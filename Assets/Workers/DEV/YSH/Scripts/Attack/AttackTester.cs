@@ -18,27 +18,27 @@ public class AttackTester : MonoBehaviour
 
     public void Attack()
     {
-        // ¿¸πÊ æ’ø° ¿÷¥¬ ∏ÛΩ∫≈ÕµÈ¿ª »Æ¿Œ«œ∞Ì ««∞›¿ª ¡¯«‡«ÿ ¡ÿ¥Ÿ.
+        // Ï†ÑÎ∞© ÏïûÏóê ÏûàÎäî Î™¨Ïä§ÌÑ∞Îì§ÏùÑ ÌôïÏù∏ÌïòÍ≥† ÌîºÍ≤©ÏùÑ ÏßÑÌñâÌï¥ Ï§ÄÎã§.
 
-        // 1. π¸¿ß æ»ø° ∏ÛΩ∫≈ÕµÈ¿ª »Æ¿Œ
-        // NonAlloc πˆ¿¸¿ª ªÁøÎ«œ∏È √÷¿˚»≠∏Èø°º≠ µµøÚµ… ºˆ ¿÷¿Ω
+        // 1. Î≤îÏúÑ ÏïàÏóê Î™¨Ïä§ÌÑ∞Îì§ÏùÑ ÌôïÏù∏
+        // NonAlloc Î≤ÑÏ†ÑÏùÑ ÏÇ¨Ïö©ÌïòÎ©¥ ÏµúÏ†ÅÌôîÎ©¥ÏóêÏÑú ÎèÑÏõÄÎê† Ïàò ÏûàÏùå
         Collider[] colliders = Physics.OverlapSphere(transform.position, range);
         foreach (Collider col in colliders)
         {
-            // 2. ≈Ω¡ˆµ» ∏ÛΩ∫≈Õ∞° ∆«¡§¿ª ¿ß«— ∞¢µµ ≥ªø° ¿÷¥¬¡ˆ »Æ¿Œ«ÿæﬂ «—¥Ÿ.
-            // y¿« ∞ÊøÏ ø¨ªÍø° ∆˜«‘«œ¡ˆ æ ¥¬∞‘ ¡¡¥Ÿ.
+            // 2. ÌÉêÏßÄÎêú Î™¨Ïä§ÌÑ∞Í∞Ä ÌåêÏ†ïÏùÑ ÏúÑÌïú Í∞ÅÎèÑ ÎÇ¥Ïóê ÏûàÎäîÏßÄ ÌôïÏù∏Ìï¥Ïïº ÌïúÎã§.
+            // yÏùò Í≤ΩÏö∞ Ïó∞ÏÇ∞Ïóê Ìè¨Ìï®ÌïòÏßÄ ÏïäÎäîÍ≤å Ï¢ãÎã§.
             Vector3 source = transform.position;
-            source.y = 0;   // y∏¶ 0¿∏∑Œ
+            source.y = 0;   // yÎ•º 0ÏúºÎ°ú
 
             Vector3 dest = col.transform.position;
-            dest.y = 0;     // y∏¶ 0¿∏∑Œ
+            dest.y = 0;     // yÎ•º 0ÏúºÎ°ú
 
             Vector3 targetDir = (dest - source).normalized;
 
-            // «√∑π¿ÃæÓ ¡§∏È¿∏∑Œ∫Œ≈Õ ∏ÛΩ∫≈Õ¿« πÊ«‚¿∏∑Œ «‚«œ¥¬ ∞¢µµ∏¶ ±∏«—¥Ÿ.
+            // ÌîåÎ†àÏù¥Ïñ¥ Ï†ïÎ©¥ÏúºÎ°úÎ∂ÄÌÑ∞ Î™¨Ïä§ÌÑ∞Ïùò Î∞©Ìñ•ÏúºÎ°ú Ìñ•ÌïòÎäî Í∞ÅÎèÑÎ•º Íµ¨ÌïúÎã§.
             float targetAngle = Vector3.Angle(transform.forward, targetDir);
-            // ¡¬√¯ angle, øÏ√¯ angleø° ¥Î«ÿ π›¿˝æø »Æ¿Œ«ÿæﬂ «œπ«∑Œ
-            // 0.5∏¶ ∞ˆ«ÿ angle¿« ¿˝π›∏∏≈≠¿« ∞™∞˙ ∫Ò±≥«—¥Ÿ.
+            // Ï¢åÏ∏° angle, Ïö∞Ï∏° angleÏóê ÎåÄÌï¥ Î∞òÏ†àÏî© ÌôïÏù∏Ìï¥Ïïº ÌïòÎØÄÎ°ú
+            // 0.5Î•º Í≥±Ìï¥ angleÏùò Ï†àÎ∞òÎßåÌÅºÏùò Í∞íÍ≥º ÎπÑÍµêÌïúÎã§.
             if (targetAngle > angle * 0.5f)
                 continue;
 
@@ -52,11 +52,11 @@ public class AttackTester : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        // ∞≈∏Æ ±◊∏Æ±‚
+        // Í±∞Î¶¨ Í∑∏Î¶¨Í∏∞
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, range);
 
-        // ∞¢µµ ±◊∏Æ±‚
+        // Í∞ÅÎèÑ Í∑∏Î¶¨Í∏∞
         Vector3 rightDir = Quaternion.Euler(0, angle * 0.5f, 0) * transform.forward;
         Vector3 leftDir = Quaternion.Euler(0, angle * -0.5f, 0) * transform.forward;
 

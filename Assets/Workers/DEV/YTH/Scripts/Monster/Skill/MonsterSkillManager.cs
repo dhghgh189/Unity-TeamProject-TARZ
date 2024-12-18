@@ -15,6 +15,7 @@ using UnityEngine.AI;
 /// 
 public class MonsterSkillManager : MonoBehaviour
 {
+    #region Skill-ScriptableObj
     [Header("MonsterSkill")]
     [SerializeField] MonsterSkill _bomb;
     public MonsterSkill BombSkill { get { return _bomb; } set { _bomb = value; } }
@@ -25,6 +26,7 @@ public class MonsterSkillManager : MonoBehaviour
     [SerializeField] MonsterSkill _stimPak;
     [SerializeField] MonsterSkill _wheelWind;
     [SerializeField] MonsterSkill _electricWall;
+    #endregion
 
     [Header("Prefab")]
     [SerializeField] GameObject _bombPrefab;
@@ -58,7 +60,6 @@ public class MonsterSkillManager : MonoBehaviour
     WaitForSeconds jumpAttackCoolTime = new(10f);
     public IEnumerator JumpAttackRoutine() // 보스의 도약해서 착지하여 범위 공격
     {
-       
         _rigidbody.AddForce((Vector3.forward + Vector3.up * 2f) * _jumpAttack.JumpForce, ForceMode.Impulse);
         Debug.Log("점프!!");
         _monsterData.CanUseSkill = false;

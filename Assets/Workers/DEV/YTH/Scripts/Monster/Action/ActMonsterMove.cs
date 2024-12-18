@@ -12,17 +12,17 @@ public class ActMonsterMove : Action
     [SerializeField] GameObject target;
     public override TaskStatus OnUpdate()
     {
-        
+
         if (Vector3.Distance(transform.position, target.transform.position) < _monsterData.TraceRange && !_monsterData.IsAttacked)
         {
             if (Vector3.Distance(transform.position, target.transform.position) <= _monsterData.AttackRange /*&& !_monsterData.IsAttacked*/)
             {
                 return TaskStatus.Success;
             }
-                _agent.SetDestination(target.transform.position);
+            _agent.SetDestination(target.transform.position);
             transform.LookAt(target.transform);
-            // _animator.SetBool("walk", true); // ÇØ½¬·Î ¹Ù²ãÁÖ¸é ÁÁÀ»µí
-            Debug.Log("ÀÌµ¿Áß");
+            // _animator.SetBool("walk", true); // í•´ì‰¬ë¡œ ë°”ê¿”ì£¼ë©´ ì¢‹ì„ë“¯
+            Debug.Log("ì´ë™ì¤‘");
             return TaskStatus.Running;
         }
         else

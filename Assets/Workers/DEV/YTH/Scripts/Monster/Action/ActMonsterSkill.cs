@@ -15,21 +15,21 @@ public class ActMonsterSkill : Action
 
     [SerializeField] NavMeshAgent _agent;
 
-    public override void OnStart()
+    /*public override void OnStart()
     {
         _agent.enabled = false;
-    }
+    }*/
 
     public override TaskStatus OnUpdate()
     {
-        // ÀÌ°Å °íÃÄ¾ß´ï
-        // ½ºÅ³ °è¼Ó ¾¸
-        // ÀÏ¹İ¸÷Àº Á¤»óÀÛµ¿ÇÏ´Âµ¥
-        // ½ºÅ³¾²´Â ¸÷ ³ëµå ¼ø¼­ ¼öÁ¤ÇÏ°í Á¶°Ç ¼öÁ¤ÇØ¾ß´ï
+        // ì´ê±° ê³ ì³ì•¼ëŒ
+        // ìŠ¤í‚¬ ê³„ì† ì”€
+        // ì¼ë°˜ëª¹ì€ ì •ìƒì‘ë™í•˜ëŠ”ë°
+        // ìŠ¤í‚¬ì“°ëŠ” ëª¹ ë…¸ë“œ ìˆœì„œ ìˆ˜ì •í•˜ê³  ì¡°ê±´ ìˆ˜ì •í•´ì•¼ëŒ
 
         _distance = Vector3.Distance(transform.position, _target.transform.position);
 
-        if (_monsterData.Type == MonsterType.Boss /*&& º¸½º°¡ ½ºÅ³ »ç¿ë °¡´ÉÇÑ Á¶°Ç*/)
+        if (_monsterData.Type == MonsterType.Boss /*&& ë³´ìŠ¤ê°€ ìŠ¤í‚¬ ì‚¬ìš© ê°€ëŠ¥í•œ ì¡°ê±´*/)
         {
             if (_distance >= 40)
             {
@@ -74,13 +74,13 @@ public class ActMonsterSkill : Action
         }
         else
         {
-            Debug.Log("³ª º¸½º¾Æ´Ï¶ó ½ºÅ³ ¸ø¾¸");
+            Debug.Log("ë‚˜ ë³´ìŠ¤ì•„ë‹ˆë¼ ìŠ¤í‚¬ ëª»ì”€");
             return TaskStatus.Failure;
         }
     }
 
-    public override void OnEnd()
+   /* public override void OnEnd()
     {
         _agent.enabled = true;
-    }
+    }*/
 }

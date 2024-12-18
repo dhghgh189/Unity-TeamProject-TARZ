@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IDamagable
+/*public interface IDamagable
 {
     void TakeDamage(int damage);
-}
+}*/
 
 public class EnemyController : MonoBehaviour, IDamagable
 {

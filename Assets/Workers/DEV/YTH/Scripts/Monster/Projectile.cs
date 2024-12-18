@@ -1,18 +1,30 @@
 using System.Collections;
 using UnityEngine;
 
-public class Projectile : MonoBehaviour // ÀÏ¹İ ¿øµô ÂÌ¸÷
+public class Projectile : MonoBehaviour // ì¼ë°˜ ì›ë”œ ì«„ëª¹
 {
     IDamagable damagable;
 
+    [SerializeField] Rigidbody _rigidBody;
+
+    private MonsterData _monsterData;
+
+    [SerializeField] GameObject _monster;
+
+    private void Start()
+    {
+        _monsterData = _monster.GetComponent<MonsterData>(); 
+
+        _rigidBody.AddForce((Vector3.forward + Vector3.up) * _monsterData.ThrowPower, ForceMode.Impulse);
+    }
     private void Update()
     {
         Destroy(gameObject, 3f);
     }
 
-    private void OnTriggerStay(Collider collider)
+    private void OnCollisionEnter(Collision collider)
     {
-        IDamagable damagableObj = collider.GetComponent<IDamagable>();
+        IDamagable damagableObj = collider.gameObject.GetComponent<IDamagable>();
         damagable = damagableObj;
         if (damagable != null)
         {
@@ -20,7 +32,7 @@ public class Projectile : MonoBehaviour // ÀÏ¹İ ¿øµô ÂÌ¸÷
         }
     }
 
-    // µµÆ®µ© ÄÚ·çÆ¾ : ÀÏÁ¤ ½Ã°£¸¶´Ù µ¥¹ÌÁö¸¦ ÁÖ±âÀûÀ¸·Î ÁÜ
+    // ë„íŠ¸ë€ ì½”ë£¨í‹´ : ì¼ì • ì‹œê°„ë§ˆë‹¤ ë°ë¯¸ì§€ë¥¼ ì£¼ê¸°ì ìœ¼ë¡œ ì¤Œ
     WaitForSeconds attackDelay = new(2f);
     public IEnumerator TakeDOTRoutine(int damage)
     {

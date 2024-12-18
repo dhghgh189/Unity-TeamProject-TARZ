@@ -13,18 +13,18 @@ public class Projectile_Bomb : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Destroy(gameObject);
-        // »ç¶óÁö´Â ½ÃÁ¡ ¹°¾îº¸±â
-        // Á÷½º ±Ã¸¶³É ÆøÅº ÇüÃ¼´Â Áß¿äx ¸ñÇ¥ ¹üÀ§¸¸ Áß¿äÇÑÁö
-        // or ¹°Ã¼¿¡ ´êÀ» ¶§ ±îÁö »ç¶óÁöÁö ¾ÊÀ»°ÍÀÎÁö 
+      
+        // ì§ìŠ¤ ê¶ ë§ˆëƒ¥
 
         IDamagable damagableObj = collision.gameObject.GetComponent<IDamagable>();
         if (damagableObj != null)
         {
+            Destroy(gameObject);
+
             Collider[] colliders = Physics.OverlapSphere(transform.position, _monsterSkillManager.BombSkill.Range);
             foreach (Collider collider in colliders)
             {
-                // °ø°İ ¹üÀ§ È®ÀÎ
+                // ê³µê²© ë²”ìœ„ í™•ì¸
                 Vector3 source = transform.position;
                 source.y = 0;
                 Vector3 destination = collider.transform.position;
@@ -32,7 +32,7 @@ public class Projectile_Bomb : MonoBehaviour
 
                 Vector3 targetDir = (destination - source).normalized;
                 float targetAngle = Vector3.Angle(transform.forward, targetDir);
-                if (targetAngle > _monsterSkillManager.BombSkill.Angle) // ¾Ş±ÛÀÇ ¹İÀı¸¸
+                if (targetAngle > _monsterSkillManager.BombSkill.Angle) // ì•µê¸€ì˜ ë°˜ì ˆë§Œ
                     continue;
 
                 IDamagable damageble = collider.GetComponent<IDamagable>();

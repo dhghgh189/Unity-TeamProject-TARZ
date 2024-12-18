@@ -14,8 +14,9 @@ public class ActMonsterAttack : Action
 
     [SerializeField] SharedTransform _muzzlePoint;
 
-    [SerializeField] GameObject target;
+    [SerializeField] GameObject _player;
 
+    [Header("Attack")]
     [SerializeField] float _throwForce; 
     public float ThrowForce { get { return _throwForce; } set { _throwForce = value; } }
 
@@ -27,16 +28,17 @@ public class ActMonsterAttack : Action
 
     public override TaskStatus OnUpdate()
     {
-        
-        if (Vector3.Distance(transform.position, target.transform.position) < _monsterData.AttackRange)
+        if (Vector3.Distance(transform.position, _player.transform.position) <= _monsterData.AttackRange)
         {
-            // ±Ùµô, ¿øµô ¸ó½ºÅÍ °ø°Ý ·ÎÁ÷ ºÐ¸®
+            // ê·¼ë”œ, ì›ë”œ ëª¬ìŠ¤í„° ê³µê²© ë¡œì§ ë¶„ë¦¬
             switch (_monsterData.Type)
             {
                 case MonsterData.MonsterType.Range:
                     if (throwRoutine == null)
                     {
+
                         throwRoutine = StartCoroutine(ThrowRoutine());
+                        Debug.Log("throwë£¨í‹´ í–ˆìŒ");
                     }
                     break;
 
@@ -47,27 +49,22 @@ public class ActMonsterAttack : Action
                     }
                     break;
             }
-            Debug.Log("°ø°ÝÇßÀ½~~~~~~~~~");
             return TaskStatus.Success;
         }
         else
         {
-           /* StopCoroutine("attackRoutine");*/
-           /* StopCoroutine("throwRoutine");*/
             return TaskStatus.Failure;
         }
     }
 
-   // °ø°Ý »çÀÌ¿¡ µô·¹ÀÌ »ý¼º
-   WaitForSeconds attackDelay = new(1f);
-   WaitForSeconds throwDelay = new(2f);
-
+    // ê³µê²© ì‚¬ì´ì— ë”œë ˆì´ ìƒì„±
+  
     Coroutine attackRoutine;
     IEnumerator AttackRoutine()
     {
         Attack(_range, _angle);
         //_animator.SetTrigger("Attack");
-        yield return attackDelay;
+        yield return new WaitForSeconds(_monsterData.MeleeAttackSpeed);
         attackRoutine = null;
     }
 
@@ -76,19 +73,17 @@ public class ActMonsterAttack : Action
     {
         ThrowAttack();
         //_animator.SetTrigger("Throw");
-        //°ø°Ý ¼Óµµ¸¸Å­ µô·¹ÀÌ ÁÖ±â
-        // ¾Æ´Ï¸é ´øÁø Åõ»çÃ¼°¡ »ç¶óÁö´Â ½Ã°£¸¸Å­ µô·¹ÀÌ
-        yield return throwDelay;
-        attackRoutine = null;
+        yield return new WaitForSeconds(_monsterData.RangeAttackSpeed);
+        throwRoutine = null;
     }
 
     private void Attack(float range, float angle)
     {
-        //³»Àû ÀÌ¿ëÇÏ¿© °ø°Ý ¹üÀ§ (Àü¹æ ºÎÃ¤²Ã) Á¤ÇØ¼­
+        //ë‚´ì  ì´ìš©í•˜ì—¬ ê³µê²© ë²”ìœ„ (ì „ë°© ë¶€ì±„ê¼´) ì •í•´ì„œ
         Collider[] colliders = Physics.OverlapSphere(transform.position, range);
         foreach (Collider collider in colliders)
         {
-            // °ø°Ý ¹üÀ§ È®ÀÎ
+            // ê³µê²© ë²”ìœ„ í™•ì¸
             Vector3 source = transform.position;
             source.y = 0;
             Vector3 destination = collider.transform.position;
@@ -105,16 +100,11 @@ public class ActMonsterAttack : Action
                 damageble.TakeDamage(_monsterData.Damage);
             }
         }
-        // ¾Ö´Ï¸ÞÀÌ¼Ç¿¡ ¸Þ¼­µå Ãß°¡ÇÏ±â
+        // ì• ë‹ˆë©”ì´ì…˜ì— ë©”ì„œë“œ ì¶”ê°€í•˜ê¸°
     }
 
     public void ThrowAttack()
     {
-        GameObject projectile = Object.Instantiate(_projectilePrefab.Value, _muzzlePoint.Value.position, _muzzlePoint.Value.rotation);
-        Rigidbody projectileRb = GetComponent<Rigidbody>();
-        if (projectileRb != null)
-        {
-            projectileRb.AddForce(Vector3.forward + Vector3.up * _throwForce, ForceMode.Impulse);
-        }
+        GameObject projectile = Object.Instantiate(_projectilePrefab.Value, _muzzlePoint.Value.position, Quaternion.identity);
     }
 }

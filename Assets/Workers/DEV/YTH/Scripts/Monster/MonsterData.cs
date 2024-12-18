@@ -23,11 +23,20 @@ public class MonsterData : MonoBehaviour
     [SerializeField] int _damage;
     public int Damage { get { return _damage; } private set { } }
 
+    [SerializeField] float _meleeAttackSpeed;
+    public float MeleeAttackSpeed { get {return _meleeAttackSpeed; } set { _meleeAttackSpeed = value; } }
+
+    [SerializeField] float _rangeAttackSpeed;
+    public float RangeAttackSpeed { get { return _rangeAttackSpeed; } set { _rangeAttackSpeed = value; } }
+
     [SerializeField] float _traceRange;
     public float TraceRange { get { return _traceRange; } private set { } }
 
     [SerializeField] float _attackRange;
     public float AttackRange { get { return _attackRange; } private set { } }
+
+    [SerializeField] float _throwPower;
+    public float ThrowPower { get { return _throwPower; } set { _throwPower = value; } }
 
     [SerializeField] bool _isAttacked; // 피격 상태 (잠시 경직)
     public bool IsAttacked { get { return _isAttacked; } set { _isAttacked = value; } }

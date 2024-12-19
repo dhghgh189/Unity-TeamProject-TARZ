@@ -61,7 +61,11 @@ public class MonsterSkillManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
-            StartCoroutine(JumpAttackRoutine());
+            JumpAttackSkill.CanUseSkill = true;
+        }
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            JumpAttackSkill.CanUseSkill = false;
         }
     }
 
@@ -95,7 +99,7 @@ public class MonsterSkillManager : MonoBehaviour
                 damageble.TakeDamage(_jumpAttack.Damage);
             }
         }
-
+        
         yield return new WaitForSeconds(_jumpAttack.CoolTime);
         _monsterData.CanUseSkill = true;
         _jumpAttack.CanUseSkill = true;

@@ -22,37 +22,34 @@ public class ActAnoldSkill : Action
 
     public override TaskStatus OnUpdate()
     {
-        if (_distance >= 40 )
+        if (_distance >= 40 &&  _monsterSkillManager.JumpAttackSkill.CanUseSkill == true)
         {
             if (_monsterSkillManager.jumpAttackRoutine == null)
             {
-                StartCoroutine(_monsterSkillManager.JumpAttackRoutine());
+                _monsterSkillManager.jumpAttackRoutine =  StartCoroutine(_monsterSkillManager.JumpAttackRoutine());
                 Debug.Log("40 JumpAttack");
-                // 코루틴이 다 끝나야 success로 넘어가는데
-                // 코루틴 안에 몬스터 canUseSkill 체크까지 해줌
-                // 1. canuseSkill을 세분화해서 스킬별로 나누면 해결될듯
             }
             return TaskStatus.Success;
         }
-        else if (_distance >= 30 && _distance < 40)
+        /*else if (_distance >= 30 && _distance < 40 && _monsterSkillManager.ElectricWallSkill.CanUseSkill == true)
         {
-            if (_monsterSkillManager.jumpAttackRoutine == null)
+            if (_monsterSkillManager.jumpAttackRoutine == null) // 일레트릭월로 변경해야댐
             {
                 //ElectricWall
                 Debug.Log("30 ElectricWall");
             }
             return TaskStatus.Success;
-        }
-        else if (_distance >= 20 && _distance < 30)
+        }*/
+        else if (_distance >= 20 && _distance < 30 && _monsterSkillManager.DashAttackSkill.CanUseSkill == true)
         {
-            if (_monsterSkillManager.jumpAttackRoutine == null)
+            if (_monsterSkillManager.dashAttackRoutine == null)
             {
-                StartCoroutine(_monsterSkillManager.DashAttackRoutine());
+                _monsterSkillManager.dashAttackRoutine = StartCoroutine(_monsterSkillManager.DashAttackRoutine());
                 Debug.Log("20 DashAttackRoutine");
             }
             return TaskStatus.Success;
         }
-        else if (_distance < 20)
+        else if (_distance < 20)  // 다가가 공격으로 넘어감
         {
             return TaskStatus.Success;
         }

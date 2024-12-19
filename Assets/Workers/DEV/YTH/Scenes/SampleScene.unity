@@ -223,7 +223,7 @@ PrefabInstance:
     - target: {fileID: 9032859600620638007, guid: 5c93874770ad8f44a9094ccb0ee68827,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 0}
@@ -330,7 +330,7 @@ PrefabInstance:
     - target: {fileID: 5583336631803751265, guid: ab8553dcc153eef4e9d219cf4283577d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.046228945
       objectReference: {fileID: 0}
     - target: {fileID: 5583336631803751265, guid: ab8553dcc153eef4e9d219cf4283577d,
         type: 3}
@@ -340,27 +340,27 @@ PrefabInstance:
     - target: {fileID: 5583336631803751265, guid: ab8553dcc153eef4e9d219cf4283577d,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -7.72
+      value: -7.684453
       objectReference: {fileID: 0}
     - target: {fileID: 5583336631803751265, guid: ab8553dcc153eef4e9d219cf4283577d,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7927363
       objectReference: {fileID: 0}
     - target: {fileID: 5583336631803751265, guid: ab8553dcc153eef4e9d219cf4283577d,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5583336631803751265, guid: ab8553dcc153eef4e9d219cf4283577d,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 0.6095648
       objectReference: {fileID: 0}
     - target: {fileID: 5583336631803751265, guid: ab8553dcc153eef4e9d219cf4283577d,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5583336631803751265, guid: ab8553dcc153eef4e9d219cf4283577d,
         type: 3}
@@ -370,7 +370,7 @@ PrefabInstance:
     - target: {fileID: 5583336631803751265, guid: ab8553dcc153eef4e9d219cf4283577d,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 75.116
       objectReference: {fileID: 0}
     - target: {fileID: 5583336631803751265, guid: ab8553dcc153eef4e9d219cf4283577d,
         type: 3}
@@ -482,7 +482,7 @@ PrefabInstance:
     - target: {fileID: 9032859600620638007, guid: ab8553dcc153eef4e9d219cf4283577d,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -913,7 +913,7 @@ MonoBehaviour:
       JSONSerialization: '{"EntryTask":{"Type":"BehaviorDesigner.Runtime.Tasks.EntryTask","NodeData":{"Offset":"(89.60143,-61.12909)"},"ID":0,"Name":"Entry","Instant":true},"RootTask":{"Type":"BehaviorDesigner.Runtime.Tasks.Repeater","NodeData":{"Offset":"(7.77776432,247.777771)"},"ID":1,"Name":"Repeater","Instant":true,"SharedIntcount":{"Type":"BehaviorDesigner.Runtime.SharedInt","Name":null,"Int32mValue":0},"SharedBoolrepeatForever":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":true},"SharedBoolendOnFailure":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(0,120)"},"ID":2,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-656.6666,319.444427)"},"ID":3,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"CondMonsterCanSkill","NodeData":{"Offset":"(-80,160)"},"ID":4,"Name":"Cond
         Monster Can Skill","Instant":true,"MonsterData_monsterData":0},{"Type":"ActAnoldSkill","NodeData":{"Offset":"(116.038712,165.1278)"},"ID":5,"Name":"Act
         Anold Skill","Instant":true,"MonsterData_monsterData":1,"MonsterSkillManager_monsterSkillManager":2,"Single_distance":0,"GameObject_target":3,"NavMeshAgent_agent":4}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-203.888641,319.444427)"},"ID":6,"Name":"Sequence","Instant":true,"AbortTypeabortType":"Self","Children":[{"Type":"CondMonsterCanMove","NodeData":{"Offset":"(-80,160)"},"ID":7,"Name":"Cond
-        Monster Can Move","Instant":true,"MonsterData_monsterData":5,"GameObject_target":6,"Single_angle":360,"Single_distance":65.46},{"Type":"ActMonsterMove","NodeData":{"Offset":"(100,160)"},"ID":8,"Name":"Act
+        Monster Can Move","Instant":true,"MonsterData_monsterData":5,"GameObject_player":6,"Single_angle":360,"Single_distance":65.46,"Single_rate":0.5},{"Type":"ActMonsterMove","NodeData":{"Offset":"(100,160)"},"ID":8,"Name":"Act
         Monster Move","Instant":true,"CondMonsterCanMove_condMonsterCanMove":7,"MonsterData_monsterData":7,"NavMeshAgent_agent":8,"GameObject_player":9}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(259.444458,323.8889)"},"ID":9,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"CondMonsterCanAttack","NodeData":{"Offset":"(-100,170)"},"ID":10,"Name":"Cond
         Monster Can Attack","Instant":true,"MonsterData_monsterData":10,"GameObject_player":11},{"Type":"ActMonsterAttack","NodeData":{"Offset":"(100,170)"},"ID":11,"Name":"Act
         Monster Attack","Instant":true,"MonsterData_monsterData":12,"SharedGameObject_projectilePrefab":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":null,"GameObjectmValue":13},"SharedTransform_muzzlePoint":{"Type":"BehaviorDesigner.Runtime.SharedTransform","Name":null,"TransformmValue":14},"GameObject_player":15,"Single_throwForce":0,"Single_angle":120,"Single_range":6}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Wait","NodeData":{"Offset":"(708.5998,294.2259)"},"ID":12,"Name":"Wait","Instant":true,"SharedFloatwaitTime":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":3},"SharedBoolrandomWait":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"SharedFloatrandomWaitMin":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1},"SharedFloatrandomWaitMax":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1}}]}]}}'

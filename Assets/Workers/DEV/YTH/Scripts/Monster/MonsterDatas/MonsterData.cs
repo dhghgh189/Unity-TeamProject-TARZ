@@ -9,7 +9,7 @@ public class MonsterData : MonoBehaviour
 
     // 몹 종류별로 데이터 3개로 분할할것
     // MeleeData, RangeData, BossData, EleteData
-    public enum MonsterType { Melee, Range, Boss }
+    public enum MonsterType { Melee, Range, Boss, Bomb }
 
     [SerializeField] int _maxHp;
     public int MaxHp { get { return _maxHp; } private set { } }
@@ -44,8 +44,11 @@ public class MonsterData : MonoBehaviour
     [SerializeField] bool _attacked_First; // 선빵 맞아서 캐릭터 추격하는 변수
     public bool Attacked_First { get { return _attacked_First; } set { _attacked_First = value; } }
 
-    [SerializeField] bool _canUseSkill = true;
-    public bool CanUseSkill { get { return _canUseSkill; } set { _canUseSkill = value; } }
+    [SerializeField] float _canUseProjectileSkillDistance;
+    public float CanUseProjectileSkillDistance { get { return _canUseProjectileSkillDistance; } set { _canUseProjectileSkillDistance = value; } }
+
+   /* [SerializeField] bool _canUseSkill = true;
+    public bool CanUseSkill { get { return _canUseSkill; } set { _canUseSkill = value; } }*/
 
     [SerializeField] MonsterType _type;
     public MonsterType Type { get { return _type; } private set { } }

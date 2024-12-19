@@ -13,14 +13,12 @@ public class Projectile_Bomb : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-      
+        Destroy(gameObject);
         // 직스 궁 마냥
 
         IDamagable damagableObj = collision.gameObject.GetComponent<IDamagable>();
         if (damagableObj != null)
         {
-            Destroy(gameObject);
-
             Collider[] colliders = Physics.OverlapSphere(transform.position, _monsterSkillManager.BombSkill.Range);
             foreach (Collider collider in colliders)
             {
@@ -38,6 +36,7 @@ public class Projectile_Bomb : MonoBehaviour
                 IDamagable damageble = collider.GetComponent<IDamagable>();
                 if (damageble != null)
                 {
+                    
                     damageble.TakeDamage(_monsterSkillManager.BombSkill.Damage);
                 }
             }

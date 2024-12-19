@@ -1,7 +1,6 @@
 using BehaviorDesigner.Runtime.Tasks;
 using UnityEngine;
 using UnityEngine.AI;
-using static MonsterData;
 
 public class ActMonsterSkill : Action
 {
@@ -15,72 +14,51 @@ public class ActMonsterSkill : Action
 
     [SerializeField] NavMeshAgent _agent;
 
-    /*public override void OnStart()
+    public override void OnStart()
     {
-        _agent.enabled = false;
-    }*/
+        _distance = Vector3.Distance(transform.position, _target.transform.position);
+       /* _agent.enabled = false;*/
+    }
 
     public override TaskStatus OnUpdate()
     {
-        // 이거 고쳐야댐
-        // 스킬 계속 씀
-        // 일반몹은 정상작동하는데
-        // 스킬쓰는 몹 노드 순서 수정하고 조건 수정해야댐
+       
 
-        _distance = Vector3.Distance(transform.position, _target.transform.position);
-
-        if (_monsterData.Type == MonsterType.Boss /*&& 보스가 스킬 사용 가능한 조건*/)
+        if (_distance >= 40)
         {
-            if (_distance >= 40)
+            if (_monsterSkillManager.jumpAttackRoutine == null)
             {
-                if (_monsterSkillManager.jumpAttackRoutine == null)
-                {
-                    StartCoroutine(_monsterSkillManager.JumpAttackRoutine());
-                    Debug.Log("40");
-                }
-                return TaskStatus.Success;
+                StartCoroutine(_monsterSkillManager.JumpAttackRoutine());
+                Debug.Log("40 JumpAttack");
             }
-            else if (_distance >= 30 && _distance < 40)
+            return TaskStatus.Success;
+        }
+        else if (_distance >= 30 && _distance < 40)
+        {
+            if (_monsterSkillManager.jumpAttackRoutine == null)
             {
-                if (_monsterSkillManager.jumpAttackRoutine == null)
-                {
-                    StartCoroutine(_monsterSkillManager.JumpAttackRoutine());
-                    Debug.Log("30");
-                }
-                return TaskStatus.Success;
+                //ElectricWall
+                Debug.Log("30 ElectricWall");
             }
-            else if (_distance >= 20 && _distance < 30)
+            return TaskStatus.Success;
+        }
+        else if (_distance >= 20 && _distance < 30)
+        {
+            if (_monsterSkillManager.jumpAttackRoutine == null)
             {
-                if (_monsterSkillManager.jumpAttackRoutine == null)
-                {
-                    StartCoroutine(_monsterSkillManager.JumpAttackRoutine());
-                    Debug.Log("20");
-                }
-                return TaskStatus.Success;
+                StartCoroutine(_monsterSkillManager.DashAttackRoutine());
+                Debug.Log("20 DashAttackRoutine");
             }
-            else if (_distance >= 10 && _distance < 20)
-            {
-                if (_monsterSkillManager.jumpAttackRoutine == null)
-                {
-                    StartCoroutine(_monsterSkillManager.JumpAttackRoutine());
-                    Debug.Log("10");
-                }
-                return TaskStatus.Success;
-            }
-            else
-            {
-                return TaskStatus.Failure;
-            }
+            return TaskStatus.Success;
         }
         else
         {
-            Debug.Log("나 보스아니라 스킬 못씀");
             return TaskStatus.Failure;
         }
     }
 
-   /* public override void OnEnd()
-    {
-        _agent.enabled = true;
-    }*/
+    /* public override void OnEnd()
+     {
+         _agent.enabled = true;
+     }*/
 }

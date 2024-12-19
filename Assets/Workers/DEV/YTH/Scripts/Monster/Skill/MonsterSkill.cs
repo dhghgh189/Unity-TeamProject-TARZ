@@ -12,10 +12,11 @@ public class MonsterSkill : ScriptableObject
     public string SkillDescription;
     public int Damage;
     public float CoolTime;
-    public float Angle; // °ø°İ ¹üÀ§ (°¢µµ)
-    public float Range; // °ø°İ ¹üÀ§ (°Å¸®)
-    public float JumpForce; // Á¡ÇÁ °ø°İ Á¡ÇÁ ¼öÄ¡
-    public string AnimationName; // Ãâ·ÂÇÒ ¾Ö´Ï¸ŞÀÌ¼Ç ÀÌ¸§
-    public float Interval; // µµÆ®µ© ÁÖ±â
+    public float Angle; // ê³µê²© ë²”ìœ„ (ê°ë„)
+    public float Range; // ê³µê²© ë²”ìœ„ (ê±°ë¦¬)
+    public float JumpForce; // ì í”„ ê³µê²© ì í”„ ìˆ˜ì¹˜
+    public string AnimationName; // ì¶œë ¥í•  ì• ë‹ˆë©”ì´ì…˜ ì´ë¦„
+    public float Interval; // ë„íŠ¸ë€ ì£¼ê¸°
     public float ThrowForce;
+    public bool CanUseSkill = true; // ê¸°ë³¸ê°’ true
 }

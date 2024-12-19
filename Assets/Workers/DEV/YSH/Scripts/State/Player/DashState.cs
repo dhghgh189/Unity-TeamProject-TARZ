@@ -7,8 +7,8 @@ public class DashState : BaseState<PlayerController>
     private Vector3 moveDir;
     private Vector3 velocity;
 
-    private Coroutine dashRoutine;
     private float dashTimer;
+    private Transform camTrf;
 
     public DashState(PlayerController owner)
     {
@@ -19,44 +19,33 @@ public class DashState : BaseState<PlayerController>
     public override void OnEnter()
     {
         base.OnEnter();
+
+        if (camTrf == null)
+            camTrf = Camera.main.transform;
+
         dashTimer = owner.Stat.DashTime;
-        // 방향키와 대쉬가 같이 눌렸는지 확인하기 위해 moveDir에 저장
-        moveDir = owner.PInput.InputDir.normalized;
-        dashRoutine = owner.StartCoroutine(DashRoutine());
+        owner.Movement.LookAt(camTrf.forward);
+        owner.Anim.CrossFade(Define.HASH_ANIM_DASH, 0.1f);
     }
 
     public override void OnUpdate()
     {
         base.OnUpdate();
-        if (dashRoutine == null)
+
+        dashTimer -= Time.deltaTime;
+
+        if (dashTimer <= 0)
         {
             owner.ChangeState(EState.Idle);
             return;
         }
+
+        owner.Movement.Move(Vector3.forward * owner.Stat.DashSpeed);
     }
 
-    IEnumerator DashRoutine()
+    public override void OnExit()
     {
-        // 방향키 입력과 대쉬가 같이 눌린 경우
-        if (moveDir != Vector3.zero)
-            owner.Movement.LookAt(owner.PInput.InputDir.normalized);
-
-        velocity = owner.transform.forward * owner.Stat.DashSpeed;
-
-        owner.Anim.CrossFade(Define.HASH_ANIM_DASH, 0.1f);
-
-        while (true)
-        {
-            if (dashTimer <= 0)
-                break;
-
-            owner.Movement.Move(velocity);
-            dashTimer -= Time.deltaTime;
-
-            yield return null;
-        }
-
+        base.OnExit();
         owner.Movement.Move(Vector3.zero);
-        dashRoutine = null;
     }
 }

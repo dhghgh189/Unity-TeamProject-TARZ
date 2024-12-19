@@ -5,9 +5,9 @@ using UnityEngine;
 [Serializable]
 public class MonsterData : MonoBehaviour
 {
-    //Melee : ±Ù°Å¸® °ø°İ ¸÷ //Range : ¿ø°Å¸® °ø°İ ¸÷ //Boss : º¸½º ¸÷
+    //Melee : ê·¼ê±°ë¦¬ ê³µê²© ëª¹ //Range : ì›ê±°ë¦¬ ê³µê²© ëª¹ //Boss : ë³´ìŠ¤ ëª¹
 
-    // ¸÷ Á¾·ùº°·Î µ¥ÀÌÅÍ 3°³·Î ºĞÇÒÇÒ°Í
+    // ëª¹ ì¢…ë¥˜ë³„ë¡œ ë°ì´í„° 3ê°œë¡œ ë¶„í• í• ê²ƒ
     // MeleeData, RangeData, BossData, EleteData
     public enum MonsterType { Melee, Range, Boss }
 
@@ -23,17 +23,29 @@ public class MonsterData : MonoBehaviour
     [SerializeField] int _damage;
     public int Damage { get { return _damage; } private set { } }
 
+    [SerializeField] float _meleeAttackSpeed;
+    public float MeleeAttackSpeed { get {return _meleeAttackSpeed; } set { _meleeAttackSpeed = value; } }
+
+    [SerializeField] float _rangeAttackSpeed;
+    public float RangeAttackSpeed { get { return _rangeAttackSpeed; } set { _rangeAttackSpeed = value; } }
+
     [SerializeField] float _traceRange;
     public float TraceRange { get { return _traceRange; } private set { } }
 
     [SerializeField] float _attackRange;
     public float AttackRange { get { return _attackRange; } private set { } }
 
-    [SerializeField] bool _isAttacked; // ÇÇ°İ »óÅÂ
+    [SerializeField] float _throwPower;
+    public float ThrowPower { get { return _throwPower; } set { _throwPower = value; } }
+
+    [SerializeField] bool _isAttacked; // í”¼ê²© ìƒíƒœ (ì ì‹œ ê²½ì§)
     public bool IsAttacked { get { return _isAttacked; } set { _isAttacked = value; } }
 
-    [SerializeField] bool _useSkill = false;
-    public bool UseSkill { get { return _useSkill; } set { _useSkill = value; } }
+    [SerializeField] bool _attacked_First; // ì„ ë¹µ ë§ì•„ì„œ ìºë¦­í„° ì¶”ê²©í•˜ëŠ” ë³€ìˆ˜
+    public bool Attacked_First { get { return _attacked_First; } set { _attacked_First = value; } }
+
+    [SerializeField] bool _canUseSkill = true;
+    public bool CanUseSkill { get { return _canUseSkill; } set { _canUseSkill = value; } }
 
     [SerializeField] MonsterType _type;
     public MonsterType Type { get { return _type; } private set { } }

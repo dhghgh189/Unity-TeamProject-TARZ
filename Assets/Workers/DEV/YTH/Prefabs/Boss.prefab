@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 396dd64a02212c647a3e8a5fbc97d6be, type: 2}
+  - {fileID: 2100000, guid: 5082832ef7dcd4b4ba2c5738cadc6b24, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -119,11 +119,11 @@ GameObject:
   - component: {fileID: 3850474234297756991}
   - component: {fileID: 2974194059921642903}
   - component: {fileID: 1917494242370153955}
-  - component: {fileID: 3752918915118489650}
-  - component: {fileID: 6518567008427096506}
-  - component: {fileID: 6464637040293085399}
+  - component: {fileID: 6853363098220886624}
+  - component: {fileID: 5463256470058330928}
+  - component: {fileID: 4887431800781456624}
   m_Layer: 9
-  m_Name: Monster
+  m_Name: Boss
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -138,7 +138,7 @@ Transform:
   m_GameObject: {fileID: 9032859600620638007}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.29, z: -11.68}
+  m_LocalPosition: {x: 0, y: 1.29, z: -19.94}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -173,7 +173,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5082832ef7dcd4b4ba2c5738cadc6b24, type: 2}
+  - {fileID: 2100000, guid: 396dd64a02212c647a3e8a5fbc97d6be, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -244,8 +244,8 @@ MonoBehaviour:
     type: 3}
   _jackTheRipper: {fileID: 0}
   _wallPrefab: {fileID: 0}
-  _monsterData: {fileID: 3752918915118489650}
-  _player: {fileID: 5087842789530824427, guid: ae329f53a4a5fd24299b23de2ca53c45, type: 3}
+  _monsterData: {fileID: 6853363098220886624}
+  _player: {fileID: 0}
   _rigidbody: {fileID: 1917494242370153955}
 --- !u!54 &1917494242370153955
 Rigidbody:
@@ -274,7 +274,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &3752918915118489650
+--- !u!114 &6853363098220886624
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -294,69 +294,11 @@ MonoBehaviour:
   _rangeAttackSpeed: 0
   _traceRange: 30
   _attackRange: 2
-  _throwPower: 7.35
   _isAttacked: 0
   _attacked_First: 0
   _canUseSkill: 0
-  _type: 0
---- !u!114 &6518567008427096506
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9032859600620638007}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d7b55c7ecdb49a4a89fa5e6f9022861, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startWhenEnabled: 1
-  asynchronousLoad: 0
-  pauseWhenDisabled: 0
-  restartWhenComplete: 0
-  logTaskChanges: 0
-  group: 0
-  resetValuesOnRestart: 0
-  externalBehavior: {fileID: 0}
-  mBehaviorSource:
-    behaviorName: Normal_Monster
-    behaviorDescription: 
-    mTaskData:
-      types: []
-      parentIndex: 
-      startIndex: 
-      variableStartIndex: 
-      JSONSerialization: '{"EntryTask":{"Type":"BehaviorDesigner.Runtime.Tasks.EntryTask","NodeData":{"Offset":"(324.5058,8.470295)"},"ID":0,"Name":"Entry","Instant":true},"RootTask":{"Type":"BehaviorDesigner.Runtime.Tasks.Repeater","NodeData":{"Offset":"(-11.6764793,140.202377)"},"ID":1,"Name":"Repeater","Instant":true,"SharedIntcount":{"Type":"BehaviorDesigner.Runtime.SharedInt","Name":null,"Int32mValue":0},"SharedBoolrepeatForever":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":true},"SharedBoolendOnFailure":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Selector","NodeData":{"Offset":"(0,120)"},"ID":2,"Name":"Selector","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-693.6331,247.857117)"},"ID":3,"Name":"Sequence","Instant":true,"AbortTypeabortType":"Self","Children":[{"Type":"CondMonsterCanMove","NodeData":{"Offset":"(-83.3808,163.568481)"},"ID":4,"Name":"Cond
-        Monster Can Move","Instant":true,"MonsterData_monsterData":0,"GameObject_target":1,"Single_angle":30,"Single_distance":10},{"Type":"ActMonsterMove","NodeData":{"Offset":"(101.72644,157.271118)"},"ID":5,"Name":"Act
-        Monster Move","Instant":true,"MonsterData_monsterData":2,"NavMeshAgent_agent":3}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-241.676651,245.403763)"},"ID":6,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"CondMonsterCanSkill","NodeData":{"Offset":"(-82.7807159,164.963455)"},"ID":7,"Name":"Cond
-        Monster Can Skill","Instant":true,"MonsterData_monsterData":4},{"Type":"ActMonsterSkill","NodeData":{"Offset":"(100,164.8485)"},"ID":8,"Name":"Act
-        Monster Skill","Instant":true,"MonsterData_monsterData":5,"MonsterSkillManager_monsterSkillManager":6,"Single_distance":0}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(212.1719,235.7423)"},"ID":9,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"CondMonsterCanAttack","NodeData":{"Offset":"(-100,170)"},"ID":10,"Name":"Cond
-        Monster Can Attack","Instant":true,"MonsterData_monsterData":7},{"Type":"ActMonsterAttack","NodeData":{"Offset":"(104.285736,170)"},"ID":11,"Name":"Act
-        Monster Attack","Instant":true,"MonsterData_monsterData":8,"SharedGameObject_projectilePrefab":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":null,"GameObjectmValue":9},"SharedTransform_muzzlePoint":{"Type":"BehaviorDesigner.Runtime.SharedTransform","Name":null,"TransformmValue":10},"Single_throwForce":10,"Single_angle":45,"Single_range":10}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Idle","NodeData":{"Offset":"(600,190.000015)"},"ID":12,"Name":"Idle","Instant":true}]}]}}'
-      fieldSerializationData:
-        typeName: []
-        fieldNameHash: 
-        startIndex: 
-        dataPosition: 
-        unityObjects:
-        - {fileID: 3752918915118489650}
-        - {fileID: 0}
-        - {fileID: 3752918915118489650}
-        - {fileID: 6464637040293085399}
-        - {fileID: 3752918915118489650}
-        - {fileID: 3752918915118489650}
-        - {fileID: 2974194059921642903}
-        - {fileID: 3752918915118489650}
-        - {fileID: 3752918915118489650}
-        - {fileID: 1616805512990888026, guid: 989aabf03a1cf174e963c4be9bad5c97, type: 3}
-        - {fileID: 5583336631803751265}
-        byteData: 
-        byteDataArray: 
-      Version: 1.7.11
-  gizmoViewMode: 2
-  showBehaviorDesignerGizmo: 1
---- !u!195 &6464637040293085399
+  _type: 2
+--- !u!195 &5463256470058330928
 NavMeshAgent:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -378,3 +320,65 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &4887431800781456624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9032859600620638007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d7b55c7ecdb49a4a89fa5e6f9022861, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startWhenEnabled: 1
+  asynchronousLoad: 0
+  pauseWhenDisabled: 0
+  restartWhenComplete: 0
+  logTaskChanges: 0
+  group: 0
+  resetValuesOnRestart: 0
+  externalBehavior: {fileID: 0}
+  mBehaviorSource:
+    behaviorName: Boss
+    behaviorDescription: 
+    mTaskData:
+      types: []
+      parentIndex: 
+      startIndex: 
+      variableStartIndex: 
+      JSONSerialization: '{"EntryTask":{"Type":"BehaviorDesigner.Runtime.Tasks.EntryTask","NodeData":{"Offset":"(232.985138,-1536.19373)"},"ID":0,"Name":"Entry","Instant":true},"RootTask":{"Type":"BehaviorDesigner.Runtime.Tasks.Repeater","NodeData":{"Offset":"(-8.749922,156.37149)"},"ID":1,"Name":"Repeater","Instant":true,"SharedIntcount":{"Type":"BehaviorDesigner.Runtime.SharedInt","Name":null,"Int32mValue":0},"SharedBoolrepeatForever":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":true},"SharedBoolendOnFailure":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Selector","NodeData":{"Offset":"(0,120)"},"ID":2,"Name":"Selector","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-189.999634,200)"},"ID":3,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"CondMonsterCanSkill","NodeData":{"Offset":"(-129.696991,179.696991)"},"ID":4,"Name":"Cond
+        Monster Can Skill","Instant":true,"MonsterData_monsterData":0},{"Type":"BehaviorDesigner.Runtime.Tasks.Selector","NodeData":{"Offset":"(160,180)"},"ID":5,"Name":"Selector","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"ActMonsterSkill","NodeData":{"Offset":"(-220,170)"},"ID":6,"Name":"Act
+        Monster Skill","Instant":true,"MonsterData_monsterData":1,"MonsterSkillManager_monsterSkillManager":2,"Single_distance":0,"GameObject_target":3,"NavMeshAgent_agent":4},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(200,170)"},"ID":7,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"CondMonsterCanAttack","NodeData":{"Offset":"(-200,140)"},"ID":8,"Name":"Cond
+        Monster Can Attack","Instant":true,"MonsterData_monsterData":5,"GameObject_target":6},{"Type":"ActMonsterAttack","NodeData":{"Offset":"(90,140)"},"ID":9,"Name":"Act
+        Monster Attack","Instant":true,"MonsterData_monsterData":7,"SharedGameObject_projectilePrefab":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":null,"GameObjectmValue":8},"SharedTransform_muzzlePoint":{"Type":"BehaviorDesigner.Runtime.SharedTransform","Name":null,"TransformmValue":9},"GameObjecttarget":10,"Single_throwForce":10,"Single_angle":45,"Single_range":10},{"Type":"BehaviorDesigner.Runtime.Tasks.Wait","NodeData":{"Offset":"(328.5719,140.000122)"},"ID":10,"Name":"Wait","Instant":true,"SharedFloatwaitTime":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":5},"SharedBoolrandomWait":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"SharedFloatrandomWaitMin":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1},"SharedFloatrandomWaitMax":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1}}]}]}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(329.9995,210)"},"ID":11,"Name":"Sequence","Instant":true,"AbortTypeabortType":"Self","Children":[{"Type":"CondMonsterCanMove","NodeData":{"Offset":"(-150,150.000122)"},"ID":12,"Name":"Cond
+        Monster Can Move","Instant":true,"MonsterData_monsterData":11,"GameObject_target":12},{"Type":"ActMonsterMove","NodeData":{"Offset":"(40.00006,140.000122)"},"ID":13,"Name":"Act
+        Monster Move","Instant":true,"MonsterData_monsterData":13,"NavMeshAgent_agent":14,"GameObjecttarget":15}]}]}]},"DetachedTasks":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(970.000061,800.0001)"},"ID":14,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None"}]}'
+      fieldSerializationData:
+        typeName: []
+        fieldNameHash: 
+        startIndex: 
+        dataPosition: 
+        unityObjects:
+        - {fileID: 6853363098220886624}
+        - {fileID: 6853363098220886624}
+        - {fileID: 2974194059921642903}
+        - {fileID: 0}
+        - {fileID: 5463256470058330928}
+        - {fileID: 6853363098220886624}
+        - {fileID: 0}
+        - {fileID: 6853363098220886624}
+        - {fileID: 1616805512990888026, guid: 989aabf03a1cf174e963c4be9bad5c97, type: 3}
+        - {fileID: 5583336631803751265}
+        - {fileID: 0}
+        - {fileID: 6853363098220886624}
+        - {fileID: 0}
+        - {fileID: 6853363098220886624}
+        - {fileID: 5463256470058330928}
+        - {fileID: 0}
+        byteData: 
+        byteDataArray: 
+      Version: 1.7.11
+  gizmoViewMode: 2
+  showBehaviorDesignerGizmo: 1

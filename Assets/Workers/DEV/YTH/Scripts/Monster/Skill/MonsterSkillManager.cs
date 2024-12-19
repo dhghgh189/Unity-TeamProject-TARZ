@@ -15,6 +15,7 @@ using UnityEngine.AI;
 /// 
 public class MonsterSkillManager : MonoBehaviour
 {
+    #region Skill-ScriptableObj
     [Header("MonsterSkill")]
     [SerializeField] MonsterSkill _bomb;
     public MonsterSkill BombSkill { get { return _bomb; } set { _bomb = value; } }
@@ -25,6 +26,7 @@ public class MonsterSkillManager : MonoBehaviour
     [SerializeField] MonsterSkill _stimPak;
     [SerializeField] MonsterSkill _wheelWind;
     [SerializeField] MonsterSkill _electricWall;
+    #endregion
 
     [Header("Prefab")]
     [SerializeField] GameObject _bombPrefab;
@@ -58,10 +60,9 @@ public class MonsterSkillManager : MonoBehaviour
     WaitForSeconds jumpAttackCoolTime = new(10f);
     public IEnumerator JumpAttackRoutine() // 보스의 도약해서 착지하여 범위 공격
     {
-       
         _rigidbody.AddForce((Vector3.forward + Vector3.up * 2f) * _jumpAttack.JumpForce, ForceMode.Impulse);
         Debug.Log("점프!!");
-        _monsterData.UseSkill = true;
+        _monsterData.CanUseSkill = false;
 
         Collider[] colliders = Physics.OverlapSphere(transform.position, _jumpAttack.Range);
         foreach (Collider collider in colliders)
@@ -85,7 +86,7 @@ public class MonsterSkillManager : MonoBehaviour
         }
         
         yield return jumpAttackCoolTime;
-        _monsterData.UseSkill = false;
+        _monsterData.CanUseSkill = true;
         jumpAttackRoutine = null;
     }
 
@@ -118,12 +119,12 @@ public class MonsterSkillManager : MonoBehaviour
     WaitForSeconds bombCoolTime = new(10f);
     public IEnumerator Bomb()  // 직스 궁 
     {
-        _monsterData.UseSkill = true;
+        _monsterData.CanUseSkill = false;
         GameObject bomb = Instantiate(_bombPrefab, transform.position, transform.rotation);
         Rigidbody bombRb = bomb.GetComponent<Rigidbody>();
         bombRb.AddForce(Vector3.forward * _bomb.ThrowForce, ForceMode.Impulse);
         yield return bombCoolTime;
-        _monsterData.UseSkill = false;
+        _monsterData.CanUseSkill = true;
     }
 
     public void Mine()
@@ -163,7 +164,7 @@ public class MonsterSkillManager : MonoBehaviour
     WaitForSeconds dashAttackCoolTime = new(10f);
     public IEnumerator DashAttack()
     {
-        _monsterData.UseSkill = true;
+        _monsterData.CanUseSkill = false;
         _rigidbody.AddForce(Vector3.forward * _dashAttack.JumpForce, ForceMode.Impulse);
         // 물리기반으로할지, translate로 할지 결정
         // rigidbody 사용 시 캐릭터에 부딪히면 멈춤
@@ -190,7 +191,7 @@ public class MonsterSkillManager : MonoBehaviour
             }
         }
         yield return dashAttackCoolTime;
-        _monsterData.UseSkill = false;
+        _monsterData.CanUseSkill = true;
 
     }
 

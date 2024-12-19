@@ -1,0 +1,81 @@
+using System.Linq;
+using UnityEngine;
+using Zenject;
+
+public class Inventory : MonoBehaviour
+{
+    // 인벤토리 슬롯들을 보관할 배열 12개임
+    [Inject] UI_GearSlot[] inventorySlots;
+
+    // 장비들의 기본 능력치로 지정된 베이스 장비가 담길 배열
+    [SerializeField] Gear[] baseGears = new Gear[(int)Part.Size];
+
+    // 티어와 부위를 지정해 장비를 인벤토리에 저장하는 함수
+    public void GetGear(Part part, int tier)
+    {
+        UI_GearSlot slot = EmptySlot();
+        if (!slot) return;
+
+        // 해당 부위의 베이스 장비를 가져옴
+        Gear gear = Instantiate(baseGears.Where(x => x.Part == part).First());
+
+        // 티어 부여
+        tier = Mathf.Clamp(tier, 1, 3);
+        gear.Tier = tier;
+
+        // 장갑은 4개중 하나의 기본 능력치를 가지므로 능력치 3개를 삭제
+        if (part == Part.장갑)
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                gear.Abilities.RemoveAt(Random.Range(0, gear.Abilities.Count));
+            }
+        }
+
+        // 랜덤한 능력치를 랜덤 확률로 상승
+        if (IsProbability(50))
+            gear.Abilities.Add(new GearAbility() { ability = (AdditionAbility)Random.Range(0, (int)AdditionAbility.Size), value = 10 });
+        if (IsProbability(50))
+            gear.Abilities.Add(new GearAbility() { ability = (AdditionAbility)Random.Range(0, (int)AdditionAbility.Size), value = 10 });
+
+        // 이름 변경
+        gear.SetName();
+
+        // 베이스 능력치에 티어를 곱하기
+        foreach (var item in gear.Abilities)
+        {
+            item.value *= tier;
+        }
+
+        slot.SetGearSlot(gear);
+    }
+    // 빈 인벤토리 슬롯을 반환하는 함수
+    private UI_GearSlot EmptySlot()
+    {
+        foreach (var item in inventorySlots)
+        {
+            if (item.IsEmpty) return item;
+        }
+        return null;
+    }
+
+    // 테스트용
+    [SerializeField] Part tempPart;
+    [SerializeField] int tempTier;
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            GetGear(tempPart, tempTier);
+        }
+    }
+
+    private bool IsProbability(float value)
+    {
+        if (Random.Range(1, 101) > 100 - value)
+        {
+            return true;
+        }
+        return false;
+    }
+}

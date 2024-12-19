@@ -21,6 +21,9 @@ public class Inventory : MonoBehaviour
         // 랜덤한 능력치를 상승
         gear.Abilities.Add(new GearAbility() { ability = (AdditionAbility)Random.Range(0, (int)AdditionAbility.Size), value = 10 });
 
+        // 이름 변경
+        gear.SetName();
+
         // 베이스 능력치에 티어를 곱하기
         foreach (var item in gear.Abilities)
         {

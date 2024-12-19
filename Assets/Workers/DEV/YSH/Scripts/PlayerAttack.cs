@@ -2,21 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using TreeEditor;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerAttack : MonoBehaviour
 {
-    // ¿©±â¼­ throw¿Í melee »óÅÂ¸¦ °ü¸®ÇÏ°í, ºñ±³ÇØ¼­ È¥ÇÕ ÄŞº¸ ±¸ÇöÀÌ °¡´ÉÇÑ°¡?
-
     [SerializeField] private Transform throwPoint;
-    [SerializeField] private ThrowObject throwObject; // Å×½ºÆ®¿ë, ½Ç ÇÁ·ÎÁ§Æ®¿¡¼­´Â ÇÃ·¹ÀÌ¾îÀÇ stack¿¡¼­ ²¨³»¿Àµµ·Ï
     [SerializeField] private LayerMask whatIsEnemy;
     [SerializeField] private float[] throwForces;
     [SerializeField] private float[] meleeAngles;
     [SerializeField] private float[] meleeRanges;
+    [SerializeField] private Transform stackTransform;
+    [SerializeField] private int maxObjectCount;
+    [SerializeField] private float comboCheckTime;
+    [SerializeField] private PlayerController player;
 
-    Vector3 source;
-    Vector3 dest;
-    float resultAngle;
+    private Vector3 source;
+    private Vector3 dest;
+    private float resultAngle;
+
+    private Stack<ThrowObject> objectStack;
+    public int ObjectCount => objectStack.Count;
 
     public LayerMask WhatIsEnemy { get { return whatIsEnemy; } }
 
@@ -25,20 +30,94 @@ public class PlayerAttack : MonoBehaviour
     public int ThrowCountMax => throwForces.Length;
     public int MeleeCountMax => meleeAngles.Length;
 
+    private List<IEffect> meleeEffects;
+    public int MeleeEffectCount => meleeEffects.Count;
+    public float ComboCheckTime => comboCheckTime;
+
     private void Awake()
     {
         MeleeCount = 0;
         ThrowCount = 0;
+
+        objectStack = new Stack<ThrowObject>(maxObjectCount);
+        meleeEffects = new List<IEffect>();
+    }
+
+    public void AddThrowEffects(ThrowObject tobj)
+    {
+        if (ThrowCount == 2)
+        {
+            Debug.Log("<color=red>Knock back throw</color>");
+            tobj.AddEffect(new KnockBack());
+        }
+    }
+
+    public void AddMeleeEffect(IEffect effect)
+    {
+        meleeEffects.Add(effect);
+    }
+
+    public void ActiveMeleeEffect(GameObject target)
+    {
+        foreach (var effect in meleeEffects)
+        {
+            effect.Activate(gameObject, target);
+        }
+
+        meleeEffects.Clear();
+    }
+
+    public void ClearMeleeEffects()
+    {
+        meleeEffects.Clear();
+    }
+
+    public void AddObjectStack(ThrowObject tobj)
+    {
+        if (objectStack.Count >= maxObjectCount)
+            return;
+
+        objectStack.Push(tobj);
+        tobj.transform.parent = stackTransform;
+        tobj.gameObject.SetActive(false);
+
+        // ì´ë²¤íŠ¸?
+        Debug.Log($"<color=yellow>Stack Count : {ObjectCount}</color>");
+    }
+
+    public ThrowObject PopObjectStack()
+    {
+        if (objectStack.Count <= 0)
+        {
+            Debug.Log("ë¬¼ê±´ì´ ì—†ìŠµë‹ˆë‹¤.");
+            return null;
+        }
+
+        ThrowObject tobj = objectStack.Pop();
+
+        // ì´ë²¤íŠ¸?
+        Debug.Log($"<color=yellow>Stack Count : {ObjectCount}</color>");
+
+        return tobj;
     }
 
     public void Throw()
     {
-        Debug.Log($"ThrowCount : {ThrowCount}");
-        ThrowObject tobj = Instantiate(throwObject, throwPoint.position, Quaternion.identity);
-        tobj.IsCollected = true;
+        ThrowObject tobj = PopObjectStack();
+        if (tobj == null)
+            return;
+
+        Debug.Log($"<color=white>Throw Count : {ThrowCount}</color>");
+
+        AddThrowEffects(tobj);
+
+        tobj.transform.parent = null;
+        tobj.transform.position = throwPoint.position;
+        tobj.gameObject.SetActive(true);
+        tobj.SetDamage(player.Stat.ThrowDamages[ThrowCount]);
         tobj.Throw(transform.forward + (transform.up*0.3f), throwForces[ThrowCount]);
 
-        // °ø°İ ½Ã ÃßÈÄ Ä«¸Ş¶ó ¹æÇâÀ» ¹Ù¶óº¸µµ·Ï ÇÏ´Â µ¿ÀÛ Ãß°¡ ÇÊ¿ä 
+        // ê³µê²© ì‹œ ì¶”í›„ ì¹´ë©”ë¼ ë°©í–¥ì„ ë°”ë¼ë³´ë„ë¡ í•˜ëŠ” ë™ì‘ ì¶”ê°€ í•„ìš” 
 
         if (ThrowCount < ThrowCountMax - 1)
             ThrowCount++;
@@ -51,32 +130,52 @@ public class PlayerAttack : MonoBehaviour
         Debug.Log($"MeleeCount : {MeleeCount}");
         Debug.Log($"Melee Attack angle : {meleeAngles[MeleeCount]}");
         Debug.Log($"Melee Attack Range : {meleeRanges[MeleeCount]}");
+        Debug.Log($"Melee Attack Damage : {player.Stat.MeleeDamages[MeleeCount]}");
 
-        // °ø°İ ½Ã ÃßÈÄ Ä«¸Ş¶ó ¹æÇâÀ» ¹Ù¶óº¸µµ·Ï ÇÏ´Â µ¿ÀÛ Ãß°¡ ÇÊ¿ä 
+        // test
+        if (MeleeCount == 2)
+            AddMeleeEffect(new KnockBack());
+
+        // ê³µê²© ì‹œ ì¶”í›„ ì¹´ë©”ë¼ ë°©í–¥ì„ ë°”ë¼ë³´ë„ë¡ í•˜ëŠ” ë™ì‘ ì¶”ê°€ í•„ìš” 
 
         Collider[] colliders = Physics.OverlapSphere(transform.position, meleeRanges[MeleeCount], whatIsEnemy);
         foreach (Collider col in colliders)
         {
-            source = transform.position;
-            dest = col.transform.position;
-            source.y = 0;
-            dest.y = 0;
-
-            resultAngle = Vector3.Angle(transform.forward, (dest - source).normalized);
-            if (resultAngle > meleeAngles[MeleeCount] * 0.5f)
+            // ê°ë„ ì²´í¬
+            if (!IsTargetInAngle(col.transform))
                 continue;
 
+            // ì´í™íŠ¸ ë°œë™
+            ActiveMeleeEffect(col.gameObject);
+
             IDamagable damagable = col.GetComponent<IDamagable>();
-            if (damagable != null)
-            {
-                damagable.TakeDamage(1);
-            }
+            if (damagable == null)
+                continue;
+
+            damagable.TakeDamage(player.Stat.MeleeDamages[MeleeCount]);
         }
+
+        if (MeleeEffectCount > 0)
+            ClearMeleeEffects();
 
         if (MeleeCount < MeleeCountMax - 1)
             MeleeCount++;
         else
             MeleeCount = 0;
+    }
+
+    private bool IsTargetInAngle(Transform targetTrf)
+    {
+        source = transform.position;
+        dest = targetTrf.position;
+        source.y = 0;
+        dest.y = 0;
+
+        resultAngle = Vector3.Angle(transform.forward, (dest - source).normalized);
+        if (resultAngle > meleeAngles[MeleeCount] * 0.5f)
+            return false;
+
+        return true;
     }
 
     private void OnDrawGizmos()

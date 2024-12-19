@@ -14,8 +14,7 @@ public class DrainState : BaseState<PlayerController>
     {
         base.OnEnter();
         owner.Movement.Move(Vector3.zero);
-        // 임시 작성, drain 애니메이션으로 바꿔야 함
-        owner.Anim.CrossFade(Define.HASH_ANIM_IDLE, 0.125f);
+        owner.Anim.CrossFade(Define.HASH_ANIM_DRAIN, 0.125f);
         owner.Drain.StartDrain();
     }
 

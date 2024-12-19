@@ -19,4 +19,12 @@ public class PlayerStat : MonoBehaviour
     [SerializeField]
     private float dashTime;
     public float DashTime { get { return dashTime; } set { dashTime = value; } }
+
+    [SerializeField]
+    private int[] throwDamages;
+    public int[] ThrowDamages { get { return throwDamages; } set { throwDamages = value; } }
+
+    [SerializeField]
+    private int[] meleeDamages;
+    public int[] MeleeDamages { get { return meleeDamages; } set { meleeDamages = value; } }
 }

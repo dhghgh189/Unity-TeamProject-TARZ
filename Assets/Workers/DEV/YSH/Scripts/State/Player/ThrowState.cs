@@ -4,10 +4,7 @@ using UnityEngine;
 
 public class ThrowState : BaseState<PlayerController>
 {
-    // attack ½ºÅ©¸³Æ® ÂÊÀ¸·Î »©´Â°Ô ÁÁÀº°¡?
     private int[] throwAnimHashes;
-
-    // ¾Ö´Ï¸ŞÀÌ¼Ç Àç»ı ¿Ï·á Ã¼Å©¸¦ À§ÇÑ timer
     private float animTimer;
 
     public ThrowState(PlayerController owner)
@@ -27,7 +24,7 @@ public class ThrowState : BaseState<PlayerController>
     {
         owner.Movement.Move(Vector3.zero);
 
-        // ¾ÆÁ÷ anim length¸¦ ¸ğ¸£±â ¶§¹®¿¡ Å« °ªÀ¸·Î ¼³Á¤
+        // ì•„ì§ anim lengthë¥¼ ëª¨ë¥´ê¸° ë•Œë¬¸ì— í° ê°’ìœ¼ë¡œ ì„¤ì •
         animTimer = 999;
 
         owner.Anim.CrossFade(throwAnimHashes[owner.Attack.ThrowCount], 0.01f);
@@ -36,25 +33,25 @@ public class ThrowState : BaseState<PlayerController>
 
     IEnumerator AnimRoutine()
     {
-        // ¾Ö´Ï¸ŞÀÌ¼Ç Àç»ı ÈÄ ¹Ù·Î info¸¦ °¡Á®¿À¸é ÀÌÀü Å¬¸³ Á¤º¸°¡ ¹Ş¾ÆÁö¹Ç·Î
-        // Àá½Ã ´ë±âÇÏ´Â ½Ã°£À» °¡Á®¾ß ÇÑ´Ù.
+        // ì• ë‹ˆë©”ì´ì…˜ ì¬ìƒ í›„ ë°”ë¡œ infoë¥¼ ê°€ì ¸ì˜¤ë©´ ì´ì „ í´ë¦½ ì •ë³´ê°€ ë°›ì•„ì§€ë¯€ë¡œ
+        // ì ì‹œ ëŒ€ê¸°í•˜ëŠ” ì‹œê°„ì„ ê°€ì ¸ì•¼ í•œë‹¤.
         yield return new WaitForSeconds(0.1f);
         AnimatorStateInfo info = owner.Anim.GetCurrentAnimatorStateInfo(0);
-        // ÇöÀç Àç»ıµÈ ¾Ö´Ï¸ŞÀÌ¼ÇÀÇ length¸¦ ¹Ş´Â´Ù (speed°¡ °í·ÁµÇ¾ß ÇÔ)
+        // í˜„ì¬ ì¬ìƒëœ ì• ë‹ˆë©”ì´ì…˜ì˜ lengthë¥¼ ë°›ëŠ”ë‹¤ (speedê°€ ê³ ë ¤ë˜ì•¼ í•¨)
         animTimer = info.length / info.speed;
     }
 
     public override void OnUpdate()
     {
-        // ´ë½¬°¡ ÀÔ·ÂµÇ¸é °ø°İÀ» Äµ½½ (Á¡ÇÁ ½Ã¿¡´Â ºÒ°¡)
-        // °ø°İ Ä«¿îÆ®µµ Ã¼Å©ÇÏ¿© ¸¶Áö¸· °ø°İ¶§´Â Äµ½½¾ÈµÇ°Ô ÇØ¾ß ÇÔ
+        // ëŒ€ì‰¬ê°€ ì…ë ¥ë˜ë©´ ê³µê²©ì„ ìº”ìŠ¬ (ì í”„ ì‹œì—ëŠ” ë¶ˆê°€)
+        // ê³µê²© ì¹´ìš´íŠ¸ë„ ì²´í¬í•˜ì—¬ ë§ˆì§€ë§‰ ê³µê²©ë•ŒëŠ” ìº”ìŠ¬ì•ˆë˜ê²Œ í•´ì•¼ í•¨
         if (owner.Movement.IsGrounded && owner.PInput.TryDash)
         {
             owner.ChangeState(EState.Dash);
             return;
         }
 
-        // ¾Ö´Ï¸ŞÀÌ¼Ç Àç»ıÀÌ ¿Ï·áµÇ¸é »óÅÂ Á¾·á
+        // ì• ë‹ˆë©”ì´ì…˜ ì¬ìƒì´ ì™„ë£Œë˜ë©´ ìƒíƒœ ì¢…ë£Œ
         if (animTimer <= 0)
         {
             if (!owner.Movement.IsGrounded)
@@ -65,7 +62,7 @@ public class ThrowState : BaseState<PlayerController>
             return;
         }
 
-        // timer ÁøÇà
+        // timer ì§„í–‰
         animTimer -= Time.deltaTime;
     }
 }

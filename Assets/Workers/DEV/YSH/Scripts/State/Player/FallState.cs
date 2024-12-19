@@ -21,6 +21,7 @@ public class FallState : BaseState<PlayerController>
     {
         if (owner.PInput.TryThrow)
         {
+            // 점프 throw로 변경필요
             owner.ChangeState(EState.Throw);
             return;
         }

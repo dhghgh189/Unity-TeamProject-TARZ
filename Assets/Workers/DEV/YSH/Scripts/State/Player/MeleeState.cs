@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class MeleeState : BaseState<PlayerController>
@@ -7,6 +8,11 @@ public class MeleeState : BaseState<PlayerController>
     private int[] meleeAnimHashes;
 
     private float animTimer;
+    private float comboTimer;
+
+    // ê³µê²© ì§„í–‰ì „ì˜ ì¹´ìš´íŠ¸ë¥¼ ì²´í¬í•´ì•¼ í•˜ë¯€ë¡œ
+    // ê³µê²©ì „ PlayerAttack ìŠ¤í¬ë¦½íŠ¸ì˜ Countë¥¼ ì €ì¥í•´ë‘ëŠ” ìš©ë„
+    private int meleeCount;
 
     public MeleeState(PlayerController owner)
     {
@@ -21,36 +27,69 @@ public class MeleeState : BaseState<PlayerController>
         }
     }
 
-    // ±ÙÁ¢°ø°İ ¾Ö´Ï¸ŞÀÌ¼Ç Àç»ı
+    // ê·¼ì ‘ê³µê²© ì• ë‹ˆë©”ì´ì…˜ ì¬ìƒ
     public override void OnEnter()
     {
+        // ê³µê²©ì„ ì§„í–‰í•˜ê¸° ì „ì˜ Countë¥¼ ë¯¸ë¦¬ ì €ì¥í•´ë‘”ë‹¤.
+        // Updateì‹œì ì—ëŠ” ì´ë¯¸ Countê°€ ë°”ë€Œê¸° ë•Œë¬¸ì— ë¨¼ì € ì €ì¥í•œë‹¤
+        meleeCount = owner.Attack.MeleeCount;
+
+        comboTimer = 0f;
         owner.Movement.Move(Vector3.zero);
 
         animTimer = 999;
+
         owner.Anim.CrossFade(meleeAnimHashes[owner.Attack.MeleeCount], 0.01f);
         owner.StartCoroutine(AnimRoutine());
     }
 
     IEnumerator AnimRoutine()
     {
-        // ¾Ö´Ï¸ŞÀÌ¼Ç Àç»ı ÈÄ ¹Ù·Î info¸¦ °¡Á®¿À¸é ÀÌÀü Å¬¸³ Á¤º¸°¡ ¹Ş¾ÆÁö¹Ç·Î
-        // Àá½Ã ´ë±âÇÏ´Â ½Ã°£À» °¡Á®¾ß ÇÑ´Ù.
+        // ì• ë‹ˆë©”ì´ì…˜ ì¬ìƒ í›„ ë°”ë¡œ infoë¥¼ ê°€ì ¸ì˜¤ë©´ ì´ì „ í´ë¦½ ì •ë³´ê°€ ë°›ì•„ì§€ë¯€ë¡œ
+        // ì ì‹œ ëŒ€ê¸°í•˜ëŠ” ì‹œê°„ì„ ê°€ì ¸ì•¼ í•œë‹¤.
         yield return new WaitForSeconds(0.1f);
         AnimatorStateInfo info = owner.Anim.GetCurrentAnimatorStateInfo(0);
-        // ÇöÀç Àç»ıµÈ ¾Ö´Ï¸ŞÀÌ¼ÇÀÇ length¸¦ ¹Ş´Â´Ù (speed°¡ °í·ÁµÇ¾ß ÇÔ)
+        // í˜„ì¬ ì¬ìƒëœ ì• ë‹ˆë©”ì´ì…˜ì˜ lengthë¥¼ ë°›ëŠ”ë‹¤ (speedê°€ ê³ ë ¤ë˜ì•¼ í•¨)
         animTimer = info.length / info.speed;
     }
 
     public override void OnUpdate()
     {
-        // ¾Ö´Ï¸ŞÀÌ¼Ç Àç»ıÀÌ ¿Ï·áµÇ¸é »óÅÂ Á¾·á
+        // ì• ë‹ˆë©”ì´ì…˜ ì¬ìƒì´ ì™„ë£Œë˜ë©´ ìƒíƒœ ì¢…ë£Œ
         if (animTimer <= 0)
         {
-            owner.ChangeState(EState.Idle);
+            if (meleeCount >= owner.Attack.MeleeCountMax-1)
+            {
+                owner.ChangeState(EState.Idle);
+            }
+            else
+            {
+                comboTimer = owner.Attack.ComboCheckTime;
+                animTimer = 999;
+            }
+            
             return;
         }
 
-        // timer ÁøÇà
+        // timer ì§„í–‰
         animTimer -= Time.deltaTime;
+
+        if (comboTimer > 0)
+        {
+            comboTimer -= Time.deltaTime;
+            // ë‹¤ìŒ ì½¤ë³´ë¥¼ ì‚¬ìš©í•˜ê¸° ê¹Œì§€ ì œí•œì‹œê°„
+            if (comboTimer <= 0)
+            {
+                owner.Attack.MeleeCount = 0;
+                owner.ChangeState(EState.Idle);
+                return;
+            }
+
+            if (owner.PInput.TryMelee)
+            {
+                OnEnter();
+                return;
+            }
+        }
     }
 }

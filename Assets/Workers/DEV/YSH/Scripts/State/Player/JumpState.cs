@@ -31,6 +31,7 @@ public class JumpState : BaseState<PlayerController>
     {
         if (owner.PInput.TryThrow)
         {
+            // jump throw로 변경 필요
             owner.ChangeState(EState.Throw);
             return;
         }

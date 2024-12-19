@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    [SerializeField] private Transform lookAt;
+    [SerializeField] public Transform lookAt;
     [SerializeField] private Vector3 delta;
 
     float yAngle;

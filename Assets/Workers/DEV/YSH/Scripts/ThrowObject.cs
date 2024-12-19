@@ -5,8 +5,11 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class ThrowObject : MonoBehaviour, IDrainable
 {
+    [SerializeField] private LayerMask whatIsTarget;
+
     private bool isCollected;
     private Rigidbody rigid;
+
 
     // test
     public bool IsCollected { get { return isCollected; } set { isCollected = value; } }
@@ -46,7 +49,8 @@ public class ThrowObject : MonoBehaviour, IDrainable
     {
         rigid.velocity = Vector3.zero;
 
-        if (other.gameObject.layer != LayerMask.NameToLayer("Enemy"))
+        // 부딪힌 오브젝트가 target이 아니면
+        if (((1 << other.gameObject.layer) & whatIsTarget.value) == 0)
         {
             isCollected = false;
             return;

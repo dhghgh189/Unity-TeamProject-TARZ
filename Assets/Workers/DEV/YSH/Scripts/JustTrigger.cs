@@ -35,7 +35,7 @@ public class JustTrigger : MonoBehaviour
             {
                 if (timer == 0)
                 {
-                    Debug.Log("Monster JustTrigger Activated!");
+                    //Debug.Log("Monster JustTrigger Activated!");
                     EnableJustTrigger(2f);
                     yield return new WaitForSeconds(0.25f);
                     DisableJustTrigger();
@@ -44,7 +44,7 @@ public class JustTrigger : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log($"Monster Charge : {timer}");
+                    //Debug.Log($"Monster Charge : {timer}");
                     timer--;
                 }
 

@@ -13,6 +13,7 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private float[] meleeRanges;
     [SerializeField] private Transform stackTransform;
     [SerializeField] private int maxObjectCount;
+    [SerializeField] private float comboCheckTime;
 
     private Vector3 source;
     private Vector3 dest;
@@ -30,6 +31,7 @@ public class PlayerAttack : MonoBehaviour
 
     private List<IEffect> meleeEffects;
     public int MeleeEffectCount => meleeEffects.Count;
+    public float ComboCheckTime => comboCheckTime;
 
     private void Awake()
     {

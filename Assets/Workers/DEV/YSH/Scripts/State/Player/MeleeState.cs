@@ -8,6 +8,9 @@ public class MeleeState : BaseState<PlayerController>
     private int[] meleeAnimHashes;
 
     private float animTimer;
+    private float comboTimer;
+
+    private int meleeCount;
 
     public MeleeState(PlayerController owner)
     {
@@ -25,6 +28,9 @@ public class MeleeState : BaseState<PlayerController>
     // 근접공격 애니메이션 재생
     public override void OnEnter()
     {
+        meleeCount = owner.Attack.MeleeCount;
+
+        comboTimer = 0f;
         owner.Movement.Move(Vector3.zero);
 
         animTimer = 999;
@@ -48,11 +54,38 @@ public class MeleeState : BaseState<PlayerController>
         // 애니메이션 재생이 완료되면 상태 종료
         if (animTimer <= 0)
         {
-            owner.ChangeState(EState.Idle);
+            if (meleeCount >= owner.Attack.MeleeCountMax-1)
+            {
+                owner.ChangeState(EState.Idle);
+            }
+            else
+            {
+                comboTimer = owner.Attack.ComboCheckTime;
+                animTimer = 999;
+            }
+            
             return;
         }
 
         // timer 진행
         animTimer -= Time.deltaTime;
+
+        if (comboTimer > 0)
+        {
+            comboTimer -= Time.deltaTime;
+            // 다음 콤보를 사용하기 까지 제한시간
+            if (comboTimer <= 0)
+            {
+                owner.Attack.MeleeCount = 0;
+                owner.ChangeState(EState.Idle);
+                return;
+            }
+
+            if (owner.PInput.TryMelee)
+            {
+                OnEnter();
+                return;
+            }
+        }
     }
 }

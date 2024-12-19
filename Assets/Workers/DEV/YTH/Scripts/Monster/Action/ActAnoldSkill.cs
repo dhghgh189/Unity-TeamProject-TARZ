@@ -2,7 +2,7 @@ using BehaviorDesigner.Runtime.Tasks;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class ActMonsterSkill : Action
+public class ActAnoldSkill : Action
 {
     [SerializeField] MonsterData _monsterData;
 
@@ -22,14 +22,15 @@ public class ActMonsterSkill : Action
 
     public override TaskStatus OnUpdate()
     {
-       
-
-        if (_distance >= 40)
+        if (_distance >= 40 )
         {
             if (_monsterSkillManager.jumpAttackRoutine == null)
             {
                 StartCoroutine(_monsterSkillManager.JumpAttackRoutine());
                 Debug.Log("40 JumpAttack");
+                // 코루틴이 다 끝나야 success로 넘어가는데
+                // 코루틴 안에 몬스터 canUseSkill 체크까지 해줌
+                // 1. canuseSkill을 세분화해서 스킬별로 나누면 해결될듯
             }
             return TaskStatus.Success;
         }
@@ -51,9 +52,13 @@ public class ActMonsterSkill : Action
             }
             return TaskStatus.Success;
         }
+        else if (_distance < 20)
+        {
+            return TaskStatus.Success;
+        }
         else
         {
-            return TaskStatus.Failure;
+            return  TaskStatus.Failure;
         }
     }
 

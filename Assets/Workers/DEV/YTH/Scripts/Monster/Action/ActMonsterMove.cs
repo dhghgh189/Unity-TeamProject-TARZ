@@ -15,10 +15,10 @@ public class ActMonsterMove : Action
     [SerializeField] GameObject _player; 
 
     private Transform _lastPlayerTransform; // 플레이어가 시야각에서 사라진 마지막 위치
-
-    public void OnStart()
+   
+    public override void OnStart()
     {
-        StartCoroutine(GetLasPlayerTransform());
+        getLasPlayerTransform = StartCoroutine(GetLasPlayerTransform());
     }
 
     public override TaskStatus OnUpdate()
@@ -44,6 +44,10 @@ public class ActMonsterMove : Action
         }
     }
 
+
+    /// <summary>
+    /// 플레이어가 시야에서 사라졌을때 마지막 플레이어 위치 기억
+    /// </summary>
     Coroutine getLasPlayerTransform;
     IEnumerator GetLasPlayerTransform()
     {
@@ -53,7 +57,6 @@ public class ActMonsterMove : Action
         }
         yield return null;
         getLasPlayerTransform = null;
-
     }
 }
 

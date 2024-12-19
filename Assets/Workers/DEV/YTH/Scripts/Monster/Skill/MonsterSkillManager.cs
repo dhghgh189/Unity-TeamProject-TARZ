@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.AI;
 
 // 제안 1) 쌩으로 함수 구현해서 스킬매니저에 몰아 놓는다
 // 제안 2) abstract
@@ -19,13 +18,27 @@ public class MonsterSkillManager : MonoBehaviour
     [Header("MonsterSkill")]
     [SerializeField] MonsterSkill _bomb;
     public MonsterSkill BombSkill { get { return _bomb; } set { _bomb = value; } }
+
     [SerializeField] MonsterSkill _dashAttack;
+    public MonsterSkill DashAttackSkill { get { return _dashAttack; } set { _dashAttack = value; } }
+    
     [SerializeField] MonsterSkill _firePoison_Wall;
+    public MonsterSkill FirePoisonWallSkill { get { return _firePoison_Wall; } set { _firePoison_Wall = value; } }
+
     [SerializeField] MonsterSkill _jumpAttack;
+    public MonsterSkill JumpAttackSkill { get { return _jumpAttack; } set { _jumpAttack = value; } }
+    
     [SerializeField] MonsterSkill _mine;
+    public MonsterSkill MineSkill { get { return _mine; } set { _mine = value; } }
+
     [SerializeField] MonsterSkill _stimPak;
+    public MonsterSkill StimPakSkill { get { return _stimPak; } set { _stimPak = value; } }
+
     [SerializeField] MonsterSkill _wheelWind;
+    public MonsterSkill WheelWindSkill { get { return _wheelWind; } set { _wheelWind = value; } }
+
     [SerializeField] MonsterSkill _electricWall;
+    public MonsterSkill ElectricWallSkill { get { return _electricWall; } set { _electricWall = value; } }
     #endregion
 
     [Header("Prefab")]
@@ -44,11 +57,7 @@ public class MonsterSkillManager : MonoBehaviour
 
     [SerializeField] Rigidbody _rigidbody;
 
-   
-
-    WaitForSeconds attackDelay = new(2f);
-
-    private void Update()
+    private void Update() // 테스트 코드 추후 삭제!!
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
@@ -56,13 +65,15 @@ public class MonsterSkillManager : MonoBehaviour
         }
     }
 
+    #region JumpAttack
     public Coroutine jumpAttackRoutine;
-    WaitForSeconds jumpAttackCoolTime = new(10f);
     public IEnumerator JumpAttackRoutine() // 보스의 도약해서 착지하여 범위 공격
     {
         _rigidbody.AddForce((Vector3.forward + Vector3.up * 2f) * _jumpAttack.JumpForce, ForceMode.Impulse);
+        //점프가 안됨 내브매쉬랑 연관있을것으로 추정
         Debug.Log("점프!!");
         _monsterData.CanUseSkill = false;
+        _jumpAttack.CanUseSkill = false;
 
         Collider[] colliders = Physics.OverlapSphere(transform.position, _jumpAttack.Range);
         foreach (Collider collider in colliders)
@@ -84,14 +95,17 @@ public class MonsterSkillManager : MonoBehaviour
                 damageble.TakeDamage(_jumpAttack.Damage);
             }
         }
-        
-        yield return jumpAttackCoolTime;
+
+        yield return new WaitForSeconds(_jumpAttack.CoolTime);
         _monsterData.CanUseSkill = true;
+        _jumpAttack.CanUseSkill = true;
         jumpAttackRoutine = null;
     }
+    #endregion
 
-
-    public IEnumerator WheelWind() // 가렌 E
+    #region WheelWind
+    public Coroutine wheelWindRoutine;
+    public IEnumerator WheelWindRoutine() // 가렌 E
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, _wheelWind.Range);
         foreach (Collider collider in colliders)
@@ -111,11 +125,13 @@ public class MonsterSkillManager : MonoBehaviour
             if (damageble != null)
             {
                 damageble.TakeDamage(_wheelWind.Damage);
-                yield return attackDelay;
+                yield return new WaitForSeconds(_wheelWind.Interval);
             }
         }
     }
+    #endregion
 
+    #region Bomb
     WaitForSeconds bombCoolTime = new(10f);
     public IEnumerator Bomb()  // 직스 궁 
     {
@@ -126,18 +142,22 @@ public class MonsterSkillManager : MonoBehaviour
         yield return bombCoolTime;
         _monsterData.CanUseSkill = true;
     }
+    #endregion
 
+    #region Mine
     public void Mine()
     {
         GameObject mine = Instantiate(_minePrefab, transform.position, transform.rotation);
         Rigidbody mineRb = mine.GetComponent<Rigidbody>();
         mineRb.AddForce(Vector3.forward * _bomb.ThrowForce, ForceMode.Impulse);
     }
+    #endregion
 
+    #region FirePoison_Wall
     public void FirePoison_Wall()
     {
-       //폭탄좀비 위치 기준으로 1자벽 생성 해서 방향은 랜덤 일정 시간뒤에 사라짐
-       // 닿으면 데미지입고 화상(도트뎀)입을지 말지 결정은 추후 
+        //폭탄좀비 위치 기준으로 1자벽 생성 해서 방향은 랜덤 일정 시간뒤에 사라짐
+        // 닿으면 데미지입고 화상(도트뎀)입을지 말지 결정은 추후 
 
         // 벽을 랜덤하게 세울지
         // 캐릭터 위치 기반으로 세울지
@@ -146,10 +166,11 @@ public class MonsterSkillManager : MonoBehaviour
         // 여러번 세울지
 
         GameObject wall = Instantiate(_wallPrefab, transform.position, transform.rotation);
-        
+
     }
+    #endregion
 
-
+    #region StimPak
     public void StimPak() // 폭탄좀비가 잭더리퍼의 몬스터 데이터에 접근해서 스텟 업 해줌
     {
         if (_player == null)
@@ -158,11 +179,12 @@ public class MonsterSkillManager : MonoBehaviour
         PlayerControllerMonster data = _player.GetComponent<PlayerControllerMonster>();
         data.CurHp += 50;
     }
+    #endregion
 
-
-    public Coroutine dashAttack;
+    #region DashAttack
+    public Coroutine dashAttackRoutine;
     WaitForSeconds dashAttackCoolTime = new(10f);
-    public IEnumerator DashAttack()
+    public IEnumerator DashAttackRoutine()
     {
         _monsterData.CanUseSkill = false;
         _rigidbody.AddForce(Vector3.forward * _dashAttack.JumpForce, ForceMode.Impulse);
@@ -181,7 +203,7 @@ public class MonsterSkillManager : MonoBehaviour
 
             Vector3 targetDir = (destination - source).normalized;
             float targetAngle = Vector3.Angle(transform.forward, targetDir);
-            if (targetAngle > _dashAttack.Angle) 
+            if (targetAngle > _dashAttack.Angle)
                 continue;
 
             IDamagable damageble = collider.GetComponent<IDamagable>();
@@ -194,7 +216,9 @@ public class MonsterSkillManager : MonoBehaviour
         _monsterData.CanUseSkill = true;
 
     }
+    #endregion
 
+    #region ElectricWall
     public void ElectricWall()
     {
         // 이거 번개 얘기임!!
@@ -203,4 +227,6 @@ public class MonsterSkillManager : MonoBehaviour
         // 생성 위치는 수정하고 
 
     }
+    #endregion
 }
+

@@ -25,29 +25,8 @@ public class ChangeInput : MonoBehaviour
         // 현재 선택된 UI 오브젝트가 없는 경우 예외 처리
         if (system.currentSelectedGameObject == null) return;
 
-        // 컨트롤러 왼쪽 조이스틱을 위로(== 키보드 위 방향키) 입력할 떄
-        if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            // 다음 선택될 UI 오브젝트를 UI 네비게이션에서 현재 선택된 UI 오브젝트의 이전 오브젝트로 지정
-            Selectable next = system.currentSelectedGameObject.GetComponent<Selectable>().FindSelectableOnUp();
-
-            // 다음 선택될 UI 오브젝트가 null이 아닌 경우 선택
-            if (next != null)
-            {
-                next.Select();
-            }
-        }
-        // 컨트롤러 왼쪽 조이스틱을 아래로(== 키보드아래 방향키) 입력할 떄
-        else if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            // 다음 선택될 UI 오브젝트를 UI 네비게이션에서 현재 선택된 UI 오브젝트의 다음 오브젝트로 지정
-            Selectable next = system.currentSelectedGameObject.GetComponent<Selectable>().FindSelectableOnDown();
-
-            // 다음 선택될 UI 오브젝트가 null이 아닌 경우 선택
-            if (next != null)
-            {
-                next.Select();
-            }
-        }
+        // UI Selectable Input 변경은 기본 EventSystem과 UI 네비게이션 기능으로 구현되어 있음.
+        // 키보드에서 W/S, 또는 방향키 위/아래 입력 시 이전/다음 UI 선택
+        // 컨트롤러(게임패드)에서 왼쪽 조이스틱 위/아래 입력 시 이전/다음 UI 선택
     }
 }

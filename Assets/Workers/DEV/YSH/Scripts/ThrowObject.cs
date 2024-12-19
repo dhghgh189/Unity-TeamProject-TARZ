@@ -9,16 +9,18 @@ public class ThrowObject : MonoBehaviour, IDrainable
 
     private bool isCollected;
     private Rigidbody rigid;
+    private PlayerController owner;
 
-
-    // test
     public bool IsCollected { get { return isCollected; } set { isCollected = value; } }
 
     Coroutine drainRoutine;
-    
+
+    private List<IEffect> throwEffects;
+
     private void Awake()
     {
         rigid = GetComponent<Rigidbody>();
+        throwEffects = new List<IEffect>();
     }
 
     private void OnDisable()
@@ -28,6 +30,11 @@ public class ThrowObject : MonoBehaviour, IDrainable
             StopCoroutine(drainRoutine);
             drainRoutine = null;
         }
+    }
+
+    public void AddEffect(IEffect effect)
+    {
+        throwEffects.Add(effect);
     }
 
     public void Throw(Vector3 dir, float throwForce)
@@ -42,6 +49,7 @@ public class ThrowObject : MonoBehaviour, IDrainable
         if (drainRoutine != null)
             StopDrain(null);
 
+        owner = player;
         player.AddObjectStack(this);
     }
 
@@ -53,7 +61,20 @@ public class ThrowObject : MonoBehaviour, IDrainable
         if (((1 << other.gameObject.layer) & whatIsTarget.value) == 0)
         {
             isCollected = false;
+
+            if (throwEffects.Count > 0)
+                throwEffects.Clear();
+
             return;
+        }
+
+        // effect 발동
+        ActiveThrowEffects(other.gameObject);
+
+        IDamagable damagable = other.gameObject.GetComponent<IDamagable>();
+        if (damagable != null)
+        {
+            damagable.TakeDamage(1);
         }
 
         Destroy(gameObject);
@@ -93,5 +114,15 @@ public class ThrowObject : MonoBehaviour, IDrainable
         rigid.velocity = Vector3.zero;
         rigid.constraints = RigidbodyConstraints.None;
         drainRoutine = null;
+    }
+
+    public void ActiveThrowEffects(GameObject target)
+    {
+        foreach(var effect in throwEffects)
+        {
+            effect.Activate(owner.gameObject, target);
+        }
+
+        throwEffects.Clear();
     }
 }

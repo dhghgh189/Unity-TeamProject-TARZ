@@ -28,12 +28,45 @@ public class PlayerAttack : MonoBehaviour
     public int ThrowCountMax => throwForces.Length;
     public int MeleeCountMax => meleeAngles.Length;
 
+    private List<IEffect> meleeEffects;
+    public int MeleeEffectCount => meleeEffects.Count;
+
     private void Awake()
     {
         MeleeCount = 0;
         ThrowCount = 0;
 
         objectStack = new Stack<ThrowObject>(maxObjectCount);
+        meleeEffects = new List<IEffect>();
+    }
+
+    public void AddThrowEffects(ThrowObject tobj)
+    {
+        if (ThrowCount == 2)
+        {
+            Debug.Log("<color=red>Knock back throw</color>");
+            tobj.AddEffect(new KnockBack());
+        }
+    }
+
+    public void AddMeleeEffect(IEffect effect)
+    {
+        meleeEffects.Add(effect);
+    }
+
+    public void ActiveMeleeEffect(GameObject target)
+    {
+        foreach (var effect in meleeEffects)
+        {
+            effect.Activate(gameObject, target);
+        }
+
+        meleeEffects.Clear();
+    }
+
+    public void ClearMeleeEffects()
+    {
+        meleeEffects.Clear();
     }
 
     public void AddObjectStack(ThrowObject tobj)
@@ -71,6 +104,10 @@ public class PlayerAttack : MonoBehaviour
         if (tobj == null)
             return;
 
+        Debug.Log($"<color=white>Throw Count : {ThrowCount}</color>");
+
+        AddThrowEffects(tobj);
+
         tobj.transform.parent = null;
         tobj.transform.position = throwPoint.position;
         tobj.gameObject.SetActive(true);
@@ -90,31 +127,50 @@ public class PlayerAttack : MonoBehaviour
         Debug.Log($"Melee Attack angle : {meleeAngles[MeleeCount]}");
         Debug.Log($"Melee Attack Range : {meleeRanges[MeleeCount]}");
 
+        // test
+        if (MeleeCount == 1)
+            AddMeleeEffect(new KnockBack());
+
         // 공격 시 추후 카메라 방향을 바라보도록 하는 동작 추가 필요 
 
         Collider[] colliders = Physics.OverlapSphere(transform.position, meleeRanges[MeleeCount], whatIsEnemy);
         foreach (Collider col in colliders)
         {
-            source = transform.position;
-            dest = col.transform.position;
-            source.y = 0;
-            dest.y = 0;
-
-            resultAngle = Vector3.Angle(transform.forward, (dest - source).normalized);
-            if (resultAngle > meleeAngles[MeleeCount] * 0.5f)
+            // 각도 체크
+            if (!IsTargetInAngle(col.transform))
                 continue;
 
+            // 이펙트 발동
+            ActiveMeleeEffect(col.gameObject);
+
             IDamagable damagable = col.GetComponent<IDamagable>();
-            if (damagable != null)
-            {
-                damagable.TakeDamage(1);
-            }
+            if (damagable == null)
+                continue;
+
+            damagable.TakeDamage(1);
         }
+
+        if (MeleeEffectCount > 0)
+            ClearMeleeEffects();
 
         if (MeleeCount < MeleeCountMax - 1)
             MeleeCount++;
         else
             MeleeCount = 0;
+    }
+
+    private bool IsTargetInAngle(Transform targetTrf)
+    {
+        source = transform.position;
+        dest = targetTrf.position;
+        source.y = 0;
+        dest.y = 0;
+
+        resultAngle = Vector3.Angle(transform.forward, (dest - source).normalized);
+        if (resultAngle > meleeAngles[MeleeCount] * 0.5f)
+            return false;
+
+        return true;
     }
 
     private void OnDrawGizmos()

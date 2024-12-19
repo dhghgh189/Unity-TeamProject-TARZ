@@ -29,7 +29,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void Move(Vector3 moveVelocity)
     {
-        // ÇöÀç Ä«¸Ş¶ó ¹æÇâÀ» ±âÁØÀ¸·Î ÀÌµ¿À» ÁøÇàÇÑ´Ù.
+        // í˜„ì¬ ì¹´ë©”ë¼ ë°©í–¥ì„ ê¸°ì¤€ìœ¼ë¡œ ì´ë™ì„ ì§„í–‰í•œë‹¤.
         Vector3 velocity = (mainCamTrf.right * moveVelocity.x) + (mainCamTrf.forward * moveVelocity.z);
         rigid.velocity = new Vector3(velocity.x, rigid.velocity.y, velocity.z);
 
@@ -58,8 +58,8 @@ public class PlayerMovement : MonoBehaviour
 
     public void Jump(float jumpForce)
     {
-        // velocity°¡ -ÀÎ »óÈ²¿¡¼­ Á¡ÇÁ°¡ ÁøÇà µÇ´Â ¹®Á¦¸¦ ¹æÁöÇÏ±â À§ÇØ
-        // velocity ÃÊ±âÈ­ 1È¸ ÁøÇà
+        // velocityê°€ -ì¸ ìƒí™©ì—ì„œ ì í”„ê°€ ì§„í–‰ ë˜ëŠ” ë¬¸ì œë¥¼ ë°©ì§€í•˜ê¸° ìœ„í•´
+        // velocity ì´ˆê¸°í™” 1íšŒ ì§„í–‰
         rigid.velocity = Vector3.zero;
 
         rigid.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);

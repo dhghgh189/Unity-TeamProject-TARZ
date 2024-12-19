@@ -61,6 +61,11 @@ public class PlayerController : MonoBehaviour
         Gizmos.DrawWireCube(transform.position + transform.up * 0.06f, new Vector3(0.5f, 0.1f, 0.5f));
     }
 
+    public void AddObjectStack(ThrowObject tobj)
+    {
+        Attack.AddObjectStack(tobj);
+    }
+
     public void ChangeState(EState state)
     {
         Fsm.ChangeState(state);

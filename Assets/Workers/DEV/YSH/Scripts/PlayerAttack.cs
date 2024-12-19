@@ -2,21 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using TreeEditor;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerAttack : MonoBehaviour
 {
-    // ¿©±â¼­ throw¿Í melee »óÅÂ¸¦ °ü¸®ÇÏ°í, ºñ±³ÇØ¼­ È¥ÇÕ ÄŞº¸ ±¸ÇöÀÌ °¡´ÉÇÑ°¡?
-
     [SerializeField] private Transform throwPoint;
-    [SerializeField] private ThrowObject throwObject; // Å×½ºÆ®¿ë, ½Ç ÇÁ·ÎÁ§Æ®¿¡¼­´Â ÇÃ·¹ÀÌ¾îÀÇ stack¿¡¼­ ²¨³»¿Àµµ·Ï
     [SerializeField] private LayerMask whatIsEnemy;
     [SerializeField] private float[] throwForces;
     [SerializeField] private float[] meleeAngles;
     [SerializeField] private float[] meleeRanges;
+    [SerializeField] private Transform stackTransform;
+    [SerializeField] private int maxObjectCount;
 
-    Vector3 source;
-    Vector3 dest;
-    float resultAngle;
+    private Vector3 source;
+    private Vector3 dest;
+    private float resultAngle;
+
+    private Stack<ThrowObject> objectStack;
+    public int ObjectCount => objectStack.Count;
 
     public LayerMask WhatIsEnemy { get { return whatIsEnemy; } }
 
@@ -29,16 +32,51 @@ public class PlayerAttack : MonoBehaviour
     {
         MeleeCount = 0;
         ThrowCount = 0;
+
+        objectStack = new Stack<ThrowObject>(maxObjectCount);
+    }
+
+    public void AddObjectStack(ThrowObject tobj)
+    {
+        if (objectStack.Count >= maxObjectCount)
+            return;
+
+        objectStack.Push(tobj);
+        tobj.transform.parent = stackTransform;
+        tobj.gameObject.SetActive(false);
+
+        // ì´ë²¤íŠ¸?
+        Debug.Log($"<color=yellow>Stack Count : {ObjectCount}</color>");
+    }
+
+    public ThrowObject PopObjectStack()
+    {
+        if (objectStack.Count <= 0)
+        {
+            Debug.Log("ë¬¼ê±´ì´ ì—†ìŠµë‹ˆë‹¤.");
+            return null;
+        }
+
+        ThrowObject tobj = objectStack.Pop();
+
+        // ì´ë²¤íŠ¸?
+        Debug.Log($"<color=yellow>Stack Count : {ObjectCount}</color>");
+
+        return tobj;
     }
 
     public void Throw()
     {
-        Debug.Log($"ThrowCount : {ThrowCount}");
-        ThrowObject tobj = Instantiate(throwObject, throwPoint.position, Quaternion.identity);
-        tobj.IsCollected = true;
+        ThrowObject tobj = PopObjectStack();
+        if (tobj == null)
+            return;
+
+        tobj.transform.parent = null;
+        tobj.transform.position = throwPoint.position;
+        tobj.gameObject.SetActive(true);
         tobj.Throw(transform.forward + (transform.up*0.3f), throwForces[ThrowCount]);
 
-        // °ø°İ ½Ã ÃßÈÄ Ä«¸Ş¶ó ¹æÇâÀ» ¹Ù¶óº¸µµ·Ï ÇÏ´Â µ¿ÀÛ Ãß°¡ ÇÊ¿ä 
+        // ê³µê²© ì‹œ ì¶”í›„ ì¹´ë©”ë¼ ë°©í–¥ì„ ë°”ë¼ë³´ë„ë¡ í•˜ëŠ” ë™ì‘ ì¶”ê°€ í•„ìš” 
 
         if (ThrowCount < ThrowCountMax - 1)
             ThrowCount++;
@@ -52,7 +90,7 @@ public class PlayerAttack : MonoBehaviour
         Debug.Log($"Melee Attack angle : {meleeAngles[MeleeCount]}");
         Debug.Log($"Melee Attack Range : {meleeRanges[MeleeCount]}");
 
-        // °ø°İ ½Ã ÃßÈÄ Ä«¸Ş¶ó ¹æÇâÀ» ¹Ù¶óº¸µµ·Ï ÇÏ´Â µ¿ÀÛ Ãß°¡ ÇÊ¿ä 
+        // ê³µê²© ì‹œ ì¶”í›„ ì¹´ë©”ë¼ ë°©í–¥ì„ ë°”ë¼ë³´ë„ë¡ í•˜ëŠ” ë™ì‘ ì¶”ê°€ í•„ìš” 
 
         Collider[] colliders = Physics.OverlapSphere(transform.position, meleeRanges[MeleeCount], whatIsEnemy);
         foreach (Collider col in colliders)

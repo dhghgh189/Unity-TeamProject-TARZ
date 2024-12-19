@@ -30,13 +30,16 @@ public class ThrowObject : MonoBehaviour, IDrainable
     public void Throw(Vector3 dir, float throwForce)
     {
         rigid.AddForce(dir * throwForce, ForceMode.Impulse);
-        Destroy(gameObject, 5f);
     }
 
-    public void Get()
+    public void Get(PlayerController player)
     {
         isCollected = true;
-        Destroy(gameObject);
+
+        if (drainRoutine != null)
+            StopDrain(null);
+
+        player.AddObjectStack(this);
     }
 
     private void OnCollisionEnter(Collision other)
@@ -44,7 +47,10 @@ public class ThrowObject : MonoBehaviour, IDrainable
         rigid.velocity = Vector3.zero;
 
         if (other.gameObject.layer != LayerMask.NameToLayer("Enemy"))
+        {
+            isCollected = false;
             return;
+        }
 
         Destroy(gameObject);
     }

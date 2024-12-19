@@ -19,7 +19,7 @@ public class IdleState : BaseState<PlayerController>
     public override void OnUpdate()
     {
         base.OnUpdate();
-        // ´ë½¬
+        // ëŒ€ì‰¬
         if (owner.PInput.TryDash)
         {
             owner.ChangeState(EState.Dash);
@@ -32,28 +32,28 @@ public class IdleState : BaseState<PlayerController>
             return;
         }
 
-        // ¿ø°Å¸® °ø°İ
-        if (owner.PInput.TryThrow)
+        // ì›ê±°ë¦¬ ê³µê²©
+        if (owner.PInput.TryThrow && owner.Attack.ObjectCount > 0)
         {
             owner.ChangeState(EState.Throw);
             return;
         }
 
-        // ±ÙÁ¢°ø°İ
+        // ê·¼ì ‘ê³µê²©
         if (owner.PInput.TryMelee)
         {
             owner.ChangeState(EState.Melee);
             return;
         }
 
-        // ÀÌµ¿
+        // ì´ë™
         if (owner.PInput.InputDir != Vector3.zero)
         {
             owner.ChangeState(EState.Move);
             return;
         }
 
-        // Á¡ÇÁ
+        // ì í”„
         if (owner.PInput.TryJump)
         {
             owner.ChangeState(EState.Jump);

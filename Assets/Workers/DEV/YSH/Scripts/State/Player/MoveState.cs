@@ -34,7 +34,7 @@ public class MoveState : BaseState<PlayerController>
             return;
         }
 
-        if (owner.PInput.TryThrow)
+        if (owner.PInput.TryThrow && owner.Attack.ObjectCount > 0)
         {
             owner.Movement.Move(Vector3.zero);
             owner.ChangeState(EState.Throw);

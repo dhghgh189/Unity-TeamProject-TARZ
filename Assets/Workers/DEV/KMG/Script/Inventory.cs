@@ -16,9 +16,12 @@ public class Inventory : MonoBehaviour
         UI_GearSlot slot = EmptySlot();
         if (!slot) return;
 
-        tier = Mathf.Clamp(tier, 1, 3);
         // 해당 부위의 베이스 장비를 가져옴
         Gear gear = Instantiate(baseGears.Where(x => x.Part == part).First());
+
+        // 티어 부여
+        tier = Mathf.Clamp(tier, 1, 3);
+        gear.Tier = tier;
 
         // 장갑은 4개중 하나의 기본 능력치를 가지므로 능력치 3개를 삭제
         if (part == Part.장갑)
@@ -29,9 +32,11 @@ public class Inventory : MonoBehaviour
             }
         }
 
-        // 랜덤한 능력치를 상승
-        gear.Tier = tier;
-        gear.Abilities.Add(new GearAbility() { ability = (AdditionAbility)Random.Range(0, (int)AdditionAbility.Size), value = 10 });
+        // 랜덤한 능력치를 랜덤 확률로 상승
+        if (IsProbability(50))
+            gear.Abilities.Add(new GearAbility() { ability = (AdditionAbility)Random.Range(0, (int)AdditionAbility.Size), value = 10 });
+        if (IsProbability(50))
+            gear.Abilities.Add(new GearAbility() { ability = (AdditionAbility)Random.Range(0, (int)AdditionAbility.Size), value = 10 });
 
         // 이름 변경
         gear.SetName();
@@ -63,5 +68,14 @@ public class Inventory : MonoBehaviour
         {
             GetGear(tempPart, tempTier);
         }
+    }
+
+    private bool IsProbability(float value)
+    {
+        if (Random.Range(1, 101) > 100 - value)
+        {
+            return true;
+        }
+        return false;
     }
 }

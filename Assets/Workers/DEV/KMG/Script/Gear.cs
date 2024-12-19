@@ -16,10 +16,18 @@ public class Gear : ScriptableObject
 
     private string[] firstName = { "강력한", "기본적인", "전략적인", "신비로운", "치명적인", "예리한", "건강한", "활발한", "기력의", "흡수하는", "재빠른", "가벼운", "부유한" };
     private string[] lastName = { "전사", "달인", "전술가", "점술가", "CriticalDamage", "칼날", "트레이너", "MaxStaminaPer", "장어", "흡수", "토끼", "주머니", "부자" };
-    private string[] tier = { "", "낡은", "", "좋은" };
+    private string[] tier = { "", "낡은", "일반", "좋은" };
     public void SetName()
     {
-        GearName = $"{firstName[(int)Abilities[0].ability]} {lastName[(int)Abilities[1].ability]} {tier[Tier]} {Part}";
+        int abilitiesCount = Abilities.Count;
+
+        if (abilitiesCount > 1)
+            GearName += $"{firstName[(int)Abilities[1].ability]} ";
+
+        if (abilitiesCount > 2)
+            GearName += $"{lastName[(int)Abilities[2].ability]} ";
+
+        GearName += $"{tier[Tier]} {Part}";
         Debug.Log(GearName);
     }
 }

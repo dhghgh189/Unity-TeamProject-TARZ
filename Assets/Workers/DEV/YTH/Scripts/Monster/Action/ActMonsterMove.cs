@@ -25,8 +25,9 @@ public class ActMonsterMove : Action
     {
         if (_condMonsterCanMove.ReturnObj != null && !_monsterData.IsAttacked) // _condMonsterCanMove.ReturnObj 는 시야각 내의 물체 (플레이어)
         {
-            if (Vector3.Distance(transform.position, _player.transform.position) <= _monsterData.AttackRange || _monsterData.CanUseSkill ==true)
+            if (Vector3.Distance(transform.position, _player.transform.position) <= _monsterData.AttackRange /*|| _monsterData.CanUseSkill ==true*/)
             {
+                _agent.isStopped = true;
                 return TaskStatus.Success;
             }
             _agent.SetDestination(_condMonsterCanMove.ReturnObj.transform.position);

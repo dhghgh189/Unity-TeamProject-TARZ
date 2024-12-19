@@ -9,7 +9,7 @@ public class CondMonsterCanSkill : Conditional
 
     public override TaskStatus OnUpdate()
     {
-        if (_monsterData.CanUseSkill == true)
+        if (_monsterData.Type == MonsterType.Boss || _monsterData.Type == MonsterType.Bomb)
         {
             Debug.Log("CondMonsterCanSkill@@@@@@");
             return TaskStatus.Success;

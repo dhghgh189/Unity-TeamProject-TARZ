@@ -1,6 +1,5 @@
 using BehaviorDesigner.Runtime;
 using BehaviorDesigner.Runtime.Tasks;
-using BehaviorDesigner.Runtime.Tasks.Unity.UnityGameObject;
 using System.Collections;
 using UnityEngine;
 
@@ -17,7 +16,7 @@ public class ActMonsterAttack : Action
     [SerializeField] GameObject _player;
 
     [Header("Attack")]
-    [SerializeField] float _throwForce; 
+    [SerializeField] float _throwForce;
     public float ThrowForce { get { return _throwForce; } set { _throwForce = value; } }
 
     [SerializeField] float _angle;
@@ -34,6 +33,7 @@ public class ActMonsterAttack : Action
             switch (_monsterData.Type)
             {
                 case MonsterData.MonsterType.Range:
+                case MonsterData.MonsterType.Bomb:
                     if (throwRoutine == null)
                     {
 
@@ -41,6 +41,7 @@ public class ActMonsterAttack : Action
                         Debug.Log("throw루틴 했음");
                     }
                     break;
+
 
                 default:
                     if (attackRoutine == null)
@@ -58,7 +59,7 @@ public class ActMonsterAttack : Action
     }
 
     // 공격 사이에 딜레이 생성
-  
+
     Coroutine attackRoutine;
     IEnumerator AttackRoutine()
     {

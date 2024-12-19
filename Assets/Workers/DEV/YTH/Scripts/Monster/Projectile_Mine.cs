@@ -8,8 +8,6 @@ public class Projectile_Mine : MonoBehaviour
 
     [SerializeField] Rigidbody _rigidBody;
 
-    [SerializeField] float Timer;
-
     private void Start()
     {
         _monsterSkillManager = _bombZombie.GetComponent<MonsterSkillManager>();
@@ -19,19 +17,21 @@ public class Projectile_Mine : MonoBehaviour
     {
         _rigidBody.velocity = Vector3.zero;
 
-        Destroy(gameObject, Timer);
-        // ¹âÀ¸¸é ÅÍÁúÁö
-        // Å¸ÀÌ¸Ó·Î ÅÍÁúÁö
+       
+        // ë°Ÿìœ¼ë©´ í„°ì§ˆì§€
+        // íƒ€ì´ë¨¸ë¡œ í„°ì§ˆì§€
 
-        // ÀÌ°Ç Á¤ÇØÁÖ½Ã¸é ¼öÁ¤!!
+        // ì´ê±´ ì •í•´ì£¼ì‹œë©´ ìˆ˜ì •!!
 
         IDamagable damagableObj = collision.gameObject.GetComponent<IDamagable>();
         if (damagableObj != null)
         {
+            
+
             Collider[] colliders = Physics.OverlapSphere(transform.position, _monsterSkillManager.BombSkill.Range);
             foreach (Collider collider in colliders)
             {
-                // °ø°İ ¹üÀ§ È®ÀÎ
+                // ê³µê²© ë²”ìœ„ í™•ì¸
                 Vector3 source = transform.position;
                 source.y = 0;
                 Vector3 destination = collider.transform.position;
@@ -45,6 +45,7 @@ public class Projectile_Mine : MonoBehaviour
                 IDamagable damageble = collider.GetComponent<IDamagable>();
                 if (damageble != null)
                 {
+                    Destroy(gameObject);
                     damageble.TakeDamage(_monsterSkillManager.BombSkill.Damage);
                 }
             }

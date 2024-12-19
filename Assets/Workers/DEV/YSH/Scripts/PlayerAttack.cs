@@ -128,7 +128,7 @@ public class PlayerAttack : MonoBehaviour
         Debug.Log($"Melee Attack Range : {meleeRanges[MeleeCount]}");
 
         // test
-        if (MeleeCount == 1)
+        if (MeleeCount == 2)
             AddMeleeEffect(new KnockBack());
 
         // 공격 시 추후 카메라 방향을 바라보도록 하는 동작 추가 필요 

@@ -14,6 +14,7 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private Transform stackTransform;
     [SerializeField] private int maxObjectCount;
     [SerializeField] private float comboCheckTime;
+    [SerializeField] private PlayerController player;
 
     private Vector3 source;
     private Vector3 dest;
@@ -113,6 +114,7 @@ public class PlayerAttack : MonoBehaviour
         tobj.transform.parent = null;
         tobj.transform.position = throwPoint.position;
         tobj.gameObject.SetActive(true);
+        tobj.SetDamage(player.Stat.ThrowDamages[ThrowCount]);
         tobj.Throw(transform.forward + (transform.up*0.3f), throwForces[ThrowCount]);
 
         // 공격 시 추후 카메라 방향을 바라보도록 하는 동작 추가 필요 
@@ -128,6 +130,7 @@ public class PlayerAttack : MonoBehaviour
         Debug.Log($"MeleeCount : {MeleeCount}");
         Debug.Log($"Melee Attack angle : {meleeAngles[MeleeCount]}");
         Debug.Log($"Melee Attack Range : {meleeRanges[MeleeCount]}");
+        Debug.Log($"Melee Attack Damage : {player.Stat.MeleeDamages[MeleeCount]}");
 
         // test
         if (MeleeCount == 2)
@@ -149,7 +152,7 @@ public class PlayerAttack : MonoBehaviour
             if (damagable == null)
                 continue;
 
-            damagable.TakeDamage(1);
+            damagable.TakeDamage(player.Stat.MeleeDamages[MeleeCount]);
         }
 
         if (MeleeEffectCount > 0)

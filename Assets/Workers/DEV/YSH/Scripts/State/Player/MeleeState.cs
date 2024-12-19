@@ -10,6 +10,8 @@ public class MeleeState : BaseState<PlayerController>
     private float animTimer;
     private float comboTimer;
 
+    // 공격 진행전의 카운트를 체크해야 하므로
+    // 공격전 PlayerAttack 스크립트의 Count를 저장해두는 용도
     private int meleeCount;
 
     public MeleeState(PlayerController owner)
@@ -28,6 +30,8 @@ public class MeleeState : BaseState<PlayerController>
     // 근접공격 애니메이션 재생
     public override void OnEnter()
     {
+        // 공격을 진행하기 전의 Count를 미리 저장해둔다.
+        // Update시점에는 이미 Count가 바뀌기 때문에 먼저 저장한다
         meleeCount = owner.Attack.MeleeCount;
 
         comboTimer = 0f;

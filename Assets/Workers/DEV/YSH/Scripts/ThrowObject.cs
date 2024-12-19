@@ -11,6 +11,8 @@ public class ThrowObject : MonoBehaviour, IDrainable
     private Rigidbody rigid;
     private PlayerController owner;
 
+    private int damage;
+
     public bool IsCollected { get { return isCollected; } set { isCollected = value; } }
 
     Coroutine drainRoutine;
@@ -35,6 +37,11 @@ public class ThrowObject : MonoBehaviour, IDrainable
     public void AddEffect(IEffect effect)
     {
         throwEffects.Add(effect);
+    }
+
+    public void SetDamage(int damage)
+    {
+        this.damage = damage;
     }
 
     public void Throw(Vector3 dir, float throwForce)
@@ -74,7 +81,7 @@ public class ThrowObject : MonoBehaviour, IDrainable
         IDamagable damagable = other.gameObject.GetComponent<IDamagable>();
         if (damagable != null)
         {
-            damagable.TakeDamage(1);
+            damagable.TakeDamage(damage);
         }
 
         Destroy(gameObject);

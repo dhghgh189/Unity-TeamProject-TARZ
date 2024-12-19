@@ -2,12 +2,22 @@ using System;
 using UnityEngine;
 public enum AdditionAbility
 {
-    AllPower, AllPowerPer, SkillPowerPer, ElementalPowerPer, CriticalDamage, Critical, MaxHp, MaxHpPer, MaxStamina, MaxStaminaPer, StaminarEgeneration, MpGain, MoveSpeed, MaxObject, ChipGetAmount, Size
+    AllPowerPer, DefaultPowerPer, SkillPowerPer, ElementalPowerPer, CriticalDamage, Critical, MaxHpPer, MaxStaminaPer, StaminarEgeneration, MpGain, MoveSpeedPer, MaxObject, ChipGetAmount, Size
 }
 
 public class StatModel : MonoBehaviour
 {
+    [Header("기본 능력치")]
+    [SerializeField] float maxHp;
+    public float MaxHp { get => maxHp; private set { } }
+
+    [SerializeField] float maxStamina;
+    public float MaxStamina { get => maxStamina; private set { } }
+
+    [SerializeField] float allPower;
+    public float AllPower { get => allPower; private set { } }
     [Header("실시간 능력치")]
+
     [SerializeField] float currentHp;
     public float CurrentHp { get => currentHp; set { currentHp = value; OnCurHpChange.Invoke(value); } }
 

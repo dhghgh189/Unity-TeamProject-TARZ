@@ -25,6 +25,7 @@ public class SettingSceneUI : MonoBehaviour
 
     [Header("<color=blue>Selected UI</color>")]
     [SerializeField] private Toggle activeMinimapToggle;
+    [SerializeField] private Dropdown languageDropdown;
 
     private void Start()
     {
@@ -70,6 +71,7 @@ public class SettingSceneUI : MonoBehaviour
         nonSelectPanel.SetActive(false);
         gameplayPanel.SetActive(false);
         languagePanel.SetActive(true);
+        languageDropdown.Select();
     }
 
     public void OnClickBackToTitleButton()

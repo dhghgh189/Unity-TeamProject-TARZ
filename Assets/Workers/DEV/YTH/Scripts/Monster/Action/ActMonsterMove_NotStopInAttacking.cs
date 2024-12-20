@@ -2,7 +2,7 @@ using BehaviorDesigner.Runtime.Tasks;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
-public class ActMonsterMove : Action
+public class ActMonsterMove_NotStopInAttacking : Action
 {
     [SerializeField] CondMonsterCanMove _condMonsterCanMove;
 

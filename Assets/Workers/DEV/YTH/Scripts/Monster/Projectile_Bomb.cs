@@ -13,6 +13,9 @@ public class Projectile_Bomb : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Monster"))
+            return;
+
         Destroy(gameObject);
         // 직스 궁 마냥
 

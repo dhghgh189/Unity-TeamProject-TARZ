@@ -20,4 +20,5 @@ public class CondMonsterCanSkill : Conditional
             return TaskStatus.Failure;
         }
     }
+    
 }

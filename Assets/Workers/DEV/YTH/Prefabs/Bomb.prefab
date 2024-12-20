@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 604305059695827611}
   - component: {fileID: 1558921255945470385}
   - component: {fileID: 8246197228115549351}
-  - component: {fileID: 6319498686623657948}
   - component: {fileID: 3982486454248507007}
   - component: {fileID: 3549681665573549969}
+  - component: {fileID: 4229450181568416022}
   m_Layer: 13
   m_Name: Bomb
   m_TagString: Untagged
@@ -86,27 +86,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &6319498686623657948
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1616805512990888026}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &3982486454248507007
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -148,3 +127,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bombZombie: {fileID: 9032859600620638007, guid: ab8553dcc153eef4e9d219cf4283577d,
     type: 3}
+--- !u!65 &4229450181568416022
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1616805512990888026}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.0000001, y: 1.0000001, z: 1.0000001}
+  m_Center: {x: 0, y: 0, z: 0}

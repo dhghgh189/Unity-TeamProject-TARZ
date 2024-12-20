@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 
 // 제안 1) 쌩으로 함수 구현해서 스킬매니저에 몰아 놓는다
 // 제안 2) abstract
@@ -59,12 +60,21 @@ public class MonsterSkillManager : MonoBehaviour
     private Vector3 _electricWallPosition;
     private Vector3 _electricWallPosition2;
 
-    [Header("")]
+    [Header("Etc")]
     [SerializeField] MonsterData _monsterData;
 
     [SerializeField] GameObject _player;
 
     [SerializeField] Rigidbody _rigidbody;
+
+    [SerializeField] Transform _muzzlePoint;
+
+    [SerializeField] NavMeshAgent _agent;
+
+    private float _elapsedTime = 0;
+
+    private Vector3 _jumpStartPosition;
+
 
     private void Start()
     {
@@ -97,15 +107,38 @@ public class MonsterSkillManager : MonoBehaviour
         }
     }
 
+    #region JumpAttack - 점프 코루틴
+    Coroutine jumpRoutine_jumpAttack;
+    IEnumerator JumpRoutine_JumpAttack()
+    {
+        _jumpStartPosition = transform.position;
+
+        while (_elapsedTime < JumpAttackSkill.InAirTime)
+        {
+            float yOffset = Mathf.Sin((_elapsedTime / JumpAttackSkill.InAirTime) * Mathf.PI) * JumpAttackSkill.JumpHeight;
+            float zOffset = (_elapsedTime / JumpAttackSkill.InAirTime) * JumpAttackSkill.JumpDistance;
+
+            transform.position = new Vector3(_jumpStartPosition.x, _jumpStartPosition.y + yOffset, _jumpStartPosition.z + zOffset);
+
+            _elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        transform.position = new Vector3(_jumpStartPosition.x, _jumpStartPosition.y, _jumpStartPosition.z + JumpAttackSkill.JumpDistance);
+        jumpRoutine_jumpAttack = null;
+        _elapsedTime = 0;
+    }
+    #endregion
+
     #region JumpAttack
     public Coroutine jumpAttackRoutine;
     public IEnumerator JumpAttackRoutine() // 보스의 도약해서 착지하여 범위 공격
     {
-        _rigidbody.AddForce((Vector3.forward + Vector3.up * 2f) * _jumpAttack.JumpForce, ForceMode.Impulse);
-        //점프가 안됨 내브매쉬랑 연관있을것으로 추정
-        Debug.Log("점프!!");
-        /*  _monsterData.CanUseSkill = false;*/
         _jumpAttack.CanUseSkill = false;
+        if (jumpRoutine_jumpAttack == null)
+        {
+            jumpRoutine_jumpAttack = StartCoroutine(JumpRoutine_JumpAttack());
+            Debug.Log("점프!!");
+        }
 
         Collider[] colliders = Physics.OverlapSphere(transform.position, _jumpAttack.Range);
         foreach (Collider collider in colliders)
@@ -129,7 +162,6 @@ public class MonsterSkillManager : MonoBehaviour
         }
 
         yield return new WaitForSeconds(_jumpAttack.CoolTime);
-        /*  _monsterData.CanUseSkill = true;*/
         _jumpAttack.CanUseSkill = true;
         jumpAttackRoutine = null;
     }
@@ -169,9 +201,9 @@ public class MonsterSkillManager : MonoBehaviour
     {
         BombSkill.CanUseSkill = false;
 
-        GameObject bomb = Instantiate(_bombPrefab, transform.position, transform.rotation);
+        GameObject bomb = Instantiate(_bombPrefab, _muzzlePoint.position, _muzzlePoint.rotation);
         Rigidbody bombRb = bomb.GetComponent<Rigidbody>();
-        bombRb.AddForce(Vector3.forward * _bomb.ThrowForce, ForceMode.Impulse);
+        bombRb.AddForce((transform.forward + transform.up * 3) * _bomb.ThrowForce, ForceMode.Impulse);
 
         yield return new WaitForSeconds(BombSkill.CoolTime);
         bombRoutine = null;
@@ -186,18 +218,19 @@ public class MonsterSkillManager : MonoBehaviour
     {
         MineSkill.CanUseSkill = false;
 
-        GameObject mine = Instantiate(_minePrefab, transform.position, transform.rotation);
+        GameObject mine = Instantiate(_minePrefab, _muzzlePoint.position, _muzzlePoint.rotation);
         Rigidbody mineRb = mine.GetComponent<Rigidbody>();
-        mineRb.AddForce(Vector3.forward * _bomb.ThrowForce, ForceMode.Impulse);
+        mineRb.AddForce(transform.forward * MineSkill.ThrowForce, ForceMode.Impulse);
 
         yield return Util.GetDelay(MineSkill.CoolTime);
-        mineRoutine=null;
-        MineSkill.CanUseSkill=true;
+        mineRoutine = null;
+
+        MineSkill.CanUseSkill = true;
     }
     #endregion
 
     #region StimPak
-    public  void StimPak() // 폭탄좀비가 잭더리퍼의 몬스터 데이터에 접근해서 스텟 업 해줌
+    public void StimPak() // 폭탄좀비가 잭더리퍼의 몬스터 데이터에 접근해서 스텟 업 해줌
     {
         StimPakSkill.CanUseSkill = false;
 
@@ -211,16 +244,38 @@ public class MonsterSkillManager : MonoBehaviour
     }
     #endregion
 
+    #region DashAttack - 점프 코루틴
+    Coroutine jumpRoutine_dashAttack;
+    IEnumerator JumpRoutine_dashAttack()
+    {
+        _jumpStartPosition = transform.position;
+
+        while (_elapsedTime < DashAttackSkill.InAirTime)
+        {
+            float yOffset = Mathf.Sin((_elapsedTime / DashAttackSkill.InAirTime) * Mathf.PI) * DashAttackSkill.JumpHeight;
+            float zOffset = (_elapsedTime / DashAttackSkill.InAirTime) * DashAttackSkill.JumpDistance;
+
+            transform.position = new Vector3(_jumpStartPosition.x, _jumpStartPosition.y + yOffset, _jumpStartPosition.z + zOffset);
+
+            _elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        transform.position = new Vector3(_jumpStartPosition.x, _jumpStartPosition.y, _jumpStartPosition.z + DashAttackSkill.JumpDistance);
+        jumpRoutine_dashAttack = null;
+        _elapsedTime = 0;
+    }
+    #endregion
+
     #region DashAttack
     public Coroutine dashAttackRoutine;
-    WaitForSeconds dashAttackCoolTime = new(10f);
     public IEnumerator DashAttackRoutine()
     {
-        /*_monsterData.CanUseSkill = false;*/
-        _rigidbody.AddForce(Vector3.forward * _dashAttack.JumpForce, ForceMode.Impulse);
-        // 물리기반으로할지, translate로 할지 결정
-        // rigidbody 사용 시 캐릭터에 부딪히면 멈춤
-        // 뚫고 나가는게 맞는거같기도하고 물어봐야함
+        DashAttackSkill.CanUseSkill = false;
+        if (jumpRoutine_dashAttack == null)
+        {
+            jumpRoutine_dashAttack = StartCoroutine(JumpRoutine_dashAttack());
+            Debug.Log("점프!!");
+        }
 
         Collider[] colliders = Physics.OverlapSphere(transform.position, _dashAttack.Range);
         foreach (Collider collider in colliders)
@@ -242,8 +297,9 @@ public class MonsterSkillManager : MonoBehaviour
                 damageble.TakeDamage(_dashAttack.Damage);
             }
         }
-        yield return dashAttackCoolTime;
-        /*_monsterData.CanUseSkill = true;*/
+        yield return new WaitForSeconds(DashAttackSkill.CoolTime);
+        dashAttackRoutine = null;
+        DashAttackSkill.CanUseSkill = true;
 
     }
     #endregion
@@ -291,6 +347,7 @@ public class MonsterSkillManager : MonoBehaviour
         ThunderSkill.CanUseSkill = true;
     }
     #endregion
+
 
 }
 

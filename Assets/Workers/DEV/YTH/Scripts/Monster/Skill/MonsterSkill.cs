@@ -19,4 +19,10 @@ public class MonsterSkill : ScriptableObject
     public float Interval; // 도트뎀 주기
     public float ThrowForce;
     public bool CanUseSkill = true; // 기본값 true
+
+   public float InAirTime; // 체공 시간
+ 
+   public float JumpHeight; // Y축 점프 높이
+  
+   public float JumpDistance; // Z축 점프 거리
 }

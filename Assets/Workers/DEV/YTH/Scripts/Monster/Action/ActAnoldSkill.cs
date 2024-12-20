@@ -16,13 +16,12 @@ public class ActAnoldSkill : Action
 
     public override void OnStart()
     {
-        
         _distance = Vector3.Distance(transform.position, _target.transform.position);
-       /* _agent.enabled = false;*/
     }
 
     public override TaskStatus OnUpdate()
     {
+        // 최장거리 패턴
         if (_distance >= 40 &&  _monsterSkillManager.JumpAttackSkill.CanUseSkill == true)
         {
             if (_monsterSkillManager.jumpAttackRoutine == null)
@@ -32,6 +31,7 @@ public class ActAnoldSkill : Action
             }
             return TaskStatus.Success;
         }
+        // 장거리 패턴
         else if (_distance >= 30 && _distance < 40 && _monsterSkillManager.ElectricWallSkill.CanUseSkill == true)
         {
             if (_monsterSkillManager.electricWallRoutine == null) 
@@ -41,6 +41,7 @@ public class ActAnoldSkill : Action
             }
             return TaskStatus.Success;
         }
+        // 중거리 패턴
         else if (_distance >= 20 && _distance < 30 && _monsterSkillManager.DashAttackSkill.CanUseSkill == true)
         {
             if (_monsterSkillManager.dashAttackRoutine == null)
@@ -50,17 +51,18 @@ public class ActAnoldSkill : Action
             }
             return TaskStatus.Success;
         }
-        else if (_distance >= 10 && _distance < 20 && _monsterSkillManager.ThunderSkill.CanUseSkill == true && _monsterData.CurHp <= _monsterData.MaxHp /2) // 낙뢰
+        // 단거리 + 체력 50% 이하 패턴
+        // 스킬 쿨 타임일 때 다가가 일반 공격
+        else if (_distance < 20)  // 다가가 공격으로 넘어감
         {
-            if (_monsterSkillManager.thunderRoutine == null)
+            if (_monsterSkillManager.ThunderSkill.CanUseSkill == true && _monsterData.CurHp <= _monsterData.MaxHp / 2)
             {
-                _monsterSkillManager.thunderRoutine = StartCoroutine(_monsterSkillManager.ThunderRoutine());
-                Debug.Log("10 ThunderRoutine 시작");
+                if (_monsterSkillManager.thunderRoutine == null)
+                {
+                    _monsterSkillManager.thunderRoutine = StartCoroutine(_monsterSkillManager.ThunderRoutine());
+                    Debug.Log("10 ThunderRoutine 시작");
+                }
             }
-            return TaskStatus.Success;
-        }
-        else if (_distance < 10)  // 다가가 공격으로 넘어감
-        {
             return TaskStatus.Success;
         }
         else
@@ -68,9 +70,4 @@ public class ActAnoldSkill : Action
             return  TaskStatus.Failure;
         }
     }
-
-    /* public override void OnEnd()
-     {
-         _agent.enabled = true;
-     }*/
 }

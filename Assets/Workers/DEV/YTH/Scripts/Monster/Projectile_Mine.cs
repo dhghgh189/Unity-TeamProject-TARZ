@@ -15,9 +15,9 @@ public class Projectile_Mine : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        _rigidBody.velocity = Vector3.zero;
+        
 
-       
+        _rigidBody.velocity = Vector3.zero;
         // 밟으면 터질지
         // 타이머로 터질지
 

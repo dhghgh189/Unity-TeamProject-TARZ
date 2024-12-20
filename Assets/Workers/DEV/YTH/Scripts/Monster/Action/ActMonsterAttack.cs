@@ -36,7 +36,6 @@ public class ActMonsterAttack : Action
                 case MonsterData.MonsterType.Bomb:
                     if (throwRoutine == null)
                     {
-
                         throwRoutine = StartCoroutine(ThrowRoutine());
                         Debug.Log("throw루틴 했음");
                     }
@@ -47,6 +46,7 @@ public class ActMonsterAttack : Action
                     if (attackRoutine == null)
                     {
                         attackRoutine = StartCoroutine(AttackRoutine());
+                        Debug.Log("근접공격루틴했음");
                     }
                     break;
             }
@@ -106,6 +106,6 @@ public class ActMonsterAttack : Action
 
     public void ThrowAttack()
     {
-        GameObject projectile = Object.Instantiate(_projectilePrefab.Value, _muzzlePoint.Value.position, Quaternion.identity);
+        GameObject projectile = Object.Instantiate(_projectilePrefab.Value, _muzzlePoint.Value.position, _muzzlePoint.Value.rotation);
     }
 }

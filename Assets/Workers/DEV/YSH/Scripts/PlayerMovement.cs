@@ -29,21 +29,18 @@ public class PlayerMovement : MonoBehaviour
 
     public void Move(Vector3 moveVelocity)
     {
+        Vector3 ForwardDir = new Vector3(mainCamTrf.forward.x, 0f, mainCamTrf.forward.z).normalized;
+        Vector3 RightDir = new Vector3(mainCamTrf.right.x, 0f, mainCamTrf.right.z).normalized;
+        Vector3 moveDir = ForwardDir * moveVelocity.z + RightDir * moveVelocity.x;
+
         // 현재 카메라 방향을 기준으로 이동을 진행한다.
         Vector3 velocity = (mainCamTrf.right * moveVelocity.x) + (mainCamTrf.forward * moveVelocity.z);
-        rigid.velocity = new Vector3(velocity.x, rigid.velocity.y, velocity.z);
+        rigid.velocity = new Vector3(velocity.x + moveDir.x, rigid.velocity.y, velocity.z + moveDir.z);
 
         if (velocity != Vector3.zero)
         {
             LookRotation(velocity.normalized);
         }
-
-        //rigid.velocity = new Vector3(moveVelocity.x, rigid.velocity.y, moveVelocity.z);
-
-        //if (moveVelocity != Vector3.zero)
-        //{
-        //    LookRotation(moveVelocity.normalized);
-        //}
     }
 
     public void LookRotation(Vector3 dir)

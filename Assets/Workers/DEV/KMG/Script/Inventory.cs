@@ -1,14 +1,30 @@
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Zenject;
 
 public class Inventory : MonoBehaviour
 {
+    [Inject] SaveData saveData;
+
     // 인벤토리 슬롯들을 보관할 배열 12개임
     [Inject] UI_InventorySlots[] inventorySlots;
 
     // 장비들의 기본 능력치로 지정된 베이스 장비가 담길 배열
     [SerializeField] Gear[] baseGears = new Gear[(int)Part.Size];
+
+    private void Start()
+    {
+        foreach (var item in saveData.InventoryGears)
+        {
+            Gear saveGear = ScriptableObject.CreateInstance<Gear>();
+            saveGear.Part = item.Part;
+            saveGear.Tier = item.Tier;
+            saveGear.GearName = item.GearName;
+            saveGear.Abilities = item.Abilities;
+            EmptySlot().SetInventorySlots(saveGear);
+        }
+    }
 
     // 티어와 부위를 지정해 장비를 인벤토리에 저장하는 함수
     public void GetGear(Part part, int tier)
@@ -57,6 +73,16 @@ public class Inventory : MonoBehaviour
             if (item.IsEmpty) return item;
         }
         return null;
+    }
+
+    public void InventorySave()
+    {
+        foreach (var item in inventorySlots)
+        {
+            GearSaveData gearSaveData = item.SaveInventoyGear();
+            if (gearSaveData == null) continue;
+            saveData.InventoryGears.Add(gearSaveData);
+        }
     }
 
     // 테스트용

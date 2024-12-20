@@ -10,19 +10,19 @@ public class UI_InventorySlots : MonoBehaviour, IPointerClickHandler
     [SerializeField] Gear gear;
     [SerializeField] TMP_Text gearName;
     public bool IsEmpty = true;
-    private void Start()
+    private void Awake()
     {
         gearName = GetComponentInChildren<TMP_Text>();
     }
     // 클릭 이벤트, 원작 게임은 마우스 클릭이 없음 변경해야할듯
     public void OnPointerClick(PointerEventData eventData)
     {
-        if(eventData.button == PointerEventData.InputButton.Right)
+        if (!gear) return;
+        if (eventData.button == PointerEventData.InputButton.Right)
         {
             GearSell();
             return;
         }
-        if (!gear) return;
         EquipGear();
     }
     public void EquipGear()
@@ -54,5 +54,12 @@ public class UI_InventorySlots : MonoBehaviour, IPointerClickHandler
         gear = null;
         IsEmpty = true;
         gearName.text = string.Empty;
+    }
+
+    public GearSaveData SaveInventoyGear()
+    {
+        if (!gear)
+            return null;
+        return JsonUtility.FromJson<GearSaveData>(JsonUtility.ToJson(gear));
     }
 }

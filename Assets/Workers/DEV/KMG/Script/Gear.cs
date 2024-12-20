@@ -6,6 +6,7 @@ public enum Part
 {
     모자, 셔츠, 안경, 장갑, 바지, 귀걸이, 반지, 신발, 목걸이, Size
 }
+[Serializable]
 [CreateAssetMenu(fileName = "Gear", menuName = "Scriptables/Gear")]
 public class Gear : ScriptableObject
 {

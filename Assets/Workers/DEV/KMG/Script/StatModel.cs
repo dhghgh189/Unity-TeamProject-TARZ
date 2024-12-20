@@ -1,6 +1,7 @@
 using System;
 using System.ComponentModel;
 using UnityEngine;
+using Zenject;
 public enum AdditionAbility
 {
     [Description("공격력%")] AllPowerPer,
@@ -21,15 +22,18 @@ public enum AdditionAbility
 
 public class StatModel : MonoBehaviour
 {
+    [Inject] SaveData saveData;
     [Header("기본 능력치")]
+
     [SerializeField] float maxHp;
-    public float MaxHp { get => maxHp + (0.01f * maxHp * GetAbility(AdditionAbility.MaxHpPer)); private set { } }
+    public float MaxHp { get => maxHp + (0.01f * maxHp * GetAbility(AdditionAbility.MaxHpPer)); set { maxHp = value; OnMaxHpChange?.Invoke(value); } }
 
     [SerializeField] float maxStamina;
-    public float MaxStamina { get => maxStamina + (0.01f * maxStamina * GetAbility(AdditionAbility.MaxStaminaPer)); private set { } }
+    public float MaxStamina { get => maxStamina + (0.01f * maxStamina * GetAbility(AdditionAbility.MaxStaminaPer)); set { maxStamina = value; OnMaxStaminaChange?.Invoke(value); } }
 
     [SerializeField] float allPower;
-    public float AllPower { get => allPower + (0.01f * allPower * GetAbility(AdditionAbility.AllPowerPer)); private set { } }
+    public float AllPower { get => allPower + (0.01f * allPower * GetAbility(AdditionAbility.AllPowerPer)); set { allPower = value; OnAllActackPowerChange?.Invoke(value); } }
+
     public float DefaultPower { get => AllPower + (0.01f * allPower * GetAbility(AdditionAbility.DefaultPowerPer)); private set { } }
     public float SkillPower { get => AllPower + (0.01f * allPower * GetAbility(AdditionAbility.SkillPowerPer)); private set { } }
     public float ElementalPower { get => AllPower + (0.01f * allPower * GetAbility(AdditionAbility.ElementalPowerPer)); private set { } }
@@ -62,6 +66,12 @@ public class StatModel : MonoBehaviour
         OnStatChange.Invoke();
     }
 
+    // 최대 체력 변경
+    public event Action<float> OnMaxHpChange;
+    // 최대 스테미나 변경
+    public event Action<float> OnMaxStaminaChange;
+    // 공격력 변경
+    public event Action<float> OnAllActackPowerChange;
     // 현재 체력 변경
     public event Action<float> OnCurHpChange;
     // 현재 마나 변경
@@ -74,4 +84,22 @@ public class StatModel : MonoBehaviour
     public event Action<float> OnBlackChipChange;
     // 능력치 변경
     public event Action OnStatChange;
+
+    private void Start()
+    {
+        if (saveData.StatSaveData == null) return;
+        MaxHp = saveData.StatSaveData.maxHp;
+        MaxStamina = saveData.StatSaveData.maxStamina;
+        AllPower = saveData.StatSaveData.allPower;
+        CurrentHp = saveData.StatSaveData.currentHp;
+        CurrentMp = saveData.StatSaveData.currentMp;
+        CurrentStamina = saveData.StatSaveData.currentStamina;
+        Chip = saveData.StatSaveData.chip;
+        BlackChip = saveData.StatSaveData.blackChip;
+        for (int i = 0; i < (int)AdditionAbility.Size; i++) 
+        {
+            additionAbility[i] = saveData.StatSaveData.additionAbility[i];
+        }
+        SetAbility(AdditionAbility.AllPowerPer, 0);
+    }
 }

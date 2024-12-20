@@ -69,13 +69,4 @@ public class Inventory : MonoBehaviour
             GetGear(tempPart, tempTier);
         }
     }
-
-    private bool IsProbability(float value)
-    {
-        if (Random.Range(1, 101) > 100 - value)
-        {
-            return true;
-        }
-        return false;
-    }
 }

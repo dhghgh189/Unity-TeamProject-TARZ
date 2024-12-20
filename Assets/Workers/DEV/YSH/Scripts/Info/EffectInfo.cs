@@ -5,7 +5,6 @@ using UnityEngine;
 [System.Serializable]
 public class EffectInfo
 {
-    public bool ExistEffet;
     public EffectData[] EffectDatas;
 }
 

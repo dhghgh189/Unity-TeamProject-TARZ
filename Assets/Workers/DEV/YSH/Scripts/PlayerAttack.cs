@@ -13,9 +13,7 @@ public class PlayerAttack : MonoBehaviour
     public ThrowAttackInfo[] ThrowAttackInfo;
 
     [Header("근거리 공격 스펙 설정")]
-    [SerializeField] private float[] meleeAngles;
-    [SerializeField] private float[] meleeRanges;
-    [SerializeField] private EffectInfo[] meleeEffectInfo;
+    public MeleeAttackInfo[] MeleeAttackInfo;
 
     [Space(10f)]
     [SerializeField] private Transform stackTransform;
@@ -35,7 +33,7 @@ public class PlayerAttack : MonoBehaviour
     public int MeleeCount { get; set; }
     public int ThrowCount { get; set; }
     public int ThrowCountMax => ThrowAttackInfo.Length;
-    public int MeleeCountMax => meleeAngles.Length;
+    public int MeleeCountMax => MeleeAttackInfo.Length;
 
     private List<IEffect> meleeEffects;
     public int MeleeEffectCount => meleeEffects.Count;
@@ -54,13 +52,7 @@ public class PlayerAttack : MonoBehaviour
         generator = new EffectGenerator();
 
         GenerateThrowEffects();
-
-        // Melee Effect 생성
-        foreach (var effectInfo in meleeEffectInfo)
-        {
-            for (int i = 0; i < effectInfo.EffectDatas.Length; i++)
-                effectInfo.EffectDatas[i].Effect = generator.Create(effectInfo.EffectDatas[i].EffectType);
-        }
+        GenerateMeleeEffects();
     }
 
     public void GenerateThrowEffects()
@@ -80,6 +72,23 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
+    public void GenerateMeleeEffects()
+    {
+        EffectInfo meleeEffectInfo;
+        for (int i = 0; i < MeleeAttackInfo.Length; i++)
+        {
+            meleeEffectInfo = MeleeAttackInfo[i].EffectInfo;
+            if (meleeEffectInfo.EffectDatas.Length <= 0)
+                continue;
+
+            foreach (var effectData in meleeEffectInfo.EffectDatas)
+            {
+                effectData.Effect = generator.Create(effectData.EffectType);
+                Debug.Log($"<color=green>근거리 {i + 1}타 Effect 생성 : {effectData.EffectType}</color>");
+            }
+        }
+    }
+
     public void AddThrowEffects(ThrowObject tobj)
     {
         if (ThrowAttackInfo[ThrowCount].EffectInfo.EffectDatas.Length <= 0)
@@ -94,12 +103,13 @@ public class PlayerAttack : MonoBehaviour
 
     public void AddMeleeEffect()
     {
-        if (meleeEffectInfo[MeleeCount].ExistEffet)
+        if (MeleeAttackInfo[MeleeCount].EffectInfo.EffectDatas.Length <= 0)
+            return;
+
+        EffectInfo meleeEffectInfo = MeleeAttackInfo[MeleeCount].EffectInfo;
+        foreach (var effectData in meleeEffectInfo.EffectDatas)
         {
-            foreach (var effectData in meleeEffectInfo[MeleeCount].EffectDatas)
-            {
-                meleeEffects.Add(effectData.Effect);
-            }
+            meleeEffects.Add(effectData.Effect);
         }
     }
 
@@ -174,15 +184,15 @@ public class PlayerAttack : MonoBehaviour
     public void Melee()
     {
         Debug.Log($"MeleeCount : {MeleeCount}");
-        Debug.Log($"Melee Attack angle : {meleeAngles[MeleeCount]}");
-        Debug.Log($"Melee Attack Range : {meleeRanges[MeleeCount]}");
-        Debug.Log($"Melee Attack Damage : {player.Stat.MeleeDamages[MeleeCount]}");
+        Debug.Log($"Melee Attack angle : {MeleeAttackInfo[MeleeCount].Angle}");
+        Debug.Log($"Melee Attack Range : {MeleeAttackInfo[MeleeCount].Range}");
+        Debug.Log($"Melee Attack Damage : {MeleeAttackInfo[MeleeCount].Damage}");
 
         AddMeleeEffect();
 
         // 공격 시 추후 카메라 방향을 바라보도록 하는 동작 추가 필요 
 
-        Collider[] colliders = Physics.OverlapSphere(transform.position, meleeRanges[MeleeCount], whatIsEnemy);
+        Collider[] colliders = Physics.OverlapSphere(transform.position, MeleeAttackInfo[MeleeCount].Range, whatIsEnemy);
         foreach (Collider col in colliders)
         {
             // 각도 체크
@@ -196,7 +206,7 @@ public class PlayerAttack : MonoBehaviour
             if (damagable == null)
                 continue;
 
-            damagable.TakeDamage(player.Stat.MeleeDamages[MeleeCount]);
+            damagable.TakeDamage(MeleeAttackInfo[MeleeCount].Damage);
         }
 
         if (MeleeEffectCount > 0)
@@ -216,7 +226,7 @@ public class PlayerAttack : MonoBehaviour
         dest.y = 0;
 
         resultAngle = Vector3.Angle(transform.forward, (dest - source).normalized);
-        if (resultAngle > meleeAngles[MeleeCount] * 0.5f)
+        if (resultAngle > MeleeAttackInfo[MeleeCount].Angle * 0.5f)
             return false;
 
         return true;
@@ -225,12 +235,12 @@ public class PlayerAttack : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, meleeRanges[MeleeCount]);
+        Gizmos.DrawWireSphere(transform.position, MeleeAttackInfo[MeleeCount].Range);
 
         Gizmos.color = Color.blue;
         Gizmos.DrawRay(transform.position,
-            (Quaternion.Euler(0, meleeAngles[MeleeCount] * 0.5f, 0) * transform.forward) * meleeRanges[MeleeCount]);
+            (Quaternion.Euler(0, MeleeAttackInfo[MeleeCount].Angle * 0.5f, 0) * transform.forward) * MeleeAttackInfo[MeleeCount].Range);
         Gizmos.DrawRay(transform.position,
-            (Quaternion.Euler(0, meleeAngles[MeleeCount] * -0.5f, 0) * transform.forward) * meleeRanges[MeleeCount]);
+            (Quaternion.Euler(0, MeleeAttackInfo[MeleeCount].Angle * -0.5f, 0) * transform.forward) * MeleeAttackInfo[MeleeCount].Range);
     }
 }

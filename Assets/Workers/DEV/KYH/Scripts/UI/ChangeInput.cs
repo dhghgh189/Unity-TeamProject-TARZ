@@ -6,18 +6,12 @@ using UnityEngine.UI;
 
 public class ChangeInput : MonoBehaviour
 {
-    // UI Selectable Input 시작점으로 지정할 버튼UI
-    [SerializeField] private Button startButton;
-
     private EventSystem system;         // 현재 씬의 UI 이벤트 시스템을 저장할 변수
     public Selectable firstInput;       // UI Selectable Input 시작점
 
     private void Start()
     {
         system = EventSystem.current;       // 현재 씬의 EventSystem을 system에 저장
-
-        firstInput = startButton;           // UI Selectable Input 시작점을 startButton으로 지정
-        firstInput.Select();                // UI Selectable Input 시작점을 선택
     }
 
     private void Update()

@@ -65,6 +65,7 @@ public class ThrowState : BaseState<PlayerController>
             if (throwCount >= owner.Attack.ThrowCountMax - 1 
                 || owner.Attack.ObjectCount <= 0)
             {
+                owner.Attack.ThrowCount = 0;
                 owner.ChangeState(EState.Idle);
             }
             else

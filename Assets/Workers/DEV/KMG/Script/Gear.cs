@@ -28,7 +28,6 @@ public class Gear : ScriptableObject
             GearName += $"{lastName[(int)Abilities[2].ability]} ";
 
         GearName += $"{tier[Tier]} {Part}";
-        Debug.Log(GearName);
     }
 }
 

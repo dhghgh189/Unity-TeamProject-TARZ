@@ -30,6 +30,9 @@ public class StatModel : MonoBehaviour
 
     [SerializeField] float allPower;
     public float AllPower { get => allPower + (0.01f * allPower * GetAbility(AdditionAbility.AllPowerPer)); private set { } }
+    public float DefaultPower { get => AllPower + (0.01f * allPower * GetAbility(AdditionAbility.DefaultPowerPer)); private set { } }
+    public float SkillPower { get => AllPower + (0.01f * allPower * GetAbility(AdditionAbility.SkillPowerPer)); private set { } }
+    public float ElementalPower { get => AllPower + (0.01f * allPower * GetAbility(AdditionAbility.ElementalPowerPer)); private set { } }
     [Header("실시간 능력치")]
 
     [SerializeField] float currentHp;

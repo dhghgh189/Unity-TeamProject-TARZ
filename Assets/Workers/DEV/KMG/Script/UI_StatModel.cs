@@ -23,6 +23,7 @@ public class UI_StatModel : MonoBehaviour
         hpText.text = $"체력: {statModel.CurrentHp}/{statModel.MaxHp}";
         mpText.text = $"마나: {statModel.CurrentMp}";
         staminaText.text = $"스테미나: {statModel.CurrentStamina}/{statModel.MaxStamina}";
+        atackPowerText.text = $"공격력: {statModel.AllPower}";
         chipText.text = $"데이터 칩: {statModel.Chip}";
     }
 
@@ -57,5 +58,11 @@ public class UI_StatModel : MonoBehaviour
                 statText.text += $"{((AdditionAbility)i).ToDescription()} : {value}\n";
             }
         }
+
+        // 얍샙이
+        statModel.CurrentHp += 0;
+        statModel.CurrentMp += 0;
+        statModel.CurrentStamina += 0;
+        atackPowerText.text = $"공격력: {statModel.AllPower}";
     }
 }

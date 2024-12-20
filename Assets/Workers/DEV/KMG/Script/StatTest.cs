@@ -10,4 +10,16 @@ public class StatTest : MonoBehaviour
     {
         statModel.CurrentHp -= value;
     }
+    public void DefaultAtack()
+    {
+        Debug.Log(statModel.DefaultPower);
+    }
+    public void SkillAtack()
+    {
+        Debug.Log(statModel.SkillPower);
+    }
+    public void ElementalAtack()
+    {
+        Debug.Log(statModel.ElementalPower);
+    }
 }

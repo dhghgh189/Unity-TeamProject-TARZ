@@ -6,15 +6,9 @@ using UnityEngine;
 
 public class AutoLockOn : MonoBehaviour
 {
-    // 현재 락온이 가능하나, 카메라가 lookat의 position을 따르고 있어 캐릭터 이동과 카메라가 따로 노는 상태
-    // 필요한 것
-    // 1. 카메라는 마우스 회전을 받지 않을 것 (=화면고정)
-    // 2. 카메라는 여전히 플레이어의 뒤에 있을 것
-    // lookat의 대체가 아닌 다른 무언가가 필요해보임  (lookat을 통해 카메라의 위치가 정해져서 X)
-
     private LayerMask monsterLayer;
     private Coroutine PlayCheck;
-    private Transform defultLookAt;
+    private PlayerController owner;
 
     [Header("인식 범위")]
     [SerializeField] float range;
@@ -22,50 +16,78 @@ public class AutoLockOn : MonoBehaviour
 
     [Header("카메라")]
     [SerializeField] private CameraController cam;
+    [SerializeField] private Transform defultLookAt;
 
     [Header("몬스터 배열")]
     [SerializeField] List<Transform> Monsters;
 
-    public Action action;
+    // 임시적 유니티 이벤트 : 추후 몬스터 컨트롤러에 이벤트 추가 시 대체될 예정
+    public event Action action;
 
 
     private void Start()
     {
         Monsters = new List<Transform>();
-        monsterLayer = LayerMask.GetMask("Monster");
 
         defultLookAt = cam.lookAt;
+        monsterLayer = LayerMask.GetMask("Monster");
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.LeftAlt))
+        {
             AutoLockOnStart();
+        }
     }
 
     public void AutoLockOnStart()
     {
+        // Queue 초기화 과정 진행
         if (Monsters.Count > 0)
         {
             Debug.Log("락온 배열 초기화");
             Monsters.Clear();
         }
 
+        // TODO : 코루틴 실행 여부 체크
         if (PlayCheck == null)
         {
+            // 배열에 몬스터 추가
+            Monsters = CheckMonsters();
+            // 코루틴 실행
+            PlayCheck = StartCoroutine(LockOnRoutine());
             action += TargetingMonster;
-            action();
+            action.Invoke();
         }
         else if (PlayCheck != null)
         {
-            action -= TargetingMonster;
-
             Debug.Log("오토 락온 사용 중지");
             StopCoroutine(PlayCheck);
+
+            action -= TargetingMonster;
 
             cam.lookAt = defultLookAt;
             PlayCheck = null;
         }
+    }
+
+    // 추후 몬스터 사망 시 마다 사용될 수 있도록, 코루틴이 아닌 이벤트 함수로 수정 예정
+    IEnumerator LockOnRoutine()
+    {
+        // 배열에 아무런 오브젝트도 존재하고 있지 않다면 코루틴 종료
+        if (IsMonsterAlive() == false)
+        {
+            Debug.Log("모든 몬스터 처리 완료 : 코루틴 종료");
+            cam.lookAt = defultLookAt;
+            PlayCheck = null;
+            yield break;
+        }
+
+        cam.lookAt = Monsters[0];
+        Debug.Log($"타겟팅 : {cam.lookAt}");
+
+        yield return new WaitForSeconds(1.5f);
     }
 
     List<Transform> CheckMonsters()
@@ -90,66 +112,48 @@ public class AutoLockOn : MonoBehaviour
 
         return targets;
     }
-    public void TargetingMonster()
+    void TargetingMonster()
     {
-        Debug.Log("타겟 설정중");
-        Monsters = CheckMonsters();
-
-        foreach (Transform col in Monsters)
-        {
-            Debug.Log($"배열값 : {col}");
-        }
+        Debug.Log("타겟 설정줌");
 
         var target = from targeting in Monsters
-                     orderby Vector3.Distance(targeting.position, transform.position) ascending
+                     where Vector3.Distance(transform.position, Monsters[0].transform.position)
+                           < Vector3.Distance(transform.position, targeting.transform.position)
+                     // 플레이어와 가까운 순으로 정렬 진행
+                     orderby targeting ascending
                      select targeting;
 
         Monsters = target.ToList();
-
-        foreach (Transform col in Monsters)
-        {
-            Debug.Log($"<color=yellow>재설정 배열값 : {col}</color>");
-        }
-
-        PlayCheck = StartCoroutine(LockOnRoutine());
     }
     bool IsMonsterAlive()
     {
         Debug.Log("몬스터 잔존 여부 확인");
+
+        // bool 자료형 임시값 할당
         bool isAlive = true;
 
-        if (Monsters.Count > 0) isAlive = true;
-        else isAlive = false;
+        foreach (Transform monster in Monsters)
+        {
+            // 배열 내에 저장된 오브젝트가 하나라도 존재할 경우, 반복문 종료 후 true 반환
+            if (Monsters.Contains(monster))
+            {
+                isAlive = true;
+                break;
+            }
+            // 그게 아닐 때, 즉 배열 내에 저장된 오브젝트가 없을 경우, false 반환
+            else isAlive = false;
+        }
 
         // 배열에 비활성화 상태, 혹은 missing인 몬스터가 존재할 때, 다시 배열을 정리하여 타겟을 설정한다.
         foreach (Transform t in Monsters)
         {
-            if (t.gameObject == null || t.gameObject.activeSelf == false)
-                Monsters.Remove(t);
-            else break;
+            if (t.gameObject != null || t.gameObject.activeSelf) continue;
+            Monsters.Remove(t);
         }
 
+        // 반복문에서 도출된 값을 반환한다.
         Debug.Log($"결과값 출력 : {isAlive}");
         return isAlive;
-    }
-    IEnumerator LockOnRoutine()
-    {
-        // 배열에 아무런 오브젝트도 존재하고 있지 않다면 동작 중지
-        if (IsMonsterAlive() == false)
-        {
-            Debug.Log("인식 가능한 몬스터 없음 : 코루틴 종료");
-            action -= TargetingMonster;
-
-            cam.lookAt = defultLookAt;
-            PlayCheck = null;
-            yield break;
-        }
-
-        // 배열에 오브젝트가 있을 경우, 타겟 설정 진행
-        cam.lookAt = Monsters[0];
-        Debug.Log($"타겟팅 : {cam.lookAt}");
-
-        yield return null;
     }
 
     private void OnDrawGizmos()
@@ -160,16 +164,5 @@ public class AutoLockOn : MonoBehaviour
         Gizmos.color = Color.yellow;
         Gizmos.DrawLine(transform.position, transform.position + rightDir * range);
         Gizmos.DrawLine(transform.position, transform.position + leftDir * range);
-    }
-
-    private void OnDisable()
-    {
-        Debug.Log("몬스터 배열 잇음");
-        Monsters.Clear();
-        Debug.Log("몬스터 배열 없음");
-
-        Debug.Log("락온 배열 초기화");
-        StopCoroutine(PlayCheck);
-        action -= TargetingMonster;
     }
 }

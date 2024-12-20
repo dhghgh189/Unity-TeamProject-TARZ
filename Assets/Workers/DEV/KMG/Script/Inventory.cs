@@ -77,6 +77,7 @@ public class Inventory : MonoBehaviour
 
     public void InventorySave()
     {
+        saveData.InventoryGears.Clear();
         foreach (var item in inventorySlots)
         {
             GearSaveData gearSaveData = item.SaveInventoyGear();
@@ -93,6 +94,10 @@ public class Inventory : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             GetGear(tempPart, tempTier);
+        }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            GetGear((Part)Random.Range(0, (int)Part.Size), Random.Range(1, 4));
         }
     }
 }

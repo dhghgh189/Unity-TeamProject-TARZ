@@ -15,6 +15,8 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private int maxObjectCount;
     [SerializeField] private float comboCheckTime;
     [SerializeField] private PlayerController player;
+    [SerializeField] private EffectInfo[] throwEffectInfo;
+    [SerializeField] private EffectInfo[] meleeEffectInfo;
 
     private Vector3 source;
     private Vector3 dest;
@@ -34,6 +36,8 @@ public class PlayerAttack : MonoBehaviour
     public int MeleeEffectCount => meleeEffects.Count;
     public float ComboCheckTime => comboCheckTime;
 
+    private EffectGenerator generator;
+
     private void Awake()
     {
         MeleeCount = 0;
@@ -41,20 +45,44 @@ public class PlayerAttack : MonoBehaviour
 
         objectStack = new Stack<ThrowObject>(maxObjectCount);
         meleeEffects = new List<IEffect>();
+
+        generator = new EffectGenerator();
+
+        // Throw Effect 생성
+        foreach (var effectInfo in throwEffectInfo)
+        {
+            for (int i = 0; i < effectInfo.EffectDatas.Length; i++)
+                effectInfo.EffectDatas[i].Effect = generator.Create(effectInfo.EffectDatas[i].EffectType);
+        }
+
+        // Melee Effect 생성
+        foreach (var effectInfo in meleeEffectInfo)
+        {
+            for (int i = 0; i < effectInfo.EffectDatas.Length; i++)
+                effectInfo.EffectDatas[i].Effect = generator.Create(effectInfo.EffectDatas[i].EffectType);
+        }
     }
 
     public void AddThrowEffects(ThrowObject tobj)
     {
-        if (ThrowCount == 2)
+        if (throwEffectInfo[ThrowCount].ExistEffet)
         {
-            Debug.Log("<color=red>Knock back throw</color>");
-            tobj.AddEffect(new KnockBack());
+            foreach(var effectData in throwEffectInfo[ThrowCount].EffectDatas)
+            {
+                tobj.AddEffect(effectData.Effect);
+            }
         }
     }
 
-    public void AddMeleeEffect(IEffect effect)
+    public void AddMeleeEffect()
     {
-        meleeEffects.Add(effect);
+        if (meleeEffectInfo[MeleeCount].ExistEffet)
+        {
+            foreach (var effectData in meleeEffectInfo[MeleeCount].EffectDatas)
+            {
+                meleeEffects.Add(effectData.Effect);
+            }
+        }
     }
 
     public void ActiveMeleeEffect(GameObject target)
@@ -132,9 +160,7 @@ public class PlayerAttack : MonoBehaviour
         Debug.Log($"Melee Attack Range : {meleeRanges[MeleeCount]}");
         Debug.Log($"Melee Attack Damage : {player.Stat.MeleeDamages[MeleeCount]}");
 
-        // test
-        if (MeleeCount == 2)
-            AddMeleeEffect(new KnockBack());
+        AddMeleeEffect();
 
         // 공격 시 추후 카메라 방향을 바라보도록 하는 동작 추가 필요 
 

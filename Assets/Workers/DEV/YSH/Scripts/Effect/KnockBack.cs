@@ -6,7 +6,7 @@ public class KnockBack : IEffect
 {
     public void Activate(GameObject attacker, GameObject target)
     {
-        Debug.Log("Activate Knock Back");
+        Debug.Log("<color=red>Activate Knock Back</color>");
         IKnockBack knockBackable = target.GetComponent<IKnockBack>();
         knockBackable?.KnockBack(attacker);
     }

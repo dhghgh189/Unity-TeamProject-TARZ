@@ -20,17 +20,14 @@ public class ActMonsterMove : Action
    
     public override void OnStart()
     {
-        getLasPlayerTransform = StartCoroutine(GetLasPlayerTransform());
+        getLasPlayerTransformRoutine = StartCoroutine(GetLasPlayerTransformRoutine());
     }
 
     public override TaskStatus OnUpdate()
     {
-
         _distance = Vector3.Distance(transform.position, _player.transform.position);
-        
 
-
-        if (_condMonsterCanMove.ReturnObj != null/* && !_monsterData.IsAttacked && _distance > _monsterData.AttackRange*/) // _condMonsterCanMove.ReturnObj 는 시야각 내의 물체 (플레이어)
+        if (_condMonsterCanMove.ReturnObj != null/* && !_monsterData.IsAttacked*/) // _condMonsterCanMove.ReturnObj 는 시야각 내의 물체 (플레이어)
         {
            
             if( _distance <= _monsterData.AttackRange || _distance < _monsterData.CanUseProjectileSkillDistance )
@@ -61,15 +58,15 @@ public class ActMonsterMove : Action
     /// <summary>
     /// 플레이어가 시야에서 사라졌을때 마지막 플레이어 위치 기억
     /// </summary>
-    Coroutine getLasPlayerTransform;
-    IEnumerator GetLasPlayerTransform()
+    Coroutine getLasPlayerTransformRoutine;
+    IEnumerator GetLasPlayerTransformRoutine()
     {
         if (_condMonsterCanMove.ReturnObj == null)
         {
             _lastPlayerTransform = _player.transform;
         }
         yield return null;
-        getLasPlayerTransform = null;
+        getLasPlayerTransformRoutine = null;
     }
 
     

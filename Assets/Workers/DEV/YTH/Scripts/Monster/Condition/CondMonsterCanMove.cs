@@ -22,16 +22,8 @@ public class CondMonsterCanMove : Conditional, IDamagable
 
     public override TaskStatus OnUpdate()
     {
-
-
-
         _returnObj = WithinSight(_player, _angle, _distance);
-        if (_returnObj != null)
-        {
-            Debug.Log(_returnObj.name);
-        }
-        Debug.Log(_monsterData.Attacked_First);
-        Debug.Log(_monsterData.Type);
+
         if (_returnObj != null && _monsterData.Type != MonsterData.MonsterType.Range)
         {
 

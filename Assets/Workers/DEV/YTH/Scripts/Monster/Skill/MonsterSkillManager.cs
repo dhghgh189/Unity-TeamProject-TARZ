@@ -74,6 +74,7 @@ public class MonsterSkillManager : MonoBehaviour
     private float _elapsedTime = 0;
 
     private Vector3 _jumpStartPosition;
+    private Vector3 _jumpDirection;
 
 
     private void Start()
@@ -112,18 +113,19 @@ public class MonsterSkillManager : MonoBehaviour
     IEnumerator JumpRoutine_JumpAttack()
     {
         _jumpStartPosition = transform.position;
+        _jumpDirection = transform.forward.normalized * JumpAttackSkill.JumpDistance;
 
         while (_elapsedTime < JumpAttackSkill.InAirTime)
         {
             float yOffset = Mathf.Sin((_elapsedTime / JumpAttackSkill.InAirTime) * Mathf.PI) * JumpAttackSkill.JumpHeight;
-            float zOffset = (_elapsedTime / JumpAttackSkill.InAirTime) * JumpAttackSkill.JumpDistance;
+            Vector3 zOffset = _jumpDirection * (_elapsedTime / JumpAttackSkill.InAirTime) ;
 
-            transform.position = new Vector3(_jumpStartPosition.x, _jumpStartPosition.y + yOffset, _jumpStartPosition.z + zOffset);
+            transform.position = _jumpStartPosition + zOffset + new Vector3(0, yOffset, 0);
 
             _elapsedTime += Time.deltaTime;
             yield return null;
         }
-        transform.position = new Vector3(_jumpStartPosition.x, _jumpStartPosition.y, _jumpStartPosition.z + JumpAttackSkill.JumpDistance);
+        transform.position = _jumpStartPosition + _jumpDirection;
         jumpRoutine_jumpAttack = null;
         _elapsedTime = 0;
     }
@@ -249,18 +251,19 @@ public class MonsterSkillManager : MonoBehaviour
     IEnumerator JumpRoutine_dashAttack()
     {
         _jumpStartPosition = transform.position;
+        _jumpDirection = transform.forward.normalized * DashAttackSkill.JumpDistance;
 
         while (_elapsedTime < DashAttackSkill.InAirTime)
         {
             float yOffset = Mathf.Sin((_elapsedTime / DashAttackSkill.InAirTime) * Mathf.PI) * DashAttackSkill.JumpHeight;
-            float zOffset = (_elapsedTime / DashAttackSkill.InAirTime) * DashAttackSkill.JumpDistance;
+            Vector3 zOffset = _jumpDirection * (_elapsedTime / DashAttackSkill.InAirTime);
 
-            transform.position = new Vector3(_jumpStartPosition.x, _jumpStartPosition.y + yOffset, _jumpStartPosition.z + zOffset);
+            transform.position = _jumpStartPosition + zOffset + new Vector3(0, yOffset, 0);
 
             _elapsedTime += Time.deltaTime;
             yield return null;
         }
-        transform.position = new Vector3(_jumpStartPosition.x, _jumpStartPosition.y, _jumpStartPosition.z + DashAttackSkill.JumpDistance);
+        transform.position = _jumpStartPosition + _jumpDirection;
         jumpRoutine_dashAttack = null;
         _elapsedTime = 0;
     }

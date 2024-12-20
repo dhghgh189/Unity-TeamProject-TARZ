@@ -5,7 +5,7 @@ using UnityEngine;
 [Serializable]
 public class MonsterData : MonoBehaviour
 {
-    public enum MonsterType { Melee, Range, Boss, Bomb }  //Melee : 근거리 공격 몹 //Range : 원거리 공격 몹 //Boss : 아놀드 //Baomber : 폭탄좀비
+    public enum MonsterType { Melee, Range, Boss, Bomb, Frog }  //Melee : 근거리 공격 몹 //Range : 원거리 공격 몹 //Boss : 아놀드 //Baomber : 폭탄좀비
 
     [SerializeField] MonsterType _type;
     public MonsterType Type { get { return _type; } private set { } }

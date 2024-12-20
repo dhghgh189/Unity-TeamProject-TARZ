@@ -46,6 +46,9 @@ public class MonsterSkillManager : MonoBehaviour
 
     [SerializeField] MonsterSkill _trippleAttack;
     public MonsterSkill TrippleAttackSkill { get { return _trippleAttack; } set { _trippleAttack = value; } }
+
+    [SerializeField] MonsterSkill _frogJumpAttack;
+    public MonsterSkill FrogJumpAttackSkill { get { return _frogJumpAttack; } set { _frogJumpAttack = value; } }
     #endregion
 
     [Header("Prefab")]
@@ -183,13 +186,13 @@ public class MonsterSkillManager : MonoBehaviour
 
         _wheelWindTrigger.SetActive(true);
 
-        Radiation jackRadiation = _jackTheRipper.GetComponent<Radiation>();
+        Radiation jackRadiation = _wheelWindTrigger.GetComponent<Radiation>();
         jackRadiation.Interaval = WheelWindSkill.Interval;
         jackRadiation.Damage = WheelWindSkill.Damage;
-
         yield return new WaitForSeconds(WheelWindSkill.Duration);
         _wheelWindTrigger.SetActive(false);
 
+        yield return new WaitForSecondsRealtime(WheelWindSkill.CoolTime);
         wheelWindRoutine = null;
         WheelWindSkill.CanUseSkill = true;
     }
@@ -390,6 +393,70 @@ public class MonsterSkillManager : MonoBehaviour
                 damageble.TakeDamage(_damage);
             }
         }
+    }
+    #endregion
+
+    #region Jump 로직 코루틴
+    Coroutine jumpRoutine;
+    IEnumerator JumpRoutine()
+    {
+        float InAirTime = 0; // 체공 시간
+        float JumpHeight = 0; // Y축 점프 높이
+        float JumpDistance = 0; // Z축 점프 거리
+
+        _jumpStartPosition = transform.position;
+        _jumpDirection = transform.forward.normalized * JumpDistance;
+
+        while (_elapsedTime < InAirTime)
+        {
+            float yOffset = Mathf.Sin((_elapsedTime / InAirTime) * Mathf.PI) * JumpHeight;
+            Vector3 zOffset = _jumpDirection * (_elapsedTime / InAirTime);
+
+            transform.position = _jumpStartPosition + zOffset + new Vector3(0, yOffset, 0);
+
+            _elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        transform.position = _jumpStartPosition + _jumpDirection;
+        jumpRoutine_jumpAttack = null;
+        _elapsedTime = 0;
+    }
+    #endregion
+
+    #region FrogJumpAttack - 점프 코루틴
+    Coroutine jumpRoutine_frogJumpAttack;
+    IEnumerator JumpRoutine_frogJumpAttack()
+    {
+        _jumpStartPosition = transform.position;
+        _jumpDirection = transform.forward.normalized * FrogJumpAttackSkill.JumpDistance;
+
+        while (_elapsedTime < FrogJumpAttackSkill.InAirTime)
+        {
+            float yOffset = Mathf.Sin((_elapsedTime / FrogJumpAttackSkill.InAirTime) * Mathf.PI) * FrogJumpAttackSkill.JumpHeight;
+            Vector3 zOffset = _jumpDirection * (_elapsedTime / FrogJumpAttackSkill.InAirTime);
+
+            transform.position = _jumpStartPosition + zOffset + new Vector3(0, yOffset, 0);
+
+            _elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        transform.position = _jumpStartPosition + _jumpDirection;
+        jumpRoutine_dashAttack = null;
+        _elapsedTime = 0;
+    }
+    #endregion
+
+    #region FrogJumpAttack
+    public Coroutine frogJumpAttackRoutine;
+    public IEnumerator FrogJumpAttackRoutine()
+    {
+        if (jumpRoutine_frogJumpAttack == null)
+        {
+            jumpRoutine_frogJumpAttack = StartCoroutine(JumpRoutine_frogJumpAttack());
+            Debug.Log("점프!!");
+        }
+        yield return new WaitForSeconds(FrogJumpAttackSkill.CoolTime);
+        dashAttackRoutine = null;
     }
     #endregion
 }

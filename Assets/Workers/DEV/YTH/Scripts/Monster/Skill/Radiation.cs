@@ -24,6 +24,7 @@ public class Radiation : MonoBehaviour
         }
     }
 
+  
     private void OnTriggerExit(Collider other)
     {
         StopCoroutine(takeDOTRoutine);

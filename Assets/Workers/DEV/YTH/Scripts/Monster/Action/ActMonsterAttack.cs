@@ -15,10 +15,9 @@ public class ActMonsterAttack : Action
 
     [SerializeField] GameObject _player;
 
-    [Header("Attack")]
-    [SerializeField] float _throwForce;
-    public float ThrowForce { get { return _throwForce; } set { _throwForce = value; } }
+    private float _distance;
 
+    [Header("Attack")]
     [SerializeField] float _angle;
     public float Angle { get { return _angle; } set { _angle = value; } }
 
@@ -27,7 +26,9 @@ public class ActMonsterAttack : Action
 
     public override TaskStatus OnUpdate()
     {
-        if (Vector3.Distance(transform.position, _player.transform.position) <= _monsterData.AttackRange)
+        _distance = Vector3.Distance(transform.position, _player.transform.position);
+
+        if (_distance <= _monsterData.AttackRange)
         {
             // 근딜, 원딜 몬스터 공격 로직 분리
             switch (_monsterData.Type)
@@ -41,6 +42,9 @@ public class ActMonsterAttack : Action
                     }
                     break;
 
+                case MonsterData.MonsterType.Frog:
+
+                    break;
 
                 default:
                     if (attackRoutine == null)

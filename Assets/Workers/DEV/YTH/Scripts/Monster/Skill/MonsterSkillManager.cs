@@ -56,8 +56,8 @@ public class MonsterSkillManager : MonoBehaviour
 
     [SerializeField] GameObject _thunderPrefab;
 
-
     private Vector3 _electricWallPosition;
+
     private Vector3 _electricWallPosition2;
 
     [Header("Etc")]
@@ -74,6 +74,7 @@ public class MonsterSkillManager : MonoBehaviour
     private float _elapsedTime = 0;
 
     private Vector3 _jumpStartPosition;
+
     private Vector3 _jumpDirection;
 
 
@@ -312,16 +313,16 @@ public class MonsterSkillManager : MonoBehaviour
     public IEnumerator ElectricWallRoutine()
     {
         ElectricWallSkill.CanUseSkill = false;
-        _electricWallPosition = new Vector3(transform.position.x, 0, transform.position.z + 5f);
+        _electricWallPosition = transform.position + transform.forward * 5f;
+
         GameObject electricWall = Instantiate(_electricWallPrefab, _electricWallPosition, transform.rotation);
 
         for (int i = 0; i < 6; i++)
         {
             yield return Util.GetDelay(ElectricWallSkill.Interval);
-            _electricWallPosition2 = new Vector3(electricWall.transform.position.x, 0, electricWall.transform.position.z + (i * 7f));
-            GameObject electricWall2 = Instantiate(_electricWallPrefab, _electricWallPosition2, transform.rotation);
+            _electricWallPosition2 = electricWall.transform.position + electricWall.transform.forward * (7f * (i + 1));
+            GameObject electricWall2 = Instantiate(_electricWallPrefab, _electricWallPosition2, electricWall.transform.rotation);
         }
-
         yield return Util.GetDelay(ElectricWallSkill.CoolTime);
         electricWallRoutine = null;
         ElectricWallSkill.CanUseSkill = true;

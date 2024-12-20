@@ -27,6 +27,6 @@ public class UI_GearSlot : MonoBehaviour, IPointerClickHandler
     {
         IsEmpty = false;
         this.gear = gear;
-        gearName.text = gear.Part.ToString();
+        gearName.text = gear.GearName;
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -22,6 +23,8 @@ public class TitleSceneUI : MonoBehaviour
     private void Start()
     {
         inputManager.StartButton = titleButton;
+        inputManager.firstInput = inputManager.StartButton;
+        inputManager.firstInput.Select();
     }
 
     public void NewGameStart()

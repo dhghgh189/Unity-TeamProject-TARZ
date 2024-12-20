@@ -13,6 +13,8 @@ public class SettingSceneUI : MonoBehaviour
     void Start()
     {
         inputManager.StartButton = settingsButton;
+        inputManager.firstInput = inputManager.StartButton;
+        inputManager.firstInput.Select();
     }
 
     void Update()

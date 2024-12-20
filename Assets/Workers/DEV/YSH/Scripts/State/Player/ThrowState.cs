@@ -7,6 +7,9 @@ public class ThrowState : BaseState<PlayerController>
     private int[] throwAnimHashes;
     private float animTimer;
 
+    private float comboTimer;
+    private int throwCount;
+
     public ThrowState(PlayerController owner)
     {
         this.owner = owner;
@@ -22,6 +25,9 @@ public class ThrowState : BaseState<PlayerController>
 
     public override void OnEnter()
     {
+        throwCount = owner.Attack.ThrowCount;
+
+        comboTimer = 0f;
         owner.Movement.Move(Vector3.zero);
 
         // 아직 anim length를 모르기 때문에 큰 값으로 설정
@@ -47,6 +53,7 @@ public class ThrowState : BaseState<PlayerController>
         // 공격 카운트도 체크하여 마지막 공격때는 캔슬안되게 해야 함
         if (owner.Movement.IsGrounded && owner.PInput.TryDash)
         {
+            owner.Attack.ThrowCount = 0;
             owner.ChangeState(EState.Dash);
             return;
         }
@@ -54,15 +61,40 @@ public class ThrowState : BaseState<PlayerController>
         // 애니메이션 재생이 완료되면 상태 종료
         if (animTimer <= 0)
         {
-            if (!owner.Movement.IsGrounded)
-                owner.ChangeState(EState.Fall);
-            else
+            // 마지막 타수였거나 물건 스택이 없는 경우 바로 Idle로 이동
+            if (throwCount >= owner.Attack.ThrowCountMax - 1 
+                || owner.Attack.ObjectCount <= 0)
+            {
                 owner.ChangeState(EState.Idle);
+            }
+            else
+            {
+                comboTimer = owner.Attack.ComboCheckTime;
+                animTimer = 999;
+            }
 
             return;
         }
 
         // timer 진행
         animTimer -= Time.deltaTime;
+
+        if (comboTimer > 0)
+        {
+            comboTimer -= Time.deltaTime;
+            // 다음 콤보를 사용하기 까지 제한시간
+            if (comboTimer <= 0)
+            {
+                owner.Attack.ThrowCount = 0;
+                owner.ChangeState(EState.Idle);
+                return;
+            }
+
+            if (owner.PInput.TryThrow)
+            {
+                OnEnter();
+                return;
+            }
+        }
     }
 }

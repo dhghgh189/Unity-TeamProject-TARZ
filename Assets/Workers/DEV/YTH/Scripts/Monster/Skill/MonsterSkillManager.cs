@@ -103,7 +103,7 @@ public class MonsterSkillManager : MonoBehaviour
 
         // 잭더리퍼 스킬 초기화
         WheelWindSkill.CanUseSkill = true;
-        DashAttackSkill.CanUseSkill = true;
+        TrippleAttackSkill.CanUseSkill = true;
     }
 
     private void Update() // 테스트 코드 추후 삭제!!

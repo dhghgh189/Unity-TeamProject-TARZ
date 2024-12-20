@@ -33,7 +33,7 @@ public class CondMonsterCanMove : Conditional, IDamagable
         else if (_monsterData.Attacked_First == true) // 시야각에 없어도 선빵 맞으면 데미지들어오면서 쳐다보는 로직 
         {
             TakeDamage(1/*플레이어 데미지 불러오기*/);
-            return TaskStatus.Running;
+            return TaskStatus.Success;
         }
         else
         {

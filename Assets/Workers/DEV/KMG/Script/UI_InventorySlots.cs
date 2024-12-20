@@ -5,6 +5,7 @@ using Zenject;
 
 public class UI_InventorySlots : MonoBehaviour, IPointerClickHandler
 {
+    [Inject] StatModel statModel;
     [Inject] Equipment equipment;
     [SerializeField] Gear gear;
     [SerializeField] TMP_Text gearName;
@@ -16,6 +17,11 @@ public class UI_InventorySlots : MonoBehaviour, IPointerClickHandler
     // 클릭 이벤트, 원작 게임은 마우스 클릭이 없음 변경해야할듯
     public void OnPointerClick(PointerEventData eventData)
     {
+        if(eventData.button == PointerEventData.InputButton.Right)
+        {
+            GearSell();
+            return;
+        }
         if (!gear) return;
         EquipGear();
     }
@@ -40,5 +46,13 @@ public class UI_InventorySlots : MonoBehaviour, IPointerClickHandler
         IsEmpty = false;
         this.gear = gear;
         gearName.text = gear.GearName;
+    }
+
+    private void GearSell()
+    {
+        statModel.Chip += gear.Tier;
+        gear = null;
+        IsEmpty = true;
+        gearName.text = string.Empty;
     }
 }

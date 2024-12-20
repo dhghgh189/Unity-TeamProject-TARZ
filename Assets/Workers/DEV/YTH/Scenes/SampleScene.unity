@@ -191,13 +191,13 @@ PrefabInstance:
     - target: {fileID: 4540969655695373356, guid: 5c93874770ad8f44a9094ccb0ee68827,
         type: 3}
       propertyPath: mBehaviorSource.mTaskData.JSONSerialization
-      value: '{"EntryTask":{"Type":"BehaviorDesigner.Runtime.Tasks.EntryTask","NodeData":{"Offset":"(89.60143,-61.12909)"},"ID":0,"Name":"Entry","Instant":true},"RootTask":{"Type":"BehaviorDesigner.Runtime.Tasks.Repeater","NodeData":{"Offset":"(-8.196671,135.95668)"},"ID":1,"Name":"Repeater","Instant":true,"SharedIntcount":{"Type":"BehaviorDesigner.Runtime.SharedInt","Name":null,"Int32mValue":0},"SharedBoolrepeatForever":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":true},"SharedBoolendOnFailure":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(0,120)"},"ID":2,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-656.6666,319.444427)"},"ID":3,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"CondMonsterCanSkill","NodeData":{"Offset":"(-80,160)"},"ID":4,"Name":"Cond
+      value: '{"EntryTask":{"Type":"BehaviorDesigner.Runtime.Tasks.EntryTask","NodeData":{"Offset":"(89.60143,-61.12909)"},"ID":0,"Name":"Entry","Instant":true},"RootTask":{"Type":"BehaviorDesigner.Runtime.Tasks.Repeater","NodeData":{"Offset":"(-8.196671,135.95668)"},"ID":1,"Name":"Repeater","Instant":true,"SharedIntcount":{"Type":"BehaviorDesigner.Runtime.SharedInt","Name":null,"Int32mValue":0},"SharedBoolrepeatForever":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":true},"SharedBoolendOnFailure":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(0,120)"},"ID":2,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-504.6395,167.41745)"},"ID":3,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"CondMonsterCanSkill","NodeData":{"Offset":"(-80,160)"},"ID":4,"Name":"Cond
         Monster Can Skill","Instant":true,"MonsterData_monsterData":0},{"Type":"ActAnoldSkill","NodeData":{"Offset":"(116.038712,165.1278)"},"ID":5,"Name":"Act
-        Anold Skill","Instant":true,"MonsterData_monsterData":1,"MonsterSkillManager_monsterSkillManager":2,"Single_distance":0,"GameObject_target":3,"NavMeshAgent_agent":4}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-203.888641,319.444427)"},"ID":6,"Name":"Sequence","Instant":true,"AbortTypeabortType":"Self","Children":[{"Type":"CondMonsterCanMove","NodeData":{"Offset":"(-80,160)"},"ID":7,"Name":"Cond
+        Anold Skill","Instant":true,"MonsterData_monsterData":1,"MonsterSkillManager_monsterSkillManager":2,"Single_distance":0,"GameObject_target":3,"NavMeshAgent_agent":4}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-153.212967,184.309341)"},"ID":6,"Name":"Sequence","Instant":true,"AbortTypeabortType":"Self","Children":[{"Type":"CondMonsterCanMove","NodeData":{"Offset":"(-80,160)"},"ID":7,"Name":"Cond
         Monster Can Move","Instant":true,"MonsterData_monsterData":5,"GameObject_player":6,"Single_angle":360,"Single_distance":50,"Single_rate":0.5},{"Type":"ActMonsterMove","NodeData":{"Offset":"(100,160)"},"ID":8,"Name":"Act
-        Monster Move","Instant":true,"CondMonsterCanMove_condMonsterCanMove":7,"MonsterData_monsterData":7,"NavMeshAgent_agent":8,"GameObject_player":9}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(259.444458,323.8889)"},"ID":9,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"CondMonsterCanAttack","NodeData":{"Offset":"(-100,170)"},"ID":10,"Name":"Cond
+        Monster Move","Instant":true,"CondMonsterCanMove_condMonsterCanMove":7,"MonsterData_monsterData":7,"NavMeshAgent_agent":8,"GameObject_player":9}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(208.768784,171.861923)"},"ID":9,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"CondMonsterCanAttack","NodeData":{"Offset":"(-100,170)"},"ID":10,"Name":"Cond
         Monster Can Attack","Instant":true,"MonsterData_monsterData":10,"GameObject_player":11},{"Type":"ActMonsterAttack","NodeData":{"Offset":"(100,170)"},"ID":11,"Name":"Act
-        Monster Attack","Instant":true,"MonsterData_monsterData":12,"SharedGameObject_projectilePrefab":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":null,"GameObjectmValue":13},"SharedTransform_muzzlePoint":{"Type":"BehaviorDesigner.Runtime.SharedTransform","Name":null,"TransformmValue":14},"GameObject_player":15,"Single_throwForce":0,"Single_angle":120,"Single_range":6}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Wait","NodeData":{"Offset":"(708.5998,294.2259)"},"ID":12,"Name":"Wait","Instant":true,"SharedFloatwaitTime":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":2},"SharedBoolrandomWait":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"SharedFloatrandomWaitMin":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1},"SharedFloatrandomWaitMax":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1}}]}]}}'
+        Monster Attack","Instant":true,"MonsterData_monsterData":12,"SharedGameObject_projectilePrefab":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":null,"GameObjectmValue":13},"SharedTransform_muzzlePoint":{"Type":"BehaviorDesigner.Runtime.SharedTransform","Name":null,"TransformmValue":14},"GameObject_player":15,"Single_throwForce":0,"Single_angle":120,"Single_range":6}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Wait","NodeData":{"Offset":"(472.1132,159.09079)"},"ID":12,"Name":"Wait","Instant":true,"SharedFloatwaitTime":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":2},"SharedBoolrandomWait":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"SharedFloatrandomWaitMin":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1},"SharedFloatrandomWaitMax":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1}}]}]}}'
       objectReference: {fileID: 0}
     - target: {fileID: 4540969655695373356, guid: 5c93874770ad8f44a9094ccb0ee68827,
         type: 3}
@@ -321,7 +321,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 388959196}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1499785068}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 27dec7f07137086469be877fd713ae48, type: 3}
@@ -388,11 +388,11 @@ PrefabInstance:
     - target: {fileID: 6518567008427096506, guid: ab8553dcc153eef4e9d219cf4283577d,
         type: 3}
       propertyPath: mBehaviorSource.mTaskData.JSONSerialization
-      value: '{"EntryTask":{"Type":"BehaviorDesigner.Runtime.Tasks.EntryTask","NodeData":{"Offset":"(324.5058,8.470295)"},"ID":0,"Name":"Entry","Instant":true},"RootTask":{"Type":"BehaviorDesigner.Runtime.Tasks.Repeater","NodeData":{"Offset":"(-11.6764793,140.202377)"},"ID":1,"Name":"Repeater","Instant":true,"SharedIntcount":{"Type":"BehaviorDesigner.Runtime.SharedInt","Name":null,"Int32mValue":0},"SharedBoolrepeatForever":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":true},"SharedBoolendOnFailure":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-2.0980835E-05,311.693237)"},"ID":2,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-290.639343,377.795441)"},"ID":3,"Name":"Sequence","Instant":true,"AbortTypeabortType":"Self","Children":[{"Type":"CondMonsterCanMove","NodeData":{"Offset":"(-115.329666,195.517365)"},"ID":4,"Name":"Cond
+      value: '{"EntryTask":{"Type":"BehaviorDesigner.Runtime.Tasks.EntryTask","NodeData":{"Offset":"(324.5058,8.470295)"},"ID":0,"Name":"Entry","Instant":true},"RootTask":{"Type":"BehaviorDesigner.Runtime.Tasks.Repeater","NodeData":{"Offset":"(-0.1024065,140.202377)"},"ID":1,"Name":"Repeater","Instant":true,"SharedIntcount":{"Type":"BehaviorDesigner.Runtime.SharedInt","Name":null,"Int32mValue":0},"SharedBoolrepeatForever":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":true},"SharedBoolendOnFailure":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-2.0980835E-05,125.882484)"},"ID":2,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-324.4231,175.09285)"},"ID":3,"Name":"Sequence","Instant":true,"AbortTypeabortType":"Self","Children":[{"Type":"CondMonsterCanMove","NodeData":{"Offset":"(-115.329666,195.517365)"},"ID":4,"Name":"Cond
         Monster Can Move","Instant":true,"MonsterData_monsterData":0,"GameObject_player":1,"Single_angle":45,"Single_distance":20,"Single_rate":1},{"Type":"ActMonsterMove","NodeData":{"Offset":"(133.675308,189.22)"},"ID":5,"Name":"Act
-        Monster Move","Instant":true,"CondMonsterCanMove_condMonsterCanMove":4,"MonsterData_monsterData":2,"NavMeshAgent_agent":3,"GameObject_player":4}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(189.999985,389.872162)"},"ID":6,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"CondMonsterCanAttack","NodeData":{"Offset":"(-100,170)"},"ID":7,"Name":"Cond
+        Monster Move","Instant":true,"CondMonsterCanMove_condMonsterCanMove":4,"MonsterData_monsterData":2,"NavMeshAgent_agent":3,"GameObject_player":4}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(105.540543,204.061462)"},"ID":6,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"CondMonsterCanAttack","NodeData":{"Offset":"(-100,170)"},"ID":7,"Name":"Cond
         Monster Can Attack","Instant":true,"MonsterData_monsterData":5,"GameObject_player":6},{"Type":"ActMonsterAttack","NodeData":{"Offset":"(104.285736,170)"},"ID":8,"Name":"Act
-        Monster Attack","Instant":true,"MonsterData_monsterData":7,"SharedGameObject_projectilePrefab":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":null,"GameObjectmValue":8},"SharedTransform_muzzlePoint":{"Type":"BehaviorDesigner.Runtime.SharedTransform","Name":null,"TransformmValue":9},"GameObject_player":10,"Single_throwForce":10,"Single_angle":45,"Single_range":10}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Idle","NodeData":{"Offset":"(498.4851,381.084229)"},"ID":9,"Name":"Idle","Instant":true,"Disabled":true}]}]}}'
+        Monster Attack","Instant":true,"MonsterData_monsterData":7,"SharedGameObject_projectilePrefab":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":null,"GameObjectmValue":8},"SharedTransform_muzzlePoint":{"Type":"BehaviorDesigner.Runtime.SharedTransform","Name":null,"TransformmValue":9},"GameObject_player":10,"Single_throwForce":10,"Single_angle":45,"Single_range":10}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Idle","NodeData":{"Offset":"(380.241974,195.273529)"},"ID":9,"Name":"Idle","Instant":true}]}]}}'
       objectReference: {fileID: 0}
     - target: {fileID: 6518567008427096506, guid: ab8553dcc153eef4e9d219cf4283577d,
         type: 3}
@@ -458,7 +458,15 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 9032859600620638007, guid: ab8553dcc153eef4e9d219cf4283577d,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1499785078}
+    - targetCorrespondingSourceObject: {fileID: 9032859600620638007, guid: ab8553dcc153eef4e9d219cf4283577d,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1499785077}
   m_SourcePrefab: {fileID: 100100000, guid: ab8553dcc153eef4e9d219cf4283577d, type: 3}
 --- !u!4 &598805392 stripped
 Transform:
@@ -865,6 +873,90 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!1 &1449115915 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6151339774275513822, guid: 4420c9e520bde5645b176e86bb1a7c63,
+    type: 3}
+  m_PrefabInstance: {fileID: 2062657078909412518}
+  m_PrefabAsset: {fileID: 0}
+--- !u!195 &1449115917 stripped
+NavMeshAgent:
+  m_CorrespondingSourceObject: {fileID: 3973130166610223532, guid: 4420c9e520bde5645b176e86bb1a7c63,
+    type: 3}
+  m_PrefabInstance: {fileID: 2062657078909412518}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1449115924 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7380713984157514300, guid: 4420c9e520bde5645b176e86bb1a7c63,
+    type: 3}
+  m_PrefabInstance: {fileID: 2062657078909412518}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1499785068 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9032859600620638007, guid: ab8553dcc153eef4e9d219cf4283577d,
+    type: 3}
+  m_PrefabInstance: {fileID: 388959196}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1499785077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1499785068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -2012967667, guid: da41a8dd3b5ec434a802d9b5a2a0a777, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1499785078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1499785068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d7b55c7ecdb49a4a89fa5e6f9022861, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startWhenEnabled: 1
+  asynchronousLoad: 0
+  pauseWhenDisabled: 0
+  restartWhenComplete: 0
+  logTaskChanges: 0
+  group: 0
+  resetValuesOnRestart: 0
+  externalBehavior: {fileID: 0}
+  mBehaviorSource:
+    behaviorName: Behavior
+    behaviorDescription: 
+    mTaskData:
+      types: []
+      parentIndex: 
+      startIndex: 
+      variableStartIndex: 
+      JSONSerialization: '{"EntryTask":{"Type":"BehaviorDesigner.Runtime.Tasks.EntryTask","NodeData":{"Offset":"(324.505768,55.28543)"},"ID":0,"Name":"Entry","Instant":true},"RootTask":{"Type":"BehaviorDesigner.Runtime.Tasks.Repeater","NodeData":{"Offset":"(-1.13585663,133.407562)"},"ID":1,"Name":"Repeater","Instant":true,"SharedIntcount":{"Type":"BehaviorDesigner.Runtime.SharedInt","Name":null,"Int32mValue":0},"SharedBoolrepeatForever":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":true},"SharedBoolendOnFailure":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(0,130)"},"ID":2,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-3.06531334,137.185974)"},"ID":3,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"CondMonsterCanAttack","NodeData":{"Offset":"(-100,170)"},"ID":4,"Name":"Cond
+        Monster Can Attack","Instant":true,"MonsterData_monsterData":0,"GameObject_player":1},{"Type":"ActMonsterAttack","NodeData":{"Offset":"(100,170)"},"ID":5,"Name":"Act
+        Monster Attack","Instant":true,"MonsterData_monsterData":2,"SharedGameObject_projectilePrefab":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":null,"GameObjectmValue":3},"SharedTransform_muzzlePoint":{"Type":"BehaviorDesigner.Runtime.SharedTransform","Name":null,"TransformmValue":4},"GameObject_player":5,"Single_throwForce":10,"Single_angle":45,"Single_range":10}]}]}]}}'
+      fieldSerializationData:
+        typeName: []
+        fieldNameHash: 
+        startIndex: 
+        dataPosition: 
+        unityObjects:
+        - {fileID: 380884194}
+        - {fileID: 9107385112170642335}
+        - {fileID: 380884194}
+        - {fileID: 1616805512990888026, guid: 989aabf03a1cf174e963c4be9bad5c97, type: 3}
+        - {fileID: 855964280}
+        - {fileID: 9107385112170642335}
+        byteData: 
+        byteDataArray: 
+      Version: 1.7.11
+  gizmoViewMode: 2
+  showBehaviorDesignerGizmo: 1
 --- !u!195 &1531876302 stripped
 NavMeshAgent:
   m_CorrespondingSourceObject: {fileID: 5463256470058330928, guid: 5c93874770ad8f44a9094ccb0ee68827,
@@ -1020,6 +1112,86 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!1001 &1800728720
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1449115924}
+    m_Modifications:
+    - target: {fileID: 6140007488947650493, guid: 21e4b73bd9a65304b95b34e21e044c29,
+        type: 3}
+      propertyPath: m_Name
+      value: Radiation
+      objectReference: {fileID: 0}
+    - target: {fileID: 7269511027983176845, guid: 21e4b73bd9a65304b95b34e21e044c29,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7269511027983176845, guid: 21e4b73bd9a65304b95b34e21e044c29,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7269511027983176845, guid: 21e4b73bd9a65304b95b34e21e044c29,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7269511027983176845, guid: 21e4b73bd9a65304b95b34e21e044c29,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7269511027983176845, guid: 21e4b73bd9a65304b95b34e21e044c29,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7269511027983176845, guid: 21e4b73bd9a65304b95b34e21e044c29,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7269511027983176845, guid: 21e4b73bd9a65304b95b34e21e044c29,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7269511027983176845, guid: 21e4b73bd9a65304b95b34e21e044c29,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7269511027983176845, guid: 21e4b73bd9a65304b95b34e21e044c29,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7269511027983176845, guid: 21e4b73bd9a65304b95b34e21e044c29,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 21e4b73bd9a65304b95b34e21e044c29, type: 3}
+--- !u!4 &1800728721 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7269511027983176845, guid: 21e4b73bd9a65304b95b34e21e044c29,
+    type: 3}
+  m_PrefabInstance: {fileID: 1800728720}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1800728722 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6140007488947650493, guid: 21e4b73bd9a65304b95b34e21e044c29,
+    type: 3}
+  m_PrefabInstance: {fileID: 1800728720}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2062657078909412518
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1030,9 +1202,30 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4515834060673096095, guid: 4420c9e520bde5645b176e86bb1a7c63,
         type: 3}
+      propertyPath: _agent
+      value: 
+      objectReference: {fileID: 1449115917}
+    - target: {fileID: 4515834060673096095, guid: 4420c9e520bde5645b176e86bb1a7c63,
+        type: 3}
       propertyPath: _player
       value: 
       objectReference: {fileID: 9107385112170642335}
+    - target: {fileID: 4515834060673096095, guid: 4420c9e520bde5645b176e86bb1a7c63,
+        type: 3}
+      propertyPath: _jackTheRipper
+      value: 
+      objectReference: {fileID: 1449115915}
+    - target: {fileID: 4515834060673096095, guid: 4420c9e520bde5645b176e86bb1a7c63,
+        type: 3}
+      propertyPath: _trippleAttack
+      value: 
+      objectReference: {fileID: 11400000, guid: e89517893da7be74a97c776a7186f4dd,
+        type: 2}
+    - target: {fileID: 4515834060673096095, guid: 4420c9e520bde5645b176e86bb1a7c63,
+        type: 3}
+      propertyPath: _wheelWindTrigger
+      value: 
+      objectReference: {fileID: 1800728722}
     - target: {fileID: 6151339774275513822, guid: 4420c9e520bde5645b176e86bb1a7c63,
         type: 3}
       propertyPath: m_Name
@@ -1041,12 +1234,12 @@ PrefabInstance:
     - target: {fileID: 6151339774275513822, guid: 4420c9e520bde5645b176e86bb1a7c63,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7380713984157514300, guid: 4420c9e520bde5645b176e86bb1a7c63,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 11.97
       objectReference: {fileID: 0}
     - target: {fileID: 7380713984157514300, guid: 4420c9e520bde5645b176e86bb1a7c63,
         type: 3}
@@ -1056,7 +1249,7 @@ PrefabInstance:
     - target: {fileID: 7380713984157514300, guid: 4420c9e520bde5645b176e86bb1a7c63,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -94.3
+      value: -18.75
       objectReference: {fileID: 0}
     - target: {fileID: 7380713984157514300, guid: 4420c9e520bde5645b176e86bb1a7c63,
         type: 3}
@@ -1120,7 +1313,11 @@ PrefabInstance:
       objectReference: {fileID: 9107385112170642335}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 7380713984157514300, guid: 4420c9e520bde5645b176e86bb1a7c63,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1800728721}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4420c9e520bde5645b176e86bb1a7c63, type: 3}
 --- !u!114 &2282508717036771499
@@ -1228,6 +1425,11 @@ PrefabInstance:
       propertyPath: _muzzlePoint
       value: 
       objectReference: {fileID: 598805392}
+    - target: {fileID: 4259824934901915064, guid: dac0786360c22784c94cd8025ddc51aa,
+        type: 3}
+      propertyPath: _jackTheRipper
+      value: 
+      objectReference: {fileID: 1449115915}
     - target: {fileID: 4268609772019526906, guid: dac0786360c22784c94cd8025ddc51aa,
         type: 3}
       propertyPath: _rangeAttackSpeed
@@ -1252,6 +1454,17 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 4.26
+      objectReference: {fileID: 0}
+    - target: {fileID: 8221683285011079206, guid: dac0786360c22784c94cd8025ddc51aa,
+        type: 3}
+      propertyPath: mBehaviorSource.mTaskData.JSONSerialization
+      value: '{"EntryTask":{"Type":"BehaviorDesigner.Runtime.Tasks.EntryTask","NodeData":{"Offset":"(310.096558,-11.5297089)"},"ID":0,"Name":"Entry","Instant":true},"RootTask":{"Type":"BehaviorDesigner.Runtime.Tasks.Repeater","NodeData":{"Offset":"(-2.485815,154.53656)"},"ID":1,"Name":"Repeater","Instant":true,"SharedIntcount":{"Type":"BehaviorDesigner.Runtime.SharedInt","Name":null,"Int32mValue":0},"SharedBoolrepeatForever":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":true},"SharedBoolendOnFailure":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(4.23907471,115.361145)"},"ID":2,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-481.4958,181.81308)"},"ID":3,"Name":"Sequence","Instant":true,"AbortTypeabortType":"Self","Children":[{"Type":"CondMonsterCanMove","NodeData":{"Offset":"(-75.76099,155.3612)"},"ID":4,"Name":"Cond
+        Monster Can Move","Instant":true,"MonsterData_monsterData":0,"GameObject_player":1,"Single_angle":360,"Single_distance":65.46,"Single_rate":0.5},{"Type":"ActMonsterMove","NodeData":{"Offset":"(104.239075,155.3612)"},"ID":5,"Name":"Act
+        Monster Move","Instant":true,"CondMonsterCanMove_condMonsterCanMove":4,"MonsterData_monsterData":2,"NavMeshAgent_agent":3,"GameObject_player":4}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-147.881989,183.659485)"},"ID":6,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"CondMonsterCanSkill","NodeData":{"Offset":"(-75.76099,155.3612)"},"ID":7,"Name":"Cond
+        Monster Can Skill","Instant":true,"MonsterData_monsterData":5},{"Type":"ActBombSkill","NodeData":{"Offset":"(88.42593,171.574066)"},"ID":8,"Name":"Act
+        Bomb Skill","Instant":true,"MonsterData_monsterData":6,"MonsterSkillManager_monsterSkillManager":7,"GameObject_player":8,"NavMeshAgent_agent":9}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(204.583282,183.659485)"},"ID":9,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"CondMonsterCanAttack","NodeData":{"Offset":"(-95.76105,165.3612)"},"ID":10,"Name":"Cond
+        Monster Can Attack","Instant":true,"MonsterData_monsterData":10,"GameObject_player":11},{"Type":"ActMonsterAttack","NodeData":{"Offset":"(104.238953,165.3612)"},"ID":11,"Name":"Act
+        Monster Attack","Instant":true,"MonsterData_monsterData":12,"SharedGameObject_projectilePrefab":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":null,"GameObjectmValue":13},"SharedTransform_muzzlePoint":{"Type":"BehaviorDesigner.Runtime.SharedTransform","Name":null,"TransformmValue":14},"GameObject_player":15,"Single_throwForce":10,"Single_angle":180,"Single_range":15}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Wait","NodeData":{"Offset":"(397.908844,176.8169)"},"ID":12,"Name":"Wait","Instant":true,"SharedFloatwaitTime":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":3},"SharedBoolrandomWait":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"SharedFloatrandomWaitMin":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1},"SharedFloatrandomWaitMax":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1}}]}]}}'
       objectReference: {fileID: 0}
     - target: {fileID: 8221683285011079206, guid: dac0786360c22784c94cd8025ddc51aa,
         type: 3}
@@ -1366,6 +1579,79 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1001 &9179871732223765240
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6140007488947650493, guid: 21e4b73bd9a65304b95b34e21e044c29,
+        type: 3}
+      propertyPath: m_Name
+      value: Radiation
+      objectReference: {fileID: 0}
+    - target: {fileID: 6140007488947650493, guid: 21e4b73bd9a65304b95b34e21e044c29,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7269511027983176845, guid: 21e4b73bd9a65304b95b34e21e044c29,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 23.90627
+      objectReference: {fileID: 0}
+    - target: {fileID: 7269511027983176845, guid: 21e4b73bd9a65304b95b34e21e044c29,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 7269511027983176845, guid: 21e4b73bd9a65304b95b34e21e044c29,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -10.593521
+      objectReference: {fileID: 0}
+    - target: {fileID: 7269511027983176845, guid: 21e4b73bd9a65304b95b34e21e044c29,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7269511027983176845, guid: 21e4b73bd9a65304b95b34e21e044c29,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7269511027983176845, guid: 21e4b73bd9a65304b95b34e21e044c29,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7269511027983176845, guid: 21e4b73bd9a65304b95b34e21e044c29,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7269511027983176845, guid: 21e4b73bd9a65304b95b34e21e044c29,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7269511027983176845, guid: 21e4b73bd9a65304b95b34e21e044c29,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7269511027983176845, guid: 21e4b73bd9a65304b95b34e21e044c29,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 21e4b73bd9a65304b95b34e21e044c29, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -1379,3 +1665,4 @@ SceneRoots:
   - {fileID: 4875103197210529211}
   - {fileID: 2062657078909412518}
   - {fileID: 1689407402}
+  - {fileID: 9179871732223765240}

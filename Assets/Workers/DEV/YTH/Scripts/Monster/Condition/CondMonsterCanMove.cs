@@ -9,7 +9,7 @@ public class CondMonsterCanMove : Conditional, IDamagable
 
     private Transform _playerFirstAttackTransform; // 플레이어 선빵 위치 받을 변수
 
-    [SerializeField] GameObject _returnObj;
+    private GameObject _returnObj;
     public GameObject ReturnObj { get { return _returnObj; } private set { } }
 
     [Header("인지 범위")]

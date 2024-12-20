@@ -43,6 +43,9 @@ public class MonsterSkillManager : MonoBehaviour
 
     [SerializeField] MonsterSkill _thunder;
     public MonsterSkill ThunderSkill { get { return _thunder; } set { _thunder = value; } }
+
+    [SerializeField] MonsterSkill _trippleAttack;
+    public MonsterSkill TrippleAttackSkill { get { return _trippleAttack; } set { _trippleAttack = value; } }
     #endregion
 
     [Header("Prefab")]
@@ -70,6 +73,8 @@ public class MonsterSkillManager : MonoBehaviour
     [SerializeField] Transform _muzzlePoint;
 
     [SerializeField] NavMeshAgent _agent;
+
+    [SerializeField] GameObject _wheelWindTrigger;
 
     private float _elapsedTime = 0;
 
@@ -119,7 +124,7 @@ public class MonsterSkillManager : MonoBehaviour
         while (_elapsedTime < JumpAttackSkill.InAirTime)
         {
             float yOffset = Mathf.Sin((_elapsedTime / JumpAttackSkill.InAirTime) * Mathf.PI) * JumpAttackSkill.JumpHeight;
-            Vector3 zOffset = _jumpDirection * (_elapsedTime / JumpAttackSkill.InAirTime) ;
+            Vector3 zOffset = _jumpDirection * (_elapsedTime / JumpAttackSkill.InAirTime);
 
             transform.position = _jumpStartPosition + zOffset + new Vector3(0, yOffset, 0);
 
@@ -174,28 +179,21 @@ public class MonsterSkillManager : MonoBehaviour
     public Coroutine wheelWindRoutine;
     public IEnumerator WheelWindRoutine() // 가렌 E
     {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, _wheelWind.Range);
-        foreach (Collider collider in colliders)
-        {
-            // 공격 범위 확인
-            Vector3 source = transform.position;
-            source.y = 0;
-            Vector3 destination = collider.transform.position;
-            destination.y = 0;
+        WheelWindSkill.CanUseSkill = false;
 
-            Vector3 targetDir = (destination - source).normalized;
-            float targetAngle = Vector3.Angle(transform.forward, targetDir);
-            if (targetAngle > _wheelWind.Angle) // 앵글의 반절만
-                continue;
+        _wheelWindTrigger.SetActive(true);
 
-            IDamagable damageble = collider.GetComponent<IDamagable>();
-            if (damageble != null)
-            {
-                damageble.TakeDamage(_wheelWind.Damage);
-                yield return new WaitForSeconds(_wheelWind.Interval);
-            }
-        }
+        Radiation jackRadiation = _jackTheRipper.GetComponent<Radiation>();
+        jackRadiation.Interaval = WheelWindSkill.Interval;
+        jackRadiation.Damage = WheelWindSkill.Damage;
+
+        yield return new WaitForSeconds(WheelWindSkill.Duration);
+        _wheelWindTrigger.SetActive(false);
+
+        wheelWindRoutine = null;
+        WheelWindSkill.CanUseSkill = true;
     }
+
     #endregion
 
     #region Bomb
@@ -352,6 +350,46 @@ public class MonsterSkillManager : MonoBehaviour
     }
     #endregion
 
+    #region TrippleAttack
+    public Coroutine trippleAttackRoutine;
+    public IEnumerator TrippleAttackRoutine()
+    {
+        TrippleAttackSkill.CanUseSkill = false;
+        // TrippleAttackSkill 애니메이션 재생
+        //애니메이션에 공격 붙이기
+        yield return Util.GetDelay(TrippleAttackSkill.CoolTime);
+        trippleAttackRoutine = null;
+        TrippleAttackSkill.CanUseSkill = true;
+    }
+    #endregion
 
+    #region 일반 공격 (범위 설정 가능)
+    public void Attack()
+    {
+        float _range = 0;
+        float _angle = 0;
+        int _damage = 0;
+
+        Collider[] colliders = Physics.OverlapSphere(transform.position, _range);
+        foreach (Collider collider in colliders)
+        {
+            // 공격 범위 확인
+            Vector3 source = transform.position;
+            source.y = 0;
+            Vector3 destination = collider.transform.position;
+            destination.y = 0;
+
+            Vector3 targetDir = (destination - source).normalized;
+            float targetAngle = Vector3.Angle(transform.forward, targetDir);
+            if (targetAngle > _angle * 0.5f) // 앵글의 반절만
+                continue;
+
+            IDamagable damageble = collider.GetComponent<IDamagable>();
+            if (damageble != null)
+            {
+                damageble.TakeDamage(_damage);
+            }
+        }
+    }
+    #endregion
 }
-

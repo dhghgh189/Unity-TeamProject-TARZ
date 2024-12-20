@@ -7,7 +7,8 @@ using UnityEngine.UI;
 public class ChangeInput : MonoBehaviour
 {
     // UI Selectable Input 시작점으로 지정할 버튼UI
-    [SerializeField] private Button startButton;
+    private Button startButton;
+    public Button StartButton { get { return startButton; } set { startButton = value; } }
 
     private EventSystem system;         // 현재 씬의 UI 이벤트 시스템을 저장할 변수
     public Selectable firstInput;       // UI Selectable Input 시작점

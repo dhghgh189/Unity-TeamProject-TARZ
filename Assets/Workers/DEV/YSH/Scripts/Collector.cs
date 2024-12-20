@@ -11,7 +11,7 @@ public class Collector : MonoBehaviour
         ThrowObject tobj = other.gameObject.GetComponent<ThrowObject>();
         if (tobj != null && tobj.IsCollected == false)
         {
-            Debug.Log($"Get Throw Object! : {tobj.name}");
+            //Debug.Log($"Get Throw Object! : {tobj.name}");
             tobj.Get(player);
         }
     }

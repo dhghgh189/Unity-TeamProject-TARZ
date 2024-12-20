@@ -6,6 +6,7 @@ public class Installer : MonoInstaller
     {
         Container.Bind<StatModel>().FromComponentInHierarchy().AsSingle();
         Container.Bind<Equipment>().FromComponentInHierarchy().AsSingle();
-        Container.Bind<UI_GearSlot>().FromComponentsInHierarchy().AsSingle();
+        Container.Bind<UI_InventorySlots>().FromComponentsInHierarchy().AsSingle();
+        Container.Bind<UI_EquipmentSlot>().FromComponentsInHierarchy().AsSingle();
     }
 }

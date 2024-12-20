@@ -5,7 +5,7 @@ using Zenject;
 public class Inventory : MonoBehaviour
 {
     // 인벤토리 슬롯들을 보관할 배열 12개임
-    [Inject] UI_GearSlot[] inventorySlots;
+    [Inject] UI_InventorySlots[] inventorySlots;
 
     // 장비들의 기본 능력치로 지정된 베이스 장비가 담길 배열
     [SerializeField] Gear[] baseGears = new Gear[(int)Part.Size];
@@ -13,7 +13,7 @@ public class Inventory : MonoBehaviour
     // 티어와 부위를 지정해 장비를 인벤토리에 저장하는 함수
     public void GetGear(Part part, int tier)
     {
-        UI_GearSlot slot = EmptySlot();
+        UI_InventorySlots slot = EmptySlot();
         if (!slot) return;
 
         // 해당 부위의 베이스 장비를 가져옴
@@ -33,9 +33,9 @@ public class Inventory : MonoBehaviour
         }
 
         // 랜덤한 능력치를 랜덤 확률로 상승
-        if (IsProbability(50))
+        if (Util.IsRandom(50))
             gear.Abilities.Add(new GearAbility() { ability = (AdditionAbility)Random.Range(0, (int)AdditionAbility.Size), value = 10 });
-        if (IsProbability(50))
+        if (Util.IsRandom(50))
             gear.Abilities.Add(new GearAbility() { ability = (AdditionAbility)Random.Range(0, (int)AdditionAbility.Size), value = 10 });
 
         // 이름 변경
@@ -47,10 +47,10 @@ public class Inventory : MonoBehaviour
             item.value *= tier;
         }
 
-        slot.SetGearSlot(gear);
+        slot.SetInventorySlots(gear);
     }
     // 빈 인벤토리 슬롯을 반환하는 함수
-    private UI_GearSlot EmptySlot()
+    private UI_InventorySlots EmptySlot()
     {
         foreach (var item in inventorySlots)
         {

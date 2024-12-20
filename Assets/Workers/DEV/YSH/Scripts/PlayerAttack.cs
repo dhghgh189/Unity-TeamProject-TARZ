@@ -8,15 +8,20 @@ public class PlayerAttack : MonoBehaviour
 {
     [SerializeField] private Transform throwPoint;
     [SerializeField] private LayerMask whatIsEnemy;
-    [SerializeField] private float[] throwForces;
+
+    [Header("원거리 공격 스펙 설정")]
+    public ThrowAttackInfo[] ThrowAttackInfo;
+
+    [Header("근거리 공격 스펙 설정")]
     [SerializeField] private float[] meleeAngles;
     [SerializeField] private float[] meleeRanges;
+    [SerializeField] private EffectInfo[] meleeEffectInfo;
+
+    [Space(10f)]
     [SerializeField] private Transform stackTransform;
     [SerializeField] private int maxObjectCount;
     [SerializeField] private float comboCheckTime;
     [SerializeField] private PlayerController player;
-    [SerializeField] private EffectInfo[] throwEffectInfo;
-    [SerializeField] private EffectInfo[] meleeEffectInfo;
 
     private Vector3 source;
     private Vector3 dest;
@@ -29,7 +34,7 @@ public class PlayerAttack : MonoBehaviour
 
     public int MeleeCount { get; set; }
     public int ThrowCount { get; set; }
-    public int ThrowCountMax => throwForces.Length;
+    public int ThrowCountMax => ThrowAttackInfo.Length;
     public int MeleeCountMax => meleeAngles.Length;
 
     private List<IEffect> meleeEffects;
@@ -48,12 +53,7 @@ public class PlayerAttack : MonoBehaviour
 
         generator = new EffectGenerator();
 
-        // Throw Effect 생성
-        foreach (var effectInfo in throwEffectInfo)
-        {
-            for (int i = 0; i < effectInfo.EffectDatas.Length; i++)
-                effectInfo.EffectDatas[i].Effect = generator.Create(effectInfo.EffectDatas[i].EffectType);
-        }
+        GenerateThrowEffects();
 
         // Melee Effect 생성
         foreach (var effectInfo in meleeEffectInfo)
@@ -63,14 +63,32 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
+    public void GenerateThrowEffects()
+    {
+        EffectInfo throwEffectInfo;
+        for (int i = 0; i < ThrowAttackInfo.Length; i++)
+        {
+            throwEffectInfo = ThrowAttackInfo[i].EffectInfo;
+            if (throwEffectInfo.EffectDatas.Length <= 0)
+                continue;
+
+            foreach (var effectData in throwEffectInfo.EffectDatas)
+            {
+                effectData.Effect = generator.Create(effectData.EffectType);
+                Debug.Log($"<color=green>원거리 {i + 1}타 Effect 생성 : {effectData.EffectType}</color>");
+            }
+        }
+    }
+
     public void AddThrowEffects(ThrowObject tobj)
     {
-        if (throwEffectInfo[ThrowCount].ExistEffet)
+        if (ThrowAttackInfo[ThrowCount].EffectInfo.EffectDatas.Length <= 0)
+            return;
+
+        EffectInfo throwEffectInfo = ThrowAttackInfo[ThrowCount].EffectInfo;
+        foreach (var effectData in throwEffectInfo.EffectDatas)
         {
-            foreach(var effectData in throwEffectInfo[ThrowCount].EffectDatas)
-            {
-                tobj.AddEffect(effectData.Effect);
-            }
+            tobj.AddEffect(effectData.Effect);
         }
     }
 
@@ -142,8 +160,8 @@ public class PlayerAttack : MonoBehaviour
         tobj.transform.parent = null;
         tobj.transform.position = throwPoint.position;
         tobj.gameObject.SetActive(true);
-        tobj.SetDamage(player.Stat.ThrowDamages[ThrowCount]);
-        tobj.Throw(transform.forward + (transform.up*0.3f), throwForces[ThrowCount]);
+        tobj.SetDamage(ThrowAttackInfo[ThrowCount].Damage);
+        tobj.Throw(transform.forward + (transform.up*0.3f), ThrowAttackInfo[ThrowCount].ThrowForce);
 
         // 공격 시 추후 카메라 방향을 바라보도록 하는 동작 추가 필요 
 

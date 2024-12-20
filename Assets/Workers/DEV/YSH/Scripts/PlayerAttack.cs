@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TreeEditor;
 using UnityEngine;
 using UnityEngine.Events;
@@ -30,6 +31,7 @@ public class PlayerAttack : MonoBehaviour
 
     public LayerMask WhatIsEnemy { get { return whatIsEnemy; } }
 
+    public EMultiActionType ActionType { get; set; }
     public int MeleeCount { get; set; }
     public int ThrowCount { get; set; }
     public int ThrowCountMax => ThrowAttackInfo.Length;
@@ -60,6 +62,14 @@ public class PlayerAttack : MonoBehaviour
         EffectInfo throwEffectInfo;
         for (int i = 0; i < ThrowAttackInfo.Length; i++)
         {
+            // 해당 타수 공격이 멀티 액션인 경우
+            if (ThrowAttackInfo[i].MultiActions.Length > 0)
+            {
+                GenerateMultiActionEffects(i, ThrowAttackInfo[i].MultiActions);
+                continue;
+            }
+
+            // 단일 액션인 경우
             throwEffectInfo = ThrowAttackInfo[i].EffectInfo;
             if (throwEffectInfo.EffectDatas.Length <= 0)
                 continue;
@@ -72,43 +82,82 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
+    public void GenerateMultiActionEffects(int throwCount, MultiActionInfo[] multiActions)
+    {
+        EffectInfo multiEffectInfo;
+        for (int i = 0; i < multiActions.Length; i++)
+        {
+            // MultiAction[i]에 적용되야 하는 Effect 정보를 확인
+            multiEffectInfo = multiActions[i].EffectInfo;
+            if (multiEffectInfo.EffectDatas.Length <= 0)
+                continue;
+
+            // 확인된 Effect를 생성
+            foreach (var effectData in multiEffectInfo.EffectDatas)
+            {
+                effectData.Effect = generator.Create(effectData.EffectType);
+                Debug.Log($"<color=cyan>원거리 {throwCount + 1}타({multiActions[i].ActionType}) Effect 생성 : {effectData.EffectType}</color>");
+            }
+        }
+    }
+
     public void GenerateMeleeEffects()
     {
         EffectInfo meleeEffectInfo;
         for (int i = 0; i < MeleeAttackInfo.Length; i++)
         {
+            // MeleeAttack[i]에 적용되야 하는 Effect 정보를 확인
             meleeEffectInfo = MeleeAttackInfo[i].EffectInfo;
             if (meleeEffectInfo.EffectDatas.Length <= 0)
                 continue;
 
+            // 확인된 Effect를 생성
             foreach (var effectData in meleeEffectInfo.EffectDatas)
             {
                 effectData.Effect = generator.Create(effectData.EffectType);
-                Debug.Log($"<color=green>근거리 {i + 1}타 Effect 생성 : {effectData.EffectType}</color>");
+                Debug.Log($"<color=lime>근거리 {i + 1}타 Effect 생성 : {effectData.EffectType}</color>");
             }
         }
     }
 
     public void AddThrowEffects(ThrowObject tobj)
     {
+        // 적용되야 할 Effect가 존재하는지 확인
         if (ThrowAttackInfo[ThrowCount].EffectInfo.EffectDatas.Length <= 0)
             return;
 
         EffectInfo throwEffectInfo = ThrowAttackInfo[ThrowCount].EffectInfo;
         foreach (var effectData in throwEffectInfo.EffectDatas)
         {
+            // 확인된 Effect 적용 
+            tobj.AddEffect(effectData.Effect);
+        }
+    }
+
+    public void AddMultiActionEffects(ThrowObject tobj, MultiActionInfo currentAction)
+    {
+        // 적용되야 할 Effect가 존재하는지 확인
+        if (currentAction.EffectInfo.EffectDatas.Length <= 0)
+            return;
+
+        EffectInfo currentActionEffectInfo = currentAction.EffectInfo;
+        foreach (var effectData in currentActionEffectInfo.EffectDatas)
+        {
+            // 확인된 Effect 적용
             tobj.AddEffect(effectData.Effect);
         }
     }
 
     public void AddMeleeEffect()
     {
+        // 적용되야 할 Effect가 존재하는지 확인
         if (MeleeAttackInfo[MeleeCount].EffectInfo.EffectDatas.Length <= 0)
             return;
 
         EffectInfo meleeEffectInfo = MeleeAttackInfo[MeleeCount].EffectInfo;
         foreach (var effectData in meleeEffectInfo.EffectDatas)
         {
+            // 확인된 Effect 적용
             meleeEffects.Add(effectData.Effect);
         }
     }
@@ -117,9 +166,11 @@ public class PlayerAttack : MonoBehaviour
     {
         foreach (var effect in meleeEffects)
         {
+            // 적용된 Melee Effect 실행
             effect.Activate(gameObject, target);
         }
 
+        // 실행 후 초기화
         meleeEffects.Clear();
     }
 
@@ -159,26 +210,47 @@ public class PlayerAttack : MonoBehaviour
 
     public void Throw()
     {
+        // 최종 수치 저장용
+        int damage = 0;
+        float throwForce = 0;
+
         ThrowObject tobj = PopObjectStack();
         if (tobj == null)
             return;
 
         Debug.Log($"<color=white>Throw Count : {ThrowCount}</color>");
 
-        AddThrowEffects(tobj);
+        MultiActionInfo[] multiActions = ThrowAttackInfo[ThrowCount].MultiActions;
+        MultiActionInfo currentAction;
+        if (multiActions.Length <= 0)
+        {
+            AddThrowEffects(tobj);
+
+            // 수치 저장
+            damage = ThrowAttackInfo[ThrowCount].Damage;
+            throwForce = ThrowAttackInfo[ThrowCount].ThrowForce;
+        }
+        else
+        {
+            List<MultiActionInfo> actionList = multiActions.ToList();
+            // 현재 Action과 일치하는 MultiActionInfo를 가져온다 (Where)
+            currentAction = actionList.Where(x => x.ActionType == ActionType).First();
+            AddMultiActionEffects(tobj, currentAction);
+
+            // 수치 저장
+            damage = currentAction.Damage;
+            throwForce = currentAction.ThrowForce;
+        }
 
         tobj.transform.parent = null;
         tobj.transform.position = throwPoint.position;
         tobj.gameObject.SetActive(true);
-        tobj.SetDamage(ThrowAttackInfo[ThrowCount].Damage);
-        tobj.Throw(transform.forward + (transform.up*0.3f), ThrowAttackInfo[ThrowCount].ThrowForce);
+        //tobj.SetDamage(ThrowAttackInfo[ThrowCount].Damage);
+        tobj.SetDamage(damage);
+        //tobj.Throw(transform.forward + (transform.up*0.3f), ThrowAttackInfo[ThrowCount].ThrowForce);
+        tobj.Throw(transform.forward + (transform.up * 0.3f), throwForce);
 
         // 공격 시 추후 카메라 방향을 바라보도록 하는 동작 추가 필요 
-
-        if (ThrowCount < ThrowCountMax - 1)
-            ThrowCount++;
-        else
-            ThrowCount = 0;
     }
 
     public void Melee()

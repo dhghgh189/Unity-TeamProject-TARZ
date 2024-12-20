@@ -1298,40 +1298,52 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   ThrowAttackInfo:
-  - Damage: 55
+  - MultiActions: []
+    Damage: 55
     ThrowForce: 10
     EffectInfo:
-      ExistEffet: 0
       EffectDatas: []
-  - Damage: 55
+  - MultiActions: []
+    Damage: 55
     ThrowForce: 10
     EffectInfo:
-      ExistEffet: 0
       EffectDatas: []
-  - Damage: 75
-    ThrowForce: 13
+  - MultiActions:
+    - ActionType: 0
+      Damage: 75
+      ThrowForce: 13
+      EffectInfo:
+        EffectDatas: []
+    - ActionType: 1
+      Damage: 105
+      ThrowForce: 15
+      EffectInfo:
+        EffectDatas:
+        - EffectType: 0
+    - ActionType: 2
+      Damage: 55
+      ThrowForce: 10
+      EffectInfo:
+        EffectDatas: []
+    Damage: 0
+    ThrowForce: 0
     EffectInfo:
-      ExistEffet: 0
-      EffectDatas:
-      - EffectType: 0
+      EffectDatas: []
   MeleeAttackInfo:
   - Damage: 20
     Angle: 90
     Range: 2
     EffectInfo:
-      ExistEffet: 0
       EffectDatas: []
   - Damage: 30
     Angle: 135
     Range: 2
     EffectInfo:
-      ExistEffet: 0
       EffectDatas: []
   - Damage: 50
     Angle: 45
     Range: 2
     EffectInfo:
-      ExistEffet: 0
       EffectDatas:
       - EffectType: 0
   stackTransform: {fileID: 1557830222}

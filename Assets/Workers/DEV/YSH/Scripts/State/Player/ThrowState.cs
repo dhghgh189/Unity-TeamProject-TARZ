@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class ThrowState : BaseState<PlayerController>
 {
-    private int[] throwAnimHashes;
+    private int[] throwAnimHashes;          // 단일 액션에 대한 애니메이션 해쉬
+    private int[,] throwMultiAnimHashes;    // 멀티 액션에 대한 애니메이션 해쉬
+
     private float animTimer;
 
     private float comboTimer;
     private int throwCount;
+
+    private Vector3 inputDir;
 
     public ThrowState(PlayerController owner)
     {
@@ -16,15 +20,31 @@ public class ThrowState : BaseState<PlayerController>
         type = EState.Throw;
 
         throwAnimHashes = new int[owner.Attack.ThrowCountMax];
+        throwMultiAnimHashes = new int[owner.Attack.ThrowCountMax, (int)EMultiActionType.Length];
 
         for (int i = 0; i < throwAnimHashes.Length; i++)
         {
             throwAnimHashes[i] = Animator.StringToHash($"Throw{i + 1}");
+
+            // Multi Action 애니메이션 Hash 생성
+            if (owner.Attack.ThrowAttackInfo[i].MultiActions.Length > 0)
+            {
+                MultiActionInfo[] multiActions = owner.Attack.ThrowAttackInfo[i].MultiActions;
+                for (int j = 0; j < multiActions.Length; j++)
+                {
+                    // actionType enum을 index로 사용
+                    int iActionType = (int)multiActions[j].ActionType;
+                    throwMultiAnimHashes[i, iActionType] = Animator.StringToHash($"Throw{i + 1}_{multiActions[j].ActionType}");
+                }
+            }
         }
     }
 
     public override void OnEnter()
     {
+        // 최초 진입시점 때의 입력값을 기억한다.
+        inputDir = owner.PInput.InputDir;
+
         throwCount = owner.Attack.ThrowCount;
 
         comboTimer = 0f;
@@ -33,8 +53,38 @@ public class ThrowState : BaseState<PlayerController>
         // 아직 anim length를 모르기 때문에 큰 값으로 설정
         animTimer = 999;
 
-        owner.Anim.CrossFade(throwAnimHashes[owner.Attack.ThrowCount], 0.01f);
+        SetAction();
+
         owner.StartCoroutine(AnimRoutine());
+    }
+
+    private void SetAction()
+    {
+        MultiActionInfo[] multiActions = owner.Attack.ThrowAttackInfo[throwCount].MultiActions;
+        if (multiActions.Length <= 0)
+        {
+            owner.Anim.CrossFade(throwAnimHashes[owner.Attack.ThrowCount], 0.01f);
+            return;
+        }
+
+        int animHash;
+        if ((int)inputDir.x > 0)
+        {
+            animHash = throwMultiAnimHashes[throwCount, (int)EMultiActionType.Right];
+            owner.Attack.ActionType = EMultiActionType.Right;
+        }
+        else if ((int)inputDir.x < 0)
+        {
+            animHash = throwMultiAnimHashes[throwCount, (int)EMultiActionType.Left];
+            owner.Attack.ActionType = EMultiActionType.Left;
+        }
+        else
+        {
+            animHash = throwMultiAnimHashes[throwCount, (int)EMultiActionType.Basic];
+            owner.Attack.ActionType = EMultiActionType.Basic;
+        }
+
+        owner.Anim.CrossFade(animHash, 0.01f);
     }
 
     IEnumerator AnimRoutine()
@@ -61,8 +111,10 @@ public class ThrowState : BaseState<PlayerController>
         // 애니메이션 재생이 완료되면 상태 종료
         if (animTimer <= 0)
         {
+            owner.Attack.ThrowCount++;
+
             // 마지막 타수였거나 물건 스택이 없는 경우 바로 Idle로 이동
-            if (throwCount >= owner.Attack.ThrowCountMax - 1 
+            if (owner.Attack.ThrowCount >= owner.Attack.ThrowCountMax 
                 || owner.Attack.ObjectCount <= 0)
             {
                 owner.Attack.ThrowCount = 0;

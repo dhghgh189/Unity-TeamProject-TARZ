@@ -22,7 +22,7 @@ public class UI_StatModel : MonoBehaviour
             float value = statModel.GetAbility((AdditionAbility)i);
             if (value > 0)
             {
-                statText.text += $"{(AdditionAbility)i} : {value}\n";
+                statText.text += $"{((AdditionAbility)i).ToDescription()} : {value}\n";
             }
         }
     }

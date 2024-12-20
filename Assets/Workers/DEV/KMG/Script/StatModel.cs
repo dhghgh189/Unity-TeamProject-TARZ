@@ -1,8 +1,22 @@
 using System;
+using System.ComponentModel;
 using UnityEngine;
 public enum AdditionAbility
 {
-    AllPowerPer, DefaultPowerPer, SkillPowerPer, ElementalPowerPer, CriticalDamage, Critical, MaxHpPer, MaxStaminaPer, StaminarEgeneration, MpGain, MoveSpeedPer, MaxObject, ChipGetAmount, Size
+    [Description("공격력%")]AllPowerPer, 
+    [Description("기본 공격력%")]DefaultPowerPer, 
+    [Description("스킬 공격력%")] SkillPowerPer, 
+    [Description("속성 공격력%")]ElementalPowerPer, 
+    [Description("크리티컬 공격력%")]CriticalDamage, 
+    [Description("크리티컬 확률%")]Critical, 
+    [Description("최대 생명력%")]MaxHpPer, 
+    [Description("최대 스테미나%")]MaxStaminaPer, 
+    [Description("스테미나 재생속도%")]StaminarEgeneration, 
+    [Description("공격시 마나 회복력%")]MpGain, 
+    [Description("이동속도%")]MoveSpeedPer, 
+    [Description("최대 보유 오브젝트")]MaxObject,
+    [Description("데이터 칩 획득량%")] ChipGetAmount, 
+    Size
 }
 
 public class StatModel : MonoBehaviour

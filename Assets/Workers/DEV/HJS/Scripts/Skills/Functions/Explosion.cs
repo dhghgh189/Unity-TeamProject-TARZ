@@ -2,9 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Explosion : MonoBehaviour
+public class Explosion : MonoBehaviour, ISpec
 {
-    private void Start()
+    [SerializeField] float damage;  // 공격 데미지
+
+    public void SetSpec(SkillSpecDatabase.Spec spec, int level)
+    {
+        damage = spec.Power(level);
+
+        Init();
+    }
+
+    private void Init()
     {
         Debug.Log("폭팔시작");
         // Overlap으로 범위 확인

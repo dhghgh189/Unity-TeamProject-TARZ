@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class GravityShoot : MonoBehaviour
+public class GravityShoot : MonoBehaviour, ISpec
 {
     [SerializeField] float operationTime;   // 동작하는 시간
     [SerializeField] float force;           // 끌어당기는 힘
     [SerializeField] float range;           // 끌어당기는 범위
 
-    private void Start()
+
+
+    private void Init()
     {
         GetComponent<SphereCollider>().radius = range;
         Destroy(gameObject, operationTime);
@@ -48,5 +50,14 @@ public class GravityShoot : MonoBehaviour
     {
         // 모든 코루틴 종료
         StopAllCoroutines();
+    }
+
+    public void SetSpec(SkillSpecDatabase.Spec spec, int level)
+    {
+        operationTime = spec.Time(level);
+        force = spec.Power(level);
+        range = spec.Range(level);
+
+        Init();
     }
 }

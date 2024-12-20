@@ -73,4 +73,5 @@ public class GuidedFuncion : MonoBehaviour
             Gizmos.DrawSphere(transform.position, 3f);
         }
     }
+
 }

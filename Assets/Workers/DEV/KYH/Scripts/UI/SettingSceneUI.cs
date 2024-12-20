@@ -22,10 +22,12 @@ public class SettingSceneUI : MonoBehaviour
     [SerializeField] private GameObject nonSelectPanel;
     [SerializeField] private GameObject gameplayPanel;
     [SerializeField] private GameObject languagePanel;
+    [SerializeField] private GameObject soundPanel;
 
     [Header("<color=blue>Selected UI</color>")]
     [SerializeField] private Toggle activeMinimapToggle;
-    [SerializeField] private Dropdown languageDropdown;
+    //[SerializeField] private Dropdown languageDropdown;
+    [SerializeField] private Slider masterVolumeSlider;
 
     private void Start()
     {
@@ -53,6 +55,10 @@ public class SettingSceneUI : MonoBehaviour
             {
                 langueButton.Select();
             }
+            else if (activeCPanel = soundPanel)
+            {
+                soundButton.Select();
+            }
         }
     }
 
@@ -62,16 +68,28 @@ public class SettingSceneUI : MonoBehaviour
         nonSelectPanel.SetActive(false);
         gameplayPanel.SetActive(true);
         languagePanel.SetActive(false);
+        soundPanel.SetActive(false);
         activeMinimapToggle.Select();
     }
 
-    public void OnClickLangueButton()
+    public void OnClickLanguageButton()
     {
         activeCPanel = languagePanel;
         nonSelectPanel.SetActive(false);
         gameplayPanel.SetActive(false);
         languagePanel.SetActive(true);
-        languageDropdown.Select();
+        soundPanel.SetActive(false);
+        //languageDropdown.Select();
+    }
+
+    public void OnClickSoundButton()
+    {
+        activeCPanel = soundPanel;
+        nonSelectPanel.SetActive(false);
+        gameplayPanel.SetActive(false);
+        languagePanel.SetActive(false);
+        soundPanel.SetActive(true);
+        masterVolumeSlider.Select();
     }
 
     public void OnClickBackToTitleButton()

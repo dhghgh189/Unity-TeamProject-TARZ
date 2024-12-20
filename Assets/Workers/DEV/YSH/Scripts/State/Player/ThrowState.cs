@@ -14,6 +14,8 @@ public class ThrowState : BaseState<PlayerController>
 
     private Vector3 inputDir;
 
+    private Transform camTrf;
+
     public ThrowState(PlayerController owner)
     {
         this.owner = owner;
@@ -42,20 +44,35 @@ public class ThrowState : BaseState<PlayerController>
 
     public override void OnEnter()
     {
+        if (camTrf == null)
+            camTrf = Camera.main.transform;
+
         // 최초 진입시점 때의 입력값을 기억한다.
         inputDir = owner.PInput.InputDir;
 
         throwCount = owner.Attack.ThrowCount;
 
         comboTimer = 0f;
+        
         owner.Movement.Move(Vector3.zero);
 
         // 아직 anim length를 모르기 때문에 큰 값으로 설정
         animTimer = 999;
 
+        // 카메라 정면을 바라본다.
+        Debug.Log($"before lookAt forward : {owner.transform.forward}");
+        owner.Movement.LookAt(camTrf.forward);
+        Debug.Log($"after lookAt forward : {owner.transform.forward}");
+
         SetAction();
 
         owner.StartCoroutine(AnimRoutine());
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+        Debug.Log($"Exit forward : {owner.transform.forward}");
     }
 
     private void SetAction()
@@ -63,7 +80,9 @@ public class ThrowState : BaseState<PlayerController>
         MultiActionInfo[] multiActions = owner.Attack.ThrowAttackInfo[throwCount].MultiActions;
         if (multiActions.Length <= 0)
         {
+            Debug.Log($"before anim forward : {owner.transform.forward}");
             owner.Anim.CrossFade(throwAnimHashes[owner.Attack.ThrowCount], 0.01f);
+            Debug.Log($"after anim forward : {owner.transform.forward}");
             return;
         }
 
@@ -84,7 +103,9 @@ public class ThrowState : BaseState<PlayerController>
             owner.Attack.ActionType = EMultiActionType.Basic;
         }
 
+        Debug.Log($"before anim forward : {owner.transform.forward}");
         owner.Anim.CrossFade(animHash, 0.01f);
+        Debug.Log($"after anim forward : {owner.transform.forward}");
     }
 
     IEnumerator AnimRoutine()

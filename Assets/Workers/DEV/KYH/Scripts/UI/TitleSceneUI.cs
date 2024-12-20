@@ -20,6 +20,10 @@ public class TitleSceneUI : MonoBehaviour
     [SerializeField] private GameObject settingsPanel;          // 설정 패널
     [SerializeField] private SettingSceneUI settingScene;       // 설정 패널 클래스
 
+    [Header("<color=red>Quit Game</color>")]
+    [SerializeField] private GameObject quitPanel;              // 게임 나가기 패널
+    [SerializeField] private QuitSceneUI quitScene;             // 게임 나가기 패널 클래스
+
     private void Start()
     {
         inputManager.firstInput = newGameButton;  // 타이틀 패널의 UI 네비게이션 첫 Input을 newGameButton로 설정
@@ -55,12 +59,7 @@ public class TitleSceneUI : MonoBehaviour
     // 게임 종료 버튼 클릭
     public void OnClickQuitGameButton()
     {
-        // Unity Editor일 경우, 에디터 플레이 모드 종료
-        #if UNITY_EDITOR
-                UnityEditor.EditorApplication.isPlaying = false;
-        // Unity Editor가 아닐 경우, 어플리케이션 종료
-        #else
-                Application.Quit();
-        #endif
+        gameObject.SetActive(false);    // 타이틀 패널 비활성화
+        quitPanel.SetActive(true);      // 게임 나가기 패널 활성화
     }
 }

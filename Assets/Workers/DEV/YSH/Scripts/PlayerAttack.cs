@@ -189,7 +189,7 @@ public class PlayerAttack : MonoBehaviour
         tobj.gameObject.SetActive(false);
 
         // 이벤트?
-        Debug.Log($"<color=yellow>Stack Count : {ObjectCount}</color>");
+        //Debug.Log($"<color=yellow>Stack Count : {ObjectCount}</color>");
     }
 
     public ThrowObject PopObjectStack()
@@ -203,7 +203,7 @@ public class PlayerAttack : MonoBehaviour
         ThrowObject tobj = objectStack.Pop();
 
         // 이벤트?
-        Debug.Log($"<color=yellow>Stack Count : {ObjectCount}</color>");
+        //Debug.Log($"<color=yellow>Stack Count : {ObjectCount}</color>");
 
         return tobj;
     }
@@ -245,12 +245,8 @@ public class PlayerAttack : MonoBehaviour
         tobj.transform.parent = null;
         tobj.transform.position = throwPoint.position;
         tobj.gameObject.SetActive(true);
-        //tobj.SetDamage(ThrowAttackInfo[ThrowCount].Damage);
         tobj.SetDamage(damage);
-        //tobj.Throw(transform.forward + (transform.up*0.3f), ThrowAttackInfo[ThrowCount].ThrowForce);
         tobj.Throw(transform.forward + (transform.up * 0.3f), throwForce);
-
-        // 공격 시 추후 카메라 방향을 바라보도록 하는 동작 추가 필요 
     }
 
     public void Melee()
@@ -261,8 +257,6 @@ public class PlayerAttack : MonoBehaviour
         Debug.Log($"Melee Attack Damage : {MeleeAttackInfo[MeleeCount].Damage}");
 
         AddMeleeEffect();
-
-        // 공격 시 추후 카메라 방향을 바라보도록 하는 동작 추가 필요 
 
         Collider[] colliders = Physics.OverlapSphere(transform.position, MeleeAttackInfo[MeleeCount].Range, whatIsEnemy);
         foreach (Collider col in colliders)
@@ -292,11 +286,14 @@ public class PlayerAttack : MonoBehaviour
 
     private bool IsTargetInAngle(Transform targetTrf)
     {
-        source = transform.position;
-        dest = targetTrf.position;
+        source = transform.position;    // 플레이어 위치
+        dest = targetTrf.position;      // 감지된 Target 위치
+
+        // y축 수치 제거
         source.y = 0;
         dest.y = 0;
 
+        // 플레이어와 Target간의 각도 체크
         resultAngle = Vector3.Angle(transform.forward, (dest - source).normalized);
         if (resultAngle > MeleeAttackInfo[MeleeCount].Angle * 0.5f)
             return false;

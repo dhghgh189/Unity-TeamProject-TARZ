@@ -67,9 +67,6 @@ public class ThrowObject : MonoBehaviour, IDrainable
         // 부딪힌 오브젝트가 target이 아니면
         if (((1 << other.gameObject.layer) & whatIsTarget.value) == 0)
         {
-            if (other.gameObject.layer == LayerMask.NameToLayer("ThrowObject"))
-                Debug.Log($"<color=white>{gameObject.name} <-> {other.gameObject.name}</color>");
-
             // 스택에 들어가는 과정에서 Throw Object끼리 충돌하여
             // isCollected가 초기화 되는 것을 방지
             if (gameObject.transform.parent == null)

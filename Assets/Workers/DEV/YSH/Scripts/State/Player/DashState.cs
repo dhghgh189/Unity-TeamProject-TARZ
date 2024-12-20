@@ -24,6 +24,8 @@ public class DashState : BaseState<PlayerController>
             camTrf = Camera.main.transform;
 
         dashTimer = owner.Stat.DashTime;
+
+        // 카메라 정면을 바라본다.
         owner.Movement.LookAt(camTrf.forward);
         owner.Anim.CrossFade(Define.HASH_ANIM_DASH, 0.1f);
     }

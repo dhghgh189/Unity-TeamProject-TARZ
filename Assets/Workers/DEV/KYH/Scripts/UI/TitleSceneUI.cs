@@ -9,42 +9,47 @@ public class TitleSceneUI : MonoBehaviour
 {
     [SerializeField] private Button titleButton;
 
-    [Header("Input Manager")]
+    [Header("<color=yellow>Input Manager</color>")]
     [SerializeField] private ChangeInput inputManager;
 
-    [Header("Load Game")]
+    [Header("<color=orange>Load Game</color>")]
     [SerializeField] private GameObject loadGamePanel;
     [SerializeField] private LoadSceneUI loadScene;
 
-    [Header("Settings")]
+    [Header("<color=green>Settings</color>")]
     [SerializeField] private GameObject settingsPanel;
     [SerializeField] private SettingSceneUI settingScene;
 
     private void Start()
     {
-        inputManager.StartButton = titleButton;
-        inputManager.firstInput = inputManager.StartButton;
+        inputManager.firstInput = titleButton;
         inputManager.firstInput.Select();
     }
 
-    public void NewGameStart()
+    private void OnEnable()
+    {
+        inputManager.firstInput = titleButton;
+        inputManager.firstInput.Select();
+    }
+
+    public void OnClickNewGameButton()
     {
         SceneManager.LoadScene("GameScene");    // 바로 새 게임 씬으로 이동(게임 씬 이름 변경 필요)
     }
 
-    public void LoadGameStart()
+    public void OnClickLoadGameButton()
     {
         gameObject.SetActive(false);
         loadGamePanel.SetActive(true);
     }
 
-    public void OpenSettingsPanel()
+    public void OnClickSettingsButton()
     {
         gameObject.SetActive(false);
         settingsPanel.SetActive(true);
     }
 
-    public void QuitGame()
+    public void OnClickQuitGameButton()
     {
         #if UNITY_EDITOR
                 UnityEditor.EditorApplication.isPlaying = false;

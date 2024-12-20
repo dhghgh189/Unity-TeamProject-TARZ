@@ -16,9 +16,6 @@ public class ChangeInput : MonoBehaviour
     private void Start()
     {
         system = EventSystem.current;       // 현재 씬의 EventSystem을 system에 저장
-
-        firstInput = startButton;           // UI Selectable Input 시작점을 startButton으로 지정
-        firstInput.Select();                // UI Selectable Input 시작점을 선택
     }
 
     private void Update()

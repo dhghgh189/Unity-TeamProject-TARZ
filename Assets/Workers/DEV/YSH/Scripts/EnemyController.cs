@@ -26,7 +26,6 @@ public class EnemyController : MonoBehaviour, IDamagable, IKnockBack
 
     public void KnockBack(GameObject attacker)
     {
-        Debug.Log("Enemy knock back");
         StartCoroutine(KnockBackRoutine(attacker));
     }
 
@@ -35,7 +34,6 @@ public class EnemyController : MonoBehaviour, IDamagable, IKnockBack
         float knockBackTime = 0.1f;
         Vector3 moveDir = (transform.position - attacker.transform.position).normalized;
         moveDir.y = 0;
-        Debug.Log($"movedir : {moveDir}");
         while (true)
         {
             knockBackTime -= Time.deltaTime;

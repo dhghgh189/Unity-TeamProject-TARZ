@@ -52,6 +52,32 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!1102 &-6411201829562984530
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Throw3_Right
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 7400000, guid: 376c19d344975d04bb01442e9da72392, type: 3}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!1102 &-3726759696813913849
 AnimatorState:
   serializedVersion: 6
@@ -104,7 +130,7 @@ AnimatorStateMachine:
     m_Position: {x: 290, y: 290, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -7142691271042010280}
-    m_Position: {x: 520, y: 170, z: 0}
+    m_Position: {x: 510, y: 290, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1945298967343572747}
     m_Position: {x: 520, y: 70, z: 0}
@@ -119,7 +145,13 @@ AnimatorStateMachine:
     m_Position: {x: 290, y: 350, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2188703807940947147}
-    m_Position: {x: 520, y: 230, z: 0}
+    m_Position: {x: 510, y: 350, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: -6411201829562984530}
+    m_Position: {x: 520, y: 220, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: -613129721903017620}
+    m_Position: {x: 520, y: 170, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -215,7 +247,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Throw3
+  m_Name: Throw3_Basic
   m_Speed: 1.5
   m_CycleOffset: 0
   m_Transitions: []
@@ -255,6 +287,32 @@ AnimatorState:
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: 7400000, guid: f9808de8e12794d468604280ad76ca36, type: 3}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
+--- !u!1102 &-613129721903017620
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Throw3_Left
+  m_Speed: 1.2
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 7400000, guid: 85b49650f570aed45a62cc7c95a0d107, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 

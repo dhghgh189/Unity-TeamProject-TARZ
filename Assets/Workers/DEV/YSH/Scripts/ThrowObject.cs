@@ -7,7 +7,7 @@ public class ThrowObject : MonoBehaviour, IDrainable
 {
     [SerializeField] private LayerMask whatIsTarget;
 
-    private bool isCollected;
+    [SerializeField] private bool isCollected;
     private Rigidbody rigid;
     private PlayerController owner;
 
@@ -51,13 +51,13 @@ public class ThrowObject : MonoBehaviour, IDrainable
 
     public void Get(PlayerController player)
     {
-        isCollected = true;
-
         if (drainRoutine != null)
             StopDrain(null);
 
         owner = player;
         player.AddObjectStack(this);
+
+        isCollected = true;
     }
 
     private void OnCollisionEnter(Collision other)
@@ -67,7 +67,12 @@ public class ThrowObject : MonoBehaviour, IDrainable
         // 부딪힌 오브젝트가 target이 아니면
         if (((1 << other.gameObject.layer) & whatIsTarget.value) == 0)
         {
-            isCollected = false;
+            // 스택에 들어가는 과정에서 Throw Object끼리 충돌하여
+            // isCollected가 초기화 되는 것을 방지
+            if (gameObject.transform.parent == null)
+            {
+                isCollected = false;
+            }
 
             if (throwEffects.Count > 0)
                 throwEffects.Clear();

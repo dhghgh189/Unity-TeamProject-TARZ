@@ -1,5 +1,4 @@
 using BehaviorDesigner.Runtime.Tasks;
-using Unity.Mathematics;
 using UnityEngine;
 
 public class CondMonsterCanMove : Conditional, IDamagable
@@ -24,18 +23,21 @@ public class CondMonsterCanMove : Conditional, IDamagable
     public override TaskStatus OnUpdate()
     {
         _returnObj = WithinSight(_player, _angle, _distance);
-        if (_returnObj != null && _monsterData.Type != MonsterData.MonsterType.Range) 
+
+        if (_returnObj != null && _monsterData.Type != MonsterData.MonsterType.Range)
         {
+
             Debug.Log("CodnMove true");
             return TaskStatus.Success;
         }
-        else if (_monsterData.Attacked_First == true)
+        else if (_monsterData.Attacked_First == true) // 시야각에 없어도 선빵 맞으면 데미지들어오면서 쳐다보는 로직 
         {
             TakeDamage(1/*플레이어 데미지 불러오기*/);
             return TaskStatus.Running;
         }
         else
         {
+            Debug.Log("cond move false");
             return TaskStatus.Failure;
         }
     }
@@ -103,6 +105,8 @@ public class CondMonsterCanMove : Conditional, IDamagable
         Quaternion lookRot = Quaternion.LookRotation(_playerFirstAttackTransform.position);
         transform.rotation = Quaternion.Lerp(transform.rotation, lookRot, _rate * Time.deltaTime);
     }
+
+
 
     ///
     /// 추후 넉백 기능 추가해주세요

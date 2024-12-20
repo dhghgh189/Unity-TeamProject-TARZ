@@ -15,7 +15,7 @@ public class Projectile : MonoBehaviour // 일반 원딜 쫄몹
     {
         _monsterData = _monster.GetComponent<MonsterData>(); 
 
-        _rigidBody.AddForce((Vector3.forward + Vector3.up) * _monsterData.ThrowPower, ForceMode.Impulse);
+        _rigidBody.AddForce((transform.forward + transform.up) * _monsterData.ThrowPower, ForceMode.Impulse);
     }
     private void Update()
     {
@@ -24,6 +24,8 @@ public class Projectile : MonoBehaviour // 일반 원딜 쫄몹
 
     private void OnCollisionEnter(Collision collider)
     {
+        _rigidBody.velocity = Vector3.zero;
+
         IDamagable damagableObj = collider.gameObject.GetComponent<IDamagable>();
         damagable = damagableObj;
         if (damagable != null)

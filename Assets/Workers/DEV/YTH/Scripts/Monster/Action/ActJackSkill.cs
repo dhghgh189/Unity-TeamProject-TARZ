@@ -12,45 +12,28 @@ public class ActJackSkill : Action
 
     [SerializeField] GameObject _player;
 
-    [SerializeField] NavMeshAgent _agent;
-
     public override void OnStart()
     {
         _distance = Vector3.Distance(transform.position, _player.transform.position);
-       
     }
 
     public override TaskStatus OnUpdate()
     {
-        if (_distance >= 40 &&  _monsterSkillManager.JumpAttackSkill.CanUseSkill == true)
+        if (_distance <= 10)
         {
-            if (_monsterSkillManager.jumpAttackRoutine == null)
+            if (_monsterSkillManager.WheelWindSkill.CanUseSkill == true && _monsterData.CurHp <= _monsterData.MaxHp /2)
             {
-                _monsterSkillManager.jumpAttackRoutine =  StartCoroutine(_monsterSkillManager.JumpAttackRoutine());
+                _monsterSkillManager.wheelWindRoutine = StartCoroutine(_monsterSkillManager.WheelWindRoutine());
                 Debug.Log("40 JumpAttack");
+                return TaskStatus.Success;
             }
-            return TaskStatus.Success;
-        }
-        /*else if (_distance >= 30 && _distance < 40 && _monsterSkillManager.ElectricWallSkill.CanUseSkill == true)
-        {
-            if (_monsterSkillManager.jumpAttackRoutine == null) // 일레트릭월로 변경해야댐
+            
+            if (_monsterSkillManager.TrippleAttackSkill.CanUseSkill == true)
             {
-                //ElectricWall
-                Debug.Log("30 ElectricWall");
+                _monsterSkillManager.trippleAttackRoutine = StartCoroutine(_monsterSkillManager.TrippleAttackRoutine());
+                return TaskStatus.Success;
             }
-            return TaskStatus.Success;
-        }*/
-        else if (_distance >= 20 && _distance < 30 && _monsterSkillManager.DashAttackSkill.CanUseSkill == true)
-        {
-            if (_monsterSkillManager.dashAttackRoutine == null)
-            {
-                _monsterSkillManager.dashAttackRoutine = StartCoroutine(_monsterSkillManager.DashAttackRoutine());
-                Debug.Log("20 DashAttackRoutine");
-            }
-            return TaskStatus.Success;
-        }
-        else if (_distance < 20)  // 다가가 공격으로 넘어감
-        {
+
             return TaskStatus.Success;
         }
         else
@@ -58,9 +41,4 @@ public class ActJackSkill : Action
             return  TaskStatus.Failure;
         }
     }
-
-    /* public override void OnEnd()
-     {
-         _agent.enabled = true;
-     }*/
 }

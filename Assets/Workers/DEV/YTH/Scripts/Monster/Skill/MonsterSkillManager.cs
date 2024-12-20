@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 
 // 제안 1) 쌩으로 함수 구현해서 스킬매니저에 몰아 놓는다
 // 제안 2) abstract
@@ -42,6 +43,9 @@ public class MonsterSkillManager : MonoBehaviour
 
     [SerializeField] MonsterSkill _thunder;
     public MonsterSkill ThunderSkill { get { return _thunder; } set { _thunder = value; } }
+
+    [SerializeField] MonsterSkill _trippleAttack;
+    public MonsterSkill TrippleAttackSkill { get { return _trippleAttack; } set { _trippleAttack = value; } }
     #endregion
 
     [Header("Prefab")]
@@ -55,16 +59,29 @@ public class MonsterSkillManager : MonoBehaviour
 
     [SerializeField] GameObject _thunderPrefab;
 
-
     private Vector3 _electricWallPosition;
+
     private Vector3 _electricWallPosition2;
 
-    [Header("")]
+    [Header("Etc")]
     [SerializeField] MonsterData _monsterData;
 
     [SerializeField] GameObject _player;
 
     [SerializeField] Rigidbody _rigidbody;
+
+    [SerializeField] Transform _muzzlePoint;
+
+    [SerializeField] NavMeshAgent _agent;
+
+    [SerializeField] GameObject _wheelWindTrigger;
+
+    private float _elapsedTime = 0;
+
+    private Vector3 _jumpStartPosition;
+
+    private Vector3 _jumpDirection;
+
 
     private void Start()
     {
@@ -97,15 +114,39 @@ public class MonsterSkillManager : MonoBehaviour
         }
     }
 
+    #region JumpAttack - 점프 코루틴
+    Coroutine jumpRoutine_jumpAttack;
+    IEnumerator JumpRoutine_JumpAttack()
+    {
+        _jumpStartPosition = transform.position;
+        _jumpDirection = transform.forward.normalized * JumpAttackSkill.JumpDistance;
+
+        while (_elapsedTime < JumpAttackSkill.InAirTime)
+        {
+            float yOffset = Mathf.Sin((_elapsedTime / JumpAttackSkill.InAirTime) * Mathf.PI) * JumpAttackSkill.JumpHeight;
+            Vector3 zOffset = _jumpDirection * (_elapsedTime / JumpAttackSkill.InAirTime);
+
+            transform.position = _jumpStartPosition + zOffset + new Vector3(0, yOffset, 0);
+
+            _elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        transform.position = _jumpStartPosition + _jumpDirection;
+        jumpRoutine_jumpAttack = null;
+        _elapsedTime = 0;
+    }
+    #endregion
+
     #region JumpAttack
     public Coroutine jumpAttackRoutine;
     public IEnumerator JumpAttackRoutine() // 보스의 도약해서 착지하여 범위 공격
     {
-        _rigidbody.AddForce((Vector3.forward + Vector3.up * 2f) * _jumpAttack.JumpForce, ForceMode.Impulse);
-        //점프가 안됨 내브매쉬랑 연관있을것으로 추정
-        Debug.Log("점프!!");
-        /*  _monsterData.CanUseSkill = false;*/
         _jumpAttack.CanUseSkill = false;
+        if (jumpRoutine_jumpAttack == null)
+        {
+            jumpRoutine_jumpAttack = StartCoroutine(JumpRoutine_JumpAttack());
+            Debug.Log("점프!!");
+        }
 
         Collider[] colliders = Physics.OverlapSphere(transform.position, _jumpAttack.Range);
         foreach (Collider collider in colliders)
@@ -129,7 +170,6 @@ public class MonsterSkillManager : MonoBehaviour
         }
 
         yield return new WaitForSeconds(_jumpAttack.CoolTime);
-        /*  _monsterData.CanUseSkill = true;*/
         _jumpAttack.CanUseSkill = true;
         jumpAttackRoutine = null;
     }
@@ -139,28 +179,21 @@ public class MonsterSkillManager : MonoBehaviour
     public Coroutine wheelWindRoutine;
     public IEnumerator WheelWindRoutine() // 가렌 E
     {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, _wheelWind.Range);
-        foreach (Collider collider in colliders)
-        {
-            // 공격 범위 확인
-            Vector3 source = transform.position;
-            source.y = 0;
-            Vector3 destination = collider.transform.position;
-            destination.y = 0;
+        WheelWindSkill.CanUseSkill = false;
 
-            Vector3 targetDir = (destination - source).normalized;
-            float targetAngle = Vector3.Angle(transform.forward, targetDir);
-            if (targetAngle > _wheelWind.Angle) // 앵글의 반절만
-                continue;
+        _wheelWindTrigger.SetActive(true);
 
-            IDamagable damageble = collider.GetComponent<IDamagable>();
-            if (damageble != null)
-            {
-                damageble.TakeDamage(_wheelWind.Damage);
-                yield return new WaitForSeconds(_wheelWind.Interval);
-            }
-        }
+        Radiation jackRadiation = _jackTheRipper.GetComponent<Radiation>();
+        jackRadiation.Interaval = WheelWindSkill.Interval;
+        jackRadiation.Damage = WheelWindSkill.Damage;
+
+        yield return new WaitForSeconds(WheelWindSkill.Duration);
+        _wheelWindTrigger.SetActive(false);
+
+        wheelWindRoutine = null;
+        WheelWindSkill.CanUseSkill = true;
     }
+
     #endregion
 
     #region Bomb
@@ -169,9 +202,9 @@ public class MonsterSkillManager : MonoBehaviour
     {
         BombSkill.CanUseSkill = false;
 
-        GameObject bomb = Instantiate(_bombPrefab, transform.position, transform.rotation);
+        GameObject bomb = Instantiate(_bombPrefab, _muzzlePoint.position, _muzzlePoint.rotation);
         Rigidbody bombRb = bomb.GetComponent<Rigidbody>();
-        bombRb.AddForce(Vector3.forward * _bomb.ThrowForce, ForceMode.Impulse);
+        bombRb.AddForce((transform.forward + transform.up * 3) * _bomb.ThrowForce, ForceMode.Impulse);
 
         yield return new WaitForSeconds(BombSkill.CoolTime);
         bombRoutine = null;
@@ -186,18 +219,19 @@ public class MonsterSkillManager : MonoBehaviour
     {
         MineSkill.CanUseSkill = false;
 
-        GameObject mine = Instantiate(_minePrefab, transform.position, transform.rotation);
+        GameObject mine = Instantiate(_minePrefab, _muzzlePoint.position, _muzzlePoint.rotation);
         Rigidbody mineRb = mine.GetComponent<Rigidbody>();
-        mineRb.AddForce(Vector3.forward * _bomb.ThrowForce, ForceMode.Impulse);
+        mineRb.AddForce(transform.forward * MineSkill.ThrowForce, ForceMode.Impulse);
 
         yield return Util.GetDelay(MineSkill.CoolTime);
-        mineRoutine=null;
-        MineSkill.CanUseSkill=true;
+        mineRoutine = null;
+
+        MineSkill.CanUseSkill = true;
     }
     #endregion
 
     #region StimPak
-    public  void StimPak() // 폭탄좀비가 잭더리퍼의 몬스터 데이터에 접근해서 스텟 업 해줌
+    public void StimPak() // 폭탄좀비가 잭더리퍼의 몬스터 데이터에 접근해서 스텟 업 해줌
     {
         StimPakSkill.CanUseSkill = false;
 
@@ -211,16 +245,39 @@ public class MonsterSkillManager : MonoBehaviour
     }
     #endregion
 
+    #region DashAttack - 점프 코루틴
+    Coroutine jumpRoutine_dashAttack;
+    IEnumerator JumpRoutine_dashAttack()
+    {
+        _jumpStartPosition = transform.position;
+        _jumpDirection = transform.forward.normalized * DashAttackSkill.JumpDistance;
+
+        while (_elapsedTime < DashAttackSkill.InAirTime)
+        {
+            float yOffset = Mathf.Sin((_elapsedTime / DashAttackSkill.InAirTime) * Mathf.PI) * DashAttackSkill.JumpHeight;
+            Vector3 zOffset = _jumpDirection * (_elapsedTime / DashAttackSkill.InAirTime);
+
+            transform.position = _jumpStartPosition + zOffset + new Vector3(0, yOffset, 0);
+
+            _elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        transform.position = _jumpStartPosition + _jumpDirection;
+        jumpRoutine_dashAttack = null;
+        _elapsedTime = 0;
+    }
+    #endregion
+
     #region DashAttack
     public Coroutine dashAttackRoutine;
-    WaitForSeconds dashAttackCoolTime = new(10f);
     public IEnumerator DashAttackRoutine()
     {
-        /*_monsterData.CanUseSkill = false;*/
-        _rigidbody.AddForce(Vector3.forward * _dashAttack.JumpForce, ForceMode.Impulse);
-        // 물리기반으로할지, translate로 할지 결정
-        // rigidbody 사용 시 캐릭터에 부딪히면 멈춤
-        // 뚫고 나가는게 맞는거같기도하고 물어봐야함
+        DashAttackSkill.CanUseSkill = false;
+        if (jumpRoutine_dashAttack == null)
+        {
+            jumpRoutine_dashAttack = StartCoroutine(JumpRoutine_dashAttack());
+            Debug.Log("점프!!");
+        }
 
         Collider[] colliders = Physics.OverlapSphere(transform.position, _dashAttack.Range);
         foreach (Collider collider in colliders)
@@ -242,8 +299,9 @@ public class MonsterSkillManager : MonoBehaviour
                 damageble.TakeDamage(_dashAttack.Damage);
             }
         }
-        yield return dashAttackCoolTime;
-        /*_monsterData.CanUseSkill = true;*/
+        yield return new WaitForSeconds(DashAttackSkill.CoolTime);
+        dashAttackRoutine = null;
+        DashAttackSkill.CanUseSkill = true;
 
     }
     #endregion
@@ -253,16 +311,16 @@ public class MonsterSkillManager : MonoBehaviour
     public IEnumerator ElectricWallRoutine()
     {
         ElectricWallSkill.CanUseSkill = false;
-        _electricWallPosition = new Vector3(transform.position.x, 0, transform.position.z + 5f);
+        _electricWallPosition = transform.position + transform.forward * 5f;
+
         GameObject electricWall = Instantiate(_electricWallPrefab, _electricWallPosition, transform.rotation);
 
         for (int i = 0; i < 6; i++)
         {
             yield return Util.GetDelay(ElectricWallSkill.Interval);
-            _electricWallPosition2 = new Vector3(electricWall.transform.position.x, 0, electricWall.transform.position.z + (i * 7f));
-            GameObject electricWall2 = Instantiate(_electricWallPrefab, _electricWallPosition2, transform.rotation);
+            _electricWallPosition2 = electricWall.transform.position + electricWall.transform.forward * (7f * (i + 1));
+            GameObject electricWall2 = Instantiate(_electricWallPrefab, _electricWallPosition2, electricWall.transform.rotation);
         }
-
         yield return Util.GetDelay(ElectricWallSkill.CoolTime);
         electricWallRoutine = null;
         ElectricWallSkill.CanUseSkill = true;
@@ -292,5 +350,46 @@ public class MonsterSkillManager : MonoBehaviour
     }
     #endregion
 
-}
+    #region TrippleAttack
+    public Coroutine trippleAttackRoutine;
+    public IEnumerator TrippleAttackRoutine()
+    {
+        TrippleAttackSkill.CanUseSkill = false;
+        // TrippleAttackSkill 애니메이션 재생
+        //애니메이션에 공격 붙이기
+        yield return Util.GetDelay(TrippleAttackSkill.CoolTime);
+        trippleAttackRoutine = null;
+        TrippleAttackSkill.CanUseSkill = true;
+    }
+    #endregion
 
+    #region 일반 공격 (범위 설정 가능)
+    public void Attack()
+    {
+        float _range = 0;
+        float _angle = 0;
+        int _damage = 0;
+
+        Collider[] colliders = Physics.OverlapSphere(transform.position, _range);
+        foreach (Collider collider in colliders)
+        {
+            // 공격 범위 확인
+            Vector3 source = transform.position;
+            source.y = 0;
+            Vector3 destination = collider.transform.position;
+            destination.y = 0;
+
+            Vector3 targetDir = (destination - source).normalized;
+            float targetAngle = Vector3.Angle(transform.forward, targetDir);
+            if (targetAngle > _angle * 0.5f) // 앵글의 반절만
+                continue;
+
+            IDamagable damageble = collider.GetComponent<IDamagable>();
+            if (damageble != null)
+            {
+                damageble.TakeDamage(_damage);
+            }
+        }
+    }
+    #endregion
+}

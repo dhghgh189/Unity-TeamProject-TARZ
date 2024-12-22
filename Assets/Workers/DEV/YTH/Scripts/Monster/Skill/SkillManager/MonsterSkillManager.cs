@@ -455,7 +455,7 @@ public class MonsterSkillManager : MonoBehaviour
             jumpRoutine_frogJumpAttack = StartCoroutine(JumpRoutine_frogJumpAttack());
             Debug.Log("점프!!");
         }
-        yield return new WaitForSeconds(FrogJumpAttackSkill.CoolTime);
+        yield return null;
         dashAttackRoutine = null;
     }
     #endregion

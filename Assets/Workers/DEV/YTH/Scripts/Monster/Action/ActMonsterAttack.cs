@@ -7,6 +7,8 @@ public class ActMonsterAttack : Action
 {
     [SerializeField] MonsterData _monsterData;
 
+    [SerializeField] MonsterSkillManager _monsterSkillManager;
+
     [SerializeField] Animator _animator;
 
     [SerializeField] SharedGameObject _projectilePrefab;
@@ -44,6 +46,18 @@ public class ActMonsterAttack : Action
 
                 case MonsterData.MonsterType.Frog:
 
+                    if (_distance > 3f && _monsterSkillManager.frogJumpAttackRoutine == null)
+                    {
+
+                        _monsterSkillManager.frogJumpAttackRoutine = StartCoroutine(_monsterSkillManager.FrogJumpAttackRoutine());
+                        Debug.Log("개구리 점프!!");
+
+                    }
+                    else if (attackRoutine == null)
+                    {
+                        attackRoutine = StartCoroutine(AttackRoutine());
+                        Debug.Log("근접공격루틴했음");
+                    }
                     break;
 
                 default:
@@ -62,8 +76,8 @@ public class ActMonsterAttack : Action
         }
     }
 
-    // 공격 사이에 딜레이 생성
 
+    #region 근접 공격
     Coroutine attackRoutine;
     IEnumerator AttackRoutine()
     {
@@ -71,15 +85,6 @@ public class ActMonsterAttack : Action
         //_animator.SetTrigger("Attack");
         yield return new WaitForSeconds(_monsterData.MeleeAttackSpeed);
         attackRoutine = null;
-    }
-
-    Coroutine throwRoutine;
-    IEnumerator ThrowRoutine()
-    {
-        ThrowAttack();
-        //_animator.SetTrigger("Throw");
-        yield return new WaitForSeconds(_monsterData.RangeAttackSpeed);
-        throwRoutine = null;
     }
 
     private void Attack(float range, float angle)
@@ -107,9 +112,21 @@ public class ActMonsterAttack : Action
         }
         // 애니메이션에 메서드 추가하기
     }
+    #endregion
+
+    #region 원거리 공격
+    Coroutine throwRoutine;
+    IEnumerator ThrowRoutine()
+    {
+        ThrowAttack();
+        //_animator.SetTrigger("Throw");
+        yield return new WaitForSeconds(_monsterData.RangeAttackSpeed);
+        throwRoutine = null;
+    }
 
     public void ThrowAttack()
     {
         GameObject projectile = Object.Instantiate(_projectilePrefab.Value, _muzzlePoint.Value.position, _muzzlePoint.Value.rotation);
     }
+    #endregion
 }

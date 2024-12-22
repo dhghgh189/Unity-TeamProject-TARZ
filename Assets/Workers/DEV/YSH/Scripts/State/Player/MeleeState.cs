@@ -14,6 +14,10 @@ public class MeleeState : BaseState<PlayerController>
     // 공격전 PlayerAttack 스크립트의 Count를 저장해두는 용도
     private int meleeCount;
 
+    private Transform camTrf;
+
+    private Vector3 lookDir;
+
     public MeleeState(PlayerController owner)
     {
         this.owner = owner;
@@ -30,6 +34,9 @@ public class MeleeState : BaseState<PlayerController>
     // 근접공격 애니메이션 재생
     public override void OnEnter()
     {
+        if (camTrf == null)
+            camTrf = Camera.main.transform;
+
         // 공격을 진행하기 전의 Count를 미리 저장해둔다.
         // Update시점에는 이미 Count가 바뀌기 때문에 먼저 저장한다
         meleeCount = owner.Attack.MeleeCount;
@@ -38,6 +45,10 @@ public class MeleeState : BaseState<PlayerController>
         owner.Movement.Move(Vector3.zero);
 
         animTimer = 999;
+
+        // 카메라 정면을 바라본다.
+        lookDir = camTrf.forward;   // 공격 시전 시 바라봤던 방향을 기억해둔다.
+        owner.Movement.LookAt(lookDir);
 
         owner.Anim.CrossFade(meleeAnimHashes[owner.Attack.MeleeCount], 0.01f);
         owner.StartCoroutine(AnimRoutine());
@@ -55,9 +66,18 @@ public class MeleeState : BaseState<PlayerController>
 
     public override void OnUpdate()
     {
+        // 회전이 원복되는 현상 방지 (Adjust)
+        if (lookDir != Vector3.zero && owner.transform.forward != lookDir)
+        {
+            owner.Movement.LookAt(lookDir);
+        }
+
         // 애니메이션 재생이 완료되면 상태 종료
         if (animTimer <= 0)
         {
+            // Adjust를 중지하기 위해 lookDir을 초기화
+            lookDir = Vector3.zero;
+
             if (meleeCount >= owner.Attack.MeleeCountMax-1)
             {
                 owner.ChangeState(EState.Idle);

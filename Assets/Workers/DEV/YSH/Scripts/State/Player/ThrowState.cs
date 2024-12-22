@@ -17,7 +17,7 @@ public class ThrowState : BaseState<PlayerController>
 
     private Transform camTrf;
 
-    Vector3 lookDir;
+    private Vector3 lookDir;
 
     public ThrowState(PlayerController owner)
     {
@@ -120,7 +120,6 @@ public class ThrowState : BaseState<PlayerController>
         // 애니메이션 도중 회전이 원복되는 현상 방지 (Adjust)
         if (lookDir != Vector3.zero && owner.transform.forward != lookDir)
         {
-            Debug.Log("<color=red>Adjust forward</color>");
             owner.Movement.LookAt(lookDir);
         }
 

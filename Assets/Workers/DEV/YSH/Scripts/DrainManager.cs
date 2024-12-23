@@ -18,6 +18,8 @@ public class DrainManager : MonoBehaviour
     public PlayerController Player => player;
     public float DrainSpeed => drainSpeed;
 
+    public float DrainStaminaAmount;
+
     private void Awake()
     {
         col = GetComponent<SphereCollider>();
@@ -35,7 +37,7 @@ public class DrainManager : MonoBehaviour
     IEnumerator DrainRoutine()
     {
         col.radius = minRadius;
-        // Äİ¶óÀÌ´õ¸¦ ¿øÁ¡À¸·Î ÀÌµ¿
+        // ì½œë¼ì´ë”ë¥¼ ì›ì ìœ¼ë¡œ ì´ë™
         transform.localPosition = Vector3.zero;
         while (true)
         {
@@ -55,8 +57,8 @@ public class DrainManager : MonoBehaviour
 
     public void StopDrain()
     {
-        // Äİ¶óÀÌ´õ¸¦ °ÔÀÓ ¿µ¿ª ¿Ü·Î º¸³»¹ö¸°´Ù.
-        // ºñÈ°¼ºÈ­ ÇÏ´Â°ÍÀ¸·Î´Â Exit È£ÃâÀÌ ¾ÈµÇ¹Ç·Î ¹°¸®ÀûÀ¸·Î ¹ş¾î³ª°Ô ÇÏ±â À§ÇÔ
+        // ì½œë¼ì´ë”ë¥¼ ê²Œì„ ì˜ì—­ ì™¸ë¡œ ë³´ë‚´ë²„ë¦°ë‹¤.
+        // ë¹„í™œì„±í™” í•˜ëŠ”ê²ƒìœ¼ë¡œëŠ” Exit í˜¸ì¶œì´ ì•ˆë˜ë¯€ë¡œ ë¬¼ë¦¬ì ìœ¼ë¡œ ë²—ì–´ë‚˜ê²Œ í•˜ê¸° ìœ„í•¨
         transform.localPosition = Vector3.up * 100f;
 
         if (drainRoutine != null)

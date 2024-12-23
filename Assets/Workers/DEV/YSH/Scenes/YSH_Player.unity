@@ -6528,10 +6528,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHp: 100
   maxStamina: 100
+  maxMp: 100
   moveSpeed: 5
-  allPower: 0
+  allPowerPer: 0
+  staminarEgeneration: 10
   DashSpeed: 6.5
-  DashSteminaAmount: 100
+  DashStaminaAmount: 0
+  StaminaCostRate: 0
   currentHp: 100
   currentMp: 0
   currentStamina: 100
@@ -10132,6 +10135,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   player: {fileID: 637873415}
+  DrainStaminaAmount: 10
 --- !u!135 &2114479526
 SphereCollider:
   m_ObjectHideFlags: 0

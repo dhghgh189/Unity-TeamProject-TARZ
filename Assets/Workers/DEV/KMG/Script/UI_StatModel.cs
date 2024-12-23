@@ -62,7 +62,7 @@ public class UI_StatModel : MonoBehaviour
         // 얍샙이
         statModel.CurrentHp += 0;
         statModel.CurrentMp += 0;
-        statModel.CurrentStamina += 0;
+        statModel.ChangeStamina(0);
         atackPowerText.text = $"공격력: {statModel.AllPowerPer}";
     }
 }

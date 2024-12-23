@@ -7,7 +7,7 @@ using Zenject;
 
 public enum EMachineType { Movement, Attack }
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IDamagable
 {
     [Inject] private StatModel stat;
 
@@ -76,5 +76,10 @@ public class PlayerController : MonoBehaviour
     public BaseState<PlayerController> GetCurrentState()
     {
         return Fsm.CurrentState;
+    }
+
+    public void TakeDamage(float damage)
+    {
+        Stat.CurrentHp -= damage;
     }
 }

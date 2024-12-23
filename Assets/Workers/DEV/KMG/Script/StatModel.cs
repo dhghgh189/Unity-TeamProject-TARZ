@@ -31,35 +31,93 @@ public class StatModel : MonoBehaviour
     [SerializeField] float maxStamina;
     public float MaxStamina { get => maxStamina + (0.01f * maxStamina * GetAbility(AdditionAbility.MaxStaminaPer)); set { maxStamina = value; OnMaxStaminaChange?.Invoke(value); } }
 
+    [SerializeField] float maxMp;
+    public float MaxMp { get => maxMp; private set { } }
+
     [SerializeField] float moveSpeed;
     public float MoveSpeed { get => moveSpeed + (0.01f * moveSpeed * GetAbility(AdditionAbility.MoveSpeedPer)); set { moveSpeed = value; OnMoveSpeedChange?.Invoke(value); } }
 
     [SerializeField] float allPowerPer;
     public float AllPowerPer { get => allPowerPer + (GetAbility(AdditionAbility.AllPowerPer)); private set { } }
     public float DefaultPowerPer { get => 1 + ((AllPowerPer + (GetAbility(AdditionAbility.DefaultPowerPer))) * 0.01f); private set { } }
-    public float SkillPowerPer { get => AllPowerPer + (GetAbility(AdditionAbility.SkillPowerPer)); private set { } }
-    public float ElementalPowerPer { get => AllPowerPer + (GetAbility(AdditionAbility.ElementalPowerPer)); private set { } }
-    
+    public float SkillPowerPer { get => 1 + ((AllPowerPer + (GetAbility(AdditionAbility.SkillPowerPer))) * 0.01f); private set { } }
+    public float ElementalPowerPer { get => 1 + ((AllPowerPer + (GetAbility(AdditionAbility.ElementalPowerPer))) * 0.01f); private set { } }
+
+    [SerializeField] float staminarEgeneration;
+    public float StaminarEgeneration { get => staminarEgeneration * (1 + ((GetAbility(AdditionAbility.StaminarEgeneration)) * 0.01f)); private set { } }
+
     public float DashSpeed;
 
-    public float DashSteminaAmount;
+    public float DashStaminaAmount;
+
+    // 스테미너가 소모되는 행동 진행 시 곱해줘야 하는 값
+    public float StaminaCostRate = 1f;
 
     [Header("실시간 능력치")]
 
     [SerializeField] float currentHp;
-    public float CurrentHp { get => currentHp; set { currentHp = value; OnCurHpChange?.Invoke(value); } }
+    public float CurrentHp { 
+        get => currentHp; 
+        set 
+        {
+            currentHp = Mathf.Clamp(value, 0, MaxHp);
+            OnCurHpChange?.Invoke(currentHp);
+        } 
+    }
 
     [SerializeField] float currentMp;
-    public float CurrentMp { get => currentMp; set { currentMp = value; OnCurMpChange?.Invoke(value); } }
+    public float CurrentMp { 
+        get => currentMp; 
+        set 
+        {
+            currentMp = Mathf.Clamp(value, 0, maxMp);
+            OnCurMpChange?.Invoke(currentMp); 
+        } 
+    }
 
     [SerializeField] float currentStamina;
-    public float CurrentStamina { get => currentStamina; set { currentStamina = value; OnCurStaminaChange?.Invoke(value); } }
+    public float CurrentStamina 
+    { 
+        get => currentStamina;
+        private set
+        {
+            currentStamina = Mathf.Clamp(value, 0, MaxStamina);
+            OnCurStaminaChange?.Invoke(currentStamina);
+        }
+    }
+
+    /// <summary>
+    /// Stamina에 더하거나 뺄 값을 넘겨준다.
+    /// </summary>
+    /// <param name="stamina"></param>
+    public void ChangeStamina(float stamina)
+    {
+        currentStamina += stamina * StaminaCostRate;
+        currentStamina = Mathf.Clamp(currentStamina, 0, maxStamina);
+        OnCurStaminaChange?.Invoke(currentStamina);
+    }
 
     [SerializeField] float chip;
-    public float Chip { get => chip; set { chip = value; OnChipChange?.Invoke(value); } }
+    public float Chip 
+    {
+        get => chip;
+        set 
+        {
+            chip = value; 
+            OnChipChange?.Invoke(value); 
+        }
+    }
 
     [SerializeField] float blackChip;
-    public float BlackChip { get => blackChip; set { blackChip = value; OnBlackChipChange?.Invoke(value); } }
+    public float BlackChip 
+    { 
+        get => blackChip; 
+        set 
+        {
+            blackChip = value; 
+            OnBlackChipChange?.Invoke(value); 
+        } 
+    }
 
     [Header("추가 능력치")] // 아이템으로 상승하는 능력치 편의상 배열로 만들었음
     [SerializeField] float[] additionAbility = new float[(int)AdditionAbility.Size];

@@ -86,8 +86,7 @@ public class ThrowObject : MonoBehaviour, IDrainable
         IDamagable damagable = other.gameObject.GetComponent<IDamagable>();
         if (damagable != null)
         {
-            // 주석 해제 필요
-            //damagable.TakeDamage(damage);
+            damagable.TakeDamage(damage);
         }
 
         Destroy(gameObject);

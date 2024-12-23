@@ -21,17 +21,24 @@ public class AudioMixController : MonoBehaviour
     [SerializeField] private Toggle bgmMute;
     [SerializeField] private Toggle sfxMute;
 
-    [Header("<color=yellow>PlayerPrefs Keys</color>")]
+    private float masterVolSave;
+    private float bgmVolSave;
+    private float sfxVolSave;
+
+    private float muteBGM;
+    private float muteSFX;
+
+    /*[Header("<color=yellow>PlayerPrefs Keys</color>")]
     private string masterVolumeKey = "MasterVolume";
     private string bgmVolumeKey = "BGMVolume";
     private string sfxVolumeKey = "SFXVolume";
     private string masterMuteKey = "MasterMute";
     private string bgmMuteKey = "BGMMute";
-    private string sfxMuteKey = "SFXMute";
+    private string sfxMuteKey = "SFXMute";*/
 
     private void Start()
     {
-        InitSlider(masterSlider, masterVolumeKey, "Master");
+        /*InitSlider(masterSlider, masterVolumeKey, "Master");
         InitSlider(bgmSlider, bgmVolumeKey, "BGM");
         InitSlider(sfxSlider, sfxVolumeKey, "SFX");
 
@@ -45,52 +52,52 @@ public class AudioMixController : MonoBehaviour
 
         masterMute.onValueChanged.AddListener(isMuted => SetMute(masterMuteKey, "Master", isMuted));
         bgmMute.onValueChanged.AddListener(isMuted => SetMute(bgmMuteKey, "BGM", isMuted));
-        sfxMute.onValueChanged.AddListener(isMuted => SetMute(sfxMuteKey, "SFX", isMuted));
+        sfxMute.onValueChanged.AddListener(isMuted => SetMute(sfxMuteKey, "SFX", isMuted));*/
     }
 
-    private void InitSlider(Slider slider, string prefsKey, string mixerPar)
-    {
-        float savedValue = PlayerPrefs.GetFloat(prefsKey, 0.75f);
-        slider.value = savedValue;
+    /* private void InitSlider(Slider slider, string prefsKey, string mixerPar)
+     {
+         float savedValue = PlayerPrefs.GetFloat(prefsKey, 0.75f);
+         slider.value = savedValue;
 
-        float volume = Mathf.Log10(Mathf.Max(savedValue, 0.0001f)) * 20f;
-        audioMixer.SetFloat(mixerPar, volume);
-    }
+         float volume = Mathf.Log10(Mathf.Max(savedValue, 0.0001f)) * 20f;
+         audioMixer.SetFloat(mixerPar, volume);
+     }
 
-    private void InitToggle(Toggle toggle, string prefsKey, string mixerPar)
-    {
-        bool isMuted = PlayerPrefs.GetInt(prefsKey, 0) == 1;
-        toggle.isOn = isMuted;
+     private void InitToggle(Toggle toggle, string prefsKey, string mixerPar)
+     {
+         bool isMuted = PlayerPrefs.GetInt(prefsKey, 0) == 1;
+         toggle.isOn = isMuted;
 
-        if (isMuted)
-        {
-            audioMixer.SetFloat(mixerPar, -80f);
-        }
-    }
+         if (isMuted)
+         {
+             audioMixer.SetFloat(mixerPar, -80f);
+         }
+     }
 
-    private void SetVolume(string prefsKey, string mixerPar, float sliderValue)
-    {
-        float volume = Mathf.Log10(Mathf.Max(sliderValue, 0.0001f)) * 20f;
-        audioMixer.SetFloat(mixerPar, volume);
+     private void SetVolume(string prefsKey, string mixerPar, float sliderValue)
+     {
+         float volume = Mathf.Log10(Mathf.Max(sliderValue, 0.0001f)) * 20f;
+         audioMixer.SetFloat(mixerPar, volume);
 
-        PlayerPrefs.SetFloat(prefsKey, sliderValue);
-    }
+         PlayerPrefs.SetFloat(prefsKey, sliderValue);
+     }
 
-    private void SetMute(string prefsKey, string mixerPar, bool isMuted)
-    {
-        if (isMuted)
-        {
-            audioMixer.SetFloat(mixerPar, -80f);
-        }
-        else
-        {
-            float savedValue = PlayerPrefs.GetFloat(prefsKey, 0.75f);
-            float volume = Mathf.Log10(Mathf.Max(savedValue, 0.0001f)) * 20f;
-            audioMixer.SetFloat(mixerPar, volume);
-        }
-        PlayerPrefs.SetInt(prefsKey, isMuted ? 1 : 0);
-    }
-    /*/// <summary>
+     private void SetMute(string prefsKey, string mixerPar, bool isMuted)
+     {
+         if (isMuted)
+         {
+             audioMixer.SetFloat(mixerPar, -80f);
+         }
+         else
+         {
+             float savedValue = PlayerPrefs.GetFloat(prefsKey, 0.75f);
+             float volume = Mathf.Log10(Mathf.Max(savedValue, 0.0001f)) * 20f;
+             audioMixer.SetFloat(mixerPar, volume);
+         }
+         PlayerPrefs.SetInt(prefsKey, isMuted ? 1 : 0);
+     }*/
+    /// <summary>
     /// 마스터 볼륨값 조절
     /// </summary>
     public void MasterVolumeControl()
@@ -101,7 +108,7 @@ public class AudioMixController : MonoBehaviour
         else { audioMixer.SetFloat("Master", masterVolSave); }
 
         PlayerPrefs.SetFloat("Master", masterVolSave);
-        
+
     }
 
     /// <summary>
@@ -133,7 +140,7 @@ public class AudioMixController : MonoBehaviour
     /// <summary>
     /// 마스터 볼륨 음소거
     /// </summary>
-    public void MasterVolumeMute ()
+    public void MasterVolumeMute()
     {
         AudioListener.volume = AudioListener.volume == 0 ? 1 : 0;
     }
@@ -141,7 +148,7 @@ public class AudioMixController : MonoBehaviour
     /// <summary>
     /// BGM 볼륨 음소거
     /// </summary>
-    public void BGMVolumeMute ()
+    public void BGMVolumeMute()
     {
         if (bgmMute.isOn == true)
         {
@@ -168,5 +175,5 @@ public class AudioMixController : MonoBehaviour
         {
             audioMixer.SetFloat("SFX", muteSFX);
         }
-    }*/
+    }
 }

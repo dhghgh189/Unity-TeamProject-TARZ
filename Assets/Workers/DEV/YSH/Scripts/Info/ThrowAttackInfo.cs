@@ -8,7 +8,7 @@ public enum EMultiActionType { Basic, Left, Right, Length }
 public class ThrowAttackInfo
 {
     public MultiActionInfo[] MultiActions;
-    public int Damage;
+    public float Damage;
     public float ThrowForce;
     public EffectInfo EffectInfo;
 }
@@ -17,7 +17,7 @@ public class ThrowAttackInfo
 public class MultiActionInfo
 {
     public EMultiActionType ActionType;
-    public int Damage;
+    public float Damage;
     public float ThrowForce;
     public EffectInfo EffectInfo;
 }

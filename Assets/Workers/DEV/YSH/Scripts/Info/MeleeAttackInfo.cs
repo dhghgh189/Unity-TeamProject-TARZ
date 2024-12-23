@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class MeleeAttackInfo
 {
-    public int Damage;
+    public float Damage;
     public float Angle;
     public float Range;
     public EffectInfo EffectInfo;

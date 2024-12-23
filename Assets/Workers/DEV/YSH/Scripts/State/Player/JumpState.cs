@@ -22,7 +22,7 @@ public class JumpState : BaseState<PlayerController>
             return;
         }
         owner.Anim.CrossFade(Define.HASH_ANIM_JUMP, 0.125f);
-        owner.Movement.Jump(owner.Stat.JumpForce);
+        owner.Movement.Jump(owner.Movement.JumpForce);
 
         jumpCheckTimer = 0.2f;
     }

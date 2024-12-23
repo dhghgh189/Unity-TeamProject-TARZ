@@ -4,6 +4,7 @@ using System.Linq;
 using TreeEditor;
 using UnityEngine;
 using UnityEngine.Events;
+using Zenject;
 
 public class PlayerAttack : MonoBehaviour
 {
@@ -211,7 +212,7 @@ public class PlayerAttack : MonoBehaviour
     public void Throw()
     {
         // 최종 수치 저장용
-        int damage = 0;
+        float damage = 0;
         float throwForce = 0;
 
         ThrowObject tobj = PopObjectStack();
@@ -271,7 +272,11 @@ public class PlayerAttack : MonoBehaviour
             if (damagable == null)
                 continue;
 
-            damagable.TakeDamage(MeleeAttackInfo[MeleeCount].Damage);
+            // 20(타수별 공격력) * 0.1(현재 스탯상 증가량) = 2
+            float damage = MeleeAttackInfo[MeleeCount].Damage * player.Stat.DefaultPowerPer;
+            
+            // 주석 해제 필요
+            //damagable.TakeDamage(damage);
         }
 
         if (MeleeEffectCount > 0)

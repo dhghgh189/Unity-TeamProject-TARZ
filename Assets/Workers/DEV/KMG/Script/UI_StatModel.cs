@@ -23,7 +23,7 @@ public class UI_StatModel : MonoBehaviour
         hpText.text = $"체력: {statModel.CurrentHp}/{statModel.MaxHp}";
         mpText.text = $"마나: {statModel.CurrentMp}";
         staminaText.text = $"스테미나: {statModel.CurrentStamina}/{statModel.MaxStamina}";
-        atackPowerText.text = $"공격력: {statModel.AllPower}";
+        atackPowerText.text = $"공격력: {statModel.AllPowerPer}";
         chipText.text = $"데이터 칩: {statModel.Chip}";
     }
 
@@ -63,6 +63,6 @@ public class UI_StatModel : MonoBehaviour
         statModel.CurrentHp += 0;
         statModel.CurrentMp += 0;
         statModel.CurrentStamina += 0;
-        atackPowerText.text = $"공격력: {statModel.AllPower}";
+        atackPowerText.text = $"공격력: {statModel.AllPowerPer}";
     }
 }

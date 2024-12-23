@@ -11,6 +11,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float rotateSpeed;
     [SerializeField] private LayerMask whatIsGround;
     [SerializeField] private bool isGrounded;
+    [SerializeField] private float dashTime;
+    [SerializeField] private float jumpForce;
+
+    public float JumpForce { get { return jumpForce; } }
+    public float DashTime { get { return dashTime; } }
     public bool IsGrounded { get { return isGrounded; } }
     public Vector3 CurrentVelocity => rigid.velocity;
 

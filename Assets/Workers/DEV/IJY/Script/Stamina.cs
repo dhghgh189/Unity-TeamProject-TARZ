@@ -5,16 +5,11 @@ using Zenject;
 
 public class Stamina : MonoBehaviour
 {
-
-    #region 임시적 사용 자료형 (추후 PlayerStat에 추가 요망)
-    [Header("스테미나 수치 변동값")]
-    [SerializeField] private float _plusStam;
-    #endregion
-
     private float _waitTime;
     private float _lastStamina;
     private bool _IsChangeStam;
 
+    [SerializeField] public bool IsGetPostion; // 추후 스테미나 회복 포션 획득 시 활성화 예정
     [Inject][SerializeField] private StatModel stat;
     [SerializeField] private Slider gauge_Stamina;
 

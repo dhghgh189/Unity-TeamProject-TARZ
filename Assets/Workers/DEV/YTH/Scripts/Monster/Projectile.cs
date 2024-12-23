@@ -26,11 +26,15 @@ public class Projectile : MonoBehaviour // 일반 원딜 쫄몹
     {
         _rigidBody.velocity = Vector3.zero;
         _rigidBody.angularVelocity = Vector3.zero;
+    }
 
-        IDamagable damagableObj = collider.gameObject.GetComponent<IDamagable>();
+    private void OnTriggerEnter(Collider other)
+    {
+        IDamagable damagableObj = other.gameObject.GetComponent<IDamagable>();
         damagable = damagableObj;
         if (damagable != null)
         {
+
             damagable.TakeDamage(5);
         }
     }

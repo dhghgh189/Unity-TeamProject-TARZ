@@ -8,6 +8,16 @@ public class ActReviveSkill : Action
 
     [SerializeField] MonsterSkillManager _monsterSkillManager;
 
+    [SerializeField] GameObject _reviveBefore;
+
+    [SerializeField] GameObject _reviveAfter;
+
+    public override void OnStart()
+    {
+        _monsterSkillManager.ReviveAfter = _reviveAfter;
+        _monsterSkillManager.ReviveBefore = _reviveBefore;
+    }
+
     public override TaskStatus OnUpdate()
     {
         if (_monsterData.CurHp <= 0 && _monsterSkillManager.ReviveSkill.CanUseSkill == true)

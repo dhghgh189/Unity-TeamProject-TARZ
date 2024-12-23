@@ -1,24 +1,54 @@
 using System;
 using UnityEngine;
 
+/// <summary>
+/// 보스는 Instantiate로 생성해서 따로 관리 고려중..
+/// </summary>
 public class PooledObject : MonoBehaviour
 {
-    private MonsterData _monsterData;
-
     private ObjectPool _returnPool; //반납 위치
     public ObjectPool ReturnPool { get { return _returnPool; } set { _returnPool = value; } }
+
+    private MonsterData _monsterData;
+
+    public event Action OnDie;
 
     private void Start()
     {
         _monsterData = GetComponent<MonsterData>();
     }
 
-    private void Update() // 사망 처리를 이벤트로 하는게 좋을까..TakeDamage 쪽에서 처리 하지 않으면 결국 똑같은 거 같은데..
+    private void OnEnable()
     {
-        if (_monsterData.CurHp <= 0) 
+        OnDie += Die;
+    }
+
+    private void OnDisable()
+    {
+        OnDie -= Die;
+    }
+
+    public void TakeDamage(float damage)
+    {
+        _monsterData.CurHp -= damage;
+        _monsterData.Attacked_First = true;
+        // 맞는 애니메이션 재생
+        // 넉백 적용
+
+        if (_monsterData.CurHp <= 0)
         {
-            ReturnPool.ReturnPool(this);
+            OnDie?.Invoke();
         }
     }
+
+    public void Die()
+    {
+        ReturnPool.ReturnPool(this);
+        //죽는애니메이션 재생
+        // 프리팹 받으면 Instantiate 보상 떨굼
+    }
+   
+
+   
     
 }

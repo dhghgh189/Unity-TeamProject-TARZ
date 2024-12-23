@@ -13,6 +13,13 @@ public class ActBombSkill : Action
 
     [SerializeField] NavMeshAgent _agent;
 
+    [SerializeField] Transform _muzzlePoint;
+
+    public override void OnStart()
+    {
+        _monsterSkillManager.MuzzlePoint = _muzzlePoint;
+    }
+
     public override TaskStatus OnUpdate()
     {
         if (_monsterSkillManager.BombSkill.CanUseSkill == true)

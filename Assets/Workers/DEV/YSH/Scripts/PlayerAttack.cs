@@ -31,6 +31,7 @@ public class PlayerAttack : MonoBehaviour
 
     private Stack<ThrowObject> objectStack;
     public int ObjectCount => objectStack.Count;
+    public int MaxObjectCount => maxObjectCount;
 
     public LayerMask WhatIsEnemy { get { return whatIsEnemy; } }
 

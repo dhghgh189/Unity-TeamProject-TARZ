@@ -31,6 +31,9 @@ public class StatModel : MonoBehaviour
     [SerializeField] float maxStamina;
     public float MaxStamina { get => maxStamina + (0.01f * maxStamina * GetAbility(AdditionAbility.MaxStaminaPer)); set { maxStamina = value; OnMaxStaminaChange?.Invoke(value); } }
 
+    [SerializeField] float maxMp;
+    public float MaxMp { get => maxMp; private set { } }
+
     [SerializeField] float moveSpeed;
     public float MoveSpeed { get => moveSpeed + (0.01f * moveSpeed * GetAbility(AdditionAbility.MoveSpeedPer)); set { moveSpeed = value; OnMoveSpeedChange?.Invoke(value); } }
 
@@ -50,19 +53,57 @@ public class StatModel : MonoBehaviour
     [Header("실시간 능력치")]
 
     [SerializeField] float currentHp;
-    public float CurrentHp { get => currentHp; set { currentHp = value; OnCurHpChange?.Invoke(value); } }
+    public float CurrentHp { 
+        get => currentHp; 
+        set 
+        {
+            currentHp = Mathf.Clamp(value, 0, MaxHp);
+            OnCurHpChange?.Invoke(currentHp);
+        } 
+    }
 
     [SerializeField] float currentMp;
-    public float CurrentMp { get => currentMp; set { currentMp = value; OnCurMpChange?.Invoke(value); } }
+    public float CurrentMp { 
+        get => currentMp; 
+        set 
+        {
+            currentMp = Mathf.Clamp(value, 0, maxMp);
+            OnCurMpChange?.Invoke(currentMp); 
+        } 
+    }
 
     [SerializeField] float currentStamina;
-    public float CurrentStamina { get => currentStamina; set { currentStamina = value; OnCurStaminaChange?.Invoke(value); } }
+    public float CurrentStamina 
+    { 
+        get => currentStamina; 
+        set 
+        {
+            currentStamina = Mathf.Clamp(value, 0, MaxStamina);
+            OnCurStaminaChange?.Invoke(currentStamina);
+        } 
+    }
 
     [SerializeField] float chip;
-    public float Chip { get => chip; set { chip = value; OnChipChange?.Invoke(value); } }
+    public float Chip 
+    {
+        get => chip;
+        set 
+        {
+            chip = value; 
+            OnChipChange?.Invoke(value); 
+        }
+    }
 
     [SerializeField] float blackChip;
-    public float BlackChip { get => blackChip; set { blackChip = value; OnBlackChipChange?.Invoke(value); } }
+    public float BlackChip 
+    { 
+        get => blackChip; 
+        set 
+        {
+            blackChip = value; 
+            OnBlackChipChange?.Invoke(value); 
+        } 
+    }
 
     [Header("추가 능력치")] // 아이템으로 상승하는 능력치 편의상 배열로 만들었음
     [SerializeField] float[] additionAbility = new float[(int)AdditionAbility.Size];

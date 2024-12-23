@@ -159,7 +159,6 @@ public class StatModel : MonoBehaviour
         CurrentHp = saveData.StatSaveData.currentHp;
         CurrentMp = saveData.StatSaveData.currentMp;
         CurrentStamina = saveData.StatSaveData.currentStamina;
-        Chip = saveData.StatSaveData.chip;
         BlackChip = saveData.StatSaveData.blackChip;
         for (int i = 0; i < (int)AdditionAbility.Size; i++) 
         {

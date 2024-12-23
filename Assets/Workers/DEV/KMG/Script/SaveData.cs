@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 public class SaveData
 {
+    public float DataChip;
     public StatSaveData StatSaveData;
     public GearSaveData[] EquipmentGears = new GearSaveData[(int)Part.Size];
     public List<GearSaveData> InventoryGears = new();
@@ -20,7 +21,6 @@ public class StatSaveData
     public float currentHp;
     public float currentMp;
     public float currentStamina;
-    public float chip;
     public float blackChip;
     public float[] additionAbility = new float[(int)AdditionAbility.Size];
 }
@@ -35,9 +35,13 @@ public class GearSaveData
 [Serializable]
 public class ArmUpgrade
 {
-    public int UpgradeNuber;
+    public int UpgradeNumber;
     public AdditionAbility UpgradeAbility;
     public float UpgradeValue;
-    public float UpgradeCost;
-    public float UpgradeWeight;
+    public ArmUpgrade(int upgradeNumber, AdditionAbility upgradeAbility, float upgradeValue)
+    {
+        UpgradeNumber = upgradeNumber;
+        UpgradeAbility = upgradeAbility;
+        UpgradeValue = upgradeValue;
+    }
 }

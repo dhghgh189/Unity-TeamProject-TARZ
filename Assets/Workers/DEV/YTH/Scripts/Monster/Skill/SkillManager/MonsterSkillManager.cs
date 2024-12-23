@@ -383,7 +383,7 @@ public class MonsterSkillManager : MonoBehaviour
     {
         float _range = 0;
         float _angle = 0;
-        int _damage = 0;
+        float _damage = 0;
 
         Collider[] colliders = Physics.OverlapSphere(transform.position, _range);
         foreach (Collider collider in colliders)

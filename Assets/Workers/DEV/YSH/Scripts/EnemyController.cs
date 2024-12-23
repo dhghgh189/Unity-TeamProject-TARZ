@@ -19,7 +19,7 @@ public class EnemyController : MonoBehaviour, IDamagable, IKnockBack
         baseColor = render.material.color;
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         Debug.Log($"TakeDamage : {damage}");
     }

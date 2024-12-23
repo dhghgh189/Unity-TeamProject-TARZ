@@ -6,8 +6,8 @@ public class Radiation : MonoBehaviour
     [SerializeField] float _interval;
     public float Interaval {  get { return _interval; } set { _interval = value; } }
 
-    [SerializeField] int _damage;
-    public int Damage { get { return _damage; } set { _damage = value; } }
+    [SerializeField] float _damage;
+    public float Damage { get { return _damage; } set { _damage = value; } }
 
     IDamagable _damagable;
 
@@ -31,7 +31,7 @@ public class Radiation : MonoBehaviour
     }
 
     Coroutine takeDOTRoutine;
-    public IEnumerator TakeDOTRoutine(int damage)
+    public IEnumerator TakeDOTRoutine(float damage)
     {
             _damagable.TakeDamage(damage);
             yield return new WaitForSeconds(_interval);  // 기획분들이 정해주시면 딜레이 캐싱 해두기

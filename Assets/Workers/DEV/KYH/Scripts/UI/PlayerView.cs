@@ -23,7 +23,7 @@ public class PlayerView : MonoBehaviour
     private void Awake()
     {
         hpSlider.maxValue = statModel.MaxHp;
-        //mpSlider.maxValue = statModel.MaxMp;
+        mpSlider.maxValue = statModel.MaxMp;
         staminaSlider.maxValue = statModel.MaxStamina;
 
         hpSlider.value = statModel.CurrentHp;

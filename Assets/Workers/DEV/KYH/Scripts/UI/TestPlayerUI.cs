@@ -14,7 +14,7 @@ public class TestPlayerUI : MonoBehaviour
 
     public void OnClickMPButton()
     {
-        model.CurrentMp += 0.1f;
+        model.CurrentMp += 10f;
     }
 
     public void OnClickStaminaButton()

@@ -19,6 +19,7 @@ public class SettingSceneUI : MonoBehaviour
     [SerializeField] private Button langueButton;           // 언어 카테고리 버튼
     [SerializeField] private Button soundButton;            // 사운드 카테고리 버튼
     [SerializeField] private Button keySettingsButton;      // 키 설정 카테고리 버튼
+    [SerializeField] private Button BackToTitleButton;
 
     [Header("<color=purple>Category Panels</color>")]
     [SerializeField] private GameObject nonSelectPanel;     // 설정 패널 첫 활성화 때 나오는 빈 패널

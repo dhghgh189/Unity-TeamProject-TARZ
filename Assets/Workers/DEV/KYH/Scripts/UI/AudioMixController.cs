@@ -36,4 +36,14 @@ public class AudioMixController : MonoBehaviour
         if (sound == -40f) { audioMixer.SetFloat("SFX", -80); }
         else { audioMixer.SetFloat("SFX", sound); }
     }
+
+    public void MasterVolumeMute ()
+    {
+        AudioListener.volume = AudioListener.volume == 0 ? 1 : 0;
+    }
+
+    /*private void SaveVolume(string key, float value)
+    {
+        PlayerPrefs.SetFloat(key, value);
+    }*/
 }

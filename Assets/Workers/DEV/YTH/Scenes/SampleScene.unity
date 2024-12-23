@@ -2774,6 +2774,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 88356985338437197, guid: 001a192f20a62694f860bb51ffb3b7c3,
+        type: 3}
+      propertyPath: _throwPower
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 1632465801364665877, guid: 001a192f20a62694f860bb51ffb3b7c3,
         type: 3}
       propertyPath: _player
@@ -2852,13 +2857,13 @@ PrefabInstance:
     - target: {fileID: 5363255009096208208, guid: 001a192f20a62694f860bb51ffb3b7c3,
         type: 3}
       propertyPath: mBehaviorSource.mTaskData.JSONSerialization
-      value: '{"EntryTask":{"Type":"BehaviorDesigner.Runtime.Tasks.EntryTask","NodeData":{"Offset":"(254.252014,-101.173065)"},"ID":0,"Name":"Entry","Instant":true},"RootTask":{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-2.289177,165.180817)"},"ID":1,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-580,180.000031)"},"ID":2,"Name":"Sequence","Instant":true,"AbortTypeabortType":"Self","Children":[{"Type":"CondMonsterCanMove","NodeData":{"Offset":"(-80,160)"},"ID":3,"Name":"Cond
-        Monster Can Move","Instant":true,"MonsterData_monsterData":0,"GameObject_player":1,"Single_angle":120,"Single_distance":40,"Single_rate":0.5},{"Type":"ActMonsterMove","NodeData":{"Offset":"(99.99997,160)"},"ID":4,"Name":"Act
-        Monster Move","Instant":true,"CondMonsterCanMove_condMonsterCanMove":3,"MonsterData_monsterData":2,"NavMeshAgent_agent":3,"GameObject_player":4}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-210.000031,180.000031)"},"ID":5,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"CondMonsterCanSkill","NodeData":{"Offset":"(-80,160)"},"ID":6,"Name":"Cond
-        Monster Can Skill","Instant":true,"MonsterData_monsterData":5},{"Type":"ActBombSkill","NodeData":{"Offset":"(89.99997,170)"},"ID":7,"Name":"Act
-        Bomb Skill","Instant":true,"MonsterData_monsterData":6,"MonsterSkillManager_monsterSkillManager":7,"GameObject_player":8,"NavMeshAgent_agent":9,"Transform_muzzlePoint":10},{"Type":"BehaviorDesigner.Runtime.Tasks.Wait","NodeData":{"Offset":"(219.999908,170)"},"ID":8,"Name":"Wait","Instant":true,"SharedFloatwaitTime":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":2},"SharedBoolrandomWait":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"SharedFloatrandomWaitMin":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1},"SharedFloatrandomWaitMax":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1}}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(270,180.000031)"},"ID":9,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"CondMonsterCanAttack","NodeData":{"Offset":"(-100.000031,170)"},"ID":10,"Name":"Cond
-        Monster Can Attack","Instant":true,"MonsterData_monsterData":11,"GameObject_player":12,"Single_distance":0},{"Type":"ActMonsterAttack","NodeData":{"Offset":"(100,170)"},"ID":11,"Name":"Act
-        Monster Attack","Instant":true,"MonsterData_monsterData":13,"MonsterSkillManager_monsterSkillManager":14,"SharedGameObject_projectilePrefab":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":null,"GameObjectmValue":15},"SharedTransform_muzzlePoint":{"Type":"BehaviorDesigner.Runtime.SharedTransform","Name":null,"TransformmValue":16},"GameObject_player":17,"Single_angle":180,"Single_range":15}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Wait","NodeData":{"Offset":"(530,180.000031)"},"ID":12,"Name":"Wait","Instant":true,"SharedFloatwaitTime":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":3},"SharedBoolrandomWait":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"SharedFloatrandomWaitMin":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1},"SharedFloatrandomWaitMax":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1}}]}}'
+      value: '{"EntryTask":{"Type":"BehaviorDesigner.Runtime.Tasks.EntryTask","NodeData":{"Offset":"(254.252014,-134.956833)"},"ID":0,"Name":"Entry","Instant":true},"RootTask":{"Type":"BehaviorDesigner.Runtime.Tasks.Repeater","NodeData":{"Offset":"(-1.5060463,167.563263)"},"ID":1,"Name":"Repeater","Instant":true,"SharedIntcount":{"Type":"BehaviorDesigner.Runtime.SharedInt","Name":null,"Int32mValue":0},"SharedBoolrepeatForever":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":true},"SharedBoolendOnFailure":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":true},"Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(0,148.24321)"},"ID":2,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-580,180.000031)"},"ID":3,"Name":"Sequence","Instant":true,"AbortTypeabortType":"Self","Children":[{"Type":"CondMonsterCanMove","NodeData":{"Offset":"(-80,160)"},"ID":4,"Name":"Cond
+        Monster Can Move","Instant":true,"MonsterData_monsterData":0,"GameObject_player":1,"Single_angle":120,"Single_distance":40,"Single_rate":0.5},{"Type":"ActMonsterMove","NodeData":{"Offset":"(99.99997,160)"},"ID":5,"Name":"Act
+        Monster Move","Instant":true,"CondMonsterCanMove_condMonsterCanMove":4,"MonsterData_monsterData":2,"NavMeshAgent_agent":3,"GameObject_player":4}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-210.000031,180.000031)"},"ID":6,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"CondMonsterCanSkill","NodeData":{"Offset":"(-80,160)"},"ID":7,"Name":"Cond
+        Monster Can Skill","Instant":true,"MonsterData_monsterData":5},{"Type":"ActBombSkill","NodeData":{"Offset":"(89.99997,170)"},"ID":8,"Name":"Act
+        Bomb Skill","Instant":true,"MonsterData_monsterData":6,"MonsterSkillManager_monsterSkillManager":7,"GameObject_player":8,"NavMeshAgent_agent":9,"Transform_muzzlePoint":10},{"Type":"BehaviorDesigner.Runtime.Tasks.Wait","NodeData":{"Offset":"(219.999908,170)"},"ID":9,"Name":"Wait","Instant":true,"SharedFloatwaitTime":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":2},"SharedBoolrandomWait":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"SharedFloatrandomWaitMin":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1},"SharedFloatrandomWaitMax":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1}}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(270,180.000031)"},"ID":10,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"CondMonsterCanAttack","NodeData":{"Offset":"(-100.000031,170)"},"ID":11,"Name":"Cond
+        Monster Can Attack","Instant":true,"MonsterData_monsterData":11,"GameObject_player":12,"Single_distance":0},{"Type":"ActMonsterAttack","NodeData":{"Offset":"(100,170)"},"ID":12,"Name":"Act
+        Monster Attack","Instant":true,"MonsterData_monsterData":13,"MonsterSkillManager_monsterSkillManager":14,"SharedGameObject_projectilePrefab":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":null,"GameObjectmValue":15},"SharedTransform_muzzlePoint":{"Type":"BehaviorDesigner.Runtime.SharedTransform","Name":null,"TransformmValue":16},"GameObject_player":17,"Single_angle":180,"Single_range":15}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Wait","NodeData":{"Offset":"(530,180.000031)"},"ID":13,"Name":"Wait","Instant":true,"SharedFloatwaitTime":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":3},"SharedBoolrandomWait":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"SharedFloatrandomWaitMin":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1},"SharedFloatrandomWaitMax":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1}}]}]}}'
       objectReference: {fileID: 0}
     - target: {fileID: 5363255009096208208, guid: 001a192f20a62694f860bb51ffb3b7c3,
         type: 3}
@@ -3779,15 +3784,15 @@ SceneRoots:
   - {fileID: 4875103197210529211}
   - {fileID: 2062657078909412518}
   - {fileID: 4251645986272490152}
-  - {fileID: 1689407402}
   - {fileID: 9179871732223765240}
   - {fileID: 1714559016}
-  - {fileID: 8878453174527445114}
   - {fileID: 388959196}
   - {fileID: 9058852496575818523}
   - {fileID: 2003601031}
   - {fileID: 1539468838}
   - {fileID: 416745683086610092}
+  - {fileID: 1689407402}
+  - {fileID: 8878453174527445114}
   - {fileID: 736849157}
   - {fileID: 4971518059933310148}
   - {fileID: 8880752441448177034}

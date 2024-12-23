@@ -5,8 +5,8 @@ public class SoundManager : MonoBehaviour
 {
     private static SoundManager instance = null;
 
-    //[SerializeField] AudioSource bgmSource;
-    //[SerializeField] AudioSource sfxSource;
+    [SerializeField] private AudioSource bgmSource;
+    [SerializeField] private AudioSource sfxSource;
 
     public static SoundManager Instance
     {
@@ -33,7 +33,7 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    /*/// <summary>
+    /// <summary>
     /// 배경 음악 재생
     /// </summary>
     public void PlayBGM(AudioClip clip)
@@ -74,5 +74,5 @@ public class SoundManager : MonoBehaviour
             return;
 
         sfxSource.Stop();
-    }*/
+    }
 }

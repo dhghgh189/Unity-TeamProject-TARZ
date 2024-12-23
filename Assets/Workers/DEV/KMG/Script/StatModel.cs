@@ -37,8 +37,8 @@ public class StatModel : MonoBehaviour
     [SerializeField] float allPowerPer;
     public float AllPowerPer { get => allPowerPer + (GetAbility(AdditionAbility.AllPowerPer)); private set { } }
     public float DefaultPowerPer { get => 1 + ((AllPowerPer + (GetAbility(AdditionAbility.DefaultPowerPer))) * 0.01f); private set { } }
-    public float SkillPowerPer { get => AllPowerPer + (GetAbility(AdditionAbility.SkillPowerPer)); private set { } }
-    public float ElementalPowerPer { get => AllPowerPer + (GetAbility(AdditionAbility.ElementalPowerPer)); private set { } }
+    public float SkillPowerPer { get => 1 + ((AllPowerPer + (GetAbility(AdditionAbility.SkillPowerPer))) * 0.01f); private set { } }
+    public float ElementalPowerPer { get => 1 + ((AllPowerPer + (GetAbility(AdditionAbility.ElementalPowerPer))) * 0.01f); private set { } }
     
     public float DashSpeed;
 

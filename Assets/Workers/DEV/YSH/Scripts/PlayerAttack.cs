@@ -245,6 +245,8 @@ public class PlayerAttack : MonoBehaviour
         tobj.transform.parent = null;
         tobj.transform.position = throwPoint.position;
         tobj.gameObject.SetActive(true);
+        // 최종 데미지 = 타수별 공격력 + (타수별 공격력 * 현재 스탯상 증가량)
+        damage = damage * player.Stat.DefaultPowerPer;
         tobj.SetDamage(damage);
         tobj.Throw(transform.forward + (transform.up * 0.3f), throwForce);
     }
@@ -272,11 +274,9 @@ public class PlayerAttack : MonoBehaviour
             if (damagable == null)
                 continue;
 
-            // 20(타수별 공격력) * 0.1(현재 스탯상 증가량) = 2
-            float damage = MeleeAttackInfo[MeleeCount].Damage * player.Stat.DefaultPowerPer;
-            
-            // 주석 해제 필요
-            //damagable.TakeDamage(damage);
+            // 최종 데미지 = 타수별 공격력 + (타수별 공격력 * 현재 스탯상 증가량)
+            float damage = MeleeAttackInfo[MeleeCount].Damage * player.Stat.DefaultPowerPer;        
+            damagable.TakeDamage(damage);
         }
 
         if (MeleeEffectCount > 0)

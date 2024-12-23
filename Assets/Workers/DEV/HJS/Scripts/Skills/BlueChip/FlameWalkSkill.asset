@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7319c5f99579ca4c9935249024bb467, type: 3}
+  m_Name: FlameWalkSkill
+  m_EditorClassIdentifier: 
+  Name: "\uBD88\uAF43 \uAC78\uC74C"
+  Description: "\uB300\uC26C\uB97C \uD558\uB294 \uC911\uC5D0 \uBC14\uB2E5\uC5D0 \uBD88\uAE38\uC774
+    \uC0DD\uAE34"
+  Icon: {fileID: 0}
+  MaxLevel: 1
+  Timing: 2
+  activeSkills:
+  - who: 0
+    refeat: 0
+    when: 0
+    Create: 1
+    Interaction: 0
+    createSetting:
+      CreateObject:
+      - {fileID: 9077476385755021717, guid: 8aae627e019dc2241847a04b0604a312, type: 3}
+    interactionSetting:
+      type: 0
+  passiveSkills: []
+  onChangeLevel:
+    m_PersistentCalls:
+      m_Calls: []

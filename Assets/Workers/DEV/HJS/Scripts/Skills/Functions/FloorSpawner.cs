@@ -17,7 +17,6 @@ public class FloorSpawner : MonoBehaviour
     // 생성을 하면서 작동을 해야하는 부분
     private void Start()
     {
-        transform.forward = targetTrans.forward;
 
         // 시작 위치를 가지고 -> 플레이어가 시작한 부분
         float distance = effect.transform.localScale.z;

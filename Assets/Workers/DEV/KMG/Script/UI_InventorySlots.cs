@@ -10,10 +10,6 @@ public class UI_InventorySlots : MonoBehaviour, IPointerClickHandler
     [SerializeField] Gear gear;
     [SerializeField] TMP_Text gearName;
     public bool IsEmpty = true;
-    private void Awake()
-    {
-        gearName = GetComponentInChildren<TMP_Text>();
-    }
     // 클릭 이벤트, 원작 게임은 마우스 클릭이 없음 변경해야할듯
     public void OnPointerClick(PointerEventData eventData)
     {
@@ -43,6 +39,9 @@ public class UI_InventorySlots : MonoBehaviour, IPointerClickHandler
     // 해당 슬롯에 장비를 보관시키는 함수
     public void SetInventorySlots(Gear gear)
     {
+        if(gearName == null)
+            gearName = GetComponentInChildren<TMP_Text>();
+
         IsEmpty = false;
         this.gear = gear;
         gearName.text = gear.GearName;

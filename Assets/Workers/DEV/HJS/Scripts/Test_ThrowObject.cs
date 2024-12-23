@@ -19,8 +19,8 @@ public class Test_ThrowObject : MonoBehaviour
         // 적일 때 대미지 입히기
         if (collision.gameObject.layer.Equals(LayerMask.NameToLayer("Monster")))
         {
-            // 데미지 입히기
             Destroy(gameObject);
+            handler.ThrowObjectCollision(gameObject, collision.gameObject);
         }
         else if(collision.gameObject.layer.Equals(LayerMask.NameToLayer("Ground")))
         {
@@ -28,9 +28,4 @@ public class Test_ThrowObject : MonoBehaviour
         }
     }
 
-    private void OnDestroy()
-    {
-        // 파괴가 되었을 때 ~한다느게 좋을 거 같다
-        handler.ThrowObjectCollision(gameObject);
-    }
 }

@@ -27,6 +27,8 @@ public class PlayerAttack : MonoBehaviour
     private Vector3 dest;
     private float resultAngle;
 
+    private EffectGenerator generator;
+
     private Stack<ThrowObject> objectStack;
     public int ObjectCount => objectStack.Count;
 
@@ -42,7 +44,7 @@ public class PlayerAttack : MonoBehaviour
     public int MeleeEffectCount => meleeEffects.Count;
     public float ComboCheckTime => comboCheckTime;
 
-    private EffectGenerator generator;
+    public event UnityAction<int> OnChangedStack; 
 
     private void Awake()
     {
@@ -189,8 +191,8 @@ public class PlayerAttack : MonoBehaviour
         tobj.transform.parent = stackTransform;
         tobj.gameObject.SetActive(false);
 
-        // 이벤트?
-        //Debug.Log($"<color=yellow>Stack Count : {ObjectCount}</color>");
+        // 이벤트
+        OnChangedStack?.Invoke(objectStack.Count);
     }
 
     public ThrowObject PopObjectStack()
@@ -203,8 +205,8 @@ public class PlayerAttack : MonoBehaviour
 
         ThrowObject tobj = objectStack.Pop();
 
-        // 이벤트?
-        //Debug.Log($"<color=yellow>Stack Count : {ObjectCount}</color>");
+        // 이벤트
+        OnChangedStack?.Invoke(objectStack.Count);
 
         return tobj;
     }

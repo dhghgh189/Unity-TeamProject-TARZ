@@ -14,6 +14,6 @@ public class exScript : MonoBehaviour
         if (model.CurrentStamina <= 0.0f) return;
 
         Debug.Log("스테미나 감소");
-        model.CurrentStamina -= ee;
+        model.ChangeStamina(-ee);
     }
 }

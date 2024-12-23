@@ -3835,6 +3835,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f047503d3b7d7e4ebe59e924d2659c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stat: {fileID: 0}
+  gauge_Mana: {fileID: 0}
 --- !u!1 &659188534
 GameObject:
   m_ObjectHideFlags: 0
@@ -7664,10 +7666,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHp: 100
   maxStamina: 100
+  maxMp: 0
   moveSpeed: 5
   allPowerPer: 0
+  staminarEgeneration: 10
   DashSpeed: 6.5
-  DashSteminaAmount: 100
+  DashStaminaAmount: 0
+  StaminaCostRate: 1
   currentHp: 100
   currentMp: 0
   currentStamina: 100
@@ -9854,8 +9859,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9044013c5d8549f42969d4de9aee1bee, type: 2}
   - {fileID: 11400000, guid: 77a89bab051376940b3a23c70c211cef, type: 2}
   - {fileID: 11400000, guid: 03cc6dd4b4b96404db1a09065cf2f5d9, type: 2}
-  tempPart: 3
-  tempTier: 3
+  canvas: {fileID: 0}
 --- !u!1 &1748220823
 GameObject:
   m_ObjectHideFlags: 0
@@ -11697,6 +11701,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   player: {fileID: 637873415}
+  DrainStaminaAmount: 0
 --- !u!135 &2114479526
 SphereCollider:
   m_ObjectHideFlags: 0

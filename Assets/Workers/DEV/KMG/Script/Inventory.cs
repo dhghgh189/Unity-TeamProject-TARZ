@@ -27,10 +27,10 @@ public class Inventory : MonoBehaviour
     }
 
     // 티어와 부위를 지정해 장비를 인벤토리에 저장하는 함수
-    public void GetGear(Part part, int tier)
+    public bool GetGear(Part part, int tier)
     {
         UI_InventorySlots slot = EmptySlot();
-        if (!slot) return;
+        if (!slot) return false;
 
         // 해당 부위의 베이스 장비를 가져옴
         Gear gear = Instantiate(baseGears.Where(x => x.Part == part).First());
@@ -64,6 +64,7 @@ public class Inventory : MonoBehaviour
         }
 
         slot.SetInventorySlots(gear);
+        return true;
     }
     // 빈 인벤토리 슬롯을 반환하는 함수
     private UI_InventorySlots EmptySlot()
@@ -87,17 +88,16 @@ public class Inventory : MonoBehaviour
     }
 
     // 테스트용
-    [SerializeField] Part tempPart;
-    [SerializeField] int tempTier;
+    [SerializeField] GameObject canvas;
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            GetGear(tempPart, tempTier);
-        }
         if (Input.GetKeyDown(KeyCode.R))
         {
             GetGear((Part)Random.Range(0, (int)Part.Size), Random.Range(1, 4));
+        }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            canvas.SetActive(!canvas.activeSelf);
         }
     }
 }

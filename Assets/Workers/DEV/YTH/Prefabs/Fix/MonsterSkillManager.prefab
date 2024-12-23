@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6248774116014186334
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8590574359488648572}
+  - component: {fileID: 8007320087449260323}
+  m_Layer: 0
+  m_Name: MonsterSkillManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8590574359488648572
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6248774116014186334}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 64.17406, y: 2.0206878, z: -7.7766957}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8007320087449260323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6248774116014186334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03a14c639c0a11f439c061e57d8114bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bomb: {fileID: 11400000, guid: f7aef78b7edafe440b1047ceb38c6e32, type: 2}
+  _dashAttack: {fileID: 11400000, guid: 25fbceb7c2e4388469bfc93e8fb1827d, type: 2}
+  _jumpAttack: {fileID: 11400000, guid: 1e2de81d87b1e6c409c75d41a0869da0, type: 2}
+  _mine: {fileID: 11400000, guid: c1bf062782da5344e94c4627697391ec, type: 2}
+  _stimPak: {fileID: 11400000, guid: c94b203ef3b68d041b41e908d6900a90, type: 2}
+  _wheelWind: {fileID: 11400000, guid: b08fc3fef67779c41bfd6951959ea2a0, type: 2}
+  _electricWall: {fileID: 11400000, guid: c1c60427577587c4582d4c2b78f1246d, type: 2}
+  _thunder: {fileID: 11400000, guid: 21aa5c94142e013489e9d47926ed6db5, type: 2}
+  _trippleAttack: {fileID: 11400000, guid: e89517893da7be74a97c776a7186f4dd, type: 2}
+  _frogJumpAttack: {fileID: 11400000, guid: 664f7e9cd5aacfb4188e01ac660bef23, type: 2}
+  _revive: {fileID: 11400000, guid: 29b127eac8fc40c4cbf72cac79dd6fea, type: 2}
+  _bombPrefab: {fileID: 1616805512990888026, guid: 7be3fa168ddd78a4f8fe83cd4cad94ad,
+    type: 3}
+  _minePrefab: {fileID: 1616805512990888026, guid: b7038b1d288993b4682a50c66df34277,
+    type: 3}
+  _jackTheRipper: {fileID: 5772571575370626647, guid: 5ebdca3c9bee2e647babf092474cc2ce,
+    type: 3}
+  _electricWallPrefab: {fileID: 2390178603253332089, guid: dee049f6313377d48b4411be8e1a8132,
+    type: 3}
+  _thunderPrefab: {fileID: 2390178603253332089, guid: dee049f6313377d48b4411be8e1a8132,
+    type: 3}
+  _reviveBefore: {fileID: 0}
+  _reviveAfter: {fileID: 0}
+  _player: {fileID: 0}
+  _muzzlePoint: {fileID: 0}
+  _wheelWindTrigger: {fileID: 0}

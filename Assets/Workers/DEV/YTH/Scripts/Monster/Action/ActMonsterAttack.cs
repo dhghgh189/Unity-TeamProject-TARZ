@@ -33,7 +33,7 @@ public class ActMonsterAttack : Action
         if (_distance <= _monsterData.AttackRange)
         {
             // 근딜, 원딜 몬스터 공격 로직 분리
-            switch (_monsterData.Type)
+            switch (_monsterData.MonsterTyPe)
             {
                 case MonsterData.MonsterType.Range:
                 case MonsterData.MonsterType.Bomb:
@@ -46,12 +46,10 @@ public class ActMonsterAttack : Action
 
                 case MonsterData.MonsterType.Frog:
 
-                    if (_distance > 3f && _monsterSkillManager.frogJumpAttackRoutine == null)
+                    if (_distance > 5f && _monsterSkillManager.frogJumpAttackRoutine == null)
                     {
-
                         _monsterSkillManager.frogJumpAttackRoutine = StartCoroutine(_monsterSkillManager.FrogJumpAttackRoutine());
                         Debug.Log("개구리 점프!!");
-
                     }
                     else if (attackRoutine == null)
                     {

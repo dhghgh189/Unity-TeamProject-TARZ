@@ -23,7 +23,7 @@ public class PooledObject : MonoBehaviour, IKnockBack
 
     private void Start()
     {
-        _autoLockOn = _player.GetComponent<AutoLockOn>();
+      /*  _autoLockOn = _player.GetComponent<AutoLockOn>();*/
         _monsterData = GetComponent<MonsterData>();
     }
 
@@ -32,7 +32,7 @@ public class PooledObject : MonoBehaviour, IKnockBack
     {
         if (Input.GetKeyDown(KeyCode.K))
         {
-            TakeDamage(10);
+            TakeDamage(1);
         }
     }
     private void OnEnable()
@@ -60,7 +60,7 @@ public class PooledObject : MonoBehaviour, IKnockBack
 
     public void Die()
     {
-        _autoLockOn.action?.Invoke();
+        /*_autoLockOn.action?.Invoke();*/
         ReturnPool.ReturnPool(this);
         //죽는애니메이션 재생
         GameObject gear = Instantiate(_gear, transform.position, transform.rotation);

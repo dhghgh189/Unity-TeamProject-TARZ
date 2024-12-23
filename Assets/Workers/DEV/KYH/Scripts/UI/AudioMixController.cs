@@ -42,6 +42,16 @@ public class AudioMixController : MonoBehaviour
         AudioListener.volume = AudioListener.volume == 0 ? 1 : 0;
     }
 
+    public void BGMVolumeMute ()
+    {
+        audioMixer.SetFloat("BGM", -80);
+    }
+
+    public void SFXVolumeMute()
+    {
+        audioMixer.SetFloat("SFX", -80);
+    }
+
     /*private void SaveVolume(string key, float value)
     {
         PlayerPrefs.SetFloat(key, value);

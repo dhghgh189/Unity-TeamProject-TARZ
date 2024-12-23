@@ -3,16 +3,28 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
-    public static SoundManager Instance { get { return SoundManager.Instance; } private set { } }
+    private static SoundManager instance = null;
 
-    [SerializeField] AudioSource bgmSource;
-    [SerializeField] AudioSource sfxSource;
+    //[SerializeField] AudioSource bgmSource;
+    //[SerializeField] AudioSource sfxSource;
+
+    public static SoundManager Instance
+    {
+        get
+        {
+            if (null == instance)
+            {
+                return null;
+            }
+            return instance;
+        }
+    }
 
     private void Awake()
     {
-        if (Instance == null)
+        if (instance == null)
         {
-            Instance = this;
+            instance = this;
             DontDestroyOnLoad(gameObject);
         }
         else
@@ -21,8 +33,8 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// ¹è°æ À½¾Ç Àç»ı
+    /*/// <summary>
+    /// ë°°ê²½ ìŒì•… ì¬ìƒ
     /// </summary>
     public void PlayBGM(AudioClip clip)
     {
@@ -35,7 +47,7 @@ public class SoundManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ¹è°æ À½¾Ç Á¤Áö
+    /// ë°°ê²½ ìŒì•… ì •ì§€
     /// </summary>
     public void StopBGM()
     {
@@ -46,7 +58,7 @@ public class SoundManager : MonoBehaviour
     }
 
     /// <summary>
-    /// È¿°úÀ½ Àç»ı
+    /// íš¨ê³¼ìŒ ì¬ìƒ
     /// </summary>
     public void PlaySFX(AudioClip clip)
     {
@@ -54,7 +66,7 @@ public class SoundManager : MonoBehaviour
     }
 
     /// <summary>
-    /// È¿°úÀ½ Á¤Áö
+    /// íš¨ê³¼ìŒ ì •ì§€
     /// </summary>
     public void StopSFX()
     {
@@ -62,5 +74,5 @@ public class SoundManager : MonoBehaviour
             return;
 
         sfxSource.Stop();
-    }
+    }*/
 }

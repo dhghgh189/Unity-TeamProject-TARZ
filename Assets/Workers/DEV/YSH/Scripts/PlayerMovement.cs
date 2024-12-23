@@ -37,12 +37,7 @@ public class PlayerMovement : MonoBehaviour
 
         // 현재 카메라 방향을 기준으로 이동을 진행한다.
         Vector3 velocity = (mainCamTrf.right * moveVelocity.x) + (mainCamTrf.forward * moveVelocity.z);
-        rigid.velocity = new Vector3(velocity.x + moveDir.x, rigid.velocity.y, velocity.z + moveDir.z);
-
-        // 원본 코드 백업
-        // 현재 카메라 방향을 기준으로 이동을 진행한다.
-        //Vector3 velocity = (mainCamTrf.right * moveVelocity.x) + (mainCamTrf.forward * moveVelocity.z);
-        //rigid.velocity = new Vector3(velocity.x, rigid.velocity.y, velocity.z);
+        rigid.velocity = new Vector3(velocity.x, rigid.velocity.y, velocity.z);
 
         if (velocity != Vector3.zero)
         {

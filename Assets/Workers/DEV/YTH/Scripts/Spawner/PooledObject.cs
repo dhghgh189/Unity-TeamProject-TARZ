@@ -13,6 +13,8 @@ public class PooledObject : MonoBehaviour
 
     public event Action OnDie;
 
+    private AutoLockOn _autoLockOn;
+
     private void Start()
     {
         _monsterData = GetComponent<MonsterData>();
@@ -43,6 +45,7 @@ public class PooledObject : MonoBehaviour
 
     public void Die()
     {
+        _autoLockOn.action?.Invoke();
         ReturnPool.ReturnPool(this);
         //죽는애니메이션 재생
         // 프리팹 받으면 Instantiate 보상 떨굼

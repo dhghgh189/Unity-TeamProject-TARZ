@@ -39,10 +39,13 @@ public class StatModel : MonoBehaviour
     public float DefaultPowerPer { get => 1 + ((AllPowerPer + (GetAbility(AdditionAbility.DefaultPowerPer))) * 0.01f); private set { } }
     public float SkillPowerPer { get => 1 + ((AllPowerPer + (GetAbility(AdditionAbility.SkillPowerPer))) * 0.01f); private set { } }
     public float ElementalPowerPer { get => 1 + ((AllPowerPer + (GetAbility(AdditionAbility.ElementalPowerPer))) * 0.01f); private set { } }
-    
+
+    [SerializeField] float staminarEgeneration;
+    public float StaminarEgeneration { get => staminarEgeneration * (1 + ((GetAbility(AdditionAbility.StaminarEgeneration)) * 0.01f)); private set { } }
+
     public float DashSpeed;
 
-    public float DashSteminaAmount;
+    public float DashStaminaAmount;
 
     [Header("실시간 능력치")]
 

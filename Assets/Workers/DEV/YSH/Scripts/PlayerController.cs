@@ -7,6 +7,8 @@ using Zenject;
 
 public enum EMachineType { Movement, Attack }
 
+public enum EMpAmountType { Melee, Throw, Length }
+
 public class PlayerController : MonoBehaviour, IDamagable
 {
     [Inject] private StatModel stat;

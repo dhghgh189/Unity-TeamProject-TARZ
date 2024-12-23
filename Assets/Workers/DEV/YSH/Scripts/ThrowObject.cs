@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject.SpaceFighter;
 
 [RequireComponent(typeof(Rigidbody))]
 public class ThrowObject : MonoBehaviour, IDrainable
@@ -87,6 +88,7 @@ public class ThrowObject : MonoBehaviour, IDrainable
         if (damagable != null)
         {
             damagable.TakeDamage(damage);
+            owner.Stat.CurrentMp += owner.Stat.GetMpGain(EMpAmountType.Throw);
         }
 
         Destroy(gameObject);

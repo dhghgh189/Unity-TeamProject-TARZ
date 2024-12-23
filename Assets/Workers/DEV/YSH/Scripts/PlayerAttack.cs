@@ -280,6 +280,9 @@ public class PlayerAttack : MonoBehaviour
             // 최종 데미지 = 타수별 공격력 + (타수별 공격력 * 현재 스탯상 증가량)
             float damage = MeleeAttackInfo[MeleeCount].Damage * player.Stat.DefaultPowerPer;        
             damagable.TakeDamage(damage);
+
+            // Mp 회복
+            player.Stat.CurrentMp += player.Stat.GetMpGain(EMpAmountType.Melee);
         }
 
         if (MeleeEffectCount > 0)

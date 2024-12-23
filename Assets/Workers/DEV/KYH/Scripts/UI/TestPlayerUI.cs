@@ -19,6 +19,6 @@ public class TestPlayerUI : MonoBehaviour
 
     public void OnClickStaminaButton()
     {
-        model.CurrentStamina -= 2f;
+        model.ChangeStamina(-2f);
     }
 }

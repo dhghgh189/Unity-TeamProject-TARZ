@@ -10,19 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5ddee20dbbc4fc541a7f48954ba4ae81, type: 3}
-  m_Name: DashAttack
+  m_Name: JumpAttack
   m_EditorClassIdentifier: 
-  SkillName: DashAttack
-  SkillDescription: "\uBAB8\uD1B5\uBC15\uCE58\uAE30"
-  Damage: 10
+  SkillName: JumpAttack
+  SkillDescription: "\uB192\uC774 \uC810\uD504\uD574\uC11C \uB0B4\uB824\uCC0D\uB294
+    \uACF5\uACA9"
+  Damage: 20
   CoolTime: 5
-  Angle: 45
-  Range: 3
-  JumpForce: 5
-  AnimationName: DashAttack
+  Angle: 360
+  Range: 9
+  JumpForce: 8
+  AnimationName: JumpAttack
   Interval: 0
   ThrowForce: 0
   CanUseSkill: 1
-  InAirTime: 10
-  JumpHeight: 6
-  JumpDistance: 12
+  Duration: 0
+  InAirTime: 2
+  JumpHeight: 25
+  JumpDistance: 40

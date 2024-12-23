@@ -5,9 +5,9 @@ public class SoundManager : MonoBehaviour
 {
     private static SoundManager instance = null;
 
-    [SerializeField] private AudioSource bgmSource;
-    [SerializeField] private AudioSource sfxSource;
-
+    [SerializeField] private AudioSource bgmSource;     // BGM 소스
+    [SerializeField] private AudioSource sfxSource;     // SFX 소스
+    
     public static SoundManager Instance
     {
         get
@@ -20,6 +20,9 @@ public class SoundManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 사운드 매니저를 싱글톤으로 선언
+    /// </summary>
     private void Awake()
     {
         if (instance == null)

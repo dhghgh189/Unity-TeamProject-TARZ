@@ -23,5 +23,25 @@ public class SkillEnum : MonoBehaviour
     /// <summary>
     /// 패시브 스킬의 종류
     /// </summary>
-    public enum PassiveType { Modify, Condition }
+    public enum PassiveType { Modify, Condition, Toggle }
+    /// <summary>
+    /// 상호작용의 종류
+    /// </summary>
+    public enum InteractionType { Slow, Elec, Frozen, Damage, SIZE }
+    /// <summary>
+    /// 패시브 - 값의 종류
+    /// </summary>
+    public enum PassiveModifyType { DashTime = -2, DrainRadius = -1, Hp = 0, Stamina, MoveSpeed, DefaultPower, SkillPower}
+    /// <summary>
+    /// 패시브 - 결과 값의 종류
+    /// </summary>
+    public enum PassiveResultModifyType { Hp, Stamina, DefaultPower, StaminaCostRate }
+    /// <summary>
+    /// 패시브 - 조건의 종류
+    /// </summary>
+    public enum ConditionType { Greater, Less, GreaterEqual, LessEqual, Equal, NotEqual }
+    /// <summary>
+    /// 패시브 - 활성화/비활성화
+    /// </summary>
+    public enum ToggleType { Collision, Function }
 }

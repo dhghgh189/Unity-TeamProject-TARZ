@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class PlayerControllerMonster : MonoBehaviour, IDamagable
 {
-    [SerializeField] int curHp;
-    public int CurHp { get { return curHp; } set { curHp = value; } }
-    [SerializeField] int maxHp = 100;
+    [SerializeField] float curHp;
+    public float CurHp { get { return curHp; } set { curHp = value; } }
+    [SerializeField] float maxHp = 100;
 
     private void Start()
     {
@@ -17,7 +17,7 @@ public class PlayerControllerMonster : MonoBehaviour, IDamagable
     {
         
     }
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
        curHp -= damage;
     }

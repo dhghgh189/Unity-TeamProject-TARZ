@@ -6,6 +6,11 @@ public class SpawnTrigger : MonoBehaviour
 {
     private MonsterSpawner _monsterSpawner;
 
+    private void Start()
+    {
+        _monsterSpawner = GetComponentInParent<MonsterSpawner>();
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))

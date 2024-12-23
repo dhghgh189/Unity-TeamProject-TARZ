@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -49,6 +50,9 @@ public class MonsterSkillManager : MonoBehaviour
 
     [SerializeField] MonsterSkill _frogJumpAttack;
     public MonsterSkill FrogJumpAttackSkill { get { return _frogJumpAttack; } set { _frogJumpAttack = value; } }
+
+    [SerializeField] MonsterSkill _revive;
+    public MonsterSkill ReviveSkill { get { return _revive; } set { _revive = value; } }
     #endregion
 
     [Header("Prefab")]
@@ -79,12 +83,17 @@ public class MonsterSkillManager : MonoBehaviour
 
     [SerializeField] GameObject _wheelWindTrigger;
 
+    [SerializeField] GameObject _reviveBefore;
+
+    [SerializeField] GameObject _reviveAfter;
+
     private float _elapsedTime = 0;
 
     private Vector3 _jumpStartPosition;
 
     private Vector3 _jumpDirection;
 
+    
 
     private void Start()
     {
@@ -107,13 +116,16 @@ public class MonsterSkillManager : MonoBehaviour
         // 잭더리퍼 스킬 초기화
         WheelWindSkill.CanUseSkill = true;
         TrippleAttackSkill.CanUseSkill = true;
+
+        // 부활 좀비 스킬 초기화
+        ReviveSkill.CanUseSkill = true;
     }
 
     private void Update() // 테스트 코드 추후 삭제!!
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
-
+            
         }
     }
 
@@ -371,7 +383,7 @@ public class MonsterSkillManager : MonoBehaviour
     {
         float _range = 0;
         float _angle = 0;
-        int _damage = 0;
+        float _damage = 0;
 
         Collider[] colliders = Physics.OverlapSphere(transform.position, _range);
         foreach (Collider collider in colliders)
@@ -457,6 +469,19 @@ public class MonsterSkillManager : MonoBehaviour
         }
         yield return null;
         dashAttackRoutine = null;
+    }
+    #endregion
+
+    #region
+    public Coroutine reviveRoutine;
+    public IEnumerator ReviveRoutine()
+    {
+        ReviveSkill.CanUseSkill = false;
+
+        _reviveBefore.SetActive(false);
+        _reviveAfter.SetActive(true);
+        yield return null;
+        reviveRoutine = null;
     }
     #endregion
 }

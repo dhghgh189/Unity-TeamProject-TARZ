@@ -10,17 +10,17 @@ public class MonsterData : MonoBehaviour
     [SerializeField] MonsterType _type;
     public MonsterType Type { get { return _type; } private set { } }
 
-    [SerializeField] int _maxHp;
-    public int MaxHp { get { return _maxHp; } private set { } }
+    [SerializeField] float _maxHp;
+    public float MaxHp { get { return _maxHp; } private set { } }
 
-    [SerializeField] int _curHp;
-    public int CurHp { get { return _curHp; } set { _curHp = value; } }
+    [SerializeField] float _curHp;
+    public float CurHp { get { return _curHp; } set { _curHp = value; } }
 
     [SerializeField] float _moveSpeed; // NavMesh랑 연동할것
     public float MoveSpeed { get { return _moveSpeed; } private set { } }
 
-    [SerializeField] int _damage;
-    public int Damage { get { return _damage; } private set { } }
+    [SerializeField] float _damage;
+    public float Damage { get { return _damage; } private set { } }
 
     [SerializeField] float _meleeAttackSpeed; // 근접 공격 속도
     public float MeleeAttackSpeed { get {return _meleeAttackSpeed; } set { _meleeAttackSpeed = value; } }
@@ -45,6 +45,11 @@ public class MonsterData : MonoBehaviour
    
 
     private static readonly int idleHash = Animator.StringToHash("Idle");
+
+    private void Awake()
+    {
+        CurHp = MaxHp;
+    }
 }
 
 

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public interface IDamagable
 {
-    void TakeDamage(int damage);
+    void TakeDamage(float damage);
 
     // Damage Over Time : 도트뎀 (장판기)
     // 장판기 위에서는 일정 시간마다 데미지가 계속 들어옴

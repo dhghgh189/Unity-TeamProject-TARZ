@@ -13,6 +13,13 @@ public class AudioMixController : MonoBehaviour
     [SerializeField] private Slider bgmSlider;
     [SerializeField] private Slider sfxSlider;
 
+    [Header("<color=orange>Mute Toggle</color>")]
+    [SerializeField] private Toggle masterMute;
+    [SerializeField] private Toggle bgmMute;
+    [SerializeField] private Toggle sfxMute;
+    private float muteBGM = 0f;
+    private float muteSFX = 0f;
+
     public void MasterVolumeControl()
     {
         float sound = masterSlider.value;
@@ -44,12 +51,28 @@ public class AudioMixController : MonoBehaviour
 
     public void BGMVolumeMute ()
     {
-        audioMixer.SetFloat("BGM", -80);
+        if (bgmMute.isOn == true)
+        {
+            audioMixer.GetFloat("BGM", out muteBGM);
+            audioMixer.SetFloat("BGM", -80f);
+        }
+        else
+        {
+            audioMixer.SetFloat("BGM", muteBGM);
+        }
     }
 
     public void SFXVolumeMute()
     {
-        audioMixer.SetFloat("SFX", -80);
+        if (sfxMute.isOn == true)
+        {
+            audioMixer.GetFloat("SFX", out muteSFX);
+            audioMixer.SetFloat("SFX", -80f);
+        }
+        else
+        {
+            audioMixer.SetFloat("SFX", muteSFX);
+        }
     }
 
     /*private void SaveVolume(string key, float value)

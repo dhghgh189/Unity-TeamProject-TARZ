@@ -3,17 +3,6 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
-// 제안 1) 쌩으로 함수 구현해서 스킬매니저에 몰아 놓는다
-// 제안 2) abstract
-// 제안 3) 
-/// <summary>
-/// 1. 기본스킬 + @
-/// 2. 투사체 스킬 + @   
-/// 3. 지점공격 (ex> 전기떨어트림) + @
-/// 4. 대시 공격 + @
-/// 애니메이션만 교체해서하면될듯
-/// </summary>
-/// 
 public class MonsterSkillManager : MonoBehaviour
 {
     #region Skill-ScriptableObj
@@ -55,6 +44,7 @@ public class MonsterSkillManager : MonoBehaviour
     public MonsterSkill ReviveSkill { get { return _revive; } set { _revive = value; } }
     #endregion
 
+    #region Prefab
     [Header("Prefab")]
     [SerializeField] GameObject _bombPrefab;
 
@@ -66,34 +56,33 @@ public class MonsterSkillManager : MonoBehaviour
 
     [SerializeField] GameObject _thunderPrefab;
 
+    [SerializeField] GameObject _reviveBefore;
+    public GameObject ReviveBefore { get { return _reviveBefore; } set { _reviveBefore = value; } }
+
+    [SerializeField] GameObject _reviveAfter;
+    public GameObject ReviveAfter { get { return _reviveAfter;  } set { _reviveAfter = value; } } 
+    #endregion
+
+    #region Etc
+    [Header("Etc")]
+    [SerializeField] GameObject _player;
+
+    [SerializeField] Transform _muzzlePoint;
+    public Transform MuzzlePoint { get { return _muzzlePoint; } set { _muzzlePoint = value; } }
+
+    [SerializeField] GameObject _wheelWindTrigger;
+    public GameObject WheelWindTrigger { get { return _wheelWindTrigger; } set { _wheelWindTrigger = value; } }
+
     private Vector3 _electricWallPosition;
 
     private Vector3 _electricWallPosition2;
-
-    [Header("Etc")]
-    [SerializeField] MonsterData _monsterData;
-
-    [SerializeField] GameObject _player;
-
-    [SerializeField] Rigidbody _rigidbody;
-
-    [SerializeField] Transform _muzzlePoint;
-
-    [SerializeField] NavMeshAgent _agent;
-
-    [SerializeField] GameObject _wheelWindTrigger;
-
-    [SerializeField] GameObject _reviveBefore;
-
-    [SerializeField] GameObject _reviveAfter;
-
-    private float _elapsedTime = 0;
-
+  
     private Vector3 _jumpStartPosition;
 
     private Vector3 _jumpDirection;
 
-    
+    private float _elapsedTime = 0;
+    #endregion
 
     private void Start()
     {
@@ -119,14 +108,6 @@ public class MonsterSkillManager : MonoBehaviour
 
         // 부활 좀비 스킬 초기화
         ReviveSkill.CanUseSkill = true;
-    }
-
-    private void Update() // 테스트 코드 추후 삭제!!
-    {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            
-        }
     }
 
     #region JumpAttack - 점프 코루틴
@@ -199,8 +180,8 @@ public class MonsterSkillManager : MonoBehaviour
         _wheelWindTrigger.SetActive(true);
 
         Radiation jackRadiation = _wheelWindTrigger.GetComponent<Radiation>();
-        jackRadiation.Interaval = WheelWindSkill.Interval;
-        jackRadiation.Damage = WheelWindSkill.Damage;
+      /*  jackRadiation.Interaval = WheelWindSkill.Interval;
+        jackRadiation.Damage = WheelWindSkill.Damage;*/
         yield return new WaitForSeconds(WheelWindSkill.Duration);
         _wheelWindTrigger.SetActive(false);
 
@@ -472,7 +453,7 @@ public class MonsterSkillManager : MonoBehaviour
     }
     #endregion
 
-    #region
+    #region Revive
     public Coroutine reviveRoutine;
     public IEnumerator ReviveRoutine()
     {

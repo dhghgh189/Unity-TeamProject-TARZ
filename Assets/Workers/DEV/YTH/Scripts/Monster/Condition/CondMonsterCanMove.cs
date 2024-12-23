@@ -32,7 +32,7 @@ public class CondMonsterCanMove : Conditional
         }
         else if (_monsterData.Attacked_First == true) // 시야각에 없어도 선빵 맞으면 데미지들어오면서 쳐다보는 로직 
         {
-            TakeDamage(1/*플레이어 데미지 불러오기*/);
+            NoticePlayer();
             return TaskStatus.Success;
         }
         else
@@ -94,23 +94,13 @@ public class CondMonsterCanMove : Conditional
     }
     #endregion
 
-    public void TakeDamage(int damage)
+    public void NoticePlayer()
     {
         //플레이어가 공격한 위치를 기억하고 맞으면 돌아봄
         _playerFirstAttackTransform = _player.GetComponent<Transform>();
 
-        _monsterData.CurHp -= damage;
-        _monsterData.Attacked_First = true;
-
         Quaternion lookRot = Quaternion.LookRotation(_playerFirstAttackTransform.position);
-        transform.rotation = Quaternion.Lerp(transform.rotation, lookRot, _rate * Time.deltaTime);
+        transform.rotation = Quaternion.Lerp(transform.rotation, lookRot, _rate * Time.deltaTime); // 속도 빠르게 수정할 것
     }
-
-
-
-    ///
-    /// 추후 넉백 기능 추가해주세요
-    ///
-
 }
 

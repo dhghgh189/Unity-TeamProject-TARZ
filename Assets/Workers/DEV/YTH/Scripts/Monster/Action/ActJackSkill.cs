@@ -11,16 +11,19 @@ public class ActJackSkill : Action
 
     [SerializeField] GameObject _player;
 
+    [SerializeField] GameObject _wheelWindTrigger;
+
     public override void OnStart()
     {
         _distance = Vector3.Distance(transform.position, _player.transform.position);
+
+        _monsterSkillManager.WheelWindTrigger = _wheelWindTrigger;
     }
 
     public override TaskStatus OnUpdate()
     {
         if (_distance <= 10)
         {
-
             if (_monsterSkillManager.TrippleAttackSkill.CanUseSkill == true)
             {
                 _monsterSkillManager.trippleAttackRoutine = StartCoroutine(_monsterSkillManager.TrippleAttackRoutine());
@@ -33,7 +36,6 @@ public class ActJackSkill : Action
                 Debug.Log("wheelWind");
                 return TaskStatus.Success;
             }
-
 
             return TaskStatus.Success;
         }

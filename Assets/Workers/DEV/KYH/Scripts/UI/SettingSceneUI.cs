@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class SettingSceneUI : MonoBehaviour
 {
@@ -28,7 +29,7 @@ public class SettingSceneUI : MonoBehaviour
 
     [Header("<color=blue>Selected UI</color>")]
     [SerializeField] private Toggle activeMinimapToggle;    // 미니맵 활성화 체크 토글
-    //[SerializeField] private Dropdown languageDropdown;   // 언어 선택 드롭다운 (참조가 되지 않는 오류로 주석처리)
+    [SerializeField] private TMP_Dropdown languageDropdown; // 언어 선택 드롭다운 (참조가 되지 않는 오류로 주석처리)
     [SerializeField] private Slider masterVolumeSlider;     // 마스터 볼륨 조절 슬라이더
 
     private void Start()
@@ -92,7 +93,7 @@ public class SettingSceneUI : MonoBehaviour
         languagePanel.SetActive(true);
         soundPanel.SetActive(false);
         keySettingsPanel.SetActive(false);
-        //languageDropdown.Select();            // languageDropdown 오브젝트를 UI 네비게이션 Input 시작으로 선택
+        languageDropdown.Select();              // languageDropdown 오브젝트를 UI 네비게이션 Input 시작으로 선택
     }
 
     // 사운드 카테고리 버튼 클릭

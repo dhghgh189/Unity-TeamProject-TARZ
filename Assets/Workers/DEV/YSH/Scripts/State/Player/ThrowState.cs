@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 
 public class ThrowState : BaseState<PlayerController>
@@ -15,6 +16,8 @@ public class ThrowState : BaseState<PlayerController>
     private Vector3 inputDir;
 
     private Transform camTrf;
+
+    private Vector3 lookDir;
 
     public ThrowState(PlayerController owner)
     {
@@ -60,9 +63,8 @@ public class ThrowState : BaseState<PlayerController>
         animTimer = 999;
 
         // 카메라 정면을 바라본다.
-        Debug.Log($"before lookAt forward : {owner.transform.forward}");
-        owner.Movement.LookAt(camTrf.forward);
-        Debug.Log($"after lookAt forward : {owner.transform.forward}");
+        lookDir = camTrf.forward;   // 공격 시전 시 바라봤던 방향을 기억해둔다.
+        owner.Movement.LookAt(lookDir);
 
         SetAction();
 
@@ -72,7 +74,6 @@ public class ThrowState : BaseState<PlayerController>
     public override void OnExit()
     {
         base.OnExit();
-        Debug.Log($"Exit forward : {owner.transform.forward}");
     }
 
     private void SetAction()
@@ -80,19 +81,17 @@ public class ThrowState : BaseState<PlayerController>
         MultiActionInfo[] multiActions = owner.Attack.ThrowAttackInfo[throwCount].MultiActions;
         if (multiActions.Length <= 0)
         {
-            Debug.Log($"before anim forward : {owner.transform.forward}");
             owner.Anim.CrossFade(throwAnimHashes[owner.Attack.ThrowCount], 0.01f);
-            Debug.Log($"after anim forward : {owner.transform.forward}");
             return;
         }
 
         int animHash;
-        if ((int)inputDir.x > 0)
+        if (inputDir.x > 0)
         {
             animHash = throwMultiAnimHashes[throwCount, (int)EMultiActionType.Right];
             owner.Attack.ActionType = EMultiActionType.Right;
         }
-        else if ((int)inputDir.x < 0)
+        else if (inputDir.x < 0)
         {
             animHash = throwMultiAnimHashes[throwCount, (int)EMultiActionType.Left];
             owner.Attack.ActionType = EMultiActionType.Left;
@@ -103,9 +102,7 @@ public class ThrowState : BaseState<PlayerController>
             owner.Attack.ActionType = EMultiActionType.Basic;
         }
 
-        Debug.Log($"before anim forward : {owner.transform.forward}");
         owner.Anim.CrossFade(animHash, 0.01f);
-        Debug.Log($"after anim forward : {owner.transform.forward}");
     }
 
     IEnumerator AnimRoutine()
@@ -120,6 +117,12 @@ public class ThrowState : BaseState<PlayerController>
 
     public override void OnUpdate()
     {
+        // 애니메이션 도중 회전이 원복되는 현상 방지 (Adjust)
+        if (lookDir != Vector3.zero && owner.transform.forward != lookDir)
+        {
+            owner.Movement.LookAt(lookDir);
+        }
+
         // 대쉬가 입력되면 공격을 캔슬 (점프 시에는 불가)
         // 공격 카운트도 체크하여 마지막 공격때는 캔슬안되게 해야 함
         if (owner.Movement.IsGrounded && owner.PInput.TryDash)
@@ -132,6 +135,9 @@ public class ThrowState : BaseState<PlayerController>
         // 애니메이션 재생이 완료되면 상태 종료
         if (animTimer <= 0)
         {
+            // Adjust를 중지하기 위해 lookDir을 초기화
+            lookDir = Vector3.zero;
+
             owner.Attack.ThrowCount++;
 
             // 마지막 타수였거나 물건 스택이 없는 경우 바로 Idle로 이동

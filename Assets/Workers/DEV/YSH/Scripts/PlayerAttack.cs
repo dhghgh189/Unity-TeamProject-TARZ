@@ -232,9 +232,8 @@ public class PlayerAttack : MonoBehaviour
         }
         else
         {
-            List<MultiActionInfo> actionList = multiActions.ToList();
             // 현재 Action과 일치하는 MultiActionInfo를 가져온다 (Where)
-            currentAction = actionList.Where(x => x.ActionType == ActionType).First();
+            currentAction = multiActions.Where(x => x.ActionType == ActionType).First();
             AddMultiActionEffects(tobj, currentAction);
 
             // 수치 저장

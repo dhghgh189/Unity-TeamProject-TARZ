@@ -44,12 +44,12 @@ public class CameraController : MonoBehaviour
     {
         if (IsAutoLockOn == false)
         {
-            //yAngle += Input.GetAxisRaw("Mouse X") * 2f;
-            //transform.rotation = Quaternion.Euler(0, yAngle, 0);
+            yAngle += Input.GetAxisRaw("Mouse X") * sensitivity;
+            transform.rotation = Quaternion.Euler(0, yAngle, 0);
 
-            yAngle += Input.GetAxisRaw("Mouse X");
-            Vector3 dir = lookAt.position - transform.position;
-            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, yAngle, 0), sensitivity * Time.deltaTime);
+            //yAngle += Input.GetAxisRaw("Mouse X");
+            //Vector3 dir = lookAt.position - transform.position;
+            //transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, yAngle, 0), sensitivity * Time.deltaTime);
         }
         else
         {

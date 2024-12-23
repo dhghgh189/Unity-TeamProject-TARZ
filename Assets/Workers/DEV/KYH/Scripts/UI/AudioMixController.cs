@@ -20,28 +20,46 @@ public class AudioMixController : MonoBehaviour
     private float muteBGM = 0f;
     private float muteSFX = 0f;
 
+    private float masterVolSave;
+    private float bgmVolSave;
+    private float sfxVolSave;
+
+    private void Start()
+    {
+        PlayerPrefs.GetFloat("Master", masterVolSave);
+        PlayerPrefs.GetFloat("BGM", bgmVolSave);
+        PlayerPrefs.GetFloat("SFX", sfxVolSave);
+    }
+
     public void MasterVolumeControl()
     {
-        float sound = masterSlider.value;
+        masterVolSave = masterSlider.value;
 
-        if (sound == -40f) { audioMixer.SetFloat("Master", -80); }
-        else { audioMixer.SetFloat("Master", sound); }
+        if (masterVolSave == -40f) { audioMixer.SetFloat("Master", -80); }
+        else { audioMixer.SetFloat("Master", masterVolSave); }
+
+        PlayerPrefs.SetFloat("Master", masterVolSave);
+        
     }
 
     public void BGMVolumeControl()
     {
-        float sound = bgmSlider.value;
+        bgmVolSave = bgmSlider.value;
 
-        if (sound == -40f) { audioMixer.SetFloat("BGM", -80); }
-        else { audioMixer.SetFloat("BGM", sound); }
+        if (bgmVolSave == -40f) { audioMixer.SetFloat("BGM", -80); }
+        else { audioMixer.SetFloat("BGM", bgmVolSave); }
+
+        PlayerPrefs.SetFloat("BGM", bgmVolSave);
     }
 
     public void SFXVolumeControl()
     {
-        float sound = sfxSlider.value;
+        sfxVolSave = sfxSlider.value;
 
-        if (sound == -40f) { audioMixer.SetFloat("SFX", -80); }
-        else { audioMixer.SetFloat("SFX", sound); }
+        if (sfxVolSave == -40f) { audioMixer.SetFloat("SFX", -80); }
+        else { audioMixer.SetFloat("SFX", sfxVolSave); }
+
+        PlayerPrefs.SetFloat("SFX", sfxVolSave);
     }
 
     public void MasterVolumeMute ()

@@ -39,7 +39,8 @@ public class TitleSceneUI : MonoBehaviour
     // 새로 시작 버튼 클릭
     public void OnClickNewGameButton()
     {
-        SceneManager.LoadScene("GameScene");    // 바로 새 게임 씬으로 이동(게임 씬 이름 변경 필요)
+        gameObject.SetActive(false);    // 타이틀 패널 비활성화
+        loadGamePanel.SetActive(true);  // 저장된 게임 불러오기 패널 활성화
     }
 
     // 저장된 게임 시작 버튼 클릭

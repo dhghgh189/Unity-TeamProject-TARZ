@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class LoadSceneUI : MonoBehaviour
 {
+    [SerializeField] private TMP_Text gameText;
+
     [SerializeField] private Button loadGame_01;
     public Button LoadGame_01 { get; private set;}
 

@@ -8,7 +8,7 @@ public class CondMonsterCanAttack : Conditional
 
     [SerializeField] GameObject _player;
 
-    private float _distance;
+    [SerializeField] float _distance;
 
     public override TaskStatus OnUpdate()
     {

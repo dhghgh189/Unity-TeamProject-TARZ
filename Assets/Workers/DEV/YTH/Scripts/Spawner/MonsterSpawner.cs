@@ -11,11 +11,19 @@ public class MonsterSpawner : MonoBehaviour
 
     [SerializeField] Transform _spawnPoint;
 
-    private void Start()
+    private void Awake()
     {
         foreach (Collider spawnTrigger in _spawnTriggers)
         {
            spawnTrigger.gameObject.AddComponent<SpawnTrigger>();
+        }
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            Spawn();
         }
     }
 

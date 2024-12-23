@@ -10,7 +10,7 @@ public class MonsterSkill : ScriptableObject
 {
     public string SkillName;
     public string SkillDescription;
-    public int Damage;
+    public float Damage;
     public float CoolTime;
     public float Angle; // 공격 범위 (각도)
     public float Range; // 공격 범위 (거리)

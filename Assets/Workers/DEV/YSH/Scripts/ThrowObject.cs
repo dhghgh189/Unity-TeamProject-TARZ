@@ -11,7 +11,7 @@ public class ThrowObject : MonoBehaviour, IDrainable
     private Rigidbody rigid;
     private PlayerController owner;
 
-    private int damage;
+    private float damage;
 
     public bool IsCollected { get { return isCollected; } set { isCollected = value; } }
 
@@ -39,7 +39,7 @@ public class ThrowObject : MonoBehaviour, IDrainable
         throwEffects.Add(effect);
     }
 
-    public void SetDamage(int damage)
+    public void SetDamage(float damage)
     {
         this.damage = damage;
     }
@@ -86,7 +86,8 @@ public class ThrowObject : MonoBehaviour, IDrainable
         IDamagable damagable = other.gameObject.GetComponent<IDamagable>();
         if (damagable != null)
         {
-            damagable.TakeDamage(damage);
+            // 주석 해제 필요
+            //damagable.TakeDamage(damage);
         }
 
         Destroy(gameObject);

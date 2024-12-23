@@ -31,12 +31,19 @@ public class StatModel : MonoBehaviour
     [SerializeField] float maxStamina;
     public float MaxStamina { get => maxStamina + (0.01f * maxStamina * GetAbility(AdditionAbility.MaxStaminaPer)); set { maxStamina = value; OnMaxStaminaChange?.Invoke(value); } }
 
-    [SerializeField] float allPower;
-    public float AllPower { get => allPower + (0.01f * allPower * GetAbility(AdditionAbility.AllPowerPer)); set { allPower = value; OnAllActackPowerChange?.Invoke(value); } }
+    [SerializeField] float moveSpeed;
+    public float MoveSpeed { get => moveSpeed + (0.01f * moveSpeed * GetAbility(AdditionAbility.MoveSpeedPer)); set { moveSpeed = value; OnMoveSpeedChange?.Invoke(value); } }
 
-    public float DefaultPower { get => AllPower + (0.01f * allPower * GetAbility(AdditionAbility.DefaultPowerPer)); private set { } }
-    public float SkillPower { get => AllPower + (0.01f * allPower * GetAbility(AdditionAbility.SkillPowerPer)); private set { } }
-    public float ElementalPower { get => AllPower + (0.01f * allPower * GetAbility(AdditionAbility.ElementalPowerPer)); private set { } }
+    [SerializeField] float allPowerPer;
+    public float AllPowerPer { get => allPowerPer + (GetAbility(AdditionAbility.AllPowerPer)); private set { } }
+    public float DefaultPowerPer { get => 1 + ((AllPowerPer + (GetAbility(AdditionAbility.DefaultPowerPer))) * 0.01f); private set { } }
+    public float SkillPowerPer { get => AllPowerPer + (GetAbility(AdditionAbility.SkillPowerPer)); private set { } }
+    public float ElementalPowerPer { get => AllPowerPer + (GetAbility(AdditionAbility.ElementalPowerPer)); private set { } }
+    
+    public float DashSpeed;
+
+    public float DashSteminaAmount;
+
     [Header("실시간 능력치")]
 
     [SerializeField] float currentHp;
@@ -70,8 +77,8 @@ public class StatModel : MonoBehaviour
     public event Action<float> OnMaxHpChange;
     // 최대 스테미나 변경
     public event Action<float> OnMaxStaminaChange;
-    // 공격력 변경
-    public event Action<float> OnAllActackPowerChange;
+    // 이동 속도 변경
+    public event Action<float> OnMoveSpeedChange;
     // 현재 체력 변경
     public event Action<float> OnCurHpChange;
     // 현재 마나 변경
@@ -90,7 +97,7 @@ public class StatModel : MonoBehaviour
         if (saveData.StatSaveData == null) return;
         MaxHp = saveData.StatSaveData.maxHp;
         MaxStamina = saveData.StatSaveData.maxStamina;
-        AllPower = saveData.StatSaveData.allPower;
+        AllPowerPer = saveData.StatSaveData.allPower;
         CurrentHp = saveData.StatSaveData.currentHp;
         CurrentMp = saveData.StatSaveData.currentMp;
         CurrentStamina = saveData.StatSaveData.currentStamina;

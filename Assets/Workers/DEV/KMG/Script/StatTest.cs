@@ -15,15 +15,15 @@ public class StatTest : MonoBehaviour
     }
     public void DefaultAtack()
     {
-        Debug.Log(statModel.DefaultPower);
+        Debug.Log(statModel.DefaultPowerPer);
     }
     public void SkillAtack()
     {
-        Debug.Log(statModel.SkillPower);
+        Debug.Log(statModel.SkillPowerPer);
     }
     public void ElementalAtack()
     {
-        Debug.Log(statModel.ElementalPower);
+        Debug.Log(statModel.ElementalPowerPer);
     }
     [ContextMenu("Save")]
     public void Save()

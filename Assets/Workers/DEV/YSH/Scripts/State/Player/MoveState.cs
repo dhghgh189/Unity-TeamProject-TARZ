@@ -67,6 +67,7 @@ public class MoveState : BaseState<PlayerController>
         base.OnFixedUpdate();
 
         moveDir = owner.PInput.InputDir.normalized;
+        Debug.Log($"<color=lime>MoveSpeed : {owner.Stat.MoveSpeed}</color>");
         owner.Movement.Move(moveDir * owner.Stat.MoveSpeed);
     }
 

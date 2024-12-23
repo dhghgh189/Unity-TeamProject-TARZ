@@ -24,7 +24,7 @@ public class DashState : BaseState<PlayerController>
         if (camTrf == null)
             camTrf = Camera.main.transform;
 
-        dashTimer = owner.Stat.DashTime;
+        dashTimer = owner.Movement.DashTime;
 
         // 대쉬 시 입력값이 있는지 확인하기 위해 저장
         moveDir = owner.PInput.InputDir.normalized;

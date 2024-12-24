@@ -11,7 +11,6 @@ public class ThrowState : BaseState<PlayerController>
     private float animTimer;
 
     private float comboTimer;
-    private int throwCount;
 
     private Vector3 inputDir;
 
@@ -58,8 +57,6 @@ public class ThrowState : BaseState<PlayerController>
         // 최초 진입시점 때의 입력값을 기억한다.
         inputDir = owner.PInput.InputDir;
 
-        throwCount = owner.Attack.ThrowCount;
-
         comboTimer = 0f;
         
         owner.Movement.Move(Vector3.zero);
@@ -83,7 +80,7 @@ public class ThrowState : BaseState<PlayerController>
 
     private void SetAction()
     {
-        MultiActionInfo[] multiActions = owner.Attack.ThrowAttackInfo[throwCount].MultiActions;
+        MultiActionInfo[] multiActions = owner.Attack.ThrowAttackInfo[owner.Attack.ThrowCount].MultiActions;
         if (multiActions.Length <= 0)
         {
             owner.Anim.CrossFade(throwAnimHashes[owner.Attack.ThrowCount], 0.01f);
@@ -93,17 +90,17 @@ public class ThrowState : BaseState<PlayerController>
         int animHash;
         if (inputDir.x > 0)
         {
-            animHash = throwMultiAnimHashes[throwCount, (int)EMultiActionType.Right];
+            animHash = throwMultiAnimHashes[owner.Attack.ThrowCount, (int)EMultiActionType.Right];
             owner.Attack.ActionType = EMultiActionType.Right;
         }
         else if (inputDir.x < 0)
         {
-            animHash = throwMultiAnimHashes[throwCount, (int)EMultiActionType.Left];
+            animHash = throwMultiAnimHashes[owner.Attack.ThrowCount, (int)EMultiActionType.Left];
             owner.Attack.ActionType = EMultiActionType.Left;
         }
         else
         {
-            animHash = throwMultiAnimHashes[throwCount, (int)EMultiActionType.Basic];
+            animHash = throwMultiAnimHashes[owner.Attack.ThrowCount, (int)EMultiActionType.Basic];
             owner.Attack.ActionType = EMultiActionType.Basic;
         }
 

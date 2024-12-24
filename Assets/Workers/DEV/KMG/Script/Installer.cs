@@ -12,7 +12,8 @@ public class Installer : MonoInstaller
             Debug.Log(JsonUtility.ToJson(saveData, true));
         }
         Container.Bind<SaveData>().FromInstance(saveData);
-
+        Container.Bind<AblityAdapter>().FromComponentInHierarchy().AsSingle();
+        Container.Bind<PlayerAttack>().FromComponentInHierarchy().AsSingle();
         Container.Bind<SaveManager>().FromComponentInHierarchy().AsSingle();
         Container.Bind<StatModel>().FromComponentInHierarchy().AsSingle();
         Container.Bind<Equipment>().FromComponentInHierarchy().AsSingle();

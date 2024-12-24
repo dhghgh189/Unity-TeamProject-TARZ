@@ -33,6 +33,9 @@ public class SettingSceneUI : MonoBehaviour
     [SerializeField] private TMP_Dropdown languageDropdown; // 언어 선택 드롭다운 (참조가 되지 않는 오류로 주석처리)
     [SerializeField] private Slider masterVolumeSlider;     // 마스터 볼륨 조절 슬라이더
 
+    [Header("Setting UI")]
+    [SerializeField] private Toggle minimapActiveToggle;
+
     private void Start()
     {
         activeCPanel = nonSelectPanel;                  // 현재 활성화 중인 패널을 nonSelectPanel로 설정
@@ -84,8 +87,19 @@ public class SettingSceneUI : MonoBehaviour
         activeMinimapToggle.Select();           // activeMinimapToggle 오브젝트를 UI 네비게이션 Input 시작으로 선택
     }
 
+    public void OnCheckMinimapActiveToggle()
+    {
+        if (minimapActiveToggle.isOn == true)
+        {
+            // TODO : 체크가 활성화 되어 있을 때 미니맵 활성화
+        }
+        else
+        {
+            // TODO : 체크가 비활성화 되어 있을 때 미니맵 비활성화
+        }
+    }
+
     // 언어 카테고리 버튼 클릭
-    // 언어 카테고리 버튼 클릭 기능에서 드롭다운 UI의 참조 오류가 있어 현재는 제대로 기능하지 않음.
     public void OnClickLanguageButton()
     {
         activeCPanel = languagePanel;           // 현재 활성화 중인 패널을 언어 카테고리 패널로 설정

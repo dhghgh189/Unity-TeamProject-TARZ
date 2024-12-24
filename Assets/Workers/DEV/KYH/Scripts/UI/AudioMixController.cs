@@ -6,167 +6,111 @@ using UnityEngine.Audio;
 
 public class AudioMixController : MonoBehaviour
 {
-    // 오디오 믹서 참조
     [SerializeField] private AudioMixer audioMixer;
 
-    // 사운드 조절 슬라이더
     [Header("<color=green>Sound Slider</color>")]
     [SerializeField] private Slider masterSlider;
     [SerializeField] private Slider bgmSlider;
     [SerializeField] private Slider sfxSlider;
 
-    // 사운드 음소거 토글
+    private float masterVol;
+    private float bgmVol;
+    private float sfxVol;
+
     [Header("<color=orange>Mute Toggle</color>")]
     [SerializeField] private Toggle masterMute;
     [SerializeField] private Toggle bgmMute;
     [SerializeField] private Toggle sfxMute;
 
-    [Header("<color=yellow>PlayerPrefs Keys</color>")]
-    private string masterVolumeKey = "MasterVolume";
-    private string bgmVolumeKey = "BGMVolume";
-    private string sfxVolumeKey = "SFXVolume";
-    private string masterMuteKey = "MasterMute";
-    private string bgmMuteKey = "BGMMute";
-    private string sfxMuteKey = "SFXMute";
+    private float muteBGM;
+    private float muteSFX;
+
+    private void Awake()
+    {
+        // 볼륨 초기값 로드 (기본값 0 dB)
+        masterSlider.value = PlayerPrefs.GetFloat("Master", masterVol);
+        bgmSlider.value = PlayerPrefs.GetFloat("BGM", bgmVol);
+        sfxSlider.value = PlayerPrefs.GetFloat("SFX", sfxVol);
+
+        // 오디오 믹서 초기값 설정
+        audioMixer.SetFloat("Master", masterVol);
+        audioMixer.SetFloat("BGM", bgmVol);
+        audioMixer.SetFloat("SFX", sfxVol);
+    }
 
     private void Start()
     {
-        InitSlider(masterSlider, masterVolumeKey, "Master");
-        InitSlider(bgmSlider, bgmVolumeKey, "BGM");
-        InitSlider(sfxSlider, sfxVolumeKey, "SFX");
+        // 음소거 상태 로드 및 초기화
+        masterMute.isOn = PlayerPrefs.GetInt("MasterMute", 0) == 1;
+        bgmMute.isOn = PlayerPrefs.GetInt("BGMMute", 0) == 1;
+        sfxMute.isOn = PlayerPrefs.GetInt("SFXMute", 0) == 1;
 
-        InitToggle(masterMute, masterMuteKey, "Master");
-        InitToggle(bgmMute, bgmMuteKey, "BGM");
-        InitToggle(sfxMute, sfxMuteKey, "SFX");
-
-        masterSlider.onValueChanged.AddListener(value => SetVolume(masterVolumeKey, "Master", value));
-        bgmSlider.onValueChanged.AddListener(value => SetVolume(bgmVolumeKey, "BGM", value));
-        sfxSlider.onValueChanged.AddListener(value => SetVolume(sfxVolumeKey, "SFX", value));
-
-        masterMute.onValueChanged.AddListener(isMuted => SetMute(masterMuteKey, "Master", isMuted));
-        bgmMute.onValueChanged.AddListener(isMuted => SetMute(bgmMuteKey, "BGM", isMuted));
-        sfxMute.onValueChanged.AddListener(isMuted => SetMute(sfxMuteKey, "SFX", isMuted));
+        if (masterMute.isOn) AudioListener.volume = 0;
+        if (bgmMute.isOn) audioMixer.SetFloat("BGM", -80f);
+        if (sfxMute.isOn) audioMixer.SetFloat("SFX", -80f);
     }
 
-    private void InitSlider(Slider slider, string prefsKey, string mixerPar)
+    public void MasterVolumeSliderChanged()
     {
-        float savedValue = PlayerPrefs.GetFloat(prefsKey, 0.75f);
-        slider.value = savedValue;
-
-        float volume = Mathf.Log10(Mathf.Max(savedValue, 0.0001f)) * 20f;
-        audioMixer.SetFloat(mixerPar, volume);
+        masterVol = masterSlider.value;
+        audioMixer.SetFloat("Master", masterVol == -40f ? -80f : masterVol); // 최소 볼륨 -80 dB로 설정
+        PlayerPrefs.SetFloat("Master", masterVol);
+        PlayerPrefs.Save();
     }
 
-    private void InitToggle(Toggle toggle, string prefsKey, string mixerPar)
+    public void BGMVolumeSliderChanged()
     {
-        bool isMuted = PlayerPrefs.GetInt(prefsKey, 0) == 1;
-        toggle.isOn = isMuted;
+        bgmVol = bgmSlider.value;
+        audioMixer.SetFloat("BGM", bgmVol == -40f ? -80f : bgmVol);
+        PlayerPrefs.SetFloat("BGM", bgmVol);
+        PlayerPrefs.Save();
+    }
 
-        if (isMuted)
+    public void SFXVolumeSliderChanged()
+    {
+        sfxVol = sfxSlider.value;
+        audioMixer.SetFloat("SFX", sfxVol == -40f ? -80f : sfxVol);
+        PlayerPrefs.SetFloat("SFX", sfxVol);
+        PlayerPrefs.Save();
+    }
+
+    public void MasterMuteToggleChanged()
+    {
+        bool isMuted = masterMute.isOn;
+        AudioListener.volume = isMuted ? 0 : 1;
+        PlayerPrefs.SetInt("MasterMute", isMuted ? 1 : 0);
+        PlayerPrefs.Save();
+    }
+
+    public void BGMMuteToggleChanged()
+    {
+        if (bgmMute.isOn)
         {
-            audioMixer.SetFloat(mixerPar, -80f);
-        }
-    }
-
-    private void SetVolume(string prefsKey, string mixerPar, float sliderValue)
-    {
-        float volume = Mathf.Log10(Mathf.Max(sliderValue, 0.0001f)) * 20f;
-        audioMixer.SetFloat(mixerPar, volume);
-
-        PlayerPrefs.SetFloat(prefsKey, sliderValue);
-    }
-
-    private void SetMute(string prefsKey, string mixerPar, bool isMuted)
-    {
-        if (isMuted)
-        {
-            audioMixer.SetFloat(mixerPar, -80f);
-        }
-        else
-        {
-            float savedValue = PlayerPrefs.GetFloat(prefsKey, 0.75f);
-            float volume = Mathf.Log10(Mathf.Max(savedValue, 0.0001f)) * 20f;
-            audioMixer.SetFloat(mixerPar, volume);
-        }
-        PlayerPrefs.SetInt(prefsKey, isMuted ? 1 : 0);
-    }
-    /*/// <summary>
-    /// 마스터 볼륨값 조절
-    /// </summary>
-    public void MasterVolumeControl()
-    {
-        masterVolSave = masterSlider.value;
-
-        if (masterVolSave == -40f) { audioMixer.SetFloat("Master", -80); }
-        else { audioMixer.SetFloat("Master", masterVolSave); }
-
-        PlayerPrefs.SetFloat("Master", masterVolSave);
-        
-    }
-
-    /// <summary>
-    /// BGM 볼륨값 조절
-    /// </summary>
-    public void BGMVolumeControl()
-    {
-        bgmVolSave = bgmSlider.value;
-
-        if (bgmVolSave == -40f) { audioMixer.SetFloat("BGM", -80); }
-        else { audioMixer.SetFloat("BGM", bgmVolSave); }
-
-        PlayerPrefs.SetFloat("BGM", bgmVolSave);
-    }
-
-    /// <summary>
-    /// SFX(효과음) 볼륨값 조절
-    /// </summary>
-    public void SFXVolumeControl()
-    {
-        sfxVolSave = sfxSlider.value;
-
-        if (sfxVolSave == -40f) { audioMixer.SetFloat("SFX", -80); }
-        else { audioMixer.SetFloat("SFX", sfxVolSave); }
-
-        PlayerPrefs.SetFloat("SFX", sfxVolSave);
-    }
-
-    /// <summary>
-    /// 마스터 볼륨 음소거
-    /// </summary>
-    public void MasterVolumeMute ()
-    {
-        AudioListener.volume = AudioListener.volume == 0 ? 1 : 0;
-    }
-
-    /// <summary>
-    /// BGM 볼륨 음소거
-    /// </summary>
-    public void BGMVolumeMute ()
-    {
-        if (bgmMute.isOn == true)
-        {
-            audioMixer.GetFloat("BGM", out muteBGM);
-            audioMixer.SetFloat("BGM", -80f);
+            audioMixer.GetFloat("BGM", out muteBGM); // 현재 볼륨 저장
+            audioMixer.SetFloat("BGM", -80f);       // 음소거
+            PlayerPrefs.SetInt("BGMMute", 1);
         }
         else
         {
-            audioMixer.SetFloat("BGM", muteBGM);
+            audioMixer.SetFloat("BGM", muteBGM);    // 이전 볼륨 복원
+            PlayerPrefs.SetInt("BGMMute", 0);
         }
+        PlayerPrefs.Save();
     }
 
-    /// <summary>
-    /// SHX(효과음) 볼륨 음소거
-    /// </summary>
-    public void SFXVolumeMute()
+    public void SFXMuteToggleChanged()
     {
-        if (sfxMute.isOn == true)
+        if (sfxMute.isOn)
         {
             audioMixer.GetFloat("SFX", out muteSFX);
             audioMixer.SetFloat("SFX", -80f);
+            PlayerPrefs.SetInt("SFXMute", 1);
         }
         else
         {
             audioMixer.SetFloat("SFX", muteSFX);
+            PlayerPrefs.SetInt("SFXMute", 0);
         }
-    }*/
+        PlayerPrefs.Save();
+    }
 }

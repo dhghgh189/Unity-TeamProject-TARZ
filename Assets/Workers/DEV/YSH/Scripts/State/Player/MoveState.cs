@@ -15,7 +15,7 @@ public class MoveState : BaseState<PlayerController>
     public override void OnEnter()
     {
         base.OnEnter();
-        owner.Anim.CrossFade(Define.HASH_ANIM_RUN, 0.125f);
+        owner.Anim.CrossFade(Define.HASH_ANIM_MOVE, 0.125f);
     }
 
     public override void OnUpdate()

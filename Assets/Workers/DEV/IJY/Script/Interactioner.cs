@@ -1,17 +1,15 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 public class Interactioner : MonoBehaviour
 {
-    private Coroutine UpdateCoroutine;
     private LayerMask interactionLayer;
     [SerializeField] private bool IsInteraction_inside;
     [SerializeField] private PlayerController PlayerController;
     [Space(10f)]
     [SerializeField] private List<GameObject> interactionOBJs = new();
+    //[SerializeField] private GameObject t;
 
     private void Start()
     {
@@ -23,68 +21,75 @@ public class Interactioner : MonoBehaviour
     {
         if (other.gameObject.layer == interactionLayer)
         {
+            interactionOBJs.Add(other.gameObject);
             IsInteraction_inside = true;
-            UpdateCoroutine = StartCoroutine(OnEnableCheckRoutine(other.gameObject));
-        }
-    }
-
-    IEnumerator OnEnableCheckRoutine(GameObject obj)
-    {
-        interactionOBJs.Add(obj);
-
-        while (true)
-        {
-            if (obj == null || !obj.activeSelf)
-            {
-                IsInteraction_inside = false;
-                yield break;
-            }
-
-            yield return null;
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (UpdateCoroutine != null)
-        {
-            StopCoroutine(UpdateCoroutine);
-            UpdateCoroutine = null;
-        }
-
         interactionOBJs.Clear();
         IsInteraction_inside = false;
     }
+
+    // 1. 키를 눌렀을 때, 오버랩 스피어를 통해 가장 거리가 가까운 오브젝트 하나를 골라 Activate
+    // 2. 변수 하나에 인식한 오브젝트를 저장하고, 다시 다른 오브젝트가 닿았을 때 해당 오브젝트와 비교 하여 다시 변수를 설정
 
     private void Update()
     {
         if (IsInteraction_inside)
         {
+            if (IsAlive() == false)
+            {
+                IsInteraction_inside = false;
+                return;
+            }
+
             if (PlayerController.PInput.TryInteraction)
             {
-                SelectInteraction(interactionOBJs).Activate();
+                Base_InteractionOBJ target = SelectInteraction();
+
+                if (target == null)
+                {
+                    IsInteraction_inside = false;
+                    return;
+                }
+
+                target.Activate();
             }
         }
     }
 
-    Base_InteractionOBJ SelectInteraction(List<GameObject> list)
+    bool IsAlive()
     {
-        foreach (GameObject obj in list)
-        {
-            Debug.Log($"정렬 전 : {obj}");
-        }
+        bool isAlive = true;
 
-        var target = from targeting in list
-                     where targeting != null || targeting.gameObject.activeSelf
+        for (int i = interactionOBJs.Count - 1; i >= 0; i--)
+        {
+            if (interactionOBJs[i] == null || !interactionOBJs[i].gameObject.activeSelf)
+            {
+                interactionOBJs.Remove(interactionOBJs[i]);
+            }
+        }
+        if (interactionOBJs.Count > 0) isAlive = true;
+        else isAlive = false;
+
+        return isAlive;
+    }
+
+    Base_InteractionOBJ SelectInteraction()
+    {
+        var target = from targeting in interactionOBJs
                      orderby Vector3.Distance(targeting.transform.position, transform.position) ascending
                      select targeting;
-        list = target.ToList();
+        interactionOBJs = target.ToList();
 
-        foreach (GameObject obj in list)
+        foreach (GameObject obj in interactionOBJs)
         {
             Debug.Log($"<color=yellow>정렬 후 : {obj}</color>");
         }
 
-        return list.First().GetComponent<Base_InteractionOBJ>();
+        if (interactionOBJs.Count <= 0) return null;
+        return interactionOBJs.First().GetComponent<Base_InteractionOBJ>();
     }
 }

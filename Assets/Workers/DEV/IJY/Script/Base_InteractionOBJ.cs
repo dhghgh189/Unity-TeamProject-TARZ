@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Base_InteractionOBJ : MonoBehaviour
+public interface Base_InteractionOBJ
 {
-    public abstract void Activate();
+    public void Activate();
 }

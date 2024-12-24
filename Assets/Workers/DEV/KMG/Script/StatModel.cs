@@ -26,19 +26,17 @@ public class StatModel : MonoBehaviour
     [Header("기본 능력치")]
 
     [SerializeField] float maxHp;
-    public float MaxHp { get => maxHp + (0.01f * maxHp * GetAbility(AdditionAbility.MaxHpPer)); set { maxHp = value; OnMaxHpChange?.Invoke(value); } }
+    public float MaxHp { get => maxHp + (maxHp * GetAbility(AdditionAbility.MaxHpPer) * 0.01f); set { maxHp = value; OnMaxHpChange?.Invoke(value); } }
 
     [SerializeField] float maxStamina;
-    public float MaxStamina { get => maxStamina + (0.01f * maxStamina * GetAbility(AdditionAbility.MaxStaminaPer)); set { maxStamina = value; OnMaxStaminaChange?.Invoke(value); } }
+    public float MaxStamina { get => maxStamina + (maxStamina * GetAbility(AdditionAbility.MaxStaminaPer) * 0.01f); set { maxStamina = value; OnMaxStaminaChange?.Invoke(value); } }
 
     [SerializeField] float maxMp;
     public float MaxMp { get => maxMp; private set { } }
 
     [SerializeField] float moveSpeed;
-    public float MoveSpeed { get => moveSpeed + (0.01f * moveSpeed * GetAbility(AdditionAbility.MoveSpeedPer)); set { moveSpeed = value; OnMoveSpeedChange?.Invoke(value); } }
-
-    [SerializeField] float allPowerPer;
-    public float AllPowerPer { get => allPowerPer + (GetAbility(AdditionAbility.AllPowerPer)); private set { } }
+    public float MoveSpeed { get => moveSpeed + (moveSpeed * GetAbility(AdditionAbility.MoveSpeedPer) * 0.01f); set { moveSpeed = value; OnMoveSpeedChange?.Invoke(value); } }
+    public float AllPowerPer { get => GetAbility(AdditionAbility.AllPowerPer); private set { } }
     public float DefaultPowerPer { get => 1 + ((AllPowerPer + (GetAbility(AdditionAbility.DefaultPowerPer))) * 0.01f); private set { } }
     public float SkillPowerPer { get => 1 + ((AllPowerPer + (GetAbility(AdditionAbility.SkillPowerPer))) * 0.01f); private set { } }
     public float ElementalPowerPer { get => 1 + ((AllPowerPer + (GetAbility(AdditionAbility.ElementalPowerPer))) * 0.01f); private set { } }
@@ -134,7 +132,7 @@ public class StatModel : MonoBehaviour
     public void SetAbility(AdditionAbility ability, float value)
     {
         additionAbility[(int)ability] += value;
-        OnStatChange.Invoke();
+        OnStatChange?.Invoke();
     }
 
     // 최대 체력 변경
@@ -161,7 +159,6 @@ public class StatModel : MonoBehaviour
         if (saveData.StatSaveData == null) return;
         MaxHp = saveData.StatSaveData.maxHp;
         MaxStamina = saveData.StatSaveData.maxStamina;
-        AllPowerPer = saveData.StatSaveData.allPower;
         CurrentHp = saveData.StatSaveData.currentHp;
         CurrentMp = saveData.StatSaveData.currentMp;
         CurrentStamina = saveData.StatSaveData.currentStamina;

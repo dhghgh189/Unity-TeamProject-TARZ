@@ -17,7 +17,6 @@ public class StatSaveData
 {
     public float maxHp;
     public float maxStamina;
-    public float allPower;
     public float currentHp;
     public float currentMp;
     public float currentStamina;

@@ -15,19 +15,12 @@ public class Projectile_Mine : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        
-
+        _rigidBody.angularVelocity = Vector3.zero;
         _rigidBody.velocity = Vector3.zero;
-        // 밟으면 터질지
-        // 타이머로 터질지
-
-        // 이건 정해주시면 수정!!
-
+       
         IDamagable damagableObj = collision.gameObject.GetComponent<IDamagable>();
         if (damagableObj != null)
         {
-            
-
             Collider[] colliders = Physics.OverlapSphere(transform.position, _monsterSkillManager.BombSkill.Range);
             foreach (Collider collider in colliders)
             {

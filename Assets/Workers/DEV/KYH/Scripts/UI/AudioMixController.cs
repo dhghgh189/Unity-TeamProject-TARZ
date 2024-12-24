@@ -77,6 +77,7 @@ public class AudioMixController : MonoBehaviour
     {
         bool isMuted = masterMute.isOn;
         AudioListener.volume = isMuted ? 0 : 1;
+        masterSlider.interactable = !isMuted;
         PlayerPrefs.SetInt("MasterMute", isMuted ? 1 : 0);
         PlayerPrefs.Save();
     }
@@ -86,12 +87,14 @@ public class AudioMixController : MonoBehaviour
         if (bgmMute.isOn)
         {
             audioMixer.GetFloat("BGM", out muteBGM); // 현재 볼륨 저장
-            audioMixer.SetFloat("BGM", -80f);       // 음소거
+            audioMixer.SetFloat("BGM", -80f);        // 음소거
+            bgmSlider.interactable = false;
             PlayerPrefs.SetInt("BGMMute", 1);
         }
         else
         {
-            audioMixer.SetFloat("BGM", muteBGM);    // 이전 볼륨 복원
+            audioMixer.SetFloat("BGM", muteBGM);     // 이전 볼륨 복원
+            bgmSlider.interactable = true;
             PlayerPrefs.SetInt("BGMMute", 0);
         }
         PlayerPrefs.Save();
@@ -103,11 +106,13 @@ public class AudioMixController : MonoBehaviour
         {
             audioMixer.GetFloat("SFX", out muteSFX);
             audioMixer.SetFloat("SFX", -80f);
+            sfxSlider.interactable = false;
             PlayerPrefs.SetInt("SFXMute", 1);
         }
         else
         {
             audioMixer.SetFloat("SFX", muteSFX);
+            sfxSlider.interactable = true;
             PlayerPrefs.SetInt("SFXMute", 0);
         }
         PlayerPrefs.Save();

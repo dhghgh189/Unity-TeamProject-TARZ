@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerInput : MonoBehaviour
@@ -8,7 +10,6 @@ public class PlayerInput : MonoBehaviour
     public bool TryMelee { get; private set; }
     public bool TryDash { get; private set; }
     public bool TryDrain { get; private set; }
-    public bool TryInteraction { get; private set; }
 
     void Update()
     {
@@ -21,6 +22,5 @@ public class PlayerInput : MonoBehaviour
         TryThrow = Input.GetMouseButtonDown(0);
         TryMelee = Input.GetKeyDown(KeyCode.F);
         TryDrain = Input.GetKey(KeyCode.LeftControl);
-        TryInteraction = Input.GetKeyDown(KeyCode.E);
     }
 }

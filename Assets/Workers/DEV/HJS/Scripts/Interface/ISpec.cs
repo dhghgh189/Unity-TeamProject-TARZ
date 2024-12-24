@@ -13,5 +13,5 @@ public interface ISpec
     /// </summary>
     /// <param name="spec">정보</param>
     /// <param name="level">레벨</param>
-    public void SetSpec(SkillSpecDatabase.Spec spec, int level);
+    public void SetSpec(BaseSkillSO.Spec spec, int level);
 }

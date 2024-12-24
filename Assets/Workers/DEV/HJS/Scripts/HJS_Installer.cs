@@ -16,6 +16,7 @@ public class HJS_Installer : MonoInstaller
         Container.Bind<StatModel>().FromComponentInHierarchy().AsSingle();
         Container.Bind<Equipment>().FromComponentInHierarchy().AsSingle();
         Container.Bind<Inventory>().FromComponentInHierarchy().AsSingle();
+        Container.Bind<PlayerSkillHandler>().FromComponentInHierarchy().AsSingle();
         Container.Bind<AblityAdapter>().FromComponentInHierarchy().AsSingle();
         Container.Bind<UI_InventorySlots>().FromComponentsInHierarchy().AsSingle();
         Container.Bind<UI_EquipmentSlot>().FromComponentsInHierarchy().AsSingle();

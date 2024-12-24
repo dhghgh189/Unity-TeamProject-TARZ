@@ -10,20 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f7319c5f99579ca4c9935249024bb467, type: 3}
-  m_Name: EnhancedDrainSkill
+  m_Name: ExpandDrainSkill
   m_EditorClassIdentifier: 
-  Name: "\uAC15\uD654 \uB4DC\uB808\uC778"
-  Description: "\uB4DC\uB808\uC778\uC774 \uC624\uBE0C\uC81D\uD2B8\uB97C \uAC15\uD654\uD55C\uB2E4."
+  Name: "\uC775\uC2A4\uD39C\uB4DC \uB4DC\uB808\uC778"
+  Description: "\uBB3C\uAC74\uC744 \uB04C\uC5B4\uB2F9\uAE30\uB294 \uC601\uC5ED\uC774
+    \uD655\uC7A5\uB41C\uB2E4."
   Icon: {fileID: 0}
   MaxLevel: 3
-  Timing: 1
+  Timing: 3
   activeSkills: []
   passiveSkills:
-  - passiveType: 2
+  - passiveType: 0
     modifySetting:
-      ModifyType: 0
+      ModifyType: -1
       inputType: 0
-      Amount: 0
+      Amount: 3
       TempValue: 0
     conditionSetting:
       modifyType: 0
@@ -34,9 +35,9 @@ MonoBehaviour:
       resultModifyType: 0
       Amount: 0
     toggleSetting:
-      ToggleType: 1
+      ToggleType: 0
       On: 0
-      Name: ThrowObjectUpgrade
+      Name: 
   onChangeLevel:
     m_PersistentCalls:
       m_Calls: []

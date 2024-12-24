@@ -33,6 +33,9 @@ public class Interaction : IEffect, ISpec
             case InteractionType.Elec:
                 statusEffectable?.ElectroEffect(attacker, target, dotDamage, duration);
                 break;
+            case InteractionType.Poison:
+                statusEffectable?.PoisonEffect(attacker, target, dotDamage, duration);
+                break;
             case InteractionType.Frozen:
                 statusEffectable?.FrozenEffect(attacker, target, duration);
                 break;
@@ -45,7 +48,7 @@ public class Interaction : IEffect, ISpec
         }
     }
 
-    public void SetSpec(SkillSpecDatabase.Spec spec, int level)
+    public void SetSpec(BaseSkillSO.Spec spec, int level)
     {
         degree = spec.interactioDegree(level);
         duration = spec.InteractionDuration(level);

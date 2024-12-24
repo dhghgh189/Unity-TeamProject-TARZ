@@ -15,21 +15,23 @@ MonoBehaviour:
   Name: "\uBC84\uC11C\uD06C"
   Description: "\uACF5\uACA9\uB825\uACFC \uC2A4\uD53C\uB4DC\uAC00 \uB300\uD3ED \uC0C1\uC2B9\uD55C\uB2E4."
   Icon: {fileID: 0}
-  MaxLevel: 1
+  MaxLevel: 3
   Timing: 3
   activeSkills: []
   passiveSkills:
   - passiveType: 0
     modifySetting:
       ModifyType: 3
-      value: 50
+      inputType: 1
+      Amount: 50
+      TempValue: 0
     conditionSetting:
       modifyType: 0
       Condition: 0
       CompareValue: 0
       MaxValue: 0
+      isChanged: 0
       resultModifyType: 0
-      IsIncrease: 0
       Amount: 0
     toggleSetting:
       ToggleType: 0
@@ -38,14 +40,16 @@ MonoBehaviour:
   - passiveType: 0
     modifySetting:
       ModifyType: 2
-      value: 10
+      inputType: 0
+      Amount: 10
+      TempValue: 0
     conditionSetting:
       modifyType: 0
       Condition: 0
       CompareValue: 0
       MaxValue: 0
+      isChanged: 0
       resultModifyType: 0
-      IsIncrease: 0
       Amount: 0
     toggleSetting:
       ToggleType: 0
@@ -54,3 +58,4 @@ MonoBehaviour:
   onChangeLevel:
     m_PersistentCalls:
       m_Calls: []
+  model: {fileID: 0}

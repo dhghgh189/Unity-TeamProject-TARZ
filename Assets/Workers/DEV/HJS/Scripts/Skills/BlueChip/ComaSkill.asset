@@ -15,20 +15,22 @@ MonoBehaviour:
   Name: "\uCF54\uB9C8"
   Description: "\uC2A4\uD0DC\uBBF8\uB098\uAC00 0\uC774 \uB41C\uB2E4."
   Icon: {fileID: 0}
-  MaxLevel: 1
+  MaxLevel: 3
   Timing: 0
   activeSkills: []
   passiveSkills:
   - passiveType: 0
     modifySetting:
       ModifyType: 1
-      value: 0
-      tempValue: 0
+      inputType: 0
+      Amount: 0
+      TempValue: 0
     conditionSetting:
       modifyType: 0
       Condition: 0
       CompareValue: 0
       MaxValue: 0
+      isChanged: 0
       resultModifyType: 0
       Amount: 0
     toggleSetting:
@@ -38,3 +40,4 @@ MonoBehaviour:
   onChangeLevel:
     m_PersistentCalls:
       m_Calls: []
+  model: {fileID: 0}

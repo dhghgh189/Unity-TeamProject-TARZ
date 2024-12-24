@@ -15,7 +15,7 @@ MonoBehaviour:
   Name: "\uC775\uC2A4\uD50C\uB85C\uC2DC\uBE0C \uC0F7"
   Description: "\uB358\uC9C4 \uBB3C\uAC74\uC774 \uD3ED\uBC1C\uD55C\uB2E4"
   Icon: {fileID: 0}
-  MaxLevel: 1
+  MaxLevel: 3
   Timing: 0
   activeSkills:
   - who: 1
@@ -28,7 +28,22 @@ MonoBehaviour:
       - {fileID: 3417300274053618209, guid: b39e3830fdbba294e8acd0b6a79ff8c3, type: 3}
     interactionSetting:
       type: 0
+    skillLevelSpec:
+      statModel: {fileID: 0}
+      power:
+      - 2
+      - 4
+      - 6
+      range:
+      - 3
+      - 3
+      - 3
+      time: []
+      degree: []
+      damage: []
+      duration: []
   passiveSkills: []
   onChangeLevel:
     m_PersistentCalls:
       m_Calls: []
+  model: {fileID: 0}

@@ -60,4 +60,13 @@ public class GravityShoot : MonoBehaviour, ISpec
 
         Init();
     }
+
+    public void SetSpec(BaseSkillSO.Spec spec, int level)
+    {
+        operationTime = spec.Time(level);
+        force = spec.Power(level);
+        range = spec.Range(level);
+
+        Init();
+    }
 }

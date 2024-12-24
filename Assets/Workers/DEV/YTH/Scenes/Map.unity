@@ -341,7 +341,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1521863447}
-  - component: {fileID: 1521863446}
+  - component: {fileID: 1521863449}
   m_Layer: 0
   m_Name: Generator
   m_TagString: Untagged
@@ -349,22 +349,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1521863446
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1521863445}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc385eef053b45c4c95e21170e4c5081, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  size: {x: 10, y: 10}
-  startPos: 0
-  room: {fileID: 3239421350731138863, guid: 658c42f8327e681419b84ce9655a2ed4, type: 3}
-  offset: {x: 8, y: 8}
 --- !u!4 &1521863447
 Transform:
   m_ObjectHideFlags: 0
@@ -380,6 +364,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1521863449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1521863445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc385eef053b45c4c95e21170e4c5081, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  size: {x: 5, y: 5}
+  startPos: 0
+  room: {fileID: 7926232823591347676, guid: 7453a0b344f0a7d438a7430dbddbee0e, type: 3}
+  offset: {x: 50, y: 50}
+  RoomCount: 20
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

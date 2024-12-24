@@ -2,7 +2,7 @@ using BehaviorDesigner.Runtime.Tasks;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
-public class ActMonsterMove_NotStopInAttacking : Action
+public class ActMonsterMove_Block : Action
 {
     [SerializeField] CondMonsterCanMove _condMonsterCanMove;
 
@@ -12,7 +12,11 @@ public class ActMonsterMove_NotStopInAttacking : Action
 
     [SerializeField] Animator _animator;
 
-    [SerializeField] GameObject _player; 
+    [SerializeField] GameObject _player;
+
+    [SerializeField] Vector3 _playerBackRoute;
+
+    [SerializeField] float _stopBlockDistance = 5f; // 공격 거리 보다 조금 멀게
 
     private Transform _lastPlayerTransform; // 플레이어가 시야각에서 사라진 마지막 위치
 
@@ -25,20 +29,25 @@ public class ActMonsterMove_NotStopInAttacking : Action
 
     public override TaskStatus OnUpdate()
     {
-       
-
         _distance = Vector3.Distance(transform.position, _player.transform.position);
 
-        if (_condMonsterCanMove.ReturnObj != null/* && !_monsterData.IsAttacked && _distance > _monsterData.AttackRange*/) // _condMonsterCanMove.ReturnObj 는 시야각 내의 물체 (플레이어)
+        _playerBackRoute = _player.transform.position - _player.transform.forward * 10f;
+
+        if (_condMonsterCanMove.ReturnObj != null && _distance > _stopBlockDistance) // _condMonsterCanMove.ReturnObj 는 시야각 내의 물체 (플레이어)
         {
-            if( _distance <= _monsterData.AttackRange/* || _distance < _monsterData.CanUseProjectileSkillDistance */)
+            _agent.SetDestination(_playerBackRoute);
+            return TaskStatus.Running;
+        }
+        else if (_condMonsterCanMove.ReturnObj != null && _distance <= _stopBlockDistance)
+        {
+            if (_condMonsterCanMove.ReturnObj != null && _distance <= _monsterData.AttackRange)
             {
                 return TaskStatus.Success;
             }
-            _agent.SetDestination(_condMonsterCanMove.ReturnObj.transform.position);
+            _agent.SetDestination(_player.transform.position);
             return TaskStatus.Running;
-            // _animator.SetBool("walk", true); // 해쉬로 바꿔주면 좋을듯
         }
+
         else if (_condMonsterCanMove.ReturnObj == null)
         {
             _agent.SetDestination(_lastPlayerTransform.position);
@@ -49,7 +58,6 @@ public class ActMonsterMove_NotStopInAttacking : Action
             return TaskStatus.Failure;
         }
     }
-
 
     /// <summary>
     /// 플레이어가 시야에서 사라졌을때 마지막 플레이어 위치 기억
@@ -64,8 +72,6 @@ public class ActMonsterMove_NotStopInAttacking : Action
         yield return null;
         getLasPlayerTransform = null;
     }
-
-    
 }
 
 

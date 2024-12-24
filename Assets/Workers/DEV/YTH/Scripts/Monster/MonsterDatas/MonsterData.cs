@@ -54,7 +54,7 @@ public class MonsterData : MonoBehaviour
     [SerializeField] float _canUseProjectileSkillDistance; // 폭탄 좀비 스킬 가능 거리
     public float CanUseProjectileSkillDistance { get { return _canUseProjectileSkillDistance; } set { _canUseProjectileSkillDistance = value; } }
    
-    private static readonly int idleHash = Animator.StringToHash("Idle");
+    private static readonly int jake_Move_Hash = Animator.StringToHash("Jake_Move");
 
     private void Awake()
     {

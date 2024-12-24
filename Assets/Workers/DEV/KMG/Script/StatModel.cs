@@ -43,6 +43,12 @@ public class StatModel : MonoBehaviour
     public float SkillPowerPer { get => 1 + ((AllPowerPer + (GetAbility(AdditionAbility.SkillPowerPer))) * 0.01f); private set { } }
     public float ElementalPowerPer { get => 1 + ((AllPowerPer + (GetAbility(AdditionAbility.ElementalPowerPer))) * 0.01f); private set { } }
 
+    public float[] MpAmount = new float[(int)EMpAmountType.Length];
+    public float GetMpGain(EMpAmountType amountType)
+    {
+        return MpAmount[(int)amountType] * (1 + (GetAbility(AdditionAbility.MpGain) * 0.01f));
+    }
+
     [SerializeField] float staminarEgeneration;
     public float StaminarEgeneration { get => staminarEgeneration * (1 + ((GetAbility(AdditionAbility.StaminarEgeneration)) * 0.01f)); private set { } }
 

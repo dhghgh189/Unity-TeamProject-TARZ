@@ -27,8 +27,11 @@ public class PlayerAttack : MonoBehaviour
     private Vector3 dest;
     private float resultAngle;
 
+    private EffectGenerator generator;
+
     private Stack<ThrowObject> objectStack;
     public int ObjectCount => objectStack.Count;
+    public int MaxObjectCount => maxObjectCount;
 
     public LayerMask WhatIsEnemy { get { return whatIsEnemy; } }
 
@@ -42,7 +45,7 @@ public class PlayerAttack : MonoBehaviour
     public int MeleeEffectCount => meleeEffects.Count;
     public float ComboCheckTime => comboCheckTime;
 
-    private EffectGenerator generator;
+    public event UnityAction<int> OnChangedStack; 
 
     private void Awake()
     {
@@ -189,8 +192,8 @@ public class PlayerAttack : MonoBehaviour
         tobj.transform.parent = stackTransform;
         tobj.gameObject.SetActive(false);
 
-        // 이벤트?
-        //Debug.Log($"<color=yellow>Stack Count : {ObjectCount}</color>");
+        // 이벤트
+        OnChangedStack?.Invoke(objectStack.Count);
     }
 
     public ThrowObject PopObjectStack()
@@ -203,8 +206,8 @@ public class PlayerAttack : MonoBehaviour
 
         ThrowObject tobj = objectStack.Pop();
 
-        // 이벤트?
-        //Debug.Log($"<color=yellow>Stack Count : {ObjectCount}</color>");
+        // 이벤트
+        OnChangedStack?.Invoke(objectStack.Count);
 
         return tobj;
     }
@@ -277,6 +280,9 @@ public class PlayerAttack : MonoBehaviour
             // 최종 데미지 = 타수별 공격력 + (타수별 공격력 * 현재 스탯상 증가량)
             float damage = MeleeAttackInfo[MeleeCount].Damage * player.Stat.DefaultPowerPer;        
             damagable.TakeDamage(damage);
+
+            // Mp 회복
+            player.Stat.CurrentMp += player.Stat.GetMpGain(EMpAmountType.Melee);
         }
 
         if (MeleeEffectCount > 0)

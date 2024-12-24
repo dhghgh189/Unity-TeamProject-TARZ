@@ -297,11 +297,6 @@ public class PlayerAttack : MonoBehaviour
 
         if (MeleeEffectCount > 0)
             ClearMeleeEffects();
-
-        if (MeleeCount < MeleeCountMax - 1)
-            MeleeCount++;
-        else
-            MeleeCount = 0;
     }
 
     private bool IsTargetInAngle(Transform targetTrf)

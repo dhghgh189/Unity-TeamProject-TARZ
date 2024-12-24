@@ -10,10 +10,6 @@ public class MeleeState : BaseState<PlayerController>
     private float animTimer;
     private float comboTimer;
 
-    // 공격 진행전의 카운트를 체크해야 하므로
-    // 공격전 PlayerAttack 스크립트의 Count를 저장해두는 용도
-    private int meleeCount;
-
     private Transform camTrf;
 
     private Vector3 lookDir;
@@ -37,9 +33,8 @@ public class MeleeState : BaseState<PlayerController>
         if (camTrf == null)
             camTrf = Camera.main.transform;
 
-        // 공격을 진행하기 전의 Count를 미리 저장해둔다.
-        // Update시점에는 이미 Count가 바뀌기 때문에 먼저 저장한다
-        meleeCount = owner.Attack.MeleeCount;
+        // Attack 시작 시에는 콤보 진행 불가능하도록 set
+        owner.Attack.CanUseCombo = false;
 
         comboTimer = 0f;
         owner.Movement.Move(Vector3.zero);
@@ -82,44 +77,28 @@ public class MeleeState : BaseState<PlayerController>
             return;
         }
 
+        // 콤보가 가능한 상황에 입력이 확인된 경우 
+        if (owner.Attack.CanUseCombo && owner.PInput.TryMelee)
+        {
+            // 애니메이션이 끝나기 전에 전이하므로 카운트를 수동으로 증가
+            owner.Attack.MeleeCount++;
+            OnEnter();
+            return;
+        }
+
         // 애니메이션 재생이 완료되면 상태 종료
         if (animTimer <= 0)
         {
             // Adjust를 중지하기 위해 lookDir을 초기화
             lookDir = Vector3.zero;
 
-            if (meleeCount >= owner.Attack.MeleeCountMax-1)
-            {
-                owner.ChangeState(EState.Idle);
-            }
-            else
-            {
-                comboTimer = owner.Attack.ComboCheckTime;
-                animTimer = 999;
-            }
-            
+            // 타수 초기화
+            owner.Attack.MeleeCount = 0;
+            owner.ChangeState(EState.Idle);
             return;
         }
 
         // timer 진행
         animTimer -= Time.deltaTime;
-
-        if (comboTimer > 0)
-        {
-            comboTimer -= Time.deltaTime;
-            // 다음 콤보를 사용하기 까지 제한시간
-            if (comboTimer <= 0)
-            {
-                owner.Attack.MeleeCount = 0;
-                owner.ChangeState(EState.Idle);
-                return;
-            }
-
-            if (owner.PInput.TryMelee)
-            {
-                OnEnter();
-                return;
-            }
-        }
     }
 }

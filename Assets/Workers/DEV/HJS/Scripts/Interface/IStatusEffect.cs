@@ -24,7 +24,14 @@ public interface IStatusEffect
     /// <param name="dotDamage">도트 데미지의 량</param>
     /// <param name="duration">지속 시간</param>
     public void ElectroEffect(GameObject attacker, GameObject target, float dotDamage, float duration);
-
+    /// <summary>
+    /// 독 중독 효과
+    /// </summary>
+    /// <param name="attacker">요청한(공격한) 오브젝트</param>
+    /// <param name="target">효과를 받는 오브젝트</param>
+    /// <param name="dotDamage">도트 데미지의 량</param>
+    /// <param name="duration">지속 시간</param>
+    public void PoisonEffect(GameObject attacker, GameObject target, float dotDamage, float duration);
     /// <summary>
     /// 빙결 효과
     /// </summary>

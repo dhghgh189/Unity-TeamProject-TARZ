@@ -10,10 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f7319c5f99579ca4c9935249024bb467, type: 3}
-  m_Name: ExplosiveDashSkill
+  m_Name: OctoDashSkill
   m_EditorClassIdentifier: 
-  Name: "\uC775\uC2A4\uD50C\uB85C\uC2DC\uBE0C \uB300\uC26C"
-  Description: "\uB300\uC26C\uB97C \uD558\uBA74 \uD3ED\uBC1C\uC744 \uB0A8\uAE34\uB2E4"
+  Name: "\uC625\uD1A0 \uB300\uC26C"
+  Description: "\uB300\uC26C\uB97C \uD560 \uB54C, \uC801\uC744 \uB290\uB824\uC9C0\uAC8C
+    \uD558\uB294 \uBA39\uBB3C\uC744 \uC0DD\uC131\uD55C\uB2E4."
   Icon: {fileID: 0}
   MaxLevel: 3
   Timing: 2
@@ -25,23 +26,29 @@ MonoBehaviour:
     Interaction: 0
     createSetting:
       CreateObject:
-      - {fileID: 3417300274053618209, guid: b39e3830fdbba294e8acd0b6a79ff8c3, type: 3}
+      - {fileID: 4688106670512780271, guid: d1a99d7ef1de55042b60504788f3053c, type: 3}
     interactionSetting:
       type: 0
     skillLevelSpec:
       statModel: {fileID: 0}
-      power:
-      - 2
-      - 4
-      - 6
+      power: []
       range:
       - 3
       - 3
       - 3
-      time: []
-      degree: []
+      time:
+      - 1
+      - 2
+      - 3
+      degree:
+      - 0.8
+      - 0.6
+      - 0.4
       damage: []
-      duration: []
+      duration:
+      - 1
+      - 2
+      - 3
   passiveSkills: []
   onChangeLevel:
     m_PersistentCalls:

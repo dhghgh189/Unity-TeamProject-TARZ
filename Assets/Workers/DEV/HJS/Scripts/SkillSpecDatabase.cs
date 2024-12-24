@@ -48,6 +48,5 @@ public class SkillSpecDatabase : ScriptableObject
         public float interactioDegree(int level) { return (degree.Count > 0) ? degree[level - 1] : 0 ;}
         public float InteractionDuration(int level) { return (duration.Count > 0) ? duration[level - 1] : 0; }
         public float InteractionDamage(int level) { return (damage.Count > 0) ? damage[level - 1] : 0; }
-
     }
 }

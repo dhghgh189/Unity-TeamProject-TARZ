@@ -16,21 +16,23 @@ MonoBehaviour:
   Description: "HP\uAC00 10% \uC774\uD558\uC778 \uACBD\uC6B0 \uC2A4\uD0DC\uBBF8\uB098\uB97C 
     \uC18C\uBE44\uD558\uC9C0 \uC54A\uB294\uB2E4."
   Icon: {fileID: 0}
-  MaxLevel: 1
+  MaxLevel: 3
   Timing: 3
   activeSkills: []
   passiveSkills:
   - passiveType: 1
     modifySetting:
       ModifyType: 0
-      value: 0
+      inputType: 0
+      Amount: 0
+      TempValue: 0
     conditionSetting:
       modifyType: 0
       Condition: 3
-      CompareValue: 0.1
+      CompareValue: 10
       MaxValue: 0
-      resultModifyType: 1
-      IsIncrease: 1
+      isChanged: 0
+      resultModifyType: 5
       Amount: 0
     toggleSetting:
       ToggleType: 0
@@ -39,3 +41,4 @@ MonoBehaviour:
   onChangeLevel:
     m_PersistentCalls:
       m_Calls: []
+  model: {fileID: 0}

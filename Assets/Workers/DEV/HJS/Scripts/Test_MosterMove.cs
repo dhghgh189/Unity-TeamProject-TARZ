@@ -15,7 +15,7 @@ public class Test_MosterMove : MonoBehaviour, IStatusEffect
 
     public void ElectroEffect(GameObject attacker, GameObject target, float dotDamage, float duration)
     {
-        StartCoroutine(DotDamageRoutine(dotDamage, duration));
+        StartCoroutine(DotDamageRoutine(dotDamage, duration, "전기"));
     }
 
     public void FrozenEffect(GameObject attacker, GameObject target, float duration)
@@ -28,13 +28,13 @@ public class Test_MosterMove : MonoBehaviour, IStatusEffect
         StartCoroutine(SlowRoutine(degree, duration));
     }
 
-    private IEnumerator DotDamageRoutine(float dotDamage, float duration)
+    private IEnumerator DotDamageRoutine(float dotDamage, float duration, string type)
     {
         float time = 0;
 
         while(time < duration)
         {
-            Debug.Log($"전기 효과로 {dotDamage}의 도트데미지를 받는다!");
+            Debug.Log($"{type} 효과로 {dotDamage}의 도트데미지를 받는다!");
             hp -= dotDamage;
             yield return new WaitForSeconds(1f);
             time += 1;
@@ -63,10 +63,21 @@ public class Test_MosterMove : MonoBehaviour, IStatusEffect
     {
         yield return new WaitForSeconds(3f);
         moveSpeed = 2f;
+
+        while (true)
+        {
+            yield return new WaitForSeconds(2f);
+            moveSpeed *= -1;
+        }
     }
-    
+
     void Update()
     {
         transform.Translate(transform.forward * moveSpeed * Time.deltaTime);
+    }
+
+    public void PoisonEffect(GameObject attacker, GameObject target, float dotDamage, float duration)
+    {
+        StartCoroutine(DotDamageRoutine(dotDamage, duration, "중독"));
     }
 }

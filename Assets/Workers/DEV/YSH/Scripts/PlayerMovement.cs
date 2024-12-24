@@ -34,6 +34,23 @@ public class PlayerMovement : MonoBehaviour
         GroundCheck();
     }
 
+    #region Anim Event
+    public void FootStep()
+    {
+        // 플레이어 Move시 발생하는 이벤트
+    }
+
+    public void DashBoostPlay()
+    {
+        // 대쉬 초반의 부스트 시작 시 발생하는 이벤트
+    }
+
+    public void StampDustPlay()
+    {
+        // 대쉬 막바지의 착지 시 발생하는 이벤트
+    }
+    #endregion
+
     public void Move(Vector3 moveVelocity)
     {
         Vector3 ForwardDir = new Vector3(mainCamTrf.forward.x, 0f, mainCamTrf.forward.z).normalized;

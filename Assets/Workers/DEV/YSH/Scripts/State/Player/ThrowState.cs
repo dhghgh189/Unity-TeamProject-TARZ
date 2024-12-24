@@ -11,7 +11,6 @@ public class ThrowState : BaseState<PlayerController>
     private float animTimer;
 
     private float comboTimer;
-    private int throwCount;
 
     private Vector3 inputDir;
 
@@ -50,10 +49,13 @@ public class ThrowState : BaseState<PlayerController>
         if (camTrf == null)
             camTrf = Camera.main.transform;
 
+        // Attack 시작 시에는 콤보 진행 불가능하도록 set
+        owner.Attack.CanUseCombo = false;
+
+        owner.SkillHandler.Use(SkillEnum.ActTimingType.Attack);
+
         // 최초 진입시점 때의 입력값을 기억한다.
         inputDir = owner.PInput.InputDir;
-
-        throwCount = owner.Attack.ThrowCount;
 
         comboTimer = 0f;
         
@@ -78,7 +80,7 @@ public class ThrowState : BaseState<PlayerController>
 
     private void SetAction()
     {
-        MultiActionInfo[] multiActions = owner.Attack.ThrowAttackInfo[throwCount].MultiActions;
+        MultiActionInfo[] multiActions = owner.Attack.ThrowAttackInfo[owner.Attack.ThrowCount].MultiActions;
         if (multiActions.Length <= 0)
         {
             owner.Anim.CrossFade(throwAnimHashes[owner.Attack.ThrowCount], 0.01f);
@@ -88,17 +90,17 @@ public class ThrowState : BaseState<PlayerController>
         int animHash;
         if (inputDir.x > 0)
         {
-            animHash = throwMultiAnimHashes[throwCount, (int)EMultiActionType.Right];
+            animHash = throwMultiAnimHashes[owner.Attack.ThrowCount, (int)EMultiActionType.Right];
             owner.Attack.ActionType = EMultiActionType.Right;
         }
         else if (inputDir.x < 0)
         {
-            animHash = throwMultiAnimHashes[throwCount, (int)EMultiActionType.Left];
+            animHash = throwMultiAnimHashes[owner.Attack.ThrowCount, (int)EMultiActionType.Left];
             owner.Attack.ActionType = EMultiActionType.Left;
         }
         else
         {
-            animHash = throwMultiAnimHashes[throwCount, (int)EMultiActionType.Basic];
+            animHash = throwMultiAnimHashes[owner.Attack.ThrowCount, (int)EMultiActionType.Basic];
             owner.Attack.ActionType = EMultiActionType.Basic;
         }
 
@@ -110,9 +112,7 @@ public class ThrowState : BaseState<PlayerController>
         // 애니메이션 재생 후 바로 info를 가져오면 이전 클립 정보가 받아지므로
         // 잠시 대기하는 시간을 가져야 한다.
         yield return new WaitForSeconds(0.1f);
-        AnimatorStateInfo info = owner.Anim.GetCurrentAnimatorStateInfo(0);
-        // 현재 재생된 애니메이션의 length를 받는다 (speed가 고려되야 함)
-        animTimer = info.length / info.speed;
+        animTimer = owner.GetCurrentAnimTime();
     }
 
     public override void OnUpdate()
@@ -125,10 +125,24 @@ public class ThrowState : BaseState<PlayerController>
 
         // 대쉬가 입력되면 공격을 캔슬 (점프 시에는 불가)
         // 공격 카운트도 체크하여 마지막 공격때는 캔슬안되게 해야 함
-        if (owner.Movement.IsGrounded && owner.PInput.TryDash)
+        if (owner.Movement.IsGrounded 
+            && owner.PInput.TryDash 
+            && owner.IsEnoughStamina(owner.Stat.DashStaminaAmount))
         {
             owner.Attack.ThrowCount = 0;
             owner.ChangeState(EState.Dash);
+            return;
+        }
+
+        // 콤보가 가능한 상황에 입력이 확인된 경우 
+        // 물건 스택또한 존재해야 함
+        if (owner.Attack.CanUseCombo 
+            && owner.PInput.TryThrow
+            && owner.Attack.ObjectCount > 0)
+        {
+            // 애니메이션이 끝나기 전에 전이하므로 카운트를 수동으로 증가
+            owner.Attack.ThrowCount++;
+            OnEnter();
             return;
         }
 
@@ -138,43 +152,13 @@ public class ThrowState : BaseState<PlayerController>
             // Adjust를 중지하기 위해 lookDir을 초기화
             lookDir = Vector3.zero;
 
-            owner.Attack.ThrowCount++;
-
-            // 마지막 타수였거나 물건 스택이 없는 경우 바로 Idle로 이동
-            if (owner.Attack.ThrowCount >= owner.Attack.ThrowCountMax 
-                || owner.Attack.ObjectCount <= 0)
-            {
-                owner.Attack.ThrowCount = 0;
-                owner.ChangeState(EState.Idle);
-            }
-            else
-            {
-                comboTimer = owner.Attack.ComboCheckTime;
-                animTimer = 999;
-            }
-
+            // 타수 초기화
+            owner.Attack.ThrowCount = 0;
+            owner.ChangeState(EState.Idle);
             return;
         }
 
         // timer 진행
         animTimer -= Time.deltaTime;
-
-        if (comboTimer > 0)
-        {
-            comboTimer -= Time.deltaTime;
-            // 다음 콤보를 사용하기 까지 제한시간
-            if (comboTimer <= 0)
-            {
-                owner.Attack.ThrowCount = 0;
-                owner.ChangeState(EState.Idle);
-                return;
-            }
-
-            if (owner.PInput.TryThrow)
-            {
-                OnEnter();
-                return;
-            }
-        }
     }
 }

@@ -45,6 +45,8 @@ public class PlayerAttack : MonoBehaviour
     public int MeleeEffectCount => meleeEffects.Count;
     public float ComboCheckTime => comboCheckTime;
 
+    public bool CanUseCombo;
+
     public event UnityAction<int> OnChangedStack; 
 
     private void Awake()
@@ -248,8 +250,16 @@ public class PlayerAttack : MonoBehaviour
         tobj.transform.parent = null;
         tobj.transform.position = throwPoint.position;
         tobj.gameObject.SetActive(true);
+        if (tobj.Upgrade.IsUpgraded)
+        {
+            // 순수데미지에 1.5 계산
+            tobj.Upgrade.UpgradeDamage(damage, out float result);
+            damage = result;
+            Debug.Log($"1.5 damage : {damage}");
+        }
         // 최종 데미지 = 타수별 공격력 + (타수별 공격력 * 현재 스탯상 증가량)
         damage = damage * player.Stat.DefaultPowerPer;
+        Debug.Log($"final damage : {damage}");
         tobj.SetDamage(damage);
         tobj.Throw(transform.forward + (transform.up * 0.3f), throwForce);
     }
@@ -287,11 +297,6 @@ public class PlayerAttack : MonoBehaviour
 
         if (MeleeEffectCount > 0)
             ClearMeleeEffects();
-
-        if (MeleeCount < MeleeCountMax - 1)
-            MeleeCount++;
-        else
-            MeleeCount = 0;
     }
 
     private bool IsTargetInAngle(Transform targetTrf)
@@ -310,6 +315,20 @@ public class PlayerAttack : MonoBehaviour
 
         return true;
     }
+
+    #region Control Combo
+    public void OnCombo()
+    {
+        // 콤보가 가능하도록 flag set
+        CanUseCombo = true;
+    }
+
+    public void EndCombo()
+    {
+        // 콤보가 불가능하도록 flag set
+        CanUseCombo = false;
+    }
+    #endregion
 
     private void OnDrawGizmos()
     {

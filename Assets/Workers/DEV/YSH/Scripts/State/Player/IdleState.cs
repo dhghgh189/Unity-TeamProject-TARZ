@@ -20,13 +20,13 @@ public class IdleState : BaseState<PlayerController>
     {
         base.OnUpdate();
         // 대쉬
-        if (owner.PInput.TryDash)
+        if (owner.PInput.TryDash && owner.IsEnoughStamina(owner.Stat.DashStaminaAmount))
         {
             owner.ChangeState(EState.Dash);
             return;
         }
 
-        if (owner.PInput.TryDrain)
+        if (owner.PInput.TryDrain && owner.Stat.CurrentStamina > 0)
         {
             owner.ChangeState(EState.Drain);
             return;

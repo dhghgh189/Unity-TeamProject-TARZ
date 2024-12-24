@@ -1,9 +1,11 @@
 using BehaviorDesigner.Runtime;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using Zenject;
+using static SkillEnum;
 
 public enum EMachineType { Movement, Attack }
 
@@ -15,13 +17,12 @@ public class PlayerController : MonoBehaviour, IDamagable
 
     private Animator anim;
 
+    [SerializeField] private AblityAdapter adapter;
     [SerializeField] private DrainManager drainManager;
-    [SerializeField] Renderer render;
 
     public EState currentStateView;
 
-    public Color BaseColor { get; private set; }
-
+    public PlayerSkillHandler SkillHandler;
     public PlayerFSM Fsm { get; private set; }
     public Animator Anim { get { return anim; } }
     public PlayerInput PInput { get; private set; }
@@ -29,7 +30,6 @@ public class PlayerController : MonoBehaviour, IDamagable
     public PlayerMovement Movement { get; private set; }
     public PlayerAttack Attack { get; private set; }
     public DrainManager Drain { get { return drainManager; } }
-    public Renderer Render { get { return render; } }
 
     void Awake()
     {
@@ -39,17 +39,31 @@ public class PlayerController : MonoBehaviour, IDamagable
         Movement = GetComponent<PlayerMovement>();
         Attack = GetComponent<PlayerAttack>();
 
-        Fsm = new PlayerFSM(this);
+        SkillHandler = GetComponent<PlayerSkillHandler>();
 
-        BaseColor = render.material.color;
+        Fsm = new PlayerFSM(this, GetComponent<AblityAdapter>());
 
-        //Cursor.visible = false;
-        //Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        
+        // test
+        isLocked = true;
     }
 
+    // test
+    bool isLocked;
     private void Update()
     {
         Fsm.OnUpdate();
+
+        // test
+        if (Input.GetKeyDown(KeyCode.F2))
+        {
+            Cursor.visible = isLocked;
+            Cursor.lockState = isLocked ? CursorLockMode.None : CursorLockMode.Locked;
+            isLocked = !isLocked;
+        }
+
         return;
     }
 
@@ -84,4 +98,27 @@ public class PlayerController : MonoBehaviour, IDamagable
     {
         Stat.CurrentHp -= damage;
     }
+
+    // 추후 StatModel로 옮기는게 좋을 듯
+    public bool IsEnoughStamina(float amount)
+    {
+        Debug.Log($"<color=cyan>Current Stamina : {stat.CurrentStamina}, Amount : {amount}</color>");
+        return stat.CurrentStamina >= amount;
+    }
+
+    public float GetCurrentAnimTime()
+    {
+        AnimatorStateInfo info = anim.GetCurrentAnimatorStateInfo(0);
+        // 현재 재생되는 애니메이션의 총 길이와 speed를 계산하여 실제 재생 시간을 반환 
+        return (info.length / info.speed);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.layer.Equals(LayerMask.NameToLayer("Monster")))
+        {
+            SkillHandler.PlayerCollision((ActTimingType)Enum.Parse(typeof(ActTimingType), currentStateView.ToString()), collision.gameObject);
+        }
+    }
+
 }

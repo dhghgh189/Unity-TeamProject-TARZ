@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject.SpaceFighter;
 
 public class DrainState : BaseState<PlayerController>
 { 
@@ -13,6 +14,8 @@ public class DrainState : BaseState<PlayerController>
     public override void OnEnter()
     {
         base.OnEnter();
+        owner.SkillHandler.Use(SkillEnum.ActTimingType.Drain);
+
         owner.Movement.Move(Vector3.zero);
         owner.Anim.CrossFade(Define.HASH_ANIM_DRAIN, 0.125f);
         owner.Drain.StartDrain();
@@ -21,7 +24,19 @@ public class DrainState : BaseState<PlayerController>
     public override void OnUpdate()
     {
         base.OnUpdate();
-        if (!owner.PInput.TryDrain)
+
+        // 대쉬가 입력되면 공격을 캔슬 (점프 시에는 불가)
+        if (owner.PInput.TryDash && owner.IsEnoughStamina(owner.Stat.DashStaminaAmount))
+        {
+            owner.Attack.MeleeCount = 0;
+            owner.ChangeState(EState.Dash);
+            return;
+        }
+
+        // 드레인 중에는 스테미너 감소
+        owner.Stat.ChangeStamina(-(owner.Drain.DrainStaminaAmount * Time.deltaTime));
+
+        if (!owner.PInput.TryDrain || owner.Stat.CurrentStamina <= 0)
         {
             owner.Drain.StopDrain();
             owner.ChangeState(EState.Idle);

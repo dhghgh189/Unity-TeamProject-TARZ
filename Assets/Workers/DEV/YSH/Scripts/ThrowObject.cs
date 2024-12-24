@@ -8,11 +8,17 @@ public class ThrowObject : MonoBehaviour, IDrainable
 {
     [SerializeField] private LayerMask whatIsTarget;
 
+    [SerializeField]
+    private AblityAdapter adapter;
+    public PlayerSkillHandler handler;
+
     [SerializeField] private bool isCollected;
     private Rigidbody rigid;
     private PlayerController owner;
 
     private float damage;
+
+    public ThrowObjectUpgrade Upgrade { get; private set; }
 
     public bool IsCollected { get { return isCollected; } set { isCollected = value; } }
 
@@ -23,7 +29,13 @@ public class ThrowObject : MonoBehaviour, IDrainable
     private void Awake()
     {
         rigid = GetComponent<Rigidbody>();
+        Upgrade = GetComponent<ThrowObjectUpgrade>();
         throwEffects = new List<IEffect>();
+    }
+
+    private void OnEnable()
+    {
+        handler.Use(gameObject);
     }
 
     private void OnDisable()
@@ -47,6 +59,7 @@ public class ThrowObject : MonoBehaviour, IDrainable
 
     public void Throw(Vector3 dir, float throwForce)
     {
+        if (adapter.IsEnable("GuidedFuncion")) GetComponent<GuidedFuncion>().enabled = true;
         rigid.AddForce(dir * throwForce, ForceMode.Impulse);
     }
 
@@ -71,9 +84,7 @@ public class ThrowObject : MonoBehaviour, IDrainable
             // 스택에 들어가는 과정에서 Throw Object끼리 충돌하여
             // isCollected가 초기화 되는 것을 방지
             if (gameObject.transform.parent == null)
-            {
                 isCollected = false;
-            }
 
             if (throwEffects.Count > 0)
                 throwEffects.Clear();
@@ -91,6 +102,8 @@ public class ThrowObject : MonoBehaviour, IDrainable
             owner.Stat.CurrentMp += owner.Stat.GetMpGain(EMpAmountType.Throw);
         }
 
+        handler.ThrowObjectCollision(gameObject, other.gameObject);
+
         Destroy(gameObject);
     }
 
@@ -98,6 +111,13 @@ public class ThrowObject : MonoBehaviour, IDrainable
     {
         if (drainRoutine != null)
             return;
+
+        // 강화 오브젝트가 작동 중 이면 사용을 안한다
+        if (adapter.IsEnable("ThrowObjectUpgrade"))
+        {
+            Upgrade.IsUpgraded = true;
+            return;
+        }
 
         rigid.useGravity = false;
         rigid.constraints = RigidbodyConstraints.FreezeRotation;

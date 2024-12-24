@@ -15,20 +15,20 @@ public class MoveState : BaseState<PlayerController>
     public override void OnEnter()
     {
         base.OnEnter();
-        owner.Anim.CrossFade(Define.HASH_ANIM_RUN, 0.125f);
+        owner.Anim.CrossFade(Define.HASH_ANIM_MOVE, 0.125f);
     }
 
     public override void OnUpdate()
     {
         base.OnUpdate();
 
-        if (owner.PInput.TryDash)
+        if (owner.PInput.TryDash && owner.IsEnoughStamina(owner.Stat.DashStaminaAmount))
         {
             owner.ChangeState(EState.Dash);
             return;
         }
 
-        if (owner.PInput.TryDrain)
+        if (owner.PInput.TryDrain && owner.Stat.CurrentStamina > 0)
         {
             owner.ChangeState(EState.Drain);
             return;

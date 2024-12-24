@@ -4,8 +4,8 @@ using Zenject;
 public class ArmUpgradManager : MonoBehaviour
 {
     [Inject] SaveData saveData;
-    [Inject] SaveManager saveManager;
     [Inject] StatModel statModel;
+    [Inject] SaveManager saveManager;
 
     private void Start()
     {

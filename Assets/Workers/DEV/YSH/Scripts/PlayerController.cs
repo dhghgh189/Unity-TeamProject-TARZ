@@ -102,6 +102,13 @@ public class PlayerController : MonoBehaviour, IDamagable
         Stat.CurrentHp -= damage;
     }
 
+    // 추후 StatModel로 옮기는게 좋을 듯
+    public bool IsEnoughStamina(float amount)
+    {
+        Debug.Log($"<color=cyan>Current Stamina : {stat.CurrentStamina}, Amount : {amount}</color>");
+        return stat.CurrentStamina >= amount;
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.layer.Equals(LayerMask.NameToLayer("Monster")))

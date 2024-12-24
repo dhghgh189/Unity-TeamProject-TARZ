@@ -22,7 +22,7 @@ public class MoveState : BaseState<PlayerController>
     {
         base.OnUpdate();
 
-        if (owner.PInput.TryDash)
+        if (owner.PInput.TryDash && owner.IsEnoughStamina(owner.Stat.DashStaminaAmount))
         {
             owner.ChangeState(EState.Dash);
             return;

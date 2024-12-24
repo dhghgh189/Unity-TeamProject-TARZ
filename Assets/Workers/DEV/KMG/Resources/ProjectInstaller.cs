@@ -14,7 +14,5 @@ public class ProjectInstaller : MonoInstaller
         }
         Container.Bind<SaveData>().FromInstance(saveData);
         Container.Bind<StatModel>().FromInstance(statModel);
-        Container.Bind<AblityAdapter>().FromComponentInHierarchy().AsSingle();
-        Container.Bind<PlayerAttack>().FromComponentInHierarchy().AsSingle();
     }
 }

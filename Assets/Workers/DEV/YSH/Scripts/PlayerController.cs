@@ -19,11 +19,8 @@ public class PlayerController : MonoBehaviour, IDamagable
 
     [SerializeField] private AblityAdapter adapter;
     [SerializeField] private DrainManager drainManager;
-    [SerializeField] Renderer render;
 
     public EState currentStateView;
-
-    public Color BaseColor { get; private set; }
 
     public PlayerSkillHandler SkillHandler;
     public PlayerFSM Fsm { get; private set; }
@@ -33,7 +30,6 @@ public class PlayerController : MonoBehaviour, IDamagable
     public PlayerMovement Movement { get; private set; }
     public PlayerAttack Attack { get; private set; }
     public DrainManager Drain { get { return drainManager; } }
-    public Renderer Render { get { return render; } }
 
     void Awake()
     {
@@ -46,8 +42,6 @@ public class PlayerController : MonoBehaviour, IDamagable
         SkillHandler = GetComponent<PlayerSkillHandler>();
 
         Fsm = new PlayerFSM(this, GetComponent<AblityAdapter>());
-
-        BaseColor = render.material.color;
 
         //Cursor.visible = false;
         //Cursor.lockState = CursorLockMode.Locked;

@@ -112,9 +112,7 @@ public class ThrowState : BaseState<PlayerController>
         // 애니메이션 재생 후 바로 info를 가져오면 이전 클립 정보가 받아지므로
         // 잠시 대기하는 시간을 가져야 한다.
         yield return new WaitForSeconds(0.1f);
-        AnimatorStateInfo info = owner.Anim.GetCurrentAnimatorStateInfo(0);
-        // 현재 재생된 애니메이션의 length를 받는다 (speed가 고려되야 함)
-        animTimer = info.length / info.speed;
+        animTimer = owner.GetCurrentAnimTime();
     }
 
     public override void OnUpdate()

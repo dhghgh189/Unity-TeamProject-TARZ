@@ -15,7 +15,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float jumpForce;
 
     public float JumpForce { get { return jumpForce; } }
-    public float DashTime { get { return dashTime; } }
+    public float DashTime { get { return dashTime; } set { dashTime = value; Debug.Log("Dash가 변경되었다!"); } }
     public bool IsGrounded { get { return isGrounded; } }
     public Vector3 CurrentVelocity => rigid.velocity;
 

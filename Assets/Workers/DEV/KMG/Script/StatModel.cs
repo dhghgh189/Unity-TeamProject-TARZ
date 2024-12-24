@@ -83,7 +83,7 @@ public class StatModel : MonoBehaviour
     public float CurrentStamina 
     { 
         get => currentStamina;
-        private set
+        set
         {
             currentStamina = Mathf.Clamp(value, 0, MaxStamina);
             OnCurStaminaChange?.Invoke(currentStamina);
@@ -168,5 +168,18 @@ public class StatModel : MonoBehaviour
             additionAbility[i] = saveData.StatSaveData.additionAbility[i];
         }
         SetAbility(AdditionAbility.AllPowerPer, 0);
+    }
+
+    public void AllCheck()
+    {
+        OnMaxHpChange?.Invoke(MaxHp);
+        OnMaxStaminaChange?.Invoke(MaxStamina);
+        OnMoveSpeedChange?.Invoke(MoveSpeed);
+        OnCurHpChange?.Invoke(currentHp);
+        OnCurMpChange?.Invoke(currentMp);
+        OnCurStaminaChange?.Invoke(currentStamina);
+        OnChipChange?.Invoke(Chip);
+        OnBlackChipChange?.Invoke(BlackChip);
+        OnStatChange?.Invoke();
     }
 }

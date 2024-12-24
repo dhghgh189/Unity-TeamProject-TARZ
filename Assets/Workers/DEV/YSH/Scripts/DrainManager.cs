@@ -17,6 +17,7 @@ public class DrainManager : MonoBehaviour
 
     public PlayerController Player => player;
     public float DrainSpeed => drainSpeed;
+    public float MaxRadius { get => maxRadius; set { maxRadius = value; } }
 
     public float DrainStaminaAmount;
 
@@ -74,6 +75,7 @@ public class DrainManager : MonoBehaviour
         {
             drainable.DoDrain(this);
         }
+        player.SkillHandler.PlayerCollision(SkillEnum.ActTimingType.Drain, other.gameObject);
     }
 
     private void OnTriggerExit(Collider other)

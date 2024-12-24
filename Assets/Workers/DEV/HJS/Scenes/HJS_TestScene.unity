@@ -122,62 +122,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &5677471 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1277732147236810276, guid: a6a424693f63ae04788f8ca7d29163b6,
-    type: 3}
-  m_PrefabInstance: {fileID: 238180348}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &5677472
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5677471}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d074954e16471b54d840b355c42aafc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  name: ThrowObjectConvertMine
-  enable: 0
-  render: {fileID: 0}
-  meshFilter: {fileID: 0}
-  damage: 100
-  mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
-  material: {fileID: 2100000, guid: 1cbea31056ef96a4386b52b61d4b91eb, type: 2}
-  layer: CantThrowObject
---- !u!114 &5677473
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5677471}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcd14377e66e6e14c98ff2bb86c5d344, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  enable: 0
-  name: GuidedFuncion
---- !u!114 &5677474
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5677471}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4077dfed7408a124ea5e854f27d32d96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enable: 0
-  name: ThrowObjectUpgrade
-  increaseDamage: 1.5
 --- !u!1 &6229753
 GameObject:
   m_ObjectHideFlags: 0
@@ -336,19 +280,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1277732147236810276, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1006856226}
-    - targetCorrespondingSourceObject: {fileID: 1277732147236810276, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1006856225}
-    - targetCorrespondingSourceObject: {fileID: 1277732147236810276, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1006856224}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
 --- !u!1 &70457832
 GameObject:
@@ -700,132 +632,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1277732147236810276, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 581628265}
-    - targetCorrespondingSourceObject: {fileID: 1277732147236810276, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 581628264}
-    - targetCorrespondingSourceObject: {fileID: 1277732147236810276, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 581628263}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
---- !u!1 &159739769 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1277732147236810276, guid: a6a424693f63ae04788f8ca7d29163b6,
-    type: 3}
-  m_PrefabInstance: {fileID: 1779598736}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &159739770
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 159739769}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d074954e16471b54d840b355c42aafc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  name: ThrowObjectConvertMine
-  enable: 0
-  render: {fileID: 0}
-  meshFilter: {fileID: 0}
-  damage: 100
-  mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
-  material: {fileID: 2100000, guid: 1cbea31056ef96a4386b52b61d4b91eb, type: 2}
-  layer: CantThrowObject
---- !u!114 &159739771
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 159739769}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcd14377e66e6e14c98ff2bb86c5d344, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  enable: 0
-  name: GuidedFuncion
---- !u!114 &159739772
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 159739769}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4077dfed7408a124ea5e854f27d32d96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enable: 0
-  name: ThrowObjectUpgrade
-  increaseDamage: 1.5
---- !u!1 &184326777 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1277732147236810276, guid: a6a424693f63ae04788f8ca7d29163b6,
-    type: 3}
-  m_PrefabInstance: {fileID: 535652379}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &184326778
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 184326777}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d074954e16471b54d840b355c42aafc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  name: ThrowObjectConvertMine
-  enable: 0
-  render: {fileID: 0}
-  meshFilter: {fileID: 0}
-  damage: 100
-  mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
-  material: {fileID: 2100000, guid: 1cbea31056ef96a4386b52b61d4b91eb, type: 2}
-  layer: CantThrowObject
---- !u!114 &184326779
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 184326777}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcd14377e66e6e14c98ff2bb86c5d344, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  enable: 0
-  name: GuidedFuncion
---- !u!114 &184326780
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 184326777}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4077dfed7408a124ea5e854f27d32d96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enable: 0
-  name: ThrowObjectUpgrade
-  increaseDamage: 1.5
 --- !u!1001 &232596261
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -907,19 +715,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1277732147236810276, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 699665862}
-    - targetCorrespondingSourceObject: {fileID: 1277732147236810276, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 699665861}
-    - targetCorrespondingSourceObject: {fileID: 1277732147236810276, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 699665860}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
 --- !u!1001 &238180348
 PrefabInstance:
@@ -1002,19 +798,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1277732147236810276, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 5677474}
-    - targetCorrespondingSourceObject: {fileID: 1277732147236810276, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 5677473}
-    - targetCorrespondingSourceObject: {fileID: 1277732147236810276, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 5677472}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
 --- !u!1 &387552331
 GameObject:
@@ -1270,62 +1054,6 @@ MonoBehaviour:
   playerMovement: {fileID: 0}
   model: {fileID: 0}
   adapter: {fileID: 0}
---- !u!1 &500155450 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1277732147236810276, guid: a6a424693f63ae04788f8ca7d29163b6,
-    type: 3}
-  m_PrefabInstance: {fileID: 2109498893}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &500155451
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 500155450}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d074954e16471b54d840b355c42aafc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  name: ThrowObjectConvertMine
-  enable: 0
-  render: {fileID: 0}
-  meshFilter: {fileID: 0}
-  damage: 100
-  mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
-  material: {fileID: 2100000, guid: 1cbea31056ef96a4386b52b61d4b91eb, type: 2}
-  layer: CantThrowObject
---- !u!114 &500155452
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 500155450}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcd14377e66e6e14c98ff2bb86c5d344, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  enable: 0
-  name: GuidedFuncion
---- !u!114 &500155453
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 500155450}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4077dfed7408a124ea5e854f27d32d96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enable: 0
-  name: ThrowObjectUpgrade
-  increaseDamage: 1.5
 --- !u!1001 &512545003
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1807,12 +1535,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 512545003}
   m_PrefabAsset: {fileID: 0}
---- !u!137 &512545005 stripped
-SkinnedMeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 1630794972795428178, guid: 81bb9eea30387e442899949a80011e55,
-    type: 3}
-  m_PrefabInstance: {fileID: 512545003}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &512545006 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 81bb9eea30387e442899949a80011e55,
@@ -1915,6 +1637,7 @@ MonoBehaviour:
   maxObjectCount: 50
   comboCheckTime: 0.2
   player: {fileID: 512545012}
+  CanUseCombo: 0
 --- !u!114 &512545010
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1958,10 +1681,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2df5efce1124f7140b2a6dd2b04b0b33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSkillHandler: {fileID: 0}
+  adapter: {fileID: 0}
   drainManager: {fileID: 1640560645}
-  render: {fileID: 512545005}
   currentStateView: 0
+  SkillHandler: {fileID: 0}
 --- !u!136 &512545013
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1998,7 +1721,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerCollisionToggle: 0000000000000000
-  ThrowObjectPrefab: {fileID: 1055689474}
+  ThrowObjectPrefab: {fileID: 0}
 --- !u!114 &512545017
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2096,19 +1819,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1277732147236810276, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 184326780}
-    - targetCorrespondingSourceObject: {fileID: 1277732147236810276, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 184326779}
-    - targetCorrespondingSourceObject: {fileID: 1277732147236810276, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 184326778}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
 --- !u!1 &554733051
 GameObject:
@@ -2316,118 +2027,6 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
---- !u!1 &579993166 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1277732147236810276, guid: a6a424693f63ae04788f8ca7d29163b6,
-    type: 3}
-  m_PrefabInstance: {fileID: 1285694578}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &579993167
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 579993166}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d074954e16471b54d840b355c42aafc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  name: ThrowObjectConvertMine
-  enable: 0
-  render: {fileID: 0}
-  meshFilter: {fileID: 0}
-  damage: 100
-  mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
-  material: {fileID: 2100000, guid: 1cbea31056ef96a4386b52b61d4b91eb, type: 2}
-  layer: CantThrowObject
---- !u!114 &579993168
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 579993166}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcd14377e66e6e14c98ff2bb86c5d344, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  enable: 0
-  name: GuidedFuncion
---- !u!114 &579993169
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 579993166}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4077dfed7408a124ea5e854f27d32d96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enable: 0
-  name: ThrowObjectUpgrade
-  increaseDamage: 1.5
---- !u!1 &581628262 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1277732147236810276, guid: a6a424693f63ae04788f8ca7d29163b6,
-    type: 3}
-  m_PrefabInstance: {fileID: 137798042}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &581628263
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 581628262}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d074954e16471b54d840b355c42aafc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  name: ThrowObjectConvertMine
-  enable: 0
-  render: {fileID: 0}
-  meshFilter: {fileID: 0}
-  damage: 100
-  mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
-  material: {fileID: 2100000, guid: 1cbea31056ef96a4386b52b61d4b91eb, type: 2}
-  layer: CantThrowObject
---- !u!114 &581628264
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 581628262}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcd14377e66e6e14c98ff2bb86c5d344, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  enable: 0
-  name: GuidedFuncion
---- !u!114 &581628265
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 581628262}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4077dfed7408a124ea5e854f27d32d96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enable: 0
-  name: ThrowObjectUpgrade
-  increaseDamage: 1.5
 --- !u!1 &587813887
 GameObject:
   m_ObjectHideFlags: 0
@@ -2756,62 +2355,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &673239800 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1277732147236810276, guid: a6a424693f63ae04788f8ca7d29163b6,
-    type: 3}
-  m_PrefabInstance: {fileID: 1638748275}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &673239801
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 673239800}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d074954e16471b54d840b355c42aafc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  name: ThrowObjectConvertMine
-  enable: 0
-  render: {fileID: 0}
-  meshFilter: {fileID: 0}
-  damage: 100
-  mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
-  material: {fileID: 2100000, guid: 1cbea31056ef96a4386b52b61d4b91eb, type: 2}
-  layer: CantThrowObject
---- !u!114 &673239802
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 673239800}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcd14377e66e6e14c98ff2bb86c5d344, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  enable: 0
-  name: GuidedFuncion
---- !u!114 &673239803
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 673239800}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4077dfed7408a124ea5e854f27d32d96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enable: 0
-  name: ThrowObjectUpgrade
-  increaseDamage: 1.5
 --- !u!1 &678567852
 GameObject:
   m_ObjectHideFlags: 0
@@ -2867,62 +2410,6 @@ MonoBehaviour:
   playerSkillHandler: {fileID: 0}
   skillName: {fileID: 0}
   skillIcon: {fileID: 0}
---- !u!1 &699665859 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1277732147236810276, guid: a6a424693f63ae04788f8ca7d29163b6,
-    type: 3}
-  m_PrefabInstance: {fileID: 232596261}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &699665860
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 699665859}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d074954e16471b54d840b355c42aafc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  name: ThrowObjectConvertMine
-  enable: 0
-  render: {fileID: 0}
-  meshFilter: {fileID: 0}
-  damage: 100
-  mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
-  material: {fileID: 2100000, guid: 1cbea31056ef96a4386b52b61d4b91eb, type: 2}
-  layer: CantThrowObject
---- !u!114 &699665861
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 699665859}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcd14377e66e6e14c98ff2bb86c5d344, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  enable: 0
-  name: GuidedFuncion
---- !u!114 &699665862
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 699665859}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4077dfed7408a124ea5e854f27d32d96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enable: 0
-  name: ThrowObjectUpgrade
-  increaseDamage: 1.5
 --- !u!1 &718813662
 GameObject:
   m_ObjectHideFlags: 0
@@ -2998,62 +2485,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 718813662}
   m_CullTransparentMesh: 1
---- !u!1 &756567125 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1277732147236810276, guid: a6a424693f63ae04788f8ca7d29163b6,
-    type: 3}
-  m_PrefabInstance: {fileID: 1408132092}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &756567126
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 756567125}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d074954e16471b54d840b355c42aafc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  name: ThrowObjectConvertMine
-  enable: 0
-  render: {fileID: 0}
-  meshFilter: {fileID: 0}
-  damage: 100
-  mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
-  material: {fileID: 2100000, guid: 1cbea31056ef96a4386b52b61d4b91eb, type: 2}
-  layer: CantThrowObject
---- !u!114 &756567127
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 756567125}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcd14377e66e6e14c98ff2bb86c5d344, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  enable: 0
-  name: GuidedFuncion
---- !u!114 &756567128
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 756567125}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4077dfed7408a124ea5e854f27d32d96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enable: 0
-  name: ThrowObjectUpgrade
-  increaseDamage: 1.5
 --- !u!1 &779459490
 GameObject:
   m_ObjectHideFlags: 0
@@ -3191,130 +2622,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 512545006}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1006856223 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1277732147236810276, guid: a6a424693f63ae04788f8ca7d29163b6,
-    type: 3}
-  m_PrefabInstance: {fileID: 54128340}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1006856224
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1006856223}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d074954e16471b54d840b355c42aafc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  name: ThrowObjectConvertMine
-  enable: 0
-  render: {fileID: 0}
-  meshFilter: {fileID: 0}
-  damage: 100
-  mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
-  material: {fileID: 2100000, guid: 1cbea31056ef96a4386b52b61d4b91eb, type: 2}
-  layer: CantThrowObject
---- !u!114 &1006856225
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1006856223}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcd14377e66e6e14c98ff2bb86c5d344, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  enable: 0
-  name: GuidedFuncion
---- !u!114 &1006856226
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1006856223}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4077dfed7408a124ea5e854f27d32d96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enable: 0
-  name: ThrowObjectUpgrade
-  increaseDamage: 1.5
---- !u!1 &1055689473 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1277732147236810276, guid: a6a424693f63ae04788f8ca7d29163b6,
-    type: 3}
-  m_PrefabInstance: {fileID: 1704339424}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1055689474 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5555454090820147888, guid: a6a424693f63ae04788f8ca7d29163b6,
-    type: 3}
-  m_PrefabInstance: {fileID: 1704339424}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1055689473}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b24a630794942d74ab16bdc98b0e2956, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1055689481
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1055689473}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4077dfed7408a124ea5e854f27d32d96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enable: 0
-  name: ThrowObjectUpgrade
-  increaseDamage: 1.5
---- !u!114 &1055689487
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1055689473}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcd14377e66e6e14c98ff2bb86c5d344, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  enable: 0
-  name: GuidedFuncion
---- !u!114 &1055689493
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1055689473}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d074954e16471b54d840b355c42aafc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  name: ThrowObjectConvertMine
-  enable: 0
-  render: {fileID: 0}
-  meshFilter: {fileID: 0}
-  damage: 100
-  mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
-  material: {fileID: 2100000, guid: 1cbea31056ef96a4386b52b61d4b91eb, type: 2}
-  layer: CantThrowObject
 --- !u!1 &1068348033
 GameObject:
   m_ObjectHideFlags: 0
@@ -3740,25 +3047,7 @@ MonoBehaviour:
   - {fileID: 678567854}
   - {fileID: 1920410748}
   isRandom: 0
-  _skillList:
-  - {fileID: 11400000, guid: a405b7a0155f5ad46ae065dabcf05c2c, type: 2}
-  - {fileID: 11400000, guid: fff5a04a89c9770428a7f7aea9a5036d, type: 2}
-  - {fileID: 11400000, guid: 5bcfd79a9e3997349827eb6ca03705f9, type: 2}
-  - {fileID: 11400000, guid: 99bf09bef84d4c14e943330fcc8639b2, type: 2}
-  - {fileID: 11400000, guid: 69f45ad4ced76474d993a4dd7ce4c54b, type: 2}
-  - {fileID: 11400000, guid: 7ee3457df4130aa479d63ba25f88e7d4, type: 2}
-  - {fileID: 11400000, guid: 9ecd54d23e02c624f9bd4516321eeca7, type: 2}
-  - {fileID: 11400000, guid: b9b316de1064b814086c1f74d76ae14f, type: 2}
-  - {fileID: 11400000, guid: 40ae1f49eb9a8b6499e9735aae1e1cb0, type: 2}
-  - {fileID: 11400000, guid: e8a6a297e94d64b4b9e341968692eacd, type: 2}
-  - {fileID: 11400000, guid: 734ef140ffbe0894792f7349195e0a5c, type: 2}
-  - {fileID: 11400000, guid: 8039eaeb8f675a645ab314a34fc2e310, type: 2}
-  - {fileID: 11400000, guid: 07aa81f9aa233134985da04f0be7170c, type: 2}
-  - {fileID: 11400000, guid: 3a45feeb48c2bfb4ca5db401f2fc73bd, type: 2}
-  - {fileID: 11400000, guid: bf625679ad3a06840a3fa2019474107a, type: 2}
-  - {fileID: 11400000, guid: 60ee7c4ef6c3e3b4ab49568c4d06a44d, type: 2}
-  - {fileID: 11400000, guid: c5db9b168fb0a6947aa380de56eaa931, type: 2}
-  - {fileID: 11400000, guid: f1854ebd6c3cfd74ca47e8b6f5642501, type: 2}
+  _skillList: []
   _handler: {fileID: 512545017}
 --- !u!114 &1072664238
 MonoBehaviour:
@@ -3776,7 +3065,6 @@ MonoBehaviour:
   maxStamina: 100
   maxMp: 0
   moveSpeed: 5
-  allPowerPer: 0
   MpAmount:
   - 0
   - 0
@@ -4208,19 +3496,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1277732147236810276, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 579993169}
-    - targetCorrespondingSourceObject: {fileID: 1277732147236810276, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 579993168}
-    - targetCorrespondingSourceObject: {fileID: 1277732147236810276, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 579993167}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
 --- !u!1 &1328249503
 GameObject:
@@ -4378,19 +3654,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1277732147236810276, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 756567128}
-    - targetCorrespondingSourceObject: {fileID: 1277732147236810276, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 756567127}
-    - targetCorrespondingSourceObject: {fileID: 1277732147236810276, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 756567126}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
 --- !u!1 &1418049398
 GameObject:
@@ -4775,19 +4039,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1277732147236810276, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1918523701}
-    - targetCorrespondingSourceObject: {fileID: 1277732147236810276, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1918523700}
-    - targetCorrespondingSourceObject: {fileID: 1277732147236810276, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1918523699}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
 --- !u!1001 &1638748275
 PrefabInstance:
@@ -4870,19 +4122,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1277732147236810276, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 673239803}
-    - targetCorrespondingSourceObject: {fileID: 1277732147236810276, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 673239802}
-    - targetCorrespondingSourceObject: {fileID: 1277732147236810276, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 673239801}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
 --- !u!1 &1640560644
 GameObject:
@@ -5175,19 +4415,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1277732147236810276, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1055689481}
-    - targetCorrespondingSourceObject: {fileID: 1277732147236810276, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1055689487}
-    - targetCorrespondingSourceObject: {fileID: 1277732147236810276, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1055689493}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
 --- !u!1 &1733912184
 GameObject:
@@ -5407,76 +4635,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1277732147236810276, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 159739772}
-    - targetCorrespondingSourceObject: {fileID: 1277732147236810276, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 159739771}
-    - targetCorrespondingSourceObject: {fileID: 1277732147236810276, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 159739770}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
---- !u!1 &1918523698 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1277732147236810276, guid: a6a424693f63ae04788f8ca7d29163b6,
-    type: 3}
-  m_PrefabInstance: {fileID: 1567427525}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1918523699
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1918523698}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d074954e16471b54d840b355c42aafc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  name: ThrowObjectConvertMine
-  enable: 0
-  render: {fileID: 0}
-  meshFilter: {fileID: 0}
-  damage: 100
-  mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
-  material: {fileID: 2100000, guid: 1cbea31056ef96a4386b52b61d4b91eb, type: 2}
-  layer: CantThrowObject
---- !u!114 &1918523700
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1918523698}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcd14377e66e6e14c98ff2bb86c5d344, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  enable: 0
-  name: GuidedFuncion
---- !u!114 &1918523701
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1918523698}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4077dfed7408a124ea5e854f27d32d96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enable: 0
-  name: ThrowObjectUpgrade
-  increaseDamage: 1.5
 --- !u!1 &1920410746
 GameObject:
   m_ObjectHideFlags: 0
@@ -5995,19 +5155,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1277732147236810276, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 500155453}
-    - targetCorrespondingSourceObject: {fileID: 1277732147236810276, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 500155452}
-    - targetCorrespondingSourceObject: {fileID: 1277732147236810276, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 500155451}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
 --- !u!1 &2134407934
 GameObject:

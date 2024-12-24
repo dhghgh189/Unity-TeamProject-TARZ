@@ -45,6 +45,8 @@ public class PlayerAttack : MonoBehaviour
     public int MeleeEffectCount => meleeEffects.Count;
     public float ComboCheckTime => comboCheckTime;
 
+    public bool CanUseCombo;
+
     public event UnityAction<int> OnChangedStack; 
 
     private void Awake()
@@ -322,12 +324,14 @@ public class PlayerAttack : MonoBehaviour
     #region Control Combo
     public void OnCombo()
     {
-
+        // 콤보가 가능하도록 flag set
+        CanUseCombo = true;
     }
 
     public void EndCombo()
     {
-
+        // 콤보가 불가능하도록 flag set
+        CanUseCombo = false;
     }
     #endregion
 

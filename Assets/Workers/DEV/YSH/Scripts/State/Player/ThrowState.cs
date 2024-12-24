@@ -50,6 +50,9 @@ public class ThrowState : BaseState<PlayerController>
         if (camTrf == null)
             camTrf = Camera.main.transform;
 
+        // Attack 시작 시에는 콤보 진행 불가능하도록 set
+        owner.Attack.CanUseCombo = false;
+
         owner.SkillHandler.Use(SkillEnum.ActTimingType.Attack);
 
         // 최초 진입시점 때의 입력값을 기억한다.
@@ -136,49 +139,31 @@ public class ThrowState : BaseState<PlayerController>
             return;
         }
 
+        // 콤보가 가능한 상황에 입력이 확인된 경우 
+        // 물건 스택또한 존재해야 함
+        if (owner.Attack.CanUseCombo 
+            && owner.PInput.TryThrow
+            && owner.Attack.ObjectCount > 0)
+        {
+            // 애니메이션이 끝나기 전에 전이하므로 카운트를 수동으로 증가
+            owner.Attack.ThrowCount++;
+            OnEnter();
+            return;
+        }
+
         // 애니메이션 재생이 완료되면 상태 종료
         if (animTimer <= 0)
         {
             // Adjust를 중지하기 위해 lookDir을 초기화
             lookDir = Vector3.zero;
 
-            owner.Attack.ThrowCount++;
-
-            // 마지막 타수였거나 물건 스택이 없는 경우 바로 Idle로 이동
-            if (owner.Attack.ThrowCount >= owner.Attack.ThrowCountMax 
-                || owner.Attack.ObjectCount <= 0)
-            {
-                owner.Attack.ThrowCount = 0;
-                owner.ChangeState(EState.Idle);
-            }
-            else
-            {
-                comboTimer = owner.Attack.ComboCheckTime;
-                animTimer = 999;
-            }
-
+            // 타수 초기화
+            owner.Attack.ThrowCount = 0;
+            owner.ChangeState(EState.Idle);
             return;
         }
 
         // timer 진행
         animTimer -= Time.deltaTime;
-
-        if (comboTimer > 0)
-        {
-            comboTimer -= Time.deltaTime;
-            // 다음 콤보를 사용하기 까지 제한시간
-            if (comboTimer <= 0)
-            {
-                owner.Attack.ThrowCount = 0;
-                owner.ChangeState(EState.Idle);
-                return;
-            }
-
-            if (owner.PInput.TryThrow)
-            {
-                OnEnter();
-                return;
-            }
-        }
     }
 }

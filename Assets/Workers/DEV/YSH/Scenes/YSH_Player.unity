@@ -3779,6 +3779,7 @@ MonoBehaviour:
   maxObjectCount: 50
   comboCheckTime: 0.2
   player: {fileID: 637873415}
+  CanUseCombo: 0
 --- !u!114 &637873423
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8317,6 +8318,16 @@ PrefabInstance:
       propertyPath: model
       value: 
       objectReference: {fileID: 1315322652}
+    - target: {fileID: 4023006331722013251, guid: 744790fd829edc343bb6392bc0fb0f1a,
+        type: 3}
+      propertyPath: PlayerCollisionToggle.Array.data[5]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4295755859348487307, guid: 744790fd829edc343bb6392bc0fb0f1a,
+        type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7365192204732169291, guid: 744790fd829edc343bb6392bc0fb0f1a,
         type: 3}
       propertyPath: m_Name

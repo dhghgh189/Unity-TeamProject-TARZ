@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-public class exScript : MonoBehaviour
+public class Example_StaminaScript : MonoBehaviour
 {
     [Inject]
     [SerializeField] StatModel model;

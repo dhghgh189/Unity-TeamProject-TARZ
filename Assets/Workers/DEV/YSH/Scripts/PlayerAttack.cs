@@ -319,6 +319,18 @@ public class PlayerAttack : MonoBehaviour
         return true;
     }
 
+    #region Control Combo
+    public void OnCombo()
+    {
+
+    }
+
+    public void EndCombo()
+    {
+
+    }
+    #endregion
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;

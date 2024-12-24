@@ -10,11 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f7319c5f99579ca4c9935249024bb467, type: 3}
-  m_Name: Test
+  m_Name: CliffEdgeSkill
   m_EditorClassIdentifier: 
-  Name: Test
-  Description: "\uD14C\uC2A4\uD2B8"
-  Icon: {fileID: 21300000, guid: 73c858644f692b842b666a1cd41770f9, type: 3}
+  Name: "\uBCBC\uB7C9\uB05D"
+  Description: "HP\uAC00 10% \uC774\uD558\uC778 \uACBD\uC6B0 \uC2A4\uD0DC\uBBF8\uB098\uB97C 
+    \uC18C\uBE44\uD558\uC9C0 \uC54A\uB294\uB2E4."
+  Icon: {fileID: 0}
   MaxLevel: 1
   Timing: 3
   activeSkills: []
@@ -23,14 +24,14 @@ MonoBehaviour:
     modifySetting:
       ModifyType: 0
       value: 0
-      tempValue: 0
     conditionSetting:
       modifyType: 0
       Condition: 3
-      CompareValue: 20
+      CompareValue: 0.1
       MaxValue: 0
       resultModifyType: 1
-      Amount: 50
+      IsIncrease: 1
+      Amount: 0
     toggleSetting:
       ToggleType: 0
       On: 0

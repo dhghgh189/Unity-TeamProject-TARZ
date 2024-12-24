@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7319c5f99579ca4c9935249024bb467, type: 3}
+  m_Name: FrostShotSkill
+  m_EditorClassIdentifier: 
+  Name: "\uD504\uB85C\uC2A4\uD2B8 \uC0F7"
+  Description: "\uB358\uC9C4 \uBB3C\uAC74\uC5D0 \uB9DE\uC740 \uC801\uC5D0\uAC8C \uC11C\uB9AC\uAC00
+    \uB0B4\uB824 \uB290\uB824\uC9C4\uB2E4."
+  Icon: {fileID: 0}
+  MaxLevel: 1
+  Timing: 0
+  activeSkills:
+  - who: 1
+    refeat: 0
+    when: 1
+    Create: 0
+    Interaction: 1
+    createSetting:
+      CreateObject: []
+    interactionSetting:
+      type: 0
+  passiveSkills: []
+  onChangeLevel:
+    m_PersistentCalls:
+      m_Calls: []

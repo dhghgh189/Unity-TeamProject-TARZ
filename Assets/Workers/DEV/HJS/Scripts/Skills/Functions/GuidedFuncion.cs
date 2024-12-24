@@ -5,12 +5,18 @@ using UnityEngine;
 /// <summary>
 /// 유도 기능
 /// </summary>
-public class GuidedFuncion : MonoBehaviour
+public class GuidedFuncion : MonoBehaviour, IEnable
 {
     // 유도와 같은 적을 우선 선별 해야할 때
     [SerializeField] Transform target;
     private Collider[] colliders;
     private Rigidbody rb;
+
+    [SerializeField] bool enable;
+    [SerializeField] string name = "GuidedFuncion";
+
+    public bool Enable { get => enable; set => enable = value; }
+    public string Name { get => name; set => name = value; }
 
     private void Awake()
     {
@@ -27,7 +33,7 @@ public class GuidedFuncion : MonoBehaviour
             // 날아가는 속도 설정
             rb.velocity = transform.forward * 3;
             // 타겟을 바라보게 회전
-            Quaternion ballTargetRotation = Quaternion.LookRotation(target.position + new Vector3(0, 0.8f) - transform.position);
+            Quaternion ballTargetRotation = Quaternion.LookRotation(target.position + new Vector3(0, 0.5f) - transform.position);
             // rigidbody를 움직이기
             rb.MoveRotation(Quaternion.RotateTowards(transform.rotation, ballTargetRotation, 180f));
         }

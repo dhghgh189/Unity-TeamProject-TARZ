@@ -30,7 +30,7 @@ public class ActiveSkillSO : ScriptableObject
     {
         public List<GameObject> CreateObject; // 생성 여부가 True일 때 -> 생성할 오브젝트 (ex. 폭발, 독구름)
     }
-    public void Use(GameObject obj)
+    public void Use(GameObject obj, GameObject ga)
     {
 
         if (Create)

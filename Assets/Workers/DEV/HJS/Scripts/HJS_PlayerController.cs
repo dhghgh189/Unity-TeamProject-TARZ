@@ -14,6 +14,8 @@ public class HJS_PlayerController : MonoBehaviour
     [Header("Dash")]
     [SerializeField] float dashSpeed;
     [SerializeField] float dashTime;
+    [Header("Drain")]
+    [SerializeField] DrainManager drainManager;
     [Space(5)]
     [Header("Inspec")]
     [SerializeField] Rigidbody rb;
@@ -33,13 +35,19 @@ public class HJS_PlayerController : MonoBehaviour
             if (timing.Equals(ActTiming.Attack))
             {
                 GameObject instance = Instantiate(throwPrefab, muzzlePoint.position, muzzlePoint.rotation);
-                instance.GetComponent<Rigidbody>().AddForce(Vector3.up * 2 + Vector3.forward * 3, ForceMode.Impulse);
+                instance.GetComponent<Rigidbody>().AddForce(Vector3.up * 2 + Vector3.forward * 5, ForceMode.Impulse);
                 instance.GetComponent<Test_ThrowObject>().handler = skillHandler;
             }
             else if (timing.Equals(ActTiming.Dash) && coroutine is null)
             {
                 coroutine = StartCoroutine(MoveRoutine());
+            }else if(timing.Equals(ActTiming.Drain))
+            {
+                drainManager.StartDrain();
             }
+        }else if(timing.Equals(ActTiming.Drain) && Input.GetKeyUp(KeyCode.Space))
+        {
+                drainManager.StopDrain();
         }
     }
 

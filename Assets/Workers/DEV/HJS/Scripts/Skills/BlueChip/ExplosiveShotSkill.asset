@@ -10,12 +10,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f7319c5f99579ca4c9935249024bb467, type: 3}
-  m_Name: EXPLOSIVE_SHOT
+  m_Name: ExplosiveShotSkill
   m_EditorClassIdentifier: 
-  Name: EXPLOSIVE_SHOT
+  Name: "\uC775\uC2A4\uD50C\uB85C\uC2DC\uBE0C \uC0F7"
   Description: "\uB358\uC9C4 \uBB3C\uAC74\uC774 \uD3ED\uBC1C\uD55C\uB2E4"
-  Icon: {fileID: 21300000, guid: 6428302f827c40843b50d188a0b79fbd, type: 3}
+  Icon: {fileID: 0}
+  MaxLevel: 1
   Timing: 0
-  EffectSkills:
-  - {fileID: 11400000, guid: 1fdfde62228087b49ab710096921e335, type: 2}
-  PassiveSkills: []
+  activeSkills:
+  - who: 1
+    refeat: 0
+    when: 1
+    Create: 1
+    Interaction: 0
+    createSetting:
+      CreateObject:
+      - {fileID: 3417300274053618209, guid: b39e3830fdbba294e8acd0b6a79ff8c3, type: 3}
+    interactionSetting:
+      type: 0
+  passiveSkills: []
+  onChangeLevel:
+    m_PersistentCalls:
+      m_Calls: []

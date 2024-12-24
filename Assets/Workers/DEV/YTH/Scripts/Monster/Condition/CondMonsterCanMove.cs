@@ -20,13 +20,15 @@ public class CondMonsterCanMove : Conditional
     [Header("회전")]
     [SerializeField] float _rate; // 회전 Lerp 비율
 
+    private float _playerDistance;
     public override TaskStatus OnUpdate()
     {
+        _playerDistance = Vector3.Distance(transform.position, _player.transform.position);
+
         _returnObj = WithinSight(_player, _angle, _distance);
 
-        if (_returnObj != null && _monsterData.MonsterTyPe != MonsterData.MonsterType.Range)
+        if (_returnObj != null && _monsterData.MonsterTyPe != MonsterData.MonsterType.Range /*|| _playerDistance <= _monsterData.AttackRange*/)
         {
-
             Debug.Log("CodnMove true");
             return TaskStatus.Success;
         }

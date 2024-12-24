@@ -156,6 +156,7 @@ GameObject:
   - component: {fileID: 5662808335819332979}
   - component: {fileID: 4042739024468859159}
   - component: {fileID: 5882879556306569713}
+  - component: {fileID: 3637788109506698752}
   m_Layer: 9
   m_Name: Monster
   m_TagString: Untagged
@@ -331,7 +332,6 @@ MonoBehaviour:
   _type: 0
   _maxHp: 10
   _curHp: 10
-  _moveSpeed: 5
   _damage: 5
   _meleeAttackSpeed: 4
   _rangeAttackSpeed: 4
@@ -485,3 +485,17 @@ MonoBehaviour:
   m_Script: {fileID: -2012967667, guid: da41a8dd3b5ec434a802d9b5a2a0a777, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3637788109506698752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9032859600620638007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c0c56d971f771247b404c1a828a76d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gear: {fileID: 7721173211588356841, guid: 6f50a567d27f5234c89a2742d0a1134a, type: 3}
+  _chip: {fileID: 790199856513174846, guid: 1a89e32ec97e86d47bd1098f5827fbeb, type: 3}

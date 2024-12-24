@@ -20,7 +20,7 @@ public class ActReviveSkill : Action
 
     public override TaskStatus OnUpdate()
     {
-        if (_monsterData.CurHp <= 0 && _monsterSkillManager.ReviveSkill.CanUseSkill == true)
+        if (_monsterData.CurHp <= _monsterData.MaxHp /2  && _monsterSkillManager.ReviveSkill.CanUseSkill == true)
         {
             if (_monsterSkillManager.reviveRoutine == null)
             {

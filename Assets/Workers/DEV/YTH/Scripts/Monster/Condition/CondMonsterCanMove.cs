@@ -24,7 +24,7 @@ public class CondMonsterCanMove : Conditional
     {
         _returnObj = WithinSight(_player, _angle, _distance);
 
-        if (_returnObj != null && _monsterData.Type != MonsterData.MonsterType.Range)
+        if (_returnObj != null && _monsterData.MonsterTyPe != MonsterData.MonsterType.Range)
         {
 
             Debug.Log("CodnMove true");

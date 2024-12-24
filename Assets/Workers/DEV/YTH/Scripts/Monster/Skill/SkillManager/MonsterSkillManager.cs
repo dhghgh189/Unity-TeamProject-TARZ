@@ -13,9 +13,6 @@ public class MonsterSkillManager : MonoBehaviour
     [SerializeField] MonsterSkill _dashAttack;
     public MonsterSkill DashAttackSkill { get { return _dashAttack; } set { _dashAttack = value; } }
 
-    [SerializeField] MonsterSkill _firePoison_Wall;
-    public MonsterSkill FirePoisonWallSkill { get { return _firePoison_Wall; } set { _firePoison_Wall = value; } }
-
     [SerializeField] MonsterSkill _jumpAttack;
     public MonsterSkill JumpAttackSkill { get { return _jumpAttack; } set { _jumpAttack = value; } }
 

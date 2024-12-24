@@ -31,11 +31,6 @@ public class AudioMixController : MonoBehaviour
         masterSlider.value = PlayerPrefs.GetFloat("Master", masterVol);
         bgmSlider.value = PlayerPrefs.GetFloat("BGM", bgmVol);
         sfxSlider.value = PlayerPrefs.GetFloat("SFX", sfxVol);
-
-        // 오디오 믹서 초기값 설정
-        audioMixer.SetFloat("Master", masterVol);
-        audioMixer.SetFloat("BGM", bgmVol);
-        audioMixer.SetFloat("SFX", sfxVol);
     }
 
     private void Start()
@@ -48,6 +43,10 @@ public class AudioMixController : MonoBehaviour
         if (masterMute.isOn) AudioListener.volume = 0;
         if (bgmMute.isOn) audioMixer.SetFloat("BGM", -80f);
         if (sfxMute.isOn) audioMixer.SetFloat("SFX", -80f);
+
+        audioMixer.SetFloat("Master", masterVol);
+        audioMixer.SetFloat("BGM", bgmVol);
+        audioMixer.SetFloat("SFX", sfxVol);
     }
 
     public void MasterVolumeSliderChanged()

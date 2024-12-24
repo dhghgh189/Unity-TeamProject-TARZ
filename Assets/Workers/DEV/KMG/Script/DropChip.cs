@@ -8,6 +8,7 @@ public class DropChip : MonoBehaviour
     [SerializeField] bool blackChip;
     [SerializeField] Material ChipMaterial;
     [SerializeField] Material blackChipMaterial;
+
     private void Awake()
     {
         if (blackChip)

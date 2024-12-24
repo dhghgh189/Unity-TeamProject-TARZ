@@ -248,8 +248,16 @@ public class PlayerAttack : MonoBehaviour
         tobj.transform.parent = null;
         tobj.transform.position = throwPoint.position;
         tobj.gameObject.SetActive(true);
+        if (tobj.Upgrade.IsUpgraded)
+        {
+            // 순수데미지에 1.5 계산
+            tobj.Upgrade.UpgradeDamage(damage, out float result);
+            damage = result;
+            Debug.Log($"1.5 damage : {damage}");
+        }
         // 최종 데미지 = 타수별 공격력 + (타수별 공격력 * 현재 스탯상 증가량)
         damage = damage * player.Stat.DefaultPowerPer;
+        Debug.Log($"final damage : {damage}");
         tobj.SetDamage(damage);
         tobj.Throw(transform.forward + (transform.up * 0.3f), throwForce);
     }

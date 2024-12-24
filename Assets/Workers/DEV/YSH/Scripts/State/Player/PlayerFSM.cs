@@ -14,7 +14,9 @@ public class PlayerFSM
 
     public BaseState<PlayerController> CurrentState => curState;
 
-    public PlayerFSM(PlayerController owner)
+    public AblityAdapter Adapter;
+
+    public PlayerFSM(PlayerController owner, AblityAdapter adapter)
     {
         this.owner = owner;
 
@@ -28,6 +30,7 @@ public class PlayerFSM
         States[(int)EState.Melee] = new MeleeState(owner);
         States[(int)EState.Drain] = new DrainState(owner);
 
+        Adapter = adapter;
         ChangeState(EState.Idle);
     }
 
@@ -35,6 +38,9 @@ public class PlayerFSM
     {
         if (curState != null)
             curState.OnExit();
+
+        bool isOk = Adapter.IsPlayerCollision(state);
+        Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Monster"), isOk);
 
         curState = States[(int)state];
         curState.OnEnter();

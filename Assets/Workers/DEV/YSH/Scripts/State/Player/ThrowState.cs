@@ -50,6 +50,8 @@ public class ThrowState : BaseState<PlayerController>
         if (camTrf == null)
             camTrf = Camera.main.transform;
 
+        owner.SkillHandler.Use(SkillEnum.ActTimingType.Attack);
+
         // 최초 진입시점 때의 입력값을 기억한다.
         inputDir = owner.PInput.InputDir;
 

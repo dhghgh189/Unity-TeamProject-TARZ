@@ -21,6 +21,8 @@ public class DashState : BaseState<PlayerController>
     {
         base.OnEnter();
 
+        owner.SkillHandler.Use(SkillEnum.ActTimingType.Dash);
+
         if (camTrf == null)
             camTrf = Camera.main.transform;
 

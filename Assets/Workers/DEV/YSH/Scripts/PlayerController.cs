@@ -1,9 +1,11 @@
 using BehaviorDesigner.Runtime;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using Zenject;
+using static SkillEnum;
 
 public enum EMachineType { Movement, Attack }
 
@@ -15,6 +17,7 @@ public class PlayerController : MonoBehaviour, IDamagable
 
     private Animator anim;
 
+    [SerializeField] private AblityAdapter adapter;
     [SerializeField] private DrainManager drainManager;
     [SerializeField] Renderer render;
 
@@ -22,6 +25,7 @@ public class PlayerController : MonoBehaviour, IDamagable
 
     public Color BaseColor { get; private set; }
 
+    public PlayerSkillHandler SkillHandler;
     public PlayerFSM Fsm { get; private set; }
     public Animator Anim { get { return anim; } }
     public PlayerInput PInput { get; private set; }
@@ -39,7 +43,9 @@ public class PlayerController : MonoBehaviour, IDamagable
         Movement = GetComponent<PlayerMovement>();
         Attack = GetComponent<PlayerAttack>();
 
-        Fsm = new PlayerFSM(this);
+        SkillHandler = GetComponent<PlayerSkillHandler>();
+
+        Fsm = new PlayerFSM(this, GetComponent<AblityAdapter>());
 
         BaseColor = render.material.color;
 
@@ -84,4 +90,13 @@ public class PlayerController : MonoBehaviour, IDamagable
     {
         Stat.CurrentHp -= damage;
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.layer.Equals(LayerMask.NameToLayer("Monster")))
+        {
+            SkillHandler.PlayerCollision((ActTimingType)Enum.Parse(typeof(ActTimingType), currentStateView.ToString()), collision.gameObject);
+        }
+    }
+
 }

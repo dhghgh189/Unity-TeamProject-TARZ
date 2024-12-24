@@ -14,6 +14,7 @@ public class ThrowObjectUpgrade : MonoBehaviour, IEnable, IDamageUpgrade
     public bool Enable { get => enable; set => enable = value; }
     public string Name { get => name; set => name = value; }
     public float IncreaseDamage { get => increaseDamage; set => increaseDamage = value; }
+    public bool IsUpgraded;
 
     /// <summary>
     /// 데미지를 업그레이드 시켜주는 함수

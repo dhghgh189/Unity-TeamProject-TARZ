@@ -49,6 +49,7 @@ public class DungeonGenerator_DFS : MonoBehaviour
             }
         }
     }
+
     void MazeGenerator()
     {
         NodeList = new List<Node>();
@@ -61,26 +62,26 @@ public class DungeonGenerator_DFS : MonoBehaviour
             }
         }
 
-        int currentCell = startPos;
+        int currentNode = startPos;
 
         Stack<int> path = new Stack<int>();
 
         int k = 0;  
 
 
-        while (k < RoomCount)
+        while (k < RoomCount) // 방의 개수 K개가 될 때까지 반복
         {
-            k++;
+            k++; 
 
-            NodeList[currentCell].visited = true;
+            NodeList[currentNode].visited = true; //현재 노드 visited = true
 
-            if (currentCell == NodeList.Count - 1)
+            if (currentNode == NodeList.Count - 1)
             {
                 break;
             }
 
             // 셀의 이웃을 확인
-            List<int> neighbors = CheckNeighbors(currentCell);
+            List<int> neighbors = CheckNeighbors(currentNode);
 
             if ((neighbors.Count) == 0)
             {
@@ -90,45 +91,45 @@ public class DungeonGenerator_DFS : MonoBehaviour
                 }
                 else
                 {
-                    currentCell = path.Pop();
+                    currentNode = path.Pop();
                 }
             }
             else
             {
-                path.Push(currentCell);
+                path.Push(currentNode);
 
                 int newCell = neighbors[Random.Range(0, neighbors.Count)];
 
-                if (newCell > currentCell)
-                {
-                    //down or R
-                    if (newCell - 1 == currentCell)
+                if (newCell > currentNode)
+                {                                               // 0 - Up 1 -Down 2 - Right 3- Left
+                    //down or R                        
+                    if (newCell - 1 == currentNode)
                     {
-                        NodeList[currentCell].status[2] = true;
-                        currentCell = newCell;
-                        NodeList[currentCell].status[3] = true;    
+                        NodeList[currentNode].status[2] = true;
+                        currentNode = newCell;
+                        NodeList[currentNode].status[3] = true;    
                     }
                     else
                     {
-                        NodeList[currentCell].status[1] = true;
-                        currentCell = newCell;
-                        NodeList[currentCell].status[0] = true;
+                        NodeList[currentNode].status[1] = true;
+                        currentNode = newCell;
+                        NodeList[currentNode].status[0] = true;
                     }
                 }
                 else
                 {
                     //up or L
-                    if (newCell + 1 == currentCell)
+                    if (newCell + 1 == currentNode)
                     {
-                        NodeList[currentCell].status[3] = true;
-                        currentCell = newCell;
-                        NodeList[currentCell].status[2] = true;
+                        NodeList[currentNode].status[3] = true;
+                        currentNode = newCell;
+                        NodeList[currentNode].status[2] = true;
                     }
                     else
                     {
-                        NodeList[currentCell].status[0] = true;
-                        currentCell = newCell;
-                        NodeList[currentCell].status[1] = true;
+                        NodeList[currentNode].status[0] = true;
+                        currentNode = newCell;
+                        NodeList[currentNode].status[1] = true;
                     }
                 }
             }

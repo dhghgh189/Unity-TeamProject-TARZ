@@ -12,14 +12,14 @@ public class StatTest : MonoBehaviour
     }
     public void DefaultAtack()
     {
-        Debug.Log(statModel.DefaultPowerPer);
+        Debug.Log(10 * statModel.DefaultPowerPer);
     }
     public void SkillAtack()
     {
-        Debug.Log(statModel.SkillPowerPer);
+        Debug.Log(10 * statModel.SkillPowerPer);
     }
     public void ElementalAtack()
     {
-        Debug.Log(statModel.ElementalPowerPer);
+        Debug.Log(10 * statModel.ElementalPowerPer);
     }
 }

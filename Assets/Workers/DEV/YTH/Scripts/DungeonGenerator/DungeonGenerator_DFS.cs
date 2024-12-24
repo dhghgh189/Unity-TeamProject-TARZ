@@ -6,21 +6,25 @@ using UnityEngine;
 /// BackTracking 알고리즘
 /// 1. 시작점 선택
 /// </summary>
-public class DeongeonGenerator : MonoBehaviour
+public class DungeonGenerator_DFS : MonoBehaviour
 {
- 
-    public class Cell
+    public Vector2 size; // 맵 전체 사이즈 NxN 사이즈
+
+    public int startPos; // 원점 시작
+
+    public GameObject room;
+
+    public Vector2 offset; // 방 사이 거리
+
+    public int RoomCount;
+
+    List<Node> NodeList;
+
+    public class Node
     {
         public bool visited = false;
         public bool[] status = new bool[4];
     }
-
-    public Vector2 size;
-    public int startPos = 0;
-    public GameObject room;
-    public Vector2 offset; // 방사이거리
-
-    List<Cell> board;
 
     private void Start()
     {
@@ -33,7 +37,7 @@ public class DeongeonGenerator : MonoBehaviour
         {
             for (int j = 0; j < size.y; j++)
             {
-                Cell currentCell = board[Mathf.FloorToInt(i + j * size.x)];
+                Node currentCell = NodeList[Mathf.FloorToInt(i + j * size.x)];
               
                 if (currentCell.visited)
                 {
@@ -47,13 +51,13 @@ public class DeongeonGenerator : MonoBehaviour
     }
     void MazeGenerator()
     {
-        board = new List<Cell>();
+        NodeList = new List<Node>();
 
         for (int i = 0; i < size.x; i++)
         {
             for (int j = 0; j < size.y; j++)
             {
-                board.Add(new Cell());
+                NodeList.Add(new Node());
             }
         }
 
@@ -63,13 +67,14 @@ public class DeongeonGenerator : MonoBehaviour
 
         int k = 0;  
 
-        while (k < 1000)
+
+        while (k < RoomCount)
         {
             k++;
 
-            board[currentCell].visited = true;
+            NodeList[currentCell].visited = true;
 
-            if (currentCell == board.Count - 1)
+            if (currentCell == NodeList.Count - 1)
             {
                 break;
             }
@@ -99,15 +104,15 @@ public class DeongeonGenerator : MonoBehaviour
                     //down or R
                     if (newCell - 1 == currentCell)
                     {
-                        board[currentCell].status[2] = true;
+                        NodeList[currentCell].status[2] = true;
                         currentCell = newCell;
-                        board[currentCell].status[3] = true;    
+                        NodeList[currentCell].status[3] = true;    
                     }
                     else
                     {
-                        board[currentCell].status[1] = true;
+                        NodeList[currentCell].status[1] = true;
                         currentCell = newCell;
-                        board[currentCell].status[0] = true;
+                        NodeList[currentCell].status[0] = true;
                     }
                 }
                 else
@@ -115,15 +120,15 @@ public class DeongeonGenerator : MonoBehaviour
                     //up or L
                     if (newCell + 1 == currentCell)
                     {
-                        board[currentCell].status[3] = true;
+                        NodeList[currentCell].status[3] = true;
                         currentCell = newCell;
-                        board[currentCell].status[2] = true;
+                        NodeList[currentCell].status[2] = true;
                     }
                     else
                     {
-                        board[currentCell].status[0] = true;
+                        NodeList[currentCell].status[0] = true;
                         currentCell = newCell;
-                        board[currentCell].status[1] = true;
+                        NodeList[currentCell].status[1] = true;
                     }
                 }
             }
@@ -135,26 +140,27 @@ public class DeongeonGenerator : MonoBehaviour
     {
         List<int> neighbors = new List<int>();
 
-        // up 이웃
-        if (cell - size.x >= 0 && board[Mathf.FloorToInt(cell - size.x)].visited)
+        // Up 이웃
+        if (cell - size.x >= 0 && !NodeList[Mathf.FloorToInt(cell - size.x)].visited)
         {
             neighbors.Add(Mathf.FloorToInt(cell - size.x));
         }
-        // down 이웃
-        if (cell + size.x < board.Count && board[Mathf.FloorToInt(cell + size.x)].visited)
+        // Down 이웃
+        if (cell + size.x < NodeList.Count && !NodeList[Mathf.FloorToInt(cell + size.x)].visited)
         {
             neighbors.Add(Mathf.FloorToInt(cell + size.x));
         }
-        // R 이웃
-        if ((cell+1) % size.x != 0 && !board[Mathf.FloorToInt(cell +1)].visited)
+        // Right 이웃
+        if ((cell + 1) % size.x != 0 && !NodeList[Mathf.FloorToInt(cell + 1)].visited)
         {
-            neighbors.Add(Mathf.FloorToInt(cell +1));
+            neighbors.Add(Mathf.FloorToInt(cell + 1));
         }
-        // L 이웃
-        if (cell % size.x != 0 && !board[Mathf.FloorToInt(cell - 1)].visited)
+        // Left 이웃
+        if (cell % size.x != 0 && !NodeList[Mathf.FloorToInt(cell - 1)].visited)
         {
-            neighbors.Add(Mathf.FloorToInt(cell -1));
+            neighbors.Add(Mathf.FloorToInt(cell - 1));
         }
+
         return neighbors;
     }
 }

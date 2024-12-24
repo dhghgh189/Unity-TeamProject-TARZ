@@ -33,11 +33,6 @@ public class ThrowObject : MonoBehaviour, IDrainable
         throwEffects = new List<IEffect>();
     }
 
-    private void OnEnable()
-    {
-        handler.Use(gameObject);
-    }
-
     private void OnDisable()
     {
         if (drainRoutine != null)
@@ -60,6 +55,7 @@ public class ThrowObject : MonoBehaviour, IDrainable
     public void Throw(Vector3 dir, float throwForce)
     {
         if (adapter.IsEnable("GuidedFuncion")) GetComponent<GuidedFuncion>().enabled = true;
+        handler.Use(gameObject);
         rigid.AddForce(dir * throwForce, ForceMode.Impulse);
     }
 
@@ -99,10 +95,13 @@ public class ThrowObject : MonoBehaviour, IDrainable
         if (damagable != null)
         {
             damagable.TakeDamage(damage);
-            owner.Stat.CurrentMp += owner.Stat.GetMpGain(EMpAmountType.Throw);
+            if (gameObject.layer.Equals(LayerMask.NameToLayer("ThrowObject")))
+            {
+                owner.Stat.CurrentMp += owner.Stat.GetMpGain(EMpAmountType.Throw);
+                owner.SkillHandler.ThrowObjectCollision(gameObject, other.gameObject);
+            }
         }
 
-        handler.ThrowObjectCollision(gameObject, other.gameObject);
 
         Destroy(gameObject);
     }
@@ -112,11 +111,20 @@ public class ThrowObject : MonoBehaviour, IDrainable
         if (drainRoutine != null)
             return;
 
-        // 강화 오브젝트가 작동 중 이면 사용을 안한다
+        bool any = true;
+
+        // TODO: 열거형으로 구현하기
         if (adapter.IsEnable("ThrowObjectUpgrade"))
         {
-            Upgrade.IsUpgraded = true;
-            return;
+            GetComponent<ThrowObjectUpgrade>().enabled = true;
+            any = false;
+        }
+        if (adapter.IsEnable("ThrowObjectConvertMine"))
+        {
+            ThrowObjectConvertMine mine = GetComponent<ThrowObjectConvertMine>();
+            mine.Change();
+            damage = mine.MineDamage * owner.Player.Stat.DefaultPowerPer;
+            any = false;
         }
 
         rigid.useGravity = false;

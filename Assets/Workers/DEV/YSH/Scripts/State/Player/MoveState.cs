@@ -28,7 +28,7 @@ public class MoveState : BaseState<PlayerController>
             return;
         }
 
-        if (owner.PInput.TryDrain)
+        if (owner.PInput.TryDrain && owner.Stat.CurrentStamina > 0)
         {
             owner.ChangeState(EState.Drain);
             return;

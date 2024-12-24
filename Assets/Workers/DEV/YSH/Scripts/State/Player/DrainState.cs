@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject.SpaceFighter;
 
 public class DrainState : BaseState<PlayerController>
 { 
@@ -23,7 +24,11 @@ public class DrainState : BaseState<PlayerController>
     public override void OnUpdate()
     {
         base.OnUpdate();
-        if (!owner.PInput.TryDrain)
+
+        // 드레인 중에는 스테미너 감소
+        owner.Stat.ChangeStamina(-(owner.Drain.DrainStaminaAmount * Time.deltaTime));
+
+        if (!owner.PInput.TryDrain || owner.Stat.CurrentStamina <= 0)
         {
             owner.Drain.StopDrain();
             owner.ChangeState(EState.Idle);

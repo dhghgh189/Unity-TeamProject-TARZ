@@ -3302,8 +3302,7 @@ MonoBehaviour:
   - {fileID: 401840278}
   - {fileID: 774590370}
   isRandom: 0
-  _skills:
-  - {fileID: 11400000, guid: 99bf09bef84d4c14e943330fcc8639b2, type: 2}
+  _skillList: []
   _handler: {fileID: 0}
 --- !u!114 &654781872
 MonoBehaviour:
@@ -7765,7 +7764,6 @@ MonoBehaviour:
   maxStamina: 100
   maxMp: 100
   moveSpeed: 5
-  allPowerPer: 0
   MpAmount:
   - 3
   - 5
@@ -8162,6 +8160,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 7420254743281234535, guid: 744790fd829edc343bb6392bc0fb0f1a,
+        type: 3}
+      propertyPath: m_Interpolate
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7889668715304265457, guid: 744790fd829edc343bb6392bc0fb0f1a,
         type: 3}

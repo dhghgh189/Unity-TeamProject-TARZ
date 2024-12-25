@@ -31,8 +31,15 @@ public class JumpState : BaseState<PlayerController>
     {
         if (owner.PInput.TryThrow)
         {
-            // jump throw로 변경 필요
-            owner.ChangeState(EState.Throw);
+            // 점프 원거리 공격
+            owner.ChangeState(EState.JumpThrow);
+            return;
+        }
+
+        if (owner.PInput.TryMelee)
+        {
+            // 점프 근거리 공격
+            owner.ChangeState(EState.JumpMelee);
             return;
         }
 

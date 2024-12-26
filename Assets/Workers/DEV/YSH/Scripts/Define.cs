@@ -10,4 +10,5 @@ public static class Define
     public static readonly int HASH_ANIM_MELEE = Animator.StringToHash("Melee");
     public static readonly int HASH_ANIM_DASH = Animator.StringToHash("Dash");
     public static readonly int HASH_ANIM_DRAIN = Animator.StringToHash("Drain");
+    public static readonly int HASH_ANIM_DAMAGED = Animator.StringToHash("Damage");
 }

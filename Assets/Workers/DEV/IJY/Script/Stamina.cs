@@ -15,10 +15,12 @@ public class Stamina : MonoBehaviour
 
     private void Start()
     {
+        stat.OnMaxStaminaChange += SliderMaxValueChange;
         stat.OnCurStaminaChange += OnSaveStamina;
         OnSaveStamina(stat.CurrentStamina);
         StartCoroutine(StaminaRoutine());
         _IsChangeStam = false;
+        SliderMaxValueChange(stat.MaxStamina);
     }
 
     private void OnSaveStamina(float lastStamina)
@@ -56,5 +58,9 @@ public class Stamina : MonoBehaviour
             }
             yield return null;
         }
+    }
+    private void SliderMaxValueChange(float maxStamina)
+    {
+        gauge_Stamina.maxValue = maxStamina;
     }
 }

@@ -1,6 +1,7 @@
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 using Zenject;
 
 public class Inventory : MonoBehaviour
@@ -13,8 +14,15 @@ public class Inventory : MonoBehaviour
     // 장비들의 기본 능력치로 지정된 베이스 장비가 담길 배열
     [SerializeField] Gear[] baseGears = new Gear[(int)Part.Size];
 
+    // 선택된 장비의 선택지들
+    [SerializeField] GameObject selectPanel;
+    [SerializeField] Button[] SelectButtons;
+
+    private Button selectedButton;
+
     private void Start()
     {
+        SelectButtons = selectPanel.GetComponentsInChildren<Button>();
         foreach (var item in saveData.InventoryGears)
         {
             Gear saveGear = ScriptableObject.CreateInstance<Gear>();
@@ -86,6 +94,36 @@ public class Inventory : MonoBehaviour
             saveData.InventoryGears.Add(gearSaveData);
         }
     }
+    public void SelectSlot(UI_InventorySlots slots)
+    {
+        if (slots.IsEmpty) return;
+        // 선택한 슬롯 위치를 저장
+        selectedButton = EventSystem.current.currentSelectedGameObject.GetComponent<Button>();
+        // 선택지를 활성화
+        selectPanel.SetActive(true);
+        // 이벤트 지정
+        SelectButtons[0].onClick.AddListener(() => { slots.GearSell(); SelectButtonReset(); });
+        SelectButtons[1].onClick.AddListener(() => { slots.EquipGear(); SelectButtonReset(); });
+
+        SelectButtons[0].Select();
+    }
+
+    // 교체 혹은 분해 후 SelectPanel 리셋 함수
+    private void SelectButtonReset()
+    {
+        // 이벤트 삭제
+        foreach (var item in SelectButtons)
+        {
+            item.onClick.RemoveAllListeners();
+        }
+        selectPanel.SetActive(false);
+        // selectPanel닫고 selectedButton이 있다면 해당 버튼을 선택 아니면 첫 번째 버튼을 선택
+        if (selectedButton)
+            selectedButton.Select();
+        else
+            GetComponentInChildren<Button>()?.Select();
+        selectedButton = null;
+    }
 
     // 테스트용
     [SerializeField] GameObject canvas;
@@ -95,9 +133,16 @@ public class Inventory : MonoBehaviour
         {
             GetGear((Part)Random.Range(0, (int)Part.Size), Random.Range(1, 4));
         }
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Tab))
         {
-            canvas.SetActive(!canvas.activeSelf);
+            if (canvas.activeSelf)
+            {
+                canvas.SetActive(false);
+                SelectButtonReset();
+                return;
+            }
+            canvas.SetActive(true);
+            GetComponentInChildren<Button>().Select();
         }
     }
 }

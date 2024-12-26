@@ -1,11 +1,19 @@
+using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 using Zenject;
 
-public class ArmUpgradManager : MonoBehaviour
+public class ArmUpgradManager : MonoBehaviour, Base_InteractionOBJ
 {
     [Inject] SaveData saveData;
     [Inject] StatModel statModel;
     [Inject] SaveManager saveManager;
+
+    [SerializeField] GameObject upgradePanel;
+    [SerializeField] TMP_Text upNameText;
+    [SerializeField] TMP_Text upInfoText;
+    [SerializeField] TMP_Text upCostText;
 
     private void Start()
     {
@@ -20,10 +28,42 @@ public class ArmUpgradManager : MonoBehaviour
     {
         if (statModel.Chip < cost) return false;
 
+        statModel.Chip -= cost;
         statModel.SetAbility(ability, value);
         saveData.ArmUpgradeDatas.Add(new ArmUpgrade(upNumber, ability, value));
         saveManager.Save();
 
         return true;
+    }
+
+    public void Activate()
+    {
+        if (upgradePanel.activeSelf)
+        {
+            upgradePanel.SetActive(false);
+            Time.timeScale = 1f;
+            return;
+        }
+        Time.timeScale = 0f;
+        upgradePanel.SetActive(true);
+        SelecteButton();
+    }
+    public void SetUpgradeDescription(string name, string info, string cost)
+    {
+        upNameText.text = name;
+        upInfoText.text = info;
+        upCostText.text = cost;
+    }
+
+    public void SelecteButton()
+    {
+        foreach (var item in GetComponentsInChildren<Button>())
+        {
+            if (item.interactable)
+            {
+                item.Select();
+                return;
+            }
+        }
     }
 }

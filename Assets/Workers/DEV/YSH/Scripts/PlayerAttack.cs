@@ -14,6 +14,16 @@ public class PlayerAttack : MonoBehaviour
     [Header("근거리 공격 스펙 설정")]
     public MeleeAttackInfo[] MeleeAttackInfo;
 
+    [Header("점프 원거리 공격 스펙 설정")]
+    public float JumpThrowDamage;
+    public float JumpThrowForce;
+    public float JumpThrowAmount;   // 필요한 물건 스택
+
+    [Header("점프 근거리 공격 스펙 설정")]
+    public float JumpMeleeDamage;
+    public float JumpMeleeAngle;
+    public float JumpMeleeRange;
+
     [Space(10f)]
     [SerializeField] private Transform stackTransform;
     [SerializeField] private int maxObjectCount;

@@ -132,10 +132,7 @@ public class StatModel : MonoBehaviour
     public void SetAbility(AdditionAbility ability, float value)
     {
         additionAbility[(int)ability] += value;
-        OnStatChange?.Invoke();
-        OnMaxHpChange?.Invoke(MaxHp);
-        OnMaxStaminaChange?.Invoke(MaxStamina);
-        OnMoveSpeedChange?.Invoke(MoveSpeed);
+        AllCheck();
     }
 
     // 최대 체력 변경

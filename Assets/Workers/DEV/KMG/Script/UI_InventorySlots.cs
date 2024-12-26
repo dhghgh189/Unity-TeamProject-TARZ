@@ -1,25 +1,20 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 using Zenject;
 
-public class UI_InventorySlots : MonoBehaviour, IPointerClickHandler
+public class UI_InventorySlots : MonoBehaviour
 {
     [Inject] StatModel statModel;
     [Inject] Equipment equipment;
+    [Inject] Inventory inventory;
     [SerializeField] Gear gear;
     [SerializeField] TMP_Text gearName;
     public bool IsEmpty = true;
-    // 클릭 이벤트, 원작 게임은 마우스 클릭이 없음 변경해야할듯
-    public void OnPointerClick(PointerEventData eventData)
+    private void Start()
     {
-        if (!gear) return;
-        if (eventData.button == PointerEventData.InputButton.Right)
-        {
-            GearSell();
-            return;
-        }
-        EquipGear();
+        GetComponent<Button>().onClick.AddListener(() => inventory.SelectSlot(this));
     }
     public void EquipGear()
     {
@@ -47,7 +42,7 @@ public class UI_InventorySlots : MonoBehaviour, IPointerClickHandler
         gearName.text = gear.GearName;
     }
 
-    private void GearSell()
+    public void GearSell()
     {
         statModel.Chip += gear.Tier;
         gear = null;

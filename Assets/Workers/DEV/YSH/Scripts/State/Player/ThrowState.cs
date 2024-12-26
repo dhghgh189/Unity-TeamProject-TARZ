@@ -86,17 +86,18 @@ public class ThrowState : BaseState<PlayerController>
         }
 
         int animHash;
-        if (inputDir.x > 0)
+
+        if (inputDir.x != 0)    // Horizontal Type
         {
-            animHash = throwMultiAnimHashes[owner.Attack.ThrowCount, (int)EMultiActionType.Right];
-            owner.Attack.ActionType = EMultiActionType.Right;
+            animHash = throwMultiAnimHashes[owner.Attack.ThrowCount, (int)EMultiActionType.Horizontal];
+            owner.Attack.ActionType = EMultiActionType.Horizontal;
         }
-        else if (inputDir.x < 0)
+        else if (inputDir.z != 0)   // Vertical Type
         {
-            animHash = throwMultiAnimHashes[owner.Attack.ThrowCount, (int)EMultiActionType.Left];
-            owner.Attack.ActionType = EMultiActionType.Left;
+            animHash = throwMultiAnimHashes[owner.Attack.ThrowCount, (int)EMultiActionType.Vertical];
+            owner.Attack.ActionType = EMultiActionType.Vertical;
         }
-        else
+        else    // Basic Type
         {
             animHash = throwMultiAnimHashes[owner.Attack.ThrowCount, (int)EMultiActionType.Basic];
             owner.Attack.ActionType = EMultiActionType.Basic;

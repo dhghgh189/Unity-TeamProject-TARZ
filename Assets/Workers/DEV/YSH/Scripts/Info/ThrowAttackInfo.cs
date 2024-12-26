@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum EMultiActionType { Basic, Left, Right, Length }
+public enum EMultiActionType { Basic, Horizontal, Vertical, Length }
 
 [System.Serializable]
 public class ThrowAttackInfo

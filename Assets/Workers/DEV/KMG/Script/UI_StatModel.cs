@@ -25,6 +25,9 @@ public class UI_StatModel : MonoBehaviour
         staminaText.text = $"스테미나: {statModel.CurrentStamina}/{statModel.MaxStamina}";
         atackPowerText.text = $"공격력: {statModel.AllPowerPer}";
         chipText.text = $"데이터 칩: {statModel.Chip}";
+
+        // UI 갱신을 위한 의미있는 함수
+        statModel.SetAbility(AdditionAbility.AllPowerPer, 0);
     }
 
     private void StatModel_OnCurHpChange(float cureentHp)

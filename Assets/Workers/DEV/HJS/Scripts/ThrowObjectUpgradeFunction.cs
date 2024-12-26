@@ -11,10 +11,11 @@ public class ThrowObjectUpgrade : MonoBehaviour, IEnable, IDamageUpgrade
     [SerializeField] bool enable;
     [SerializeField] string name = "ThrowObjectUpgrade";
     [SerializeField] float increaseDamage;
+    [SerializeField] bool isUpgraded;
     public bool Enable { get => enable; set => enable = value; }
     public string Name { get => name; set => name = value; }
     public float IncreaseDamage { get => increaseDamage; set => increaseDamage = value; }
-    public bool IsUpgraded;
+    public bool IsUpgraded { get => isUpgraded; set { isUpgraded = value; if (isUpgraded) GetComponent<MeshRenderer>().material.color = Color.yellow; } }
 
     /// <summary>
     /// 데미지를 업그레이드 시켜주는 함수

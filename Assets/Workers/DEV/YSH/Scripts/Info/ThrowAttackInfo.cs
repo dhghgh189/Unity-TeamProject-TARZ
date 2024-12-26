@@ -17,6 +17,7 @@ public class ThrowAttackInfo
 public class MultiActionInfo
 {
     public EMultiActionType ActionType;
+    public int StackAmount;     // 필요한 물건스택의 수
     public float Damage;
     public float ThrowForce;
     public EffectInfo EffectInfo;

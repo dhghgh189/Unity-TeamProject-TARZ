@@ -1,20 +1,24 @@
 using System.Linq;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Zenject;
 
-public class UI_ArmUpgrade : MonoBehaviour
+public class UI_ArmUpgrade : MonoBehaviour, ISelectHandler
 {
-    [Inject] SaveData saveData;
+    [Inject] SaveData saveData; 
     [Inject] ArmUpgradManager armUpgradManager;
 
+    [Header("강화 능력 정보")]
     [SerializeField] int upgradeNumber;
     [SerializeField] AdditionAbility upgradeAbility;
     [SerializeField] float upgradeValue;
     [SerializeField] float upgradeCost;
+    [Header("강화 능력 설명")]
+    [SerializeField] string upgradeName;
+    [SerializeField] string upgradeDescription;
 
     private Button button;
-
     private void Start()
     {
         button = GetComponent<Button>();
@@ -29,11 +33,16 @@ public class UI_ArmUpgrade : MonoBehaviour
         if (armUpgradManager.ArmUpgredeExecute(upgradeNumber, upgradeAbility, upgradeValue, upgradeCost))
         {
             button.interactable = false;
-            Debug.Log("업글성공");
+            armUpgradManager.SelecteButton();
         }
         else
         {
             Debug.Log("돈없음");
         }
+    }
+
+    public void OnSelect(BaseEventData eventData)
+    {
+        armUpgradManager.SetUpgradeDescription(upgradeName, upgradeDescription, upgradeCost.ToString());
     }
 }

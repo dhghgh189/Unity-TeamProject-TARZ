@@ -46,24 +46,11 @@ public class PlayerController : MonoBehaviour, IDamagable
 
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-        
-        // test
-        isLocked = true;
     }
 
-    // test
-    bool isLocked;
     private void Update()
     {
         Fsm.OnUpdate();
-
-        // test
-        if (Input.GetKeyDown(KeyCode.F2))
-        {
-            Cursor.visible = isLocked;
-            Cursor.lockState = isLocked ? CursorLockMode.None : CursorLockMode.Locked;
-            isLocked = !isLocked;
-        }
 
         SetAnimParam();
 

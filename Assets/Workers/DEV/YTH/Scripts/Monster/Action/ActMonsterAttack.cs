@@ -80,7 +80,7 @@ public class ActMonsterAttack : Action
     IEnumerator AttackRoutine()
     {
         Attack(_range, _angle);
-        //_animator.SetTrigger("Attack");
+        _animator.SetTrigger("Attack");
         yield return new WaitForSeconds(_monsterData.MeleeAttackSpeed);
         attackRoutine = null;
     }
@@ -108,7 +108,6 @@ public class ActMonsterAttack : Action
                 damageble.TakeDamage(_monsterData.Damage);
             }
         }
-        // 애니메이션에 메서드 추가하기
     }
     #endregion
 

@@ -1578,6 +1578,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1560255522742598978, guid: 37305a29f7e1a5b408ce01591b44f1f8,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 112
+      objectReference: {fileID: 0}
+    - target: {fileID: 2427957077250043015, guid: 37305a29f7e1a5b408ce01591b44f1f8,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3599884017524454369, guid: 37305a29f7e1a5b408ce01591b44f1f8,
         type: 3}
       propertyPath: mBehaviorSource.mTaskData.JSONSerialization
@@ -1738,13 +1748,29 @@ PrefabInstance:
     - target: {fileID: 8942506606477700167, guid: 37305a29f7e1a5b408ce01591b44f1f8,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 9112775609412227576, guid: 37305a29f7e1a5b408ce01591b44f1f8,
+        type: 3}
+      propertyPath: _rigid
+      value: 
+      objectReference: {fileID: 917184896683443610}
+    - target: {fileID: 9112775609412227576, guid: 37305a29f7e1a5b408ce01591b44f1f8,
+        type: 3}
+      propertyPath: _monsterData
+      value: 
+      objectReference: {fileID: 1565474119}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37305a29f7e1a5b408ce01591b44f1f8, type: 3}
+--- !u!54 &917184896683443610 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 1560255522742598978, guid: 37305a29f7e1a5b408ce01591b44f1f8,
+    type: 3}
+  m_PrefabInstance: {fileID: 917184896683443609}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1368512623332777113
 PrefabInstance:
   m_ObjectHideFlags: 0

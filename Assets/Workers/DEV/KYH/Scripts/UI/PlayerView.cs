@@ -8,7 +8,7 @@ using Zenject;
 public class PlayerView : MonoBehaviour
 {
     [Inject] StatModel statModel;
-    //[Inject] PlayerAttack playerAttack;
+    [Inject] PlayerAttack playerAttack;
 
     [Header("플레이어 정보")]
     [SerializeField] private Slider hpSlider;
@@ -34,7 +34,7 @@ public class PlayerView : MonoBehaviour
         statModel.OnCurHpChange += Player_OnCurHPChanged;
         statModel.OnCurMpChange += Player_OnCurMPChanged;
         statModel.OnCurStaminaChange += Player_OnCurStaminaChanged;
-        //playerAttack.OnChangedStack += Player_OnTObjectChanged;
+        playerAttack.OnChangedStack += Player_OnTObjectChanged;
     }
 
     public void Player_OnCurHPChanged(float curHP)
@@ -57,6 +57,6 @@ public class PlayerView : MonoBehaviour
 
     public void Player_OnTObjectChanged(int count)
     {
-        //numberingText.text = $"{playerAttack.ObjectCount} / {playerAttack.MaxObjectCount}";
+        numberingText.text = $"{playerAttack.ObjectCount} / {playerAttack.MaxObjectCount}";
     }
 }

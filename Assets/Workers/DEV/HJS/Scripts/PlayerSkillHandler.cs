@@ -19,7 +19,7 @@ public class PlayerSkillHandler : MonoBehaviour
     [SerializeField] PlayerMovement playerMovement;
 
     [Header("SkillList")]
-    [SerializeField] Dictionary<BaseSkillSO, int> skillDic;
+    [SerializeField] Dictionary<string, int> skillDic;
 
     [Header("Test")]
     [Inject]
@@ -39,7 +39,7 @@ public class PlayerSkillHandler : MonoBehaviour
             onActionPlayerEvents[i] = new UnityEvent<GameObject, GameObject>();
             onCollisionPlayerEvents[i] = new UnityEvent<GameObject, GameObject>();
         }
-        skillDic = new Dictionary<BaseSkillSO, int>();
+        skillDic = new Dictionary<string, int>();
     }
 
     private void Update()
@@ -166,18 +166,19 @@ public class PlayerSkillHandler : MonoBehaviour
         #endregion
 
         // 스킬리스트에 있으면 레벨 올려주기
-        if (skillDic.ContainsKey(skill) )
+        if (skillDic.ContainsKey(skill.Name) )
         {
-            int level = skillDic[skill];
+            int level = skillDic[skill.Name];
             level += 1;
-            skillDic[skill] = level;
+            skillDic[skill.Name] = level;
             skill.SkillLevel = level;
         }
         // 스킬리스트에 없으면 넣어두기
         else
         {
-            skillDic.Add(skill, 1);
+            skillDic.Add(skill.Name, 1);
             skill.SkillLevel = 1;
+            Debug.Log("딕션에 추가!");
         }
         // 디버그로 정보 보여주기
         Debug.Log($"Add Skill Name : {skill.Name}  / Skill Act Timing : {skill.Timing} ");
@@ -245,7 +246,6 @@ public class PlayerSkillHandler : MonoBehaviour
                             psivSkill.ResetValue();
                             break;
                     }
-                    model.AllCheck();
                     break;
                 // 조건 - 조건에 맞으면 특정 행동을 수행한다.
                 case PassiveType.Condition:
@@ -261,7 +261,6 @@ public class PlayerSkillHandler : MonoBehaviour
                             model.OnCurStaminaChange -= psivSkill.ConditionCheck;
                             break;
                     }
-                    model.AllCheck();
                     break;
                 // 활성화/비활성화 - 특정 기능의 활성화 여부 설정한다.
                 case PassiveType.Toggle:
@@ -280,7 +279,9 @@ public class PlayerSkillHandler : MonoBehaviour
         #endregion
 
         // 스킬 리스트에서 제거하기
-        skillDic[skill] = 0;
+        skillDic[skill.Name] = 0;
+        // 스킬 제거하기
+        Destroy(skill);
         Debug.Log($"Remove Active Skill Name : {skill.Name}  / Skill Act Timing : {skill.Timing}");
     }
 
@@ -300,9 +301,9 @@ public class PlayerSkillHandler : MonoBehaviour
 
     public void LevelUp(BaseSkillSO skill)
     {
-        if (skillDic.ContainsKey(skill))
+        if (skillDic.ContainsKey(skill.Name))
         {
-            int level = skillDic[skill];
+            int level = skillDic[skill.Name];
 
             if (level >= skill.MaxLevel)
             {
@@ -310,7 +311,7 @@ public class PlayerSkillHandler : MonoBehaviour
             }
 
             level += 1;
-            skillDic[skill] = level;
+            skillDic[skill.Name] = level;
             skill.SkillLevel = level;
 
             Debug.Log($"<color=white>{skill.name} 스킬 {level}로 레벨업!</color>");

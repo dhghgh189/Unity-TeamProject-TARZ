@@ -17,12 +17,13 @@ public class PlayerController : MonoBehaviour, IDamagable
 
     private Animator anim;
 
-    [SerializeField] private AblityAdapter adapter;
+    //[SerializeField] private AblityAdapter adapter;
     [SerializeField] private DrainManager drainManager;
 
     public EState currentStateView;
 
     public PlayerSkillHandler SkillHandler;
+    public AblityAdapter AblityAdapter;
     public PlayerFSM Fsm { get; private set; }
     public Animator Anim { get { return anim; } }
     public PlayerInput PInput { get; private set; }
@@ -34,14 +35,14 @@ public class PlayerController : MonoBehaviour, IDamagable
     void Awake()
     {
         anim = GetComponent<Animator>();
-
+        AblityAdapter = GetComponent<AblityAdapter>();
         PInput = GetComponent<PlayerInput>();
         Movement = GetComponent<PlayerMovement>();
         Attack = GetComponent<PlayerAttack>();
 
         SkillHandler = GetComponent<PlayerSkillHandler>();
 
-        Fsm = new PlayerFSM(this, GetComponent<AblityAdapter>());
+        Fsm = new PlayerFSM(this, AblityAdapter);
 
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;

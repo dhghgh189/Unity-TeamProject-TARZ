@@ -9,7 +9,7 @@ public class ThrowObject : MonoBehaviour, IDrainable
     [SerializeField] private LayerMask whatIsTarget;
 
     [SerializeField]
-    private AblityAdapter adapter;
+    public AblityAdapter adapter;
     public PlayerSkillHandler handler;
 
     [SerializeField] private bool isCollected;
@@ -116,7 +116,7 @@ public class ThrowObject : MonoBehaviour, IDrainable
         // TODO: 열거형으로 구현하기
         if (adapter.IsEnable("ThrowObjectUpgrade"))
         {
-            GetComponent<ThrowObjectUpgrade>().enabled = true;
+            GetComponent<ThrowObjectUpgrade>().IsUpgraded = true;
             any = false;
         }
         if (adapter.IsEnable("ThrowObjectConvertMine"))
@@ -126,6 +126,8 @@ public class ThrowObject : MonoBehaviour, IDrainable
             damage = mine.MineDamage * owner.Player.Stat.DefaultPowerPer;
             any = false;
         }
+
+        if (!any) return;
 
         rigid.useGravity = false;
         rigid.constraints = RigidbodyConstraints.FreezeRotation;

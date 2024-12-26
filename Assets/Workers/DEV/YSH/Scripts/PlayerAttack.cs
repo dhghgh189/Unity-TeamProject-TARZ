@@ -1,10 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using TreeEditor;
 using UnityEngine;
 using UnityEngine.Events;
-using Zenject;
 
 public class PlayerAttack : MonoBehaviour
 {
@@ -47,7 +44,7 @@ public class PlayerAttack : MonoBehaviour
 
     public bool CanUseCombo;
 
-    public event UnityAction<int> OnChangedStack; 
+    public event UnityAction<int> OnChangedStack;
 
     private void Awake()
     {
@@ -261,6 +258,8 @@ public class PlayerAttack : MonoBehaviour
         damage = damage * player.Stat.DefaultPowerPer;
         Debug.Log($"final damage : {damage}");
         tobj.SetDamage(damage);
+        tobj.adapter = player.AblityAdapter;
+        tobj.handler = player.SkillHandler;
         tobj.Throw(transform.forward + (transform.up * 0.3f), throwForce);
     }
 
@@ -288,7 +287,7 @@ public class PlayerAttack : MonoBehaviour
                 continue;
 
             // 최종 데미지 = 타수별 공격력 + (타수별 공격력 * 현재 스탯상 증가량)
-            float damage = MeleeAttackInfo[MeleeCount].Damage * player.Stat.DefaultPowerPer;        
+            float damage = MeleeAttackInfo[MeleeCount].Damage * player.Stat.DefaultPowerPer;
             damagable.TakeDamage(damage);
 
             // Mp 회복

@@ -10,10 +10,6 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
     private ObjectPool _returnPool; //반납 위치
     public ObjectPool ReturnPool { get { return _returnPool; } set { _returnPool = value; } }
 
-    [SerializeField] GameObject _gear;
-
-    [SerializeField] GameObject _chip;
-
     [SerializeField] MonsterData _monsterData;
 
     [SerializeField] GameObject _player;
@@ -21,6 +17,11 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
     [SerializeField] Rigidbody _rigid;
 
     [SerializeField] Animator _animator;
+
+    [Header("Drop Item")]
+    [SerializeField] GameObject _gear;
+
+    [SerializeField] GameObject _chip;
 
     public event Action OnDie;
 
@@ -43,6 +44,8 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
 
     public void TakeDamage(float damage)
     {
+        RotateToPlayer();
+
         _rigid.angularVelocity = Vector3.zero;
         _rigid.velocity = Vector3.zero;
 
@@ -84,5 +87,12 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
             transform.position += moveDir * 5f * Time.deltaTime;
             yield return null;
         }
+    }
+
+    public void RotateToPlayer()
+    {
+        //피격 시 플레이어 방향으로 회전
+        Quaternion lookRot = Quaternion.LookRotation(_player.transform.position);
+        transform.rotation = Quaternion.Lerp(transform.rotation, lookRot, 0.7f * Time.deltaTime); // 속도 빠르게 수정할 것
     }
 }

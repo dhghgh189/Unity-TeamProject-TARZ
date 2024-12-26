@@ -2,6 +2,11 @@ using BehaviorDesigner.Runtime.Tasks;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
+
+/// <summary>
+/// 1. 플레이어 뒤로 가다가 stopblockDistance보다 클때 running 
+/// 2. stopBlockDistance보다 가까워지면 추격 으로 넘어가게 Running 
+/// </summary>
 public class ActMonsterMove_Block : Action
 {
     [SerializeField] CondMonsterCanMove _condMonsterCanMove;

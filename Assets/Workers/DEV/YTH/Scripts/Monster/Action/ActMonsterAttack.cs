@@ -3,6 +3,12 @@ using BehaviorDesigner.Runtime.Tasks;
 using System.Collections;
 using UnityEngine;
 
+/// <summary>
+/// 1. 근접공격
+/// 2. 원거리 공격
+/// 3. 개구리점프 - 대쉬어택
+/// 4. 공격로직 
+/// </summary>
 public class ActMonsterAttack : Action
 {
     [SerializeField] MonsterData _monsterData;

@@ -3,6 +3,17 @@ using System.Collections.Generic;
 using System.Data;
 using UnityEngine;
 
+// 임시 선언한 공격 타입. 현재 Stern만 사용한다.
+public enum TakeHitType
+{
+    Stern,
+    Doto_Damage,
+    Grab,
+    Knock_Back, Knock_Up,
+    Super_Knock_Back, Super_Knock_Up,
+    Size
+}
+
 public interface IDamagable
 {
     void TakeDamage(float damage);

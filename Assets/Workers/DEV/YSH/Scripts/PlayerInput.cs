@@ -1,7 +1,9 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerInput : MonoBehaviour
 {
+    public List<Vector3> TryInputDown = new();
     public Vector3 InputDir { get; private set; }
     public bool TryJump { get; private set; }
     public bool TryThrow { get; private set; }
@@ -9,6 +11,11 @@ public class PlayerInput : MonoBehaviour
     public bool TryDash { get; private set; }
     public bool TryDrain { get; private set; }
     public bool TryInteraction { get; private set; }
+
+    private void Start()
+    {
+        TryInputDown.Add(InputDir);
+    }
 
     void Update()
     {

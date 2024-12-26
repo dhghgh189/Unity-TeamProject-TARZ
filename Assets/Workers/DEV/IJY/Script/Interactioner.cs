@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Interactioner : MonoBehaviour
@@ -25,12 +24,9 @@ public class Interactioner : MonoBehaviour
             if (target == null || !target.activeSelf) return;
 
             // 상호작용 대상을 바라보는 코드. 추후 자연스럽게 수정 예정
-            Vector3 dir = new Vector3(target.transform.position.x, transform.parent.position.y, target.transform.position.z) - transform.parent.position;
-            transform.parent.rotation = Quaternion.LookRotation(dir).normalized;
-
-            //transform.parent.rotation = Quaternion.Lerp(transform.parent.rotation, Quaternion.LookRotation(dir), Time.deltaTime);
-            //transform.parent.rotation = Quaternion.Slerp(transform.parent.rotation, Quaternion.LookRotation(dir), Time.deltaTime * 2f);
-            //transform.parent.rotation = Quaternion.LookRotation(dir);
+            Vector3 dir = new Vector3
+                (target.transform.position.x, transform.parent.position.y, target.transform.position.z) - transform.parent.position;
+            transform.parent.rotation = Quaternion.Slerp(transform.parent.rotation, Quaternion.LookRotation(dir), 2f);
 
             target.GetComponent<Base_InteractionOBJ>().Activate();
             target = null;
@@ -39,18 +35,18 @@ public class Interactioner : MonoBehaviour
 
     GameObject SelectInteraction(List<GameObject> targets)
     {
-        targets = CheckMonsters();
+        targets = CheckInteraction();
         if (targets.Count <= 0) return null;
 
         var target = from targeting in targets
                      orderby Vector3.Distance(targeting.transform.position, transform.position) ascending
                      select targeting;
         targets = target.ToList();
-        
+
         return targets.First();
     }
 
-    List<GameObject> CheckMonsters()
+    List<GameObject> CheckInteraction()
     {
         List<GameObject> _targets = new List<GameObject>();
         Collider[] collider = Physics.OverlapSphere(transform.position, range, interactionLayer);

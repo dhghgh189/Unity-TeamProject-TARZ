@@ -95,7 +95,7 @@ public class Inventory : MonoBehaviour
         {
             GetGear((Part)Random.Range(0, (int)Part.Size), Random.Range(1, 4));
         }
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Tab))
         {
             canvas.SetActive(!canvas.activeSelf);
         }

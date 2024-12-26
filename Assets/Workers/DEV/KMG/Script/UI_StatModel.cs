@@ -1,7 +1,6 @@
 using TMPro;
 using UnityEngine;
 using Zenject;
-using Zenject.Asteroids;
 
 public class UI_StatModel : MonoBehaviour
 {

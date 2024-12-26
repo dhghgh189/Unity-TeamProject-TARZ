@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour, IDamagable
 
     public EState currentStateView;
 
+    public ManaSkillHandler ManaSkillHandler;
     public PlayerSkillHandler SkillHandler;
     public AblityAdapter AblityAdapter;
     public PlayerFSM Fsm { get; private set; }

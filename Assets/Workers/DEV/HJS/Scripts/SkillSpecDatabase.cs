@@ -1,52 +1,46 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Scriptables/Skill_Spec_Database")]
+/// <summary>
+/// 스킬이 들어있는 데이터베이스 -> 블루칩들
+/// </summary>
+[CreateAssetMenu(menuName = "Scriptables/Skill_Database")]
 public class SkillSpecDatabase : ScriptableObject
 {
-    [Header("DataBase")]
-    [SerializeField] Dictionary<string, Spec> dic;
-    [Header("Skill_Spec_List")]
-    [SerializeField] List<Spec> specs;
+    [Header("Init")]
+    [SerializeField, Min(1), Tooltip("보여줄 스킬의 수")] int showCount;
+    [SerializeField, Min(1), Tooltip("나올 수 있는 최대 레벨")] int maxLevel; 
+    private BaseSkillSO[] showSkillArray;
 
-    public bool GetData(BaseSkillSO baseSkill, out Spec spec)
-    {
-        return dic.TryGetValue(baseSkill.Name, out spec);
-    }
+    [Header("Skills")]
+    [SerializeField] List<BaseSkillSO> skillList;
 
     private void Awake()
     {
-        dic = new Dictionary<string, Spec>();
-        foreach (Spec spec in specs)
-        {
-            dic.Add(spec.Name, spec);
-        }
+        showSkillArray = new BaseSkillSO[showCount];
     }
 
-    [Serializable]
-    public struct Spec
+    /// <summary>
+    /// 보여줄 스킬의 수만큼 담아서 보내준다.
+    /// </summary>
+    public BaseSkillSO[] ShowSkillArray()
     {
-        [Header("Active")]
-        [SerializeField] BaseSkillSO skill;
-        [SerializeField] List<float> power;
-        [SerializeField] List<float> range;
-        [SerializeField] List<float> time;
-        [Header("Interaction")]
-        [SerializeField, Range(0f, 1f)] List<float> degree;
-        [SerializeField] List<float> damage;
-        [SerializeField] List<float> duration;
+        for(int i = 0; i < showCount; i++)
+        {
+            showSkillArray[i] = skillList[Random.Range(0, skillList.Count)];       
+        }
 
-        public string Name { get { Debug.Log("<color=Green>스킬을 가져오기</color>"); return skill.Name; } }
+        return showSkillArray;
+    }
 
-        public float Power(int level) => power[level - 1];
-        public float Range(int level) => range[level - 1];
-        public float Time(int level) => time[level - 1];
-
-        public float interactioDegree(int level) { return (degree.Count > 0) ? degree[level - 1] : 0 ;}
-        public float InteractionDuration(int level) { return (duration.Count > 0) ? duration[level - 1] : 0; }
-        public float InteractionDamage(int level) { return (damage.Count > 0) ? damage[level - 1] : 0; }
+    /// <summary>
+    /// 새로 고침을 한 스킬
+    /// </summary>
+    /// <returns>새롭게 나온 스킬</returns>
+    public BaseSkillSO RerollSkill()
+    {
+        return skillList[Random.Range(0, skillList.Count)];
     }
 }

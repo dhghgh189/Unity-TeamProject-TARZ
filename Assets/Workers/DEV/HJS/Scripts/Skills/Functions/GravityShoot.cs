@@ -52,15 +52,6 @@ public class GravityShoot : MonoBehaviour, ISpec
         StopAllCoroutines();
     }
 
-    public void SetSpec(SkillSpecDatabase.Spec spec, int level)
-    {
-        operationTime = spec.Time(level);
-        force = spec.Power(level);
-        range = spec.Range(level);
-
-        Init();
-    }
-
     public void SetSpec(BaseSkillSO.Spec spec, int level)
     {
         operationTime = spec.Time(level);

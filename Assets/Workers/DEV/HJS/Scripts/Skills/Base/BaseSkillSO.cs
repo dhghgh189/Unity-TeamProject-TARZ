@@ -202,6 +202,7 @@ public class BaseSkillSO : ScriptableObject
                     if (GetModifySetting.inputType == PassiveModifyInputType.Value)
                     {
                         statModel.MoveSpeed = GetModifySetting.Amount;
+                        Debug.Log("TestOn");
                     }
                     else if (GetModifySetting.inputType == PassiveModifyInputType.Percent)
                     {
@@ -321,7 +322,10 @@ public class BaseSkillSO : ScriptableObject
                     //     PassiveResultModifyType.Power => statModel.SetAbility(AdditionAbility.AllPowerPer, statModel.GetAbility(AdditionAbility.AllPowerPer) * (conditionSetting.IsIncrease ? 1 : -1) * conditionSetting.Amount),
                     //     _ => throw new NotImplementedException(),
                     // };
+                    if (conditionSetting.isChanged) return;
+
                     conditionSetting.isChanged = true;
+
                     switch (conditionSetting.resultModifyType)
                     {
                         case PassiveResultModifyType.MaxHp: Debug.Log("HP+"); statModel.SetAbility(AdditionAbility.MaxHpPer, (conditionSetting.Amount)); break;
@@ -338,8 +342,8 @@ public class BaseSkillSO : ScriptableObject
                     {
                         case PassiveResultModifyType.MaxHp: Debug.Log("HP-"); statModel.SetAbility(AdditionAbility.MaxHpPer, (-conditionSetting.Amount)); break;
                         case PassiveResultModifyType.MaxStamina: Debug.Log("ST-"); statModel.SetAbility(AdditionAbility.MaxStaminaPer, (-conditionSetting.Amount)); break;
-                        case PassiveResultModifyType.AllPower: Debug.Log("AP-"); statModel.SetAbility(AdditionAbility.AllPowerPer, (conditionSetting.Amount)); break;
-                        case PassiveResultModifyType.DefaultPower: Debug.Log("DP-"); statModel.SetAbility(AdditionAbility.DefaultPowerPer, (conditionSetting.Amount)); break;
+                        case PassiveResultModifyType.AllPower: Debug.Log("AP-"); statModel.SetAbility(AdditionAbility.AllPowerPer, (-conditionSetting.Amount)); break;
+                        case PassiveResultModifyType.DefaultPower: Debug.Log("DP-"); statModel.SetAbility(AdditionAbility.DefaultPowerPer, (-conditionSetting.Amount)); break;
                         case PassiveResultModifyType.StaminaCostRate: Debug.Log("SC-"); statModel.StaminaCostRate += Mathf.Clamp(1 - conditionSetting.Amount * 0.01f, 0f, 1f); break;
                     }
                 }
@@ -354,13 +358,12 @@ public class BaseSkillSO : ScriptableObject
         {
             if (conditionSetting.isChanged)
             {
-                conditionSetting.isChanged = false;
                 switch (conditionSetting.resultModifyType)
                 {
                     case PassiveResultModifyType.MaxHp: Debug.Log("HP-"); statModel.SetAbility(AdditionAbility.MaxHpPer, (-conditionSetting.Amount)); break;
                     case PassiveResultModifyType.MaxStamina: Debug.Log("ST-"); statModel.SetAbility(AdditionAbility.MaxStaminaPer, (-conditionSetting.Amount)); break;
-                    case PassiveResultModifyType.AllPower: Debug.Log("AP-"); statModel.SetAbility(AdditionAbility.AllPowerPer, (conditionSetting.Amount)); break;
-                    case PassiveResultModifyType.DefaultPower: Debug.Log("DP-"); statModel.SetAbility(AdditionAbility.DefaultPowerPer, (conditionSetting.Amount)); break;
+                    case PassiveResultModifyType.AllPower: Debug.Log("AP-"); statModel.SetAbility(AdditionAbility.AllPowerPer, (-conditionSetting.Amount)); break;
+                    case PassiveResultModifyType.DefaultPower: Debug.Log("DP-"); statModel.SetAbility(AdditionAbility.DefaultPowerPer, (-conditionSetting.Amount)); break;
                     case PassiveResultModifyType.StaminaCostRate: Debug.Log("SC-"); statModel.StaminaCostRate = Mathf.Lerp(0f, 1f, 1 - conditionSetting.Amount * 0.01f); break;
                 }
             }

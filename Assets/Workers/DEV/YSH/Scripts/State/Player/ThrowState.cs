@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 
 public class ThrowState : BaseState<PlayerController>
@@ -58,7 +56,7 @@ public class ThrowState : BaseState<PlayerController>
         inputDir = owner.PInput.InputDir;
 
         comboTimer = 0f;
-        
+
         owner.Movement.Move(Vector3.zero);
 
         // 아직 anim length를 모르기 때문에 큰 값으로 설정
@@ -125,8 +123,8 @@ public class ThrowState : BaseState<PlayerController>
 
         // 대쉬가 입력되면 공격을 캔슬 (점프 시에는 불가)
         // 공격 카운트도 체크하여 마지막 공격때는 캔슬안되게 해야 함
-        if (owner.Movement.IsGrounded 
-            && owner.PInput.TryDash 
+        if (owner.Movement.IsGrounded
+            && owner.PInput.TryDash
             && owner.IsEnoughStamina(owner.Stat.DashStaminaAmount))
         {
             owner.Attack.ThrowCount = 0;
@@ -136,7 +134,7 @@ public class ThrowState : BaseState<PlayerController>
 
         // 콤보가 가능한 상황에 입력이 확인된 경우 
         // 물건 스택또한 존재해야 함
-        if (owner.Attack.CanUseCombo 
+        if (owner.Attack.CanUseCombo
             && owner.PInput.TryThrow
             && owner.Attack.ObjectCount > 0)
         {

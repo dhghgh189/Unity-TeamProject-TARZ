@@ -1,95 +1,82 @@
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Interactioner : MonoBehaviour
 {
     private LayerMask interactionLayer;
-    [SerializeField] private bool IsInteraction_inside;
+    private Coroutine UpdateCoroutine;
+    private List<GameObject> interactionOBJs = new();
     [SerializeField] private PlayerController PlayerController;
-    [Space(10f)]
-    [SerializeField] private List<GameObject> interactionOBJs = new();
-    //[SerializeField] private GameObject t;
+    [SerializeField] private GameObject target;
+    [Header("인식 범위")]
+    [SerializeField] float range;
+    [SerializeField] float angle;
 
-    private void Start()
-    {
-        IsInteraction_inside = false;
-        interactionLayer = LayerMask.NameToLayer("Is_Interaction");
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.layer == interactionLayer)
-        {
-            interactionOBJs.Add(other.gameObject);
-            IsInteraction_inside = true;
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        interactionOBJs.Clear();
-        IsInteraction_inside = false;
-    }
-
-    // 1. 키를 눌렀을 때, 오버랩 스피어를 통해 가장 거리가 가까운 오브젝트 하나를 골라 Activate
-    // 2. 변수 하나에 인식한 오브젝트를 저장하고, 다시 다른 오브젝트가 닿았을 때 해당 오브젝트와 비교 하여 다시 변수를 설정
+    private void Start() => interactionLayer = LayerMask.GetMask("Is_Interaction");
 
     private void Update()
     {
-        if (IsInteraction_inside)
+        if (PlayerController.PInput.TryInteraction)
         {
-            if (IsAlive() == false)
-            {
-                IsInteraction_inside = false;
-                return;
-            }
+            target = SelectInteraction(interactionOBJs);
 
-            if (PlayerController.PInput.TryInteraction)
-            {
-                Base_InteractionOBJ target = SelectInteraction();
+            if (target == null || !target.activeSelf) return;
 
-                if (target == null)
-                {
-                    IsInteraction_inside = false;
-                    return;
-                }
+            // 상호작용 대상을 바라보는 코드. 추후 자연스럽게 수정 예정
+            Vector3 dir = new Vector3(target.transform.position.x, transform.parent.position.y, target.transform.position.z) - transform.parent.position;
+            transform.parent.rotation = Quaternion.LookRotation(dir).normalized;
 
-                target.Activate();
-            }
+            //transform.parent.rotation = Quaternion.Lerp(transform.parent.rotation, Quaternion.LookRotation(dir), Time.deltaTime);
+            //transform.parent.rotation = Quaternion.Slerp(transform.parent.rotation, Quaternion.LookRotation(dir), Time.deltaTime * 2f);
+            //transform.parent.rotation = Quaternion.LookRotation(dir);
+
+            target.GetComponent<Base_InteractionOBJ>().Activate();
+            target = null;
         }
     }
 
-    bool IsAlive()
+    GameObject SelectInteraction(List<GameObject> targets)
     {
-        bool isAlive = true;
+        targets = CheckMonsters();
+        if (targets.Count <= 0) return null;
 
-        for (int i = interactionOBJs.Count - 1; i >= 0; i--)
-        {
-            if (interactionOBJs[i] == null || !interactionOBJs[i].gameObject.activeSelf)
-            {
-                interactionOBJs.Remove(interactionOBJs[i]);
-            }
-        }
-        if (interactionOBJs.Count > 0) isAlive = true;
-        else isAlive = false;
-
-        return isAlive;
-    }
-
-    Base_InteractionOBJ SelectInteraction()
-    {
-        var target = from targeting in interactionOBJs
+        var target = from targeting in targets
                      orderby Vector3.Distance(targeting.transform.position, transform.position) ascending
                      select targeting;
-        interactionOBJs = target.ToList();
+        targets = target.ToList();
+        
+        return targets.First();
+    }
 
-        foreach (GameObject obj in interactionOBJs)
+    List<GameObject> CheckMonsters()
+    {
+        List<GameObject> _targets = new List<GameObject>();
+        Collider[] collider = Physics.OverlapSphere(transform.position, range, interactionLayer);
+
+        // 인식할 몬스터 각도의 범위 설정
+        foreach (Collider _col in collider)
         {
-            Debug.Log($"<color=yellow>정렬 후 : {obj}</color>");
+            Vector3 source = transform.position; source.y = 0;
+            Vector3 destination = _col.transform.position; destination.y = 0;
+            Vector3 targetDir = (destination - source).normalized;
+            float targetAngle = Vector3.Angle(transform.forward, targetDir);
+
+            if (targetAngle > angle * 0.5f) continue;
+            _targets.Add(_col.gameObject);
         }
 
-        if (interactionOBJs.Count <= 0) return null;
-        return interactionOBJs.First().GetComponent<Base_InteractionOBJ>();
+        return _targets;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Vector3 rightDir = Quaternion.Euler(0, angle * 0.5f, 0) * transform.forward;
+        Vector3 leftDir = Quaternion.Euler(0, angle * -0.5f, 0) * transform.forward;
+
+        Gizmos.color = Color.black;
+        Gizmos.DrawLine(transform.position, transform.position + rightDir * range);
+        Gizmos.DrawLine(transform.position, transform.position + leftDir * range);
     }
 }

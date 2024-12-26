@@ -20,7 +20,7 @@ public class PlayerInput : MonoBehaviour
         TryJump = Input.GetButtonDown("Jump");
         TryThrow = Input.GetButtonDown("Throw");
         TryMelee = Input.GetButtonDown("Melee");
-        TryDrain = Input.GetKey(KeyCode.LeftControl);
+        TryDrain = Input.GetButton("Drain");
         TryInteraction = Input.GetKeyDown(KeyCode.E);
     }
 }

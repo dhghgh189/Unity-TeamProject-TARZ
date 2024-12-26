@@ -7,6 +7,16 @@ public class TestPlayerUI : MonoBehaviour
 {
     [Inject] StatModel model;
 
+    [SerializeField] private GameObject skillPanel;
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            skillPanel.SetActive(true);
+        }
+    }
+
     public void OnClickHPButton()
     {
         model.CurrentHp -= 10f;

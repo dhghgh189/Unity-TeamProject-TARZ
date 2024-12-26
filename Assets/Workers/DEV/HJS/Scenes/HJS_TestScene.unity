@@ -1681,10 +1681,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2df5efce1124f7140b2a6dd2b04b0b33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  adapter: {fileID: 0}
   drainManager: {fileID: 1640560645}
   currentStateView: 0
   SkillHandler: {fileID: 0}
+  AblityAdapter: {fileID: 0}
 --- !u!136 &512545013
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1721,7 +1721,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerCollisionToggle: 0000000000000000
-  ThrowObjectPrefab: {fileID: 0}
+  ThrowObjectPrefab: {fileID: 4766049548964259805, guid: a6a424693f63ae04788f8ca7d29163b6,
+    type: 3}
 --- !u!114 &512545017
 MonoBehaviour:
   m_ObjectHideFlags: 0

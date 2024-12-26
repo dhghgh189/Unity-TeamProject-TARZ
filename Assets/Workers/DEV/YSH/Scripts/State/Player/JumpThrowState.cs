@@ -21,6 +21,8 @@ public class JumpThrowState : BaseState<PlayerController>
         if (camTrf == null)
             camTrf = Camera.main.transform;
 
+        owner.Movement.Move(Vector3.zero);
+
         // 카메라 정면을 바라본다.
         lookDir = camTrf.forward;   // 공격 시전 시 바라봤던 방향을 기억해둔다.
         owner.Movement.LookAt(lookDir);
@@ -42,7 +44,6 @@ public class JumpThrowState : BaseState<PlayerController>
     {
         base.OnUpdate();
 
-        // 애니메이션 도중 회전이 원복되는 현상 방지 (Adjust)
         if (lookDir != Vector3.zero && owner.transform.forward != lookDir)
         {
             owner.Movement.LookAt(lookDir);

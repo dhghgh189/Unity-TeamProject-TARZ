@@ -29,7 +29,9 @@ public class JumpState : BaseState<PlayerController>
 
     public override void OnUpdate()
     {
-        if (owner.PInput.TryThrow)
+        // 현재 물건 스택이 점프 공격에 필요한 스택만큼 존재해야 함
+        if (owner.PInput.TryThrow 
+            && owner.Attack.ObjectCount >= owner.Attack.JumpThrowAmount)
         {
             // 점프 원거리 공격
             owner.ChangeState(EState.JumpThrow);

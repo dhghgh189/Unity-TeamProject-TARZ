@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 
 public class ThrowState : BaseState<PlayerController>
@@ -50,23 +51,30 @@ public class ThrowState : BaseState<PlayerController>
         // Attack 시작 시에는 콤보 진행 불가능하도록 set
         owner.Attack.CanUseCombo = false;
 
-        owner.SkillHandler.Use(SkillEnum.ActTimingType.Attack);
-
         // 최초 진입시점 때의 입력값을 기억한다.
         inputDir = owner.PInput.InputDir;
 
         comboTimer = 0f;
 
-        owner.Movement.Move(Vector3.zero);
-
         // 아직 anim length를 모르기 때문에 큰 값으로 설정
         animTimer = 999;
+
+        // 동작 처리
+        if (!SetAction())
+        {
+            // 조건이 맞지않아 공격 진행에 실패하면 상태 초기화
+            owner.Attack.ThrowCount = 0;
+            owner.ChangeState(EState.Idle);        
+            return;
+        }
+
+        owner.Movement.Move(Vector3.zero);
 
         // 카메라 정면을 바라본다.
         lookDir = camTrf.forward;   // 공격 시전 시 바라봤던 방향을 기억해둔다.
         owner.Movement.LookAt(lookDir);
 
-        SetAction();
+        owner.SkillHandler.Use(SkillEnum.ActTimingType.Attack);
 
         owner.StartCoroutine(AnimRoutine());
     }
@@ -76,33 +84,43 @@ public class ThrowState : BaseState<PlayerController>
         base.OnExit();
     }
 
-    private void SetAction()
+    private bool SetAction()
     {
         MultiActionInfo[] multiActions = owner.Attack.ThrowAttackInfo[owner.Attack.ThrowCount].MultiActions;
         if (multiActions.Length <= 0)
         {
             owner.Anim.CrossFade(throwAnimHashes[owner.Attack.ThrowCount], 0.01f);
-            return;
+            return true;
         }
 
         int animHash;
-        if (inputDir.x > 0)
+
+        if (inputDir.x != 0)    // Horizontal Type
         {
-            animHash = throwMultiAnimHashes[owner.Attack.ThrowCount, (int)EMultiActionType.Right];
-            owner.Attack.ActionType = EMultiActionType.Right;
+            animHash = throwMultiAnimHashes[owner.Attack.ThrowCount, (int)EMultiActionType.Horizontal];
+            owner.Attack.ActionType = EMultiActionType.Horizontal;
         }
-        else if (inputDir.x < 0)
+        else if (inputDir.z != 0)   // Vertical Type
         {
-            animHash = throwMultiAnimHashes[owner.Attack.ThrowCount, (int)EMultiActionType.Left];
-            owner.Attack.ActionType = EMultiActionType.Left;
+            animHash = throwMultiAnimHashes[owner.Attack.ThrowCount, (int)EMultiActionType.Vertical];
+            owner.Attack.ActionType = EMultiActionType.Vertical;
         }
-        else
+        else    // Basic Type
         {
             animHash = throwMultiAnimHashes[owner.Attack.ThrowCount, (int)EMultiActionType.Basic];
             owner.Attack.ActionType = EMultiActionType.Basic;
         }
 
+        // 물건 스택 체크
+        MultiActionInfo currentAction = multiActions.Where(x => x.ActionType == owner.Attack.ActionType).First();
+        if (owner.Attack.ObjectCount < currentAction.StackAmount)
+        {
+            Debug.Log("<color=red>물건이 부족합니다!!</color>");
+            return false;
+        }
+
         owner.Anim.CrossFade(animHash, 0.01f);
+        return true;
     }
 
     IEnumerator AnimRoutine()

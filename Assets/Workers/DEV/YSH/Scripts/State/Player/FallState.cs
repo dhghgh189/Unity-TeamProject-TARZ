@@ -19,7 +19,8 @@ public class FallState : BaseState<PlayerController>
 
     public override void OnUpdate()
     {
-        if (owner.PInput.TryThrow)
+        if (owner.PInput.TryThrow
+            && owner.Attack.ObjectCount >= owner.Attack.JumpThrowAmount)
         {
             // 점프 원거리 공격
             owner.ChangeState(EState.JumpThrow);

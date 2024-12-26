@@ -14,6 +14,17 @@ public class PlayerAttack : MonoBehaviour
     [Header("근거리 공격 스펙 설정")]
     public MeleeAttackInfo[] MeleeAttackInfo;
 
+    [Header("점프 원거리 공격 스펙 설정")]
+    public float JumpThrowDamage;
+    public float JumpThrowForce;
+    public float JumpThrowAmount;   // 필요한 물건 스택
+    public float JumpThrowInterval; // 점프 공격 시 1~2타 사이 딜레이
+
+    [Header("점프 근거리 공격 스펙 설정")]
+    public float JumpMeleeDamage;
+    public float JumpMeleeAngle;
+    public float JumpMeleeRange;
+
     [Space(10f)]
     [SerializeField] private Transform stackTransform;
     [SerializeField] private int maxObjectCount;
@@ -261,6 +272,39 @@ public class PlayerAttack : MonoBehaviour
         tobj.adapter = player.AblityAdapter;
         tobj.handler = player.SkillHandler;
         tobj.Throw(transform.forward + (transform.up * 0.3f), throwForce);
+    }
+
+    public void JumpThrow()
+    {
+        // 최종 수치 저장용
+        float damage = 0;
+        float throwForce = 0;
+
+        ThrowObject tobj = PopObjectStack();
+        if (tobj == null)
+            return;
+
+        // 수치 저장
+        damage = ThrowAttackInfo[ThrowCount].Damage;
+        throwForce = ThrowAttackInfo[ThrowCount].ThrowForce;
+
+        tobj.transform.parent = null;
+        tobj.transform.position = throwPoint.position;
+        tobj.gameObject.SetActive(true);
+        if (tobj.Upgrade.IsUpgraded)
+        {
+            // 순수데미지에 1.5 계산
+            tobj.Upgrade.UpgradeDamage(damage, out float result);
+            damage = result;
+            Debug.Log($"1.5 damage : {damage}");
+        }
+        // 최종 데미지 = 타수별 공격력 + (타수별 공격력 * 현재 스탯상 증가량)
+        damage = damage * player.Stat.DefaultPowerPer;
+        Debug.Log($"final damage : {damage}");
+        tobj.SetDamage(damage);
+        tobj.adapter = player.AblityAdapter;
+        tobj.handler = player.SkillHandler;
+        tobj.Throw(transform.forward + (-transform.up * 0.3f), throwForce);
     }
 
     public void Melee()

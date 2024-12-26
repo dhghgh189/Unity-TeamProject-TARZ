@@ -65,7 +65,14 @@ public class PlayerController : MonoBehaviour, IDamagable
             isLocked = !isLocked;
         }
 
+        SetAnimParam();
+
         return;
+    }
+
+    private void SetAnimParam()
+    {
+        anim.SetBool("IsGrounded", Movement.IsGrounded);
     }
 
     private void FixedUpdate()

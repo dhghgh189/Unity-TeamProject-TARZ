@@ -95,20 +95,24 @@ public class ThrowState : BaseState<PlayerController>
 
         int animHash;
 
-        if (inputDir.x != 0)    // Horizontal Type
+        // 패드 지원을 위해 추가 작업 진행
+        float xValue = Mathf.Abs(inputDir.x);
+        float zValue = Mathf.Abs(inputDir.z);
+
+        if (inputDir == Vector3.zero)   // Basic Type
+        {
+            animHash = throwMultiAnimHashes[owner.Attack.ThrowCount, (int)EMultiActionType.Basic];
+            owner.Attack.ActionType = EMultiActionType.Basic;
+        }
+        else if (xValue >= zValue)      // Horizontal Type
         {
             animHash = throwMultiAnimHashes[owner.Attack.ThrowCount, (int)EMultiActionType.Horizontal];
             owner.Attack.ActionType = EMultiActionType.Horizontal;
         }
-        else if (inputDir.z != 0)   // Vertical Type
+        else                            // Vertical Type
         {
             animHash = throwMultiAnimHashes[owner.Attack.ThrowCount, (int)EMultiActionType.Vertical];
             owner.Attack.ActionType = EMultiActionType.Vertical;
-        }
-        else    // Basic Type
-        {
-            animHash = throwMultiAnimHashes[owner.Attack.ThrowCount, (int)EMultiActionType.Basic];
-            owner.Attack.ActionType = EMultiActionType.Basic;
         }
 
         // 물건 스택 체크

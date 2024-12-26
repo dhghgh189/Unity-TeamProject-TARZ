@@ -1,6 +1,10 @@
 using BehaviorDesigner.Runtime.Tasks;
 using UnityEngine;
 
+/// <summary>
+/// 1. 적인지 로직
+/// 2. 선빵 맞으면 그쪽 쳐다보게 - 자연스럽게 캐릭터가 시야에 들어와서 추적 함
+/// </summary>
 public class CondMonsterCanMove : Conditional
 {
     [SerializeField] MonsterData _monsterData;
@@ -9,7 +13,7 @@ public class CondMonsterCanMove : Conditional
 
     private Transform _playerFirstAttackTransform; // 플레이어 선빵 위치 받을 변수
 
-    [SerializeField] GameObject _returnObj;
+    private GameObject _returnObj;
     public GameObject ReturnObj { get { return _returnObj; } private set { } }
 
     [Header("인지 범위")]

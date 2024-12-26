@@ -3,6 +3,12 @@ using BehaviorDesigner.Runtime.Tasks;
 using System.Collections;
 using UnityEngine;
 
+/// <summary>
+/// 1. 근접공격
+/// 2. 원거리 공격
+/// 3. 개구리점프 - 대쉬어택
+/// 4. 공격로직 
+/// </summary>
 public class ActMonsterAttack : Action
 {
     [SerializeField] MonsterData _monsterData;
@@ -80,7 +86,7 @@ public class ActMonsterAttack : Action
     IEnumerator AttackRoutine()
     {
         Attack(_range, _angle);
-        //_animator.SetTrigger("Attack");
+        _animator.SetTrigger("Attack");
         yield return new WaitForSeconds(_monsterData.MeleeAttackSpeed);
         attackRoutine = null;
     }
@@ -108,7 +114,6 @@ public class ActMonsterAttack : Action
                 damageble.TakeDamage(_monsterData.Damage);
             }
         }
-        // 애니메이션에 메서드 추가하기
     }
     #endregion
 

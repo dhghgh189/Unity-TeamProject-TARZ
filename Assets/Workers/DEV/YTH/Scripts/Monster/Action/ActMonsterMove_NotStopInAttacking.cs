@@ -25,8 +25,6 @@ public class ActMonsterMove_NotStopInAttacking : Action
 
     public override TaskStatus OnUpdate()
     {
-       
-
         _distance = Vector3.Distance(transform.position, _player.transform.position);
 
         if (_condMonsterCanMove.ReturnObj != null/* && !_monsterData.IsAttacked && _distance > _monsterData.AttackRange*/) // _condMonsterCanMove.ReturnObj 는 시야각 내의 물체 (플레이어)

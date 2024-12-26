@@ -24,6 +24,7 @@ public class PlayerAttack : MonoBehaviour
     public float JumpMeleeDamage;
     public float JumpMeleeAngle;
     public float JumpMeleeRange;
+    public float JumpMeleeFallForce;    // 하강 시 가해줄 힘
 
     [HideInInspector]
     public bool IsEndJumpMelee;

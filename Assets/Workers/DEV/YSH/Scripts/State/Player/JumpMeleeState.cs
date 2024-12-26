@@ -57,7 +57,7 @@ public class JumpMeleeState : BaseState<PlayerController>
         if (!owner.Attack.IsEndJumpMelee)
         {
             // 기본 하강속도보다 빠르게 하강하도록 하기 위해 AddForce
-            owner.Movement.Rigid.AddForce(Vector3.down * 10f, ForceMode.Force);
+            owner.Movement.Rigid.AddForce(Vector3.down * owner.Attack.JumpMeleeFallForce, ForceMode.Force);
         }
     }
 }

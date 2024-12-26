@@ -8,12 +8,18 @@ public class TestPlayerUI : MonoBehaviour
     [Inject] StatModel model;
 
     [SerializeField] private GameObject skillPanel;
+    [SerializeField] private GameObject menuPanel;
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.O))
         {
             skillPanel.SetActive(true);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            menuPanel.SetActive(true);
         }
     }
 

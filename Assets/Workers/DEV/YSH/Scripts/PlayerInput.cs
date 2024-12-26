@@ -17,7 +17,7 @@ public class PlayerInput : MonoBehaviour
 
         // 패드 지원되도록 구성해야 함
         TryDash = Input.GetKeyDown(KeyCode.LeftShift);
-        TryJump = Input.GetKeyDown(KeyCode.Space);
+        TryJump = Input.GetButtonDown("Jump");
         TryThrow = Input.GetButtonDown("Throw");
         TryMelee = Input.GetButtonDown("Melee");
         TryDrain = Input.GetKey(KeyCode.LeftControl);

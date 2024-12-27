@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Zenject;
 
 public class MenuPanel : MonoBehaviour
 {
     [Inject] SaveManager saveManager;
+    [Inject] SaveSlot saveSlot;
 
     [SerializeField] private ChangeInput inputManager;
     [SerializeField] private Button selectButton;
@@ -45,7 +47,11 @@ public class MenuPanel : MonoBehaviour
 
     public void OnClickQuitGameButton()
     {
-        saveManager.Save();
-        // TODO : 타이틀 화면으로 되돌아가기
+        if (saveSlot != null)
+        {
+            saveManager.Save();
+        }
+
+        SceneManager.LoadScene("TitleScene");
     }
 }

@@ -67,7 +67,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: f34b99ca2454aeb42a316f5fa7a1a5ba,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 55.56
+      value: 5.39
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f34b99ca2454aeb42a316f5fa7a1a5ba,
         type: 3}
@@ -77,27 +77,27 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: f34b99ca2454aeb42a316f5fa7a1a5ba,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -8.47
+      value: -19.406132
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f34b99ca2454aeb42a316f5fa7a1a5ba,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.8927215
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f34b99ca2454aeb42a316f5fa7a1a5ba,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f34b99ca2454aeb42a316f5fa7a1a5ba,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 0.45060888
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f34b99ca2454aeb42a316f5fa7a1a5ba,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f34b99ca2454aeb42a316f5fa7a1a5ba,
         type: 3}
@@ -107,7 +107,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: f34b99ca2454aeb42a316f5fa7a1a5ba,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 53.566
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f34b99ca2454aeb42a316f5fa7a1a5ba,
         type: 3}
@@ -479,11 +479,11 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f34b99ca2454aeb42a316f5fa7a1a5ba,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 5449095041906912228}
+      addedObject: {fileID: 8676337835483362626}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f34b99ca2454aeb42a316f5fa7a1a5ba,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 5363255009096208208}
+      addedObject: {fileID: 5449095041906912228}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f34b99ca2454aeb42a316f5fa7a1a5ba,
         type: 3}
       insertIndex: -1
@@ -492,6 +492,14 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 88356985338437197}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f34b99ca2454aeb42a316f5fa7a1a5ba,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1385054151913723658}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f34b99ca2454aeb42a316f5fa7a1a5ba,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1401089475864900157}
   m_SourcePrefab: {fileID: 100100000, guid: f34b99ca2454aeb42a316f5fa7a1a5ba, type: 3}
 --- !u!1 &3471556509123995877 stripped
 GameObject:
@@ -526,6 +534,29 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!136 &8676337835483362626
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3471556509123995877}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.25
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!195 &5449095041906912228
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -548,7 +579,52 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &5363255009096208208
+--- !u!114 &7689624759592379715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3471556509123995877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c0c56d971f771247b404c1a828a76d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _monsterData: {fileID: 0}
+  _player: {fileID: 0}
+  _rigid: {fileID: 0}
+  _animator: {fileID: 0}
+  _gear: {fileID: 7721173211588356841, guid: 6f50a567d27f5234c89a2742d0a1134a, type: 3}
+  _chip: {fileID: 790199856513174846, guid: 1a89e32ec97e86d47bd1098f5827fbeb, type: 3}
+--- !u!114 &88356985338437197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3471556509123995877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27dec7f07137086469be877fd713ae48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _monsterType: 3
+  _skillType: 0
+  _rewardType: 1
+  _maxHp: 12
+  _curHp: 0
+  _damage: 8
+  _attackRange: 11
+  _isAttacked: 0
+  _attacked_First: 0
+  _meleeAttackSpeed: 0
+  _rangeAttackSpeed: 2
+  _throwPower: 20
+  _dangerDistance: 9
+  _canUseProjectileSkillDistance: 11
+  _canJumpDistance: 0
+--- !u!114 &1385054151913723658
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -576,43 +652,51 @@ MonoBehaviour:
       parentIndex: 
       startIndex: 
       variableStartIndex: 
-      JSONSerialization: '{"EntryTask":{"Type":"BehaviorDesigner.Runtime.Tasks.EntryTask","NodeData":{"Offset":"(254.252014,-101.173065)"},"ID":0,"Name":"Entry","Instant":true},"RootTask":{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-2.289177,165.180817)"},"ID":1,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-580,180.000031)"},"ID":2,"Name":"Sequence","Instant":true,"AbortTypeabortType":"Self","Children":[{"Type":"CondMonsterCanMove","NodeData":{"Offset":"(-80,160)"},"ID":3,"Name":"Cond
-        Monster Can Move","Instant":true,"MonsterData_monsterData":0,"GameObject_player":1,"Single_angle":180,"Single_distance":60,"Single_rate":0.5},{"Type":"ActMonsterMove","NodeData":{"Offset":"(99.99997,160)"},"ID":4,"Name":"Act
-        Monster Move","Instant":true,"MonsterData_monsterData":2,"NavMeshAgent_agent":3,"GameObject_player":4}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-210.000031,180.000031)"},"ID":5,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"CondMonsterCanSkill","NodeData":{"Offset":"(-80,160)"},"ID":6,"Name":"Cond
-        Monster Can Skill","Instant":true,"MonsterData_monsterData":5},{"Type":"ActBombSkill","NodeData":{"Offset":"(89.99997,170)"},"ID":7,"Name":"Act
-        Bomb Skill","Instant":true,"MonsterData_monsterData":6,"MonsterSkillManager_monsterSkillManager":7,"GameObject_player":8,"NavMeshAgent_agent":9,"Transform_muzzlePoint":10},{"Type":"BehaviorDesigner.Runtime.Tasks.Wait","NodeData":{"Offset":"(219.999908,170)"},"ID":8,"Name":"Wait","Instant":true,"SharedFloatwaitTime":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":2},"SharedBoolrandomWait":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"SharedFloatrandomWaitMin":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1},"SharedFloatrandomWaitMax":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1}}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(270,180.000031)"},"ID":9,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"CondMonsterCanAttack","NodeData":{"Offset":"(-100.000031,170)"},"ID":10,"Name":"Cond
-        Monster Can Attack","Instant":true,"MonsterData_monsterData":11,"GameObject_player":12,"Single_distance":0},{"Type":"ActMonsterAttack","NodeData":{"Offset":"(100,170)"},"ID":11,"Name":"Act
-        Monster Attack","Instant":true,"MonsterData_monsterData":13,"MonsterSkillManager_monsterSkillManager":14,"SharedGameObject_projectilePrefab":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":null,"GameObjectmValue":15},"SharedTransform_muzzlePoint":{"Type":"BehaviorDesigner.Runtime.SharedTransform","Name":null,"TransformmValue":16},"GameObject_player":17,"Single_angle":180,"Single_range":15}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Wait","NodeData":{"Offset":"(530,180.000031)"},"ID":12,"Name":"Wait","Instant":true,"SharedFloatwaitTime":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":3},"SharedBoolrandomWait":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"SharedFloatrandomWaitMin":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1},"SharedFloatrandomWaitMax":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1}}]}}'
+      JSONSerialization: '{"EntryTask":{"Type":"BehaviorDesigner.Runtime.Tasks.EntryTask","NodeData":{"Offset":"(189.77829,-898.744141)"},"ID":0,"Name":"Entry","Instant":true},"RootTask":{"Type":"BehaviorDesigner.Runtime.Tasks.Repeater","NodeData":{"Offset":"(-1.36331177,123.633331)"},"ID":1,"Name":"Repeater","Instant":true,"SharedIntcount":{"Type":"BehaviorDesigner.Runtime.SharedInt","Name":null,"Int32mValue":0},"SharedBoolrepeatForever":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":true},"SharedBoolendOnFailure":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(2.04016113,142.277557)"},"ID":2,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-462.892883,154.972672)"},"ID":3,"Name":"Sequence","Instant":true,"AbortTypeabortType":"Self","Children":[{"Type":"CondCanMove","NodeData":{"Offset":"(-89.3700562,230)"},"ID":4,"Name":"Cond
+        Can Move","Instant":true,"MonsterData_monsterData":0,"GameObject_player":1,"Single_angle":360,"Single_distance":50,"Single_rate":0.5},{"Type":"BehaviorDesigner.Runtime.Tasks.Selector","NodeData":{"Offset":"(91.46985,241.470215)"},"ID":5,"Name":"Selector","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"ActMove","NodeData":{"Offset":"(-70,150)"},"ID":6,"Name":"Act
+        Move","Instant":true,"CondCanMove_condCanMove":4,"MonsterData_monsterData":2,"NavMeshAgent_agent":3,"GameObject_player":4},{"Type":"ActMove_Back","NodeData":{"Offset":"(60,150)"},"ID":7,"Name":"Act
+        Move   Back","Instant":true,"CondCanMove_condCanMove":4,"MonsterData_monsterData":5,"NavMeshAgent_agent":6,"GameObject_player":7}]}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-2.45833969,154.972672)"},"ID":8,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"CondMonsterCanSkill","NodeData":{"Offset":"(-93.1347046,227.867432)"},"ID":9,"Name":"Cond
+        Monster Can Skill","Instant":true,"MonsterData_monsterData":8},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(85.27069,242.468079)"},"ID":10,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Selector","NodeData":{"Offset":"(-82.72931,169.668091)"},"ID":11,"Name":"Selector","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"MSkill_Bomb","NodeData":{"Offset":"(-133.129272,132.068115)"},"ID":12,"Name":"M
+        Skill   Bomb","Instant":true,"MonsterSkillManager_monsterSkillManager":9,"GameObject_player":10,"Transform_muzzlePoint":11},{"Type":"MSkill_Mine","NodeData":{"Offset":"(-3.52929688,126.8681)"},"ID":13,"Name":"M
+        Skill   Mine","Instant":true,"MonsterSkillManager_monsterSkillManager":12,"GameObject_player":13,"Transform_muzzlePoint":14},{"Type":"MSkill_StimPack","NodeData":{"Offset":"(135.270691,134.468079)"},"ID":14,"Name":"M
+        Skill   Stim Pack","Instant":true,"MonsterSkillManager_monsterSkillManager":15,"MonsterData_monsterData":16}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Wait","NodeData":{"Offset":"(80,170)"},"ID":15,"Name":"Wait","Instant":true,"SharedFloatwaitTime":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":2},"SharedBoolrandomWait":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"SharedFloatrandomWaitMin":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1},"SharedFloatrandomWaitMax":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1}}]}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(417.8042,154.972672)"},"ID":16,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"CondMonsterCanAttack","NodeData":{"Offset":"(-91.83104,220.187622)"},"ID":17,"Name":"Cond
+        Monster Can Attack","Instant":true,"MonsterData_monsterData":17,"GameObject_player":18},{"Type":"ActRangeAttack","NodeData":{"Offset":"(100,220)"},"ID":18,"Name":"Act
+        Range Attack","Instant":true,"MonsterData_monsterData":19,"GameObject_player":20,"SharedGameObject_projectilePrefab":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":null,"GameObjectmValue":21},"SharedTransform_muzzlePoint":{"Type":"BehaviorDesigner.Runtime.SharedTransform","Name":null,"TransformmValue":22}}]}]}]}}'
       fieldSerializationData:
         typeName: []
         fieldNameHash: 
         startIndex: 
         dataPosition: 
         unityObjects:
+        - {fileID: 88356985338437197}
+        - {fileID: 0}
+        - {fileID: 88356985338437197}
+        - {fileID: 5449095041906912228}
+        - {fileID: 0}
+        - {fileID: 88356985338437197}
+        - {fileID: 5449095041906912228}
+        - {fileID: 0}
+        - {fileID: 88356985338437197}
         - {fileID: 0}
         - {fileID: 0}
+        - {fileID: 4628396067407366693}
         - {fileID: 0}
         - {fileID: 0}
+        - {fileID: 4628396067407366693}
         - {fileID: 0}
+        - {fileID: 88356985338437197}
+        - {fileID: 88356985338437197}
         - {fileID: 0}
-        - {fileID: 0}
-        - {fileID: 0}
-        - {fileID: 0}
-        - {fileID: 0}
-        - {fileID: 0}
-        - {fileID: 0}
-        - {fileID: 0}
-        - {fileID: 0}
+        - {fileID: 88356985338437197}
         - {fileID: 0}
         - {fileID: 8167883818004183144, guid: 989aabf03a1cf174e963c4be9bad5c97, type: 3}
-        - {fileID: 0}
-        - {fileID: 0}
+        - {fileID: 4628396067407366693}
         byteData: 
         byteDataArray: 
       Version: 1.7.11
   gizmoViewMode: 2
   showBehaviorDesignerGizmo: 1
---- !u!114 &7689624759592379715
+--- !u!114 &1401089475864900157
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -621,37 +705,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 3471556509123995877}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c0c56d971f771247b404c1a828a76d9, type: 3}
+  m_Script: {fileID: -2012967667, guid: da41a8dd3b5ec434a802d9b5a2a0a777, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gear: {fileID: 7721173211588356841, guid: 6f50a567d27f5234c89a2742d0a1134a, type: 3}
-  _chip: {fileID: 790199856513174846, guid: 1a89e32ec97e86d47bd1098f5827fbeb, type: 3}
-  _player: {fileID: 0}
---- !u!114 &88356985338437197
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3471556509123995877}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27dec7f07137086469be877fd713ae48, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _monsterType: 3
-  _skillType: 0
-  _rewardType: 1
-  _maxHp: 12
-  _curHp: 0
-  _damage: 8
-  _attackRange: 15
-  _isAttacked: 0
-  _attacked_First: 0
-  _meleeAttackSpeed: 0
-  _rangeAttackSpeed: 4
-  _throwPower: 15
-  _canUseProjectileSkillDistance: 15
 --- !u!4 &4280287630806463071 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f34b99ca2454aeb42a316f5fa7a1a5ba,

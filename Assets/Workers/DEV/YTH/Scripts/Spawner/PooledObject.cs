@@ -1,42 +1,37 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
 /// 보스는 Instantiate로 생성해서 따로 관리 고려중..
 /// </summary>
-public class PooledObject : MonoBehaviour, IKnockBack
+public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
 {
     private ObjectPool _returnPool; //반납 위치
     public ObjectPool ReturnPool { get { return _returnPool; } set { _returnPool = value; } }
 
+    [SerializeField] MonsterData _monsterData;
+
+    [SerializeField] GameObject _player;
+
+    [SerializeField] Rigidbody _rigid;
+
+    [SerializeField] Animator _animator;
+
+    [Header("Drop Item")]
     [SerializeField] GameObject _gear;
 
     [SerializeField] GameObject _chip;
-
-    private MonsterData _monsterData;
 
     public event Action OnDie;
 
     private AutoLockOn _autoLockOn;
 
-    [SerializeField] GameObject _player;
-
     private void Start()
     {
-      /*  _autoLockOn = _player.GetComponent<AutoLockOn>();*/
-        _monsterData = GetComponent<MonsterData>();
+        /*  _autoLockOn = _player.GetComponent<AutoLockOn>();*/
     }
 
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            TakeDamage(1);
-        }
-    }
     private void OnEnable()
     {
         OnDie += Die;
@@ -49,11 +44,15 @@ public class PooledObject : MonoBehaviour, IKnockBack
 
     public void TakeDamage(float damage)
     {
+        RotateToPlayer();
+
+        _rigid.angularVelocity = Vector3.zero;
+        _rigid.velocity = Vector3.zero;
+
         _monsterData.CurHp -= damage;
         _monsterData.Attacked_First = true;
-        // 맞는 애니메이션 재생
-        // 넉백 적용
 
+        _animator.SetTrigger("TakeDamage");
         if (_monsterData.CurHp <= 0)
         {
             OnDie?.Invoke();
@@ -64,7 +63,7 @@ public class PooledObject : MonoBehaviour, IKnockBack
     {
         /*_autoLockOn.action?.Invoke();*/
         ReturnPool.ReturnPool(this);
-        //죽는애니메이션 재생
+        _animator.SetTrigger("Die");
         GameObject gear = Instantiate(_gear, transform.position, transform.rotation);
         gear.GetComponent<DropGear>().SetDropItem(Part.신발, 1, true, true);
     }
@@ -88,5 +87,12 @@ public class PooledObject : MonoBehaviour, IKnockBack
             transform.position += moveDir * 5f * Time.deltaTime;
             yield return null;
         }
+    }
+
+    public void RotateToPlayer()
+    {
+        //피격 시 플레이어 방향으로 회전
+        Quaternion lookRot = Quaternion.LookRotation(_player.transform.position);
+        transform.rotation = Quaternion.Lerp(transform.rotation, lookRot, 0.7f * Time.deltaTime); // 속도 빠르게 수정할 것
     }
 }

@@ -64,10 +64,12 @@ public class MonsterSkillManager : MonoBehaviour
     [Header("Etc")]
     [SerializeField] GameObject _player;
 
-    [SerializeField] Transform _muzzlePoint; // 불러올거에요 비워놔주세요
+    [SerializeField] Animator _animator;
+
+    private Transform _muzzlePoint; // 불러올거에요 비워놔주세요
     public Transform MuzzlePoint { get { return _muzzlePoint; } set { _muzzlePoint = value; } }
 
-    [SerializeField] GameObject _wheelWindTrigger; // 불러올거에요 비워놔주세요
+    private GameObject _wheelWindTrigger; // 불러올거에요 비워놔주세요
     public GameObject WheelWindTrigger { get { return _wheelWindTrigger; } set { _wheelWindTrigger = value; } }
 
     private Vector3 _electricWallPosition;
@@ -134,6 +136,8 @@ public class MonsterSkillManager : MonoBehaviour
     public Coroutine jumpAttackRoutine;
     public IEnumerator JumpAttackRoutine() // 보스의 도약해서 착지하여 범위 공격
     {
+        _animator.SetTrigger("JumpAttack");
+
         _jumpAttack.CanUseSkill = false;
         if (jumpRoutine_jumpAttack == null)
         {
@@ -172,6 +176,8 @@ public class MonsterSkillManager : MonoBehaviour
     public Coroutine wheelWindRoutine;
     public IEnumerator WheelWindRoutine() // 가렌 E
     {
+        /*_animator.SetTrigger("WheelWind");*/
+
         WheelWindSkill.CanUseSkill = false;
 
         _wheelWindTrigger.SetActive(true);
@@ -186,13 +192,14 @@ public class MonsterSkillManager : MonoBehaviour
         wheelWindRoutine = null;
         WheelWindSkill.CanUseSkill = true;
     }
-
     #endregion
 
     #region Bomb
     public Coroutine bombRoutine;
     public IEnumerator BombRoutine()  // 직스 궁 
     {
+        /*_animator.SetTrigger("");*/
+
         BombSkill.CanUseSkill = false;
 
         GameObject bomb = Instantiate(_bombPrefab, _muzzlePoint.position, _muzzlePoint.rotation);
@@ -210,6 +217,7 @@ public class MonsterSkillManager : MonoBehaviour
     public Coroutine mineRoutine;
     public IEnumerator MineRoutine()
     {
+        /*_animator.SetTrigger("");*/
         MineSkill.CanUseSkill = false;
 
         GameObject mine = Instantiate(_minePrefab, _muzzlePoint.position, _muzzlePoint.rotation);
@@ -226,6 +234,8 @@ public class MonsterSkillManager : MonoBehaviour
     #region StimPak
     public void StimPak() // 폭탄좀비가 잭더리퍼의 몬스터 데이터에 접근해서 스텟 업 해줌
     {
+        /*_animator.SetTrigger("");*/
+
         StimPakSkill.CanUseSkill = false;
 
         if (_jackTheRipper == null)
@@ -265,6 +275,8 @@ public class MonsterSkillManager : MonoBehaviour
     public Coroutine dashAttackRoutine;
     public IEnumerator DashAttackRoutine()
     {
+        _animator.SetTrigger("DashAttack");
+
         DashAttackSkill.CanUseSkill = false;
         if (jumpRoutine_dashAttack == null)
         {
@@ -347,6 +359,8 @@ public class MonsterSkillManager : MonoBehaviour
     public Coroutine trippleAttackRoutine;
     public IEnumerator TrippleAttackRoutine()
     {
+        _animator.SetTrigger("TrippleAttack");
+
         TrippleAttackSkill.CanUseSkill = false;
         // TrippleAttackSkill 애니메이션 재생
         //애니메이션에 공격 붙이기

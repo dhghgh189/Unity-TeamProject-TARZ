@@ -1,40 +1,32 @@
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
+using Zenject;
 
 public class MonsterJustTrigger : MonoBehaviour
 {
-    ///
-    /// 1. 공격 애니메이션 타이밍에 저스트 회피 기능 끼워넣기
-    /// 2. 짧은 순간에 트리거가 켜졌다 꺼짐
-    /// 
-    /// 
-    /// 3. vector3 앵글로 공격 범위를 체크
-    /// 4. returnObject가 있다면 Trigger.enable == true
-    /// 5. 도망가면 공격한 몬스터의 등급에 맞는 보상이 주어짐
-    ///
+    [SerializeField] Animator _animator;
+
     [SerializeField] MonsterData _monsterData;
 
-    [SerializeField] StatModel _playerStat;
+    [Inject]
+    [SerializeField] StatModel _playerStat; // 젠젝
 
     [SerializeField] GameObject _justTrigger;
 
-    [SerializeField] GameObject _returnObj;
-
     [SerializeField] GameObject _player;
+
+    private GameObject _returnObj;
 
     [Header("저스트 회피 범위")]
     [SerializeField] float _angle; // 시야각
 
     [SerializeField] float _distance; // 시야 거리
 
-
     private void Update()
     {
         // 저스트회피 판정 범위 내에 있으면 트리거가 켜짐
         _returnObj = WithinSight(_player, _angle, _distance);
-
-       
     }
 
     private void Just()
@@ -68,11 +60,15 @@ public class MonsterJustTrigger : MonoBehaviour
             switch (_monsterData.RewardTyPe)
             {
                 case MonsterData.RewardType.Tier_3:
-                    _playerStat.MoveSpeed += 5f;
+                    // 버프 느낌
+                    // 일시적 스탯 향상
+                    Debug.Log("3티어 정상작동");
                     break;
                 case MonsterData.RewardType.Tier_2:
+                    Debug.Log("2티어 정상작동");
                     break;
                 case MonsterData.RewardType.Tier_1:
+                    Debug.Log("1티어 정상작동");
                     break;
             }
             Debug.Log("Just Success!");

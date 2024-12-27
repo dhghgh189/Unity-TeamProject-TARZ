@@ -2,6 +2,11 @@ using BehaviorDesigner.Runtime.Tasks;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
+
+/// <summary>
+/// 1. returnObj로 setdastination  running + 공격 거리 내로 들어오면 succeess
+/// 2. 시야에서 놓치면 마지막 위치까지 가게 succeess 
+/// </summary>
 public class ActMonsterMove_NotStopInAttacking : Action
 {
     [SerializeField] CondMonsterCanMove _condMonsterCanMove;
@@ -25,8 +30,6 @@ public class ActMonsterMove_NotStopInAttacking : Action
 
     public override TaskStatus OnUpdate()
     {
-       
-
         _distance = Vector3.Distance(transform.position, _player.transform.position);
 
         if (_condMonsterCanMove.ReturnObj != null/* && !_monsterData.IsAttacked && _distance > _monsterData.AttackRange*/) // _condMonsterCanMove.ReturnObj 는 시야각 내의 물체 (플레이어)

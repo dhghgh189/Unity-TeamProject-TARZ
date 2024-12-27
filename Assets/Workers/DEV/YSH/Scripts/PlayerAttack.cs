@@ -24,6 +24,10 @@ public class PlayerAttack : MonoBehaviour
     public float JumpMeleeDamage;
     public float JumpMeleeAngle;
     public float JumpMeleeRange;
+    public float JumpMeleeFallForce;    // 하강 시 가해줄 힘
+
+    [HideInInspector]
+    public bool IsEndJumpMelee;
 
     [Space(10f)]
     [SerializeField] private Transform stackTransform;
@@ -310,7 +314,7 @@ public class PlayerAttack : MonoBehaviour
     public void Melee()
     {
         Debug.Log($"MeleeCount : {MeleeCount}");
-        Debug.Log($"Melee Attack angle : {MeleeAttackInfo[MeleeCount].Angle}");
+        Debug.Log($"Melee Attack Angle : {MeleeAttackInfo[MeleeCount].Angle}");
         Debug.Log($"Melee Attack Range : {MeleeAttackInfo[MeleeCount].Range}");
         Debug.Log($"Melee Attack Damage : {MeleeAttackInfo[MeleeCount].Damage}");
 
@@ -320,7 +324,7 @@ public class PlayerAttack : MonoBehaviour
         foreach (Collider col in colliders)
         {
             // 각도 체크
-            if (!IsTargetInAngle(col.transform))
+            if (!IsTargetInAngle(col.transform, MeleeAttackInfo[MeleeCount].Angle))
                 continue;
 
             // 이펙트 발동
@@ -342,7 +346,48 @@ public class PlayerAttack : MonoBehaviour
             ClearMeleeEffects();
     }
 
-    private bool IsTargetInAngle(Transform targetTrf)
+    public void OnJumpMelee()
+    {
+        IsEndJumpMelee = false;
+    }
+
+    public void EndJumpMelee()
+    {
+        IsEndJumpMelee = true;
+    }
+
+    public void JumpMelee()
+    {
+        Debug.Log($"JumpMelee Attack Angle : {JumpMeleeAngle}");
+        Debug.Log($"JumpMelee Attack Range : {JumpMeleeRange}");
+        Debug.Log($"JumpMelee Attack Damage : {JumpMeleeDamage}");
+
+        Collider[] colliders = Physics.OverlapSphere(transform.position, JumpMeleeRange, whatIsEnemy);
+        foreach (Collider col in colliders)
+        {
+            // 각도 체크
+            if (!IsTargetInAngle(col.transform, JumpMeleeAngle))
+                continue;
+
+            // 이펙트 발동
+            ActiveMeleeEffect(col.gameObject);
+
+            IDamagable damagable = col.GetComponent<IDamagable>();
+            if (damagable == null)
+                continue;
+
+            // 최종 데미지 = 타수별 공격력 + (타수별 공격력 * 현재 스탯상 증가량)
+            float damage = JumpMeleeDamage * player.Stat.DefaultPowerPer;
+            damagable.TakeDamage(damage);
+
+            Debug.Log($"<color=yellow>jump melee hit : {col.name}</color>");
+
+            // Mp 회복
+            player.Stat.CurrentMp += player.Stat.GetMpGain(EMpAmountType.Melee);
+        }
+    }
+
+    private bool IsTargetInAngle(Transform targetTrf, float angle)
     {
         source = transform.position;    // 플레이어 위치
         dest = targetTrf.position;      // 감지된 Target 위치
@@ -353,7 +398,7 @@ public class PlayerAttack : MonoBehaviour
 
         // 플레이어와 Target간의 각도 체크
         resultAngle = Vector3.Angle(transform.forward, (dest - source).normalized);
-        if (resultAngle > MeleeAttackInfo[MeleeCount].Angle * 0.5f)
+        if (resultAngle > angle * 0.5f)
             return false;
 
         return true;
@@ -383,5 +428,8 @@ public class PlayerAttack : MonoBehaviour
             (Quaternion.Euler(0, MeleeAttackInfo[MeleeCount].Angle * 0.5f, 0) * transform.forward) * MeleeAttackInfo[MeleeCount].Range);
         Gizmos.DrawRay(transform.position,
             (Quaternion.Euler(0, MeleeAttackInfo[MeleeCount].Angle * -0.5f, 0) * transform.forward) * MeleeAttackInfo[MeleeCount].Range);
+
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, JumpMeleeRange);
     }
 }

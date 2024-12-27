@@ -1,11 +1,9 @@
-using BehaviorDesigner.Runtime;
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using Zenject;
 using static SkillEnum;
+using static UnityEngine.UI.GridLayoutGroup;
 
 public enum EMachineType { Movement, Attack }
 
@@ -21,7 +19,9 @@ public class PlayerController : MonoBehaviour, IDamagable
     [SerializeField] private DrainManager drainManager;
 
     public EState currentStateView;
+    public TakeHitType currentHitTypeView;
 
+    public ManaSkillHandler ManaSkillHandler;
     public PlayerSkillHandler SkillHandler;
     public AblityAdapter AblityAdapter;
     public PlayerFSM Fsm { get; private set; }
@@ -46,26 +46,20 @@ public class PlayerController : MonoBehaviour, IDamagable
 
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-        
-        // test
-        isLocked = true;
     }
 
-    // test
-    bool isLocked;
     private void Update()
     {
         Fsm.OnUpdate();
 
-        // test
-        if (Input.GetKeyDown(KeyCode.F2))
-        {
-            Cursor.visible = isLocked;
-            Cursor.lockState = isLocked ? CursorLockMode.None : CursorLockMode.Locked;
-            isLocked = !isLocked;
-        }
+        SetAnimParam();
 
         return;
+    }
+
+    private void SetAnimParam()
+    {
+        anim.SetBool("IsGrounded", Movement.IsGrounded);
     }
 
     private void FixedUpdate()
@@ -97,7 +91,32 @@ public class PlayerController : MonoBehaviour, IDamagable
 
     public void TakeDamage(float damage)
     {
+        Debug.Log("아야");
         Stat.CurrentHp -= damage;
+
+        Anim.CrossFade(Define.HASH_ANIM_DAMAGED, 0.1f);
+        StartCoroutine(SternRoutine());
+
+        /* 추후 합의 후 재진행 예정
+        switch (currentHitTypeView)
+        {
+            case TakeHitType.Stern:
+                {
+                    Debug.Log("스턴됨!");
+                    break;
+                }
+            case TakeHitType.Knock_Back:
+                {
+                    Debug.Log("넉백됨!");
+                    break;
+                }
+            default:
+                {
+                    // 임시
+                    currentHitTypeView = TakeHitType.Size;
+                    break;
+                }
+        }*/
     }
 
     // 추후 StatModel로 옮기는게 좋을 듯
@@ -112,6 +131,26 @@ public class PlayerController : MonoBehaviour, IDamagable
         AnimatorStateInfo info = anim.GetCurrentAnimatorStateInfo(0);
         // 현재 재생되는 애니메이션의 총 길이와 speed를 계산하여 실제 재생 시간을 반환 
         return (info.length / info.speed);
+    }
+
+    public IEnumerator SternRoutine()
+    {
+        float delay = GetCurrentAnimTime();
+        float MaxCool = delay;
+
+        Vector3 curPosition = new Vector3 (transform.position.x, transform.position.y, transform.position.z);
+
+        while (delay > 0.1f)
+        {
+            delay -= Time.deltaTime;
+
+            PInput.TryInputDown[0] = Vector3.zero;
+            transform.position = curPosition;
+
+            yield return new WaitForFixedUpdate();
+        }
+
+        yield break;
     }
 
     private void OnCollisionEnter(Collision collision)

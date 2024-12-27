@@ -11,10 +11,20 @@ public class PlayerInput : MonoBehaviour
     public bool TryDash { get; private set; }
     public bool TryDrain { get; private set; }
     public bool TryInteraction { get; private set; }
+    public bool TryManaSkill { get; private set; }
+
+    public bool[] ManaKeyPressed;
+    public KeyCode[] ManaSkillKey;
 
     private void Start()
     {
         TryInputDown.Add(InputDir);
+        ManaKeyPressed = new bool[Define.MANASKILL_MAXCOUNT];
+        ManaSkillKey = new KeyCode[Define.MANASKILL_MAXCOUNT];
+        for (int i = 0; i < ManaSkillKey.Length; i++)
+        {
+            ManaSkillKey[i] = KeyCode.Alpha1 + i;
+        }
     }
 
     void Update()
@@ -29,5 +39,13 @@ public class PlayerInput : MonoBehaviour
         TryMelee = Input.GetButtonDown("Melee");
         TryDrain = Input.GetButton("Drain");
         TryInteraction = Input.GetKeyDown(KeyCode.E);
+        TryManaSkill = Input.GetKey(KeyCode.F9);
+        if (TryManaSkill)
+        {
+            for (int i = 0; i < ManaSkillKey.Length; i++)
+            {
+                ManaKeyPressed[i] = Input.GetKeyDown(ManaSkillKey[i]);
+            }
+        }
     }
 }

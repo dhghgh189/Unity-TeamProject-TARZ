@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Example_InteractionScript : MonoBehaviour, Base_InteractionOBJ

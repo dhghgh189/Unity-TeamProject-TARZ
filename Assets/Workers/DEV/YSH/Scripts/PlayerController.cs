@@ -3,7 +3,6 @@ using System.Collections;
 using UnityEngine;
 using Zenject;
 using static SkillEnum;
-using static UnityEngine.UI.GridLayoutGroup;
 
 public enum EMachineType { Movement, Attack }
 
@@ -31,6 +30,9 @@ public class PlayerController : MonoBehaviour, IDamagable
     public PlayerMovement Movement { get; private set; }
     public PlayerAttack Attack { get; private set; }
     public DrainManager Drain { get { return drainManager; } }
+    public float delay { get; set; }
+    public bool IsAnimStart { get; set; }
+
 
     void Awake()
     {
@@ -39,10 +41,11 @@ public class PlayerController : MonoBehaviour, IDamagable
         PInput = GetComponent<PlayerInput>();
         Movement = GetComponent<PlayerMovement>();
         Attack = GetComponent<PlayerAttack>();
-
         SkillHandler = GetComponent<PlayerSkillHandler>();
 
         Fsm = new PlayerFSM(this, AblityAdapter);
+
+        IsAnimStart = false;
 
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
@@ -94,8 +97,8 @@ public class PlayerController : MonoBehaviour, IDamagable
         Debug.Log("아야");
         Stat.CurrentHp -= damage;
 
-        Anim.CrossFade(Define.HASH_ANIM_DAMAGED, 0.1f);
-        StartCoroutine(SternRoutine());
+        ChangeState(EState.Damaged);
+        StartCoroutine(SternRoutine(delay));
 
         /* 추후 합의 후 재진행 예정
         switch (currentHitTypeView)
@@ -119,6 +122,25 @@ public class PlayerController : MonoBehaviour, IDamagable
         }*/
     }
 
+    IEnumerator SternRoutine(float cool)
+    {
+        while (!IsAnimStart)
+        {
+            yield return null;
+        }
+
+        float MaxCool = cool;
+
+        while (cool > 0.1f)
+        {
+            cool -= Time.deltaTime;
+            yield return null;
+        }
+
+        IsAnimStart = false;
+        yield break;
+    }
+
     // 추후 StatModel로 옮기는게 좋을 듯
     public bool IsEnoughStamina(float amount)
     {
@@ -131,26 +153,6 @@ public class PlayerController : MonoBehaviour, IDamagable
         AnimatorStateInfo info = anim.GetCurrentAnimatorStateInfo(0);
         // 현재 재생되는 애니메이션의 총 길이와 speed를 계산하여 실제 재생 시간을 반환 
         return (info.length / info.speed);
-    }
-
-    public IEnumerator SternRoutine()
-    {
-        float delay = GetCurrentAnimTime();
-        float MaxCool = delay;
-
-        Vector3 curPosition = new Vector3 (transform.position.x, transform.position.y, transform.position.z);
-
-        while (delay > 0.1f)
-        {
-            delay -= Time.deltaTime;
-
-            PInput.TryInputDown[0] = Vector3.zero;
-            transform.position = curPosition;
-
-            yield return new WaitForFixedUpdate();
-        }
-
-        yield break;
     }
 
     private void OnCollisionEnter(Collision collision)

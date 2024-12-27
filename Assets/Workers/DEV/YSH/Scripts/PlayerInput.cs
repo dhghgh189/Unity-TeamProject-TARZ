@@ -18,7 +18,6 @@ public class PlayerInput : MonoBehaviour
 
     private void Start()
     {
-        TryInputDown.Add(InputDir);
         UseKeyPressed = new bool[Define.USEKEY_MAXCOUNT];
         
         controller = GetComponent<PlayerController>();

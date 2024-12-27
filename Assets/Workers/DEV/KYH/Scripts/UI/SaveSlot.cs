@@ -33,11 +33,12 @@ public class SaveSlot : MonoBehaviour
         if (PlayerPrefs.HasKey(profileId))
         {
             Debug.Log($"<color=yellow>{profileId}에서 데이터 로드");
-
+            LoadDataToSlot();
         }
         else
         {
             Debug.Log($"<color=red>{profileId}에 데이터 저장");
+            SaveDataToSlot();
         }
     }
 

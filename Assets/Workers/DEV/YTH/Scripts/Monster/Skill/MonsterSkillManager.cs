@@ -307,7 +307,6 @@ public class MonsterSkillManager : MonoBehaviour
         yield return new WaitForSeconds(DashAttackSkill.CoolTime);
         dashAttackRoutine = null;
         DashAttackSkill.CanUseSkill = true;
-
     }
     #endregion
 

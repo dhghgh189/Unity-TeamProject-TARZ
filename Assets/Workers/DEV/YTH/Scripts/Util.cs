@@ -1,9 +1,7 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Reflection;
-using System.Text;
 using UnityEngine;
 
 public static partial class Util
@@ -54,4 +52,15 @@ public static partial class Util
         }
     }
 
+
+    /* public void StartRoutine(Coroutine coroutine, IEnumerator enumerator)
+     {
+         if (coroutine == null)
+         {
+             Debug.LogWarning("시작할겡2222222");
+             coroutine = StartCoroutine(enumerator);
+         }
+
+
+     }*/
 }

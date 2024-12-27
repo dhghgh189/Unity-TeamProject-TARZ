@@ -8,11 +8,9 @@ public class ActAnoldSkill : Action
 
     [SerializeField] MonsterSkillManager _monsterSkillManager;
 
-    [SerializeField] float _distance;
-
     [SerializeField] GameObject _target;
 
-    [SerializeField] NavMeshAgent _agent;
+    private float _distance;
 
     public override void OnStart()
     {

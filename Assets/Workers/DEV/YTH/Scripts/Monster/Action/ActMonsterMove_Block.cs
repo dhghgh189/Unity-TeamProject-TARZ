@@ -38,7 +38,7 @@ public class ActMonsterMove_Block : Action
 
         _playerBackRoute = _player.transform.position - _player.transform.forward * 10f;
 
-        if (_condMonsterCanMove.ReturnObj != null && _distance > _stopBlockDistance) // _condMonsterCanMove.ReturnObj 는 시야각 내의 물체 (플레이어)
+        if (_condMonsterCanMove.ReturnObj != null && _distance > _stopBlockDistance) // _condCanMove.ReturnObj 는 시야각 내의 물체 (플레이어)
         {
             _agent.SetDestination(_playerBackRoute);
             return TaskStatus.Running;

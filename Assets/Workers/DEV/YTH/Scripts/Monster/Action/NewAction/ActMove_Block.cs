@@ -2,7 +2,12 @@ using BehaviorDesigner.Runtime.Tasks;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
-public class ActMove : Action
+
+/// <summary>
+/// 1. 플레이어 뒤로 가다가 stopblockDistance보다 클때 running 
+/// 2. stopBlockDistance보다 가까워지면 추격 으로 넘어가게 Running 
+/// </summary>
+public class ActMove_Block : Action
 {
     [SerializeField] CondCanMove _condCanMove;
 
@@ -12,12 +17,16 @@ public class ActMove : Action
 
     [SerializeField] Animator _animator;
 
-    [SerializeField] GameObject _player; 
+    [SerializeField] GameObject _player;
+
+    [SerializeField] Vector3 _playerBackRoute;
+
+    [SerializeField] float _stopBlockDistance = 5f; // 공격 거리 보다 조금 멀게
 
     private Transform _lastPlayerTransform; // 플레이어가 시야각에서 사라진 마지막 위치
 
     private float _distance;
-   
+
     public override void OnStart()
     {
         keepChaseRoutine = StartCoroutine(KeepChaseRoutine());
@@ -27,19 +36,23 @@ public class ActMove : Action
     {
         _distance = Vector3.Distance(transform.position, _player.transform.position);
 
-        if (_condCanMove.IsPlayerWithinSight(_player)/* && !_monsterData.IsAttacked*/)
+        _playerBackRoute = _player.transform.position - _player.transform.forward * 10f;
+
+        if (_condCanMove.IsPlayerWithinSight(_player) && _distance > _stopBlockDistance) 
         {
-            if( _distance <= _monsterData.AttackRange || _distance <= _monsterData.CanUseProjectileSkillDistance )
+            _agent.SetDestination(_playerBackRoute);
+            return TaskStatus.Running;
+        }
+        else if (_condCanMove.IsPlayerWithinSight(_player) && _distance <= _stopBlockDistance)
+        {
+            if (_condCanMove.IsPlayerWithinSight(_player) && _distance <= _monsterData.AttackRange)
             {
-                _agent.isStopped = true;
-                
                 return TaskStatus.Success;
             }
-
-            _agent.isStopped = false;
             _agent.SetDestination(_player.transform.position);
             return TaskStatus.Running;
         }
+
         else if (_condCanMove.IsPlayerWithinSight(_player))
         {
             _agent.SetDestination(_lastPlayerTransform.position);
@@ -50,7 +63,6 @@ public class ActMove : Action
             return TaskStatus.Failure;
         }
     }
-
 
     /// <summary>
     /// 플레이어가 시야에서 사라졌을때 마지막 플레이어 위치 기억
@@ -65,8 +77,6 @@ public class ActMove : Action
         yield return null;
         keepChaseRoutine = null;
     }
-
-
 }
 
 

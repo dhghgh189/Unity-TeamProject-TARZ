@@ -11,8 +11,6 @@ public class ActBombSkill : Action
 
     [SerializeField] GameObject _player;
 
-    [SerializeField] NavMeshAgent _agent;
-
     [SerializeField] Transform _muzzlePoint;
 
     public override void OnStart()

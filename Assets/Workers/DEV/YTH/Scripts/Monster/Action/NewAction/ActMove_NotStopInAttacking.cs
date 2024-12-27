@@ -2,7 +2,12 @@ using BehaviorDesigner.Runtime.Tasks;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
-public class ActMove : Action
+
+/// <summary>
+/// 1. returnObj로 setdastination  running + 공격 거리 내로 들어오면 succeess
+/// 2. 시야에서 놓치면 마지막 위치까지 가게 succeess 
+/// </summary>
+public class ActMove_NotStopInAttacking : Action
 {
     [SerializeField] CondCanMove _condCanMove;
 
@@ -17,7 +22,7 @@ public class ActMove : Action
     private Transform _lastPlayerTransform; // 플레이어가 시야각에서 사라진 마지막 위치
 
     private float _distance;
-   
+
     public override void OnStart()
     {
         keepChaseRoutine = StartCoroutine(KeepChaseRoutine());
@@ -29,16 +34,14 @@ public class ActMove : Action
 
         if (_condCanMove.IsPlayerWithinSight(_player)/* && !_monsterData.IsAttacked*/)
         {
-            if( _distance <= _monsterData.AttackRange || _distance <= _monsterData.CanUseProjectileSkillDistance )
+            if( _distance <= _monsterData.AttackRange)
             {
-                _agent.isStopped = true;
-                
                 return TaskStatus.Success;
             }
 
-            _agent.isStopped = false;
             _agent.SetDestination(_player.transform.position);
             return TaskStatus.Running;
+            // _animator.SetBool("walk", true); // 해쉬로 바꿔주면 좋을듯
         }
         else if (_condCanMove.IsPlayerWithinSight(_player))
         {
@@ -65,8 +68,6 @@ public class ActMove : Action
         yield return null;
         keepChaseRoutine = null;
     }
-
-
 }
 
 

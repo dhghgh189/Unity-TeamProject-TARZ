@@ -2,6 +2,7 @@ using BehaviorDesigner.Runtime.Tasks.Unity.UnityCharacterController;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class JumpTester : MonoBehaviour
 {
@@ -20,10 +21,7 @@ public class JumpTester : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-           if (jumpRoutine == null)
-            {
-                jumpRoutine = StartCoroutine(JumpRoutine());
-            }
+           
         }
     }
 

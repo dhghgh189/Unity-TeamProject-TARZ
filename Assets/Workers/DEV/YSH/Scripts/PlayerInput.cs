@@ -34,6 +34,7 @@ public class PlayerInput : MonoBehaviour
     {
         if (controller.IsAnimStart)
         {
+            Debug.Log("니냐?");
             InputDir = Vector3.zero;
 
             for (int i = TryKeyDown.Count - 1; i >= 0; i--)

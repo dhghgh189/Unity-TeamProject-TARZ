@@ -1,16 +1,17 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 public class Interactioner : MonoBehaviour
 {
-    private LayerMask interactionLayer;
-    private LayerMask interactionGrabLayer;
+    private int interactionLayer;
+    private int interactionGrabLayer;
     private Example_Interaction_GrabScript exampleScript;
+    private Coroutine RoutineCheck;
 
-    private Coroutine UpdateCoroutine;
     private List<GameObject> interactionOBJs = new();
-    [SerializeField] private PlayerController PlayerController;
+    [SerializeField] private PlayerController playerController;
     [SerializeField] private GameObject target;
     [Header("인식 범위")]
     [SerializeField] float range;
@@ -20,13 +21,14 @@ public class Interactioner : MonoBehaviour
 
     void Init()
     {
+        playerController = GetComponentInParent<PlayerController>();
         interactionLayer = LayerMask.NameToLayer("Is_Interaction");
         interactionGrabLayer = LayerMask.NameToLayer("Is_Interaction_Grab");
     }
 
     private void Update()
     {
-        if (PlayerController.PInput.TryInteraction)
+        if (playerController.PInput.TryInteraction)
         {
             if (exampleScript != null)
             {
@@ -40,7 +42,7 @@ public class Interactioner : MonoBehaviour
             // 상호작용 대상을 바라보는 코드. 추후 자연스럽게 수정 예정
             Vector3 dir = new Vector3
                 (target.transform.position.x, transform.parent.position.y, target.transform.position.z) - transform.parent.position;
-            transform.parent.rotation = Quaternion.Slerp(transform.parent.rotation, Quaternion.LookRotation(dir), 2f);
+            if (RoutineCheck == null) RoutineCheck = StartCoroutine(RotateTransform(transform.parent, dir));
 
             if (exampleScript != null)
             {
@@ -50,7 +52,6 @@ public class Interactioner : MonoBehaviour
 
             target.GetComponent<Base_InteractionOBJ>().Activate();
             target = null;
-
         }
     }
 
@@ -67,7 +68,7 @@ public class Interactioner : MonoBehaviour
         if (targets.First().layer == interactionGrabLayer)
         {
             exampleScript = targets.First().GetComponent<Example_Interaction_GrabScript>();
-            exampleScript.playerController = PlayerController;
+            exampleScript.playerController = playerController;
         }
 
         return targets.First();
@@ -81,10 +82,7 @@ public class Interactioner : MonoBehaviour
         // 인식할 몬스터 각도의 범위 설정
         foreach (Collider _col in collider)
         {
-            // 이놈이 범인입니다
-            Debug.Log("랄");
-            if (_col.gameObject.layer != interactionLayer || _col.gameObject.layer != interactionGrabLayer) continue;
-            Debug.Log("라");
+            if (_col.gameObject.layer != interactionLayer && _col.gameObject.layer != interactionGrabLayer) continue;
 
             Vector3 source = transform.position; source.y = 0;
             Vector3 destination = _col.transform.position; destination.y = 0;
@@ -93,12 +91,6 @@ public class Interactioner : MonoBehaviour
 
             if (targetAngle > angle * 0.5f) continue;
             _targets.Add(_col.gameObject);
-        }
-
-        foreach (GameObject _col in _targets)
-        {
-            // 이상하다 이거 왜이러지?
-            Debug.Log($"뭐가 있나요 : {_col.name}");
         }
 
         return _targets;
@@ -121,6 +113,23 @@ public class Interactioner : MonoBehaviour
             exampleScript = null;
             target = null;
         }
+    }
+
+    IEnumerator RotateTransform(Transform player, Vector3 target)
+    {
+        playerController.IsAnimStart = true;
+        Vector3 targetRotate = Quaternion.LookRotation(target).eulerAngles;
+
+        while (Vector3.Distance(player.eulerAngles, targetRotate) > 3f)
+        {
+            player.rotation = Quaternion.Slerp(player.rotation, Quaternion.LookRotation(target), Time.deltaTime * 20f);
+            yield return null;
+        }
+        Debug.Log("해치웠다");
+
+        playerController.IsAnimStart = false;
+        RoutineCheck = null;
+        yield break;
     }
 
     private void OnDrawGizmos()

@@ -44,6 +44,6 @@ public class ContinueManager : MonoBehaviour
     public void OnClickSlotButton()
     {
         saveSlot.Load();
-        SceneManager.LoadScene("LobbyScene");
+        SceneManager.LoadScene(1);
     }
 }

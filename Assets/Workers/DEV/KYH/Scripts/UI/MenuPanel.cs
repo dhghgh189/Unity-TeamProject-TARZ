@@ -52,6 +52,6 @@ public class MenuPanel : MonoBehaviour
             saveManager.Save();
         }
 
-        SceneManager.LoadScene("TitleScene");
+        SceneManager.LoadScene(0);
     }
 }

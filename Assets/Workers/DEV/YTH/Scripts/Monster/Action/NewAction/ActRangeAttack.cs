@@ -27,6 +27,7 @@ public class ActRangeAttack : Action
     {
         if (_distance <= _monsterData.AttackRange && throwRoutine == null)
         {
+            MonsterRotation();
             throwRoutine = StartCoroutine(ThrowRoutine());
             return TaskStatus.Success;
         }
@@ -51,4 +52,9 @@ public class ActRangeAttack : Action
         GameObject projectile = Object.Instantiate(_projectilePrefab.Value, _muzzlePoint.Value.position, _muzzlePoint.Value.rotation);
     }
     #endregion
+
+    public void MonsterRotation()
+    {
+        transform.LookAt(_player.transform);
+    }
 }

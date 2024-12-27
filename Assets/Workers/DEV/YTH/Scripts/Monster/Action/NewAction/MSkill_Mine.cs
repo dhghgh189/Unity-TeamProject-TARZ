@@ -27,7 +27,7 @@ public class MSkill_Mine : Action
         }
         else
         {
-            return TaskStatus.Success;
+            return TaskStatus.Failure;
         }
     }
 

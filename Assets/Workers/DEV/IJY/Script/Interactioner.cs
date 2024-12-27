@@ -42,7 +42,8 @@ public class Interactioner : MonoBehaviour
             // 상호작용 대상을 바라보는 코드. 추후 자연스럽게 수정 예정
             Vector3 dir = new Vector3
                 (target.transform.position.x, transform.parent.position.y, target.transform.position.z) - transform.parent.position;
-            if (RoutineCheck == null) RoutineCheck = StartCoroutine(RotateTransform(transform.parent, dir));
+            if (RoutineCheck == null)
+                RoutineCheck = StartCoroutine(RotateTransform(transform.parent, dir));
 
             if (exampleScript != null)
             {
@@ -118,12 +119,12 @@ public class Interactioner : MonoBehaviour
     IEnumerator RotateTransform(Transform player, Vector3 target)
     {
         playerController.IsAnimStart = true;
-        Vector3 targetRotate = Quaternion.LookRotation(target).eulerAngles;
 
-        while (Vector3.Distance(player.eulerAngles, targetRotate) > 3f)
+        Vector3 targetRotate = Quaternion.LookRotation(target).eulerAngles;
+        while (Vector3.Distance(player.eulerAngles, targetRotate) > 1f)
         {
+            playerController.PInput.TryInteraction = Input.GetButtonDown("Interaction");
             player.rotation = Quaternion.Slerp(player.rotation, Quaternion.LookRotation(target), Time.deltaTime * 20f);
-            yield return null;
         }
         Debug.Log("해치웠다");
 

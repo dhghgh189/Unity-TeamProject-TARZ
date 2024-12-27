@@ -45,6 +45,7 @@ public class PlayerController : MonoBehaviour, IDamagable
         Movement = GetComponent<PlayerMovement>();
         Attack = GetComponent<PlayerAttack>();
         SkillHandler = GetComponent<PlayerSkillHandler>();
+        ManaSkillHandler = GetComponent<ManaSkillHandler>();
 
         Fsm = new PlayerFSM(this, AblityAdapter);
 

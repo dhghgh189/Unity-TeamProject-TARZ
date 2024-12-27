@@ -53,7 +53,8 @@ public class ManaRush_1 : BaseManaState
     public override void OnEnter()
     {
         base.OnEnter();
-        Debug.Log("마나 입장");
+
+        Debug.Log("마나1 마나 입장");
         rushTime = parent.SkillData.GetData((int)ManaRushDataType.RushTime);
         rushSpeed = parent.SkillData.GetData((int)ManaRushDataType.RushSpeed);
 
@@ -95,7 +96,7 @@ public class ManaRush_1 : BaseManaState
 
         if (rushTime <= 0)
         {
-            Debug.Log("충격파 행동으로 넘어가기 요청!");
+            Debug.Log("마나1 충격파 행동으로 넘어가기 요청!");
             owner.ManaSkillHandler.NextStep(2);
             return;
         }
@@ -111,7 +112,7 @@ public class ManaRush_1 : BaseManaState
     {
         if(other.gameObject.layer.Equals(LayerMask.NameToLayer("Monster")))
         {
-            Debug.Log("잡는 행동으로 넘어가기 요청!");
+            Debug.Log("마나1 잡는 행동으로 넘어가기 요청!");
             parent.collider = other.gameObject.transform;
             parent.quaternion = other.transform.rotation;
             return true;
@@ -146,6 +147,7 @@ public class ManaRush_2 : BaseManaState
     public override void OnEnter()
     {
         base.OnEnter();
+        animTimer = 999f;
         grabDamage = parent.SkillData.GetData((int)ManaRushDataType.GrabDamage);
         Debug.Log("마나2 입장");
 
@@ -164,6 +166,7 @@ public class ManaRush_2 : BaseManaState
         // 잠시 대기하는 시간을 가져야 한다.
         yield return new WaitForSeconds(0.1f);
         animTimer = owner.GetCurrentAnimTime();
+        Debug.Log($"마나2 animTimer : {animTimer}");
     }
 
     public override void OnUpdate()
@@ -176,7 +179,7 @@ public class ManaRush_2 : BaseManaState
         if (animTimer <= 0)
         {
             lookDir = Vector3.zero;
-            Debug.Log("잡기에서 충격파 행동으로 넘어가기 요청!");
+            Debug.Log("마나2 잡기에서 충격파 행동으로 넘어가기 요청!");
             IDamagable damagable = parent.collider.gameObject.GetComponent<IDamagable>();
 
             if (damagable is not null) damagable.TakeDamage(grabDamage);
@@ -221,6 +224,7 @@ public class ManaRush_3 : BaseManaState
 
     public override void OnEnter()
     {
+        animTimer = 999f;
         Debug.Log("충격파 입장");
         damage = parent.SkillData.GetData((int)ManaRushDataType.RangeAttackDamage);
         attackRange = parent.SkillData.GetData((int)ManaRushDataType.AttackRange);

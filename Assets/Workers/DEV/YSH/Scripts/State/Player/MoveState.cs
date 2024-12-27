@@ -22,6 +22,13 @@ public class MoveState : BaseState<PlayerController>
     {
         base.OnUpdate();
 
+        // fall 조건
+        if (!owner.Movement.IsGrounded)
+        {
+            owner.ChangeState(EState.Fall);
+            return;
+        }
+
         if (owner.PInput.TryDash && owner.IsEnoughStamina(owner.Stat.DashStaminaAmount))
         {
             owner.ChangeState(EState.Dash);

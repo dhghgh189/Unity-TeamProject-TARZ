@@ -19,6 +19,14 @@ public class IdleState : BaseState<PlayerController>
     public override void OnUpdate()
     {
         base.OnUpdate();
+
+        // fall 조건
+        if (!owner.Movement.IsGrounded)
+        {
+            owner.ChangeState(EState.Fall);
+            return;
+        }
+
         // 대쉬
         if (owner.PInput.TryDash && owner.IsEnoughStamina(owner.Stat.DashStaminaAmount))
         {

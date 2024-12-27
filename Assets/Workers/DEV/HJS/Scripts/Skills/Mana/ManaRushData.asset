@@ -10,16 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 819ca06869edfcf4cb60e61f8ffdd4f3, type: 3}
-  m_Name: New Mana Skill Data SO
+  m_Name: ManaRushData
   m_EditorClassIdentifier: 
-  spec: 0
   Type: 0
-  skillName: "\uB3CC\uC9C4"
-  damage: 0
-  attackRange: 0
-  targetSpeed: 0
-  targetTime: 0
-  rushSpeed: 3
-  rushTime: 2
-  uniqueFeatureRange: 0
-  uniqueFeatureSpeed: 0
+  skillName: ManaRush
+  dataInputStructs:
+  - VariableName: RushTime
+    value: 2
+    index: 0
+  - VariableName: RushSpeed
+    value: 3
+    index: 1
+  - VariableName: GrabDamage
+    value: 100
+    index: 2
+  - VariableName: RangeAttackDamage
+    value: 150
+    index: 3
+  - VariableName: AttackRange
+    value: 5
+    index: 4

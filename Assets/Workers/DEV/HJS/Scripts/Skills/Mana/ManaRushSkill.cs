@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using UnityEngine;
 
+
+public enum ManaRushDataType { RushTime, RushSpeed, GrabDamage, RangeAttackDamage, AttackRange }
 public class ManaRushSkill : IManaSkill
 {
+    private const string KEY_NAME = "ManaRush";
     private ManaSkillDataSO skillData;
     public LinkedList<BaseManaState> Acts { get; private set; }
     public ManaSkillDataSO SkillData { get => skillData; set => skillData = value; }
@@ -24,7 +27,7 @@ public class ManaRushSkill : IManaSkill
     {
         // 초기 설정
         manaSkillHandler.ActList = Acts;
-        skillData = manaSkillHandler.skillData;
+        skillData = manaSkillHandler.GetData(KEY_NAME);
     }
 }
 
@@ -34,10 +37,10 @@ public class ManaRushSkill : IManaSkill
 public class ManaRush_1 : BaseManaState
 {
     private readonly ManaRushSkill parent;
-    public string animName = "ManaRush_1";
-
+    private readonly string animName = "ManaRush_1";
     float rushTime;
     float rushSpeed;
+
     private Transform camTrf;
     private Vector3 moveDir;
     private Vector3 lookDir;
@@ -50,10 +53,10 @@ public class ManaRush_1 : BaseManaState
     public override void OnEnter()
     {
         base.OnEnter();
-        //owner.ManaSkillHandler.StartManaSkill();
         Debug.Log("마나 입장");
-        rushTime = owner.ManaSkillHandler.skillData.RushTime;
-        rushSpeed = owner.ManaSkillHandler.skillData.RushSpeed;
+        rushTime = parent.SkillData.GetData((int)ManaRushDataType.RushTime);
+        rushSpeed = parent.SkillData.GetData((int)ManaRushDataType.RushSpeed);
+
 
         if (camTrf == null)
             camTrf = Camera.main.transform;
@@ -72,7 +75,7 @@ public class ManaRush_1 : BaseManaState
 
         lookDir = owner.transform.forward;
 
-        owner.Anim.CrossFade(Animator.StringToHash(animName), 0.1f);
+        owner.Anim.CrossFade(Animator.StringToHash(animName), 0.01f);
     }
 
     public override void OnUpdate()
@@ -125,23 +128,25 @@ public class ManaRush_1 : BaseManaState
 public class ManaRush_2 : BaseManaState
 {
     private readonly ManaRushSkill parent;
-    public string animName = "ManaRush_2";
+    private string animName = "ManaRush_2";
 
     float animTimer;
     private Transform camTrf;
     private Vector3 lookDir;
-
+    float grabDamage;
     Transform grabPoint;
 
     public ManaRush_2(PlayerController owner, ManaRushSkill parent) : base(owner)
     {
         if (grabPoint == null) grabPoint = GameObject.FindWithTag("GrabPoint").transform;
         this.parent = parent;
+        animTimer = 999f;
     }
 
     public override void OnEnter()
     {
         base.OnEnter();
+        grabDamage = parent.SkillData.GetData((int)ManaRushDataType.GrabDamage);
         Debug.Log("마나2 입장");
 
         if (camTrf == null)
@@ -150,7 +155,7 @@ public class ManaRush_2 : BaseManaState
         // 충돌한 몬스터 손에 잡기
         parent.collider.transform.parent = grabPoint;
 
-        owner.Anim.CrossFade(Animator.StringToHash(animName), 0.1f);
+        owner.Anim.CrossFade(Animator.StringToHash(animName), 0.01f);
         owner.StartCoroutine(AnimRoutine());
     }
     IEnumerator AnimRoutine()
@@ -174,7 +179,7 @@ public class ManaRush_2 : BaseManaState
             Debug.Log("잡기에서 충격파 행동으로 넘어가기 요청!");
             IDamagable damagable = parent.collider.gameObject.GetComponent<IDamagable>();
 
-            if (damagable is not null) damagable.TakeDamage(100);   // TODO: so에서 데미지 가져오기
+            if (damagable is not null) damagable.TakeDamage(grabDamage);
 
             // 잡은 몬스터 놓아주기
             LeaveMonster();
@@ -188,7 +193,6 @@ public class ManaRush_2 : BaseManaState
     {
         LeaveMonster();
     }
-
     private void LeaveMonster()
     {
         parent.collider.transform.parent = null;
@@ -203,7 +207,7 @@ public class ManaRush_2 : BaseManaState
 public class ManaRush_3 : BaseManaState
 {
     private readonly ManaRushSkill parent;
-    public string animName = "ManaRush_3";
+    private string animName = "ManaRush_3";
 
     float animTimer;
     private Vector3 lookDir;
@@ -212,15 +216,16 @@ public class ManaRush_3 : BaseManaState
     public ManaRush_3(PlayerController owner, ManaRushSkill parent) : base(owner)
     {
         this.parent = parent;
+        animTimer = 999f;
     }
 
     public override void OnEnter()
     {
         Debug.Log("충격파 입장");
-        damage = owner.ManaSkillHandler.skillData.Damage;
-        attackRange = owner.ManaSkillHandler.skillData.AttackRange;
+        damage = parent.SkillData.GetData((int)ManaRushDataType.RangeAttackDamage);
+        attackRange = parent.SkillData.GetData((int)ManaRushDataType.AttackRange);
 
-        owner.Anim.CrossFade(Animator.StringToHash(animName), 0.1f);
+        owner.Anim.CrossFade(Animator.StringToHash(animName), 0.01f);
         owner.StartCoroutine(AnimRoutine());
     }
 
@@ -263,11 +268,11 @@ public class ManaRush_3 : BaseManaState
     public override void OnAction()
     {
         Debug.Log("범위 공격!");
-        Collider[] colliders = Physics.OverlapSphere(owner.transform.position, 5f, LayerMask.GetMask("Monster"));
+        Collider[] colliders = Physics.OverlapSphere(owner.transform.position, attackRange, LayerMask.GetMask("Monster"));
         foreach (Collider collider in colliders)
         {
             IDamagable damagable = collider.gameObject.GetComponent<IDamagable>();
-            if (damagable != null) { damagable.TakeDamage(150); Debug.Log($"{collider.gameObject.name}에게 {150}만큼의 피해를 입혔다!"); }
+            if (damagable != null) { damagable.TakeDamage(damage); Debug.Log($"{collider.gameObject.name}에게 {150}만큼의 피해를 입혔다!"); }
         }
     }
 

@@ -16,7 +16,7 @@ public class BaseManaState : BaseState<PlayerController>, IManaAct
 
     public virtual bool OnCollisionAction(Collision other)
     {
-        return true;
+        return false;
     }
 
 }

@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Jake_Body Dissolve
+  m_Name: Jake_Head  Dissolve
   m_Shader: {fileID: -6465566751694194690, guid: 57be3c396545f564ab5fdcb8c3c01890,
     type: 3}
   m_Parent: {fileID: 0}
@@ -39,11 +39,11 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: a78bd12d16bc0144e9e7606adfbf4e3e, type: 3}
+        m_Texture: {fileID: 2800000, guid: 281ede3f929e0064b8c49d92b6e563e6, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Base_Map:
-        m_Texture: {fileID: 2800000, guid: a78bd12d16bc0144e9e7606adfbf4e3e, type: 3}
+        m_Texture: {fileID: 2800000, guid: 281ede3f929e0064b8c49d92b6e563e6, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -67,11 +67,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Emission_Map:
-        m_Texture: {fileID: 2800000, guid: 34f460ea50bb6fd458499589b27bee8b, type: 3}
+        m_Texture: {fileID: 2800000, guid: 281ede3f929e0064b8c49d92b6e563e6, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: a78bd12d16bc0144e9e7606adfbf4e3e, type: 3}
+        m_Texture: {fileID: 2800000, guid: 281ede3f929e0064b8c49d92b6e563e6, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -87,7 +87,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Normal_Map:
-        m_Texture: {fileID: 2800000, guid: d6cdd8db9116f8a48af89a49d0a52caa, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -131,6 +131,7 @@ Material:
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
+    - _Dissolve_Float: -1
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
@@ -138,8 +139,8 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _Glow_Size: 0.2
     - _Metallic: 0
+    - _Noise_Float: -32
     - _OcclusionStrength: 1
     - _Parallax: 0.005
     - _QueueControl: 0
@@ -158,8 +159,10 @@ Material:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Dissolve_Color: {r: 1.3350784, g: 0, b: 0, a: 0}
+    - _Dissolve_Color_1: {r: 0, g: 0.7490196, b: 0.5610304, a: 0}
+    - _Dissolve_Color_2: {r: 1, g: 1, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Emission_Color: {r: 0.6698113, g: 0.6698113, b: 0.6698113, a: 0}
+    - _Emission_Color: {r: 0.0009765625, g: 0.0009765625, b: 0.0009765625, a: 0}
     - _Glow_Color: {r: 1, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
   m_BuildTextureStacks: []

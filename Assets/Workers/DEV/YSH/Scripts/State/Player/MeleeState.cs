@@ -69,7 +69,6 @@ public class MeleeState : BaseState<PlayerController>
         if (owner.PInput.TryDash
             && owner.IsEnoughStamina(owner.Stat.DashStaminaAmount))
         {
-            owner.Attack.MeleeCount = 0;
             owner.ChangeState(EState.Dash);
             return;
         }
@@ -89,13 +88,17 @@ public class MeleeState : BaseState<PlayerController>
             // Adjust를 중지하기 위해 lookDir을 초기화
             lookDir = Vector3.zero;
 
-            // 타수 초기화
-            owner.Attack.MeleeCount = 0;
             owner.ChangeState(EState.Idle);
             return;
         }
 
         // timer 진행
         animTimer -= Time.deltaTime;
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+        owner.Attack.MeleeCount = 0;
     }
 }

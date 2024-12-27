@@ -13,18 +13,12 @@ public class PlayerInput : MonoBehaviour
     public bool TryInteraction { get; private set; }
     public bool TryManaSkill { get; private set; }
 
-    public bool[] ManaKeyPressed;
-    public KeyCode[] ManaSkillKey;
+    [HideInInspector] public bool[] UseKeyPressed;
 
     private void Start()
     {
         TryInputDown.Add(InputDir);
-        ManaKeyPressed = new bool[Define.MANASKILL_MAXCOUNT];
-        ManaSkillKey = new KeyCode[Define.MANASKILL_MAXCOUNT];
-        for (int i = 0; i < ManaSkillKey.Length; i++)
-        {
-            ManaSkillKey[i] = KeyCode.Alpha1 + i;
-        }
+        UseKeyPressed = new bool[Define.USEKEY_MAXCOUNT];
     }
 
     void Update()
@@ -32,20 +26,22 @@ public class PlayerInput : MonoBehaviour
         InputDir = new Vector3(
             Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
 
-        // 패드 지원되도록 구성해야 함
-        TryDash = Input.GetButtonDown("Dash");
-        TryJump = Input.GetButtonDown("Jump");
+        // 패드 지원되도록 구성해야 함    
         TryThrow = Input.GetButtonDown("Throw");
-        TryMelee = Input.GetButtonDown("Melee");
-        TryDrain = Input.GetButton("Drain");
+        TryMelee = Input.GetButtonDown("Melee");      
         TryInteraction = Input.GetKeyDown(KeyCode.E);
-        TryManaSkill = Input.GetKey(KeyCode.F9);
-        if (TryManaSkill)
+        TryManaSkill = Input.GetButton("TryManaSkill");
+
+        if (!TryManaSkill)
         {
-            for (int i = 0; i < ManaSkillKey.Length; i++)
-            {
-                ManaKeyPressed[i] = Input.GetKeyDown(ManaSkillKey[i]);
-            }
+            TryDash = Input.GetButtonDown("Dash");
+            TryJump = Input.GetButtonDown("Jump");
+            TryDrain = Input.GetButton("Drain");
+        }
+
+        for (int i = 0; i < Define.USEKEY_MAXCOUNT; i++)
+        {
+            UseKeyPressed[i] = Input.GetButtonDown($"UseKey {i + 1}");
         }
     }
 }

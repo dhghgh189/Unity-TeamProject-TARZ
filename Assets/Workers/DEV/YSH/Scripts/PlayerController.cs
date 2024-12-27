@@ -80,9 +80,9 @@ public class PlayerController : MonoBehaviour, IDamagable
         if (!isTryManaSkill)    
             return;
 
-        for (int i = 0; i < Define.MANASKILL_MAXCOUNT; i++)
+        for (int i = 0; i < Define.USEKEY_MAXCOUNT; i++)
         {
-            if (PInput.ManaKeyPressed[i])   // 스킬 1 ~ 4 번 키 입력 감지 
+            if (PInput.UseKeyPressed[i])   // 스킬 1 ~ 4 번 키 입력 감지 
             {
                 TryManaSkill(i);
                 return;

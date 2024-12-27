@@ -13,5 +13,5 @@ public static class Define
     public static readonly int HASH_ANIM_DRAIN = Animator.StringToHash("Drain");
     public static readonly int HASH_ANIM_DAMAGED = Animator.StringToHash("Damage");
 
-    public const int MANASKILL_MAXCOUNT = 4;
+    public const int USEKEY_MAXCOUNT = 4;
 }

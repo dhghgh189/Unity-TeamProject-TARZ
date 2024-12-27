@@ -20,8 +20,8 @@ public class Interactioner : MonoBehaviour
 
     void Init()
     {
-        interactionLayer = LayerMask.GetMask("Is_Interaction");
-        interactionGrabLayer = LayerMask.GetMask("Is_Interaction_Grab");
+        interactionLayer = LayerMask.NameToLayer("Is_Interaction");
+        interactionGrabLayer = LayerMask.NameToLayer("Is_Interaction_Grab");
     }
 
     private void Update()
@@ -34,11 +34,9 @@ public class Interactioner : MonoBehaviour
                 return;
             }
 
-            Debug.Log("1 이건 또 무슨 버그야 미친것");
             target = SelectInteraction(interactionOBJs);
             if (target == null || !target.activeSelf) return;
 
-            Debug.Log("2 이건 또 무슨 버그야 미친것");
             // 상호작용 대상을 바라보는 코드. 추후 자연스럽게 수정 예정
             Vector3 dir = new Vector3
                 (target.transform.position.x, transform.parent.position.y, target.transform.position.z) - transform.parent.position;
@@ -50,7 +48,6 @@ public class Interactioner : MonoBehaviour
                 return;
             }
 
-            Debug.Log("3 이건 또 무슨 버그야 미친것");
             target.GetComponent<Base_InteractionOBJ>().Activate();
             target = null;
 
@@ -69,12 +66,10 @@ public class Interactioner : MonoBehaviour
 
         if (targets.First().layer == interactionGrabLayer)
         {
-            Debug.Log("4 이건 또 무슨 버그야 미친것");
             exampleScript = targets.First().GetComponent<Example_Interaction_GrabScript>();
             exampleScript.playerController = PlayerController;
         }
 
-        Debug.Log("5 이건 또 무슨 버그야 미친것");
         return targets.First();
     }
 
@@ -86,7 +81,8 @@ public class Interactioner : MonoBehaviour
         // 인식할 몬스터 각도의 범위 설정
         foreach (Collider _col in collider)
         {
-            // 이거에 걸러지는거니
+            // 이놈이 범인입니다
+            Debug.Log("랄");
             if (_col.gameObject.layer != interactionLayer || _col.gameObject.layer != interactionGrabLayer) continue;
             Debug.Log("라");
 
@@ -112,19 +108,16 @@ public class Interactioner : MonoBehaviour
     {
         if (target == null || !target.activeSelf)
         {
-            Debug.Log("6 이건 또 무슨 버그야 미친것");
             exampleScript.GrabOnOff = false;
             exampleScript = null;
             return;
         }
 
-        Debug.Log("7 이건 또 무슨 버그야 미친것");
         exampleScript.GrabOnOff = !exampleScript.GrabOnOff;
         target.GetComponent<Base_InteractionOBJ_Grab>().Activate_Grab();
 
         if (exampleScript.GrabOnOff != true)
         {
-            Debug.Log("8 이건 또 무슨 버그야 미친것");
             exampleScript = null;
             target = null;
         }

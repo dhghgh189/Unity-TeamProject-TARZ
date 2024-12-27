@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using static UnityEngine.UI.GridLayoutGroup;
 
@@ -11,24 +12,37 @@ public class ThrowCarObject : MonoBehaviour
     [SerializeField] float explosionRange;
 
     [SerializeField] Rigidbody rigid;
+    [SerializeField] BoxCollider coll;
     private void Awake()
     {
+        coll = GetComponent<BoxCollider>();
         rigid = GetComponent<Rigidbody>();
+
+        coll.enabled = false;
+        rigid.useGravity = false;
     }
 
     public void Throw()
     {
-        rigid.AddForce( (Vector3.right * 45f).normalized * speed, ForceMode.Impulse);
+        coll.enabled = true;
+        Debug.LogWarning("차 날라가기 시작!");
+        StartCoroutine(MoveRoutine());
     }
 
-    private void OnCollisionEnter(Collision other)
+    private IEnumerator MoveRoutine()
     {
-        if(other.gameObject.layer.Equals(LayerMask.NameToLayer("Monster")))
+        yield return null;
+        rigid.velocity = transform.forward * speed;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.layer.Equals(LayerMask.NameToLayer("Monster")))
         {
             IDamagable damagable = other.gameObject.GetComponent<IDamagable>();
             if (damagable != null) { damagable.TakeDamage(hitDamage); }
         }
-        else if(other.gameObject.layer.Equals(LayerMask.NameToLayer("Ground")))
+        else if (other.gameObject.layer.Equals(LayerMask.NameToLayer("Ground")))
         {
             Destroy(gameObject);
         }

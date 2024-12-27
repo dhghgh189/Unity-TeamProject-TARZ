@@ -11,17 +11,17 @@ public class ManaSkillDataSO : ScriptableObject
     [Header("Info")]
     public ManaSkillType Type;
     public string skillName;
-    private Dictionary<int, (string, float)> dataDictionary;
+    private Dictionary<int, float> dataDictionary;
 
     [Header("Setting")]
     [SerializeField] List<DataInputStruct> dataInputStructs;
 
     private void Awake()
     {
-        dataDictionary = new Dictionary<int, (string, float)>();
+        dataDictionary = new Dictionary<int,  float>();
         foreach(DataInputStruct data in dataInputStructs)
         {
-            if (!dataDictionary.TryAdd(data.index, (data.VariableName, data.value)))
+            if (!dataDictionary.TryAdd(data.index,  data.value))
             {
                 Debug.Log($"{data.index}와 동일한 이름의 데이터가 있습니다!");
                 break;
@@ -31,7 +31,7 @@ public class ManaSkillDataSO : ScriptableObject
 
     public float GetData(int index)
     {
-        return dataDictionary[index].Item2;
+        return dataDictionary[index];
     }
 }
 

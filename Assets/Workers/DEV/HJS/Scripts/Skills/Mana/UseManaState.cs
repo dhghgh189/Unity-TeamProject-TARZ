@@ -22,9 +22,16 @@ public class UseManaState : BaseState<PlayerController>
     public override void OnUpdate()
     {
         base.OnUpdate();
+
+        if (owner.PInput.TryDash && owner.IsEnoughStamina(owner.Stat.DashStaminaAmount))
+        {
+            owner.ChangeState(EState.Dash);
+            return;
+        }
+
         owner.ManaSkillHandler.CurNode.Value.OnUpdate();
 
-        if(IsEnd)
+        if (IsEnd)
         {
             owner.ChangeState(EState.Idle);
         }

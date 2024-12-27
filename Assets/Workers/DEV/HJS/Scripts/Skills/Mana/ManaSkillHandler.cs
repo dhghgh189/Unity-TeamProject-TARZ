@@ -32,7 +32,7 @@ public class ManaSkillHandler : MonoBehaviour
 
         foreach(ManaSkillDataSO data in skillData)
         {
-            skillDataDictionary.Add(data.skillName, data);
+            skillDataDictionary.Add( data.skillName, Instantiate(data));
         }
     }
 
@@ -70,7 +70,7 @@ public class ManaSkillHandler : MonoBehaviour
             // 사용하는 마나 만큼 차감
             stat.CurrentMp -= 100 * index;
             // Todo -> 해당하는 스킬 사용
-            selectIndex = index - 1;
+            selectIndex = index;
             manaSkill[selectIndex]?.SetInit(this);
             curNode = actList.First;
             return true;
@@ -128,7 +128,7 @@ public class ManaSkillHandler : MonoBehaviour
         selectIndex = -1;
     }
 
-    public void TakeDamage()
+    public void OnAction()
     {
         curNode.Value.OnAction();
     }

@@ -4,9 +4,6 @@ using Zenject;
 
 public class MSkill_Revive : Action
 {
-    [Inject]
-    private CoroutineManager _util;
-
     [SerializeField] MonsterData _monsterData;
 
     [SerializeField] MonsterSkillManager _monsterSkillManager;
@@ -23,9 +20,9 @@ public class MSkill_Revive : Action
 
     public override TaskStatus OnUpdate()
     {
-        if (_monsterData.CurHp <= _monsterData.MaxHp / 2 && _monsterSkillManager.ReviveSkill.CanUseSkill == true)
+        if (_monsterData.CurHp <= _monsterData.MaxHp / 2 && _monsterSkillManager.ReviveSkill.CanUseSkill)
         {
-            _util.StartRoutine(ref _monsterSkillManager.reviveRoutine, _monsterSkillManager.ReviveRoutine());
+            _monsterSkillManager.Revive();
             Debug.Log("부활");
             return TaskStatus.Success;
         }

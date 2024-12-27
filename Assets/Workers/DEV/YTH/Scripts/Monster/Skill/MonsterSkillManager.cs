@@ -53,10 +53,10 @@ public class MonsterSkillManager : MonoBehaviour
 
     [SerializeField] GameObject _thunderPrefab;
 
-    [SerializeField] GameObject _reviveBefore; // 불러올거에요 비워놔주세요
+    private GameObject _reviveBefore; // 불러올거에요 비워놔주세요
     public GameObject ReviveBefore { get { return _reviveBefore; } set { _reviveBefore = value; } }
 
-    [SerializeField] GameObject _reviveAfter; // 불러올거에요 비워놔주세요
+    private GameObject _reviveAfter; // 불러올거에요 비워놔주세요
     public GameObject ReviveAfter { get { return _reviveAfter;  } set { _reviveAfter = value; } } 
     #endregion
 
@@ -358,7 +358,7 @@ public class MonsterSkillManager : MonoBehaviour
     public Coroutine trippleAttackRoutine;
     public IEnumerator TrippleAttackRoutine()
     {
-        _animator.SetTrigger("TrippleAttack");
+       /* _animator.SetTrigger("TrippleAttack");*/
 
         TrippleAttackSkill.CanUseSkill = false;
         // TrippleAttackSkill 애니메이션 재생
@@ -444,7 +444,7 @@ public class MonsterSkillManager : MonoBehaviour
             yield return null;
         }
         transform.position = _jumpStartPosition + _jumpDirection;
-        jumpRoutine_dashAttack = null;
+        jumpRoutine_frogJumpAttack = null;
         _elapsedTime = 0;
     }
     #endregion
@@ -459,20 +459,20 @@ public class MonsterSkillManager : MonoBehaviour
             Debug.Log("점프!!");
         }
         yield return null;
-        dashAttackRoutine = null;
+        frogJumpAttackRoutine = null;
     }
     #endregion
 
     #region Revive
-    public Coroutine reviveRoutine;
-    public IEnumerator ReviveRoutine()
+    /*public Coroutine reviveRoutine;*/
+    public void Revive()
     {
         ReviveSkill.CanUseSkill = false;
 
         _reviveBefore.SetActive(false);
         _reviveAfter.SetActive(true);
-        yield return null;
-        reviveRoutine = null;
+      /*  yield return null;
+        reviveRoutine = null;*/
     }
     #endregion
 }

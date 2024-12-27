@@ -4,9 +4,6 @@ using Zenject;
 
 public class MSkill_Thunder : Action
 {
-    [Inject]
-    private CoroutineManager _util;
-
     [SerializeField] MonsterSkillManager _monsterSkillManager;
 
     [SerializeField] MonsterData _monsterData;
@@ -22,15 +19,15 @@ public class MSkill_Thunder : Action
 
     public override TaskStatus OnUpdate()
     {
-        if (_distance < 20 && _monsterSkillManager.ThunderSkill.CanUseSkill == true && _monsterData.CurHp <= _monsterData.MaxHp / 2)
+        if (_distance < 20 && _monsterSkillManager.ThunderSkill.CanUseSkill == true && _monsterData.CurHp <= _monsterData.MaxHp / 2 && _monsterSkillManager.thunderRoutine == null)
         {
-            _util.StartRoutine(ref _monsterSkillManager.thunderRoutine, _monsterSkillManager.ThunderRoutine());
+            _monsterSkillManager.thunderRoutine = StartCoroutine(_monsterSkillManager.ThunderRoutine());
             Debug.Log("10 ThunderRoutine 시작");
             return TaskStatus.Success;
         }
         else
         {
-            return TaskStatus.Failure;
+            return TaskStatus.Success;
         }
         
     }

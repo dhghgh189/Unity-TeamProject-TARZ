@@ -4,11 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-public class MSkill_FrogJuMP : Action
+public class MSkill_FrogJump : Action
 {
-    [Inject]
-    private CoroutineManager _util;
-
     [SerializeField] MonsterData _monsterData;
 
     [SerializeField] MonsterSkillManager _monsterSkillManager;
@@ -16,9 +13,9 @@ public class MSkill_FrogJuMP : Action
     private float _distance;
     public override TaskStatus OnUpdate()
     {
-        if (_distance > _monsterData.CanJumpDistance)
+        if (_monsterSkillManager.frogJumpAttackRoutine == null)
         {
-            _util.StartRoutine(ref _monsterSkillManager.frogJumpAttackRoutine, _monsterSkillManager.FrogJumpAttackRoutine());
+            _monsterSkillManager.frogJumpAttackRoutine = StartCoroutine(_monsterSkillManager.FrogJumpAttackRoutine());
             Debug.Log("개구리 점프!!");
             return TaskStatus.Success;
         }

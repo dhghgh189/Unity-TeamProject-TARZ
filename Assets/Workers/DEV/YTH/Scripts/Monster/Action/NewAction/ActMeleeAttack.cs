@@ -6,16 +6,13 @@ using System.Collections;
 
 public class ActMeleeAttack : Action
 {
-    /*[Inject]*/
-    [SerializeField] DistanceChecker _checker;
-
     [SerializeField] MonsterData _monsterData;
 
     [SerializeField] Animator _animator;
 
-   /* [SerializeField] GameObject _player;
+    [SerializeField] GameObject _player;
 
-    private float _distance;*/
+    private float _distance;
 
     [Header("Attack")]
     [SerializeField] float _angle;
@@ -31,9 +28,8 @@ public class ActMeleeAttack : Action
 
     public override TaskStatus OnUpdate()
     {
-        if (_checker.Distance <= _monsterData.AttackRange)
+        if (_distance <= _monsterData.AttackRange)
         {
-           /* _util.StartRoutine(ref attackRoutine, AttackRoutine());*/
             if (attackRoutine == null)
             {
                 attackRoutine = StartCoroutine(AttackRoutine());

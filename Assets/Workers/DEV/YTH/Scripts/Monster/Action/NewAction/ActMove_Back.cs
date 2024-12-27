@@ -6,8 +6,6 @@ public class ActMove_Back : Action
 {
     [SerializeField] CondCanMove _condCanMove;
 
-   /* [SerializeField] dis*/
-
     [SerializeField] MonsterData _monsterData;
 
     [SerializeField] NavMeshAgent _agent;
@@ -20,7 +18,6 @@ public class ActMove_Back : Action
 
     private float _distance;
    
-   
     public override TaskStatus OnUpdate()
     {
         _distance = Vector3.Distance(transform.position, _player.transform.position);
@@ -29,12 +26,20 @@ public class ActMove_Back : Action
 
         if (_condCanMove.IsPlayerWithinSight(_player) && _distance < _monsterData.DangerDistance)
         {
+            if (_distance <= _monsterData.AttackRange || _distance <= _monsterData.CanUseProjectileSkillDistance)
+            {
+                _agent.isStopped = true;
+
+                return TaskStatus.Success;
+            }
+
+            _agent.isStopped = false;
             _agent.SetDestination(_back);
-            return TaskStatus.Running;
+            return TaskStatus.Success;
         }
         else
         {
-            return TaskStatus.Failure;
+            return TaskStatus.Success;
         }
     }
 }

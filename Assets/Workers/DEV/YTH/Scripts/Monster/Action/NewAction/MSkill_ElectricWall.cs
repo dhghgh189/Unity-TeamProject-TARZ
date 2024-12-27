@@ -5,9 +5,6 @@ using Zenject;
 
 public class MSkill_ElectricWall : Action
 {
-    [Inject]
-    private CoroutineManager _util;
-
     [SerializeField] MonsterSkillManager _monsterSkillManager;
 
     [SerializeField] GameObject _player;
@@ -21,9 +18,10 @@ public class MSkill_ElectricWall : Action
 
 	public override TaskStatus OnUpdate()
 	{
-        if (_distance >= 30 && _distance < 40 && _monsterSkillManager.ElectricWallSkill.CanUseSkill == true)
+        if (_distance < 40 && _monsterSkillManager.ElectricWallSkill.CanUseSkill == true && _monsterSkillManager.electricWallRoutine == null)
         {
-            _util.StartRoutine(ref _monsterSkillManager.electricWallRoutine, _monsterSkillManager.ElectricWallRoutine());
+            _monsterSkillManager.electricWallRoutine = StartCoroutine(_monsterSkillManager.ElectricWallRoutine());
+            Debug.Log("일렉트릭월");
             return TaskStatus.Success;
         }
         else

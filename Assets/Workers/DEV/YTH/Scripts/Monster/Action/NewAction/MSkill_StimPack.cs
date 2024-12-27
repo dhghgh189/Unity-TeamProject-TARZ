@@ -15,11 +15,12 @@ public class MSkill_StimPack : Action
         if (_monsterData.CurHp <= 0)
         {
             _monsterSkillManager.StimPak();
+            Debug.Log("스팀팩");
             return TaskStatus.Success;
         }
         else
         {
-            return TaskStatus.Failure;
+            return TaskStatus.Success;
         }
     }
 }

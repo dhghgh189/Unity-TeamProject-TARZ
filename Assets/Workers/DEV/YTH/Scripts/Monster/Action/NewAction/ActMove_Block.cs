@@ -19,7 +19,7 @@ public class ActMove_Block : Action
 
     [SerializeField] GameObject _player;
 
-    [SerializeField] Vector3 _playerBackRoute;
+    private Vector3 _playerBackRoute;
 
     [SerializeField] float _stopBlockDistance = 5f; // 공격 거리 보다 조금 멀게
 
@@ -30,6 +30,8 @@ public class ActMove_Block : Action
     public override void OnStart()
     {
         keepChaseRoutine = StartCoroutine(KeepChaseRoutine());
+
+        
     }
 
     public override TaskStatus OnUpdate()
@@ -38,12 +40,12 @@ public class ActMove_Block : Action
 
         _playerBackRoute = _player.transform.position - _player.transform.forward * 10f;
 
-        if (_condCanMove.IsPlayerWithinSight(_player) && _distance > _stopBlockDistance) 
+        if (_condCanMove.IsPlayerWithinSight(_player) && _distance >= _stopBlockDistance) 
         {
             _agent.SetDestination(_playerBackRoute);
             return TaskStatus.Running;
         }
-        else if (_condCanMove.IsPlayerWithinSight(_player) && _distance <= _stopBlockDistance)
+        else if (_condCanMove.IsPlayerWithinSight(_player) && _distance < _stopBlockDistance)
         {
             if (_condCanMove.IsPlayerWithinSight(_player) && _distance <= _monsterData.AttackRange)
             {

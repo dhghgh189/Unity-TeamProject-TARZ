@@ -53,10 +53,10 @@ public class MonsterSkillManager : MonoBehaviour
 
     [SerializeField] GameObject _thunderPrefab;
 
-    private GameObject _reviveBefore; 
+    private GameObject _reviveBefore; // 불러올거에요 비워놔주세요
     public GameObject ReviveBefore { get { return _reviveBefore; } set { _reviveBefore = value; } }
 
-    private GameObject _reviveAfter; 
+    private GameObject _reviveAfter; // 불러올거에요 비워놔주세요
     public GameObject ReviveAfter { get { return _reviveAfter;  } set { _reviveAfter = value; } } 
     #endregion
 
@@ -66,10 +66,10 @@ public class MonsterSkillManager : MonoBehaviour
 
     [SerializeField] Animator _animator;
 
-    private Transform _muzzlePoint; 
+    private Transform _muzzlePoint; // 불러올거에요 비워놔주세요
     public Transform MuzzlePoint { get { return _muzzlePoint; } set { _muzzlePoint = value; } }
 
-    private GameObject _wheelWindTrigger; 
+    private GameObject _wheelWindTrigger; // 불러올거에요 비워놔주세요
     public GameObject WheelWindTrigger { get { return _wheelWindTrigger; } set { _wheelWindTrigger = value; } }
 
     private Vector3 _electricWallPosition;
@@ -111,7 +111,7 @@ public class MonsterSkillManager : MonoBehaviour
 
     #region JumpAttack - 점프 코루틴
     Coroutine jumpRoutine_jumpAttack;
-    IEnumerator JumpRoutine_JumpAttack() // 모든 스킬이 방향이 Transform.forawrd 로 되어있는데 어떻게 하는게 좋을까..흠
+    IEnumerator JumpRoutine_JumpAttack()
     {
         _jumpStartPosition = transform.position;
         _jumpDirection = transform.forward.normalized * JumpAttackSkill.JumpDistance;

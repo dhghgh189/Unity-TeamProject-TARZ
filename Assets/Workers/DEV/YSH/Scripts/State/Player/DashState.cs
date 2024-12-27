@@ -65,7 +65,10 @@ public class DashState : BaseState<PlayerController>
 
         if (dashTimer <= 0)
         {
-            owner.ChangeState(EState.Idle);
+            if (!owner.Movement.IsGrounded)
+                owner.ChangeState(EState.Fall);
+            else
+                owner.ChangeState(EState.Idle);
             return;
         }
 

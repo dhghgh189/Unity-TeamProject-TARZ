@@ -16,6 +16,9 @@ public class PlayerController : MonoBehaviour, IDamagable
 
     //[SerializeField] private AblityAdapter adapter;
     [SerializeField] private DrainManager drainManager;
+    [SerializeField] private GameObject manaSkillPanel;
+
+    private bool isTryManaSkill;
 
     public EState currentStateView;
     public TakeHitType currentHitTypeView;
@@ -51,13 +54,78 @@ public class PlayerController : MonoBehaviour, IDamagable
         Cursor.lockState = CursorLockMode.Locked;
     }
 
+    private void Start()
+    {
+        manaSkillPanel.SetActive(false);
+    }
+
     private void Update()
     {
         Fsm.OnUpdate();
 
         SetAnimParam();
 
-        return;
+        // Mana Skill 처리 구간
+        if (Fsm.CurrentState.type == EState.ManaUse
+            || Fsm.CurrentState.type == EState.Jump
+            || Fsm.CurrentState.type == EState.Fall)
+        {
+            if (isTryManaSkill)
+                SetManaSkillState(false);
+
+            return;
+        }
+
+        // 마나 스킬 UI 출력 키 입력 감지 
+        CheckManaSkillInput();
+
+        // 키 감지 되지 않으면 return
+        if (!isTryManaSkill)    
+            return;
+
+        for (int i = 0; i < Define.USEKEY_MAXCOUNT; i++)
+        {
+            if (PInput.UseKeyPressed[i])   // 스킬 1 ~ 4 번 키 입력 감지 
+            {
+                TryManaSkill(i);
+                return;
+            }
+        }
+    }
+
+    private void CheckManaSkillInput()
+    {
+        if (PInput.TryManaSkill)
+        {
+            if (!isTryManaSkill)
+            {
+                SetManaSkillState(true);
+            }
+        }
+        else
+        {
+            if (isTryManaSkill) // 무한 반복 방지
+            {
+                SetManaSkillState(false);
+            }
+        }
+    }
+
+    private void TryManaSkill(int index)
+    {
+        // 스킬 사용 여부 확인
+        bool bSuccess = ManaSkillHandler.UseManaSkill(index);
+        if (bSuccess)
+        {
+            ChangeState(EState.ManaUse);
+            SetManaSkillState(false);
+        }
+    }
+
+    private void SetManaSkillState(bool bOn)
+    {
+        manaSkillPanel.gameObject.SetActive(bOn);
+        isTryManaSkill = bOn;
     }
 
     private void SetAnimParam()

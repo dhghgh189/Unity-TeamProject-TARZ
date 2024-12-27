@@ -63,7 +63,6 @@ public class ThrowState : BaseState<PlayerController>
         if (!SetAction())
         {
             // 조건이 맞지않아 공격 진행에 실패하면 상태 초기화
-            owner.Attack.ThrowCount = 0;
             owner.ChangeState(EState.Idle);        
             return;
         }
@@ -77,11 +76,6 @@ public class ThrowState : BaseState<PlayerController>
         owner.SkillHandler.Use(SkillEnum.ActTimingType.Attack);
 
         owner.StartCoroutine(AnimRoutine());
-    }
-
-    public override void OnExit()
-    {
-        base.OnExit();
     }
 
     private bool SetAction()
@@ -143,13 +137,10 @@ public class ThrowState : BaseState<PlayerController>
             owner.Movement.LookAt(lookDir);
         }
 
-        // 대쉬가 입력되면 공격을 캔슬 (점프 시에는 불가)
-        // 공격 카운트도 체크하여 마지막 공격때는 캔슬안되게 해야 함
-        if (owner.Movement.IsGrounded
-            && owner.PInput.TryDash
+        // 대쉬가 입력되면 공격을 캔슬
+        if (owner.PInput.TryDash
             && owner.IsEnoughStamina(owner.Stat.DashStaminaAmount))
         {
-            owner.Attack.ThrowCount = 0;
             owner.ChangeState(EState.Dash);
             return;
         }
@@ -172,13 +163,17 @@ public class ThrowState : BaseState<PlayerController>
             // Adjust를 중지하기 위해 lookDir을 초기화
             lookDir = Vector3.zero;
 
-            // 타수 초기화
-            owner.Attack.ThrowCount = 0;
             owner.ChangeState(EState.Idle);
             return;
         }
 
         // timer 진행
         animTimer -= Time.deltaTime;
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+        owner.Attack.ThrowCount = 0;
     }
 }

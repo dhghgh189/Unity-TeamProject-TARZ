@@ -25,10 +25,8 @@ public class DrainState : BaseState<PlayerController>
     {
         base.OnUpdate();
 
-        // 대쉬가 입력되면 공격을 캔슬 (점프 시에는 불가)
         if (owner.PInput.TryDash && owner.IsEnoughStamina(owner.Stat.DashStaminaAmount))
         {
-            owner.Attack.MeleeCount = 0;
             owner.ChangeState(EState.Dash);
             return;
         }
@@ -38,7 +36,6 @@ public class DrainState : BaseState<PlayerController>
 
         if (!owner.PInput.TryDrain || owner.Stat.CurrentStamina <= 0)
         {
-            owner.Drain.StopDrain();
             owner.ChangeState(EState.Idle);
             return;
         }
@@ -47,5 +44,6 @@ public class DrainState : BaseState<PlayerController>
     public override void OnExit()
     {
         base.OnExit();
+        owner.Drain.StopDrain();
     }
 }

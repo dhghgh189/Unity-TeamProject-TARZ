@@ -63,8 +63,15 @@ public class PlayerController : MonoBehaviour, IDamagable
         SetAnimParam();
 
         // Mana Skill 처리 구간
-        if (Fsm.CurrentState.type == EState.ManaUse)
+        if (Fsm.CurrentState.type == EState.ManaUse
+            || Fsm.CurrentState.type == EState.Jump
+            || Fsm.CurrentState.type == EState.Fall)
+        {
+            if (isTryManaSkill)
+                SetManaSkillState(false);
+
             return;
+        }
 
         // 마나 스킬 UI 출력 키 입력 감지 
         CheckManaSkillInput();

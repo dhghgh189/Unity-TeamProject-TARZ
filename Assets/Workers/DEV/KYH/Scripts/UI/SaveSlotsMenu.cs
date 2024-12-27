@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class SaveSlotsMenu : MonoBehaviour
 {
+    [Inject] private SaveManager manager;
+
     [SerializeField] private SaveSlot[] saveSlots;
 
     private void Awake()
@@ -13,6 +16,6 @@ public class SaveSlotsMenu : MonoBehaviour
 
     public void ActivateMenu()
     {
-
+        //Dictionary<string, SaveData> profilesSaveData = 
     }
 }

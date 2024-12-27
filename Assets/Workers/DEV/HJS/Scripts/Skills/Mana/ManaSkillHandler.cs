@@ -13,23 +13,49 @@ public class ManaSkillHandler : MonoBehaviour
 {
     [Inject] private StatModel stat;
     [Header("Init")]
-    [SerializeField] public ManaSkillDataSO skillData;
-    [SerializeField] List<IManaSkill> manaSkill;        // 현재 등록되어
-    [Header("")]
-    [SerializeField] LinkedList<BaseManaState> actList; // 해당 마나스킬의 진행 순서
-    [SerializeField] int selectIndex;                   // 사용할 마나스킬
-    private LinkedListNode<BaseManaState> curNode;      // 현재 동작
-    private bool isEnd;                                 // 동작이 끝이 났는지 확인
+    [SerializeField] public List<ManaSkillDataSO> skillData;
+    [SerializeField] IManaSkill[] manaSkill;                    // 마나 스킬의 슬롯
+    [Header("ManaSkill")]
+    private Dictionary<string, ManaSkillDataSO> skillDataDictionary;    // 스킬 데이터를 담아두는 딕셔너리
+    [SerializeField] LinkedList<BaseManaState> actList;         // 해당 마나스킬의 진행 순서
+    [SerializeField] int selectIndex;                           // 사용할 마나스킬
+    private LinkedListNode<BaseManaState> curNode;              // 현재 동작
+    private bool isEnd;                                         // 동작이 끝이 났는지 확인
 
     public bool ActionEnd { get => isEnd; set => isEnd = value; }
     public LinkedList<BaseManaState> ActList { get { return actList; } set { actList = value; } }
     public LinkedListNode<BaseManaState> CurNode { get { return curNode; }}
 
+    public void Awake()
+    {
+        skillDataDictionary = new Dictionary<string, ManaSkillDataSO>();
+
+        foreach(ManaSkillDataSO data in skillData)
+        {
+            skillDataDictionary.Add(data.skillName, data);
+        }
+    }
+
     private void Start()
     {
         selectIndex = -1;
-        manaSkill = new List<IManaSkill>();
-        manaSkill.Add(new ManaRushSkill(GetComponent<PlayerController>()));
+        manaSkill = new IManaSkill[4];
+        manaSkill[0] = new ManaRushSkill(GetComponent<PlayerController>());
+        manaSkill[1] = new ManaThrowCarSkill(GetComponent<PlayerController>());
+        manaSkill[2] = null;
+        manaSkill[3] = null;
+    }
+
+    public ManaSkillDataSO GetData(string KeyName)
+    {
+        if (skillDataDictionary.TryGetValue(KeyName, out ManaSkillDataSO data))
+        {
+            return data; 
+        }
+        else
+        {
+            throw new Exception("데이터 해당하는 이름의 데이터 셋이 없습니다!");
+        }
     }
 
     /// <summary>
@@ -45,7 +71,7 @@ public class ManaSkillHandler : MonoBehaviour
             stat.CurrentMp -= 100 * index;
             // Todo -> 해당하는 스킬 사용
             selectIndex = index - 1;
-            manaSkill[selectIndex].SetInit(this);
+            manaSkill[selectIndex]?.SetInit(this);
             curNode = actList.First;
             return true;
         }
@@ -106,4 +132,5 @@ public class ManaSkillHandler : MonoBehaviour
     {
         curNode.Value.OnAction();
     }
+
 }

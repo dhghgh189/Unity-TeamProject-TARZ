@@ -49,15 +49,28 @@ public class JumpThrowState : BaseState<PlayerController>
             owner.Movement.LookAt(lookDir);
         }
 
+        // 대쉬가 입력되면 공격을 캔슬
+        if (owner.PInput.TryDash
+            && owner.IsEnoughStamina(owner.Stat.DashStaminaAmount))
+        {
+            Stop();
+            owner.ChangeState(EState.Dash);
+            return;
+        }
+
         if (owner.Movement.IsGrounded)
         {
-            owner.StopCoroutine(throwRoutine);
-            throwRoutine = null;
-
+            Stop();
             owner.Movement.Move(Vector3.zero);
             owner.ChangeState(EState.Idle);
             return;
         }
+    }
+
+    public void Stop()
+    {
+        owner.StopCoroutine(throwRoutine);
+        throwRoutine = null;
     }
 
     public override void OnFixedUpdate()

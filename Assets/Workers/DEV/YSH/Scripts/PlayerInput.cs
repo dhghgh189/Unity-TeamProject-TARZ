@@ -11,7 +11,7 @@ public class PlayerInput : MonoBehaviour
     public bool TryMelee { get; private set; }
     public bool TryDash { get; private set; }
     public bool TryDrain { get; private set; }
-    public bool TryInteraction { get; private set; }
+    public bool TryInteraction { get; set; }
     public bool TryManaSkill { get; private set; }
 
     [HideInInspector] public bool[] UseKeyPressed;

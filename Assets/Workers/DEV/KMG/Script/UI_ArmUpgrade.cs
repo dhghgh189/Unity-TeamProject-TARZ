@@ -22,9 +22,11 @@ public class UI_ArmUpgrade : MonoBehaviour, ISelectHandler
     private void Start()
     {
         button = GetComponent<Button>();
-        button.onClick.AddListener(ArmUpgredeExecute);
-        // 해당 스크립트에 지정된 넘버가 이미 업그레이드 되었다면 버튼을 비활성화
-        button.interactable = saveData.ArmUpgradeDatas.Where(x => x.UpgradeNumber == upgradeNumber).Count() == 0;
+        // 강화가 안되어 있으면 이벤트를 추가
+        if (saveData.ArmUpgradeDatas.Where(x => x.UpgradeNumber == upgradeNumber).Count() == 0)
+        {
+            button.onClick.AddListener(ArmUpgredeExecute);
+        }
     }
 
     private void ArmUpgredeExecute()
@@ -32,8 +34,7 @@ public class UI_ArmUpgrade : MonoBehaviour, ISelectHandler
         // 돈있음?
         if (armUpgradManager.ArmUpgredeExecute(upgradeNumber, upgradeAbility, upgradeValue, upgradeCost))
         {
-            button.interactable = false;
-            armUpgradManager.SelecteButton();
+            button.onClick.RemoveAllListeners();
         }
         else
         {

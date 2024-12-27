@@ -21,6 +21,7 @@ public class Stamina : MonoBehaviour
         StartCoroutine(StaminaRoutine());
         _IsChangeStam = false;
         SliderMaxValueChange(stat.MaxStamina);
+        gauge_Stamina.value = stat.MaxStamina;
     }
 
     private void OnSaveStamina(float lastStamina)

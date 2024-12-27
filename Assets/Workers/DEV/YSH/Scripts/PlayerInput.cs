@@ -29,7 +29,6 @@ public class PlayerInput : MonoBehaviour
         // 패드 지원되도록 구성해야 함    
         TryThrow = Input.GetButtonDown("Throw");
         TryMelee = Input.GetButtonDown("Melee");      
-        TryInteraction = Input.GetKeyDown(KeyCode.E);
         TryManaSkill = Input.GetButton("TryManaSkill");
 
         if (!TryManaSkill)
@@ -37,6 +36,7 @@ public class PlayerInput : MonoBehaviour
             TryDash = Input.GetButtonDown("Dash");
             TryJump = Input.GetButtonDown("Jump");
             TryDrain = Input.GetButton("Drain");
+            TryInteraction = Input.GetButtonDown("Interaction");
         }
 
         for (int i = 0; i < Define.USEKEY_MAXCOUNT; i++)

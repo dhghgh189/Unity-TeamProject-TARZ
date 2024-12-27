@@ -4,9 +4,6 @@ using Zenject;
 
 public class MSkill_TrippleAttack : Action
 {
-    [Inject]
-    private CoroutineManager _util;
-
     [SerializeField] MonsterSkillManager _monsterSkillManager;
 
     [SerializeField] GameObject _player;
@@ -20,9 +17,9 @@ public class MSkill_TrippleAttack : Action
 
     public override TaskStatus OnUpdate()
     {
-        if (_monsterSkillManager.TrippleAttackSkill.CanUseSkill == true && _distance <= 10)
+        if (_monsterSkillManager.TrippleAttackSkill.CanUseSkill == true && _distance <= 10 && _monsterSkillManager.trippleAttackRoutine == null)
         {
-            _util.StartRoutine(ref _monsterSkillManager.trippleAttackRoutine, _monsterSkillManager.TrippleAttackRoutine());
+            _monsterSkillManager.trippleAttackRoutine = StartCoroutine(_monsterSkillManager.TrippleAttackRoutine());
             Debug.Log("trippleAttack");
             return TaskStatus.Success;
         }

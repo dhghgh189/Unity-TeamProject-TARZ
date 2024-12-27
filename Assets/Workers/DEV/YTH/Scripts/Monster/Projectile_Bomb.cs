@@ -1,49 +1,39 @@
+using System.Collections;
 using UnityEngine;
 
 public class Projectile_Bomb : MonoBehaviour
 {
-     MonsterSkillManager _monsterSkillManager;
-
     [SerializeField] GameObject _bombZombie;
+
+    private MonsterSkillManager _monsterSkillManager;
+    private SphereCollider _sphereCollider;
 
     private void Start()
     {
+        _sphereCollider = GetComponent<SphereCollider>();
         _monsterSkillManager = _bombZombie.GetComponent<MonsterSkillManager>();
+        _sphereCollider.radius = _monsterSkillManager.BombSkill.Range;
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Monster"))
-            return;
+        StartCoroutine(CountDown());
+        Debug.Log("바닥에 닿음");
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!other.transform.CompareTag("Player")) return;
 
+        Debug.Log("플레이어가 맞았다");
+        IDamagable damagableObj = other.gameObject.GetComponent<IDamagable>();
+        damagableObj.TakeDamage(_monsterSkillManager.BombSkill.Damage);
+    }
+    IEnumerator CountDown()
+    {
+        yield return new WaitForSeconds(3f);
+        _sphereCollider.enabled = true;
+        yield return new WaitForSeconds(0.1f);
         Destroy(gameObject);
-        // 직스 궁 마냥
-
-        IDamagable damagableObj = collision.gameObject.GetComponent<IDamagable>();
-        if (damagableObj != null)
-        {
-            Collider[] colliders = Physics.OverlapSphere(transform.position, _monsterSkillManager.BombSkill.Range);
-            foreach (Collider collider in colliders)
-            {
-                // 공격 범위 확인
-                Vector3 source = transform.position;
-                source.y = 0;
-                Vector3 destination = collider.transform.position;
-                destination.y = 0;
-
-                Vector3 targetDir = (destination - source).normalized;
-                float targetAngle = Vector3.Angle(transform.forward, targetDir);
-                if (targetAngle > _monsterSkillManager.BombSkill.Angle) // 앵글의 반절만
-                    continue;
-
-                IDamagable damageble = collider.GetComponent<IDamagable>();
-                if (damageble != null)
-                {
-                    
-                    damageble.TakeDamage(_monsterSkillManager.BombSkill.Damage);
-                }
-            }
-        }
     }
 }
 

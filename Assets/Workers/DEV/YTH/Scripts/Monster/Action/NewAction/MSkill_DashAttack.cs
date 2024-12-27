@@ -1,12 +1,8 @@
 using BehaviorDesigner.Runtime.Tasks;
 using UnityEngine;
-using Zenject;
 
 public class MSkill_DashAttack : Action
 {
-    [Inject]
-    private CoroutineManager _util;
-
     [SerializeField] MonsterSkillManager _monsterSkillManager;
 
     [SerializeField] GameObject _player;
@@ -20,11 +16,10 @@ public class MSkill_DashAttack : Action
 
     public override TaskStatus OnUpdate()
     {
-        if (_distance >= 20 && _distance < 30 && _monsterSkillManager.DashAttackSkill.CanUseSkill == true)
+        if ( _distance < 30 && _monsterSkillManager.DashAttackSkill.CanUseSkill == true && _monsterSkillManager.dashAttackRoutine == null)
         {
-            _util.StartRoutine(ref _monsterSkillManager.dashAttackRoutine, _monsterSkillManager.DashAttackRoutine());
+            _monsterSkillManager.dashAttackRoutine = StartCoroutine(_monsterSkillManager.DashAttackRoutine());
             Debug.Log("20 DashAttackRoutine");
-
             return TaskStatus.Success;
         }
         else

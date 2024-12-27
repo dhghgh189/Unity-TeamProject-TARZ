@@ -5,9 +5,6 @@ using Zenject;
 
 public class MSkill_Mine : Action
 {
-    [Inject]
-    private CoroutineManager _util;
-
     [SerializeField] MonsterSkillManager _monsterSkillManager;
 
     [SerializeField] GameObject _player;
@@ -21,11 +18,11 @@ public class MSkill_Mine : Action
 
     public override TaskStatus OnUpdate()
 	{
-        if (_monsterSkillManager.MineSkill.CanUseSkill == true)
+        if (_monsterSkillManager.MineSkill.CanUseSkill == true && _monsterSkillManager.mineRoutine == null)
         {
-            Debug.Log("Bomb");
             MonsterRotation();
-            _util.StartRoutine(ref _monsterSkillManager.mineRoutine, _monsterSkillManager.MineRoutine());
+            Debug.Log("mine");
+            _monsterSkillManager.mineRoutine = StartCoroutine(_monsterSkillManager.MineRoutine());
             return TaskStatus.Success;
         }
         else

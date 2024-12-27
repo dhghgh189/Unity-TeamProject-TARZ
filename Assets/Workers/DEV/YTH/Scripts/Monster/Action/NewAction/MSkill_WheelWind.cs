@@ -4,9 +4,6 @@ using Zenject;
 
 public class MSkill_WheelWind : Action
 {
-    [Inject]
-    private CoroutineManager _util;
-
     [SerializeField] MonsterData _monsterData;
 
     [SerializeField] MonsterSkillManager _monsterSkillManager;
@@ -26,9 +23,9 @@ public class MSkill_WheelWind : Action
 
     public override TaskStatus OnUpdate()
     {
-        if (_monsterSkillManager.WheelWindSkill.CanUseSkill == true && _monsterData.CurHp <= _monsterData.MaxHp / 2 && _distance <= 10)
+        if (_monsterSkillManager.WheelWindSkill.CanUseSkill == true && _monsterData.CurHp <= _monsterData.MaxHp / 2 && _distance <= 10 && _monsterSkillManager.wheelWindRoutine == null)
         {
-            _util.StartRoutine(ref _monsterSkillManager.wheelWindRoutine, _monsterSkillManager.WheelWindRoutine());
+            _monsterSkillManager.wheelWindRoutine = StartCoroutine(_monsterSkillManager.WheelWindRoutine());
             Debug.Log("wheelWind");
             return TaskStatus.Success;
         }

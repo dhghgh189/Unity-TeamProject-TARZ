@@ -32,9 +32,9 @@ public class ActMove_NotStopInAttacking : Action
     {
         _distance = Vector3.Distance(transform.position, _player.transform.position);
 
-        if (_condCanMove.IsPlayerWithinSight(_player)/* && !_monsterData.IsAttacked*/)
+        if (_condCanMove.IsPlayerWithinSight(_player)/* && !_monsterData.IsAttacked*/ )
         {
-            if( _distance <= _monsterData.AttackRange)
+            if( _distance <= _monsterData.AttackRange || _distance <= _monsterData.CanJumpDistance )
             {
                 return TaskStatus.Success;
             }
@@ -43,7 +43,7 @@ public class ActMove_NotStopInAttacking : Action
             return TaskStatus.Running;
             // _animator.SetBool("walk", true); // 해쉬로 바꿔주면 좋을듯
         }
-        else if (_condCanMove.IsPlayerWithinSight(_player))
+        else if (_condCanMove.IsPlayerWithinSight(_player) == false)
         {
             _agent.SetDestination(_lastPlayerTransform.position);
             return TaskStatus.Failure;

@@ -6,9 +6,6 @@ using System.Collections;
 
 public class ActRangeAttack : Action
 {
-    [Inject]
-    private CoroutineManager _util;
-
     [SerializeField] MonsterData _monsterData;
 
     [SerializeField] Animator _animator;
@@ -28,9 +25,10 @@ public class ActRangeAttack : Action
 
     public override TaskStatus OnUpdate()
     {
-        if (_distance <= _monsterData.AttackRange)
+        if (_distance <= _monsterData.AttackRange && throwRoutine == null)
         {
-            _util.StartRoutine(ref throwRoutine, ThrowRoutine());
+            MonsterRotation();
+            throwRoutine = StartCoroutine(ThrowRoutine());
             return TaskStatus.Success;
         }
         else
@@ -54,4 +52,9 @@ public class ActRangeAttack : Action
         GameObject projectile = Object.Instantiate(_projectilePrefab.Value, _muzzlePoint.Value.position, _muzzlePoint.Value.rotation);
     }
     #endregion
+
+    public void MonsterRotation()
+    {
+        transform.LookAt(_player.transform);
+    }
 }

@@ -6,9 +6,6 @@ using Zenject;
 
 public class MSkill_JumpAttack : Action
 {
-    [Inject]
-    private CoroutineManager _util;
-
     [SerializeField] MonsterSkillManager _monsterSkillManager;
 
     [SerializeField] GameObject _player;
@@ -22,9 +19,10 @@ public class MSkill_JumpAttack : Action
 
     public override TaskStatus OnUpdate()
     {
-        if (_distance >= 40 && _monsterSkillManager.JumpAttackSkill.CanUseSkill == true)
+        if (_distance >= 40 && _monsterSkillManager.JumpAttackSkill.CanUseSkill == true && _monsterSkillManager.jumpAttackRoutine == null)
         {
-            _util.StartRoutine(ref _monsterSkillManager.jumpAttackRoutine, _monsterSkillManager.JumpAttackRoutine());
+            _monsterSkillManager.jumpAttackRoutine = StartCoroutine( _monsterSkillManager.JumpAttackRoutine());
+            Debug.Log("점프어택");
             return TaskStatus.Success;
         }
         else

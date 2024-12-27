@@ -6,6 +6,8 @@ public class ActMove_Back : Action
 {
     [SerializeField] CondCanMove _condCanMove;
 
+   /* [SerializeField] dis*/
+
     [SerializeField] MonsterData _monsterData;
 
     [SerializeField] NavMeshAgent _agent;

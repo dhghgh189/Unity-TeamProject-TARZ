@@ -6,16 +6,16 @@ using System.Collections;
 
 public class ActMeleeAttack : Action
 {
-    [Inject]
-    private CoroutineManager _util;
+    /*[Inject]*/
+    [SerializeField] DistanceChecker _checker;
 
     [SerializeField] MonsterData _monsterData;
 
     [SerializeField] Animator _animator;
 
-    [SerializeField] GameObject _player;
+   /* [SerializeField] GameObject _player;
 
-    private float _distance;
+    private float _distance;*/
 
     [Header("Attack")]
     [SerializeField] float _angle;
@@ -24,16 +24,20 @@ public class ActMeleeAttack : Action
     [SerializeField] float _range;
     public float Range { get { return _range; } set { _range = value; } }
 
-    public override void OnStart()
+   /* public override void OnStart()
 	{
         _distance = Vector3.Distance(transform.position, _player.transform.position);
-    }
+    }*/
 
     public override TaskStatus OnUpdate()
     {
-        if (_distance <= _monsterData.AttackRange)
+        if (_checker.Distance <= _monsterData.AttackRange)
         {
-            _util.StartRoutine(ref attackRoutine, AttackRoutine());
+           /* _util.StartRoutine(ref attackRoutine, AttackRoutine());*/
+            if (attackRoutine == null)
+            {
+                attackRoutine = StartCoroutine(AttackRoutine());
+            }
             return TaskStatus.Success;
         }
         else
@@ -47,7 +51,7 @@ public class ActMeleeAttack : Action
     IEnumerator AttackRoutine()
     {
         Attack(_range, _angle);
-        _animator.SetTrigger("Attack");
+       /* _animator.SetTrigger("Attack");*/
         yield return new WaitForSeconds(_monsterData.MeleeAttackSpeed);
         attackRoutine = null;
     }

@@ -6,6 +6,6 @@ public class YTHInstaller : MonoInstaller
     public override void InstallBindings()
     {
 
-        Container.Bind<CoroutineManager>().FromComponentInHierarchy().AsSingle();
+        Container.Bind<DistanceChecker>().FromComponentInHierarchy().AsSingle();
     }
 }

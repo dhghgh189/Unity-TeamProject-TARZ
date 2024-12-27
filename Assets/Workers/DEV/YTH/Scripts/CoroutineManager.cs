@@ -3,13 +3,12 @@ using UnityEngine;
 
 public class CoroutineManager : MonoBehaviour
 {
-
     /// <summary>
     /// Coroutine 앞에 ref 붙이기
     /// </summary>
     /// <param name="coroutine"></param>
     /// <param name="enumerator"></param>
-    public void StartRoutine(ref Coroutine coroutine, IEnumerator enumerator) // ref 안 쓰고 가능? 내일 교수님한테 _monsterSkillManager.JumpAttack()
+    public void StartRoutine(ref Coroutine coroutine, IEnumerator enumerator) // 쓰
     {
         if (coroutine == null)
         {

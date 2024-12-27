@@ -1,15 +1,17 @@
 using BehaviorDesigner.Runtime.Tasks;
 using UnityEngine;
 
-public class DistanceChecker : Action
+public class DistanceChecker :MonoBehaviour
 {
     [SerializeField] GameObject _player;
+    public GameObject Player { get { return _player; } private set { } }
 
-    private float _distance;
+    [SerializeField] float _distance;
+    public float Distance { get { return _distance; } private set { } }
 
-    public override TaskStatus OnUpdate()
+    public void Update()
     {
-        _distance = Vector3.Distance(transform.position, _player.transform.position);
-        return TaskStatus.Running;
+        Distance = Vector3.Distance(transform.position, Player.transform.position);
     }
+  
 }

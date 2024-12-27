@@ -6,9 +6,6 @@ using Zenject;
 
 public class JumpTester : MonoBehaviour
 {
-    [Inject]
-    [SerializeField] CoroutineManager _manager;
-
     [Header("Jump")]
     [SerializeField] float _inAirTime; // 체공 시간
 
@@ -24,7 +21,7 @@ public class JumpTester : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            _manager.StartRoutine(ref jumpRoutine, JumpRoutine());
+           
         }
     }
 

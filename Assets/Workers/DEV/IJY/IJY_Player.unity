@@ -41722,11 +41722,11 @@ GameObject:
   - component: {fileID: 3360778194057134626}
   - component: {fileID: 8665995656535103576}
   - component: {fileID: 1252920862492825014}
+  - component: {fileID: 2676352369648850612}
   - component: {fileID: 4226988922435397499}
   - component: {fileID: 6122028410392850238}
   - component: {fileID: 7689343590510049031}
   - component: {fileID: 6211748399863930545}
-  - component: {fileID: 2676352369648850612}
   - component: {fileID: 8361720931515547280}
   - component: {fileID: 6246508710651430099}
   - component: {fileID: 5400823893998099219}
@@ -41983,10 +41983,10 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1215440856}
-  - {fileID: 2843688818927274729}
   - {fileID: 2182815757276099472}
   - {fileID: 1089293812766883687}
   - {fileID: 4460308160042776724}
+  - {fileID: 2843688818927274729}
   - {fileID: 1697479009814148574}
   - {fileID: 4672144510987418808}
   m_Father: {fileID: 0}
@@ -43232,27 +43232,6 @@ MonoBehaviour:
   comboCheckTime: 0.2
   player: {fileID: 4226988922435397499}
   CanUseCombo: 0
---- !u!135 &6224738470464336539
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7988580397607047654}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 2
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &6246508710651430099
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43927,7 +43906,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2843688818927274729}
   - component: {fileID: 5787273569214207103}
-  - component: {fileID: 6224738470464336539}
   m_Layer: 6
   m_Name: Interactioner
   m_TagString: Untagged

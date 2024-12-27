@@ -7,7 +7,7 @@ using UnityEngine;
 public class AutoLockOn : MonoBehaviour
 {
     public Action action;
-    private bool ToggleOn, KickDownOn;
+    private bool KickDownOn, ToggleOn;
     private LayerMask monsterLayer;
     private Coroutine PlayCheck;
 
@@ -23,36 +23,35 @@ public class AutoLockOn : MonoBehaviour
 
     private void Start()
     {
-        ToggleOn = false; KickDownOn = false;
+        KickDownOn = false; ToggleOn = false;
         Monsters = new List<Transform>();
         monsterLayer = LayerMask.GetMask("Monster");
     }
 
     private void Update()
     {
-        if (!KickDownOn)
+        if (!ToggleOn)
         {
             if (Input.GetKeyDown(KeyCode.RightAlt))
             {
-                Toggle_AutoLockOn(ToggleOn = true);
-                Debug.Log($"토글 활성화됨{ToggleOn}");
+                KickDown_AutoLockOn(KickDownOn = true);
+                Debug.Log($"킥다운 활성화됨{KickDownOn}");
             }
             else if (Input.GetKeyUp(KeyCode.RightAlt))
             {
-                Toggle_AutoLockOn(ToggleOn = false);
-                Debug.Log($"토글 비활성화됨{ToggleOn}");
+                KickDown_AutoLockOn(KickDownOn = false);
+                Debug.Log($"킥다운 비활성화됨{KickDownOn}");
             }
-
         }
-        if (!ToggleOn)
+        if (!KickDownOn)
         {
-            if (Input.GetKeyDown(KeyCode.LeftAlt)) KickDown_AutoLockOn();
+            if (Input.GetKeyDown(KeyCode.LeftAlt)) Toggle_AutoLockOn();
         }
     }
 
-    void Toggle_AutoLockOn(bool isPress)
+    void KickDown_AutoLockOn(bool isPress)
     {
-        Debug.Log("<color=green>오토락온 : 토글 모드</color>");
+        Debug.Log("<color=green>오토락온 : 킥다운 모드</color>");
         if (Monsters.Count > 0)
         {
             Debug.Log("락온 배열 초기화");
@@ -64,7 +63,7 @@ public class AutoLockOn : MonoBehaviour
             action += TargetingMonster;
             action();
 
-            ToggleOn = true;
+            KickDownOn = true;
             cam.IsAutoLockOn = true;
         }
         else if (!isPress)
@@ -79,13 +78,13 @@ public class AutoLockOn : MonoBehaviour
             action -= TargetingMonster;
 
             cam.target = null;
-            ToggleOn = false;
+            KickDownOn = false;
             cam.IsAutoLockOn = false;
         }
     }
-    void KickDown_AutoLockOn()
+    void Toggle_AutoLockOn()
     {
-        Debug.Log("<color=green>오토락온 : 킥다운 모드</color>");
+        Debug.Log("<color=green>오토락온 : 토글 모드</color>");
         if (Monsters.Count > 0)
         {
             Debug.Log("락온 배열 초기화");
@@ -96,7 +95,7 @@ public class AutoLockOn : MonoBehaviour
         {
             action += TargetingMonster;
             action();
-            KickDownOn = true;
+            ToggleOn = true;
             cam.IsAutoLockOn = true;
         }
         else if (PlayCheck != null)
@@ -108,7 +107,7 @@ public class AutoLockOn : MonoBehaviour
             PlayCheck = null;
 
             cam.target = null;
-            KickDownOn = false;
+            ToggleOn = false;
             cam.IsAutoLockOn = false;
         }
     }
@@ -129,8 +128,6 @@ public class AutoLockOn : MonoBehaviour
             float targetAngle = Vector3.Angle(transform.forward, targetDir);
 
             if (targetAngle > angle * 0.5f) continue;
-
-            Debug.Log("범위 내 몬스터 배열에 추가");
             targets.Add(_col.transform);
         }
 
@@ -146,12 +143,8 @@ public class AutoLockOn : MonoBehaviour
         var target = from targeting in Monsters
                      orderby Vector3.Distance(targeting.position, transform.position) ascending
                      select targeting;
-
         Monsters = target.ToList();
-        foreach (Transform col in Monsters)
-        {
-            Debug.Log($"<color=yellow>재설정 배열값 : {col}</color>");
-        }
+
         PlayCheck = StartCoroutine(LockOnRoutine());
     }
     // 3. 주기적으로 타겟팅할 몬스터를 설정
@@ -164,7 +157,7 @@ public class AutoLockOn : MonoBehaviour
             action -= TargetingMonster;
 
             cam.target = null; PlayCheck = null;
-            ToggleOn = false; KickDownOn = false;
+            KickDownOn = false; ToggleOn = false;
             cam.IsAutoLockOn = false;
             yield break;
         }
@@ -177,7 +170,6 @@ public class AutoLockOn : MonoBehaviour
     // 4. 주기적으로 타겟팅을 확인할 때, 배열의 갯수 유무를 판단
     bool IsMonsterAlive()
     {
-        Debug.Log("몬스터 잔존 여부 확인");
         bool isAlive = true;
 
         for (int i = Monsters.Count - 1; i >= 0; i--)
@@ -185,7 +177,6 @@ public class AutoLockOn : MonoBehaviour
             Debug.Log("배열 정리중");
             if (Monsters[i] == null || !Monsters[i].gameObject.activeSelf)
             {
-                Debug.Log($"지워짐 : {Monsters[i]}");
                 Monsters.Remove(Monsters[i]);
             }
         }
@@ -218,7 +209,7 @@ public class AutoLockOn : MonoBehaviour
         {
             StopCoroutine(PlayCheck);
             cam.target = null; PlayCheck = null;
-            ToggleOn = false; KickDownOn = false;
+            KickDownOn = false; ToggleOn = false;
             cam.IsAutoLockOn = false;
         }
         action -= TargetingMonster;

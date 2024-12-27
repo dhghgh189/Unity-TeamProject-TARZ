@@ -124,7 +124,7 @@ public class Interactioner : MonoBehaviour
         while (Vector3.Distance(player.eulerAngles, targetRotate) > 1f)
         {
             playerController.PInput.TryInteraction = Input.GetButtonDown("Interaction");
-            player.rotation = Quaternion.Slerp(player.rotation, Quaternion.LookRotation(target), Time.deltaTime * 20f);
+            player.rotation = Quaternion.Slerp(player.rotation, Quaternion.LookRotation(target), Time.deltaTime * 10f);
         }
         Debug.Log("해치웠다");
 

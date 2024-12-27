@@ -29,6 +29,14 @@ public class JumpState : BaseState<PlayerController>
 
     public override void OnUpdate()
     {
+        // 대쉬가 입력되면 캔슬
+        if (owner.PInput.TryDash
+            && owner.IsEnoughStamina(owner.Stat.DashStaminaAmount))
+        {
+            owner.ChangeState(EState.Dash);
+            return;
+        }
+
         // 현재 물건 스택이 점프 공격에 필요한 스택만큼 존재해야 함
         if (owner.PInput.TryThrow 
             && owner.Attack.ObjectCount >= owner.Attack.JumpThrowAmount)

@@ -143,10 +143,8 @@ public class ThrowState : BaseState<PlayerController>
             owner.Movement.LookAt(lookDir);
         }
 
-        // 대쉬가 입력되면 공격을 캔슬 (점프 시에는 불가)
-        // 공격 카운트도 체크하여 마지막 공격때는 캔슬안되게 해야 함
-        if (owner.Movement.IsGrounded
-            && owner.PInput.TryDash
+        // 대쉬가 입력되면 공격을 캔슬
+        if (owner.PInput.TryDash
             && owner.IsEnoughStamina(owner.Stat.DashStaminaAmount))
         {
             owner.Attack.ThrowCount = 0;

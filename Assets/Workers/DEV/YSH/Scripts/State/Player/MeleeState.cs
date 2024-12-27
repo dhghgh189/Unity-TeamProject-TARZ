@@ -65,9 +65,8 @@ public class MeleeState : BaseState<PlayerController>
             owner.Movement.LookAt(lookDir);
         }
 
-        // 대쉬가 입력되면 공격을 캔슬 (점프 시에는 불가)
-        if (owner.Movement.IsGrounded
-            && owner.PInput.TryDash
+        // 대쉬가 입력되면 공격을 캔슬
+        if (owner.PInput.TryDash
             && owner.IsEnoughStamina(owner.Stat.DashStaminaAmount))
         {
             owner.Attack.MeleeCount = 0;

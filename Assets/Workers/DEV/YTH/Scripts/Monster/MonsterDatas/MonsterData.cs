@@ -1,21 +1,20 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
 
 [Serializable]
 public class MonsterData : MonoBehaviour
 {
     public enum MonsterType { Melee, Range, Boss, Bomb, Frog }  //Melee : 근거리 공격 몹 //Range : 원거리 공격 몹 //Boss : 아놀드 //Baomber : 폭탄좀비
-   
+
     [SerializeField] MonsterType _monsterType;
     public MonsterType MonsterTyPe { get { return _monsterType; } private set { } }
 
-    public enum SkillType {Skill, UnSkill }
+    public enum SkillType { Skill, UnSkill }
 
     [SerializeField] SkillType _skillType;
     public SkillType SkillTyPe { get { return _skillType; } set { } }
 
-    public enum RewardType { Tier_1, Tier_2 , Tier_3 }
+    public enum RewardType { Tier_1, Tier_2, Tier_3 }
 
     [SerializeField] RewardType _rewardType;
     public RewardType RewardTyPe { get { return _rewardType; } private set { } }
@@ -41,7 +40,7 @@ public class MonsterData : MonoBehaviour
 
     [Header("근거리 몬스터")]
     [SerializeField] float _meleeAttackSpeed; // 근접 공격 속도
-    public float MeleeAttackSpeed { get {return _meleeAttackSpeed; } set { _meleeAttackSpeed = value; } }
+    public float MeleeAttackSpeed { get { return _meleeAttackSpeed; } set { _meleeAttackSpeed = value; } }
 
     [Header("원거리 몬스터")]
     [SerializeField] float _rangeAttackSpeed; // 원거리 공격 속도
@@ -56,8 +55,12 @@ public class MonsterData : MonoBehaviour
     [Header("폭탄 좀비")]
     [SerializeField] float _canUseProjectileSkillDistance; // 폭탄 좀비 스킬 가능 거리
     public float CanUseProjectileSkillDistance { get { return _canUseProjectileSkillDistance; } set { _canUseProjectileSkillDistance = value; } }
-   
+
     private static readonly int jake_Move_Hash = Animator.StringToHash("Jake_Move");
+
+    [Header("개구리 점프 거리")]
+    [SerializeField] float _canJumpDistance;
+    public float CanJumpDistance { get { return _canJumpDistance; } set { _canJumpDistance = value; } }
 
     private void Awake()
     {

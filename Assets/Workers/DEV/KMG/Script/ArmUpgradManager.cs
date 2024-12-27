@@ -46,24 +46,12 @@ public class ArmUpgradManager : MonoBehaviour, Base_InteractionOBJ
         }
         Time.timeScale = 0f;
         upgradePanel.SetActive(true);
-        SelecteButton();
+        GetComponentInChildren<Button>().Select();
     }
     public void SetUpgradeDescription(string name, string info, string cost)
     {
         upNameText.text = name;
         upInfoText.text = info;
         upCostText.text = cost;
-    }
-
-    public void SelecteButton()
-    {
-        foreach (var item in GetComponentsInChildren<Button>())
-        {
-            if (item.interactable)
-            {
-                item.Select();
-                return;
-            }
-        }
     }
 }

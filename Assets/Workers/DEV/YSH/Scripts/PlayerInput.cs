@@ -3,7 +3,8 @@ using UnityEngine;
 
 public class PlayerInput : MonoBehaviour
 {
-    public List<Vector3> TryInputDown = new();
+    private PlayerController controller;
+    public List<bool> TryKeyDown = new();
     public Vector3 InputDir { get; private set; }
     public bool TryJump { get; private set; }
     public bool TryThrow { get; private set; }
@@ -14,11 +15,30 @@ public class PlayerInput : MonoBehaviour
 
     private void Start()
     {
-        TryInputDown.Add(InputDir);
+        controller = GetComponent<PlayerController>();
+
+        TryKeyDown.Add(TryJump);
+        TryKeyDown.Add(TryThrow);
+        TryKeyDown.Add(TryMelee);
+        TryKeyDown.Add(TryDash);
+        TryKeyDown.Add(TryDrain);
+        TryKeyDown.Add(TryInteraction);
     }
 
     void Update()
     {
+        if (controller.IsAnimStart)
+        {
+            InputDir = Vector3.zero;
+
+            for (int i = TryKeyDown.Count - 1; i >= 0; i--)
+            {
+                TryKeyDown[i] = false;
+            }
+
+            return;
+        }
+
         InputDir = new Vector3(
             Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
 

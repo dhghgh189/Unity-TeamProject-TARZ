@@ -45,7 +45,9 @@ public class FallState : BaseState<PlayerController>
 
         if (owner.Movement.IsGrounded)
         {
-            owner.Movement.Move(Vector3.zero);
+            if (owner.PInput.InputDir == Vector3.zero)
+                owner.Movement.Move(Vector3.zero);
+
             owner.ChangeState(EState.Idle);
             return;
         }

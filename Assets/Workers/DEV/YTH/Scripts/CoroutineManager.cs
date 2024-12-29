@@ -8,7 +8,7 @@ public class CoroutineManager : MonoBehaviour
     /// </summary>
     /// <param name="coroutine"></param>
     /// <param name="enumerator"></param>
-    public void StartRoutine(ref Coroutine coroutine, IEnumerator enumerator) // 쓰
+    public void StartRoutine(ref Coroutine coroutine, IEnumerator enumerator) 
     {
         if (coroutine == null)
         {

@@ -8,6 +8,7 @@ public class PlayerInputHandler : MonoBehaviour
     public List<bool> TryKeyDown = new();
 
     private PlayerInput input;
+    public PlayerInput Input { get { return input; } }
 
     private Vector2 move;
     public Vector3 InputDir { get; private set; }
@@ -19,6 +20,7 @@ public class PlayerInputHandler : MonoBehaviour
     public bool TryDrain { get; private set; }
     public bool TryInteraction { get; set; }
     public bool TryManaSkill { get; private set; }
+    public bool TryLockOnToggle { get; private set; }
 
     [HideInInspector] public bool[] UseKeyPressed;
 
@@ -58,6 +60,7 @@ public class PlayerInputHandler : MonoBehaviour
         TryThrow = input.actions["Throw"].WasPressedThisFrame();
         TryMelee = input.actions["Melee"].WasPressedThisFrame();
         TryManaSkill = input.actions["ManaSkillMode"].IsPressed();
+        TryLockOnToggle = input.actions["LockOnToggle"].WasPressedThisFrame();
 
         if (!TryManaSkill)
         {

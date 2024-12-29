@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+    [SerializeField] private PlayerInputHandler playerInput;
     [SerializeField] public bool IsAutoLockOn;
     [SerializeField] public Transform target;
     [SerializeField] private Transform lookAt;
@@ -44,7 +45,7 @@ public class CameraController : MonoBehaviour
     {
         if (IsAutoLockOn == false)
         {
-            yAngle += Input.GetAxisRaw("Mouse X") * sensitivity;
+            yAngle += playerInput.InputLook.x * sensitivity;
             transform.rotation = Quaternion.Euler(0, yAngle, 0);
 
             //yAngle += Input.GetAxisRaw("Mouse X");

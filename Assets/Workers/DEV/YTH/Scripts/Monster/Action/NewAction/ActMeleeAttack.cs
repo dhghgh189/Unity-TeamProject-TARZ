@@ -21,10 +21,10 @@ public class ActMeleeAttack : Action
     [SerializeField] float _range;
     public float Range { get { return _range; } set { _range = value; } }
 
-   /* public override void OnStart()
-	{
+    public override void OnStart()
+    {
         _distance = Vector3.Distance(transform.position, _player.transform.position);
-    }*/
+    }
 
     public override TaskStatus OnUpdate()
     {

@@ -6,9 +6,10 @@ using Zenject;
 
 public class MSkill_FrogJump : Action
 {
-    [SerializeField] MonsterData _monsterData;
-
+    [Inject]
     [SerializeField] MonsterSkillManager _monsterSkillManager;
+
+    [SerializeField] MonsterData _monsterData;
 
     private float _distance;
     public override TaskStatus OnUpdate()

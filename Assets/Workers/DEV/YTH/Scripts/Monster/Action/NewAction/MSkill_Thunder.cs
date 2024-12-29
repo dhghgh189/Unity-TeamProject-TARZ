@@ -4,6 +4,7 @@ using Zenject;
 
 public class MSkill_Thunder : Action
 {
+    [Inject]
     [SerializeField] MonsterSkillManager _monsterSkillManager;
 
     [SerializeField] MonsterData _monsterData;

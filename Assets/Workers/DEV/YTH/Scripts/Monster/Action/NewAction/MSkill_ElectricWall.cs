@@ -5,6 +5,7 @@ using Zenject;
 
 public class MSkill_ElectricWall : Action
 {
+    [Inject]
     [SerializeField] MonsterSkillManager _monsterSkillManager;
 
     [SerializeField] GameObject _player;

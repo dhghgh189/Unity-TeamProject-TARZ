@@ -456,6 +456,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: 6df8f01820cdb694a8e6468a4e18ea0e,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: bfb61420997846d4ca919461d93dcdb5, type: 2}
     - target: {fileID: 6311696543851329281, guid: 6df8f01820cdb694a8e6468a4e18ea0e,
         type: 3}
       propertyPath: m_Layer
@@ -526,6 +531,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6df8f01820cdb694a8e6468a4e18ea0e,
         type: 3}
       insertIndex: -1
+      addedObject: {fileID: 3225589709981276456}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6df8f01820cdb694a8e6468a4e18ea0e,
+        type: 3}
+      insertIndex: -1
       addedObject: {fileID: 4931760377755902228}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6df8f01820cdb694a8e6468a4e18ea0e,
         type: 3}
@@ -579,8 +588,31 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!136 &3225589709981276456
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3632602514074780826}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!195 &4931760377755902228
 NavMeshAgent:
   m_ObjectHideFlags: 0

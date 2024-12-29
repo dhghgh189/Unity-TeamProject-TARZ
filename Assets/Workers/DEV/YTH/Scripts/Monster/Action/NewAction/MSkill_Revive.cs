@@ -4,9 +4,10 @@ using Zenject;
 
 public class MSkill_Revive : Action
 {
-    [SerializeField] MonsterData _monsterData;
-
+    [Inject]
     [SerializeField] MonsterSkillManager _monsterSkillManager;
+
+    [SerializeField] MonsterData _monsterData;
 
     [SerializeField] GameObject _reviveBefore;
 

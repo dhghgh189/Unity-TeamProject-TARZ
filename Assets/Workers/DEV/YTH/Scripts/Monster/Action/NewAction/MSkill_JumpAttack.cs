@@ -6,6 +6,7 @@ using Zenject;
 
 public class MSkill_JumpAttack : Action
 {
+    [Inject]
     [SerializeField] MonsterSkillManager _monsterSkillManager;
 
     [SerializeField] GameObject _player;

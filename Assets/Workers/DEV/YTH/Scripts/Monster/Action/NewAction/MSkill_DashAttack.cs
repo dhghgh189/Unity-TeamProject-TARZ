@@ -1,8 +1,10 @@
 using BehaviorDesigner.Runtime.Tasks;
 using UnityEngine;
+using Zenject;
 
 public class MSkill_DashAttack : Action
 {
+    [Inject]
     [SerializeField] MonsterSkillManager _monsterSkillManager;
 
     [SerializeField] GameObject _player;

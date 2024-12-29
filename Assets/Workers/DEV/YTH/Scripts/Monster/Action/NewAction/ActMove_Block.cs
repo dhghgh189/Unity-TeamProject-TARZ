@@ -30,8 +30,6 @@ public class ActMove_Block : Action
     public override void OnStart()
     {
         keepChaseRoutine = StartCoroutine(KeepChaseRoutine());
-
-        
     }
 
     public override TaskStatus OnUpdate()

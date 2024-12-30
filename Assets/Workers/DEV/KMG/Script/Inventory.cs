@@ -1,4 +1,5 @@
 using System.Linq;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -74,6 +75,37 @@ public class Inventory : MonoBehaviour
         slot.SetInventorySlots(gear);
         return true;
     }
+
+    public bool GetGear(Gear gear)
+    {
+        UI_InventorySlots slot = EmptySlot();
+        if (!slot) return false;
+
+        // 해당 부위의 베이스 장비를 가져옴
+        Gear baseGear = Instantiate(baseGears.Where(x => x.Part == gear.Part).First());
+
+        // 장갑은 4개중 하나의 기본 능력치를 가지므로 능력치 3개를 삭제
+        if (gear.Part == Part.장갑)
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                gear.Abilities.RemoveAt(Random.Range(0, gear.Abilities.Count));
+            }
+        }
+
+        // 이름 변경
+        gear.SetName();
+
+        // 베이스 능력치에 티어를 곱하기
+        foreach (var item in gear.Abilities)
+        {
+            item.value *= gear.Tier;
+        }
+
+        slot.SetInventorySlots(gear);
+        return true;
+    }
+
     // 빈 인벤토리 슬롯을 반환하는 함수
     private UI_InventorySlots EmptySlot()
     {

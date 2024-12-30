@@ -57,17 +57,17 @@ public class MonsterJustTrigger : MonoBehaviour
 
         if (player.Fsm.CurrentState.type == EState.Dash)
         {
-            switch (_monsterData.RewardTyPe)
+            switch (_monsterData.MonsterTIer)
             {
-                case MonsterData.RewardType.Tier_3:
+                case MonsterData.MonsterTier.Normal:
                     // 버프 느낌
                     // 일시적 스탯 향상
                     Debug.Log("3티어 정상작동");
                     break;
-                case MonsterData.RewardType.Tier_2:
+                case MonsterData.MonsterTier.Elite:
                     Debug.Log("2티어 정상작동");
                     break;
-                case MonsterData.RewardType.Tier_1:
+                case MonsterData.MonsterTier.Boss:
                     Debug.Log("1티어 정상작동");
                     break;
             }

@@ -106,6 +106,7 @@ public class ManaRush_1 : BaseManaState
     public override void OnExit()
     {
         base.OnExit();
+        owner.Movement.Rigid.velocity = Vector3.zero;
     }
 
     public override bool OnCollisionAction(Collision other)
@@ -115,6 +116,7 @@ public class ManaRush_1 : BaseManaState
             Debug.Log("마나1 잡는 행동으로 넘어가기 요청!");
             parent.collider = other.gameObject.transform;
             parent.quaternion = other.transform.rotation;
+            owner.Movement.Rigid.velocity = Vector3.zero;
             return true;
         }
 
@@ -149,6 +151,7 @@ public class ManaRush_2 : BaseManaState
         base.OnEnter();
         animTimer = 999f;
         grabDamage = parent.SkillData.GetData((int)ManaRushDataType.GrabDamage);
+
         Debug.Log("마나2 입장");
 
         if (camTrf == null)
@@ -228,6 +231,8 @@ public class ManaRush_3 : BaseManaState
         Debug.Log("충격파 입장");
         damage = parent.SkillData.GetData((int)ManaRushDataType.RangeAttackDamage);
         attackRange = parent.SkillData.GetData((int)ManaRushDataType.AttackRange);
+
+        owner.Movement.Rigid.velocity = Vector3.zero;
 
         owner.Anim.CrossFade(Animator.StringToHash(animName), 0.01f);
         owner.StartCoroutine(AnimRoutine());

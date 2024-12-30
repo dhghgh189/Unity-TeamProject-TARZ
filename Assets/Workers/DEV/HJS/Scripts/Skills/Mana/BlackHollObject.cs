@@ -32,6 +32,8 @@ public class BlackHollObject : MonoBehaviour
     private float damageDelta;
     private float rangeDelta;
 
+    [SerializeField] SphereCollider coll;
+    [SerializeField] Rigidbody rigid;
     public Vector3 dir;
 
     private Coroutine coroutine;
@@ -41,6 +43,8 @@ public class BlackHollObject : MonoBehaviour
         CanThrow = false;
         FullCharge = false;
         delta = 0f;
+        coll = GetComponent<SphereCollider>();
+        rigid = GetComponent<Rigidbody>();
     }
     private void Start()
     {
@@ -63,6 +67,9 @@ public class BlackHollObject : MonoBehaviour
             absorptionRange = Mathf.Clamp(absorptionMinRange * delta, absorptionMinRange, absorptionMaxRange);
             explosionDamage = Mathf.Clamp(explosionMinDamage * delta, explosionMinDamage, explosionMaxDamage);
             body.transform.localScale = Vector3.one * delta * 0.5f;
+
+            coll.radius = absorptionRange;
+
             delta += Time.deltaTime;
             yield return null;
         }
@@ -71,12 +78,15 @@ public class BlackHollObject : MonoBehaviour
         absorptionRange = absorptionMaxRange;
         explosionDamage = explosionMaxDamage;
 
+        coll.radius = absorptionRange;
+
         FullCharge = true;
     }
 
     public void Throw()
     {
         StopCoroutine(coroutine);
+        rigid.velocity = dir * moveSpeed;
         StartCoroutine(StartThrowRoutine());
     }
 
@@ -95,7 +105,6 @@ public class BlackHollObject : MonoBehaviour
         while (time < moveTime)
         {
             yield return null;
-            transform.Translate(dir * moveSpeed * Time.deltaTime);
             time += Time.deltaTime;
         }
 
@@ -108,17 +117,14 @@ public class BlackHollObject : MonoBehaviour
         {
             // 거리를 계산하고
             Vector3 relativeDirection = other.position - transform.position;
-            // 거리가 중력장 크기보다 크면 중지
-            if (relativeDirection.sqrMagnitude > absorptionRange * absorptionRange) yield break;
 
-            // 아니면 정규화를 진행하고
+            // 정규화를 진행하고
             Vector3 gravityDirection = relativeDirection.normalized;
 
             // 현재 있는 오브젝트 방향으로 힘의 량만큼 끌어당기기
             other.gameObject.GetComponent<Rigidbody>().velocity = -gravityDirection * absorptionSpeed;
 
             // 흡수하고 있을 때 데미지
-            if (coroutine is not null) { other.gameObject.GetComponent<IDamagable>().TakeDamage(Mathf.Clamp(10 * delta, 10, 20)); }
             yield return new WaitForFixedUpdate();
         }
     }

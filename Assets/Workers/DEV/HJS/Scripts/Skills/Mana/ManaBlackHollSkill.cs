@@ -1,10 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Net;
 using UnityEngine;
 using UnityEngine.Events;
-using static UnityEngine.UI.GridLayoutGroup;
 
 public enum ManaBlackHollDataType { ExplosionMinDamage, ExplosionMaxDamage, AbsorptionMinRange, AbsorptionMaxRange, AbsorptionSpeed, ThrowSpeed, FlightTime, ExplosionRange }
 public class ManaBlackHollSkill : IManaSkill
@@ -52,7 +49,7 @@ public class ManaBlackHollSkill : IManaSkill
         public ManaBlackHoll_1(PlayerController owner, ManaBlackHollSkill parent) : base(owner)
         {
             this.parent = parent;
-            if(createPoint == null) createPoint = GameObject.FindWithTag("CreatePoint").transform;
+            if (createPoint == null) createPoint = GameObject.FindWithTag("CreatePoint").transform;
         }
 
         public override void OnEnter()
@@ -87,12 +84,13 @@ public class ManaBlackHollSkill : IManaSkill
         {
             base.OnUpdate();
 
-            if (blackHoll is null) return;
 
             if (lookDir != Vector3.zero && owner.transform.forward != lookDir)
             {
                 owner.Movement.LookAt(lookDir);
             }
+
+            if (blackHoll is null) return;
 
             // else 로 한 이유 -> 누른 타이밍이 애니메이션이 끝나는 타이밍이면 동시에 되서, 입력이 우선
             if (blackHoll.CanThrow && owner.PInput.TryThrow)
@@ -113,10 +111,10 @@ public class ManaBlackHollSkill : IManaSkill
         public override void OnAction()
         {
             // 생성하는 부분
-            parent.blackhollInstance = Object.Instantiate(parent.tmp, createPoint.position, owner.transform.rotation);
+            parent.blackhollInstance = Object.Instantiate(parent.tmp, createPoint.position, Quaternion.identity);
 
             blackHoll = parent.blackhollInstance.GetComponent<BlackHollObject>();
-            if (blackHoll != null) 
+            if (blackHoll != null)
             {
                 Debug.Log("연결!");
                 // 이벤트 연결
@@ -149,9 +147,6 @@ public class ManaBlackHollSkill : IManaSkill
         private string animName = "ManaBlackHoll_2";
 
         private float animTimer;
-        private Transform camTrf;
-        private Vector3 moveDir;
-        private Vector3 lookDir;
 
         public ManaBlackHoll_2(PlayerController owner, ManaBlackHollSkill parent) : base(owner)
         {
@@ -165,23 +160,6 @@ public class ManaBlackHollSkill : IManaSkill
             animTimer = 999f;
 
             Debug.Log("블랙홀 발사 시작");
-
-            if (camTrf == null)
-                camTrf = Camera.main.transform;
-
-            moveDir = owner.PInput.InputDir.normalized;
-
-            if (moveDir != Vector3.zero)
-            {
-                owner.Movement.LookAt((camTrf.right * moveDir.x) + (camTrf.forward * moveDir.z));
-            }
-            // 방향키 입력이 없는 경우 카메라 정면을 바라본다.
-            else
-            {
-                owner.Movement.LookAt(camTrf.forward);
-            }
-
-            lookDir = owner.transform.forward;
 
             parent.OnThrowEvent?.Invoke();
 
@@ -202,14 +180,13 @@ public class ManaBlackHollSkill : IManaSkill
                 owner.ManaSkillHandler.NextStep();
             }
 
+            owner.transform.position += -owner.transform.forward * Time.deltaTime * 0.5f;
             animTimer -= Time.deltaTime;
-
-            // 애니메이션 길이만큼 뒤로 가기(반동)
-            owner.Movement.Rigid.velocity = -lookDir * Time.deltaTime;
         }
 
         public override void OnExit()
         {
+
             parent.OnThrowEvent.RemoveAllListeners();
             if (parent.blackhollInstance is not null)
             {

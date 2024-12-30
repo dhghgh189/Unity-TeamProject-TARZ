@@ -4,15 +4,27 @@ using UnityEngine;
 
 public class MegaFistObject : MonoBehaviour
 {
-    // 전방으로 나가는 함수
-    public void MoveToward()
-    {
+    [SerializeField] float damage;
+    [SerializeField] BoxCollider coll;
 
+    public float Damage { get => damage; set { damage = value; } }
+
+    private void Awake()
+    {
+        coll = GetComponent<BoxCollider>();
     }
 
-    // 다시 돌아오는 함수
-    public void MoveReturn()
-    {
+    public void Move() =>  coll.enabled = true;
 
+    public void Return() => coll.enabled = false;
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.layer.Equals(LayerMask.NameToLayer("Monster")))
+        {
+            IDamagable damagable = other.gameObject.GetComponent<IDamagable>();
+            if (damagable != null) { damagable.TakeDamage(Damage); }
+        }
     }
+
 }

@@ -126,7 +126,7 @@ public class CheatUI : MonoBehaviour
 
     public void MujeokMode(bool isOn)
     {
-        Debug.Log(isOn);
+        Debug.Log($"무적 상태 : {isOn}");
         CheatManager.isMujeok = isOn;
     }
 
@@ -232,5 +232,16 @@ public class CheatUI : MonoBehaviour
         };
 
         inventory.GetGear(gear);
+    }
+
+    public void Heal()
+    {
+        model.CurrentHp = model.MaxHp;
+    }
+
+    public void ManaInfinite(bool isOn)
+    {
+        Debug.Log($"마나 무한 : {isOn}");
+        CheatManager.isManaInfinite = isOn;
     }
 }

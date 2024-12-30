@@ -6,6 +6,7 @@ using UnityEngine;
 public static class CheatManager
 {
     public static bool isMujeok;
+    public static bool isManaInfinite;
 
     public enum StatType
     {

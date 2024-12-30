@@ -64,6 +64,16 @@ public class ManaSkillHandler : MonoBehaviour
     /// <param name="index">요청한 마나 스킬의 번호</param>
     public bool UseManaSkill(int index)
     {
+        if (CheatManager.isManaInfinite)
+        {
+            Debug.Log("마나 무한이당");
+            selectIndex = index;
+            manaSkill[selectIndex]?.SetInit(this);
+            curNode = actList.First;
+            return true;
+        }
+        Debug.Log("끝났당");
+
         // 마나 스킬의 조건이 충족하는지 확인
         if (stat.CurrentMp >= 0 * index)
         {

@@ -6,7 +6,7 @@ public class TestManager : MonoBehaviour
 {
     [SerializeField] JoystickTester joystickTester;
     [SerializeField] PlayerController player;
-    
+    [SerializeField] GameObject cheatPanel;
 
     bool isLocked;
 
@@ -32,6 +32,11 @@ public class TestManager : MonoBehaviour
         if (Input .GetKeyDown(KeyCode.F4))
         {
             player.TakeDamage(10f);
+        }
+
+        if (Input.GetKeyDown(KeyCode.F5))
+        {
+            cheatPanel.SetActive(!cheatPanel.activeSelf);
         }
     }
 }

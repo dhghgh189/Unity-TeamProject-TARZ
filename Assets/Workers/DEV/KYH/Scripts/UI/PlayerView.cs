@@ -15,30 +15,31 @@ public class PlayerView : MonoBehaviour
     [SerializeField] private Image hpImage;
     [SerializeField] private Slider mpSlider;
     [SerializeField] private Image mpImage;
-    [SerializeField] private Slider staminaSlider;
-    [SerializeField] private Image staminaImage;
 
     [Header("쓰레기 오브젝트")]
     [SerializeField] private TMP_Text numberingText;
 
-    private void Awake()
+    private void Start()
     {
         hpSlider.maxValue = statModel.MaxHp;
         mpSlider.maxValue = statModel.MaxMp;
-        staminaSlider.maxValue = statModel.MaxStamina;
 
         hpSlider.value = statModel.CurrentHp;
         mpSlider.value = statModel.CurrentMp;
-        staminaSlider.value = statModel.CurrentStamina;
 
         statModel.OnCurHpChange += Player_OnCurHPChanged;
         statModel.OnCurMpChange += Player_OnCurMPChanged;
-        statModel.OnCurStaminaChange += Player_OnCurStaminaChanged;
+        statModel.OnStatChange += Player_OnTObjectChanged;
         playerAttack.OnChangedStack += Player_OnTObjectChanged;
+
+        Player_OnCurHPChanged(statModel.MaxHp);
+        Player_OnCurMPChanged(0);
+        Player_OnTObjectChanged();
     }
 
     public void Player_OnCurHPChanged(float curHP)
     {
+        Debug.Log($"Hp Change : {curHP}");
         hpSlider.value = curHP;
         hpImage.enabled = curHP > 0;
     }
@@ -49,13 +50,7 @@ public class PlayerView : MonoBehaviour
         mpImage.enabled = curMP > 0;
     }
 
-    public void Player_OnCurStaminaChanged(float curStamina)
-    {
-        staminaSlider.value = curStamina;
-        staminaImage.enabled = curStamina > 0;
-    }
-
-    public void Player_OnTObjectChanged(int count)
+    public void Player_OnTObjectChanged()
     {
         numberingText.text = $"{playerAttack.ObjectCount} / {playerAttack.MaxObjectCount}";
     }

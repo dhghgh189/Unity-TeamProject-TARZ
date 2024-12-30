@@ -19,12 +19,12 @@ public class CondCanMove : Conditional
     {
         if (IsPlayerWithinSight(_player))
         {
-            Debug.Log("CodnMove true");
+            //Debug.Log("CodnMove true");
             return TaskStatus.Success;
         }
         else
         {
-            Debug.Log("cond move false");
+            //Debug.Log("cond move false");
             return TaskStatus.Failure;
         }
     }

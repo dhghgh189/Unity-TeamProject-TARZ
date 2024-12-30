@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
+using Zenject;
 
 public class PlayerAttack : MonoBehaviour
 {
@@ -43,7 +44,7 @@ public class PlayerAttack : MonoBehaviour
 
     private Stack<ThrowObject> objectStack;
     public int ObjectCount => objectStack.Count;
-    public int MaxObjectCount => maxObjectCount;
+    public int MaxObjectCount => maxObjectCount + (int)player.Stat.GetAbility(AdditionAbility.MaxObject);
 
     public LayerMask WhatIsEnemy { get { return whatIsEnemy; } }
 
@@ -59,14 +60,14 @@ public class PlayerAttack : MonoBehaviour
 
     public bool CanUseCombo;
 
-    public event UnityAction<int> OnChangedStack;
+    public event UnityAction OnChangedStack;
 
     private void Awake()
     {
         MeleeCount = 0;
         ThrowCount = 0;
 
-        objectStack = new Stack<ThrowObject>(maxObjectCount);
+        objectStack = new Stack<ThrowObject>();
         meleeEffects = new List<IEffect>();
 
         generator = new EffectGenerator();
@@ -199,7 +200,7 @@ public class PlayerAttack : MonoBehaviour
 
     public void AddObjectStack(ThrowObject tobj)
     {
-        if (objectStack.Count >= maxObjectCount)
+        if (objectStack.Count >= MaxObjectCount)
             return;
 
         objectStack.Push(tobj);
@@ -207,7 +208,7 @@ public class PlayerAttack : MonoBehaviour
         tobj.gameObject.SetActive(false);
 
         // 이벤트
-        OnChangedStack?.Invoke(objectStack.Count);
+        OnChangedStack?.Invoke();
     }
 
     public ThrowObject PopObjectStack()
@@ -221,7 +222,7 @@ public class PlayerAttack : MonoBehaviour
         ThrowObject tobj = objectStack.Pop();
 
         // 이벤트
-        OnChangedStack?.Invoke(objectStack.Count);
+        OnChangedStack?.Invoke();
 
         return tobj;
     }

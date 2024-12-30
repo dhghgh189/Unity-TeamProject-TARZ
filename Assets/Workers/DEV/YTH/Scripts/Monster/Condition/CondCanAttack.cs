@@ -2,7 +2,7 @@ using BehaviorDesigner.Runtime.Tasks;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
-public class CondMonsterCanAttack : Conditional
+public class CondCanAttack : Conditional
 {
     [SerializeField] MonsterData _monsterData;
 

@@ -1,20 +1,11 @@
 using BehaviorDesigner.Runtime.Tasks;
 using UnityEngine;
 
-/// <summary>
-/// 1. 적인지 로직
-/// 2. 선빵 맞으면 그쪽 쳐다보게 - 자연스럽게 캐릭터가 시야에 들어와서 추적 함
-/// </summary>
-public class CondMonsterCanMove : Conditional
+public class CondCanMove : Conditional
 {
     [SerializeField] MonsterData _monsterData;
 
     [SerializeField] GameObject _player; // 플레이어 위치 넘겨줄 오브젝트
-
-    private Transform _playerFirstAttackTransform; // 플레이어 선빵 위치 받을 변수
-
-    private GameObject _returnObj;
-    public GameObject ReturnObj { get { return _returnObj; } private set { } }
 
     [Header("인지 범위")]
     [SerializeField] float _angle; // 시야각
@@ -23,22 +14,12 @@ public class CondMonsterCanMove : Conditional
 
     [Header("회전")]
     [SerializeField] float _rate; // 회전 Lerp 비율
-
-    private float _playerDistance;
+   
     public override TaskStatus OnUpdate()
     {
-        _playerDistance = Vector3.Distance(transform.position, _player.transform.position);
-
-        _returnObj = WithinSight(_player, _angle, _distance);
-
-        if (_returnObj != null && _monsterData.MonsterTyPe != MonsterData.MonsterType.Range /*|| _playerDistance <= _monsterData.AttackRange*/)
+        if (IsPlayerWithinSight(_player))
         {
             Debug.Log("CodnMove true");
-            return TaskStatus.Success;
-        }
-        else if (_monsterData.Attacked_First == true) // 시야각에 없어도 선빵 맞으면 데미지들어오면서 쳐다보는 로직 
-        {
-            NoticePlayer();
             return TaskStatus.Success;
         }
         else
@@ -49,40 +30,27 @@ public class CondMonsterCanMove : Conditional
     }
 
     #region 적 인지 로직
-    // 범위 안에 들어온 타겟을 특정해주는 함수
-    private GameObject WithinSight(GameObject target, float angleValue, float distanceValue)
+    public bool IsPlayerWithinSight(GameObject target)
     {
         if (target == null)
-        {
-            return null;
-        }
+            return false;
 
-        var direction = target.transform.position - transform.position;
+        Vector3 direction = target.transform.position - transform.position;
         direction.y = 0;
-        var angle = Vector3.Angle(direction, transform.forward);
-        if (direction.magnitude < _distance && angle < _angle * 0.5f)
-        {
-            if (LineOfSight(target))
-            {
-                return target;
-            }
-        }
-        return null;
-    }
 
-    // 타겟이 범위 안에 들어왔는지 확인
-    private bool LineOfSight(GameObject targetObject)
-    {
-        RaycastHit hit;
-        if (Physics.Linecast(transform.position, targetObject.transform.position, out hit))
+        if (direction.magnitude < _distance && Vector3.Angle(direction, transform.forward) < _angle * 0.5f)
         {
-            if (hit.transform.IsChildOf(targetObject.transform) || targetObject.transform.IsChildOf(hit.transform))
+            if (Physics.Linecast(transform.position, target.transform.position, out RaycastHit hit))
             {
-                return true;
+                if (hit.transform.IsChildOf(target.transform) || target.transform.IsChildOf(hit.transform))
+                {
+                    return true;
+                }
             }
         }
         return false;
     }
+
 
     // 기즈모 확인
     public override void OnDrawGizmos()
@@ -99,14 +67,5 @@ public class CondMonsterCanMove : Conditional
         UnityEditor.Handles.color = oldColor;
     }
     #endregion
-
-    public void NoticePlayer()
-    {
-        //플레이어가 공격한 위치를 기억하고 맞으면 돌아봄
-        _playerFirstAttackTransform = _player.GetComponent<Transform>();
-
-        Quaternion lookRot = Quaternion.LookRotation(_playerFirstAttackTransform.position);
-        transform.rotation = Quaternion.Lerp(transform.rotation, lookRot, _rate * Time.deltaTime); // 속도 빠르게 수정할 것
-    }
 }
 

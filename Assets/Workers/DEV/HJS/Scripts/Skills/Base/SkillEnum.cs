@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SkillEnum : MonoBehaviour
@@ -31,7 +29,7 @@ public class SkillEnum : MonoBehaviour
     /// <summary>
     /// 패시브 - 값의 종류
     /// </summary>
-    public enum PassiveModifyType { DashTime = -2, DrainRadius = -1, MaxHp = 0, MaxStamina, MoveSpeed, AllPower ,DefaultPower, StaminaCostRate }
+    public enum PassiveModifyType { DashTime = -2, DrainRadius = -1, MaxHp = 0, MaxStamina, MoveSpeed, AllPower, DefaultPower, StaminaCostRate }
     /// <summary>
     /// 패시브 - 입력 값의 종류
     /// </summary>

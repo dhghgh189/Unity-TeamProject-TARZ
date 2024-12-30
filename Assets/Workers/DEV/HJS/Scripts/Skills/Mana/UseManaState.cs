@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Rendering.LookDev;
-using UnityEngine;
-using UnityEngine.Rendering;
-
+/// <summary>
+/// 플레이어의 마나 상태
+/// </summary>
 public class UseManaState : BaseState<PlayerController>
 {
-    public bool IsEnd{ get => owner.ManaSkillHandler.ActionEnd; }
+    // 해당 능력의 사용이  끝났는지 확인하는 변수
+    public bool IsEnd { get => owner.ManaSkillHandler.ActionEnd; }
 
     public UseManaState(PlayerController owner)
     {

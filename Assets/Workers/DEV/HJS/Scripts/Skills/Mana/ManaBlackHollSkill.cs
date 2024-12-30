@@ -3,17 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+/// <summary>
+/// 마나 4스킬의 필요 데이터
+/// </summary>
 public enum ManaBlackHollDataType { ExplosionMinDamage, ExplosionMaxDamage, AbsorptionMinRange, AbsorptionMaxRange, AbsorptionSpeed, ThrowSpeed, FlightTime, ExplosionRange }
+/// <summary>
+/// 마나 4스킬 : 블랙홀 생성
+/// </summary>
 public class ManaBlackHollSkill : IManaSkill
 {
-    private const string KEY_NAME = "ManaBlackHoll";
-    private ManaSkillDataSO skillData;
-    public LinkedList<BaseManaState> Acts { get; private set; }
+    private const string KEY_NAME = "ManaBlackHoll";             // 스킬의 고유 이름
+    private ManaSkillDataSO skillData;                           // 스킬의 데이터
+    public LinkedList<BaseManaState> Acts { get; private set; }  // 행동이 들어있는 연결리스트
     public ManaSkillDataSO SkillData { get => skillData; set => skillData = value; }
 
-    public GameObject tmp;
-    public GameObject blackhollInstance;
-    public UnityEvent OnThrowEvent { get; private set; }
+    public GameObject tmp;                          // 블랙홀 오브젝트를 담아두는 변수
+    public GameObject blackhollInstance;            // 블랙홀 오브젝트를 Instatiate로 생성하여 담아두는 변수
+    public UnityEvent OnThrowEvent { get; private set; }    // 블랙홀을 던지는 이벤트
 
     public ManaBlackHollSkill(PlayerController owner)
     {

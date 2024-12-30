@@ -1,7 +1,9 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 장판을 생성해주는 스크립트
+/// </summary>
 public class FloorSpawner : MonoBehaviour
 {
     // Target의 Transform
@@ -59,7 +61,7 @@ public class FloorSpawner : MonoBehaviour
                 }
             }
         } while (targetTrans is not null && !pastPos.Equals(curPos));
-        
+
 
         Debug.Log("End");
         Destroy(gameObject);

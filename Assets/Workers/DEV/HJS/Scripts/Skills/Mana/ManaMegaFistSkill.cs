@@ -2,16 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 마나 3스킬의 필요 데이터
+/// </summary>
 public enum ManaMegaFistDataType { FistDamage, FistRange, FistSpeed, FistTime, FistAlpha}
-
+/// <summary>
+/// 마나 3스킬 : 거대 주먹
+/// </summary>
 public class ManaMegaFistSkill : IManaSkill
 {
-    private const string KEY_NAME = "ManaMegaFist";
-    private ManaSkillDataSO skillData;
-    public LinkedList<BaseManaState> Acts { get; private set; }
+    private const string KEY_NAME = "ManaMegaFist";             // 스킬의 고유 이름
+    private ManaSkillDataSO skillData;                          // 스킬의 데이터
+    public LinkedList<BaseManaState> Acts { get; private set; } // 행동이 들어있는 연결리스트
     public ManaSkillDataSO SkillData { get => skillData; set => skillData = value; }
 
-    public GameObject tmp;
+    public GameObject tmp;  // 차원문 오브젝트를 담아두는 변수
 
     public ManaMegaFistSkill(PlayerController owner)
     {

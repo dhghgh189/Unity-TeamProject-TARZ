@@ -1,6 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+#if UNITY_EDITOR
 using UnityEditor;
 using UnityEngine;
 
@@ -12,7 +10,7 @@ public class ShowEnumDrawer : PropertyDrawer
         ShowEnumAttribute showEnum = (ShowEnumAttribute)attribute;
         SerializedProperty conditionProperty = property.serializedObject.FindProperty(showEnum.ConditionField);
 
-        if (conditionProperty != null &&  showEnum.EnumValueIndex == conditionProperty.enumValueIndex)
+        if (conditionProperty != null && showEnum.EnumValueIndex == conditionProperty.enumValueIndex)
         {
             EditorGUI.PropertyField(position, property, label, true);
         }
@@ -44,3 +42,4 @@ public class ShowEnumAttribute : PropertyAttribute
     }
 
 }
+#endif

@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using static SkillEnum;
 
@@ -11,8 +9,8 @@ public class PassiveSkillSO : ScriptableObject
 
     [Space(2)]
     [Header("Settings")]
-    [SerializeField, ShowEnum((int)PassiveType.Modify, "passiveType")] ModifySetting modifySetting;
-    [SerializeField, ShowEnum((int)PassiveType.Condition, "passiveType")] ConditionSetting conditionSetting;
+    [SerializeField] ModifySetting modifySetting;
+    [SerializeField] ConditionSetting conditionSetting;
 
     // Modify - 수정
     // 값의 수정을 담당

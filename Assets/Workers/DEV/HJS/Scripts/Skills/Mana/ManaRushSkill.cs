@@ -1,19 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using UnityEngine;
 
-
+/// <summary>
+/// 마나 1스킬의 필요 데이터
+/// </summary>
 public enum ManaRushDataType { RushTime, RushSpeed, GrabDamage, RangeAttackDamage, AttackRange }
+/// <summary>
+/// 마나 1스킬 : 돌진 잡기
+/// </summary>
 public class ManaRushSkill : IManaSkill
 {
-    private const string KEY_NAME = "ManaRush";
-    private ManaSkillDataSO skillData;
-    public LinkedList<BaseManaState> Acts { get; private set; }
+    private const string KEY_NAME = "ManaRush";                 // 스킬의 고유 이름       
+    private ManaSkillDataSO skillData;                          // 스킬의 데이터
+    public LinkedList<BaseManaState> Acts { get; private set; } // 행동이 들어있는 연결리스트
     public ManaSkillDataSO SkillData { get => skillData; set => skillData = value; }
 
-    public Transform collider;
-    public Quaternion quaternion;
+    public Transform collider;      // 충돌한 오브젝트를 담아두는 변수
+    public Quaternion quaternion;   // 해당 충돌체의 방향
 
     public ManaRushSkill(PlayerController owner)
     {
@@ -111,7 +115,7 @@ public class ManaRush_1 : BaseManaState
 
     public override bool OnCollisionAction(Collision other)
     {
-        if(other.gameObject.layer.Equals(LayerMask.NameToLayer("Monster")))
+        if (other.gameObject.layer.Equals(LayerMask.NameToLayer("Monster")))
         {
             Debug.Log("마나1 잡는 행동으로 넘어가기 요청!");
             parent.collider = other.gameObject.transform;
@@ -265,7 +269,7 @@ public class ManaRush_3 : BaseManaState
             Debug.Log("충격파 행동에서 기본으로 돌아가기!");
             owner.ManaSkillHandler.NextStep();
         }
-        
+
         animTimer -= Time.deltaTime;
     }
 

@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 /// <summary>
@@ -11,7 +9,7 @@ public class SkillSpecDatabase : ScriptableObject
 {
     [Header("Init")]
     [SerializeField, Min(1), Tooltip("보여줄 스킬의 수")] int showCount;
-    [SerializeField, Min(1), Tooltip("나올 수 있는 최대 레벨")] int maxLevel; 
+    [SerializeField, Min(1), Tooltip("나올 수 있는 최대 레벨")] int maxLevel;
     private BaseSkillSO[] showSkillArray;
 
     [Header("Skills")]
@@ -27,9 +25,9 @@ public class SkillSpecDatabase : ScriptableObject
     /// </summary>
     public BaseSkillSO[] ShowSkillArray()
     {
-        for(int i = 0; i < showCount; i++)
+        for (int i = 0; i < showCount; i++)
         {
-            showSkillArray[i] = skillList[Random.Range(0, skillList.Count)];       
+            showSkillArray[i] = skillList[Random.Range(0, skillList.Count)];
         }
 
         return showSkillArray;

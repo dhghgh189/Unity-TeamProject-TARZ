@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using ActTiming = SkillEnum.ActTimingType;
 
@@ -41,13 +40,15 @@ public class HJS_PlayerController : MonoBehaviour
             else if (timing.Equals(ActTiming.Dash) && coroutine is null)
             {
                 coroutine = StartCoroutine(MoveRoutine());
-            }else if(timing.Equals(ActTiming.Drain))
+            }
+            else if (timing.Equals(ActTiming.Drain))
             {
                 drainManager.StartDrain();
             }
-        }else if(timing.Equals(ActTiming.Drain) && Input.GetKeyUp(KeyCode.Space))
+        }
+        else if (timing.Equals(ActTiming.Drain) && Input.GetKeyUp(KeyCode.Space))
         {
-                drainManager.StopDrain();
+            drainManager.StopDrain();
         }
     }
 

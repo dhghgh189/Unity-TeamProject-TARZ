@@ -1,10 +1,7 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using Zenject;
-using static UnityEngine.UI.GridLayoutGroup;
 
 /// <summary>
 /// 플레이어의 마나 스킬을 사용하게 해주는 핸들러
@@ -13,24 +10,26 @@ public class ManaSkillHandler : MonoBehaviour
 {
     [Inject] private StatModel stat;
     [Header("Init")]
-    [SerializeField] public List<ManaSkillDataSO> skillData;
-    [SerializeField] IManaSkill[] manaSkill;                    // 마나 스킬의 슬롯
+    [SerializeField] public List<ManaSkillDataSO> skillData;            // 스킬의 데이터 리스트
+    [SerializeField] IManaSkill[] manaSkill;                            // 마나 스킬의 슬롯
     [Header("ManaSkill")]
     private Dictionary<string, ManaSkillDataSO> skillDataDictionary;    // 스킬 데이터를 담아두는 딕셔너리
-    [SerializeField] LinkedList<BaseManaState> actList;          // 해당 마나스킬의 진행 순서
-    [SerializeField] int selectIndex;                            // 사용할 마나스킬
-    private LinkedListNode<BaseManaState> curNode;               // 현재 동작
-    private bool isEnd;                                          // 동작이 끝이 났는지 확인
+    [SerializeField] LinkedList<BaseManaState> actList;                 // 해당 마나스킬의 진행 순서
+    [SerializeField] int selectIndex;                                   // 사용할 마나스킬
+    private LinkedListNode<BaseManaState> curNode;                      // 현재 동작
+    private bool isEnd;                                                 // 동작이 끝이 났는지 확인
 
-    public bool ActionEnd { get => isEnd; set => isEnd = value; }
-    public LinkedList<BaseManaState> ActList { get { return actList; } set { actList = value; } }
-    public LinkedListNode<BaseManaState> CurNode { get { return curNode; }}
+    public bool ActionEnd { get => isEnd; set => isEnd = value; }       // 마나 스킬이 끝났는지 확인하는 변수
+    public LinkedList<BaseManaState> ActList { get { return actList; } set { actList = value; } }   // 스킬의 행동 리스트
+    public LinkedListNode<BaseManaState> CurNode { get { return curNode; } }                        // 현재 행동 노드
 
     public void Awake()
     {
+        // 스킬 딕셔너리 초기화
         skillDataDictionary = new Dictionary<string, ManaSkillDataSO>();
 
-        foreach(ManaSkillDataSO data in skillData)
+        // 리스트에 있는 만큼 넣어주기
+        foreach (ManaSkillDataSO data in skillData)
         {
             skillDataDictionary.Add(data.skillName, Instantiate(data));
         }
@@ -46,11 +45,17 @@ public class ManaSkillHandler : MonoBehaviour
         manaSkill[3] = new ManaBlackHollSkill(GetComponent<PlayerController>());
     }
 
+    /// <summary>
+    /// 스킬의 데이터를 가져오는 함수
+    /// </summary>
+    /// <param name="KeyName">고유 식별 이름</param>
+    /// <returns>해당 이름의 데이터</returns>
+    /// <exception cref="Exception">만약 해당하는 데이터가 없으면 발생할 예외</exception>
     public ManaSkillDataSO GetData(string KeyName)
     {
         if (skillDataDictionary.TryGetValue(KeyName, out ManaSkillDataSO data))
         {
-            return data; 
+            return data;
         }
         else
         {
@@ -89,11 +94,11 @@ public class ManaSkillHandler : MonoBehaviour
     /// <param name="nextIndex">넘어갈 횟수, 기본은 한번 -> 여러번 요청할 수 있음</param>
     public void NextStep(int nextIndex = 1)
     {
-        if(nextIndex <= 0) { Debug.LogError($"{selectIndex}의 스킬에서 애니메이션이 잘못된 숫자 {nextIndex}를 넘겨줬다!."); return; }
-        
-        for(int i = 0; i < nextIndex; i++)
+        if (nextIndex <= 0) { Debug.LogError($"{selectIndex}의 스킬에서 애니메이션이 잘못된 숫자 {nextIndex}를 넘겨줬다!."); return; }
+
+        for (int i = 0; i < nextIndex; i++)
         {
-            if(curNode.Next == null)
+            if (curNode.Next == null)
             {
                 Debug.Log("end");
                 isEnd = true;
@@ -110,8 +115,8 @@ public class ManaSkillHandler : MonoBehaviour
     private void OnCollisionEnter(Collision other)
     {
         if (selectIndex < 0) return;
-        
-        if(curNode.Value.OnCollisionAction(other))
+
+        if (curNode.Value.OnCollisionAction(other))
         {
             NextStep();
         }
@@ -127,7 +132,9 @@ public class ManaSkillHandler : MonoBehaviour
         actList = null;
         selectIndex = -1;
     }
-
+    /// <summary>
+    /// 실직적으로 애니메이션의 이벤트를 실행시켜주는 함수
+    /// </summary>
     public void OnAction()
     {
         curNode.Value.OnAction();

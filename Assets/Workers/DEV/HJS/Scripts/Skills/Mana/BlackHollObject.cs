@@ -1,36 +1,34 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Net.NetworkInformation;
 using UnityEngine;
 
+/// <summary>
+/// 블랙홀 오브젝트에 부착하는 스크립트
+/// </summary>
 public class BlackHollObject : MonoBehaviour
 {
-    [SerializeField] GameObject body;
+    [SerializeField] GameObject body;           // 보여줄 구체
 
     [Header("발사")]
-    [SerializeField] float moveSpeed;
-    [SerializeField] float moveTime;
+    [SerializeField] float moveSpeed;           // 움직이는 속도
+    [SerializeField] float moveTime;            // 움직이는 시간
 
     [Header("흡수")]
-    [SerializeField] float absorptionRange;
-    [SerializeField] float absorptionMinRange;
-    [SerializeField] float absorptionMaxRange;
-    [SerializeField] float absorptionSpeed;
+    [SerializeField] float absorptionRange;     // 흡수 범위
+    [SerializeField] float absorptionMinRange;  // 흡수 최소 범위
+    [SerializeField] float absorptionMaxRange;  // 흡수 최대 범위
+    [SerializeField] float absorptionSpeed;     // 흡수하는 속도
 
     [Header("폭발")]
-    [SerializeField] float explosionRange;
-    [SerializeField] float explosionMinDamage;
-    [SerializeField] float explosionMaxDamage;
+    [SerializeField] float explosionRange;      // 폭발 범위
+    [SerializeField] float explosionMinDamage;  // 폭발 최소 데미지
+    [SerializeField] float explosionMaxDamage;  // 폭발 최대 데미지
 
-    public bool CanThrow;
-    public bool FullCharge;
+    public bool CanThrow;                       // 1초가 지난 시점을 알려주는 변수 <- 던질 수 있다.
+    public bool FullCharge;                     // 최대 시간이 모두 지나면 알려주는 변수 <- 던져야 한다.
 
-    private float delta;
+    private float delta;                        // 변화량
 
-    private float explosionDamage;
-    private float damageDelta;
-    private float rangeDelta;
+    private float explosionDamage;              // 폭발 데미지
 
     [SerializeField] SphereCollider coll;
     [SerializeField] Rigidbody rigid;
@@ -54,16 +52,16 @@ public class BlackHollObject : MonoBehaviour
 
     private void Charge()
     {
-       // TODO: 충전하기 (1~2초 동안 크기 키우기 + 끌어당기기)
-       coroutine = StartCoroutine(StartChargingRoutine());
+        // 충전하기
+        coroutine = StartCoroutine(StartChargingRoutine());
     }
 
     private IEnumerator StartChargingRoutine()
     {
-        while(delta <= 2f)
+        while (delta <= 2f)
         {
             if (delta >= 1f) CanThrow = true;
-            
+
             absorptionRange = Mathf.Clamp(absorptionMinRange * delta, absorptionMinRange, absorptionMaxRange);
             explosionDamage = Mathf.Clamp(explosionMinDamage * delta, explosionMinDamage, explosionMaxDamage);
             body.transform.localScale = Vector3.one * delta * 0.5f;
@@ -83,10 +81,16 @@ public class BlackHollObject : MonoBehaviour
         FullCharge = true;
     }
 
+    /// <summary>
+    /// 던지는 함수
+    /// </summary>
     public void Throw()
     {
+        // 기존 흡수하는 코루틴을 중단하고
         StopCoroutine(coroutine);
+        // 플레이어가 바라보는 방향 -> 구체의 앞 방향으로 속도만큼 이동
         rigid.velocity = dir * moveSpeed;
+        // 날아가는 시간을 계산하는 코루틴 실행
         StartCoroutine(StartThrowRoutine());
     }
 
@@ -99,15 +103,13 @@ public class BlackHollObject : MonoBehaviour
         }
     }
 
+    // 시간 딜레이 코루틴
     private IEnumerator StartThrowRoutine()
     {
-        float time = 0f;
-        while (time < moveTime)
-        {
-            yield return null;
-            time += Time.deltaTime;
-        }
+        // 날아가는 시간만큼 기다린 다음
+        yield return Util.GetDelay(moveTime);
 
+        // 해당 구체 폭발하기
         Destroy(gameObject);
     }
 

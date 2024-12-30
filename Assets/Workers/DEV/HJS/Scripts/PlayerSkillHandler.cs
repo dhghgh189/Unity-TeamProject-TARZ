@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.Events;
 using Zenject;
 using static BaseSkillSO;
-using static Cinemachine.DocumentationSortingAttribute;
 using static SkillEnum;
 using ActTiming = SkillEnum.ActTimingType;
 
@@ -60,7 +59,7 @@ public class PlayerSkillHandler : MonoBehaviour
         }
 
         #region 액티브 스킬 넣기
-            foreach (ActiveSkill actSkill in skill.activeSkills)
+        foreach (ActiveSkill actSkill in skill.activeSkills)
         {
             // 해당 스킬의 레벨에 따라 변경하기 위해 부모 설정
             actSkill.Parent = skill;
@@ -312,7 +311,7 @@ public class PlayerSkillHandler : MonoBehaviour
                 return false;
             }
             // 스킬이 이미 최대 레벨에 도달했다
-            else if(level >= skill.MaxLevel)
+            else if (level >= skill.MaxLevel)
             {
                 // 등록할 행동을 안하기 위한 true 반환
                 return true;

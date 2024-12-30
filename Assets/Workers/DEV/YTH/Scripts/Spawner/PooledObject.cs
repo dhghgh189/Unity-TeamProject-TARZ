@@ -54,7 +54,7 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
         _monsterData.CurHp -= damage;
         _monsterData.Attacked_First = true;
 
-        _animator.SetTrigger("TakeDamage");
+       /* _animator.SetTrigger("TakeDamage");*/
         if (_monsterData.CurHp <= 0)
         {
             OnDie?.Invoke();

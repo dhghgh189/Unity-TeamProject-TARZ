@@ -122,6 +122,30 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &417713878 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3161584150894216510, guid: 4a839caa195178241bdf5a136def625b,
+    type: 3}
+  m_PrefabInstance: {fileID: 8147378369100917093}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27dec7f07137086469be877fd713ae48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!195 &417713881 stripped
+NavMeshAgent:
+  m_CorrespondingSourceObject: {fileID: 6526634306257319494, guid: 4a839caa195178241bdf5a136def625b,
+    type: 3}
+  m_PrefabInstance: {fileID: 8147378369100917093}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &417713884 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 6125961805356519679, guid: 4a839caa195178241bdf5a136def625b,
+    type: 3}
+  m_PrefabInstance: {fileID: 8147378369100917093}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &418917065
 GameObject:
   m_ObjectHideFlags: 0
@@ -946,6 +970,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Amber
       objectReference: {fileID: 0}
+    - target: {fileID: 3632602514074780826, guid: c990824329ec4df47b25a43739973317,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4116932251100257824, guid: c990824329ec4df47b25a43739973317,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1073,6 +1102,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: JackTheRipper
+      objectReference: {fileID: 0}
+    - target: {fileID: 5772571575370626647, guid: 5ebdca3c9bee2e647babf092474cc2ce,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6581900835331763437, guid: 5ebdca3c9bee2e647babf092474cc2ce,
         type: 3}
@@ -1262,6 +1296,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Arnold
       objectReference: {fileID: 0}
+    - target: {fileID: 8942506606477700167, guid: 37305a29f7e1a5b408ce01591b44f1f8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1329,6 +1368,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FrogZombie
+      objectReference: {fileID: 0}
+    - target: {fileID: 1124082638942842974, guid: 967c75d39b272ce45bc0704b1ee68307,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3546522850649538722, guid: 967c75d39b272ce45bc0704b1ee68307,
         type: 3}
@@ -1564,6 +1608,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bomber
       objectReference: {fileID: 0}
+    - target: {fileID: 3471556509123995877, guid: 001a192f20a62694f860bb51ffb3b7c3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4280287630806463071, guid: 001a192f20a62694f860bb51ffb3b7c3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1717,6 +1766,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ReviveZombie
       objectReference: {fileID: 0}
+    - target: {fileID: 5226637099986443634, guid: 5d8438364fee3484f8ab825afb7457f1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1734,6 +1788,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Range
+      objectReference: {fileID: 0}
+    - target: {fileID: 364008909961081413, guid: 7409f86f5b22f3f4681834138e4d22b6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1028765202830518527, guid: 7409f86f5b22f3f4681834138e4d22b6,
         type: 3}
@@ -1863,10 +1922,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 422953918920400610, guid: 4a839caa195178241bdf5a136def625b,
+        type: 3}
+      propertyPath: _player
+      value: 
+      objectReference: {fileID: 9107385112170642335}
     - target: {fileID: 623807605200867391, guid: 4a839caa195178241bdf5a136def625b,
         type: 3}
       propertyPath: m_Name
       value: Jake
+      objectReference: {fileID: 0}
+    - target: {fileID: 6738699747450627129, guid: 4a839caa195178241bdf5a136def625b,
+        type: 3}
+      propertyPath: mBehaviorSource.mTaskData.JSONSerialization
+      value: '{"EntryTask":{"Type":"BehaviorDesigner.Runtime.Tasks.EntryTask","NodeData":{"Offset":"(437.825836,14.0752106)"},"ID":0,"Name":"Entry","Instant":true},"RootTask":{"Type":"BehaviorDesigner.Runtime.Tasks.Repeater","NodeData":{"Offset":"(-1.56629181,158.192749)"},"ID":1,"Name":"Repeater","Instant":true,"SharedIntcount":{"Type":"BehaviorDesigner.Runtime.SharedInt","Name":null,"Int32mValue":0},"SharedBoolrepeatForever":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":true},"SharedBoolendOnFailure":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(0,130.000015)"},"ID":2,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-230,180)"},"ID":3,"Name":"Sequence","Instant":true,"AbortTypeabortType":"Self","Children":[{"Type":"CondCanMove","NodeData":{"Offset":"(-108.425919,200)"},"ID":4,"Name":"Cond
+        Can Move","Instant":true,"MonsterData_monsterData":0,"GameObject_player":1,"Single_angle":90,"Single_distance":10,"Single_rate":0.5},{"Type":"ActMove_NotStopInAttacking","NodeData":{"Offset":"(93.14815,200)"},"ID":5,"Name":"Act
+        Move   Not Stop In Attacking","Instant":true,"CondCanMove_condCanMove":4,"MonsterData_monsterData":2,"NavMeshAgent_agent":3,"Animator_animator":4,"GameObject_player":5}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(210,199.999969)"},"ID":6,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"CondMonsterCanAttack","NodeData":{"Offset":"(-90.00003,180)"},"ID":7,"Name":"Cond
+        Monster Can Attack","Instant":true,"MonsterData_monsterData":6,"GameObject_player":7},{"Type":"ActMeleeAttack","NodeData":{"Offset":"(100,180)"},"ID":8,"Name":"Act
+        Melee Attack","Instant":true,"MonsterData_monsterData":8,"Animator_animator":9,"GameObject_player":10,"Single_angle":90,"Single_range":2}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Idle","NodeData":{"Offset":"(420,199.999969)"},"ID":9,"Name":"Idle","Instant":true,"Disabled":true}]}]}}'
+      objectReference: {fileID: 0}
+    - target: {fileID: 6738699747450627129, guid: 4a839caa195178241bdf5a136def625b,
+        type: 3}
+      propertyPath: mBehaviorSource.mTaskData.fieldSerializationData.unityObjects.Array.size
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 6738699747450627129, guid: 4a839caa195178241bdf5a136def625b,
         type: 3}
@@ -1875,17 +1953,42 @@ PrefabInstance:
       objectReference: {fileID: 9107385112170642335}
     - target: {fileID: 6738699747450627129, guid: 4a839caa195178241bdf5a136def625b,
         type: 3}
+      propertyPath: mBehaviorSource.mTaskData.fieldSerializationData.unityObjects.Array.data[3]
+      value: 
+      objectReference: {fileID: 417713881}
+    - target: {fileID: 6738699747450627129, guid: 4a839caa195178241bdf5a136def625b,
+        type: 3}
       propertyPath: mBehaviorSource.mTaskData.fieldSerializationData.unityObjects.Array.data[4]
+      value: 
+      objectReference: {fileID: 417713884}
+    - target: {fileID: 6738699747450627129, guid: 4a839caa195178241bdf5a136def625b,
+        type: 3}
+      propertyPath: mBehaviorSource.mTaskData.fieldSerializationData.unityObjects.Array.data[5]
       value: 
       objectReference: {fileID: 9107385112170642335}
     - target: {fileID: 6738699747450627129, guid: 4a839caa195178241bdf5a136def625b,
         type: 3}
       propertyPath: mBehaviorSource.mTaskData.fieldSerializationData.unityObjects.Array.data[6]
       value: 
+      objectReference: {fileID: 417713878}
+    - target: {fileID: 6738699747450627129, guid: 4a839caa195178241bdf5a136def625b,
+        type: 3}
+      propertyPath: mBehaviorSource.mTaskData.fieldSerializationData.unityObjects.Array.data[7]
+      value: 
       objectReference: {fileID: 9107385112170642335}
     - target: {fileID: 6738699747450627129, guid: 4a839caa195178241bdf5a136def625b,
         type: 3}
       propertyPath: mBehaviorSource.mTaskData.fieldSerializationData.unityObjects.Array.data[8]
+      value: 
+      objectReference: {fileID: 417713878}
+    - target: {fileID: 6738699747450627129, guid: 4a839caa195178241bdf5a136def625b,
+        type: 3}
+      propertyPath: mBehaviorSource.mTaskData.fieldSerializationData.unityObjects.Array.data[9]
+      value: 
+      objectReference: {fileID: 417713884}
+    - target: {fileID: 6738699747450627129, guid: 4a839caa195178241bdf5a136def625b,
+        type: 3}
+      propertyPath: mBehaviorSource.mTaskData.fieldSerializationData.unityObjects.Array.data[10]
       value: 
       objectReference: {fileID: 9107385112170642335}
     - target: {fileID: 7035260321180673097, guid: 4a839caa195178241bdf5a136def625b,
@@ -1964,7 +2067,7 @@ PrefabInstance:
     - target: {fileID: 7277938333960850763, guid: ae329f53a4a5fd24299b23de2ca53c45,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

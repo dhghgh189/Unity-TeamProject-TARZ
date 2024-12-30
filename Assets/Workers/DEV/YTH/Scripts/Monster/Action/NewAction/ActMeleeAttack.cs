@@ -46,14 +46,15 @@ public class ActMeleeAttack : Action
     Coroutine attackRoutine;
     IEnumerator AttackRoutine()
     {
+       
         Attack(_range, _angle);
-       /* _animator.SetTrigger("Attack");*/
         yield return new WaitForSeconds(_monsterData.MeleeAttackSpeed);
         attackRoutine = null;
     }
 
     private void Attack(float range, float angle)
     {
+        _animator.SetTrigger("Attack");
         //내적 이용하여 공격 범위 (전방 부채꼴) 정해서
         Collider[] colliders = Physics.OverlapSphere(transform.position, range);
         foreach (Collider collider in colliders)

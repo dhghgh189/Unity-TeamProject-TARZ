@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 /// <summary>
 /// 스킬의 정보 업데이트가 가능하게 해주는 인터페이스
 /// </summary>

@@ -1,7 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 마나 상태
+/// </summary>
 public class BaseManaState : BaseState<PlayerController>, IManaAct
 {
 

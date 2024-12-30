@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -50,7 +49,7 @@ public class AblityAdapter : MonoBehaviour
         }
     }
 
-    public void SetDisable(string name) 
+    public void SetDisable(string name)
     {
         if (components.TryGetValue(name, out IEnable enable))
         {
@@ -68,7 +67,8 @@ public class AblityAdapter : MonoBehaviour
     /// <param name="name">컴포넌트의 이름</param>
     /// <returns>동작 여부</returns>
     /// <exception cref="System.Exception"></exception>
-    public bool IsEnable(string name) {
+    public bool IsEnable(string name)
+    {
         if (components.TryGetValue(name, out IEnable enable))
         {
             return enable.Enable;

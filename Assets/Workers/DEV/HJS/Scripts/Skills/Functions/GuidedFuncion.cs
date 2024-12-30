@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -13,7 +12,7 @@ public class GuidedFuncion : MonoBehaviour, IEnable
     private Rigidbody rb;
 
     [SerializeField] bool enable;
-    [SerializeField] string name = "GuidedFuncion";
+    [SerializeField] new string name = "GuidedFuncion";
 
     public bool Enable { get => enable; set => enable = value; }
     public string Name { get => name; set => name = value; }
@@ -73,7 +72,7 @@ public class GuidedFuncion : MonoBehaviour, IEnable
 
     private void OnDrawGizmos()
     {
-        if(enabled == true)
+        if (enabled == true)
         {
             Gizmos.color = Color.red;
             Gizmos.DrawSphere(transform.position, 3f);

@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Zenject;
 
 /// <summary>
 /// 강화 가능하게 해주는 기능
@@ -9,7 +6,7 @@ using Zenject;
 public class ThrowObjectUpgrade : MonoBehaviour, IEnable, IDamageUpgrade
 {
     [SerializeField] bool enable;
-    [SerializeField] string name = "ThrowObjectUpgrade";
+    [SerializeField] new string name = "ThrowObjectUpgrade";
     [SerializeField] float increaseDamage;
     [SerializeField] bool isUpgraded;
     public bool Enable { get => enable; set => enable = value; }

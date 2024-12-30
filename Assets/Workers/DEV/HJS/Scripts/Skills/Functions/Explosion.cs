@@ -1,7 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 폭발을 담당하는 스크립트
+/// </summary>
 public class Explosion : MonoBehaviour, ISpec
 {
     [SerializeField] float damage;  // 공격 데미지
@@ -10,7 +11,7 @@ public class Explosion : MonoBehaviour, ISpec
     public void SetSpec(BaseSkillSO.Spec spec, int level)
     {
         damage = spec.Power(level);
-        range = spec.Range(level);  
+        range = spec.Range(level);
         Init();
     }
 

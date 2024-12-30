@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using static SkillEnum;
 /// <summary>
 /// 이거 있으면 상태이상을 받을 수 있게 해주는 인터페이스,
 /// ex) 기절, 공격 약해짐, 빙결, 전기, etc

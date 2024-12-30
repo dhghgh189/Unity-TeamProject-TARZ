@@ -8,7 +8,7 @@ using static SkillEnum;
 public class BaseSkillSO : ScriptableObject
 {
     [Header("Skill_Info")]
-    public new string Name;               // 스킬 이름
+    public string Name;               // 스킬 이름
     public string Description;            // 스킬 설명
     public Sprite Icon;                   // 스킬 아이콘
     [Range(1, 3)] public int MaxLevel;    // 레벨업 가능한 최대 레벨
@@ -229,7 +229,7 @@ public class BaseSkillSO : ScriptableObject
                 case PassiveModifyType.StaminaCostRate:
                     if (GetModifySetting.inputType == PassiveModifyInputType.Percent)
                     {
-                         statModel.StaminaCostRate = Mathf.Clamp((GetModifySetting.Amount * 0.01f), 0f, 1f); break;
+                        statModel.StaminaCostRate = Mathf.Clamp((GetModifySetting.Amount * 0.01f), 0f, 1f); break;
                     }
                     else Debug.LogWarning("<Color=red>추가 능력치는 수치를 값으로 설정할 수 없습니다.</color>");
                     break;

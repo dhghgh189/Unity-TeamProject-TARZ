@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static SkillEnum;
@@ -17,7 +16,7 @@ public class ActiveSkillSO : ScriptableObject
 
     [Space(2)]
     [Header("Settings")]
-    [SerializeField, ShowIf("Create")] CreateSetting createSetting;
+    [SerializeField] CreateSetting createSetting;
 
     #region 프로퍼티
     public Target Target => who;

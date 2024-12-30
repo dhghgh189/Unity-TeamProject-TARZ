@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Test_MosterMove : MonoBehaviour, IStatusEffect
@@ -32,7 +31,7 @@ public class Test_MosterMove : MonoBehaviour, IStatusEffect
     {
         float time = 0;
 
-        while(time < duration)
+        while (time < duration)
         {
             Debug.Log($"{type} 효과로 {dotDamage}의 도트데미지를 받는다!");
             hp -= dotDamage;

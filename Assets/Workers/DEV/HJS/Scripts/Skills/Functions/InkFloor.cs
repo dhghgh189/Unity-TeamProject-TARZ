@@ -1,7 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 먹물 장판
+/// </summary>
 public class InkFloor : MonoBehaviour, ISpec
 {
     private float operationTime;

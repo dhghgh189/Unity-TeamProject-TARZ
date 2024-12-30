@@ -520,4 +520,34 @@ public class MonsterSkillManager : MonoBehaviour
         _reviveAfter.SetActive(true);
     }
     #endregion
+
+    #region MeleeAttack
+    public void MeleeAttack()
+    {
+        Debug.Log("Attack 함수 시작");
+        //내적 이용하여 공격 범위 (전방 부채꼴) 정해서
+        Collider[] colliders = Physics.OverlapSphere(transform.position, 5f);
+        foreach (Collider collider in colliders)
+        {
+            // 공격 범위 확인
+            Vector3 source = transform.position;
+            source.y = 0;
+            Vector3 destination = collider.transform.position;
+            destination.y = 0;
+
+            Vector3 targetDir = (destination - source).normalized;
+            float targetAngle = Vector3.Angle(transform.forward, targetDir);
+            if (targetAngle > 90f * 0.5f)
+                continue;
+
+            Debug.Log("공격 조건 OK");
+            IDamagable damageble = collider.GetComponent<IDamagable>();
+            if (damageble != null)
+            {
+                Debug.Log("공격");
+                damageble.TakeDamage(10f);
+            }
+        }
+    }
+    #endregion
 }

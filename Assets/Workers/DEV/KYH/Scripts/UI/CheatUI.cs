@@ -9,8 +9,10 @@ public class CheatUI : MonoBehaviour
 {
     [Inject] StatModel model;
 
+    [SerializeField] PlayerController player;
     [SerializeField] TMP_Dropdown dropdown;
     [SerializeField] TMP_InputField inputField;
+    [SerializeField] GameObject dropGear;
 
     private List<string> dropdownList;
 
@@ -116,5 +118,13 @@ public class CheatUI : MonoBehaviour
                 model.SetAbility(AdditionAbility.ChipGetAmount, float.Parse(inputField.text));
                 break;
         }
+    }
+
+    public void CreateGear()
+    {
+        Vector3 randomPos = player.transform.position + Random.insideUnitSphere * 5f;
+        randomPos.y = 0;
+        Instantiate(dropGear, randomPos, Quaternion.identity)
+            .GetComponent<DropGear>().SetDropItem(Part.신발, 1, true, true);
     }
 }

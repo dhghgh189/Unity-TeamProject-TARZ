@@ -6,6 +6,7 @@ public class TestManager : MonoBehaviour
 {
     [SerializeField] JoystickTester joystickTester;
     [SerializeField] PlayerController player;
+    
 
     bool isLocked;
 

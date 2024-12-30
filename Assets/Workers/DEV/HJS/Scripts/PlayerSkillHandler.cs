@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.Events;
 using Zenject;
 using static BaseSkillSO;
-using static Cinemachine.DocumentationSortingAttribute;
 using static SkillEnum;
 using ActTiming = SkillEnum.ActTimingType;
 
@@ -45,7 +44,7 @@ public class PlayerSkillHandler : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Alpha0))
+        if (Input.GetKeyDown(KeyCode.Alpha0))
         {
             model.CurrentHp -= 10;
         }
@@ -112,7 +111,7 @@ public class PlayerSkillHandler : MonoBehaviour
         #endregion
 
         #region 패시브 스킬 넣기
-        foreach(PassiveSkill psivSkill in skill.passiveSkills)
+        foreach (PassiveSkill psivSkill in skill.passiveSkills)
         {
             psivSkill.Parent = skill;
             psivSkill.StatModel = model;
@@ -172,7 +171,7 @@ public class PlayerSkillHandler : MonoBehaviour
         #endregion
 
         // 스킬리스트에 있으면 레벨 올려주기
-        if (skillDic.ContainsKey(skill.Name) )
+        if (skillDic.ContainsKey(skill.Name))
         {
             Debug.Log("스킬 레벨업");
             int level = skillDic[skill.Name];

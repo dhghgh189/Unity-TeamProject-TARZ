@@ -17,5 +17,7 @@ public class SpawnTrigger : MonoBehaviour
         {
             _monsterSpawner.Spawn();
         }
+
+        Destroy(gameObject);
     }
 }

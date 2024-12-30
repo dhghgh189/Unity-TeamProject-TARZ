@@ -119,11 +119,12 @@ public class MonsterSkillManager : MonoBehaviour
 
         if (jumpRoutine_jumpAttack == null)
         {
+            yield return Util.GetDelay(0.8f);
             jumpRoutine_jumpAttack = StartCoroutine(JumpRoutine_JumpAttack());
             Debug.Log("점프!!");
         }
 
-        yield return new WaitForSeconds(_jumpAttack.CoolTime);
+        yield return Util.GetDelay(_jumpAttack.CoolTime);
         jumpAttackRoutine = null;
         _jumpAttack.CanUseSkill = true;
     }
@@ -192,10 +193,10 @@ public class MonsterSkillManager : MonoBehaviour
         Radiation jackRadiation = _wheelWindTrigger.GetComponent<Radiation>();
       /*  jackRadiation.Interaval = WheelWindSkill.Interval;
         jackRadiation.Damage = WheelWindSkill.Damage;*/
-        yield return new WaitForSeconds(WheelWindSkill.Duration);
+        yield return Util.GetDelay(WheelWindSkill.Duration);
         _wheelWindTrigger.SetActive(false);
 
-        yield return new WaitForSecondsRealtime(WheelWindSkill.CoolTime);
+        yield return Util.GetDelay(WheelWindSkill.CoolTime);
         wheelWindRoutine = null;
         WheelWindSkill.CanUseSkill = true;
     }
@@ -212,7 +213,7 @@ public class MonsterSkillManager : MonoBehaviour
         GameObject bomb = Instantiate(_bombPrefab, _muzzlePoint.position, _muzzlePoint.rotation);
         Rigidbody bombRb = bomb.GetComponent<Rigidbody>();
         bombRb.AddForce((_muzzlePoint.forward + _muzzlePoint.up * 3) * BombSkill.ThrowForce, ForceMode.Impulse);
-        yield return new WaitForSeconds(BombSkill.CoolTime);
+        yield return Util.GetDelay(BombSkill.CoolTime);    
         bombRoutine = null;
         BombSkill.CanUseSkill = true;
 
@@ -259,7 +260,7 @@ public class MonsterSkillManager : MonoBehaviour
     public IEnumerator DashAttackRoutine()
     {
         DashAttackSkill.CanUseSkill = false;
-        _animator.SetTrigger("DashAttack");
+        _animator.SetBool("DashAttack", true);
 
         if (jumpRoutine_dashAttack == null)
         {
@@ -288,7 +289,10 @@ public class MonsterSkillManager : MonoBehaviour
             }
         }
 
-        yield return new WaitForSeconds(DashAttackSkill.CoolTime);
+        yield return Util.GetDelay(0.5f);
+        _animator.SetBool("DashAttack", false);
+
+        yield return Util.GetDelay(DashAttackSkill.CoolTime);
         dashAttackRoutine = null;
         DashAttackSkill.CanUseSkill = true;
     }

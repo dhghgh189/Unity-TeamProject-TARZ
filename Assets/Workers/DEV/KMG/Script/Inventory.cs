@@ -85,18 +85,6 @@ public class Inventory : MonoBehaviour
         UI_InventorySlots slot = EmptySlot();
         if (!slot) return false;
 
-        // 해당 부위의 베이스 장비를 가져옴
-        Gear baseGear = Instantiate(baseGears.Where(x => x.Part == gear.Part).First());
-
-        // 장갑은 4개중 하나의 기본 능력치를 가지므로 능력치 3개를 삭제
-        if (gear.Part == Part.장갑)
-        {
-            for (int i = 0; i < 3; i++)
-            {
-                gear.Abilities.RemoveAt(Random.Range(0, gear.Abilities.Count));
-            }
-        }
-
         // 이름 변경
         gear.SetName();
 

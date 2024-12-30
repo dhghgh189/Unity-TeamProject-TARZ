@@ -15,9 +15,9 @@ public class SpawnTrigger : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            Debug.Log("몬스터 소환!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
             _monsterSpawner.Spawn();
+            Destroy(gameObject);
         }
-
-        Destroy(gameObject);
     }
 }

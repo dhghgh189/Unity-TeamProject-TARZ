@@ -73,7 +73,15 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
         GameObject gear = Instantiate(_gear, transform.position, transform.rotation);
         gear.GetComponent<DropGear>().SetDropItem(Part.신발, 1, true, true);
 
-        ReturnPool.ReturnPool(this);
+        if (ReturnPool != null)
+        {
+            ReturnPool.ReturnPool(this);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+        
     }
 
     public void KnockBack(GameObject attacker)

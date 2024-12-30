@@ -32,6 +32,8 @@ public class BlackHollObject : MonoBehaviour
     private float damageDelta;
     private float rangeDelta;
 
+    public Vector3 dir;
+
     private Coroutine coroutine;
 
     private void Awake()
@@ -60,10 +62,14 @@ public class BlackHollObject : MonoBehaviour
             
             absorptionRange = Mathf.Clamp(absorptionMinRange * delta, absorptionMinRange, absorptionMaxRange);
             explosionDamage = Mathf.Clamp(explosionMinDamage * delta, explosionMinDamage, explosionMaxDamage);
-            body.transform.localScale *= delta * 0.5f;
+            body.transform.localScale = Vector3.one * delta * 0.5f;
             delta += Time.deltaTime;
             yield return null;
         }
+
+        body.transform.localScale = Vector3.one;
+        absorptionRange = absorptionMaxRange;
+        explosionDamage = explosionMaxDamage;
 
         FullCharge = true;
     }
@@ -89,7 +95,7 @@ public class BlackHollObject : MonoBehaviour
         while (time < moveTime)
         {
             yield return null;
-            transform.Translate(transform.forward * moveSpeed * Time.deltaTime);
+            transform.Translate(dir * moveSpeed * Time.deltaTime);
             time += Time.deltaTime;
         }
 

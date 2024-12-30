@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using System.Net;
 using UnityEngine;
 using UnityEngine.Events;
 using static UnityEngine.UI.GridLayoutGroup;
@@ -7,7 +9,7 @@ using static UnityEngine.UI.GridLayoutGroup;
 public enum ManaBlackHollDataType { ExplosionMinDamage, ExplosionMaxDamage, AbsorptionMinRange, AbsorptionMaxRange, AbsorptionSpeed, ThrowSpeed, FlightTime, ExplosionRange }
 public class ManaBlackHollSkill : IManaSkill
 {
-    private const string KEY_NAME = "ManaBlackHoll_1";
+    private const string KEY_NAME = "ManaBlackHoll";
     private ManaSkillDataSO skillData;
     public LinkedList<BaseManaState> Acts { get; private set; }
     public ManaSkillDataSO SkillData { get => skillData; set => skillData = value; }
@@ -19,6 +21,9 @@ public class ManaBlackHollSkill : IManaSkill
     public ManaBlackHollSkill(PlayerController owner)
     {
         Acts = new LinkedList<BaseManaState>();
+        Acts.AddLast(new ManaBlackHoll_1(owner, this));
+        Acts.AddLast(new ManaBlackHoll_2(owner, this));
+
         OnThrowEvent = new UnityEvent();
         tmp = Resources.Load("Unmanaged/BlackHoll") as GameObject;
     }
@@ -55,6 +60,8 @@ public class ManaBlackHollSkill : IManaSkill
             base.OnEnter();
             Debug.Log("블랙홀 생성 시작");
 
+            owner.Movement.Rigid.velocity = Vector3.zero;
+
             if (camTrf == null)
                 camTrf = Camera.main.transform;
 
@@ -79,20 +86,26 @@ public class ManaBlackHollSkill : IManaSkill
         public override void OnUpdate()
         {
             base.OnUpdate();
-            // 시야를 고정하고
-            // 무슨 버튼? 누르면 즉시 나가는거 같다
-            // 그 예외처리 실행
+
+            if (blackHoll is null) return;
+
+            if (lookDir != Vector3.zero && owner.transform.forward != lookDir)
+            {
+                owner.Movement.LookAt(lookDir);
+            }
 
             // else 로 한 이유 -> 누른 타이밍이 애니메이션이 끝나는 타이밍이면 동시에 되서, 입력이 우선
-            if(blackHoll.CanThrow && owner.PInput.TryThrow)
+            if (blackHoll.CanThrow && owner.PInput.TryThrow)
             {
                 Debug.Log("블랙홀을 지금 발포하기 요청!");
                 owner.ManaSkillHandler.NextStep();
+                blackHoll = null;
             }
             else if (blackHoll.FullCharge)
             {
                 Debug.Log("블랙홀을 최대치 만큼 생성 후 발포 요청!");
                 owner.ManaSkillHandler.NextStep();
+                blackHoll = null;
             }
 
         }
@@ -100,13 +113,15 @@ public class ManaBlackHollSkill : IManaSkill
         public override void OnAction()
         {
             // 생성하는 부분
-            parent.blackhollInstance = Object.Instantiate(parent.tmp, createPoint.position, createPoint.rotation);
-            
+            parent.blackhollInstance = Object.Instantiate(parent.tmp, createPoint.position, owner.transform.rotation);
+
             blackHoll = parent.blackhollInstance.GetComponent<BlackHollObject>();
             if (blackHoll != null) 
-            { 
+            {
+                Debug.Log("연결!");
                 // 이벤트 연결
                 parent.OnThrowEvent.AddListener(blackHoll.Throw);
+                blackHoll.dir = owner.transform.forward;
             }
             else
             {
@@ -147,6 +162,7 @@ public class ManaBlackHollSkill : IManaSkill
         public override void OnEnter()
         {
             base.OnEnter();
+            animTimer = 999f;
 
             Debug.Log("블랙홀 발사 시작");
 
@@ -195,6 +211,10 @@ public class ManaBlackHollSkill : IManaSkill
         public override void OnExit()
         {
             parent.OnThrowEvent.RemoveAllListeners();
+            if (parent.blackhollInstance is not null)
+            {
+                parent.blackhollInstance = null;
+            }
         }
     }
 }

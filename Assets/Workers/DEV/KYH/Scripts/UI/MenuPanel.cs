@@ -10,7 +10,7 @@ using Zenject;
 public class MenuPanel : MonoBehaviour
 {
     [Inject] SaveManager saveManager;
-    [Inject] SaveSlot saveSlot;
+    //[Inject] SaveSlot saveSlot;
 
     [SerializeField] private ChangeInput inputManager;
     [SerializeField] private Button selectButton;
@@ -47,10 +47,10 @@ public class MenuPanel : MonoBehaviour
 
     public void OnClickQuitGameButton()
     {
-        if (saveSlot != null)
-        {
-            saveManager.Save();
-        }
+        //if (saveSlot != null)
+        //{
+        //    saveManager.Save();
+        //}
 
         SceneManager.LoadScene(0);
     }

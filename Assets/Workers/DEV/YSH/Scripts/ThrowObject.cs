@@ -72,6 +72,10 @@ public class ThrowObject : MonoBehaviour, IDrainable
 
     private void OnCollisionEnter(Collision other)
     {
+        // 획득 전에 다른 오브젝트에 닿아서 처리되는 것을 방지
+        if (!isCollected)
+            return;
+
         rigid.velocity = Vector3.zero;
 
         // 부딪힌 오브젝트가 target이 아니면
@@ -101,7 +105,6 @@ public class ThrowObject : MonoBehaviour, IDrainable
                 owner.SkillHandler.ThrowObjectCollision(gameObject, other.gameObject);
             }
         }
-
 
         Destroy(gameObject);
     }

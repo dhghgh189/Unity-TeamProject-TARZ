@@ -9,7 +9,9 @@ public class Collector : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         ThrowObject tobj = other.gameObject.GetComponent<ThrowObject>();
-        if (tobj != null && tobj.IsCollected == false)
+        if (tobj != null 
+            && tobj.IsCollected == false
+            && player.Attack.ObjectCount < player.Attack.MaxObjectCount)
         {
             //Debug.Log($"Get Throw Object! : {tobj.name}");
             tobj.Get(player);

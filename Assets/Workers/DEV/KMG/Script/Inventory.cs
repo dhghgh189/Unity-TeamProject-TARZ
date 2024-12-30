@@ -1,7 +1,7 @@
 using System.Linq;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using Zenject;
 
@@ -21,6 +21,8 @@ public class Inventory : MonoBehaviour
 
     private Button selectedButton;
 
+    private InputAction inventoryAction;
+
     private void Start()
     {
         SelectButtons = selectPanel.GetComponentsInChildren<Button>();
@@ -33,6 +35,8 @@ public class Inventory : MonoBehaviour
             saveGear.Abilities = item.Abilities;
             EmptySlot().SetInventorySlots(saveGear);
         }
+
+        inventoryAction = InputSystem.actions.FindAction("Inventory");
     }
 
     // 티어와 부위를 지정해 장비를 인벤토리에 저장하는 함수
@@ -161,11 +165,11 @@ public class Inventory : MonoBehaviour
     [SerializeField] GameObject canvas;
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            GetGear((Part)Random.Range(0, (int)Part.Size), Random.Range(1, 4));
-        }
-        if (Input.GetKeyDown(KeyCode.Tab))
+        //if (Input.GetKeyDown(KeyCode.R))
+        //{
+        //    GetGear((Part)Random.Range(0, (int)Part.Size), Random.Range(1, 4));
+        //}
+        if (inventoryAction.WasPressedThisFrame())
         {
             if (canvas.activeSelf)
             {

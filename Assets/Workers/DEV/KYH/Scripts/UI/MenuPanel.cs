@@ -12,7 +12,6 @@ public class MenuPanel : MonoBehaviour
 {
     [Inject] SaveManager saveManager;
     //[Inject] SaveSlot saveSlot;
-    [SerializeField] private PlayerInputHandler inputHandler;
     private InputAction menuAction;
     private bool isActive;
 

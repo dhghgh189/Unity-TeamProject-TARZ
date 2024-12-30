@@ -32,6 +32,7 @@ public class ActMove : Action
             if( _distance <= _monsterData.AttackRange || _distance <= _monsterData.CanUseProjectileSkillDistance )
             {
                 _agent.isStopped = true;
+                _animator.SetBool("Move", false);
                 
                 return TaskStatus.Success;
             }

@@ -63,8 +63,6 @@ public class MonsterSkillManager : MonoBehaviour
 
     #region Etc
     [Header("Etc")]
-    [SerializeField] GameObject _player;
-
     private Animator _animator;
 
     private Transform _muzzlePoint; // 불러올거에요 비워놔주세요
@@ -318,7 +316,7 @@ public class MonsterSkillManager : MonoBehaviour
     public IEnumerator ElectricWallRoutine()
     {
         ElectricWallSkill.CanUseSkill = false;
-    /*    _animator.SetTrigger("R");*/
+        _animator.SetTrigger("ElectricWall");
 
         _electricWallPosition = transform.position + transform.forward * 5f;
 

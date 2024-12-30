@@ -331,6 +331,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: f34b99ca2454aeb42a316f5fa7a1a5ba,
         type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f34b99ca2454aeb42a316f5fa7a1a5ba,
+        type: 3}
       propertyPath: m_TagString
       value: Bomber
       objectReference: {fileID: 0}
@@ -500,6 +505,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1401089475864900157}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f34b99ca2454aeb42a316f5fa7a1a5ba,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2999352012146182}
   m_SourcePrefab: {fileID: 100100000, guid: f34b99ca2454aeb42a316f5fa7a1a5ba, type: 3}
 --- !u!1 &3471556509123995877 stripped
 GameObject:
@@ -708,6 +717,36 @@ MonoBehaviour:
   m_Script: {fileID: -2012967667, guid: da41a8dd3b5ec434a802d9b5a2a0a777, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2999352012146182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3471556509123995877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03a14c639c0a11f439c061e57d8114bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bomb: {fileID: 11400000, guid: f7aef78b7edafe440b1047ceb38c6e32, type: 2}
+  _dashAttack: {fileID: 11400000, guid: 25fbceb7c2e4388469bfc93e8fb1827d, type: 2}
+  _jumpAttack: {fileID: 11400000, guid: 1e2de81d87b1e6c409c75d41a0869da0, type: 2}
+  _mine: {fileID: 11400000, guid: c1bf062782da5344e94c4627697391ec, type: 2}
+  _stimPak: {fileID: 11400000, guid: c94b203ef3b68d041b41e908d6900a90, type: 2}
+  _wheelWind: {fileID: 11400000, guid: b08fc3fef67779c41bfd6951959ea2a0, type: 2}
+  _electricWall: {fileID: 11400000, guid: c1c60427577587c4582d4c2b78f1246d, type: 2}
+  _thunder: {fileID: 11400000, guid: 21aa5c94142e013489e9d47926ed6db5, type: 2}
+  _trippleAttack: {fileID: 11400000, guid: e89517893da7be74a97c776a7186f4dd, type: 2}
+  _frogJumpAttack: {fileID: 11400000, guid: 664f7e9cd5aacfb4188e01ac660bef23, type: 2}
+  _revive: {fileID: 11400000, guid: 29b127eac8fc40c4cbf72cac79dd6fea, type: 2}
+  _bombPrefab: {fileID: 1616805512990888026, guid: 7be3fa168ddd78a4f8fe83cd4cad94ad,
+    type: 3}
+  _minePrefab: {fileID: 1616805512990888026, guid: b7038b1d288993b4682a50c66df34277,
+    type: 3}
+  _jackTheRipper: {fileID: 0}
+  _electricWallPrefab: {fileID: 0}
+  _thunderPrefab: {fileID: 0}
 --- !u!4 &4280287630806463071 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f34b99ca2454aeb42a316f5fa7a1a5ba,

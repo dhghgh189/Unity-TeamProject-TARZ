@@ -15,7 +15,7 @@ public class SkillSpecDatabase : ScriptableObject
     private BaseSkillSO[] showSkillArray;
 
     [Header("Skills")]
-    [SerializeField] List<BaseSkillSO> skillList;
+    public List<BaseSkillSO> skillList;
 
     private void Awake()
     {

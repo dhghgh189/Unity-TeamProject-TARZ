@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using Zenject;
 using static BaseSkillSO;
+using static Cinemachine.DocumentationSortingAttribute;
 using static SkillEnum;
 using ActTiming = SkillEnum.ActTimingType;
 
@@ -59,8 +60,13 @@ public class PlayerSkillHandler : MonoBehaviour
     // 던지는 물체 -> 헨들러에게 충돌 되었다고 요청
     public void ThrowObjectCollision(GameObject to, GameObject collider) => onCollisionThrowObjectEvents?.Invoke(to, collider);
 
-    public void AddSkill(BaseSkillSO skill)
+    public void AddSkill(BaseSkillSO skill, int setLevel = 1)
     {
+        if (LevelUp(skill))
+        {
+            return;
+        }
+
         #region 액티브 스킬 넣기
         foreach (ActiveSkill actSkill in skill.activeSkills)
         {
@@ -168,20 +174,25 @@ public class PlayerSkillHandler : MonoBehaviour
         // 스킬리스트에 있으면 레벨 올려주기
         if (skillDic.ContainsKey(skill.Name) )
         {
+            Debug.Log("스킬 레벨업");
             int level = skillDic[skill.Name];
-            level += 1;
+            level += setLevel;
             skillDic[skill.Name] = level;
             skill.SkillLevel = level;
+            Debug.Log($"스킬 : {skill.Name} / {level}");
         }
         // 스킬리스트에 없으면 넣어두기
         else
         {
-            skillDic.Add(skill.Name, 1);
-            skill.SkillLevel = 1;
+            skillDic.Add(skill.Name, setLevel);
+            if (setLevel == 1)
+            {
+                skill.SkillLevel = 1;
+            }
             Debug.Log("딕션에 추가!");
         }
         // 디버그로 정보 보여주기
-        Debug.Log($"Add Skill Name : {skill.Name}  / Skill Act Timing : {skill.Timing} ");
+        Debug.Log($"Add Skill Name : {skill.Name}  / Skill Act Timing : {skill.Timing} / Skill Level : {skill.SkillLevel}");
     }
 
     public void RemoveSkill(BaseSkillSO skill)
@@ -299,22 +310,37 @@ public class PlayerSkillHandler : MonoBehaviour
         }
     }
 
-    public void LevelUp(BaseSkillSO skill)
+    public bool LevelUp(BaseSkillSO skill)
     {
+        // 스킬에 등록이 되어있다면 -> 기존에 한번이라도 장착은 한 스킬
         if (skillDic.ContainsKey(skill.Name))
         {
+            // 해당 스킬의 레벨을 가져온다
             int level = skillDic[skill.Name];
 
-            if (level >= skill.MaxLevel)
+            // 가져왔는데 레벨이 0이다 -> 삭제한 스킬
+            if (level == 0)
             {
-                return;
+                // 등록을 위한 false 반환
+                return false;
+            }
+            // 스킬이 이미 최대 레벨에 도달했다
+            else if (level >= skill.MaxLevel)
+            {
+                // 등록할 행동을 안하기 위한 true 반환
+                return true;
             }
 
+            // 레벨을 올려주는 로직
             level += 1;
             skillDic[skill.Name] = level;
             skill.SkillLevel = level;
 
             Debug.Log($"<color=white>{skill.name} 스킬 {level}로 레벨업!</color>");
+            // 등록하는 행동을 안하기 위한 true 반환
+            return true;
         }
+        // 스킬 등록이 안되어 있다 -> 한번도 장착을 안한 스킬 -> 등록을 위한 false 반환
+        return false;
     }
 }

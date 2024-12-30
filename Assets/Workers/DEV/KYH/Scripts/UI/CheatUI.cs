@@ -12,7 +12,7 @@ public class CheatUI : MonoBehaviour
     [Inject] Inventory inventory;
 
     [SerializeField] PlayerController player;
-    
+    [SerializeField] SkillSpecDatabase skillData;
     [SerializeField] GameObject dropGear;
 
     [Header("드롭다운")]
@@ -21,6 +21,8 @@ public class CheatUI : MonoBehaviour
     [SerializeField] TMP_Dropdown tierDropdown;
     [SerializeField] TMP_Dropdown ability01Dropdown;
     [SerializeField] TMP_Dropdown ability02Dropdown;
+    [SerializeField] TMP_Dropdown skillDropdown;
+    [SerializeField] TMP_Dropdown levelDropdown;
 
     [Header("인풋필드")]
     [SerializeField] TMP_InputField statInputField;
@@ -35,6 +37,7 @@ public class CheatUI : MonoBehaviour
         Init_StatDropdown();
         Init_PartsDropdown();
         Init_AbilityDropdown();
+        Init_skillDropdown();
     }
 
     private void Init_StatDropdown()
@@ -122,6 +125,34 @@ public class CheatUI : MonoBehaviour
         // 현재 dropdown에 선택된 옵션을 0번으로 설정
         ability01Dropdown.value = 0;
         ability02Dropdown.value = 0;
+    }
+
+    private void Init_skillDropdown()
+    {
+        // 현재 dropdown에 있는 모든 옵션을 제거
+        skillDropdown.ClearOptions();
+
+        dropdownList = new List<string>(skillData.skillList.Count);
+
+        for (int i = 0; i < skillData.skillList.Count; i++)
+        {
+            dropdownList.Add(skillData.skillList[i].Name);
+        }
+
+        // 새로운 옵션 설정을 위한 OptionData 생성
+        List<TMP_Dropdown.OptionData> optionList = new List<TMP_Dropdown.OptionData>();
+
+        // arrayClass 배열에 있는 모든 문자열 데이터를 불러와서 optionList에 저장
+        foreach (string str in dropdownList)
+        {
+            optionList.Add(new TMP_Dropdown.OptionData(str));
+        }
+
+        // 위에서 생성한 optionList를 dropdown의 옵션 값에 추가
+        skillDropdown.AddOptions(optionList);
+
+        // 현재 dropdown에 선택된 옵션을 0번으로 설정
+        skillDropdown.value = 0;
     }
 
     public void MujeokMode(bool isOn)
@@ -243,5 +274,18 @@ public class CheatUI : MonoBehaviour
     {
         Debug.Log($"마나 무한 : {isOn}");
         CheatManager.isManaInfinite = isOn;
+    }
+
+    public void RandomSkill()
+    {
+        BaseSkillSO[] skill = skillData.ShowSkillArray();
+        player.SkillHandler.AddSkill(skill[0]);
+    }
+
+    public void GetSkill()
+    {
+        BaseSkillSO skill = Instantiate(skillData.skillList[skillDropdown.value]);
+        skill.SkillLevel = levelDropdown.value + 1;
+        player.SkillHandler.AddSkill(skill, levelDropdown.value + 1);
     }
 }

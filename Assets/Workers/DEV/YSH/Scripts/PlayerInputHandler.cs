@@ -1,11 +1,18 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class PlayerInput : MonoBehaviour
+public class PlayerInputHandler : MonoBehaviour
 {
     private PlayerController controller;
     public List<bool> TryKeyDown = new();
+
+    private PlayerInput input;
+    public PlayerInput Input { get { return input; } }
+
+    private Vector2 move;
     public Vector3 InputDir { get; private set; }
+    public Vector2 InputLook { get; private set; }
     public bool TryJump { get; private set; }
     public bool TryThrow { get; private set; }
     public bool TryMelee { get; private set; }
@@ -13,6 +20,7 @@ public class PlayerInput : MonoBehaviour
     public bool TryDrain { get; private set; }
     public bool TryInteraction { get; set; }
     public bool TryManaSkill { get; private set; }
+    public bool TryLockOnToggle { get; private set; }
 
     [HideInInspector] public bool[] UseKeyPressed;
 
@@ -21,6 +29,7 @@ public class PlayerInput : MonoBehaviour
         UseKeyPressed = new bool[Define.USEKEY_MAXCOUNT];
         
         controller = GetComponent<PlayerController>();
+        input = GetComponent<PlayerInput>();
 
         TryKeyDown.Add(TryJump);
         TryKeyDown.Add(TryThrow);
@@ -44,25 +53,26 @@ public class PlayerInput : MonoBehaviour
             return;
         }
 
-        InputDir = new Vector3(
-            Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
+        move = input.actions["Move"].ReadValue<Vector2>();
+        InputDir = new Vector3(move.x, 0, move.y);
 
-        // 패드 지원되도록 구성해야 함    
-        TryThrow = Input.GetButtonDown("Throw");
-        TryMelee = Input.GetButtonDown("Melee");      
-        TryManaSkill = Input.GetButton("TryManaSkill");
+        InputLook = input.actions["Look"].ReadValue<Vector2>();
+        TryThrow = input.actions["Throw"].WasPressedThisFrame();
+        TryMelee = input.actions["Melee"].WasPressedThisFrame();
+        TryManaSkill = input.actions["ManaSkillMode"].IsPressed();
+        TryLockOnToggle = input.actions["LockOnToggle"].WasPressedThisFrame();
 
         if (!TryManaSkill)
         {
-            TryDash = Input.GetButtonDown("Dash");
-            TryJump = Input.GetButtonDown("Jump");
-            TryDrain = Input.GetButton("Drain");
-            TryInteraction = Input.GetButtonDown("Interaction");
+            TryDash = input.actions["Dash"].WasPressedThisFrame();
+            TryJump = input.actions["Jump"].WasPressedThisFrame();
+            TryDrain = input.actions["Drain"].IsPressed();
+            TryInteraction = input.actions["Interact"].WasPressedThisFrame();
         }
 
         for (int i = 0; i < Define.USEKEY_MAXCOUNT; i++)
         {
-            UseKeyPressed[i] = Input.GetButtonDown($"UseKey {i + 1}");
+            UseKeyPressed[i] = input.actions[$"Use{i + 1}"].WasPressedThisFrame();
         }
     }
 }

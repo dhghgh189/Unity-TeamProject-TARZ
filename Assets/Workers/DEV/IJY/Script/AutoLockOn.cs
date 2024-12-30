@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class AutoLockOn : MonoBehaviour
 {
+    private PlayerInputHandler inputHandler;
     public Action action;
     private bool KickDownOn, ToggleOn;
     private LayerMask monsterLayer;
@@ -23,6 +24,8 @@ public class AutoLockOn : MonoBehaviour
 
     private void Start()
     {
+        inputHandler = GetComponent<PlayerInputHandler>();
+
         KickDownOn = false; ToggleOn = false;
         Monsters = new List<Transform>();
         monsterLayer = LayerMask.GetMask("Monster");
@@ -32,12 +35,12 @@ public class AutoLockOn : MonoBehaviour
     {
         if (!ToggleOn)
         {
-            if (Input.GetKeyDown(KeyCode.RightAlt))
+            if (inputHandler.Input.actions["LockOnKeyDown"].WasPressedThisFrame())
             {
                 KickDown_AutoLockOn(KickDownOn = true);
                 Debug.Log($"킥다운 활성화됨{KickDownOn}");
             }
-            else if (Input.GetKeyUp(KeyCode.RightAlt))
+            else if (inputHandler.Input.actions["LockOnKeyDown"].WasReleasedThisFrame())
             {
                 KickDown_AutoLockOn(KickDownOn = false);
                 Debug.Log($"킥다운 비활성화됨{KickDownOn}");
@@ -45,7 +48,7 @@ public class AutoLockOn : MonoBehaviour
         }
         if (!KickDownOn)
         {
-            if (Input.GetKeyDown(KeyCode.LeftAlt)) Toggle_AutoLockOn();
+            if (inputHandler.TryLockOnToggle) Toggle_AutoLockOn();
         }
     }
 

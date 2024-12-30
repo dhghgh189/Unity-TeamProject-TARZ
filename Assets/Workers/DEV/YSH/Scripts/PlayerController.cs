@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour, IDamagable
     public AblityAdapter AblityAdapter;
     public PlayerFSM Fsm { get; private set; }
     public Animator Anim { get { return anim; } }
-    public PlayerInput PInput { get; private set; }
+    public PlayerInputHandler PInput { get; private set; }
     public StatModel Stat { get { return stat; } }
     public PlayerMovement Movement { get; private set; }
     public PlayerAttack Attack { get; private set; }
@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour, IDamagable
     {
         anim = GetComponent<Animator>();
         AblityAdapter = GetComponent<AblityAdapter>();
-        PInput = GetComponent<PlayerInput>();
+        PInput = GetComponent<PlayerInputHandler>();
         Movement = GetComponent<PlayerMovement>();
         Attack = GetComponent<PlayerAttack>();
         SkillHandler = GetComponent<PlayerSkillHandler>();

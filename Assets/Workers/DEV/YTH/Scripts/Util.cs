@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Reflection;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public static partial class Util
 {
@@ -52,6 +53,10 @@ public static partial class Util
         }
     }
 
+    public static void ChangeScene(Define.SceneType sceneType)
+    {
+        SceneManager.LoadScene((int)sceneType);
+    }
 
     /* public void StartRoutine(Coroutine coroutine, IEnumerator enumerator)
      {

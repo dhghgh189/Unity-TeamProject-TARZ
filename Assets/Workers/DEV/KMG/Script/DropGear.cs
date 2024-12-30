@@ -6,6 +6,11 @@ public class DropGear : MonoBehaviour
     [Inject] Inventory inventory;
     [SerializeField] Part part;
     [SerializeField] int tier;
+    private void Awake()
+    {
+        inventory = FindAnyObjectByType<Inventory>();
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (!other.transform.CompareTag("Player") || !inventory.GetGear(part, tier)) return;

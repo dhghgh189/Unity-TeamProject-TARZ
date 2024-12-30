@@ -14,4 +14,6 @@ public static class Define
     public static readonly int HASH_ANIM_DAMAGED = Animator.StringToHash("Damage");
 
     public const int USEKEY_MAXCOUNT = 4;
+
+    public enum SceneType { Title, Lobby, Game }
 }

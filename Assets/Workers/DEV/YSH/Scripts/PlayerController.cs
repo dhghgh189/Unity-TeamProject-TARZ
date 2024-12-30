@@ -167,6 +167,12 @@ public class PlayerController : MonoBehaviour, IDamagable
 
     public void TakeDamage(float damage)
     {
+        if (CheatManager.isMujeok)
+        {
+            Debug.Log("무적이당");
+            return; 
+        }
+
         Debug.Log("아야");
         Stat.CurrentHp -= damage;
 

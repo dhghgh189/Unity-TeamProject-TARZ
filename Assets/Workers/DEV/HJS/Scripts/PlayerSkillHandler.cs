@@ -51,7 +51,7 @@ public class PlayerSkillHandler : MonoBehaviour
     // 던지는 물체 -> 헨들러에게 충돌 되었다고 요청
     public void ThrowObjectCollision(GameObject to, GameObject collider) => onCollisionThrowObjectEvents?.Invoke(to, collider);
 
-    public void AddSkill(BaseSkillSO skill)
+    public void AddSkill(BaseSkillSO skill, int setLevel = 1)
     {
         if (LevelUp(skill))
         {
@@ -165,20 +165,25 @@ public class PlayerSkillHandler : MonoBehaviour
         // 스킬리스트에 있으면 레벨 올려주기 <- 제거했다가 다시 추가했을 때
         if (skillDic.ContainsKey(skill.Name))
         {
+            Debug.Log("스킬 레벨업");
             int level = skillDic[skill.Name];
-            level += 1;
+            level += setLevel;
             skillDic[skill.Name] = level;
             skill.SkillLevel = level;
+            Debug.Log($"스킬 : {skill.Name} / {level}");
         }
         // 스킬리스트에 없으면 넣어두기
         else
         {
-            skillDic.Add(skill.Name, 1);
-            skill.SkillLevel = 1;
+            skillDic.Add(skill.Name, setLevel);
+            if (setLevel == 1)
+            {
+                skill.SkillLevel = 1;
+            }
             Debug.Log("딕션에 추가!");
         }
         // 디버그로 정보 보여주기
-        Debug.Log($"Add Skill Name : {skill.Name}  / Skill Act Timing : {skill.Timing} ");
+        Debug.Log($"Add Skill Name : {skill.Name}  / Skill Act Timing : {skill.Timing} / Skill Level : {skill.SkillLevel}");
     }
 
     public void RemoveSkill(BaseSkillSO skill)

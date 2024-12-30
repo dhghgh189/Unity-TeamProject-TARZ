@@ -38,6 +38,7 @@ public class ActMove : Action
 
             _agent.isStopped = false;
             _agent.SetDestination(_player.transform.position);
+            _animator.SetBool("Move", true);
             return TaskStatus.Running;
         }
         else if (_condCanMove.IsPlayerWithinSight(_player))

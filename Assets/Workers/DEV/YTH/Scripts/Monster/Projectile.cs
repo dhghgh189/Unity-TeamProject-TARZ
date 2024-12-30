@@ -7,9 +7,11 @@ public class Projectile : MonoBehaviour // 일반 원딜 쫄몹
 
     [SerializeField] Rigidbody _rigidBody;
 
-    private MonsterData _monsterData;
-
     [SerializeField] GameObject _monster;
+
+    [SerializeField] GameObject _radiation;
+
+    private MonsterData _monsterData;
 
     private void Start()
     {
@@ -26,27 +28,14 @@ public class Projectile : MonoBehaviour // 일반 원딜 쫄몹
     {
         _rigidBody.velocity = Vector3.zero;
         _rigidBody.angularVelocity = Vector3.zero;
-    }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        IDamagable damagableObj = other.gameObject.GetComponent<IDamagable>();
+        _radiation.SetActive(true);
+
+        IDamagable damagableObj = collider.gameObject.GetComponent<IDamagable>();
         damagable = damagableObj;
         if (damagable != null)
         {
-
             damagable.TakeDamage(5);
-        }
-    }
-
-    // 도트뎀 코루틴 : 일정 시간마다 데미지를 주기적으로 줌
-    WaitForSeconds attackDelay = new(2f);
-    public IEnumerator TakeDOTRoutine(int damage)
-    {
-        while (true)
-        {
-            damagable.TakeDamage(damage);
-            yield return attackDelay;
         }
     }
 }

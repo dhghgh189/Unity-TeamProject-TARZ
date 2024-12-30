@@ -53,6 +53,7 @@ public class MonsterSkillManager : MonoBehaviour
 
     [SerializeField] GameObject _thunderPrefab;
 
+
     private GameObject _reviveBefore; // 불러올거에요 비워놔주세요
     public GameObject ReviveBefore { get { return _reviveBefore; } set { _reviveBefore = value; } }
 
@@ -64,7 +65,7 @@ public class MonsterSkillManager : MonoBehaviour
     [Header("Etc")]
     [SerializeField] GameObject _player;
 
-    [SerializeField] Animator _animator;
+    private Animator _animator;
 
     private Transform _muzzlePoint; // 불러올거에요 비워놔주세요
     public Transform MuzzlePoint { get { return _muzzlePoint; } set { _muzzlePoint = value; } }
@@ -86,6 +87,8 @@ public class MonsterSkillManager : MonoBehaviour
     private void Start()
     {
         SkillInit();
+
+        _animator = GetComponent<Animator>();
     }
 
     public void SkillInit()
@@ -136,9 +139,9 @@ public class MonsterSkillManager : MonoBehaviour
     public Coroutine jumpAttackRoutine;
     public IEnumerator JumpAttackRoutine() // 보스의 도약해서 착지하여 범위 공격
     {
+        _jumpAttack.CanUseSkill = false;
         _animator.SetTrigger("JumpAttack");
 
-        _jumpAttack.CanUseSkill = false;
         if (jumpRoutine_jumpAttack == null)
         {
             jumpRoutine_jumpAttack = StartCoroutine(JumpRoutine_JumpAttack());
@@ -167,8 +170,8 @@ public class MonsterSkillManager : MonoBehaviour
         }
 
         yield return new WaitForSeconds(_jumpAttack.CoolTime);
-        _jumpAttack.CanUseSkill = true;
         jumpAttackRoutine = null;
+        _jumpAttack.CanUseSkill = true;
     }
     #endregion
 
@@ -274,9 +277,9 @@ public class MonsterSkillManager : MonoBehaviour
     public Coroutine dashAttackRoutine;
     public IEnumerator DashAttackRoutine()
     {
+        DashAttackSkill.CanUseSkill = false;
         _animator.SetTrigger("DashAttack");
 
-        DashAttackSkill.CanUseSkill = false;
         if (jumpRoutine_dashAttack == null)
         {
             jumpRoutine_dashAttack = StartCoroutine(JumpRoutine_dashAttack());
@@ -303,6 +306,7 @@ public class MonsterSkillManager : MonoBehaviour
                 damageble.TakeDamage(_dashAttack.Damage);
             }
         }
+
         yield return new WaitForSeconds(DashAttackSkill.CoolTime);
         dashAttackRoutine = null;
         DashAttackSkill.CanUseSkill = true;
@@ -314,6 +318,8 @@ public class MonsterSkillManager : MonoBehaviour
     public IEnumerator ElectricWallRoutine()
     {
         ElectricWallSkill.CanUseSkill = false;
+    /*    _animator.SetTrigger("R");*/
+
         _electricWallPosition = transform.position + transform.forward * 5f;
 
         GameObject electricWall = Instantiate(_electricWallPrefab, _electricWallPosition, transform.rotation);
@@ -335,6 +341,7 @@ public class MonsterSkillManager : MonoBehaviour
     public IEnumerator ThunderRoutine()
     {
         ThunderSkill.CanUseSkill = false;
+        _animator.SetTrigger("Thunder");
 
         for (int i = 0; i < 11; i++)
         {
@@ -355,13 +362,11 @@ public class MonsterSkillManager : MonoBehaviour
 
     #region TrippleAttack
     public Coroutine trippleAttackRoutine;
-    public IEnumerator TrippleAttackRoutine()
+    public IEnumerator TrippleAttackRoutine() //   // TrippleAttackSkill 애니메이션 재생     //애니메이션에 공격 붙이기
     {
-       /* _animator.SetTrigger("TrippleAttack");*/
-
         TrippleAttackSkill.CanUseSkill = false;
-        // TrippleAttackSkill 애니메이션 재생
-        //애니메이션에 공격 붙이기
+        /* _animator.SetTrigger("TrippleAttack");*/
+
         yield return Util.GetDelay(TrippleAttackSkill.CoolTime);
         trippleAttackRoutine = null;
         TrippleAttackSkill.CanUseSkill = true;
@@ -452,6 +457,8 @@ public class MonsterSkillManager : MonoBehaviour
     public Coroutine frogJumpAttackRoutine;
     public IEnumerator FrogJumpAttackRoutine()
     {
+        _animator.SetTrigger("JumpAttack");
+
         if (jumpRoutine_frogJumpAttack == null)
         {
             jumpRoutine_frogJumpAttack = StartCoroutine(JumpRoutine_frogJumpAttack());
@@ -463,15 +470,12 @@ public class MonsterSkillManager : MonoBehaviour
     #endregion
 
     #region Revive
-    /*public Coroutine reviveRoutine;*/
     public void Revive()
     {
         ReviveSkill.CanUseSkill = false;
 
         _reviveBefore.SetActive(false);
         _reviveAfter.SetActive(true);
-      /*  yield return null;
-        reviveRoutine = null;*/
     }
     #endregion
 }

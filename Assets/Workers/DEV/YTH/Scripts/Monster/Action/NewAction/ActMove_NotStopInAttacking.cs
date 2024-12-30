@@ -17,7 +17,7 @@ public class ActMove_NotStopInAttacking : Action
 
     [SerializeField] Animator _animator;
 
-    [SerializeField] GameObject _player; 
+    [SerializeField] GameObject _player;
 
     private Transform _lastPlayerTransform; // 플레이어가 시야각에서 사라진 마지막 위치
 
@@ -34,14 +34,14 @@ public class ActMove_NotStopInAttacking : Action
 
         if (_condCanMove.IsPlayerWithinSight(_player)/* && !_monsterData.IsAttacked*/ )
         {
-            if( _distance <= _monsterData.AttackRange || _distance <= _monsterData.CanJumpDistance )
+            if (_distance <= _monsterData.AttackRange || _distance <= _monsterData.CanJumpDistance)
             {
                 return TaskStatus.Success;
             }
 
             _agent.SetDestination(_player.transform.position);
+            _animator.SetBool("Move", true);
             return TaskStatus.Running;
-            // _animator.SetBool("walk", true); // 해쉬로 바꿔주면 좋을듯
         }
         else if (_condCanMove.IsPlayerWithinSight(_player) == false)
         {

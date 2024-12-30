@@ -5,10 +5,10 @@ using Zenject;
 
 public class MSkill_StimPack : Action
 {
+    [Inject]
     [SerializeField] MonsterSkillManager _monsterSkillManager;
 
     [SerializeField] MonsterData _monsterData;
-
 
     public override TaskStatus OnUpdate()
 	{

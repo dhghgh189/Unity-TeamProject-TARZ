@@ -30,6 +30,8 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
     private void Start()
     {
         /*  _autoLockOn = _player.GetComponent<AutoLockOn>();*/
+
+        _animator = GetComponent<Animator>();
     }
 
     private void OnEnable()
@@ -52,7 +54,7 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
         _monsterData.CurHp -= damage;
         _monsterData.Attacked_First = true;
 
-        _animator.SetTrigger("TakeDamage");
+       /* _animator.SetTrigger("TakeDamage");*/
         if (_monsterData.CurHp <= 0)
         {
             OnDie?.Invoke();
@@ -64,6 +66,7 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
         /*_autoLockOn.action?.Invoke();*/
         ReturnPool.ReturnPool(this);
         _animator.SetTrigger("Die");
+
         GameObject gear = Instantiate(_gear, transform.position, transform.rotation);
         gear.GetComponent<DropGear>().SetDropItem(Part.신발, 1, true, true);
     }

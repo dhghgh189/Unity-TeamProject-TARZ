@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Zenject;
@@ -11,7 +12,11 @@ public class MenuPanel : MonoBehaviour
 {
     [Inject] SaveManager saveManager;
     //[Inject] SaveSlot saveSlot;
+    [SerializeField] private PlayerInputHandler inputHandler;
+    private InputAction menuAction;
+    private bool isActive;
 
+    [SerializeField] private GameObject menuPanel;
     [SerializeField] private ChangeInput inputManager;
     [SerializeField] private Button selectButton;
 
@@ -19,6 +24,7 @@ public class MenuPanel : MonoBehaviour
 
     private void Start()
     {
+        menuAction = InputSystem.actions.FindAction("Menu");
         inputManager.firstInput = selectButton;
         inputManager.firstInput.Select();
     }
@@ -29,15 +35,36 @@ public class MenuPanel : MonoBehaviour
         inputManager.firstInput.Select();
     }
 
+    private void Update()
+    {
+        if (menuAction.WasPressedThisFrame())
+        {
+            if (isActive)
+            {
+                menuPanel.SetActive(false);
+                isActive = false;
+                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.Locked;
+            }
+            else
+            {
+                menuPanel.SetActive(true);
+                isActive = true;
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
+            }
+        }
+    }
+
     public void OnClickSettingsButton()
     {
         settingsPanel.SetActive(true);
-        gameObject.SetActive(false);
+        menuPanel.SetActive(false);
     }
 
     public void OnClickBackToGameButton()
     {
-        gameObject.SetActive(false);
+        menuPanel.SetActive(false);
     }
 
     public void OnClickBackToMenuButton()

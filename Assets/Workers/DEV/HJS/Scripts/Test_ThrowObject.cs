@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Test_ThrowObject : MonoBehaviour
@@ -22,7 +20,7 @@ public class Test_ThrowObject : MonoBehaviour
             Destroy(gameObject);
             handler.ThrowObjectCollision(gameObject, collision.gameObject);
         }
-        else if(collision.gameObject.layer.Equals(LayerMask.NameToLayer("Ground")))
+        else if (collision.gameObject.layer.Equals(LayerMask.NameToLayer("Ground")))
         {
             GetComponent<GuidedFuncion>().enabled = false;
         }

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -7,9 +5,9 @@ using UnityEngine;
 /// </summary>
 public class PoisonFog : MonoBehaviour, ISpec
 {
-    private Interaction interaction;
-    private SphereCollider coll;
-    private float operationTime;
+    private Interaction interaction;        // 상태이상을 담당하는 클래스
+    private SphereCollider coll;            // 독 안개의 감지를 담당할 콜라이더
+    private float operationTime;            // 동작하는 시간
 
     private void Awake()
     {

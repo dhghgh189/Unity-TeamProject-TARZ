@@ -1,15 +1,14 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
+/// <summary>
+/// 중력장을 발생하는 스크립트
+/// </summary>
 public class GravityShoot : MonoBehaviour, ISpec
 {
     [SerializeField] float operationTime;   // 동작하는 시간
     [SerializeField] float force;           // 끌어당기는 힘
     [SerializeField] float range;           // 끌어당기는 범위
-
-
 
     private void Init()
     {
@@ -20,7 +19,7 @@ public class GravityShoot : MonoBehaviour, ISpec
     private void OnTriggerEnter(Collider other)
     {
         // 끌어당기기
-        if(other.gameObject.layer.Equals(LayerMask.NameToLayer("Monster")))
+        if (other.gameObject.layer.Equals(LayerMask.NameToLayer("Monster")))
         {
             Debug.Log("StartHolidng");
             StartCoroutine(StartBoilingRoutine(other.gameObject.transform));
@@ -29,12 +28,12 @@ public class GravityShoot : MonoBehaviour, ISpec
 
     private IEnumerator StartBoilingRoutine(Transform other)
     {
-        while (true) 
+        while (true)
         {
             // 거리를 계산하고
             Vector3 relativeDirection = other.position - transform.position;
             // 거리가 중력장 크기보다 크면 중지
-            if(relativeDirection.sqrMagnitude > range * range) yield break;
+            if (relativeDirection.sqrMagnitude > range * range) yield break;
 
             // 아니면 정규화를 진행하고
             Vector3 gravityDirection = relativeDirection.normalized;

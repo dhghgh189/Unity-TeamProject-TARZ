@@ -1,15 +1,17 @@
 using System.Collections;
 using UnityEngine;
-using static UnityEngine.UI.GridLayoutGroup;
 
+/// <summary>
+/// 던지는 차에 부착하는 스크립트
+/// </summary>
 public class ThrowCarObject : MonoBehaviour
 {
     [Header("Init")]
-    [SerializeField] ParticleSystem effect;
-    [SerializeField] float speed;
-    [SerializeField] float hitDamage;
-    [SerializeField] float explosionDamage;
-    [SerializeField] float explosionRange;
+    [SerializeField] ParticleSystem effect;     // TODO: 충돌일 생겼을 때 발생할 파티클
+    [SerializeField] float speed;               // 날아가는 속도
+    [SerializeField] float hitDamage;           // 피격을 입히는 데미지
+    [SerializeField] float explosionDamage;     // 폭발했을 때 데미지
+    [SerializeField] float explosionRange;      // 폭발하는 범위
 
     [SerializeField] Rigidbody rigid;
     [SerializeField] BoxCollider coll;
@@ -22,6 +24,9 @@ public class ThrowCarObject : MonoBehaviour
         rigid.useGravity = false;
     }
 
+    /// <summary>
+    /// 던지기 시작하는 함수
+    /// </summary>
     public void Throw()
     {
         coll.enabled = true;
@@ -37,17 +42,16 @@ public class ThrowCarObject : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer.Equals(LayerMask.NameToLayer("Monster")))
+        if (other.gameObject.layer.Equals(LayerMask.NameToLayer("Monster")))    // 몬스터에 닿을경우 -> 피격 데미지
         {
             IDamagable damagable = other.gameObject.GetComponent<IDamagable>();
             if (damagable != null) { damagable.TakeDamage(hitDamage); }
         }
-        else if (other.gameObject.layer.Equals(LayerMask.NameToLayer("Ground")))
+        else if (other.gameObject.layer.Equals(LayerMask.NameToLayer("Ground")))    // 땅에 닿을경우 -> 폭파
         {
             Destroy(gameObject);
         }
     }
-
     private void OnDestroy()
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRange, LayerMask.GetMask("Monster"));
@@ -58,6 +62,10 @@ public class ThrowCarObject : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 초기 값을 설정하는 함수
+    /// </summary>
+    /// <param name="data">해당 스킬의 데이터</param>
     public void Init(ManaSkillDataSO data)
     {
         speed = data.GetData((int)ManaThrowCarDataType.FlightSpeed);

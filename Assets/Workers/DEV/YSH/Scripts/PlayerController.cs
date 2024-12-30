@@ -1,5 +1,7 @@
 using System;
 using System.Collections;
+using System.Text;
+using Unity.Properties;
 using UnityEngine;
 using Zenject;
 using static SkillEnum;
@@ -36,7 +38,7 @@ public class PlayerController : MonoBehaviour, IDamagable
     public float delay { get; set; }
     public bool IsAnimStart { get; set; }
 
-
+    private StringBuilder sb;
     void Awake()
     {
         anim = GetComponent<Animator>();
@@ -50,6 +52,8 @@ public class PlayerController : MonoBehaviour, IDamagable
         Fsm = new PlayerFSM(this, AblityAdapter);
 
         IsAnimStart = false;
+
+        sb = new StringBuilder();
 
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
@@ -232,9 +236,12 @@ public class PlayerController : MonoBehaviour, IDamagable
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.layer.Equals(LayerMask.NameToLayer("Monster")))
+        sb.Clear();
+        sb.Append(currentStateView);
+
+        if (collision.gameObject.layer.Equals(LayerMask.NameToLayer("Monster")) && Enum.IsDefined(typeof(ActTimingType), sb.ToString()))
         {
-            SkillHandler.PlayerCollision((ActTimingType)Enum.Parse(typeof(ActTimingType), currentStateView.ToString()), collision.gameObject);
+            SkillHandler.PlayerCollision((ActTimingType)Enum.Parse(typeof(ActTimingType), sb.ToString()), collision.gameObject);
         }
     }
 

@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,7 +13,7 @@ public class Test_SkillTable : MonoBehaviour
 
     private void Start()
     {
-        foreach(Test_SkillSlot slot in slots)
+        foreach (Test_SkillSlot slot in slots)
         {
             slot.playerSkillHandler = _handler;
         }
@@ -29,7 +28,7 @@ public class Test_SkillTable : MonoBehaviour
         {
             BaseSkillSO newSkill = (isRandom) ? Instantiate(_skills[Random.Range(0, _skills.Count)]) : Instantiate(_skills[index]);
             slots[index].SetSlot(newSkill);
-            _handler.AddSkill(newSkill); 
+            _handler.AddSkill(newSkill);
         }
     }
 

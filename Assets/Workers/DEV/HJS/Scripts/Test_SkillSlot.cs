@@ -34,7 +34,7 @@ public class Test_SkillSlot : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if(eventData.button == PointerEventData.InputButton.Right)
+        if (eventData.button == PointerEventData.InputButton.Right)
         {
             playerSkillHandler.RemoveSkill(skill);
             RemoveSlot();

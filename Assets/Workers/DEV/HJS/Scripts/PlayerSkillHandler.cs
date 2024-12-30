@@ -42,14 +42,6 @@ public class PlayerSkillHandler : MonoBehaviour
         skillDic = new Dictionary<string, int>();
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Alpha0))
-        {
-            model.CurrentHp -= 10;
-        }
-    }
-
     // 플레이어 -> 헨들러에게 스킬 사용 요청
     public void Use(ActTiming act) => onActionPlayerEvents[(int)act]?.Invoke(gameObject, null);
     // 던지는 물체 -> 헨들러에게 스킬 사용 요청
@@ -170,7 +162,7 @@ public class PlayerSkillHandler : MonoBehaviour
         }
         #endregion
 
-        // 스킬리스트에 있으면 레벨 올려주기
+        // 스킬리스트에 있으면 레벨 올려주기 <- 제거했다가 다시 추가했을 때
         if (skillDic.ContainsKey(skill.Name))
         {
             Debug.Log("스킬 레벨업");

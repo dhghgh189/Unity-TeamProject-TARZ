@@ -289,7 +289,7 @@ public class MonsterSkillManager : MonoBehaviour
             }
         }
 
-        yield return Util.GetDelay(0.5f);
+        yield return Util.GetDelay(1f);
         _animator.SetBool("DashAttack", false);
 
         yield return Util.GetDelay(DashAttackSkill.CoolTime);
@@ -328,6 +328,7 @@ public class MonsterSkillManager : MonoBehaviour
     {
         ElectricWallSkill.CanUseSkill = false;
         _animator.SetTrigger("ElectricWall");
+      
 
         _electricWallPosition = transform.position + transform.forward * 5f;
 
@@ -339,6 +340,9 @@ public class MonsterSkillManager : MonoBehaviour
             _electricWallPosition2 = electricWall.transform.position + electricWall.transform.forward * (7f * (i + 1));
             GameObject electricWall2 = Instantiate(_electricWallPrefab, _electricWallPosition2, electricWall.transform.rotation);
         }
+
+        yield return Util.GetDelay(2.5f);
+
         yield return Util.GetDelay(ElectricWallSkill.CoolTime);
         electricWallRoutine = null;
         ElectricWallSkill.CanUseSkill = true;

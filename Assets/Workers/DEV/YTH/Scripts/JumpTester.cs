@@ -21,7 +21,7 @@ public class JumpTester : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-           
+            StartCoroutine(JumpRoutine());
         }
     }
 

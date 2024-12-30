@@ -687,7 +687,7 @@ MonoBehaviour:
   _monsterType: 0
   _skillType: 0
   _rewardType: 0
-  _maxHp: 10
+  _maxHp: 1000
   _curHp: 0
   _damage: 5
   _attackRange: 3
@@ -729,9 +729,9 @@ MonoBehaviour:
       variableStartIndex: 
       JSONSerialization: '{"EntryTask":{"Type":"BehaviorDesigner.Runtime.Tasks.EntryTask","NodeData":{"Offset":"(324.5058,-51.52971)"},"ID":0,"Name":"Entry","Instant":true},"RootTask":{"Type":"BehaviorDesigner.Runtime.Tasks.Repeater","NodeData":{"Offset":"(3.5616703,133.13089)"},"ID":1,"Name":"Repeater","Instant":true,"SharedIntcount":{"Type":"BehaviorDesigner.Runtime.SharedInt","Name":null,"Int32mValue":0},"SharedBoolrepeatForever":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":true},"SharedBoolendOnFailure":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-4.3616333,134.951965)"},"ID":2,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-234.361633,184.951965)"},"ID":3,"Name":"Sequence","Instant":true,"AbortTypeabortType":"Self","Children":[{"Type":"CondCanMove","NodeData":{"Offset":"(-74.3616,204.951965)"},"ID":4,"Name":"Cond
         Can Move","Instant":true,"MonsterData_monsterData":0,"GameObject_player":1,"Single_angle":90,"Single_distance":10,"Single_rate":0.5},{"Type":"ActMove","NodeData":{"Offset":"(65.63837,204.951965)"},"ID":5,"Name":"Act
-        Move","Instant":true,"CondCanMove_condCanMove":4,"MonsterData_monsterData":2,"NavMeshAgent_agent":3,"GameObject_player":4}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(205.638367,204.951965)"},"ID":6,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"CondMonsterCanAttack","NodeData":{"Offset":"(-94.36163,184.951965)"},"ID":7,"Name":"Cond
-        Monster Can Attack","Instant":true,"MonsterData_monsterData":5,"GameObject_player":6},{"Type":"ActMeleeAttack","NodeData":{"Offset":"(95.63837,184.951965)"},"ID":8,"Name":"Act
-        Melee Attack","Instant":true,"MonsterData_monsterData":7,"GameObject_player":8,"Single_angle":90,"Single_range":2}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Idle","NodeData":{"Offset":"(415.638367,204.951965)"},"ID":9,"Name":"Idle","Instant":true,"Disabled":true}]}]}}'
+        Move","Instant":true,"CondCanMove_condCanMove":4,"MonsterData_monsterData":2,"NavMeshAgent_agent":3,"Animator_animator":4,"GameObject_player":5}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(205.638367,204.951965)"},"ID":6,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"CondCanAttack","NodeData":{"Offset":"(-79.9942,184.8703)"},"ID":7,"Name":"Cond
+        Can Attack","Instant":true,"MonsterData_monsterData":6,"GameObject_player":7},{"Type":"ActMeleeAttack","NodeData":{"Offset":"(95.63837,184.951965)"},"ID":8,"Name":"Act
+        Melee Attack","Instant":true,"MonsterData_monsterData":8,"Animator_animator":9,"GameObject_player":10,"Single_angle":90,"Single_range":2}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Idle","NodeData":{"Offset":"(415.638367,204.951965)"},"ID":9,"Name":"Idle","Instant":true,"Disabled":true}]}]}}'
       fieldSerializationData:
         typeName: []
         fieldNameHash: 
@@ -742,10 +742,12 @@ MonoBehaviour:
         - {fileID: 0}
         - {fileID: 6014731872465248145}
         - {fileID: 4931760377755902228}
+        - {fileID: 8053109882612859994}
         - {fileID: 0}
         - {fileID: 6014731872465248145}
         - {fileID: 0}
         - {fileID: 6014731872465248145}
+        - {fileID: 8053109882612859994}
         - {fileID: 0}
         byteData: 
         byteDataArray: 

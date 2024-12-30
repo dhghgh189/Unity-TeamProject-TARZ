@@ -5,19 +5,16 @@ using UnityEngine;
 public class MonsterData : MonoBehaviour
 {
     public enum MonsterType { Melee, Range, Boss, Bomb, Frog }  //Melee : 근거리 공격 몹 //Range : 원거리 공격 몹 //Boss : 아놀드 //Baomber : 폭탄좀비
-
     [SerializeField] MonsterType _monsterType;
     public MonsterType MonsterTyPe { get { return _monsterType; } private set { } }
 
     public enum SkillType { Skill, UnSkill }
-
     [SerializeField] SkillType _skillType;
     public SkillType SkillTyPe { get { return _skillType; } set { } }
 
-    public enum RewardType { Tier_1, Tier_2, Tier_3 }
-
-    [SerializeField] RewardType _rewardType;
-    public RewardType RewardTyPe { get { return _rewardType; } private set { } }
+    public enum MonsterTier { Normal, Elite, Boss }
+    [SerializeField] MonsterTier _monsterTier;
+    public MonsterTier MonsterTIer { get { return _monsterTier; } private set { } }
 
 
     [SerializeField] float _maxHp;

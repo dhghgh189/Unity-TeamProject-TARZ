@@ -16,8 +16,6 @@ public class MonsterJustTrigger : MonoBehaviour
 
     [SerializeField] GameObject _player;
 
-    private GameObject _returnObj;
-
     [Header("저스트 회피 범위")]
     [SerializeField] float _angle; // 시야각
 
@@ -25,24 +23,23 @@ public class MonsterJustTrigger : MonoBehaviour
 
     private void Update()
     {
-        // 저스트회피 판정 범위 내에 있으면 트리거가 켜짐
-        _returnObj = WithinSight(_player, _angle, _distance);
+        _justTrigger.transform.localPosition = Vector3.zero;
+        _justTrigger.transform.localRotation = Quaternion.identity;
     }
 
     private void Just()
     {
-        if (_returnObj != null)
+        if (IsPlayerWithinSight(_player))   // 저스트회피 판정 범위 내에 있으면 트리거가 켜짐
         {
             justRoutine = StartCoroutine(JustRoutine());
         }
     }
 
-    WaitForSeconds delay = new(0.25f);
     Coroutine justRoutine;
     IEnumerator JustRoutine() // 켜진 트리거는 아주 짧은 시간 뒤 꺼짐
     {
         _justTrigger.SetActive(true);
-        yield return delay;
+        yield return Util.GetDelay(0.25f);
         _justTrigger.SetActive(false);
 
         justRoutine = null;
@@ -57,17 +54,17 @@ public class MonsterJustTrigger : MonoBehaviour
 
         if (player.Fsm.CurrentState.type == EState.Dash)
         {
-            switch (_monsterData.RewardTyPe)
+            switch (_monsterData.MonsterTIer)
             {
-                case MonsterData.RewardType.Tier_3:
+                case MonsterData.MonsterTier.Normal:
                     // 버프 느낌
                     // 일시적 스탯 향상
                     Debug.Log("3티어 정상작동");
                     break;
-                case MonsterData.RewardType.Tier_2:
+                case MonsterData.MonsterTier.Elite:
                     Debug.Log("2티어 정상작동");
                     break;
-                case MonsterData.RewardType.Tier_1:
+                case MonsterData.MonsterTier.Boss:
                     Debug.Log("1티어 정상작동");
                     break;
             }
@@ -81,35 +78,22 @@ public class MonsterJustTrigger : MonoBehaviour
 
     #region 저스트회피 범위 판정
     // 범위 안에 들어온 타겟을 특정해주는 함수
-    private GameObject WithinSight(GameObject target, float angleValue, float distanceValue)
+    public bool IsPlayerWithinSight(GameObject target)
     {
         if (target == null)
-        {
-            return null;
-        }
+            return false;
 
-        var direction = target.transform.position - transform.position;
+        Vector3 direction = target.transform.position - transform.position;
         direction.y = 0;
-        var angle = Vector3.Angle(direction, transform.forward);
-        if (direction.magnitude < _distance && angle < _angle * 0.5f)
-        {
-            if (LineOfSight(target))
-            {
-                return target;
-            }
-        }
-        return null;
-    }
 
-    // 타겟이 범위 안에 들어왔는지 확인
-    private bool LineOfSight(GameObject targetObject)
-    {
-        RaycastHit hit;
-        if (Physics.Linecast(transform.position, targetObject.transform.position, out hit))
+        if (direction.magnitude < _distance && Vector3.Angle(direction, transform.forward) < _angle * 0.5f)
         {
-            if (hit.transform.IsChildOf(targetObject.transform) || targetObject.transform.IsChildOf(hit.transform))
+            if (Physics.Linecast(transform.position, target.transform.position, out RaycastHit hit))
             {
-                return true;
+                if (hit.transform.IsChildOf(target.transform) || target.transform.IsChildOf(hit.transform))
+                {
+                    return true;
+                }
             }
         }
         return false;

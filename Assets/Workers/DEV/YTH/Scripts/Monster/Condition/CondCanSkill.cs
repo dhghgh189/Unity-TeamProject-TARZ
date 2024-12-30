@@ -3,7 +3,7 @@ using static MonsterData;
 using System.Collections;
 using UnityEngine;
 
-public class CondMonsterCanSkill : Conditional
+public class CondCanSkill : Conditional
 {
     [SerializeField] MonsterData _monsterData;
 

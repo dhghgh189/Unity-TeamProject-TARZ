@@ -63,8 +63,6 @@ public class MonsterSkillManager : MonoBehaviour
 
     #region Etc
     [Header("Etc")]
-    [SerializeField] GameObject _player;
-
     private Animator _animator;
 
     private Transform _muzzlePoint; // 불러올거에요 비워놔주세요
@@ -112,6 +110,51 @@ public class MonsterSkillManager : MonoBehaviour
         ReviveSkill.CanUseSkill = true;
     }
 
+    #region JumpAttack
+    public Coroutine jumpAttackRoutine;
+    public IEnumerator JumpAttackRoutine() // 보스의 도약해서 착지하여 범위 공격
+    {
+        _jumpAttack.CanUseSkill = false;
+        _animator.SetTrigger("JumpAttack");
+
+        if (jumpRoutine_jumpAttack == null)
+        {
+            yield return Util.GetDelay(0.8f);
+            jumpRoutine_jumpAttack = StartCoroutine(JumpRoutine_JumpAttack());
+            Debug.Log("점프!!");
+        }
+
+        yield return Util.GetDelay(_jumpAttack.CoolTime);
+        jumpAttackRoutine = null;
+        _jumpAttack.CanUseSkill = true;
+    }
+
+    #region 데미지
+    private void JumpAttack()
+    {
+        Collider[] colliders = Physics.OverlapSphere(transform.position, _jumpAttack.Range);
+        foreach (Collider collider in colliders)
+        {
+            // 공격 범위 확인
+            Vector3 source = transform.position;
+            source.y = 0;
+            Vector3 destination = collider.transform.position;
+            destination.y = 0;
+
+            Vector3 targetDir = (destination - source).normalized;
+            float targetAngle = Vector3.Angle(transform.forward, targetDir);
+            if (targetAngle > _jumpAttack.Angle) // 앵글의 반절만
+                continue;
+
+            IDamagable damageble = collider.GetComponent<IDamagable>();
+            if (damageble != null)
+            {
+                damageble.TakeDamage(_jumpAttack.Damage);
+            }
+        }
+    }
+    #endregion
+
     #region JumpAttack - 점프 코루틴
     Coroutine jumpRoutine_jumpAttack;
     IEnumerator JumpRoutine_JumpAttack()
@@ -135,44 +178,6 @@ public class MonsterSkillManager : MonoBehaviour
     }
     #endregion
 
-    #region JumpAttack
-    public Coroutine jumpAttackRoutine;
-    public IEnumerator JumpAttackRoutine() // 보스의 도약해서 착지하여 범위 공격
-    {
-        _jumpAttack.CanUseSkill = false;
-        _animator.SetTrigger("JumpAttack");
-
-        if (jumpRoutine_jumpAttack == null)
-        {
-            jumpRoutine_jumpAttack = StartCoroutine(JumpRoutine_JumpAttack());
-            Debug.Log("점프!!");
-        }
-
-        Collider[] colliders = Physics.OverlapSphere(transform.position, _jumpAttack.Range);
-        foreach (Collider collider in colliders)
-        {
-            // 공격 범위 확인
-            Vector3 source = transform.position;
-            source.y = 0;
-            Vector3 destination = collider.transform.position;
-            destination.y = 0;
-
-            Vector3 targetDir = (destination - source).normalized;
-            float targetAngle = Vector3.Angle(transform.forward, targetDir);
-            if (targetAngle > _jumpAttack.Angle) // 앵글의 반절만
-                continue;
-
-            IDamagable damageble = collider.GetComponent<IDamagable>();
-            if (damageble != null)
-            {
-                damageble.TakeDamage(_jumpAttack.Damage);
-            }
-        }
-
-        yield return new WaitForSeconds(_jumpAttack.CoolTime);
-        jumpAttackRoutine = null;
-        _jumpAttack.CanUseSkill = true;
-    }
     #endregion
 
     #region WheelWind
@@ -188,10 +193,10 @@ public class MonsterSkillManager : MonoBehaviour
         Radiation jackRadiation = _wheelWindTrigger.GetComponent<Radiation>();
       /*  jackRadiation.Interaval = WheelWindSkill.Interval;
         jackRadiation.Damage = WheelWindSkill.Damage;*/
-        yield return new WaitForSeconds(WheelWindSkill.Duration);
+        yield return Util.GetDelay(WheelWindSkill.Duration);
         _wheelWindTrigger.SetActive(false);
 
-        yield return new WaitForSecondsRealtime(WheelWindSkill.CoolTime);
+        yield return Util.GetDelay(WheelWindSkill.CoolTime);
         wheelWindRoutine = null;
         WheelWindSkill.CanUseSkill = true;
     }
@@ -208,7 +213,7 @@ public class MonsterSkillManager : MonoBehaviour
         GameObject bomb = Instantiate(_bombPrefab, _muzzlePoint.position, _muzzlePoint.rotation);
         Rigidbody bombRb = bomb.GetComponent<Rigidbody>();
         bombRb.AddForce((_muzzlePoint.forward + _muzzlePoint.up * 3) * BombSkill.ThrowForce, ForceMode.Impulse);
-        yield return new WaitForSeconds(BombSkill.CoolTime);
+        yield return Util.GetDelay(BombSkill.CoolTime);    
         bombRoutine = null;
         BombSkill.CanUseSkill = true;
 
@@ -250,35 +255,12 @@ public class MonsterSkillManager : MonoBehaviour
     }
     #endregion
 
-    #region DashAttack - 점프 코루틴
-    Coroutine jumpRoutine_dashAttack;
-    IEnumerator JumpRoutine_dashAttack()
-    {
-        _jumpStartPosition = transform.position;
-        _jumpDirection = transform.forward.normalized * DashAttackSkill.JumpDistance;
-
-        while (_elapsedTime < DashAttackSkill.InAirTime)
-        {
-            float yOffset = Mathf.Sin((_elapsedTime / DashAttackSkill.InAirTime) * Mathf.PI) * DashAttackSkill.JumpHeight;
-            Vector3 zOffset = _jumpDirection * (_elapsedTime / DashAttackSkill.InAirTime);
-
-            transform.position = _jumpStartPosition + zOffset + new Vector3(0, yOffset, 0);
-
-            _elapsedTime += Time.deltaTime;
-            yield return null;
-        }
-        transform.position = _jumpStartPosition + _jumpDirection;
-        jumpRoutine_dashAttack = null;
-        _elapsedTime = 0;
-    }
-    #endregion
-
     #region DashAttack
     public Coroutine dashAttackRoutine;
     public IEnumerator DashAttackRoutine()
     {
         DashAttackSkill.CanUseSkill = false;
-        _animator.SetTrigger("DashAttack");
+        _animator.SetBool("DashAttack", true);
 
         if (jumpRoutine_dashAttack == null)
         {
@@ -307,10 +289,37 @@ public class MonsterSkillManager : MonoBehaviour
             }
         }
 
-        yield return new WaitForSeconds(DashAttackSkill.CoolTime);
+        yield return Util.GetDelay(1f);
+        _animator.SetBool("DashAttack", false);
+
+        yield return Util.GetDelay(DashAttackSkill.CoolTime);
         dashAttackRoutine = null;
         DashAttackSkill.CanUseSkill = true;
     }
+
+    #region DashAttack - 점프 코루틴
+    Coroutine jumpRoutine_dashAttack;
+    IEnumerator JumpRoutine_dashAttack()
+    {
+        _jumpStartPosition = transform.position;
+        _jumpDirection = transform.forward.normalized * DashAttackSkill.JumpDistance;
+
+        while (_elapsedTime < DashAttackSkill.InAirTime)
+        {
+            float yOffset = Mathf.Sin((_elapsedTime / DashAttackSkill.InAirTime) * Mathf.PI) * DashAttackSkill.JumpHeight;
+            Vector3 zOffset = _jumpDirection * (_elapsedTime / DashAttackSkill.InAirTime);
+
+            transform.position = _jumpStartPosition + zOffset + new Vector3(0, yOffset, 0);
+
+            _elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        transform.position = _jumpStartPosition + _jumpDirection;
+        jumpRoutine_dashAttack = null;
+        _elapsedTime = 0;
+    }
+    #endregion
+
     #endregion
 
     #region ElectricWall
@@ -318,7 +327,8 @@ public class MonsterSkillManager : MonoBehaviour
     public IEnumerator ElectricWallRoutine()
     {
         ElectricWallSkill.CanUseSkill = false;
-    /*    _animator.SetTrigger("R");*/
+        _animator.SetTrigger("ElectricWall");
+      
 
         _electricWallPosition = transform.position + transform.forward * 5f;
 
@@ -330,6 +340,9 @@ public class MonsterSkillManager : MonoBehaviour
             _electricWallPosition2 = electricWall.transform.position + electricWall.transform.forward * (7f * (i + 1));
             GameObject electricWall2 = Instantiate(_electricWallPrefab, _electricWallPosition2, electricWall.transform.rotation);
         }
+
+        yield return Util.GetDelay(2.5f);
+
         yield return Util.GetDelay(ElectricWallSkill.CoolTime);
         electricWallRoutine = null;
         ElectricWallSkill.CanUseSkill = true;
@@ -365,12 +378,39 @@ public class MonsterSkillManager : MonoBehaviour
     public IEnumerator TrippleAttackRoutine() //   // TrippleAttackSkill 애니메이션 재생     //애니메이션에 공격 붙이기
     {
         TrippleAttackSkill.CanUseSkill = false;
-        /* _animator.SetTrigger("TrippleAttack");*/
+         _animator.SetTrigger("TrippleAttack");
 
         yield return Util.GetDelay(TrippleAttackSkill.CoolTime);
         trippleAttackRoutine = null;
         TrippleAttackSkill.CanUseSkill = true;
     }
+
+    #region 데미지
+    private void TrippleAttack()
+    {
+        Collider[] colliders = Physics.OverlapSphere(transform.position, TrippleAttackSkill.Range);
+        foreach (Collider collider in colliders)
+        {
+            // 공격 범위 확인
+            Vector3 source = transform.position;
+            source.y = 0;
+            Vector3 destination = collider.transform.position;
+            destination.y = 0;
+
+            Vector3 targetDir = (destination - source).normalized;
+            float targetAngle = Vector3.Angle(transform.forward, targetDir);
+            if (targetAngle > TrippleAttackSkill.Angle * 0.5f) // 앵글의 반절만
+                continue;
+
+            IDamagable damageble = collider.GetComponent<IDamagable>();
+            if (damageble != null)
+            {
+                damageble.TakeDamage(TrippleAttackSkill.Damage);
+            }
+        }
+    }
+    #endregion
+
     #endregion
 
     #region 일반 공격 (범위 설정 가능)
@@ -430,6 +470,21 @@ public class MonsterSkillManager : MonoBehaviour
     }
     #endregion
 
+    #region FrogJumpAttack
+    public Coroutine frogJumpAttackRoutine;
+    public IEnumerator FrogJumpAttackRoutine()
+    {
+        _animator.SetTrigger("JumpAttack");
+
+        if (jumpRoutine_frogJumpAttack == null)
+        {
+            jumpRoutine_frogJumpAttack = StartCoroutine(JumpRoutine_frogJumpAttack());
+            Debug.Log("점프!!");
+        }
+        yield return null;
+        frogJumpAttackRoutine = null;
+    }
+
     #region FrogJumpAttack - 점프 코루틴
     Coroutine jumpRoutine_frogJumpAttack;
     IEnumerator JumpRoutine_frogJumpAttack()
@@ -453,26 +508,13 @@ public class MonsterSkillManager : MonoBehaviour
     }
     #endregion
 
-    #region FrogJumpAttack
-    public Coroutine frogJumpAttackRoutine;
-    public IEnumerator FrogJumpAttackRoutine()
-    {
-        _animator.SetTrigger("JumpAttack");
-
-        if (jumpRoutine_frogJumpAttack == null)
-        {
-            jumpRoutine_frogJumpAttack = StartCoroutine(JumpRoutine_frogJumpAttack());
-            Debug.Log("점프!!");
-        }
-        yield return null;
-        frogJumpAttackRoutine = null;
-    }
     #endregion
 
     #region Revive
     public void Revive()
     {
         ReviveSkill.CanUseSkill = false;
+        _animator.SetTrigger("Revive");
 
         _reviveBefore.SetActive(false);
         _reviveAfter.SetActive(true);

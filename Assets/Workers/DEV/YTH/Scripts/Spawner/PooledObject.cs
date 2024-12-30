@@ -10,28 +10,32 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
     private ObjectPool _returnPool; //반납 위치
     public ObjectPool ReturnPool { get { return _returnPool; } set { _returnPool = value; } }
 
-    [SerializeField] MonsterData _monsterData;
-
     [SerializeField] GameObject _player;
 
-    [SerializeField] Rigidbody _rigid;
+    public event Action OnDie;
 
-    [SerializeField] Animator _animator;
+    private MonsterData _monsterData;
+
+    private Rigidbody _rigid;
+
+    private Animator _animator;
+
+    private AutoLockOn _autoLockOn;
 
     [Header("Drop Item")]
     [SerializeField] GameObject _gear;
 
     [SerializeField] GameObject _chip;
 
-    public event Action OnDie;
-
-    private AutoLockOn _autoLockOn;
+   
 
     private void Start()
     {
         /*  _autoLockOn = _player.GetComponent<AutoLockOn>();*/
 
         _animator = GetComponent<Animator>();
+        _rigid = GetComponent<Rigidbody>();
+        _monsterData = GetComponent<MonsterData>();
     }
 
     private void OnEnable()
@@ -54,7 +58,7 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
         _monsterData.CurHp -= damage;
         _monsterData.Attacked_First = true;
 
-       /* _animator.SetTrigger("TakeDamage");*/
+        /* _animator.SetTrigger("TakeDamage");*/
         if (_monsterData.CurHp <= 0)
         {
             OnDie?.Invoke();
@@ -64,11 +68,12 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
     public void Die()
     {
         /*_autoLockOn.action?.Invoke();*/
-        ReturnPool.ReturnPool(this);
         _animator.SetTrigger("Die");
 
         GameObject gear = Instantiate(_gear, transform.position, transform.rotation);
         gear.GetComponent<DropGear>().SetDropItem(Part.신발, 1, true, true);
+
+        ReturnPool.ReturnPool(this);
     }
 
     public void KnockBack(GameObject attacker)

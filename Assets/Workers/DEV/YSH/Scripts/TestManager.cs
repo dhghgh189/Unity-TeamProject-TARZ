@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class TestManager : MonoBehaviour
 {
-    [SerializeField] JoystickTester joystickTester;
     [SerializeField] PlayerController player;
     [SerializeField] GameObject cheatPanel;
 
@@ -22,16 +21,6 @@ public class TestManager : MonoBehaviour
             Cursor.visible = isLocked;
             Cursor.lockState = isLocked ? CursorLockMode.None : CursorLockMode.Locked;
             isLocked = !isLocked;
-        }
-
-        if (Input.GetKeyDown(KeyCode.F3))
-        {
-            joystickTester.gameObject.SetActive(!joystickTester.gameObject.activeSelf);
-        }
-
-        if (Input .GetKeyDown(KeyCode.F4))
-        {
-            player.TakeDamage(10f);
         }
 
         if (Input.GetKeyDown(KeyCode.F5))

@@ -17,9 +17,11 @@ public class ArmUpgradManager : MonoBehaviour, Base_InteractionOBJ
 
     private void Start()
     {
+        Debug.Log("Start");
         // 세이브 데이터의 업글 정보를 순회 하면서 모델에 반영
         foreach (ArmUpgrade item in saveData.ArmUpgradeDatas)
         {
+            Debug.Log("dsafsdfasd");
             statModel.SetAbility(item.UpgradeAbility, item.UpgradeValue);
         }
     }

@@ -156,18 +156,7 @@ public class StatModel : MonoBehaviour
 
     private void Start()
     {
-        if (saveData.StatSaveData == null) return;
-        MaxHp = saveData.StatSaveData.maxHp;
-        MaxStamina = saveData.StatSaveData.maxStamina;
-        CurrentHp = saveData.StatSaveData.currentHp;
-        CurrentMp = saveData.StatSaveData.currentMp;
-        CurrentStamina = saveData.StatSaveData.currentStamina;
-        BlackChip = saveData.StatSaveData.blackChip;
-        for (int i = 0; i < (int)AdditionAbility.Size; i++) 
-        {
-            additionAbility[i] = saveData.StatSaveData.additionAbility[i];
-        }
-        SetAbility(AdditionAbility.AllPowerPer, 0);
+        Chip = saveData.DataChip;
     }
 
     public void AllCheck()

@@ -53,10 +53,11 @@ public class MonsterSkillManager : MonoBehaviour
 
     [SerializeField] GameObject _thunderPrefab;
 
-    private GameObject _reviveBefore;
+
+    private GameObject _reviveBefore; // 불러올거에요 비워놔주세요
     public GameObject ReviveBefore { get { return _reviveBefore; } set { _reviveBefore = value; } }
 
-    private GameObject _reviveAfter; 
+    private GameObject _reviveAfter; // 불러올거에요 비워놔주세요
     public GameObject ReviveAfter { get { return _reviveAfter;  } set { _reviveAfter = value; } } 
     #endregion
 
@@ -66,10 +67,10 @@ public class MonsterSkillManager : MonoBehaviour
 
     private Animator _animator;
 
-    private Transform _muzzlePoint; 
+    private Transform _muzzlePoint; // 불러올거에요 비워놔주세요
     public Transform MuzzlePoint { get { return _muzzlePoint; } set { _muzzlePoint = value; } }
 
-    private GameObject _wheelWindTrigger; 
+    private GameObject _wheelWindTrigger; // 불러올거에요 비워놔주세요
     public GameObject WheelWindTrigger { get { return _wheelWindTrigger; } set { _wheelWindTrigger = value; } }
 
     private Vector3 _electricWallPosition;

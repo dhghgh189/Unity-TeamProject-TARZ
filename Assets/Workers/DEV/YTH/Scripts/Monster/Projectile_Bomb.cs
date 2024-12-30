@@ -5,12 +5,12 @@ public class Projectile_Bomb : MonoBehaviour
 {
     [SerializeField] GameObject _bombZombie;
 
-    [SerializeField] SphereCollider _sphereCollider;
-
     private MonsterSkillManager _monsterSkillManager;
+    private SphereCollider _sphereCollider;
 
     private void Start()
     {
+        _sphereCollider = GetComponent<SphereCollider>();
         _monsterSkillManager = _bombZombie.GetComponent<MonsterSkillManager>();
         _sphereCollider.radius = _monsterSkillManager.BombSkill.Range;
     }
@@ -30,9 +30,9 @@ public class Projectile_Bomb : MonoBehaviour
     }
     IEnumerator CountDown()
     {
-        yield return Util.GetDelay(3f);
+        yield return new WaitForSeconds(3f);
         _sphereCollider.enabled = true;
-        yield return Util.GetDelay(0.1f);
+        yield return new WaitForSeconds(0.1f);
         Destroy(gameObject);
     }
 }

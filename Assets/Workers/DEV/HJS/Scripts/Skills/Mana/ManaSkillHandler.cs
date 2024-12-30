@@ -17,10 +17,10 @@ public class ManaSkillHandler : MonoBehaviour
     [SerializeField] IManaSkill[] manaSkill;                    // 마나 스킬의 슬롯
     [Header("ManaSkill")]
     private Dictionary<string, ManaSkillDataSO> skillDataDictionary;    // 스킬 데이터를 담아두는 딕셔너리
-    [SerializeField] LinkedList<BaseManaState> actList;         // 해당 마나스킬의 진행 순서
-    [SerializeField] int selectIndex;                           // 사용할 마나스킬
-    private LinkedListNode<BaseManaState> curNode;              // 현재 동작
-    private bool isEnd;                                         // 동작이 끝이 났는지 확인
+    [SerializeField] LinkedList<BaseManaState> actList;          // 해당 마나스킬의 진행 순서
+    [SerializeField] int selectIndex;                            // 사용할 마나스킬
+    private LinkedListNode<BaseManaState> curNode;               // 현재 동작
+    private bool isEnd;                                          // 동작이 끝이 났는지 확인
 
     public bool ActionEnd { get => isEnd; set => isEnd = value; }
     public LinkedList<BaseManaState> ActList { get { return actList; } set { actList = value; } }
@@ -32,7 +32,7 @@ public class ManaSkillHandler : MonoBehaviour
 
         foreach(ManaSkillDataSO data in skillData)
         {
-            skillDataDictionary.Add( data.skillName, Instantiate(data));
+            skillDataDictionary.Add(data.skillName, Instantiate(data));
         }
     }
 
@@ -43,7 +43,7 @@ public class ManaSkillHandler : MonoBehaviour
         manaSkill[0] = new ManaRushSkill(GetComponent<PlayerController>());
         manaSkill[1] = new ManaThrowCarSkill(GetComponent<PlayerController>());
         manaSkill[2] = new ManaMegaFistSkill(GetComponent<PlayerController>());
-        manaSkill[3] = null;
+        manaSkill[3] = new ManaBlackHollSkill(GetComponent<PlayerController>());
     }
 
     public ManaSkillDataSO GetData(string KeyName)

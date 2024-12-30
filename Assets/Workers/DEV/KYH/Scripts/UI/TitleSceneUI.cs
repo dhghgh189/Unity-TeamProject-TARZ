@@ -26,8 +26,9 @@ public class TitleSceneUI : MonoBehaviour
 
     private void Start()
     {
-        inputManager.firstInput = newGameButton;  // 타이틀 패널의 UI 네비게이션 첫 Input을 newGameButton로 설정
-        inputManager.firstInput.Select();         // 첫 Input으로 지정한 오브젝트를 선택 처리
+        //inputManager.firstInput = newGameButton;  // 타이틀 패널의 UI 네비게이션 첫 Input을 newGameButton로 설정
+        //inputManager.firstInput.Select();         // 첫 Input으로 지정한 오브젝트를 선택 처리
+        
     }
 
     private void OnEnable()
@@ -39,8 +40,9 @@ public class TitleSceneUI : MonoBehaviour
     // 새로 시작 버튼 클릭
     public void OnClickNewGameButton()
     {
-        gameObject.SetActive(false);    // 타이틀 패널 비활성화
-        loadGamePanel.SetActive(true);  // 저장된 게임 불러오기 패널 활성화
+        //gameObject.SetActive(false);    // 타이틀 패널 비활성화
+        //loadGamePanel.SetActive(true);  // 저장된 게임 불러오기 패널 활성화
+        Util.ChangeScene(Define.SceneType.Lobby);  // 로비 씬으로 전환
     }
 
     // 저장된 게임 시작 버튼 클릭

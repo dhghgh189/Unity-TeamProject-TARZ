@@ -5,6 +5,7 @@ using UnityEngine;
 public class TestManager : MonoBehaviour
 {
     [SerializeField] JoystickTester joystickTester;
+    [SerializeField] PlayerController player;
 
     bool isLocked;
 
@@ -25,6 +26,11 @@ public class TestManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F3))
         {
             joystickTester.gameObject.SetActive(!joystickTester.gameObject.activeSelf);
+        }
+
+        if (Input .GetKeyDown(KeyCode.F4))
+        {
+            player.TakeDamage(10f);
         }
     }
 }

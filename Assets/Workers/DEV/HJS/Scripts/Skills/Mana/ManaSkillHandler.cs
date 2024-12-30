@@ -42,7 +42,7 @@ public class ManaSkillHandler : MonoBehaviour
         manaSkill = new IManaSkill[4];
         manaSkill[0] = new ManaRushSkill(GetComponent<PlayerController>());
         manaSkill[1] = new ManaThrowCarSkill(GetComponent<PlayerController>());
-        manaSkill[2] = null;
+        manaSkill[2] = new ManaMegaFistSkill(GetComponent<PlayerController>());
         manaSkill[3] = null;
     }
 

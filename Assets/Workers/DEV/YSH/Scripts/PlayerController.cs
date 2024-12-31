@@ -13,6 +13,7 @@ public enum EMpAmountType { Melee, Throw, Length }
 public class PlayerController : MonoBehaviour, IDamagable
 {
     [Inject] private StatModel stat;
+    [HideInInspector] [Inject] public Loading loadingObject;
 
     private Animator anim;
 
@@ -180,9 +181,18 @@ public class PlayerController : MonoBehaviour, IDamagable
 
         Debug.Log("아야");
         Stat.CurrentHp -= damage;
+        if (Stat.CurrentHp > 0)
+        {
+            ChangeState(EState.Damaged);
+            StartCoroutine(SternRoutine(delay));
+        }
+        else
+        {
+            ChangeState(EState.Dead);
+        }
 
-        ChangeState(EState.Damaged);
-        StartCoroutine(SternRoutine(delay));
+        //ChangeState(EState.Damaged);
+        //StartCoroutine(SternRoutine(delay));
 
         /* 추후 합의 후 재진행 예정
         switch (currentHitTypeView)

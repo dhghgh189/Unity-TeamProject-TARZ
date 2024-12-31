@@ -41,11 +41,11 @@ public class PlayerInputHandler : MonoBehaviour
 
     void Update()
     {
-        //if (controller.IsGrabingInput)
-        //{
-        //    GrabingInput();
-        //    return;
-        //}
+        if (controller.IsGrabingInput)
+        {
+            GrabingInput();
+            return;
+        }
 
         if (controller.IsAnimStart)
         {

@@ -5,16 +5,30 @@ using UnityEngine;
 
 public class CondCanSkill : Conditional
 {
+    [SerializeField] CondCanMove _condCanMove;
+
     private MonsterData _monsterData;
+
+    private PlayerController _player;
+
+    private PooledObject _pooledObject;
+
 
     public override void OnAwake()
     {
         _monsterData = GetComponent<MonsterData>();
+        _pooledObject = GetComponent<PooledObject>();
     }
+
+    public override void OnStart()
+    {
+        _player = _pooledObject.player;
+    }
+
 
     public override TaskStatus OnUpdate()
     {
-        if (_monsterData.SkillTyPe == SkillType.Skill)
+        if (_monsterData.SkillTyPe == SkillType.Skill && _condCanMove.IsPlayerWithinSight(_player.gameObject))
         {
             Debug.Log("CondMonsterCanSkill@@@@@@");
             return TaskStatus.Success;

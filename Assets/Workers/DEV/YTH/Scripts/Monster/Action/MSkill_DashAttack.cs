@@ -28,6 +28,7 @@ public class MSkill_DashAttack : Action
     {
         if ( _distance < 30 && _monsterSkillManager.DashAttackSkill.CanUseSkill == true && _monsterSkillManager.dashAttackRoutine == null)
         {
+            _pooledObject.RotateToPlayer();
             _monsterSkillManager.dashAttackRoutine = StartCoroutine(_monsterSkillManager.DashAttackRoutine());
             Debug.Log("20 DashAttackRoutine");
             return TaskStatus.Success;

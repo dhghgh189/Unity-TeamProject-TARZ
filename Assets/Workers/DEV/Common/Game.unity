@@ -5646,7 +5646,7 @@ PrefabInstance:
         Can Move","Instant":true,"Single_angle":360,"Single_distance":50,"Single_rate":0.5},{"Type":"BehaviorDesigner.Runtime.Tasks.Selector","NodeData":{"Offset":"(91.46985,241.470215)"},"ID":5,"Name":"Selector","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"ActMove","NodeData":{"Offset":"(-70,150)"},"ID":6,"Name":"Act
         Move","Instant":true,"CondCanMove_condCanMove":4},{"Type":"ActMove_Back","NodeData":{"Offset":"(60,150)"},"ID":7,"Name":"Act
         Move   Back","Instant":true,"CondCanMove_condCanMove":4}]}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-2.45833969,154.972672)"},"ID":8,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"CondCanSkill","NodeData":{"Offset":"(-51.4094543,238.3606)"},"ID":9,"Name":"Cond
-        Can Skill","Instant":true},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(85.27069,242.468079)"},"ID":10,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Selector","NodeData":{"Offset":"(-82.72931,169.668091)"},"ID":11,"Name":"Selector","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"MSkill_Bomb","NodeData":{"Offset":"(-133.129272,132.068115)"},"ID":12,"Name":"M
+        Can Skill","Instant":true,"CondCanMove_condCanMove":4},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(85.27069,242.468079)"},"ID":10,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Selector","NodeData":{"Offset":"(-82.72931,169.668091)"},"ID":11,"Name":"Selector","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"MSkill_Bomb","NodeData":{"Offset":"(-133.129272,132.068115)"},"ID":12,"Name":"M
         Skill   Bomb","Instant":true,"Transform_muzzlePoint":0},{"Type":"MSkill_Mine","NodeData":{"Offset":"(-3.52929688,126.8681)"},"ID":13,"Name":"M
         Skill   Mine","Instant":true,"Transform_muzzlePoint":1},{"Type":"MSkill_StimPack","NodeData":{"Offset":"(135.270691,134.468079)"},"ID":14,"Name":"M
         Skill   Stim Pack","Instant":true}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Wait","NodeData":{"Offset":"(80,170)"},"ID":15,"Name":"Wait","Instant":true,"SharedFloatwaitTime":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":2},"SharedBoolrandomWait":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"SharedFloatrandomWaitMin":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1},"SharedFloatrandomWaitMax":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1}}]}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(417.8042,154.972672)"},"ID":16,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"CondCanAttack","NodeData":{"Offset":"(-58.05298,222.098083)"},"ID":17,"Name":"Cond
@@ -5687,12 +5687,12 @@ PrefabInstance:
     - target: {fileID: 3471556509123995877, guid: 001a192f20a62694f860bb51ffb3b7c3,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4280287630806463071, guid: 001a192f20a62694f860bb51ffb3b7c3,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 64.13033
+      value: -65.5
       objectReference: {fileID: 0}
     - target: {fileID: 4280287630806463071, guid: 001a192f20a62694f860bb51ffb3b7c3,
         type: 3}
@@ -5702,7 +5702,7 @@ PrefabInstance:
     - target: {fileID: 4280287630806463071, guid: 001a192f20a62694f860bb51ffb3b7c3,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -66.14632
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4280287630806463071, guid: 001a192f20a62694f860bb51ffb3b7c3,
         type: 3}
@@ -9973,7 +9973,7 @@ GameObject:
   m_Component:
   - component: {fileID: 466933921}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: ======M=========M========
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9987,7 +9987,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 466933920}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -124.78344, y: 12.773565, z: 0.09535313}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -16494,7 +16494,7 @@ PrefabInstance:
         type: 3}
       propertyPath: mBehaviorSource.mTaskData.JSONSerialization
       value: '{"EntryTask":{"Type":"BehaviorDesigner.Runtime.Tasks.EntryTask","NodeData":{"Offset":"(84.9347,-394.5912)"},"ID":0,"Name":"Entry","Instant":true},"RootTask":{"Type":"BehaviorDesigner.Runtime.Tasks.Repeater","NodeData":{"Offset":"(3.864089,134.153351)"},"ID":1,"Name":"Repeater","Instant":true,"SharedIntcount":{"Type":"BehaviorDesigner.Runtime.SharedInt","Name":null,"Int32mValue":0},"SharedBoolrepeatForever":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":true},"SharedBoolendOnFailure":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(0,120)"},"ID":2,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-389.277679,170)"},"ID":3,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"CondCanSkill","NodeData":{"Offset":"(-71.54861,173.116241)"},"ID":4,"Name":"Cond
-        Can Skill","Instant":true},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(78.33946,170.881836)"},"ID":5,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Selector","NodeData":{"Offset":"(-80,160)"},"ID":6,"Name":"Selector","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"MSkill_JumpAttack","NodeData":{"Offset":"(-387.187622,174.148132)"},"ID":7,"Name":"M
+        Can Skill","Instant":true,"CondCanMove_condCanMove":13},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(78.33946,170.881836)"},"ID":5,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Selector","NodeData":{"Offset":"(-80,160)"},"ID":6,"Name":"Selector","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"MSkill_JumpAttack","NodeData":{"Offset":"(-387.187622,184.877747)"},"ID":7,"Name":"M
         Skill   Jump Attack","Instant":true},{"Type":"MSkill_ElectricWall","NodeData":{"Offset":"(-232.91597,179.17334)"},"ID":8,"Name":"M
         Skill   Electric Wall","Instant":true},{"Type":"MSkill_DashAttack","NodeData":{"Offset":"(-83.67011,176.1582)"},"ID":9,"Name":"M
         Skill   Dash Attack","Instant":true},{"Type":"MSkill_Thunder","NodeData":{"Offset":"(61.25438,181.786377)"},"ID":10,"Name":"M
@@ -16502,7 +16502,7 @@ PrefabInstance:
         Can Move","Instant":true,"Single_angle":360,"Single_distance":50,"Single_rate":0.5},{"Type":"ActMove","NodeData":{"Offset":"(64.8743744,162.5628)"},"ID":14,"Name":"Act
         Move","Instant":true,"CondCanMove_condCanMove":13}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(332.030121,170)"},"ID":15,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"CondCanAttack","NodeData":{"Offset":"(-71.17114,180.538452)"},"ID":16,"Name":"Cond
         Can Attack","Instant":true},{"Type":"ActMeleeAttack","NodeData":{"Offset":"(100,180.729614)"},"ID":17,"Name":"Act
-        Melee Attack","Instant":true,"Single_angle":90,"Single_range":4}]}]}]}}'
+        Melee Attack","Instant":true}]}]}]}}'
       objectReference: {fileID: 0}
     - target: {fileID: 2871297817612175280, guid: 37305a29f7e1a5b408ce01591b44f1f8,
         type: 3}
@@ -41363,12 +41363,12 @@ SceneRoots:
   - {fileID: 1358433649}
   - {fileID: 628373952}
   - {fileID: 2015215086}
+  - {fileID: 1867301679}
+  - {fileID: 392536642}
   - {fileID: 1653007615}
   - {fileID: 560147099}
+  - {fileID: 466933921}
   - {fileID: 272198995}
   - {fileID: 837699254}
-  - {fileID: 392536642}
-  - {fileID: 1867301679}
   - {fileID: 1075569508}
   - {fileID: 941025976}
-  - {fileID: 466933921}

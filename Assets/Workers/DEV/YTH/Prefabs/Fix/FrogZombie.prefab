@@ -672,11 +672,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a2d4d2e02dbed2439f2161bc2a70335, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _animator: {fileID: 5922927629447639198}
-  _monsterData: {fileID: 4926079250640333438}
-  _playerStat: {fileID: 0}
-  _justTrigger: {fileID: 5120033002144045853}
-  _player: {fileID: 0}
   _angle: 45
   _distance: 3
 --- !u!114 &7074158778666801736
@@ -691,10 +686,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c0c56d971f771247b404c1a828a76d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _monsterData: {fileID: 4926079250640333438}
-  _player: {fileID: 0}
-  _rigid: {fileID: 3546522850649538722}
-  _animator: {fileID: 5922927629447639198}
+  player: {fileID: 0}
   _gear: {fileID: 7721173211588356841, guid: 6f50a567d27f5234c89a2742d0a1134a, type: 3}
   _chip: {fileID: 790199856513174846, guid: 1a89e32ec97e86d47bd1098f5827fbeb, type: 3}
 --- !u!114 &4926079250640333438
@@ -711,13 +703,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _monsterType: 4
   _skillType: 0
-  _rewardType: 2
+  _monsterTier: 0
   _maxHp: 10
   _curHp: 0
   _damage: 5
   _attackRange: 1
   _isAttacked: 0
   _attacked_First: 0
+  _range: 0
+  _angle: 0
   _meleeAttackSpeed: 2
   _rangeAttackSpeed: 0
   _throwPower: 0
@@ -807,17 +801,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03a14c639c0a11f439c061e57d8114bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bomb: {fileID: 11400000, guid: f7aef78b7edafe440b1047ceb38c6e32, type: 2}
-  _dashAttack: {fileID: 11400000, guid: 25fbceb7c2e4388469bfc93e8fb1827d, type: 2}
-  _jumpAttack: {fileID: 11400000, guid: 1e2de81d87b1e6c409c75d41a0869da0, type: 2}
-  _mine: {fileID: 11400000, guid: c1bf062782da5344e94c4627697391ec, type: 2}
-  _stimPak: {fileID: 11400000, guid: c94b203ef3b68d041b41e908d6900a90, type: 2}
-  _wheelWind: {fileID: 11400000, guid: b08fc3fef67779c41bfd6951959ea2a0, type: 2}
-  _electricWall: {fileID: 11400000, guid: c1c60427577587c4582d4c2b78f1246d, type: 2}
-  _thunder: {fileID: 11400000, guid: 21aa5c94142e013489e9d47926ed6db5, type: 2}
-  _trippleAttack: {fileID: 11400000, guid: e89517893da7be74a97c776a7186f4dd, type: 2}
-  _frogJumpAttack: {fileID: 11400000, guid: 664f7e9cd5aacfb4188e01ac660bef23, type: 2}
-  _revive: {fileID: 11400000, guid: 29b127eac8fc40c4cbf72cac79dd6fea, type: 2}
   _bombPrefab: {fileID: 0}
   _minePrefab: {fileID: 0}
   _jackTheRipper: {fileID: 0}

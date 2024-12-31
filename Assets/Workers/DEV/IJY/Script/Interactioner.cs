@@ -5,12 +5,13 @@ using UnityEngine;
 
 public class Interactioner : MonoBehaviour
 {
+    public bool IsGrabing = false;
     private int interactionLayer;
     private int interactionGrabLayer;
-    private Example_Interaction_GrabScript exampleScript;
+    [SerializeField] private Example_Interaction_GrabScript exampleScript;
     private Coroutine RoutineCheck;
-
     private List<GameObject> interactionOBJs = new();
+
     [SerializeField] private PlayerController playerController;
     [SerializeField] private GameObject target;
     [Header("인식 범위")]
@@ -25,7 +26,7 @@ public class Interactioner : MonoBehaviour
         interactionLayer = LayerMask.NameToLayer("Is_Interaction");
         interactionGrabLayer = LayerMask.NameToLayer("Is_Interaction_Grab");
     }
-
+    // 해결해야 하는 부분 : 상호작용 후 오브젝트가 삭제되었을 경우, 다음 상호작용 실행에 문제가 없게끔 구성
     private void Update()
     {
         if (playerController.PInput.TryInteraction)
@@ -39,11 +40,9 @@ public class Interactioner : MonoBehaviour
             target = SelectInteraction(interactionOBJs);
             if (target == null || !target.activeSelf) return;
 
-            // 상호작용 대상을 바라보는 코드. 추후 자연스럽게 수정 예정
             Vector3 dir = new Vector3
                 (target.transform.position.x, transform.parent.position.y, target.transform.position.z) - transform.parent.position;
-            if (RoutineCheck == null)
-                RoutineCheck = StartCoroutine(RotateTransform(transform.parent, dir));
+            if (RoutineCheck == null) RoutineCheck = StartCoroutine(RotateTransform(transform.parent, dir));
 
             if (exampleScript != null)
             {
@@ -99,17 +98,13 @@ public class Interactioner : MonoBehaviour
 
     void Grab_KickDown()
     {
-        if (target == null || !target.activeSelf)
-        {
-            exampleScript.GrabOnOff = false;
-            exampleScript = null;
-            return;
-        }
+        if (IsGrabing) return;
 
-        exampleScript.GrabOnOff = !exampleScript.GrabOnOff;
+        IsGrabing = true;
+        StartCoroutine(CheckGrabing());
         target.GetComponent<Base_InteractionOBJ_Grab>().Activate_Grab();
 
-        if (exampleScript.GrabOnOff != true)
+        if (IsGrabing != true)
         {
             exampleScript = null;
             target = null;
@@ -123,13 +118,31 @@ public class Interactioner : MonoBehaviour
         Vector3 targetRotate = Quaternion.LookRotation(target).eulerAngles;
         while (Vector3.Distance(player.eulerAngles, targetRotate) > 1f)
         {
-            playerController.PInput.TryInteraction = Input.GetButtonDown("Interaction");
+            playerController.PInput.TryInteraction = playerController.PInput.Input.actions["Interact"].WasPressedThisFrame();
             player.rotation = Quaternion.Slerp(player.rotation, Quaternion.LookRotation(target), Time.deltaTime * 10f);
         }
-        Debug.Log("해치웠다");
 
         playerController.IsAnimStart = false;
         RoutineCheck = null;
+        yield break;
+    }
+
+    IEnumerator CheckGrabing()
+    {
+        while (IsGrabing)
+        {
+            Debug.Log("코루틴 돌돌돌");
+            if (target == null || !target.activeSelf)
+            {
+                Debug.Log("어 사라졌다");
+                IsGrabing = false;
+            }
+
+            yield return null;
+        }
+        Debug.Log("코루틴 끝!");
+        exampleScript.playerController = null;
+        exampleScript = null;
         yield break;
     }
 

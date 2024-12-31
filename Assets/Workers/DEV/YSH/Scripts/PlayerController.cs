@@ -16,18 +16,19 @@ public class PlayerController : MonoBehaviour, IDamagable
 
     private Animator anim;
 
-    //[SerializeField] private AblityAdapter adapter;
-    [SerializeField] private DrainManager drainManager;
+    private DrainManager drainManager;
     [SerializeField] private GameObject manaSkillPanel;
 
     private bool isTryManaSkill;
 
     public EState currentStateView;
-    public TakeHitType currentHitTypeView;
+    private TakeHitType currentHitTypeView;
 
-    public ManaSkillHandler ManaSkillHandler;
-    public PlayerSkillHandler SkillHandler;
-    public AblityAdapter AblityAdapter;
+    public Transform cameraLookPos; 
+
+    [HideInInspector] public ManaSkillHandler ManaSkillHandler;
+    [HideInInspector] public PlayerSkillHandler SkillHandler;
+    [HideInInspector] public AblityAdapter AblityAdapter;
     public PlayerFSM Fsm { get; private set; }
     public Animator Anim { get { return anim; } }
     public PlayerInputHandler PInput { get; private set; }
@@ -41,6 +42,10 @@ public class PlayerController : MonoBehaviour, IDamagable
     private StringBuilder sb;
     void Awake()
     {
+        drainManager = GetComponentInChildren<DrainManager>();
+        this.ManaSkillHandler = GetComponent<ManaSkillHandler>();
+        SkillHandler = GetComponent<PlayerSkillHandler>();
+        this.AblityAdapter = GetComponent<AblityAdapter>();
         anim = GetComponent<Animator>();
         AblityAdapter = GetComponent<AblityAdapter>();
         PInput = GetComponent<PlayerInputHandler>();

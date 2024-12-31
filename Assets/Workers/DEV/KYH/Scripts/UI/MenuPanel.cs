@@ -16,7 +16,7 @@ public class MenuPanel : MonoBehaviour
     private bool isActive;
 
     [SerializeField] private GameObject menuPanel;
-    [SerializeField] private ChangeInput inputManager;
+    [Inject] private ChangeInput inputManager;
     [SerializeField] private Button selectButton;
 
     [SerializeField] private GameObject settingsPanel;

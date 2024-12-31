@@ -72,4 +72,14 @@ public class UI_StatModel : MonoBehaviour
         statModel.CurrentMp += 0;
         statModel.ChangeStamina(0);
     }
+
+    private void OnDestroy()
+    {
+        statModel.OnStatChange -= StatModel_OnStatChange;
+        statModel.OnCurHpChange -= StatModel_OnCurHpChange;
+        statModel.OnCurMpChange -= StatModel_OnCurMpChange;
+        statModel.OnCurStaminaChange -= StatModel_OnCurStaminaChange;
+        statModel.OnChipChange -= StatModel_OnChipChange;
+        statModel.OnBlackChipChange -= StatModel_OnBlackChipChange;
+    }
 }

@@ -8,7 +8,9 @@ using Zenject;
 public class PlayerView : MonoBehaviour
 {
     [Inject] StatModel statModel;
-    [Inject] PlayerAttack playerAttack;
+    [Inject] PlayerController player;
+
+    private PlayerAttack attack;
 
     [Header("플레이어 정보")]
     [SerializeField] private Slider hpSlider;
@@ -21,6 +23,8 @@ public class PlayerView : MonoBehaviour
 
     private void Start()
     {
+        attack = player.Attack;
+
         hpSlider.maxValue = statModel.MaxHp;
         mpSlider.maxValue = statModel.MaxMp;
 
@@ -30,7 +34,7 @@ public class PlayerView : MonoBehaviour
         statModel.OnCurHpChange += Player_OnCurHPChanged;
         statModel.OnCurMpChange += Player_OnCurMPChanged;
         statModel.OnStatChange += Player_OnTObjectChanged;
-        playerAttack.OnChangedStack += Player_OnTObjectChanged;
+        attack.OnChangedStack += Player_OnTObjectChanged;
 
         Player_OnCurHPChanged(statModel.MaxHp);
         Player_OnCurMPChanged(0);
@@ -52,6 +56,14 @@ public class PlayerView : MonoBehaviour
 
     public void Player_OnTObjectChanged()
     {
-        numberingText.text = $"{playerAttack.ObjectCount} / {playerAttack.MaxObjectCount}";
+        numberingText.text = $"{attack.ObjectCount} / {attack.MaxObjectCount}";
+    }
+
+    private void OnDestroy()
+    {
+        statModel.OnCurHpChange -= Player_OnCurHPChanged;
+        statModel.OnCurMpChange -= Player_OnCurMPChanged;
+        statModel.OnStatChange -= Player_OnTObjectChanged;
+        attack.OnChangedStack -= Player_OnTObjectChanged;
     }
 }

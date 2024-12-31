@@ -6,11 +6,12 @@ using System.Collections;
 
 public class ActRangeAttack : Action
 {
-    [SerializeField] MonsterData _monsterData;
+    private MonsterData _monsterData;
+    private Animator _animator;
 
-    [SerializeField] Animator _animator;
+    private PooledObject _pooledObject;
 
-    [SerializeField] GameObject _player;
+    private PlayerController _player;
 
     [SerializeField] SharedGameObject _projectilePrefab;
 
@@ -18,8 +19,16 @@ public class ActRangeAttack : Action
 
     private float _distance;
 
+    public override void OnAwake()
+    {
+        _pooledObject = GetComponent<PooledObject>();
+        _monsterData = GetComponent<MonsterData>();
+        _animator = GetComponent<Animator>();
+    }
+
     public override void OnStart()
 	{
+        _player = _pooledObject.player;
         _distance = Vector3.Distance(transform.position, _player.transform.position);
     }
 

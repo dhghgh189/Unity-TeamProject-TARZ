@@ -2,6 +2,7 @@ using BehaviorDesigner.Runtime.Tasks;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
+using Zenject;
 
 /// <summary>
 /// 1. 플레이어 뒤로 가다가 stopblockDistance보다 클때 running 
@@ -10,14 +11,13 @@ using UnityEngine.AI;
 public class ActMove_Block : Action
 {
     [SerializeField] CondCanMove _condCanMove;
+    private PooledObject _pooledObject;
 
-    [SerializeField] MonsterData _monsterData;
+    private MonsterData _monsterData;
+    private NavMeshAgent _agent;
+    private Animator _animator;
 
-    [SerializeField] NavMeshAgent _agent;
-
-    [SerializeField] Animator _animator;
-
-    [SerializeField] GameObject _player;
+    private PlayerController _player;
 
     private Vector3 _playerBackRoute;
 
@@ -27,8 +27,17 @@ public class ActMove_Block : Action
 
     private float _distance;
 
+    public override void OnAwake()
+    {
+        _pooledObject = GetComponent<PooledObject>();
+        _monsterData = GetComponent<MonsterData>();
+        _agent = GetComponent<NavMeshAgent>();
+        _animator = GetComponent<Animator>();
+    }
+
     public override void OnStart()
     {
+        _player = _pooledObject.player;
         keepChaseRoutine = StartCoroutine(KeepChaseRoutine());
     }
 
@@ -38,14 +47,14 @@ public class ActMove_Block : Action
 
         _playerBackRoute = _player.transform.position - _player.transform.forward * 10f;
 
-        if (_condCanMove.IsPlayerWithinSight(_player) && _distance >= _stopBlockDistance) 
+        if (_condCanMove.IsPlayerWithinSight(_player.gameObject) && _distance >= _stopBlockDistance) 
         {
             _agent.SetDestination(_playerBackRoute);
             return TaskStatus.Running;
         }
-        else if (_condCanMove.IsPlayerWithinSight(_player) && _distance < _stopBlockDistance)
+        else if (_condCanMove.IsPlayerWithinSight(_player.gameObject) && _distance < _stopBlockDistance)
         {
-            if (_condCanMove.IsPlayerWithinSight(_player) && _distance <= _monsterData.AttackRange)
+            if (_condCanMove.IsPlayerWithinSight(_player.gameObject) && _distance <= _monsterData.AttackRange)
             {
                 return TaskStatus.Success;
             }
@@ -53,7 +62,7 @@ public class ActMove_Block : Action
             return TaskStatus.Running;
         }
 
-        else if (_condCanMove.IsPlayerWithinSight(_player))
+        else if (_condCanMove.IsPlayerWithinSight(_player.gameObject))
         {
             _agent.SetDestination(_lastPlayerTransform.position);
             return TaskStatus.Failure;
@@ -70,7 +79,7 @@ public class ActMove_Block : Action
     Coroutine keepChaseRoutine;
     IEnumerator KeepChaseRoutine()
     {
-        if (_condCanMove.IsPlayerWithinSight(_player) == false)
+        if (_condCanMove.IsPlayerWithinSight(_player.gameObject) == false)
         {
             _lastPlayerTransform = _player.transform;
         }

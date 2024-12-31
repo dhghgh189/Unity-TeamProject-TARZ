@@ -12,6 +12,6 @@ public class InventoryInstaller : MonoInstaller
         Container.Bind<UI_InventorySlots>().FromComponentsInHierarchy().AsSingle();
         Container.Bind<UI_EquipmentSlot>().FromComponentsInHierarchy().AsSingle();
         Container.Bind<AblityAdapter>().FromComponentInHierarchy().AsSingle();
-        Container.Bind<PlayerAttack>().FromComponentInHierarchy().AsSingle();
+        Container.Bind<PlayerController>().FromComponentInHierarchy().AsSingle();
     }
 }

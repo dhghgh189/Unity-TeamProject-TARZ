@@ -5,15 +5,23 @@ using Zenject;
 
 public class MSkill_Mine : Action
 {
-    [Inject]
-    [SerializeField] MonsterSkillManager _monsterSkillManager;
+    private MonsterSkillManager _monsterSkillManager;
 
-    [SerializeField] GameObject _player;
+    private PooledObject _pooledObject;
+
+    private PlayerController _player;
 
     [SerializeField] Transform _muzzlePoint;
-    
-	public override void OnStart()
+
+    public override void OnAwake()
+    {
+        _monsterSkillManager = GetComponent<MonsterSkillManager>();
+        _pooledObject = GetComponent<PooledObject>();
+    }
+
+    public override void OnStart()
 	{
+        _player = _pooledObject.player;
         _monsterSkillManager.MuzzlePoint = _muzzlePoint;
     }
 

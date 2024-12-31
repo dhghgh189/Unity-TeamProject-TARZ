@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 [Serializable]
@@ -34,6 +35,11 @@ public class MonsterData : MonoBehaviour
 
     [SerializeField] bool _attacked_First; // 선빵 맞아서 캐릭터 추격하는 변수
     public bool Attacked_First { get { return _attacked_First; } set { _attacked_First = value; } }
+
+    [SerializeField] float _range;
+    public float Range { get { return _range; } set { _range = value; } }
+    [SerializeField] float _angle;
+    public float Angle { get { return _angle; } set { _angle = value; } }
 
     [Header("근거리 몬스터")]
     [SerializeField] float _meleeAttackSpeed; // 근접 공격 속도

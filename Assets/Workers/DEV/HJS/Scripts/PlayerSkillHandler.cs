@@ -15,17 +15,21 @@ public class PlayerSkillHandler : MonoBehaviour
     private UnityEvent<GameObject, GameObject> onCollisionThrowObjectEvents;   // ThrowObject의 충돌 - OnCollision or OnTrigger
     private UnityEvent<GameObject, GameObject> onActionThrowObjectEvents;      // 기본 ThrowObject에서의 할일 - Enter
 
-    [SerializeField] DrainManager drainManager;
-    [SerializeField] PlayerMovement playerMovement;
+    private DrainManager drainManager;
+    private PlayerMovement playerMovement;
 
     [Header("SkillList")]
     [SerializeField] Dictionary<string, int> skillDic;
 
     [Header("Test")]
-    [Inject]
-    [SerializeField] StatModel model;
-    [Inject]
-    [SerializeField] AblityAdapter adapter;
+    [Inject] [SerializeField] StatModel model;
+    [Inject] private AblityAdapter adapter;
+
+    private void Awake()
+    {
+        drainManager = GetComponentInChildren<DrainManager>();
+        playerMovement = GetComponent<PlayerMovement>();
+    }
 
     private void Start()
     {
@@ -115,8 +119,8 @@ public class PlayerSkillHandler : MonoBehaviour
                 case PassiveType.Modify:
                     switch (psivSkill.GetModifySetting.ModifyType)
                     {
-                        case PassiveModifyType.DashTime:
-                            playerMovement.DashTime += psivSkill.GetModifySetting.Amount;
+                        case PassiveModifyType.DashSpeed:
+                            model.DashSpeed += psivSkill.GetModifySetting.Amount;
                             break;
                         case PassiveModifyType.DrainRadius:
                             drainManager.MaxRadius += psivSkill.GetModifySetting.Amount;
@@ -238,8 +242,8 @@ public class PlayerSkillHandler : MonoBehaviour
                 case PassiveType.Modify:
                     switch (psivSkill.GetModifySetting.ModifyType)
                     {
-                        case PassiveModifyType.DashTime:
-                            playerMovement.DashTime -= psivSkill.GetModifySetting.Amount;
+                        case PassiveModifyType.DashSpeed:
+                            model.DashSpeed -= psivSkill.GetModifySetting.Amount;
                             break;
                         case PassiveModifyType.DrainRadius:
                             drainManager.MaxRadius -= psivSkill.GetModifySetting.Amount;

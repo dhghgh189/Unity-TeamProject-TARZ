@@ -3,6 +3,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 using Zenject;
+using Zenject.SpaceFighter;
 
 public class PlayerAttack : MonoBehaviour
 {
@@ -34,7 +35,7 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private Transform stackTransform;
     [SerializeField] private int maxObjectCount;
     [SerializeField] private float comboCheckTime;
-    [SerializeField] private PlayerController player;
+    private PlayerController player;
 
     private Vector3 source;
     private Vector3 dest;
@@ -64,6 +65,8 @@ public class PlayerAttack : MonoBehaviour
 
     private void Awake()
     {
+        player = GetComponent<PlayerController>();
+
         MeleeCount = 0;
         ThrowCount = 0;
 

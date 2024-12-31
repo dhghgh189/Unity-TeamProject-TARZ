@@ -4,15 +4,23 @@ using Zenject;
 
 public class MSkill_TrippleAttack : Action
 {
-    [Inject]
-    [SerializeField] MonsterSkillManager _monsterSkillManager;
+    private MonsterSkillManager _monsterSkillManager;
 
-    [SerializeField] GameObject _player;
+    private PooledObject _pooledObject;
+
+    private PlayerController _player;
 
     private float _distance;
 
+    public override void OnAwake()
+    {
+        _monsterSkillManager = GetComponent<MonsterSkillManager>();
+        _pooledObject = GetComponent<PooledObject>();
+    }
+
     public override void OnStart()
     {
+        _player = _pooledObject.player;
         _distance = Vector3.Distance(transform.position, _player.transform.position);
     }
 

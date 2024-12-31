@@ -6,38 +6,45 @@ using UnityEngine.AI;
 public class MonsterSkillManager : MonoBehaviour
 {
     #region Skill-ScriptableObj
+
+    const string SKILL_PATH = "Managed/Skill/Monster";
+
+    private MonsterData _monsterData;
+
+    private LayerMask WhatIsTarget;
+
     [Header("MonsterSkill")]
-    [SerializeField] MonsterSkill _bomb;
+    private MonsterSkill _bomb;
     public MonsterSkill BombSkill { get { return _bomb; } set { _bomb = value; } }
 
-    [SerializeField] MonsterSkill _dashAttack;
+    private MonsterSkill _dashAttack;
     public MonsterSkill DashAttackSkill { get { return _dashAttack; } set { _dashAttack = value; } }
 
-    [SerializeField] MonsterSkill _jumpAttack;
+    private MonsterSkill _jumpAttack;
     public MonsterSkill JumpAttackSkill { get { return _jumpAttack; } set { _jumpAttack = value; } }
 
-    [SerializeField] MonsterSkill _mine;
+    private MonsterSkill _mine;
     public MonsterSkill MineSkill { get { return _mine; } set { _mine = value; } }
 
-    [SerializeField] MonsterSkill _stimPak;
+    private MonsterSkill _stimPak;
     public MonsterSkill StimPakSkill { get { return _stimPak; } set { _stimPak = value; } }
 
-    [SerializeField] MonsterSkill _wheelWind;
+    private MonsterSkill _wheelWind;
     public MonsterSkill WheelWindSkill { get { return _wheelWind; } set { _wheelWind = value; } }
 
-    [SerializeField] MonsterSkill _electricWall;
+    private MonsterSkill _electricWall;
     public MonsterSkill ElectricWallSkill { get { return _electricWall; } set { _electricWall = value; } }
 
-    [SerializeField] MonsterSkill _thunder;
+    private MonsterSkill _thunder;
     public MonsterSkill ThunderSkill { get { return _thunder; } set { _thunder = value; } }
 
-    [SerializeField] MonsterSkill _trippleAttack;
+    private MonsterSkill _trippleAttack;
     public MonsterSkill TrippleAttackSkill { get { return _trippleAttack; } set { _trippleAttack = value; } }
 
-    [SerializeField] MonsterSkill _frogJumpAttack;
+    private MonsterSkill _frogJumpAttack;
     public MonsterSkill FrogJumpAttackSkill { get { return _frogJumpAttack; } set { _frogJumpAttack = value; } }
 
-    [SerializeField] MonsterSkill _revive;
+    private MonsterSkill _revive;
     public MonsterSkill ReviveSkill { get { return _revive; } set { _revive = value; } }
     #endregion
 
@@ -82,11 +89,33 @@ public class MonsterSkillManager : MonoBehaviour
     private float _elapsedTime = 0;
     #endregion
 
+    private void Awake()
+    {
+        _monsterData = GetComponent<MonsterData>();
+        WhatIsTarget = (1 << LayerMask.NameToLayer("Player"));
+    }
+
     private void Start()
     {
+        LoadSkill();
         SkillInit();
 
         _animator = GetComponent<Animator>();
+    }
+
+    public void LoadSkill()
+    {
+        _bomb = Resources.Load<MonsterSkill>($"{SKILL_PATH}/Bomb");
+        _dashAttack = Resources.Load<MonsterSkill>($"{SKILL_PATH}/DashAttack");
+        _jumpAttack = Resources.Load<MonsterSkill>($"{SKILL_PATH}/JumpAttack");
+        _mine = Resources.Load<MonsterSkill>($"{SKILL_PATH}/Mine");
+        _stimPak = Resources.Load<MonsterSkill>($"{SKILL_PATH}/StimPak");
+        _wheelWind = Resources.Load<MonsterSkill>($"{SKILL_PATH}/WheelWind");
+        _electricWall = Resources.Load<MonsterSkill>($"{SKILL_PATH}/ElectricWall");
+        _thunder = Resources.Load<MonsterSkill>($"{SKILL_PATH}/Thunder");
+        _trippleAttack = Resources.Load<MonsterSkill>($"{SKILL_PATH}/TrippleAttack");
+        _frogJumpAttack = Resources.Load<MonsterSkill>($"{SKILL_PATH}/FrogJumpAttack");
+        _revive = Resources.Load<MonsterSkill>($"{SKILL_PATH}/Revive");
     }
 
     public void SkillInit()
@@ -525,7 +554,7 @@ public class MonsterSkillManager : MonoBehaviour
     public void MeleeAttack()
     {
         //내적 이용하여 공격 범위 (전방 부채꼴) 정해서
-        Collider[] colliders = Physics.OverlapSphere(transform.position, 5f);
+        Collider[] colliders = Physics.OverlapSphere(transform.position, _monsterData.Range, WhatIsTarget);
         foreach (Collider collider in colliders)
         {
             // 공격 범위 확인
@@ -536,13 +565,13 @@ public class MonsterSkillManager : MonoBehaviour
 
             Vector3 targetDir = (destination - source).normalized;
             float targetAngle = Vector3.Angle(transform.forward, targetDir);
-            if (targetAngle > 90f * 0.5f)
+            if (targetAngle > _monsterData.Angle * 0.5f)
                 continue;
 
             IDamagable damageble = collider.GetComponent<IDamagable>();
             if (damageble != null)
             {
-                damageble.TakeDamage(10f);
+                damageble.TakeDamage(_monsterData.Damage);
             }
         }
     }

@@ -1,8 +1,11 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class ObjectPool : MonoBehaviour
 {
+    [Inject] private PlayerController player;
+
     [SerializeField] List<PooledObject> pool = new List<PooledObject>();
 
     [SerializeField] PooledObject _monsterPrefab;
@@ -18,6 +21,14 @@ public class ObjectPool : MonoBehaviour
             instance.transform.parent = transform;
             instance.ReturnPool = this;
             pool.Add(instance);
+        }
+    }
+
+    private void Start()
+    {
+        foreach(PooledObject instance in pool)
+        {
+            instance.player = player;
         }
     }
 

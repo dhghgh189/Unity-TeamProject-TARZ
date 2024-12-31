@@ -2,29 +2,42 @@ using BehaviorDesigner.Runtime.Tasks;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
+using Zenject;
 public class ActMove_Back : Action
 {
+    private PooledObject _pooledObject;
     [SerializeField] CondCanMove _condCanMove;
 
-    [SerializeField] MonsterData _monsterData;
+    private MonsterData _monsterData;
+    private NavMeshAgent _agent;
+    private Animator _animator;
 
-    [SerializeField] NavMeshAgent _agent;
-
-    [SerializeField] Animator _animator;
-
-    [SerializeField] GameObject _player; 
+    private PlayerController _player; 
 
     private Vector3 _back;
 
     private float _distance;
-   
+
+    public override void OnAwake()
+    {
+        _pooledObject = GetComponent<PooledObject>();
+        _monsterData = GetComponent<MonsterData>();
+        _agent = GetComponent<NavMeshAgent>();
+        _animator = GetComponent<Animator>();
+    }
+
+    public override void OnStart()
+    {
+        _player = _pooledObject.player;
+}
+
     public override TaskStatus OnUpdate()
     {
         _distance = Vector3.Distance(transform.position, _player.transform.position);
 
         _back = transform.position - transform.forward * 2f;
 
-        if (_condCanMove.IsPlayerWithinSight(_player) && _distance < _monsterData.DangerDistance)
+        if (_condCanMove.IsPlayerWithinSight(_player.gameObject) && _distance < _monsterData.DangerDistance)
         {
             if (_distance <= _monsterData.AttackRange || _distance <= _monsterData.CanUseProjectileSkillDistance)
             {

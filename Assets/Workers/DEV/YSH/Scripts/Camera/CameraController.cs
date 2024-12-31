@@ -1,11 +1,14 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
+using Zenject.SpaceFighter;
 
 public class CameraController : MonoBehaviour
 {
-    [SerializeField] private PlayerInputHandler playerInput;
+    private PlayerController player;
+    private PlayerInputHandler playerInput;
     [SerializeField] public bool IsAutoLockOn;
     [SerializeField] public Transform target;
-    [SerializeField] private Transform lookAt;
+    private Transform lookAt;
     [Space(5f)]
     [SerializeField] private float sensitivity;
     [SerializeField] private Vector3 delta;
@@ -15,6 +18,11 @@ public class CameraController : MonoBehaviour
 
     private void Start()
     {
+        player = FindAnyObjectByType<PlayerController>();
+        playerInput = FindAnyObjectByType<PlayerInputHandler>();
+
+        lookAt = player.cameraLookPos;
+
         mainCam = Camera.main;
         transform.position = lookAt.position;
 

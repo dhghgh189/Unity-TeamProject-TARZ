@@ -7,6 +7,7 @@ public class SaveManager : MonoBehaviour
     [Inject] StatModel statModel;
     [Inject] Inventory inventory;
     [Inject] Equipment equipment;
+    [Inject] PlayerSkillHandler handler;
 
     [ContextMenu("Save")]
     public void Save()
@@ -22,6 +23,8 @@ public class SaveManager : MonoBehaviour
         
         // 데이터 칩 저장
         saveData.DataChip = statModel.Chip;
+
+        saveData.blueChipSaveDatas = handler.SaveBlueChips();
 
         // PlayerPrefs으로 세이브 데이터 저장
         PlayerPrefs.SetString("SaveData", JsonUtility.ToJson(saveData));

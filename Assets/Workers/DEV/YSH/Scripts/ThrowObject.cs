@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 using Zenject.SpaceFighter;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -8,9 +9,8 @@ public class ThrowObject : MonoBehaviour, IDrainable
 {
     [SerializeField] private LayerMask whatIsTarget;
 
-    [SerializeField]
-    public AblityAdapter adapter;
-    public PlayerSkillHandler handler;
+    [Inject] [HideInInspector] public AblityAdapter adapter;
+    [HideInInspector] public PlayerSkillHandler handler;
 
     [SerializeField] private bool isCollected;
     private Rigidbody rigid;
@@ -65,6 +65,7 @@ public class ThrowObject : MonoBehaviour, IDrainable
             StopDrain(null);
 
         owner = player;
+        handler = owner.SkillHandler;
         player.AddObjectStack(this);
 
         isCollected = true;

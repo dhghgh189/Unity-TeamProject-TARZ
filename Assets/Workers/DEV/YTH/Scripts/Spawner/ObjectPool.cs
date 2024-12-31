@@ -11,13 +11,10 @@ public class ObjectPool : MonoBehaviour
 {
     private List<MonsterFactoryData> monsterFactoryDatas = new();
 
-    [Inject(Id = "Jake")]
-    private MonsterFactory jakeFactory;
-    [SerializeField] Transform jakePool;
+    [Inject] DiContainer container;
 
-    [Inject(Id = "Amber")]
-    private MonsterFactory amberFactory;
-    [SerializeField] Transform amberPool;
+    [Header("Pool Transforms")]
+    [SerializeField] Transform[] poolTransforms;
 
 
     public class MonsterFactoryData
@@ -28,14 +25,17 @@ public class ObjectPool : MonoBehaviour
 
     private void Start()
     {
-        monsterFactoryDatas.Add(new MonsterFactoryData() { factory = jakeFactory, PoolTransform = jakePool });
-        monsterFactoryDatas.Add(new MonsterFactoryData() { factory = amberFactory, PoolTransform = amberPool });
+        // 컨데이너를 바인딩 해서 ResolveId로 팩토리들을 가져오고 리스트에 추가
+        for (int i = 0; i < (int)MonsterName.Size; i++)
+        {
+            monsterFactoryDatas.Add(new MonsterFactoryData() { factory = container.ResolveId<MonsterFactory>(((MonsterName)i).ToString()), PoolTransform = poolTransforms[i] });
+        }
     }
 
     public PooledObject CreateMonster(MonsterName monsterName, Transform transform)
     {
         MonsterFactoryData temp = monsterFactoryDatas[(int)monsterName];
-        foreach (var item in temp.PoolTransform.GetComponentsInChildren<Transform>(true))
+        foreach (var item in temp.PoolTransform.GetComponentsInChildren<PooledObject>(true))
         {
             if (!item.gameObject.activeSelf)
             {

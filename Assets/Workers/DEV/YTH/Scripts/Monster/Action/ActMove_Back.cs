@@ -5,13 +5,14 @@ using UnityEngine.AI;
 using Zenject;
 public class ActMove_Back : Action
 {
+    private PooledObject _pooledObject;
     [SerializeField] CondCanMove _condCanMove;
 
     private MonsterData _monsterData;
     private NavMeshAgent _agent;
     private Animator _animator;
 
-    [Inject] private PlayerController _player; 
+    private PlayerController _player; 
 
     private Vector3 _back;
 
@@ -19,10 +20,16 @@ public class ActMove_Back : Action
 
     public override void OnAwake()
     {
+        _pooledObject = GetComponent<PooledObject>();
         _monsterData = GetComponent<MonsterData>();
         _agent = GetComponent<NavMeshAgent>();
         _animator = GetComponent<Animator>();
     }
+
+    public override void OnStart()
+    {
+        _player = _pooledObject.player;
+}
 
     public override TaskStatus OnUpdate()
     {

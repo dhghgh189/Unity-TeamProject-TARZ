@@ -11,12 +11,13 @@ using Zenject;
 public class ActMove_Block : Action
 {
     [SerializeField] CondCanMove _condCanMove;
+    private PooledObject _pooledObject;
 
     private MonsterData _monsterData;
     private NavMeshAgent _agent;
     private Animator _animator;
 
-    [Inject] private PlayerController _player;
+    private PlayerController _player;
 
     private Vector3 _playerBackRoute;
 
@@ -28,6 +29,7 @@ public class ActMove_Block : Action
 
     public override void OnAwake()
     {
+        _pooledObject = GetComponent<PooledObject>();
         _monsterData = GetComponent<MonsterData>();
         _agent = GetComponent<NavMeshAgent>();
         _animator = GetComponent<Animator>();
@@ -35,6 +37,7 @@ public class ActMove_Block : Action
 
     public override void OnStart()
     {
+        _player = _pooledObject.player;
         keepChaseRoutine = StartCoroutine(KeepChaseRoutine());
     }
 

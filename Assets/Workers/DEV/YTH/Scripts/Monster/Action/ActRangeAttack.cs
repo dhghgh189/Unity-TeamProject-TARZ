@@ -9,7 +9,9 @@ public class ActRangeAttack : Action
     private MonsterData _monsterData;
     private Animator _animator;
 
-    [Inject] private PlayerController _player;
+    private PooledObject _pooledObject;
+
+    private PlayerController _player;
 
     [SerializeField] SharedGameObject _projectilePrefab;
 
@@ -19,12 +21,14 @@ public class ActRangeAttack : Action
 
     public override void OnAwake()
     {
+        _pooledObject = GetComponent<PooledObject>();
         _monsterData = GetComponent<MonsterData>();
         _animator = GetComponent<Animator>();
     }
 
     public override void OnStart()
 	{
+        _player = _pooledObject.player;
         _distance = Vector3.Distance(transform.position, _player.transform.position);
     }
 

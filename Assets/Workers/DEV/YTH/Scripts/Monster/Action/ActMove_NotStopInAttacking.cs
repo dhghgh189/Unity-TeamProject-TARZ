@@ -11,12 +11,13 @@ using Zenject;
 public class ActMove_NotStopInAttacking : Action
 {
     [SerializeField] CondCanMove _condCanMove;
+    private PooledObject _pooledObject;
 
     private MonsterData _monsterData;
     private NavMeshAgent _agent;
     private Animator _animator;
 
-    [Inject] private PlayerController _player;
+    private PlayerController _player;
 
     private Transform _lastPlayerTransform; // 플레이어가 시야각에서 사라진 마지막 위치
 
@@ -24,6 +25,7 @@ public class ActMove_NotStopInAttacking : Action
 
     public override void OnAwake()
     {
+        _pooledObject = GetComponent<PooledObject>();
         _monsterData = GetComponent<MonsterData>();
         _agent = GetComponent<NavMeshAgent>();
         _animator = GetComponent<Animator>();
@@ -31,6 +33,7 @@ public class ActMove_NotStopInAttacking : Action
 
     public override void OnStart()
     {
+        _player = _pooledObject.player;
         keepChaseRoutine = StartCoroutine(KeepChaseRoutine());
     }
 

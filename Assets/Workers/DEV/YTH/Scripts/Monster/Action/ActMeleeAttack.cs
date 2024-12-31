@@ -9,7 +9,7 @@ public class ActMeleeAttack : Action
     private MonsterData _monsterData;
     private Animator _animator;
 
-    [Inject] private PlayerController _player;
+    private PlayerController _player;
 
     private float _distance;
 
@@ -20,14 +20,18 @@ public class ActMeleeAttack : Action
     [SerializeField] float _range;
     public float Range { get { return _range; } set { _range = value; } }
 
+    private PooledObject _pooledObject;
+
     public override void OnAwake()
     {
         _monsterData = GetComponent<MonsterData>();
         _animator = GetComponent<Animator>();
+        _pooledObject = GetComponent<PooledObject>();
     }
 
     public override void OnStart()
     {
+        _player = _pooledObject.player;
         _distance = Vector3.Distance(transform.position, _player.transform.position);
     }
 

@@ -24,7 +24,7 @@ public class MonsterJustTrigger : MonoBehaviour
         _animator = GetComponent<Animator>();
         _monsterData = GetComponent<MonsterData>();
 
-        _justTrigger = transform.Find("_justTrigger").gameObject;
+        _justTrigger = transform.Find("JustTrigger").gameObject;
     }
 
     private void Update()

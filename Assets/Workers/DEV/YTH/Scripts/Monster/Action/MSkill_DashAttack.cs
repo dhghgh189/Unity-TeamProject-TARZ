@@ -6,17 +6,21 @@ public class MSkill_DashAttack : Action
 {
     private MonsterSkillManager _monsterSkillManager;
 
-    [Inject] private PlayerController _player;
+    private PooledObject _pooledObject;
+
+    private PlayerController _player;
 
     private float _distance;
 
     public override void OnAwake()
     {
         _monsterSkillManager = GetComponent<MonsterSkillManager>();
+        _pooledObject = GetComponent<PooledObject>();
     }
 
     public override void OnStart()
     {
+        _player = _pooledObject.player;
         _distance = Vector3.Distance(transform.position, _player.transform.position);
     }
 

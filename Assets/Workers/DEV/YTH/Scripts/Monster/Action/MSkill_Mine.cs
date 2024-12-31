@@ -7,17 +7,21 @@ public class MSkill_Mine : Action
 {
     private MonsterSkillManager _monsterSkillManager;
 
-    [Inject] private PlayerController _player;
+    private PooledObject _pooledObject;
+
+    private PlayerController _player;
 
     [SerializeField] Transform _muzzlePoint;
 
     public override void OnAwake()
     {
         _monsterSkillManager = GetComponent<MonsterSkillManager>();
+        _pooledObject = GetComponent<PooledObject>();
     }
 
     public override void OnStart()
 	{
+        _player = _pooledObject.player;
         _monsterSkillManager.MuzzlePoint = _muzzlePoint;
     }
 

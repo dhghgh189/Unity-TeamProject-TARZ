@@ -7,13 +7,21 @@ public class CondCanAttack : Conditional
 {
     private MonsterData _monsterData;
 
-    [Inject] private PlayerController _player;
+    private PlayerController _player;
 
     private float _distance;
+
+    private PooledObject _pooledObject;
 
     public override void OnAwake()
     {
         _monsterData = GetComponent<MonsterData>();
+        _pooledObject = GetComponent<PooledObject>();
+    }
+
+    public override void OnStart()
+    {  
+        _player = _pooledObject.player;
     }
 
     public override TaskStatus OnUpdate()

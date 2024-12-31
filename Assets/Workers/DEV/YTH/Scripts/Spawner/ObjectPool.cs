@@ -34,23 +34,21 @@ public class ObjectPool : MonoBehaviour
 
     public PooledObject CreateMonster(MonsterName monsterName, Transform transform)
     {
-        MonsterFactoryData temp = monsterFactoryDatas[(int)monsterName];
-        foreach (var item in temp.PoolTransform.GetComponentsInChildren<PooledObject>(true))
+        MonsterFactoryData factoryData = monsterFactoryDatas[(int)monsterName];
+        foreach (PooledObject pooledObject in factoryData.PoolTransform.GetComponentsInChildren<PooledObject>(true))
         {
-            if (!item.gameObject.activeSelf)
+            if (!pooledObject.gameObject.activeSelf)
             {
-                item.gameObject.transform.position = transform.position;
-                item.gameObject.SetActive(true);
+                pooledObject.gameObject.transform.position = transform.position;
+                pooledObject.gameObject.SetActive(true);
 
-                return item.GetComponent<PooledObject>();
+                return pooledObject;
             }
         }
-        PooledObject instance = temp.factory.Create();
+        PooledObject instance = factoryData.factory.Create();
         instance.transform.position = transform.position;
 
         return instance;
-
-
     }
 
     public void ReturnPool(PooledObject pooledObject)

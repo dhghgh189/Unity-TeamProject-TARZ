@@ -27,7 +27,7 @@ public class PlayerSkillHandler : MonoBehaviour
 
     private void Awake()
     {
-        drainManager = GetComponent<DrainManager>();
+        drainManager = GetComponentInChildren<DrainManager>();
         playerMovement = GetComponent<PlayerMovement>();
     }
 
@@ -119,8 +119,8 @@ public class PlayerSkillHandler : MonoBehaviour
                 case PassiveType.Modify:
                     switch (psivSkill.GetModifySetting.ModifyType)
                     {
-                        case PassiveModifyType.DashTime:
-                            playerMovement.DashTime += psivSkill.GetModifySetting.Amount;
+                        case PassiveModifyType.DashSpeed:
+                            model.DashSpeed += psivSkill.GetModifySetting.Amount;
                             break;
                         case PassiveModifyType.DrainRadius:
                             drainManager.MaxRadius += psivSkill.GetModifySetting.Amount;
@@ -242,8 +242,8 @@ public class PlayerSkillHandler : MonoBehaviour
                 case PassiveType.Modify:
                     switch (psivSkill.GetModifySetting.ModifyType)
                     {
-                        case PassiveModifyType.DashTime:
-                            playerMovement.DashTime -= psivSkill.GetModifySetting.Amount;
+                        case PassiveModifyType.DashSpeed:
+                            model.DashSpeed -= psivSkill.GetModifySetting.Amount;
                             break;
                         case PassiveModifyType.DrainRadius:
                             drainManager.MaxRadius -= psivSkill.GetModifySetting.Amount;

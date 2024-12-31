@@ -36,7 +36,7 @@ public class ActMove : Action
     {
         _distance = Vector3.Distance(transform.position, _player.transform.position);
 
-        if (_condCanMove.IsPlayerWithinSight(_player.gameObject)/* && !_monsterData.IsAttacked*/)
+        if (_condCanMove.IsPlayerWithinSight(_player.gameObject) && !_monsterData.IsAttacked)
         {
             if( _distance <= _monsterData.AttackRange || _distance <= _monsterData.CanUseProjectileSkillDistance )
             {

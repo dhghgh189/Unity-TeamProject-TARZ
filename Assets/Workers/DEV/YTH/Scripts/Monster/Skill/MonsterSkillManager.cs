@@ -9,10 +9,6 @@ public class MonsterSkillManager : MonoBehaviour
 
     const string SKILL_PATH = "Managed/Skill/Monster";
 
-    private MonsterData _monsterData;
-
-    private LayerMask WhatIsTarget;
-
     [Header("MonsterSkill")]
     private MonsterSkill _bomb;
     public MonsterSkill BombSkill { get { return _bomb; } set { _bomb = value; } }
@@ -87,6 +83,10 @@ public class MonsterSkillManager : MonoBehaviour
     private Vector3 _jumpDirection;
 
     private float _elapsedTime = 0;
+
+    private MonsterData _monsterData;
+
+    private LayerMask WhatIsTarget;
     #endregion
 
     private void Awake()
@@ -297,7 +297,7 @@ public class MonsterSkillManager : MonoBehaviour
             Debug.Log("점프!!");
         }
 
-        Collider[] colliders = Physics.OverlapSphere(transform.position, _dashAttack.Range);
+        Collider[] colliders = Physics.OverlapSphere(transform.position, _dashAttack.Range, WhatIsTarget);
         foreach (Collider collider in colliders)
         {
             // 공격 범위 확인
@@ -449,7 +449,7 @@ public class MonsterSkillManager : MonoBehaviour
         float _angle = 0;
         float _damage = 0;
 
-        Collider[] colliders = Physics.OverlapSphere(transform.position, _range);
+        Collider[] colliders = Physics.OverlapSphere(transform.position, _range , WhatIsTarget);
         foreach (Collider collider in colliders)
         {
             // 공격 범위 확인

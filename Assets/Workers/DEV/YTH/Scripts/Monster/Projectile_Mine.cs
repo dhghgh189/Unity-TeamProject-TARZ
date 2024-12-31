@@ -8,6 +8,13 @@ public class Projectile_Mine : MonoBehaviour
 
     [SerializeField] Rigidbody _rigidBody;
 
+    private LayerMask WhatIsTarget;
+
+    private void Awake()
+    {
+        WhatIsTarget = (1 << LayerMask.NameToLayer("Player"));
+    }
+
     private void Start()
     {
         _monsterSkillManager = _bombZombie.GetComponent<MonsterSkillManager>();
@@ -21,7 +28,7 @@ public class Projectile_Mine : MonoBehaviour
         IDamagable damagableObj = collision.gameObject.GetComponent<IDamagable>();
         if (damagableObj != null)
         {
-            Collider[] colliders = Physics.OverlapSphere(transform.position, _monsterSkillManager.BombSkill.Range);
+            Collider[] colliders = Physics.OverlapSphere(transform.position, _monsterSkillManager.BombSkill.Range, WhatIsTarget);
             foreach (Collider collider in colliders)
             {
                 // 공격 범위 확인

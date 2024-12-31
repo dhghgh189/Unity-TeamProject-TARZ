@@ -1,14 +1,20 @@
 using BehaviorDesigner.Runtime.Tasks;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using Zenject;
 
 public class CondCanAttack : Conditional
 {
-    [SerializeField] MonsterData _monsterData;
+    private MonsterData _monsterData;
 
-    [SerializeField] GameObject _player;
+    [Inject] private PlayerController _player;
 
     private float _distance;
+
+    public override void OnAwake()
+    {
+        _monsterData = GetComponent<MonsterData>();
+    }
 
     public override TaskStatus OnUpdate()
     {

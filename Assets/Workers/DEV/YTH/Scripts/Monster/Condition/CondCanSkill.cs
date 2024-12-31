@@ -5,7 +5,12 @@ using UnityEngine;
 
 public class CondCanSkill : Conditional
 {
-    [SerializeField] MonsterData _monsterData;
+    private MonsterData _monsterData;
+
+    public override void OnAwake()
+    {
+        _monsterData = GetComponent<MonsterData>();
+    }
 
     public override TaskStatus OnUpdate()
     {

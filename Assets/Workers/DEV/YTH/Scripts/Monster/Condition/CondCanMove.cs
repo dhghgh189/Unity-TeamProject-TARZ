@@ -1,11 +1,12 @@
 using BehaviorDesigner.Runtime.Tasks;
 using UnityEngine;
+using Zenject;
 
 public class CondCanMove : Conditional
 {
-    [SerializeField] MonsterData _monsterData;
+    private MonsterData _monsterData;
 
-    [SerializeField] GameObject _player; // 플레이어 위치 넘겨줄 오브젝트
+    [Inject] private PlayerController _player; // 플레이어 위치 넘겨줄 오브젝트
 
     [Header("인지 범위")]
     [SerializeField] float _angle; // 시야각
@@ -14,10 +15,15 @@ public class CondCanMove : Conditional
 
     [Header("회전")]
     [SerializeField] float _rate; // 회전 Lerp 비율
-   
+
+    public override void OnAwake()
+    {
+        _monsterData = GetComponent<MonsterData>();
+    }
+
     public override TaskStatus OnUpdate()
     {
-        if (IsPlayerWithinSight(_player))
+        if (IsPlayerWithinSight(_player.gameObject))
         {
             //Debug.Log("CodnMove true");
             return TaskStatus.Success;

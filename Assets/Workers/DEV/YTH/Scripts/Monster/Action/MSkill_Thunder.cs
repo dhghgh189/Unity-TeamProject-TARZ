@@ -4,14 +4,19 @@ using Zenject;
 
 public class MSkill_Thunder : Action
 {
-    [Inject]
-    [SerializeField] MonsterSkillManager _monsterSkillManager;
+    private MonsterSkillManager _monsterSkillManager;
 
-    [SerializeField] MonsterData _monsterData;
+    private MonsterData _monsterData;
 
-    [SerializeField] GameObject _player;
+    [Inject] private PlayerController _player;
 
     private float _distance;
+
+    public override void OnAwake()
+    {
+        _monsterSkillManager = GetComponent<MonsterSkillManager>();
+        _monsterData = GetComponent<MonsterData>();
+    }
 
     public override void OnStart()
     {

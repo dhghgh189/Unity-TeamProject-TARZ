@@ -84,9 +84,15 @@ public class MonsterSkillManager : MonoBehaviour
 
     private void Start()
     {
+        LoadSkill();
         SkillInit();
 
         _animator = GetComponent<Animator>();
+    }
+
+    public void LoadSkill()
+    {
+
     }
 
     public void SkillInit()

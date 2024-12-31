@@ -6,12 +6,16 @@ using Zenject;
 
 public class MSkill_JumpAttack : Action
 {
-    [Inject]
-    [SerializeField] MonsterSkillManager _monsterSkillManager;
+    private MonsterSkillManager _monsterSkillManager;
 
-    [SerializeField] GameObject _player;
+    [Inject] private PlayerController _player;
 
     private float _distance;
+
+    public override void OnAwake()
+    {
+        _monsterSkillManager = GetComponent<MonsterSkillManager>();
+    }
 
     public override void OnStart()
     {

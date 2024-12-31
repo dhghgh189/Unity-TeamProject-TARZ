@@ -6,17 +6,22 @@ using System.Collections;
 
 public class ActRangeAttack : Action
 {
-    [SerializeField] MonsterData _monsterData;
+    private MonsterData _monsterData;
+    private Animator _animator;
 
-    [SerializeField] Animator _animator;
-
-    [SerializeField] GameObject _player;
+    [Inject] private PlayerController _player;
 
     [SerializeField] SharedGameObject _projectilePrefab;
 
     [SerializeField] SharedTransform _muzzlePoint;
 
     private float _distance;
+
+    public override void OnAwake()
+    {
+        _monsterData = GetComponent<MonsterData>();
+        _animator = GetComponent<Animator>();
+    }
 
     public override void OnStart()
 	{

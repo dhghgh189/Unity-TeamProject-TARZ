@@ -5,14 +5,18 @@ using Zenject;
 
 public class MSkill_Bomb : Action
 {
-    [Inject]
-    [SerializeField] MonsterSkillManager _monsterSkillManager;
+    private MonsterSkillManager _monsterSkillManager;
 
-    [SerializeField] GameObject _player;
+    [Inject] private PlayerController _player;
 
     [SerializeField] Transform _muzzlePoint;
-    
-	public override void OnStart()
+
+    public override void OnAwake()
+    {
+        _monsterSkillManager = GetComponent<MonsterSkillManager>();
+    }
+
+    public override void OnStart()
 	{
         _monsterSkillManager.MuzzlePoint = _muzzlePoint;
     }

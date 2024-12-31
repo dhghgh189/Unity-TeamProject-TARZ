@@ -5,21 +5,27 @@ using Zenject;
 
 public class MonsterJustTrigger : MonoBehaviour
 {
-    [SerializeField] Animator _animator;
+    private Animator _animator;
+    private MonsterData _monsterData;
 
-    [SerializeField] MonsterData _monsterData;
+    [Inject] private StatModel _playerStat; // 젠젝
 
-    [Inject]
-    [SerializeField] StatModel _playerStat; // 젠젝
+    private GameObject _justTrigger;
 
-    [SerializeField] GameObject _justTrigger;
-
-    [SerializeField] GameObject _player;
+    [Inject] private PlayerController _player;
 
     [Header("저스트 회피 범위")]
     [SerializeField] float _angle; // 시야각
 
     [SerializeField] float _distance; // 시야 거리
+
+    private void Awake()
+    {
+        _animator = GetComponent<Animator>();
+        _monsterData = GetComponent<MonsterData>();
+
+        _justTrigger = transform.Find("_justTrigger").gameObject;
+    }
 
     private void Update()
     {
@@ -29,7 +35,7 @@ public class MonsterJustTrigger : MonoBehaviour
 
     private void Just()
     {
-        if (IsPlayerWithinSight(_player))   // 저스트회피 판정 범위 내에 있으면 트리거가 켜짐
+        if (IsPlayerWithinSight(_player.gameObject))   // 저스트회피 판정 범위 내에 있으면 트리거가 켜짐
         {
             justRoutine = StartCoroutine(JustRoutine());
         }

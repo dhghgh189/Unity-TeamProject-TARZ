@@ -4,16 +4,21 @@ using Zenject;
 
 public class MSkill_WheelWind : Action
 {
-    [Inject]
-    [SerializeField] MonsterSkillManager _monsterSkillManager;
+    private MonsterSkillManager _monsterSkillManager;
 
-    [SerializeField] MonsterData _monsterData;
+    private MonsterData _monsterData;
 
     [SerializeField] GameObject _wheelWindTrigger;
 
-    [SerializeField] GameObject _player;
+    [Inject] private PlayerController _player;
 
     private float _distance;
+
+    public override void OnAwake()
+    {
+        _monsterSkillManager = GetComponent<MonsterSkillManager>();
+        _monsterData = GetComponent<MonsterData>();
+    }
 
     public override void OnStart()
     {

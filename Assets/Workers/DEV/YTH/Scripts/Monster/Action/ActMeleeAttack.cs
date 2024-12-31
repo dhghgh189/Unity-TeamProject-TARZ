@@ -6,11 +6,10 @@ using System.Collections;
 
 public class ActMeleeAttack : Action
 {
-    [SerializeField] MonsterData _monsterData;
+    private MonsterData _monsterData;
+    private Animator _animator;
 
-    [SerializeField] Animator _animator;
-
-    [SerializeField] GameObject _player;
+    [Inject] private PlayerController _player;
 
     private float _distance;
 
@@ -20,6 +19,12 @@ public class ActMeleeAttack : Action
 
     [SerializeField] float _range;
     public float Range { get { return _range; } set { _range = value; } }
+
+    public override void OnAwake()
+    {
+        _monsterData = GetComponent<MonsterData>();
+        _animator = GetComponent<Animator>();
+    }
 
     public override void OnStart()
     {

@@ -5,14 +5,18 @@ using Zenject;
 
 public class MSkill_ElectricWall : Action
 {
-    [Inject]
-    [SerializeField] MonsterSkillManager _monsterSkillManager;
+    private MonsterSkillManager _monsterSkillManager;
 
-    [SerializeField] GameObject _player;
+    [Inject] private PlayerController _player;
 
     private float _distance;
-    
-	public override void OnStart()
+
+    public override void OnAwake()
+    {
+        _monsterSkillManager = GetComponent<MonsterSkillManager>();
+    }
+
+    public override void OnStart()
 	{
         _distance = Vector3.Distance(transform.position, _player.transform.position);
     }

@@ -556,6 +556,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 3746910717887322921}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6df8f01820cdb694a8e6468a4e18ea0e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5866156247373006491}
   m_SourcePrefab: {fileID: 100100000, guid: 6df8f01820cdb694a8e6468a4e18ea0e, type: 3}
 --- !u!1 &3632602514074780826 stripped
 GameObject:
@@ -647,11 +651,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a2d4d2e02dbed2439f2161bc2a70335, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _animator: {fileID: 8053109882612859994}
-  _monsterData: {fileID: 6014731872465248145}
-  _playerStat: {fileID: 0}
-  _justTrigger: {fileID: 7600246639324840484}
-  _player: {fileID: 0}
   _angle: 45
   _distance: 3
 --- !u!114 &8748090681101065241
@@ -666,10 +665,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c0c56d971f771247b404c1a828a76d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _monsterData: {fileID: 0}
-  _player: {fileID: 0}
-  _rigid: {fileID: 0}
-  _animator: {fileID: 0}
+  player: {fileID: 0}
   _gear: {fileID: 7721173211588356841, guid: 6f50a567d27f5234c89a2742d0a1134a, type: 3}
   _chip: {fileID: 790199856513174846, guid: 1a89e32ec97e86d47bd1098f5827fbeb, type: 3}
 --- !u!114 &6014731872465248145
@@ -686,14 +682,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _monsterType: 0
   _skillType: 0
-  _rewardType: 0
+  _monsterTier: 0
   _maxHp: 1000
   _curHp: 0
   _damage: 5
   _attackRange: 3
   _isAttacked: 0
-  _attacked_First: 0
   _meleeAttackSpeed: 2
+  _range: 3
+  _angle: 90
   _rangeAttackSpeed: 0
   _throwPower: 0
   _dangerDistance: 0
@@ -766,6 +763,23 @@ MonoBehaviour:
   m_Script: {fileID: -2012967667, guid: da41a8dd3b5ec434a802d9b5a2a0a777, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5866156247373006491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3632602514074780826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03a14c639c0a11f439c061e57d8114bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bombPrefab: {fileID: 0}
+  _minePrefab: {fileID: 0}
+  _jackTheRipper: {fileID: 0}
+  _electricWallPrefab: {fileID: 0}
+  _thunderPrefab: {fileID: 0}
 --- !u!4 &4116932251100257824 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 6df8f01820cdb694a8e6468a4e18ea0e,

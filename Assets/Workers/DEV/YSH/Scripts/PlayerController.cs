@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour, IDamagable
     public DrainManager Drain { get { return drainManager; } }
     public float delay { get; set; }
     public bool IsAnimStart { get; set; }
-    //public bool IsGrabingInput { get { return interactioner.IsGrabing; } }
+    public bool IsGrabingInput { get { return interactioner.IsGrabing; } }
 
     private StringBuilder sb;
     void Awake()

@@ -131,15 +131,11 @@ public class Interactioner : MonoBehaviour
     {
         while (IsGrabing)
         {
-            Debug.Log("코루틴 돌돌돌");
-            if (target == null || !target.activeSelf)
-            {
-                Debug.Log("어 사라졌다");
-                IsGrabing = false;
-            }
-
+            //playerController.Stat.MoveSpeed = playerController.Stat.MoveSpeed / 3f;
+            if (target == null || !target.activeSelf) IsGrabing = false;
             yield return null;
         }
+
         Debug.Log("코루틴 끝!");
         exampleScript.playerController = null;
         exampleScript = null;

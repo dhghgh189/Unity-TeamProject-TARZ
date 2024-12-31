@@ -15,6 +15,8 @@ public class Loading : MonoBehaviour
 
     IEnumerator LoadingRoutine(Define.SceneType sceneType)
     {
+        int currentScene = SceneManager.GetActiveScene().buildIndex;
+
         AsyncOperation oper = SceneManager.LoadSceneAsync((int)sceneType);
 
         oper.allowSceneActivation = false;
@@ -27,5 +29,17 @@ public class Loading : MonoBehaviour
         }
 
         oper.allowSceneActivation = true;
+
+        yield return Util.GetDelay(0.2f);
+        gameObject.SetActive(false);
+
+        //while (true)
+        //{
+        //    if (currentScene == SceneManager.GetActiveScene().buildIndex)
+        //        yield return null;
+
+        //    gameObject.SetActive(false);
+        //    yield break;
+        //}
     }
 }

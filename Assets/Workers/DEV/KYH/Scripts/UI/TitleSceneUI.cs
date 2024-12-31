@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Zenject;
 
 public class TitleSceneUI : MonoBehaviour
 {
@@ -28,7 +29,7 @@ public class TitleSceneUI : MonoBehaviour
     [SerializeField] private GameObject LogoPanel;
 
     [Header("<color=white>Loading Object</color>")]
-    [SerializeField] private Loading LoadingObject;
+    [Inject] private Loading LoadingObject;
 
     private Animator anim;
     private int fadeOutHash = Animator.StringToHash("Fade Out");

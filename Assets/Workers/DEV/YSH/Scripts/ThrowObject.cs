@@ -126,8 +126,7 @@ public class ThrowObject : MonoBehaviour, IDrainable
         if (adapter.IsEnable("ThrowObjectConvertMine"))
         {
             ThrowObjectConvertMine mine = GetComponent<ThrowObjectConvertMine>();
-            mine.Change();
-            damage = mine.MineDamage * owner.Player.Stat.DefaultPowerPer;
+            mine.Change(owner.Player.Stat.DefaultPowerPer);
             any = false;
         }
 

@@ -12,7 +12,9 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
     private ObjectPool _returnPool; //반납 위치
     public ObjectPool ReturnPool { get { return _returnPool; } set { _returnPool = value; } }
 
-    [Inject] public PlayerController player;
+    [HideInInspector]
+    [Inject] 
+    public PlayerController player;
 
     public event Action OnDie;
 

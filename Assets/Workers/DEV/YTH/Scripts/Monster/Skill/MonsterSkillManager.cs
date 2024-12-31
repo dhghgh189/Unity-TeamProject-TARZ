@@ -46,12 +46,15 @@ public class MonsterSkillManager : MonoBehaviour
 
     #region Prefab
     [Header("Prefab")]
+
+    [Header("Bomber")]
     [SerializeField] GameObject _bombPrefab;
 
     [SerializeField] GameObject _minePrefab;
 
     [SerializeField] GameObject _jackTheRipper;
 
+    [Header("Arnold")]
     [SerializeField] GameObject _electricWallPrefab;
 
     [SerializeField] GameObject _thunderPrefab;

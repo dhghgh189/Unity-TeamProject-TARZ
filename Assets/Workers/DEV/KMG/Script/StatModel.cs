@@ -57,6 +57,8 @@ public class StatModel : MonoBehaviour
     // 스테미너가 소모되는 행동 진행 시 곱해줘야 하는 값
     public float StaminaCostRate = 1f;
 
+    public float StaminaChargeRate = 1f;
+
     [Header("실시간 능력치")]
 
     [SerializeField] float currentHp;
@@ -94,9 +96,9 @@ public class StatModel : MonoBehaviour
     /// Stamina에 더하거나 뺄 값을 넘겨준다.
     /// </summary>
     /// <param name="stamina"></param>
-    public void ChangeStamina(float stamina)
+    public void ChangeStamina(float stamina, bool isCharge = false)
     {
-        currentStamina += stamina * StaminaCostRate;
+        currentStamina += stamina * ((isCharge) ? StaminaChargeRate : StaminaCostRate);
         currentStamina = Mathf.Clamp(currentStamina, 0, MaxStamina);
         OnCurStaminaChange?.Invoke(currentStamina);
     }

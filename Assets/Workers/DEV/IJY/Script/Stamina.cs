@@ -54,7 +54,7 @@ public class Stamina : MonoBehaviour
             {
                 if (stat.CurrentStamina < stat.MaxStamina)
                 {
-                    stat.ChangeStamina(stat.StaminarEgeneration * Time.deltaTime);
+                    stat.ChangeStamina(stat.StaminarEgeneration * Time.deltaTime, true);
                 }
             }
             yield return null;

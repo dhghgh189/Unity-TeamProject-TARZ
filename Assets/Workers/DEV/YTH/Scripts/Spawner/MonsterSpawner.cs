@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class MonsterSpawner : MonoBehaviour
 {
-    private ObjectPool _monsterPool;
+    [SerializeField] ObjectPool _monsterPool;
 
     private Transform _spawnPoint;
 
@@ -17,7 +17,9 @@ public class MonsterSpawner : MonoBehaviour
 
     public void Spawn()
     {
-        PooledObject instance = _monsterPool.GetPool(_spawnPoint.position, _spawnPoint.rotation);
+        PooledObject jake = _monsterPool.CreateMonster(MonsterName.Jake, _spawnPoint.position);
+        PooledObject amber = _monsterPool.CreateMonster(MonsterName.Amber, _spawnPoint.position);
+
     }
 
     private void OnTriggerEnter(Collider other)

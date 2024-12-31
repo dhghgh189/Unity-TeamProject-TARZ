@@ -1,65 +1,56 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
+public enum MonsterName
+{
+    Jake, Amber, Size
+}
 
 public class ObjectPool : MonoBehaviour
 {
-    [Inject] private PlayerController player;
-
-    [SerializeField] List<PooledObject> pool = new List<PooledObject>();
-
     [SerializeField] PooledObject _monsterPrefab;
 
-    [SerializeField] int _poolSize;
+    private List<MonsterFactoryData> monsterFactoryDatas = new();
+
+    [Inject(Id = "Jake")]
+    private MonsterFactory jakeFactory;
+    [SerializeField] Transform jakePool;
+
+    [Inject(Id = "Amberr")]
+    private MonsterFactory amberFactory;
+    [SerializeField] Transform amberPool;
+
+
+    public class MonsterFactoryData
+    {
+        public Transform PoolTransform;
+        public MonsterFactory factory;
+    }
 
     private void Awake()
     {
-        for (int i = 0; i < _poolSize; i++)
-        {
-            PooledObject instance = Instantiate(_monsterPrefab);
-            instance.gameObject.SetActive(false);
-            instance.transform.parent = transform;
-            instance.ReturnPool = this;
-            pool.Add(instance);
-        }
+        monsterFactoryDatas.Add(new MonsterFactoryData() { factory = jakeFactory, PoolTransform = jakePool });
+        monsterFactoryDatas.Add(new MonsterFactoryData() { factory = amberFactory, PoolTransform = amberPool });
     }
 
-    private void Start()
+    public PooledObject CreateMonster(MonsterName monsterName, Vector3 pos)
     {
-        foreach(PooledObject instance in pool)
+        MonsterFactoryData temp = monsterFactoryDatas[(int)monsterName];
+        foreach (var item in temp.PoolTransform.GetComponentsInChildren<Transform>(true))
         {
-            instance.player = player;
+            if (!item.gameObject.activeSelf)
+            {
+                item.gameObject.transform.position = pos;
+                item.gameObject.SetActive(true);
+
+                return item.GetComponent<PooledObject>();
+            }
         }
+        return temp.factory.Create().GetComponent<PooledObject>();
     }
 
-    public PooledObject GetPool(Vector3 position, Quaternion rotation)
+    public void ReturnPool(PooledObject pooledObject)
     {
-        if (pool.Count > 0)
-        {
-            PooledObject instance = pool[pool.Count - 1];
-            instance.transform.position = position;
-            instance.transform.rotation = rotation;
-            instance.transform.parent = null;
-            instance.gameObject.SetActive(true);
-            instance.ReturnPool = this;
-
-            pool.RemoveAt(pool.Count - 1);
-
-            return instance;
-        }
-        else
-        {
-            PooledObject instance = Instantiate(_monsterPrefab, position, rotation);
-            instance.ReturnPool = this;
-            return instance;
-        }
-    }
-
-    public void ReturnPool(PooledObject instance)
-    {
-        instance.gameObject.SetActive(false);
-        instance.transform.parent = transform;
-
-        pool.Add(instance);
+        pooledObject.gameObject.SetActive(false);
     }
 }

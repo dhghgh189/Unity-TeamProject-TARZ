@@ -62,6 +62,8 @@ public class ManaThrowCarSkill : IManaSkill
             if (camTrf == null)
                 camTrf = Camera.main.transform;
 
+            owner.Movement.Rigid.velocity = Vector3.zero;
+
             moveDir = owner.PInput.InputDir.normalized;
 
             if (moveDir != Vector3.zero)
@@ -144,6 +146,8 @@ public class ManaThrowCarSkill : IManaSkill
         {
             Debug.Log("차량 던지기 시작");
             animTimer = 999f;
+
+            owner.Movement.Rigid.velocity = Vector3.zero;
 
             // 차량 투척 애니메이션 실행
             owner.Anim.CrossFade(Animator.StringToHash(animName), 0.01f);

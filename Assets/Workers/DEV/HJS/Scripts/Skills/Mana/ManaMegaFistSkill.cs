@@ -56,6 +56,7 @@ public class ManaMegaFistSkill : IManaSkill
             if (camTrf == null)
                 camTrf = Camera.main.transform;
 
+            owner.Movement.Rigid.velocity = Vector3.zero;
             moveDir = owner.PInput.InputDir.normalized;
 
             if (moveDir != Vector3.zero)

@@ -372,7 +372,7 @@ public class PlayerSkillHandler : MonoBehaviour
             }
 
             // 레벨을 올려주는 로직
-            level += 1;
+            level = (level >= skill.SkillLevel) ? level + 1 : skill.SkillLevel;
             skillDic[skill.Name] = level;
             skill.SkillLevel = level;
 

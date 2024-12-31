@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static MonsterData;
 
 /// <summary>
 /// 마나 1스킬의 필요 데이터
@@ -117,11 +118,19 @@ public class ManaRush_1 : BaseManaState
     {
         if (other.gameObject.layer.Equals(LayerMask.NameToLayer("Monster")))
         {
-            Debug.Log("마나1 잡는 행동으로 넘어가기 요청!");
-            parent.collider = other.gameObject.transform;
-            parent.quaternion = other.transform.rotation;
-            owner.Movement.Rigid.velocity = Vector3.zero;
-            return true;
+            if (other.gameObject.GetComponent<MonsterData>().MonsterTIer.Equals(MonsterTier.Normal))
+            {
+                Debug.Log("마나1 잡는 행동으로 넘어가기 요청!");
+                parent.collider = other.gameObject.transform;
+                parent.quaternion = other.transform.rotation;
+                owner.Movement.Rigid.velocity = Vector3.zero;
+                return true;
+            }
+        }
+        else if(((1 << other.gameObject.layer) & LayerMask.GetMask("Ground")) == 0)
+        {
+            owner.ManaSkillHandler.NextStep(2);
+            return false;
         }
 
         return false;

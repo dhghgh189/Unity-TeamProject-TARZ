@@ -1,4 +1,4 @@
 public interface IChange
 {
-    public void Change();
+    public void Change(float per);
 }

@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Diagnostics.CodeAnalysis;
 using UnityEngine;
 
 /// <summary>
@@ -17,59 +18,89 @@ public class GuidedFuncion : MonoBehaviour, IEnable
     public bool Enable { get => enable; set => enable = value; }
     public string Name { get => name; set => name = value; }
 
+    private Coroutine traceCoroutine;
+    private Coroutine checkCoroutine;
+
+    public void StartCheckTarget() => checkCoroutine = StartCoroutine(CheckTargetRoutine());
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         colliders = new Collider[1];
     }
 
-    // 일단 테스트 용으로 FixedUpdate에 구현 -> 코루틴에 구현 예정
     public void FixedUpdate()
     {
         // 유도하는 함수
         if (target != null)
         {
-            // 날아가는 속도 설정
-            rb.velocity = transform.forward * 3;
-            // 타겟을 바라보게 회전
-            Quaternion ballTargetRotation = Quaternion.LookRotation(target.position + new Vector3(0, 0.5f) - transform.position);
-            // rigidbody를 움직이기
-            rb.MoveRotation(Quaternion.RotateTowards(transform.rotation, ballTargetRotation, 180f));
-        }
-    }
-    private void Update()
-    {
-        // 이게 타겟 설정
-        if (target == null)
-        {
-            // 범위 안에 있는 하나의 Monater만 overlap해서 배열에 넣기
-            int nun = Physics.OverlapSphereNonAlloc(transform.position, 3f, colliders, LayerMask.GetMask("Monster"));
-            Debug.Log(nun); // 디버그 용도로 숫자 받기
-            // 만약 배열이 비어있지 않다면 -> 범위 안에 몬스터가 있다
-            if (colliders[0] is not null)
+            try
             {
-                // 타겟을 설정
-                target = colliders[0].gameObject.transform;
+                // 날아가는 속도 설정
+                rb.velocity = transform.forward * 3;
+                // 타겟을 바라보게 회전
+                Quaternion ballTargetRotation = Quaternion.LookRotation(target.position + new Vector3(0, 0.5f) - transform.position);
+                // rigidbody를 움직이기
+                rb.MoveRotation(Quaternion.RotateTowards(transform.rotation, ballTargetRotation, 180f));
+            }
+            finally 
+            {
+                CheckTarget();
             }
         }
     }
-    private void Start()
+
+    private void Update()
     {
-        // 여기서 해도 된다
-        // 여기서 하면 coroutine 으로 작동하는 형식으로
-        // 코루틴에 적이 있는지 확인하고 
-        // 있으면 코루틴을 멈추기 Update에서 추적 or 코루틴에서 추적
-        // StartCoroutine(TraceRoutine());
+       //  // 이게 타겟 설정
+       //  if (target == null)
+       //  {
+       //      if (CheckTarget())
+       //      {
+       //          coroutine = StartCoroutine(TraceRoutine());
+       //      }
+       //  }
     }
 
-    private IEnumerator TraceRoutine()
+    private IEnumerator CheckTargetRoutine()
     {
-        yield return new WaitUntil(() => { return target != null; });
-
-        //rb.position = Vector3.MoveTowards(rb.position, target.position, 5f * Time.fixedDeltaTime);
-        transform.position = Vector3.MoveTowards(transform.position, target.position, 1f);
+        while(target == null)
+        {
+            if (CheckTarget()) break;
+            yield return null;
+        }
     }
 
+    private bool CheckTarget()
+    {
+        colliders[0] = null;
+        // 범위 안에 있는 하나의 Monater만 overlap해서 배열에 넣기
+        int nun = Physics.OverlapSphereNonAlloc(transform.position, 2f, colliders, LayerMask.GetMask("Monster"));
+        Debug.Log($"상대 찾는 중... 찾은 수 {nun}"); // 디버그 용도로 숫자 받기
+        // 만약 배열이 비어있지 않다면 -> 범위 안에 몬스터가 있다
+        if (colliders[0] is not null)
+        {
+            // 타겟을 설정
+            target = colliders[0].gameObject.transform;
+            return true;
+        }
+
+        return false;
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (traceCoroutine is not null)
+        {
+            StopCoroutine(traceCoroutine);
+            traceCoroutine = null;
+        }
+        else if (checkCoroutine is not null)
+        {
+            StopCoroutine (checkCoroutine);
+            checkCoroutine = null;
+        }
+    }
     private void OnDrawGizmos()
     {
         if (enabled == true)

@@ -197,6 +197,16 @@ public class BaseSkillSO : ScriptableObject
                         statModel.SetAbility(AdditionAbility.MaxStaminaPer, GetModifySetting.Amount);
                     }
                     break;
+                case PassiveModifyType.CurStamina:
+                    if (GetModifySetting.inputType == PassiveModifyInputType.Value)
+                    {
+                        statModel.CurrentStamina = GetModifySetting.Amount;
+                    }
+                    else if (GetModifySetting.inputType == PassiveModifyInputType.Percent)
+                    {
+                        statModel.CurrentStamina = statModel.CurrentStamina * (GetModifySetting.Amount * 0.01f);
+                    }
+                    break;
                 case PassiveModifyType.MoveSpeed:
                     tempValue = statModel.MoveSpeed;
                     if (GetModifySetting.inputType == PassiveModifyInputType.Value)
@@ -229,7 +239,14 @@ public class BaseSkillSO : ScriptableObject
                 case PassiveModifyType.StaminaCostRate:
                     if (GetModifySetting.inputType == PassiveModifyInputType.Percent)
                     {
-                        statModel.StaminaCostRate = Mathf.Clamp((GetModifySetting.Amount * 0.01f), 0f, 1f); break;
+                        statModel.StaminaCostRate = Mathf.Clamp((GetModifySetting.Amount * 0.01f), 0f, 1f);
+                    }
+                    else Debug.LogWarning("<Color=red>추가 능력치는 수치를 값으로 설정할 수 없습니다.</color>");
+                    break;
+                case PassiveModifyType.StaminaChargeRate:
+                    if (GetModifySetting.inputType == PassiveModifyInputType.Percent)
+                    {
+                        statModel.StaminaChargeRate = Mathf.Clamp((GetModifySetting.Amount * 0.01f), 0f, 1f);
                     }
                     else Debug.LogWarning("<Color=red>추가 능력치는 수치를 값으로 설정할 수 없습니다.</color>");
                     break;
@@ -263,6 +280,9 @@ public class BaseSkillSO : ScriptableObject
                     break;
                 case PassiveModifyType.StaminaCostRate:
                     if (GetModifySetting.inputType == PassiveModifyInputType.Percent) statModel.StaminaCostRate += Mathf.Clamp((1 - GetModifySetting.Amount * 0.01f), 0f, 1f);
+                    break;
+                case PassiveModifyType.StaminaChargeRate:
+                    if (GetModifySetting.inputType == PassiveModifyInputType.Percent) statModel.StaminaChargeRate += Mathf.Clamp((1 - GetModifySetting.Amount * 0.01f), 0f, 1f);
                     break;
             }
         }

@@ -54,7 +54,7 @@ public class ThrowObject : MonoBehaviour, IDrainable
 
     public void Throw(Vector3 dir, float throwForce)
     {
-        if (adapter.IsEnable("GuidedFuncion")) GetComponent<GuidedFuncion>().enabled = true;
+        if (adapter.IsEnable("GuidedFuncion")) GetComponent<GuidedFuncion>().StartCheckTarget();
         handler.Use(gameObject);
         rigid.AddForce(dir * throwForce, ForceMode.Impulse);
     }
@@ -126,8 +126,7 @@ public class ThrowObject : MonoBehaviour, IDrainable
         if (adapter.IsEnable("ThrowObjectConvertMine"))
         {
             ThrowObjectConvertMine mine = GetComponent<ThrowObjectConvertMine>();
-            mine.Change();
-            damage = mine.MineDamage * owner.Player.Stat.DefaultPowerPer;
+            mine.Change(owner.Player.Stat.DefaultPowerPer);
             any = false;
         }
 

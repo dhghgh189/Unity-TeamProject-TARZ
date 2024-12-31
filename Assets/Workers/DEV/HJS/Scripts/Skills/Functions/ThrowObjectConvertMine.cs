@@ -11,6 +11,7 @@ public class ThrowObjectConvertMine : MonoBehaviour, IEnable, IChange
     [SerializeField] bool enable;                                   // 스킬의 활성화 여부
     [SerializeField] MeshRenderer render;                           // 해당 오브젝트의 Mesh Renderer
     [SerializeField] MeshFilter meshFilter;                         // 해당 오브젝트의 Mesh Filter
+    [SerializeField] float defaultDamage;                                  // 해당 오브젝트의 데미지 
     [SerializeField] float damage;                                  // 해당 오브젝트의 데미지 
     [Header("Change Mesh")]
     [SerializeField] Mesh mesh;                                     // 변경할 Mesh
@@ -24,12 +25,14 @@ public class ThrowObjectConvertMine : MonoBehaviour, IEnable, IChange
     /// <summary>
     /// 변경을 요청하는 함수
     /// </summary>
-    public void Change()
+    public void Change(float per)
     {
         // 각 설정한 값이 있을 경우에만 변경
         if (mesh is not null) meshFilter.mesh = mesh;
         if (material is not null) render.material = material;
         if (!layer.IsEmpty()) gameObject.layer = LayerMask.NameToLayer(layer);
+        Enable = true;
+        damage = defaultDamage * per;
     }
 
     private void Awake()
@@ -38,5 +41,21 @@ public class ThrowObjectConvertMine : MonoBehaviour, IEnable, IChange
         meshFilter = GetComponent<MeshFilter>();
     }
 
+    private void OnCollisionEnter(Collision other)
+    {
+       if(!enable) return;
+       
+       if(other.gameObject.layer.Equals(LayerMask.NameToLayer("Monster")))
+       {
+           IDamagable damagable = other.gameObject.GetComponent<IDamagable>();
+           if (damagable != null) 
+           { 
+               damagable.TakeDamage(damage); 
+               Debug.Log($"{damage}의 데미지를 {other.gameObject.name}에게 입혔다!");
+               Destroy(gameObject);
+           }
+       }
+
+    }
 
 }

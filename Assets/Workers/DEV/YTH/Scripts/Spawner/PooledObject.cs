@@ -105,6 +105,9 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
 
     public void KnockBack(GameObject attacker)
     {
+        if (_monsterData.MonsterTIer == MonsterData.MonsterTier.Boss)
+            return;
+
         StartCoroutine(KnockBackRoutine(attacker));
     }
 

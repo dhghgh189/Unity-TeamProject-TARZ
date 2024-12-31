@@ -16,15 +16,19 @@ public class AutoLockOn : MonoBehaviour
     [SerializeField] float range, angle;
 
     [Header("카메라")]
-    [SerializeField] private CameraController cam;
+    private CameraController cam;
 
     [Header("몬스터 배열")]
     [SerializeField] List<Transform> Monsters;
 
+    private void Awake()
+    {
+        inputHandler = GetComponent<PlayerInputHandler>();
+    }
 
     private void Start()
     {
-        inputHandler = GetComponent<PlayerInputHandler>();
+        cam = FindAnyObjectByType<CameraController>();
 
         KickDownOn = false; ToggleOn = false;
         Monsters = new List<Transform>();

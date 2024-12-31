@@ -15,17 +15,21 @@ public class PlayerSkillHandler : MonoBehaviour
     private UnityEvent<GameObject, GameObject> onCollisionThrowObjectEvents;   // ThrowObject의 충돌 - OnCollision or OnTrigger
     private UnityEvent<GameObject, GameObject> onActionThrowObjectEvents;      // 기본 ThrowObject에서의 할일 - Enter
 
-    [SerializeField] DrainManager drainManager;
-    [SerializeField] PlayerMovement playerMovement;
+    private DrainManager drainManager;
+    private PlayerMovement playerMovement;
 
     [Header("SkillList")]
     [SerializeField] Dictionary<string, int> skillDic;
 
     [Header("Test")]
-    [Inject]
-    [SerializeField] StatModel model;
-    [Inject]
-    [SerializeField] AblityAdapter adapter;
+    [Inject] [SerializeField] StatModel model;
+    [Inject] private AblityAdapter adapter;
+
+    private void Awake()
+    {
+        drainManager = GetComponent<DrainManager>();
+        playerMovement = GetComponent<PlayerMovement>();
+    }
 
     private void Start()
     {

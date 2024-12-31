@@ -156,6 +156,19 @@ public class StatModel : MonoBehaviour
     // 능력치 변경
     public event Action OnStatChange;
 
+    private StatSaveData baseStat;
+
+    private void Awake()
+    {
+        baseStat = new StatSaveData();
+        baseStat.maxHp = maxHp;
+        baseStat.maxStamina = maxStamina;
+        baseStat.currentHp = currentHp;
+        baseStat.currentMp = currentMp;
+        baseStat.currentStamina = currentStamina;
+        baseStat.blackChip = 0;
+}
+
     private void Start()
     {
         Chip = saveData.DataChip;
@@ -172,5 +185,17 @@ public class StatModel : MonoBehaviour
         OnChipChange?.Invoke(Chip);
         OnBlackChipChange?.Invoke(BlackChip);
         OnStatChange?.Invoke();
+    }
+
+    public void Clear()
+    {
+        maxHp = baseStat.maxHp;
+        maxStamina = baseStat.maxStamina;
+        currentHp = baseStat.currentHp;
+        currentMp = baseStat.currentMp;
+        currentStamina = baseStat.currentStamina;
+        blackChip = 0;
+        additionAbility = new float[(int)AdditionAbility.Size];
+        AllCheck();
     }
 }

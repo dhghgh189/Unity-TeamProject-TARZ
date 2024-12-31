@@ -1,0 +1,45 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+public class Loading : MonoBehaviour
+{
+    Coroutine loadingRoutine;
+
+    public void StartLoading(Define.SceneType sceneType)
+    {
+        gameObject.SetActive(true);
+        loadingRoutine = StartCoroutine(LoadingRoutine(sceneType));
+    }
+
+    IEnumerator LoadingRoutine(Define.SceneType sceneType)
+    {
+        int currentScene = SceneManager.GetActiveScene().buildIndex;
+
+        AsyncOperation oper = SceneManager.LoadSceneAsync((int)sceneType);
+
+        oper.allowSceneActivation = false;
+
+        float time = 0f;
+        while (time < 3f)
+        {
+            time += Time.deltaTime;
+            yield return null;
+        }
+
+        oper.allowSceneActivation = true;
+
+        yield return Util.GetDelay(0.2f);
+        gameObject.SetActive(false);
+
+        //while (true)
+        //{
+        //    if (currentScene == SceneManager.GetActiveScene().buildIndex)
+        //        yield return null;
+
+        //    gameObject.SetActive(false);
+        //    yield break;
+        //}
+    }
+}

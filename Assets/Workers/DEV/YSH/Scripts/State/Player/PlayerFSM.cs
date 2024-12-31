@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum EState { Idle, Move, Dash, Jump, JumpThrow, JumpMelee, Fall, Throw, Melee, Drain, ManaUse, Damaged, Length }
+public enum EState { Idle, Move, Dash, Jump, JumpThrow, JumpMelee, Fall, Throw, Melee, Drain, ManaUse, Damaged, Dead, Length }
 
 public class PlayerFSM
 {
@@ -33,6 +33,7 @@ public class PlayerFSM
         States[(int)EState.Drain] = new DrainState(owner);
         States[(int)EState.ManaUse] = new UseManaState(owner);
         States[(int)EState.Damaged] = new DamagedState(owner);
+        States[(int)EState.Dead] = new DeadState(owner);
 
         Adapter = adapter;
         ChangeState(EState.Idle);

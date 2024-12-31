@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 using Zenject;
@@ -15,6 +16,8 @@ public class PlayerSkillHandler : MonoBehaviour
     private UnityEvent<GameObject, GameObject> onCollisionThrowObjectEvents;   // ThrowObject의 충돌 - OnCollision or OnTrigger
     private UnityEvent<GameObject, GameObject> onActionThrowObjectEvents;      // 기본 ThrowObject에서의 할일 - Enter
 
+    public SkillContainer Container;
+
     private DrainManager drainManager;
     private PlayerMovement playerMovement;
 
@@ -24,6 +27,8 @@ public class PlayerSkillHandler : MonoBehaviour
     [Header("Test")]
     [Inject] [SerializeField] StatModel model;
     [Inject] private AblityAdapter adapter;
+
+    [Inject] private SaveData saveData;
 
     private void Awake()
     {
@@ -44,6 +49,16 @@ public class PlayerSkillHandler : MonoBehaviour
             onCollisionPlayerEvents[i] = new UnityEvent<GameObject, GameObject>();
         }
         skillDic = new Dictionary<string, int>();
+
+        LoadSkills();
+    }
+
+    public void LoadSkills()
+    {
+        foreach (BlueChipSaveData bluechipData in saveData.blueChipSaveDatas)
+        {
+            AddSkill(bluechipData.BlueChipName, bluechipData.BlueChipLevel);
+        }
     }
 
     // 플레이어 -> 헨들러에게 스킬 사용 요청
@@ -55,8 +70,11 @@ public class PlayerSkillHandler : MonoBehaviour
     // 던지는 물체 -> 헨들러에게 충돌 되었다고 요청
     public void ThrowObjectCollision(GameObject to, GameObject collider) => onCollisionThrowObjectEvents?.Invoke(to, collider);
 
-    public void AddSkill(BaseSkillSO skill, int setLevel = 1)
+    //public void AddSkill(BaseSkillSO skill, int setLevel = 1)
+    public void AddSkill(string skillName, int setLevel = 1)
     {
+        BaseSkillSO skill = Instantiate(Container.Skills.Where(x => x.Name == skillName).First());
+
         if (LevelUp(skill))
         {
             return;
@@ -190,6 +208,16 @@ public class PlayerSkillHandler : MonoBehaviour
         Debug.Log($"Add Skill Name : {skill.Name}  / Skill Act Timing : {skill.Timing} / Skill Level : {skill.SkillLevel}");
     }
 
+    public List<BlueChipSaveData> SaveBlueChips()
+    {
+        List<BlueChipSaveData> blueChips = new();
+        foreach (var item in skillDic)
+        {
+            blueChips.Add(new BlueChipSaveData() { BlueChipName = item.Key, BlueChipLevel = item.Value });
+        }
+        return blueChips;
+    }
+
     public void RemoveSkill(BaseSkillSO skill)
     {
         // 스킬이 없을 때 예외처리
@@ -295,6 +323,21 @@ public class PlayerSkillHandler : MonoBehaviour
     private void OnDestroy()
     {
         // 이벤트들에 달려있는 모든 리스터 연결 종료
+        //onCollisionThrowObjectEvents.RemoveAllListeners();
+        //onActionThrowObjectEvents.RemoveAllListeners();
+
+        //for (int i = 0; i < (int)ActTiming.None; i++)
+        //{
+        //    onActionPlayerEvents[i].RemoveAllListeners();
+        //    onCollisionPlayerEvents[i].RemoveAllListeners();
+        //}
+
+        Clear();
+    }
+
+    public void Clear()
+    {
+        // 이벤트들에 달려있는 모든 리스터 연결 종료
         onCollisionThrowObjectEvents.RemoveAllListeners();
         onActionThrowObjectEvents.RemoveAllListeners();
 
@@ -303,6 +346,8 @@ public class PlayerSkillHandler : MonoBehaviour
             onActionPlayerEvents[i].RemoveAllListeners();
             onCollisionPlayerEvents[i].RemoveAllListeners();
         }
+
+        skillDic.Clear();
     }
 
     public bool LevelUp(BaseSkillSO skill)
@@ -327,7 +372,7 @@ public class PlayerSkillHandler : MonoBehaviour
             }
 
             // 레벨을 올려주는 로직
-            level += 1;
+            level = (level >= skill.SkillLevel) ? level + 1 : skill.SkillLevel;
             skillDic[skill.Name] = level;
             skill.SkillLevel = level;
 

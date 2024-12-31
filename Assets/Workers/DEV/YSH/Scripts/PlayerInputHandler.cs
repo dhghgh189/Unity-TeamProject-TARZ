@@ -41,15 +41,15 @@ public class PlayerInputHandler : MonoBehaviour
 
     void Update()
     {
+        //if (controller.IsGrabingInput)
+        //{
+        //    GrabingInput();
+        //    return;
+        //}
+
         if (controller.IsAnimStart)
         {
-            InputDir = Vector3.zero;
-
-            for (int i = TryKeyDown.Count - 1; i >= 0; i--)
-            {
-                TryKeyDown[i] = false;
-            }
-
+            AnimStart();
             return;
         }
 
@@ -73,6 +73,33 @@ public class PlayerInputHandler : MonoBehaviour
         for (int i = 0; i < Define.USEKEY_MAXCOUNT; i++)
         {
             UseKeyPressed[i] = input.actions[$"Use{i + 1}"].WasPressedThisFrame();
+        }
+    }
+
+    void GrabingInput()
+    {
+        move = input.actions["Move"].ReadValue<Vector2>();
+        InputDir = new Vector3(move.x, 0, move.y);
+        InputLook = input.actions["Look"].ReadValue<Vector2>();
+        TryThrow = input.actions["Throw"].WasPressedThisFrame();
+        TryInteraction = input.actions["Interact"].WasPressedThisFrame();
+
+        for (int i = TryKeyDown.Count - 1; i >= 0; i--)
+        {
+            if (TryKeyDown[i] == TryThrow) continue;
+            if (TryKeyDown[i] == TryInteraction) continue;
+            TryKeyDown[i] = false;
+        }
+    }
+
+    void AnimStart()
+    {
+        InputDir = Vector3.zero;
+        InputLook = input.actions["Look"].ReadValue<Vector2>();
+
+        for (int i = TryKeyDown.Count - 1; i >= 0; i--)
+        {
+            TryKeyDown[i] = false;
         }
     }
 }

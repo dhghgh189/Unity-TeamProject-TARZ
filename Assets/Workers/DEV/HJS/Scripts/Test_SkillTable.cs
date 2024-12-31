@@ -28,7 +28,7 @@ public class Test_SkillTable : MonoBehaviour
         {
             BaseSkillSO newSkill = (isRandom) ? Instantiate(_skills[Random.Range(0, _skills.Count)]) : Instantiate(_skills[index]);
             slots[index].SetSlot(newSkill);
-            _handler.AddSkill(newSkill);
+            _handler.AddSkill(newSkill.Name);
         }
     }
 

@@ -13,6 +13,8 @@ public class SaveData
     public List<GearSaveData> InventoryGears = new();
     // 패시브 강화 상태를 저장하는 리스트
     public List<ArmUpgrade> ArmUpgradeDatas = new();
+    // 블루칩 상태를 저장하는 리스트
+    public List<BlueChipSaveData> blueChipSaveDatas = new();
 }
 // MonoBehaviour를 상속한 클래스들은 FromJson으로 역 직렬화가 불가능 함
 // 그러므로 아래와 같은 클래스들을 만듬
@@ -48,4 +50,11 @@ public class ArmUpgrade
         UpgradeAbility = upgradeAbility;
         UpgradeValue = upgradeValue;
     }
+}
+
+[Serializable]
+public class BlueChipSaveData
+{
+    public string BlueChipName;
+    public int BlueChipLevel;
 }

@@ -13,6 +13,7 @@ public enum EMpAmountType { Melee, Throw, Length }
 public class PlayerController : MonoBehaviour, IDamagable
 {
     [Inject] private StatModel stat;
+    [HideInInspector] [Inject] public Loading loadingObject;
 
     private Animator anim;
 
@@ -29,6 +30,7 @@ public class PlayerController : MonoBehaviour, IDamagable
     [HideInInspector] public ManaSkillHandler ManaSkillHandler;
     [HideInInspector] public PlayerSkillHandler SkillHandler;
     [HideInInspector] public AblityAdapter AblityAdapter;
+    [HideInInspector] public Interactioner interactioner;
     public PlayerFSM Fsm { get; private set; }
     public Animator Anim { get { return anim; } }
     public PlayerInputHandler PInput { get; private set; }
@@ -38,6 +40,7 @@ public class PlayerController : MonoBehaviour, IDamagable
     public DrainManager Drain { get { return drainManager; } }
     public float delay { get; set; }
     public bool IsAnimStart { get; set; }
+    //public bool IsGrabingInput { get { return interactioner.IsGrabing; } }
 
     private StringBuilder sb;
     void Awake()
@@ -53,6 +56,7 @@ public class PlayerController : MonoBehaviour, IDamagable
         Attack = GetComponent<PlayerAttack>();
         SkillHandler = GetComponent<PlayerSkillHandler>();
         ManaSkillHandler = GetComponent<ManaSkillHandler>();
+        interactioner = GetComponentInChildren<Interactioner>();
 
         Fsm = new PlayerFSM(this, AblityAdapter);
 
@@ -180,9 +184,18 @@ public class PlayerController : MonoBehaviour, IDamagable
 
         Debug.Log("아야");
         Stat.CurrentHp -= damage;
+        if (Stat.CurrentHp > 0)
+        {
+            ChangeState(EState.Damaged);
+            StartCoroutine(SternRoutine(delay));
+        }
+        else
+        {
+            ChangeState(EState.Dead);
+        }
 
-        ChangeState(EState.Damaged);
-        StartCoroutine(SternRoutine(delay));
+        //ChangeState(EState.Damaged);
+        //StartCoroutine(SternRoutine(delay));
 
         /* 추후 합의 후 재진행 예정
         switch (currentHitTypeView)

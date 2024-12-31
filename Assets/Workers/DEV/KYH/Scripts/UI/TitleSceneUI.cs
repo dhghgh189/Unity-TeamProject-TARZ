@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Zenject;
 
 public class TitleSceneUI : MonoBehaviour
 {
@@ -24,6 +25,21 @@ public class TitleSceneUI : MonoBehaviour
     [SerializeField] private GameObject quitPanel;              // 게임 나가기 패널
     [SerializeField] private QuitSceneUI quitScene;             // 게임 나가기 패널 클래스
 
+    [Header("<color=white>Logo Panel</color>")]
+    [SerializeField] private GameObject LogoPanel;
+
+    [Header("<color=white>Loading Object</color>")]
+    [Inject] private Loading LoadingObject;
+
+    private Animator anim;
+    private int fadeOutHash = Animator.StringToHash("Fade Out");
+    private int fadeInHash = Animator.StringToHash("Fade In");
+
+    private void Awake()
+    {
+        anim = GetComponent<Animator>();
+    }
+
     private void Start()
     {
         //inputManager.firstInput = newGameButton;  // 타이틀 패널의 UI 네비게이션 첫 Input을 newGameButton로 설정
@@ -33,8 +49,16 @@ public class TitleSceneUI : MonoBehaviour
 
     private void OnEnable()
     {
-        inputManager.firstInput = newGameButton;  // 타이틀 패널의 UI 네비게이션 첫 Input을 newGameButton로 설정
-        inputManager.firstInput.Select();         // 첫 Input으로 지정한 오브젝트를 선택 처리
+        //inputManager.firstInput = newGameButton;  // 타이틀 패널의 UI 네비게이션 첫 Input을 newGameButton로 설정
+        //inputManager.firstInput.Select();         // 첫 Input으로 지정한 오브젝트를 선택 처리
+    }
+
+    private void Update()
+    {
+        if (Input.anyKeyDown && LogoPanel.gameObject.activeSelf)
+        {
+            anim.Play(fadeOutHash);
+        }
     }
 
     // 새로 시작 버튼 클릭
@@ -42,7 +66,10 @@ public class TitleSceneUI : MonoBehaviour
     {
         //gameObject.SetActive(false);    // 타이틀 패널 비활성화
         //loadGamePanel.SetActive(true);  // 저장된 게임 불러오기 패널 활성화
-        Util.ChangeScene(Define.SceneType.Lobby);  // 로비 씬으로 전환
+        //Util.ChangeScene(Define.SceneType.Lobby);  // 로비 씬으로 전환
+
+        LoadingObject.StartLoading(Define.SceneType.Lobby);
+        gameObject.SetActive(false);
     }
 
     // 저장된 게임 시작 버튼 클릭
@@ -64,5 +91,17 @@ public class TitleSceneUI : MonoBehaviour
     {
         gameObject.SetActive(false);    // 타이틀 패널 비활성화
         quitPanel.SetActive(true);      // 게임 나가기 패널 활성화
+    }
+
+    public void HideLogo()
+    {
+        LogoPanel.gameObject.SetActive(false);
+        anim.Play(fadeInHash);
+    }
+
+    public void OnCompleteFadeIn()
+    {
+        inputManager.firstInput = newGameButton;  // 타이틀 패널의 UI 네비게이션 첫 Input을 newGameButton로 설정
+        inputManager.firstInput.Select();         // 첫 Input으로 지정한 오브젝트를 선택 처리
     }
 }

@@ -56,4 +56,12 @@ public class UI_InventorySlots : MonoBehaviour
             return null;
         return JsonUtility.FromJson<GearSaveData>(JsonUtility.ToJson(gear));
     }
+
+    public void ClearSlot()
+    {
+        // 장착하고 인벤토리 슬롯을 초기화
+        gear = null;
+        IsEmpty = true;
+        gearName.text = string.Empty;
+    }
 }

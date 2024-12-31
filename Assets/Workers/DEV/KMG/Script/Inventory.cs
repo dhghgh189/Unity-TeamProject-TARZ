@@ -169,4 +169,12 @@ public class Inventory : MonoBehaviour
             GetComponentInChildren<Button>().Select();
         }
     }
+
+    public void Clear()
+    {
+        foreach (UI_InventorySlots slot in inventorySlots)
+        {
+            slot.ClearSlot();
+        }
+    }
 }

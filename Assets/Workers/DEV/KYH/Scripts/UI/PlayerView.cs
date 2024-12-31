@@ -43,7 +43,7 @@ public class PlayerView : MonoBehaviour
 
     public void Player_OnCurHPChanged(float curHP)
     {
-        Debug.Log($"Hp Change : {curHP}");
+        //Debug.Log($"Hp Change : {curHP}");
         hpSlider.value = curHP;
         hpImage.enabled = curHP > 0;
     }

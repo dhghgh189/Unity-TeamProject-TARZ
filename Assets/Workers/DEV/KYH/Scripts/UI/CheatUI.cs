@@ -279,13 +279,13 @@ public class CheatUI : MonoBehaviour
     public void RandomSkill()
     {
         BaseSkillSO[] skill = skillData.ShowSkillArray();
-        player.SkillHandler.AddSkill(skill[0]);
+        player.SkillHandler.AddSkill(skill[0].Name);
     }
 
     public void GetSkill()
     {
         BaseSkillSO skill = Instantiate(skillData.skillList[skillDropdown.value]);
         skill.SkillLevel = levelDropdown.value + 1;
-        player.SkillHandler.AddSkill(skill, levelDropdown.value + 1);
+        player.SkillHandler.AddSkill(skill.Name, levelDropdown.value + 1);
     }
 }

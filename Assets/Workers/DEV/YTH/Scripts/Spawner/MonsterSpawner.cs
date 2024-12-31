@@ -7,17 +7,18 @@ public class MonsterSpawner : MonoBehaviour
 {
     [SerializeField] ObjectPool _monsterPool;
 
-    private Transform _spawnPoint;
+    [SerializeField] Transform _spawnPoint;
 
     private void Awake()
     {
-        _spawnPoint = transform.Find("MonsterSpawnPoint");
+        /*_spawnPoint = transform.Find("MonsterSpawnPoint");*/
     }
 
+ 
     public void Spawn()
     {
-        PooledObject jake = _monsterPool.CreateMonster(MonsterName.Jake, _spawnPoint.position);
-        PooledObject amber = _monsterPool.CreateMonster(MonsterName.Amber, _spawnPoint.position);
+        PooledObject jake = _monsterPool.CreateMonster(MonsterName.Jake, _spawnPoint);
+        PooledObject amber = _monsterPool.CreateMonster(MonsterName.Amber, _spawnPoint);
 
     }
 

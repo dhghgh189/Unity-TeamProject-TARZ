@@ -58,4 +58,12 @@ public class PlayerView : MonoBehaviour
     {
         numberingText.text = $"{attack.ObjectCount} / {attack.MaxObjectCount}";
     }
+
+    private void OnDestroy()
+    {
+        statModel.OnCurHpChange -= Player_OnCurHPChanged;
+        statModel.OnCurMpChange -= Player_OnCurMPChanged;
+        statModel.OnStatChange -= Player_OnTObjectChanged;
+        attack.OnChangedStack -= Player_OnTObjectChanged;
+    }
 }

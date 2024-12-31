@@ -31,7 +31,7 @@ public class CondCanMove : Conditional
 
     public override TaskStatus OnUpdate()
     {
-        if (IsPlayerWithinSight(_player.gameObject))
+        if (IsPlayerWithinSight(_player.gameObject) && !_monsterData.IsAttacked)
         {
             //Debug.Log("CodnMove true");
             return TaskStatus.Success;

@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using Zenject;
 
@@ -11,7 +12,9 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
     private ObjectPool _returnPool; //반납 위치
     public ObjectPool ReturnPool { get { return _returnPool; } set { _returnPool = value; } }
 
-    [Inject] public PlayerController player;
+    [HideInInspector]
+    [Inject] 
+    public PlayerController player;
 
     public event Action OnDie;
 
@@ -57,13 +60,28 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
 
         Debug.Log($"몬스터 피격 : {damage}");
         _monsterData.CurHp -= damage;
-        _monsterData.Attacked_First = true;
 
-        _animator.SetTrigger("TakeDamage");
+        if (isAttackedRoutine == null)
+        {
+            isAttackedRoutine = StartCoroutine(IsAttackedRoutine());
+        }
+        else
+        {
+            StopCoroutine(isAttackedRoutine);
+            isAttackedRoutine = null;
+            isAttackedRoutine = StartCoroutine(IsAttackedRoutine());
+        }
+
         if (_monsterData.CurHp <= 0)
         {
             OnDie?.Invoke();
+            return;
         }
+
+        if (_monsterData.MonsterTIer== MonsterData.MonsterTier.Boss)
+            return;
+
+        _animator.SetTrigger("TakeDamage");
     }
 
     public void Die()
@@ -87,6 +105,9 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
 
     public void KnockBack(GameObject attacker)
     {
+        if (_monsterData.MonsterTIer == MonsterData.MonsterTier.Boss)
+            return;
+
         StartCoroutine(KnockBackRoutine(attacker));
     }
 
@@ -111,5 +132,15 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
         //피격 시 플레이어 방향으로 회전
         Quaternion lookRot = Quaternion.LookRotation(player.transform.position);
         transform.rotation = Quaternion.Lerp(transform.rotation, lookRot, 0.7f * Time.deltaTime); // 속도 빠르게 수정할 것
+    }
+
+    Coroutine isAttackedRoutine;
+    IEnumerator IsAttackedRoutine()
+    {
+        _monsterData.IsAttacked = true;
+        yield return Util.GetDelay(1f);
+        _monsterData.IsAttacked = false;
+
+        isAttackedRoutine = null;
     }
 }

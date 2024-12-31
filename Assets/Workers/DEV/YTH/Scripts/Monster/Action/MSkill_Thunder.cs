@@ -31,6 +31,7 @@ public class MSkill_Thunder : Action
     {
         if (_distance < 20 && _monsterSkillManager.ThunderSkill.CanUseSkill == true && _monsterData.CurHp <= _monsterData.MaxHp / 2 && _monsterSkillManager.thunderRoutine == null)
         {
+            _pooledObject.RotateToPlayer();
             _monsterSkillManager.thunderRoutine = StartCoroutine(_monsterSkillManager.ThunderRoutine());
             Debug.Log("10 ThunderRoutine 시작");
             return TaskStatus.Success;

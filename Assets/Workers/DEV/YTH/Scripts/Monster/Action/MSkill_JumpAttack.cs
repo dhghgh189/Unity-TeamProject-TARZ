@@ -30,6 +30,7 @@ public class MSkill_JumpAttack : Action
     {
         if (_distance >= 40 && _monsterSkillManager.JumpAttackSkill.CanUseSkill == true && _monsterSkillManager.jumpAttackRoutine == null)
         {
+            _pooledObject.RotateToPlayer();
             _monsterSkillManager.jumpAttackRoutine = StartCoroutine( _monsterSkillManager.JumpAttackRoutine());
             Debug.Log("점프어택");
             return TaskStatus.Success;

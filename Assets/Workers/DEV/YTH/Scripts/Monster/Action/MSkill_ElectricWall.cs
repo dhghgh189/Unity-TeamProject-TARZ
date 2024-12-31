@@ -29,6 +29,7 @@ public class MSkill_ElectricWall : Action
 	{
         if (_distance < 40 && _monsterSkillManager.ElectricWallSkill.CanUseSkill == true && _monsterSkillManager.electricWallRoutine == null)
         {
+            _pooledObject.RotateToPlayer();
             _monsterSkillManager.electricWallRoutine = StartCoroutine(_monsterSkillManager.ElectricWallRoutine());
             Debug.Log("일렉트릭월");
             return TaskStatus.Success;

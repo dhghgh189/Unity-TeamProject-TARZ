@@ -10,12 +10,12 @@ public class KeySettingsUI : MonoBehaviour
     public void OnClickKeyboardButton()
     {
         keyboardPanel.SetActive(true);
-        gamepadPanel.SetActive(!keyboardPanel.activeSelf);
+        gamepadPanel.SetActive(false);
     }
 
     public void OnClickGamepadButton()
     {
         gamepadPanel.SetActive(true);
-        keyboardPanel.SetActive(!gamepadPanel.activeSelf);
+        keyboardPanel.SetActive(false);
     }
 }

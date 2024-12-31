@@ -12,7 +12,7 @@ public class MonsterJustTrigger : MonoBehaviour
 
     private GameObject _justTrigger;
 
-    [Inject] private PlayerController _player;
+    private GameObject _player;
 
     [Header("저스트 회피 범위")]
     [SerializeField] float _angle; // 시야각
@@ -27,6 +27,11 @@ public class MonsterJustTrigger : MonoBehaviour
         _justTrigger = transform.Find("JustTrigger").gameObject;
     }
 
+    private void Start()
+    {
+        _player = GameObject.FindGameObjectWithTag("Player");
+    }
+
     private void Update()
     {
         _justTrigger.transform.localPosition = Vector3.zero;
@@ -35,7 +40,7 @@ public class MonsterJustTrigger : MonoBehaviour
 
     private void Just()
     {
-        if (IsPlayerWithinSight(_player.gameObject))   // 저스트회피 판정 범위 내에 있으면 트리거가 켜짐
+        if (IsPlayerWithinSight(_player))   // 저스트회피 판정 범위 내에 있으면 트리거가 켜짐
         {
             justRoutine = StartCoroutine(JustRoutine());
         }

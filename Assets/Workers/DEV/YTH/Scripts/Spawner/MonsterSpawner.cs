@@ -5,26 +5,14 @@ using UnityEngine;
 
 public class MonsterSpawner : MonoBehaviour
 {
-    [SerializeField] ObjectPool _monsterPool;
+    private ObjectPool _monsterPool;
 
-    [SerializeField] Collider[] _spawnTriggers;
-
-    [SerializeField] Transform _spawnPoint;
+    private Transform _spawnPoint;
 
     private void Awake()
     {
-        foreach (Collider spawnTrigger in _spawnTriggers)
-        {
-           spawnTrigger.gameObject.AddComponent<SpawnTrigger>();
-        }
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.V))
-        {
-            Spawn();
-        }
+        _monsterPool = GetComponent<ObjectPool>();
+        _spawnPoint = transform.Find("MonsterSpawnPoint");
     }
 
     public void Spawn()
@@ -32,5 +20,13 @@ public class MonsterSpawner : MonoBehaviour
         PooledObject instance = _monsterPool.GetPool(_spawnPoint.position, _spawnPoint.rotation);
     }
 
-   
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            Debug.Log("몬스터 소환!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+            Spawn();
+            Destroy(gameObject);
+        }
+    }
 }

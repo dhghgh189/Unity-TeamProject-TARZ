@@ -9,6 +9,10 @@ public class MonsterSkillManager : MonoBehaviour
 
     const string SKILL_PATH = "Managed/Skill/Monster";
 
+    private MonsterData _monsterData;
+
+    private LayerMask WhatIsTarget;
+
     [Header("MonsterSkill")]
     private MonsterSkill _bomb;
     public MonsterSkill BombSkill { get { return _bomb; } set { _bomb = value; } }
@@ -84,6 +88,12 @@ public class MonsterSkillManager : MonoBehaviour
 
     private float _elapsedTime = 0;
     #endregion
+
+    private void Awake()
+    {
+        _monsterData = GetComponent<MonsterData>();
+        WhatIsTarget = (1 << LayerMask.NameToLayer("Player"));
+    }
 
     private void Start()
     {
@@ -544,7 +554,7 @@ public class MonsterSkillManager : MonoBehaviour
     public void MeleeAttack()
     {
         //내적 이용하여 공격 범위 (전방 부채꼴) 정해서
-        Collider[] colliders = Physics.OverlapSphere(transform.position, 5f);
+        Collider[] colliders = Physics.OverlapSphere(transform.position, _monsterData.Range, WhatIsTarget);
         foreach (Collider collider in colliders)
         {
             // 공격 범위 확인
@@ -555,13 +565,13 @@ public class MonsterSkillManager : MonoBehaviour
 
             Vector3 targetDir = (destination - source).normalized;
             float targetAngle = Vector3.Angle(transform.forward, targetDir);
-            if (targetAngle > 90f * 0.5f)
+            if (targetAngle > _monsterData.Angle * 0.5f)
                 continue;
 
             IDamagable damageble = collider.GetComponent<IDamagable>();
             if (damageble != null)
             {
-                damageble.TakeDamage(10f);
+                damageble.TakeDamage(_monsterData.Damage);
             }
         }
     }

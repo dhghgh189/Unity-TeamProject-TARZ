@@ -31,7 +31,7 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
    
     private void Start()
     {
-        _autoLockOn = player.GetComponent<AutoLockOn>();
+         _autoLockOn = player.GetComponent<AutoLockOn>();
 
         _animator = GetComponent<Animator>();
         _rigid = GetComponent<Rigidbody>();

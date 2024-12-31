@@ -22,6 +22,8 @@ public class MonsterFactoryInstaller : MonoInstaller
         Container.BindFactory<PooledObject, MonsterFactory>().WithId("JackTheRipper").FromComponentInNewPrefab(jackTheRipper).UnderTransformGroup("MonsterFactory/JackTheRipperFactory");
         Container.BindFactory<PooledObject, MonsterFactory>().WithId("Range").FromComponentInNewPrefab(range).UnderTransformGroup("MonsterFactory/RangeFactory");
         Container.BindFactory<PooledObject, MonsterFactory>().WithId("ReviveZombie").FromComponentInNewPrefab(reviveZombie).UnderTransformGroup("MonsterFactory/ReviveZombieFactory");
+
+        Container.Bind().FromInstance(Container);
     }
 }
 public class MonsterFactory : PlaceholderFactory<PooledObject>

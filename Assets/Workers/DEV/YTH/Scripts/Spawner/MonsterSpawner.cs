@@ -11,7 +11,6 @@ public class MonsterSpawner : MonoBehaviour
 
     private void Awake()
     {
-        _monsterPool = GetComponent<ObjectPool>();
         _spawnPoint = transform.Find("MonsterSpawnPoint");
     }
 

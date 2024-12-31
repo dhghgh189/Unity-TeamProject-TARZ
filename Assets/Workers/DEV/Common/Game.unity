@@ -13014,6 +13014,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Inventory And Equipment
       objectReference: {fileID: 0}
+    - target: {fileID: 8111387734978387587, guid: 079937d469d40a24b83fb1d66d5ad827,
+        type: 3}
+      propertyPath: _monoInstallers.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8111387734978387587, guid: 079937d469d40a24b83fb1d66d5ad827,
+        type: 3}
+      propertyPath: _monoInstallers.Array.data[1]
+      value: 
+      objectReference: {fileID: 941025977}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -18836,6 +18846,7 @@ GameObject:
   m_Component:
   - component: {fileID: 941025976}
   - component: {fileID: 941025975}
+  - component: {fileID: 941025977}
   m_Layer: 0
   m_Name: MonsterFactory
   m_TagString: Untagged
@@ -18855,7 +18866,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be540928a386e574fb0cf1ad01ba5df0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _monsterPrefab: {fileID: 0}
   jakePool: {fileID: 509532077}
   amberPool: {fileID: 995616816}
 --- !u!4 &941025976
@@ -18875,6 +18885,26 @@ Transform:
   - {fileID: 995616816}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &941025977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 941025974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a813d627c63a38342b322048fb03e8ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jake: {fileID: 623807605200867391, guid: 4a839caa195178241bdf5a136def625b, type: 3}
+  amber: {fileID: 3632602514074780826, guid: c990824329ec4df47b25a43739973317, type: 3}
+  arnold: {fileID: 0}
+  bomber: {fileID: 0}
+  frogZombie: {fileID: 0}
+  jackTheRipper: {fileID: 0}
+  range: {fileID: 0}
+  reviveZombie: {fileID: 0}
 --- !u!1 &956400156
 GameObject:
   m_ObjectHideFlags: 0

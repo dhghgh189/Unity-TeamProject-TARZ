@@ -8,15 +8,13 @@ public enum MonsterName
 
 public class ObjectPool : MonoBehaviour
 {
-    [SerializeField] PooledObject _monsterPrefab;
-
     private List<MonsterFactoryData> monsterFactoryDatas = new();
 
     [Inject(Id = "Jake")]
     private MonsterFactory jakeFactory;
     [SerializeField] Transform jakePool;
 
-    [Inject(Id = "Amberr")]
+    [Inject(Id = "Amber")]
     private MonsterFactory amberFactory;
     [SerializeField] Transform amberPool;
 
@@ -27,7 +25,7 @@ public class ObjectPool : MonoBehaviour
         public MonsterFactory factory;
     }
 
-    private void Awake()
+    private void Start()
     {
         monsterFactoryDatas.Add(new MonsterFactoryData() { factory = jakeFactory, PoolTransform = jakePool });
         monsterFactoryDatas.Add(new MonsterFactoryData() { factory = amberFactory, PoolTransform = amberPool });
@@ -46,7 +44,7 @@ public class ObjectPool : MonoBehaviour
                 return item.GetComponent<PooledObject>();
             }
         }
-        return temp.factory.Create().GetComponent<PooledObject>();
+        return temp.factory.Create();
     }
 
     public void ReturnPool(PooledObject pooledObject)

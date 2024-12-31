@@ -80,10 +80,10 @@ public class ManaSkillHandler : MonoBehaviour
         Debug.Log("끝났당");
 
         // 마나 스킬의 조건이 충족하는지 확인
-        if (stat.CurrentMp >= 0 * index)
+        if (stat.CurrentMp >= 100 * (index + 1))
         {
             // 사용하는 마나 만큼 차감
-            stat.CurrentMp -= 100 * index;
+            stat.CurrentMp -= 100 * (index + 1);
             // Todo -> 해당하는 스킬 사용
             selectIndex = index;
             manaSkill[selectIndex]?.SetInit(this);

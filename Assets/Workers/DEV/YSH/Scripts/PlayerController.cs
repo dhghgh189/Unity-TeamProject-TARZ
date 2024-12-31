@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour, IDamagable
     [HideInInspector] public ManaSkillHandler ManaSkillHandler;
     [HideInInspector] public PlayerSkillHandler SkillHandler;
     [HideInInspector] public AblityAdapter AblityAdapter;
+    [HideInInspector] public Interactioner interactioner;
     public PlayerFSM Fsm { get; private set; }
     public Animator Anim { get { return anim; } }
     public PlayerInputHandler PInput { get; private set; }
@@ -39,6 +40,7 @@ public class PlayerController : MonoBehaviour, IDamagable
     public DrainManager Drain { get { return drainManager; } }
     public float delay { get; set; }
     public bool IsAnimStart { get; set; }
+    //public bool IsGrabingInput { get { return interactioner.IsGrabing; } }
 
     private StringBuilder sb;
     void Awake()
@@ -54,6 +56,7 @@ public class PlayerController : MonoBehaviour, IDamagable
         Attack = GetComponent<PlayerAttack>();
         SkillHandler = GetComponent<PlayerSkillHandler>();
         ManaSkillHandler = GetComponent<ManaSkillHandler>();
+        interactioner = GetComponentInChildren<Interactioner>();
 
         Fsm = new PlayerFSM(this, AblityAdapter);
 

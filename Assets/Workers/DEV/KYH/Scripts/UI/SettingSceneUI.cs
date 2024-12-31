@@ -32,6 +32,7 @@ public class SettingSceneUI : MonoBehaviour
     [SerializeField] private Toggle activeMinimapToggle;    // 미니맵 활성화 체크 토글
     [SerializeField] private TMP_Dropdown languageDropdown; // 언어 선택 드롭다운 (참조가 되지 않는 오류로 주석처리)
     [SerializeField] private Slider masterVolumeSlider;     // 마스터 볼륨 조절 슬라이더
+    [SerializeField] private Button keyboardButton;
 
     [Header("Setting UI")]
     [SerializeField] private Toggle minimapActiveToggle;
@@ -58,18 +59,26 @@ public class SettingSceneUI : MonoBehaviour
             // 현재 활성화 중인 카테고리 패널에 맞는 카테고리 버튼 선택
             if (activeCPanel == gameplayPanel)
             {
+                nonSelectPanel.SetActive(true);
+                gameplayPanel.SetActive(false);
                 gameplayButton.Select();
             }
             else if (activeCPanel == languagePanel)
             {
+                nonSelectPanel.SetActive(true);
+                languagePanel.SetActive(false);
                 langueButton.Select();
             }
             else if (activeCPanel == soundPanel)
             {
+                nonSelectPanel.SetActive(true);
+                soundPanel.SetActive(false);
                 soundButton.Select();
             }
             else if (activeCPanel == keySettingsPanel)
             {
+                nonSelectPanel.SetActive(true);
+                keySettingsPanel.SetActive(false);
                 keySettingsButton.Select();
             }
         }
@@ -126,13 +135,13 @@ public class SettingSceneUI : MonoBehaviour
     // 키 설정 카테고리 버튼 클릭
     public void OnClickKeySettingsButton()
     {
-        activeCPanel = soundPanel;              // 현재 활성화 중인 패널을 키 설정 카테고리 패널로 설정
+        activeCPanel = keySettingsPanel;              // 현재 활성화 중인 패널을 키 설정 카테고리 패널로 설정
         nonSelectPanel.SetActive(false);        // 키 설정 카테고리 패널을 제외하고 모두 비활성화
         gameplayPanel.SetActive(false);
         languagePanel.SetActive(false);
         soundPanel.SetActive(false);
         keySettingsPanel.SetActive(true);
-        // TODO : 키세팅 패널 시작 UI Select
+        keyboardButton.Select();
     }
 
     // 타이틀 화면으로 돌아가기 버튼 클릭

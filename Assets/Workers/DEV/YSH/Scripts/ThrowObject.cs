@@ -54,7 +54,7 @@ public class ThrowObject : MonoBehaviour, IDrainable
 
     public void Throw(Vector3 dir, float throwForce)
     {
-        if (adapter.IsEnable("GuidedFuncion")) GetComponent<GuidedFuncion>().enabled = true;
+        if (adapter.IsEnable("GuidedFuncion")) GetComponent<GuidedFuncion>().StartCheckTarget();
         handler.Use(gameObject);
         rigid.AddForce(dir * throwForce, ForceMode.Impulse);
     }

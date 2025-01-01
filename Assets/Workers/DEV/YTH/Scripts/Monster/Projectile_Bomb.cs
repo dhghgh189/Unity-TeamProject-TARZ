@@ -3,10 +3,11 @@ using UnityEngine;
 
 public class Projectile_Bomb : MonoBehaviour
 {
-    [SerializeField] GameObject _bombZombie;
+    public GameObject _bombZombie;
 
     private MonsterSkillManager _monsterSkillManager;
     private SphereCollider _sphereCollider;
+
 
     private void Start()
     {

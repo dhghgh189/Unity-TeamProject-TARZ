@@ -246,6 +246,9 @@ public class MonsterSkillManager : MonoBehaviour
         BombSkill.CanUseSkill = false;
 
         GameObject bomb = Instantiate(_bombPrefab, _muzzlePoint.position, _muzzlePoint.rotation);
+
+         bomb.GetComponent<Projectile_Bomb>()._bombZombie = gameObject;
+
         Rigidbody bombRb = bomb.GetComponent<Rigidbody>();
         bombRb.AddForce((_muzzlePoint.forward + _muzzlePoint.up * 3) * BombSkill.ThrowForce, ForceMode.Impulse);
         yield return Util.GetDelay(BombSkill.CoolTime);    
@@ -263,6 +266,7 @@ public class MonsterSkillManager : MonoBehaviour
         MineSkill.CanUseSkill = false;
 
         GameObject mine = Instantiate(_minePrefab, _muzzlePoint.position, _muzzlePoint.rotation);
+        mine.GetComponent<Projectile_Mine>()._bombZombie = gameObject;
         Rigidbody mineRb = mine.GetComponent<Rigidbody>();
         mineRb.AddForce(_muzzlePoint.forward * MineSkill.ThrowForce, ForceMode.Impulse);
 

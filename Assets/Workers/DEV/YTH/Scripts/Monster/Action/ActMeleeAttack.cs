@@ -18,9 +18,9 @@ public class ActMeleeAttack : Action
 
     public override void OnAwake()
     {
+        _pooledObject = GetComponent<PooledObject>();
         _monsterData = GetComponent<MonsterData>();
         _animator = GetComponent<Animator>();
-        _pooledObject = GetComponent<PooledObject>();
     }
 
     public override void OnStart()
@@ -36,6 +36,7 @@ public class ActMeleeAttack : Action
             if (attackRoutine == null)
             {
                 attackRoutine = StartCoroutine(AttackRoutine());
+                _animator.SetTrigger("Attack");
             }
             return TaskStatus.Success;
         }
@@ -48,7 +49,6 @@ public class ActMeleeAttack : Action
     Coroutine attackRoutine;
     IEnumerator AttackRoutine()
     {
-        _animator.SetTrigger("Attack");
         yield return new WaitForSeconds(_monsterData.MeleeAttackSpeed);
         attackRoutine = null;
     }

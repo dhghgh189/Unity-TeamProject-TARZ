@@ -147,7 +147,7 @@ public class MonsterSkillManager : MonoBehaviour
     public IEnumerator JumpAttackRoutine() // 보스의 도약해서 착지하여 범위 공격
     {
         _jumpAttack.CanUseSkill = false;
-        _animator.SetTrigger("JumpAttack");
+        /*_animator.SetTrigger("JumpAttack");*/
 
         if (jumpRoutine_jumpAttack == null)
         {
@@ -359,8 +359,8 @@ public class MonsterSkillManager : MonoBehaviour
     public IEnumerator ElectricWallRoutine()
     {
         ElectricWallSkill.CanUseSkill = false;
-        _animator.SetTrigger("ElectricWall");
-      
+/*        _animator.SetTrigger("ElectricWall");
+*/      
 
         _electricWallPosition = transform.position + transform.forward * 5f;
 
@@ -386,8 +386,8 @@ public class MonsterSkillManager : MonoBehaviour
     public IEnumerator ThunderRoutine()
     {
         ThunderSkill.CanUseSkill = false;
-        _animator.SetTrigger("Thunder");
-
+/*        _animator.SetTrigger("Thunder");
+*/
         for (int i = 0; i < 11; i++)
         {
             Vector3 randomPos = new Vector3(Random.Range(-30f, 30f), 0, Random.Range(-30f, 30f));

@@ -13,10 +13,13 @@ public class MSkill_Bomb : Action
 
     [SerializeField] Transform _muzzlePoint;
 
+    private Animator _animator;
+
     public override void OnAwake()
     {
         _monsterSkillManager = GetComponent<MonsterSkillManager>();
         _pooledObject = GetComponent<PooledObject>();
+        _animator = GetComponent<Animator>();
     }
 
     public override void OnStart()
@@ -32,6 +35,7 @@ public class MSkill_Bomb : Action
             Debug.Log("Bomb");
             MonsterRotation();
             _monsterSkillManager.bombRoutine = StartCoroutine(_monsterSkillManager.BombRoutine());
+            _animator.SetTrigger("BigBomb");
 
             return TaskStatus.Success;
         }

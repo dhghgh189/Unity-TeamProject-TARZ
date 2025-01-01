@@ -47,6 +47,9 @@ public class MonsterSkillManager : MonoBehaviour
     #region Prefab
     [Header("Prefab")]
 
+    [Header("Range")]
+    [SerializeField] GameObject _projectile;
+
     [Header("Bomber")]
     [SerializeField] GameObject _bombPrefab;
 
@@ -579,4 +582,9 @@ public class MonsterSkillManager : MonoBehaviour
         }
     }
     #endregion
+
+    public void ThrowAttack()
+    {
+        GameObject projectile = Object.Instantiate(_projectile, _muzzlePoint.position, _muzzlePoint.rotation);
+    }
 }

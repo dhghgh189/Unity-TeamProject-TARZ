@@ -619,7 +619,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 1.2708354, y: 0.9253521, z: 2.7972727}
   m_Center: {x: 0.008922398, y: -6.7948856e-15, z: 0.49232543}
@@ -2631,6 +2631,59 @@ Transform:
   - {fileID: 4950663126027413895}
   m_Father: {fileID: 8222241620830950503}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7613862987325186172
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1929157231094216085}
+  - component: {fileID: 8480285240410101876}
+  m_Layer: 0
+  m_Name: JustTrigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1929157231094216085
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7613862987325186172}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1715668567581199283}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &8480285240410101876
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7613862987325186172}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 2.08
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7830270363789348777
 GameObject:
   m_ObjectHideFlags: 0
@@ -3374,10 +3427,12 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -74.21004, y: 0.45000076, z: -0.37333965}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2694930369069196523}
+  - {fileID: 3847844958790272726}
+  - {fileID: 1929157231094216085}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &2546414819421226625
@@ -3447,7 +3502,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.7
+  m_Radius: 0.5
   m_Height: 2.5
   m_Direction: 1
   m_Center: {x: 0, y: 1.25, z: 0}
@@ -3494,7 +3549,7 @@ MonoBehaviour:
   resetValuesOnRestart: 0
   externalBehavior: {fileID: 11400000, guid: 7545275e7a4fcfa42920e538325e8e03, type: 2}
   mBehaviorSource:
-    behaviorName: Jack
+    behaviorName: JackTheRipper
     behaviorDescription: 
     mTaskData:
       types: []
@@ -3503,22 +3558,19 @@ MonoBehaviour:
       variableStartIndex: 
       JSONSerialization: '{"EntryTask":{"Type":"BehaviorDesigner.Runtime.Tasks.EntryTask","NodeData":{"Offset":"(567.849365,-571.8981)"},"ID":0,"Name":"Entry","Instant":true},"RootTask":{"Type":"BehaviorDesigner.Runtime.Tasks.Repeater","NodeData":{"Offset":"(-1.58229065,139.083344)"},"ID":1,"Name":"Repeater","Instant":true,"SharedIntcount":{"Type":"BehaviorDesigner.Runtime.SharedInt","Name":null,"Int32mValue":0},"SharedBoolrepeatForever":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":true},"SharedBoolendOnFailure":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-3.05175781E-05,140)"},"ID":2,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-420,200)"},"ID":3,"Name":"Sequence","Instant":true,"AbortTypeabortType":"Self","Children":[{"Type":"CondCanMove","NodeData":{"Offset":"(-80,160)"},"ID":4,"Name":"Cond
         Can Move","Instant":true,"Single_angle":360,"Single_distance":50,"Single_rate":0.5},{"Type":"ActMove","NodeData":{"Offset":"(70,160)"},"ID":5,"Name":"Act
-        Move","Instant":true}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-3.05175781E-05,190)"},"ID":6,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"CondCanSkill","NodeData":{"Offset":"(-60.00003,170)"},"ID":7,"Name":"Cond
-        Can Skill","Instant":true},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(59.99997,170)"},"ID":8,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Selector","NodeData":{"Offset":"(-70.00003,160)"},"ID":9,"Name":"Selector","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"MSkill_TrippleAttack","NodeData":{"Offset":"(-100.000031,140)"},"ID":10,"Name":"M
-        Skill   Tripple Attack","Instant":true},{"Type":"MSkill_WheelWind","NodeData":{"Offset":"(89.99997,140)"},"ID":11,"Name":"M
-        Skill   Wheel Wind","Instant":true,"GameObject_wheelWindTrigger":0}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Wait","NodeData":{"Offset":"(80,160)"},"ID":12,"Name":"Wait","Instant":true,"SharedFloatwaitTime":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":2},"SharedBoolrandomWait":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"SharedFloatrandomWaitMin":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1},"SharedFloatrandomWaitMax":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1}}]}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(390,190)"},"ID":13,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"CondCanAttack","NodeData":{"Offset":"(-100,170)"},"ID":14,"Name":"Cond
-        Can Attack","Instant":true},{"Type":"BehaviorDesigner.Runtime.Tasks.Unity.UnityAnimation.Play","NodeData":{"Offset":"(20,170)"},"ID":15,"Name":"Play","Instant":true,"Disabled":true,"SharedGameObjecttargetGameObject":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":null},"SharedStringanimationName":{"Type":"BehaviorDesigner.Runtime.SharedString","Name":null},"PlayModeplayMode":"StopSameLayer"},{"Type":"ActMeleeAttack","NodeData":{"Offset":"(140,170)"},"ID":16,"Name":"Act
-        Melee Attack","Instant":true},{"Type":"BehaviorDesigner.Runtime.Tasks.Wait","NodeData":{"Offset":"(260,170)"},"ID":17,"Name":"Wait","Instant":true,"Disabled":true,"SharedFloatwaitTime":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":2},"SharedBoolrandomWait":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"SharedFloatrandomWaitMin":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1},"SharedFloatrandomWaitMax":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1}}]}]}]},"DetachedTasks":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(443.798462,519.844849)"},"ID":18,"Name":"Sequence","Instant":true,"Disabled":true,"AbortTypeabortType":"None","Children":[{"Type":"MSkill_TrippleAttack","NodeData":{"Offset":"(-70.00003,110)"},"ID":19,"Name":"M
-        Skill   Tripple Attack","Instant":true},{"Type":"BehaviorDesigner.Runtime.Tasks.Unity.UnityAnimation.Play","NodeData":{"Offset":"(69.99997,110)"},"ID":20,"Name":"Play","Instant":true,"SharedGameObjecttargetGameObject":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":null},"SharedStringanimationName":{"Type":"BehaviorDesigner.Runtime.SharedString","Name":null},"PlayModeplayMode":"StopSameLayer"}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(733.7985,519.844849)"},"ID":21,"Name":"Sequence","Instant":true,"Disabled":true,"AbortTypeabortType":"None","Children":[{"Type":"MSkill_WheelWind","NodeData":{"Offset":"(-70.00003,110)"},"ID":22,"Name":"M
-        Skill   Wheel Wind","Instant":true,"GameObject_wheelWindTrigger":1},{"Type":"BehaviorDesigner.Runtime.Tasks.Unity.UnityAnimation.Play","NodeData":{"Offset":"(70,110)"},"ID":23,"Name":"Play","Instant":true,"SharedGameObjecttargetGameObject":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":null},"SharedStringanimationName":{"Type":"BehaviorDesigner.Runtime.SharedString","Name":null},"PlayModeplayMode":"StopSameLayer"}]}],"Variables":[{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"ActorSelf","IsShared":true},{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"MoveSpeed","IsShared":true,"SinglemValue":0},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Animator","IsShared":true},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"TargetObject","IsShared":true},{"Type":"BehaviorDesigner.Runtime.SharedTransform","Name":"Target","IsShared":true},{"Type":"BehaviorDesigner.Runtime.SharedVector3","Name":"Destination","IsShared":true,"Vector3mValue":"(0,0,0)"}]}'
+        Move","Instant":true,"CondCanMove_condCanMove":4}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-3.05175781E-05,190)"},"ID":6,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"CondCanSkill","NodeData":{"Offset":"(-60.00003,170)"},"ID":7,"Name":"Cond
+        Can Skill","Instant":true,"CondCanMove_condCanMove":4},{"Type":"BehaviorDesigner.Runtime.Tasks.Selector","NodeData":{"Offset":"(57.4336548,165.13269)"},"ID":8,"Name":"Selector","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-146.201538,149.844849)"},"ID":9,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"MSkill_TrippleAttack","NodeData":{"Offset":"(-70.00003,110)"},"ID":10,"Name":"M
+        Skill   Tripple Attack","Instant":true},{"Type":"BehaviorDesigner.Runtime.Tasks.Wait","NodeData":{"Offset":"(70,110)"},"ID":11,"Name":"Wait","Instant":true,"SharedFloatwaitTime":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":5},"SharedBoolrandomWait":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"SharedFloatrandomWaitMin":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1},"SharedFloatrandomWaitMax":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1}}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(143.798523,149.844849)"},"ID":12,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"MSkill_WheelWind","NodeData":{"Offset":"(-70.00003,110)"},"ID":13,"Name":"M
+        Skill   Wheel Wind","Instant":true,"GameObject_wheelWindTrigger":0},{"Type":"BehaviorDesigner.Runtime.Tasks.Wait","NodeData":{"Offset":"(60,110)"},"ID":14,"Name":"Wait","Instant":true,"SharedFloatwaitTime":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":5},"SharedBoolrandomWait":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"SharedFloatrandomWaitMin":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1},"SharedFloatrandomWaitMax":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1}}]}]}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(390,190)"},"ID":15,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"CondCanAttack","NodeData":{"Offset":"(-100,170)"},"ID":16,"Name":"Cond
+        Can Attack","Instant":true},{"Type":"ActMeleeAttack","NodeData":{"Offset":"(29.3804951,170)"},"ID":17,"Name":"Act
+        Melee Attack","Instant":true},{"Type":"BehaviorDesigner.Runtime.Tasks.Wait","NodeData":{"Offset":"(149.3805,170)"},"ID":18,"Name":"Wait","Instant":true,"SharedFloatwaitTime":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1},"SharedBoolrandomWait":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"SharedFloatrandomWaitMin":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1},"SharedFloatrandomWaitMax":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1}}]}]}]},"Variables":[{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"ActorSelf","IsShared":true},{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"MoveSpeed","IsShared":true,"SinglemValue":0},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Animator","IsShared":true},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"TargetObject","IsShared":true},{"Type":"BehaviorDesigner.Runtime.SharedTransform","Name":"Target","IsShared":true},{"Type":"BehaviorDesigner.Runtime.SharedVector3","Name":"Destination","IsShared":true,"Vector3mValue":"(0,0,0)"}]}'
       fieldSerializationData:
         typeName: []
         fieldNameHash: 
         startIndex: 
         dataPosition: 
         unityObjects:
-        - {fileID: 0}
-        - {fileID: 0}
+        - {fileID: 338200011797327334}
         byteData: 
         byteDataArray: 
       Version: 1.7.11
@@ -3630,3 +3682,108 @@ Transform:
   m_Children: []
   m_Father: {fileID: 7938725454038803727}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &5873880673126715995
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1715668567581199283}
+    m_Modifications:
+    - target: {fileID: 4396648588544818953, guid: 21e4b73bd9a65304b95b34e21e044c29,
+        type: 3}
+      propertyPath: _interval
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6140007488947650493, guid: 21e4b73bd9a65304b95b34e21e044c29,
+        type: 3}
+      propertyPath: m_Name
+      value: Radiation
+      objectReference: {fileID: 0}
+    - target: {fileID: 6140007488947650493, guid: 21e4b73bd9a65304b95b34e21e044c29,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7269511027983176845, guid: 21e4b73bd9a65304b95b34e21e044c29,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7269511027983176845, guid: 21e4b73bd9a65304b95b34e21e044c29,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7269511027983176845, guid: 21e4b73bd9a65304b95b34e21e044c29,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7269511027983176845, guid: 21e4b73bd9a65304b95b34e21e044c29,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.5031347
+      objectReference: {fileID: 0}
+    - target: {fileID: 7269511027983176845, guid: 21e4b73bd9a65304b95b34e21e044c29,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.38000003
+      objectReference: {fileID: 0}
+    - target: {fileID: 7269511027983176845, guid: 21e4b73bd9a65304b95b34e21e044c29,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -5.2272954
+      objectReference: {fileID: 0}
+    - target: {fileID: 7269511027983176845, guid: 21e4b73bd9a65304b95b34e21e044c29,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7269511027983176845, guid: 21e4b73bd9a65304b95b34e21e044c29,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7269511027983176845, guid: 21e4b73bd9a65304b95b34e21e044c29,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7269511027983176845, guid: 21e4b73bd9a65304b95b34e21e044c29,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7269511027983176845, guid: 21e4b73bd9a65304b95b34e21e044c29,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7269511027983176845, guid: 21e4b73bd9a65304b95b34e21e044c29,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7269511027983176845, guid: 21e4b73bd9a65304b95b34e21e044c29,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 21e4b73bd9a65304b95b34e21e044c29, type: 3}
+--- !u!1 &338200011797327334 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6140007488947650493, guid: 21e4b73bd9a65304b95b34e21e044c29,
+    type: 3}
+  m_PrefabInstance: {fileID: 5873880673126715995}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &3847844958790272726 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7269511027983176845, guid: 21e4b73bd9a65304b95b34e21e044c29,
+    type: 3}
+  m_PrefabInstance: {fileID: 5873880673126715995}
+  m_PrefabAsset: {fileID: 0}

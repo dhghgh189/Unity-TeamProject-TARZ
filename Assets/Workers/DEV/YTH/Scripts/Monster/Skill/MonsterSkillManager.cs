@@ -219,15 +219,14 @@ public class MonsterSkillManager : MonoBehaviour
     public Coroutine wheelWindRoutine;
     public IEnumerator WheelWindRoutine() // 가렌 E
     {
-        /*_animator.SetTrigger("WheelWind");*/
-
         WheelWindSkill.CanUseSkill = false;
 
         _wheelWindTrigger.SetActive(true);
 
-        Radiation jackRadiation = _wheelWindTrigger.GetComponent<Radiation>();
-      /*  jackRadiation.Interaval = WheelWindSkill.Interval;
-        jackRadiation.Damage = WheelWindSkill.Damage;*/
+        Radiation jackRadiation = _wheelWindTrigger.GetComponentInChildren<Radiation>();
+        jackRadiation.Interaval = WheelWindSkill.Interval;
+        jackRadiation.Damage = WheelWindSkill.Damage;
+
         yield return Util.GetDelay(WheelWindSkill.Duration);
         _wheelWindTrigger.SetActive(false);
 
@@ -414,10 +413,9 @@ public class MonsterSkillManager : MonoBehaviour
 
     #region TrippleAttack
     public Coroutine trippleAttackRoutine;
-    public IEnumerator TrippleAttackRoutine() //   // TrippleAttackSkill 애니메이션 재생     //애니메이션에 공격 붙이기
+    public IEnumerator TrippleAttackRoutine() 
     {
         TrippleAttackSkill.CanUseSkill = false;
-         _animator.SetTrigger("TrippleAttack");
 
         yield return Util.GetDelay(TrippleAttackSkill.CoolTime);
         trippleAttackRoutine = null;
@@ -587,8 +585,10 @@ public class MonsterSkillManager : MonoBehaviour
     }
     #endregion
 
+    #region RangeAttack
     public void ThrowAttack()
     {
         GameObject projectile = Object.Instantiate(_projectile, _muzzlePoint.position, _muzzlePoint.rotation);
     }
+    #endregion
 }

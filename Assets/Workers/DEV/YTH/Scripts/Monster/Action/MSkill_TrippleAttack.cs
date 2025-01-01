@@ -10,12 +10,15 @@ public class MSkill_TrippleAttack : Action
 
     private PlayerController _player;
 
+    private Animator _animator;
+
     private float _distance;
 
     public override void OnAwake()
     {
         _monsterSkillManager = GetComponent<MonsterSkillManager>();
         _pooledObject = GetComponent<PooledObject>();
+        _animator = GetComponent<Animator>();
     }
 
     public override void OnStart()
@@ -29,6 +32,7 @@ public class MSkill_TrippleAttack : Action
         if (_monsterSkillManager.TrippleAttackSkill.CanUseSkill == true && _distance <= 10 && _monsterSkillManager.trippleAttackRoutine == null)
         {
             _monsterSkillManager.trippleAttackRoutine = StartCoroutine(_monsterSkillManager.TrippleAttackRoutine());
+            _animator.SetTrigger("TrippleAttack");
             Debug.Log("trippleAttack");
             return TaskStatus.Success;
         }

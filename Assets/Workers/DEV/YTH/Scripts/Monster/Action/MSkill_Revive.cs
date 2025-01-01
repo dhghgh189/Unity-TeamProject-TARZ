@@ -5,7 +5,7 @@ using Zenject;
 public class MSkill_Revive : Action
 {
     private MonsterSkillManager _monsterSkillManager;
-
+    private Animator _animator;
     private MonsterData _monsterData;
 
     [SerializeField] GameObject _reviveBefore;
@@ -15,6 +15,7 @@ public class MSkill_Revive : Action
     public override void OnAwake()
     {
         _monsterSkillManager = GetComponent<MonsterSkillManager>();
+        _animator = GetComponent<Animator>();
         _monsterData = GetComponent<MonsterData>();
     }
 
@@ -29,6 +30,7 @@ public class MSkill_Revive : Action
         if (_monsterData.CurHp <= _monsterData.MaxHp / 2 && _monsterSkillManager.ReviveSkill.CanUseSkill)
         {
             _monsterSkillManager.Revive();
+            _animator.SetTrigger("Revive");
             Debug.Log("부활");
             return TaskStatus.Success;
         }

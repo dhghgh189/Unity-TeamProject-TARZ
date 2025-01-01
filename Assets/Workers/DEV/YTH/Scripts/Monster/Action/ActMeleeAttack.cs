@@ -37,6 +37,7 @@ public class ActMeleeAttack : Action
             {
                 attackRoutine = StartCoroutine(AttackRoutine());
                 _animator.SetTrigger("Attack");
+                Debug.Log("점프공격했음");
             }
             return TaskStatus.Success;
         }

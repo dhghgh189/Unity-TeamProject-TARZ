@@ -93,12 +93,18 @@ public class MonsterSkillManager : MonoBehaviour
     private MonsterData _monsterData;
 
     private LayerMask WhatIsTarget;
+
+    private PooledObject _pooledObject;
+
+    private PlayerController _player;
     #endregion
 
     private void Awake()
     {
         _monsterData = GetComponent<MonsterData>();
         WhatIsTarget = (1 << LayerMask.NameToLayer("Player"));
+        _pooledObject = GetComponent<PooledObject>();
+        _animator = GetComponent<Animator>();
     }
 
     private void Start()
@@ -106,7 +112,7 @@ public class MonsterSkillManager : MonoBehaviour
         LoadSkill();
         SkillInit();
 
-        _animator = GetComponent<Animator>();
+        _player = _pooledObject.player;
     }
 
     public void LoadSkill()
@@ -526,8 +532,10 @@ public class MonsterSkillManager : MonoBehaviour
     Coroutine jumpRoutine_frogJumpAttack;
     IEnumerator JumpRoutine_frogJumpAttack()
     {
+        float distance = Vector3.Distance(transform.position, _player.transform.position);
+
         _jumpStartPosition = transform.position;
-        _jumpDirection = transform.forward.normalized * FrogJumpAttackSkill.JumpDistance;
+        _jumpDirection = transform.forward.normalized * distance;
 
         while (_elapsedTime < FrogJumpAttackSkill.InAirTime)
         {
@@ -551,7 +559,7 @@ public class MonsterSkillManager : MonoBehaviour
     public void Revive()
     {
         ReviveSkill.CanUseSkill = false;
-        _animator.SetTrigger("Revive");
+        //_animator.SetTrigger("Revive");
 
         _reviveBefore.SetActive(false);
         _reviveAfter.SetActive(true);

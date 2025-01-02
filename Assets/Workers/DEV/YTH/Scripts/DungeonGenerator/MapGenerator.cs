@@ -11,6 +11,7 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] RoomChecker roomChecker;
 
     [SerializeField] GameObject movePotalPrefab;
+    [SerializeField] GameObject scenePotalPrefab;
     [SerializeField] GameObject bossRoomPrefab;
     private Transform bossRoomTransform;
 
@@ -31,9 +32,16 @@ public class MapGenerator : MonoBehaviour
     private int random;
 
     [Inject] PlayerController playerController;
+    [Inject] SaveData saveData;
+
+    [SerializeField] ChapterManager chapterManager;
 
     private void Start()
     {
+        ChapterSaveData chapterSaveData = saveData.chapterSaveData;
+        StageInfo stageInfo = chapterManager.stageInfos[saveData.chapterSaveData.StageNum];
+        roomCount = stageInfo.RoomCount;
+
         CreateBossRoom();
         StartCoroutine(MapCreater());
     }
@@ -41,6 +49,7 @@ public class MapGenerator : MonoBehaviour
     private void CreateBossRoom()
     {
         bossRoomTransform = Instantiate(bossRoomPrefab, new Vector3(3000f, 0, 3000f), Quaternion.identity).transform;
+        Instantiate(scenePotalPrefab, new Vector3(3010f, 0, 3000f), Quaternion.identity).GetComponent<ScenePotal>().SetScene(Define.SceneType.Chapter1);
     }
 
     IEnumerator MapCreater()

@@ -42,7 +42,7 @@ public class DungeonGenerator_DFS : MonoBehaviour
                 if (currentCell.visited)
                 {
                     var newRoom = Instantiate(room, new Vector3(i * offset.x, 0, -j * offset.y), Quaternion.identity, transform).GetComponent<RoomBehaviour>();
-                    newRoom.UpdateRoom(currentCell.status);
+                    //newRoom.UpdateRoom(currentCell.status);
 
                     newRoom.name += " " + i + "-" + j;
                 }

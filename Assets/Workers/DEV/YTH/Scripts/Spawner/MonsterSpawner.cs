@@ -22,15 +22,19 @@ public class MonsterSpawner : MonoBehaviour
 
     public void Spawn()
     {
+        RoomBehaviour roomBehaviour = transform.parent.GetComponent<RoomBehaviour>();
         int temp = 0;
         for (int i = 0; i < monsterSpwanInfos.Count; i++)
         {
             for (int j = 0; j < monsterSpwanInfos[i].MonsterCount; j++)
             {
-                _monsterPool.CreateMonster(monsterSpwanInfos[i].monsterName, _spawnPoints[temp++ % _spawnPoints.Length]);
-                Debug.Log(temp);
+                PooledObject pooledObject = _monsterPool.CreateMonster(monsterSpwanInfos[i].monsterName, _spawnPoints[temp++ % _spawnPoints.Length]);
+
+                pooledObject.OnDie += roomBehaviour.MonsterCountChange;
             }
         }
+        roomBehaviour.CloseWall();
+        roomBehaviour.MonsterCount = temp;
         Destroy(gameObject);
     }
 

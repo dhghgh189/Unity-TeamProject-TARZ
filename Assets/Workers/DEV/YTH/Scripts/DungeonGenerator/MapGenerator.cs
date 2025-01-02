@@ -10,6 +10,7 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] GameObject storePrefab;
     [SerializeField] GameObject wallDestroyer;
     [SerializeField] RoomChecker roomChecker;
+    [SerializeField] GameObject[] obstacles;
 
     [SerializeField] GameObject movePotalPrefab;
     [SerializeField] GameObject scenePotalPrefab;
@@ -68,6 +69,7 @@ public class MapGenerator : MonoBehaviour
 
             // 방 생성
             Instantiate(i == 0 ? clearRoomPrefab : roomPrefab, createPos, Quaternion.identity, transform);
+            Instantiate(obstacles[Random.Range(0, obstacles.Length)], createPos + Vector3.up * 0.75f, Quaternion.identity, transform);
 
             // 상점, 보스방 생성을 위한 가장 먼 방 체크
             FindFarRoomPos();

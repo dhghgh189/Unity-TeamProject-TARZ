@@ -1,25 +1,37 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
+using System.Linq;
 using UnityEngine;
 
 public class MonsterSpawner : MonoBehaviour
 {
-    [SerializeField] ObjectPool _monsterPool;
+    [SerializeField] List<MonsterSpwanInfo> monsterSpwanInfos;
 
-    [SerializeField] Transform _spawnPoint;
+    private ObjectPool _monsterPool;
+    private Transform[] _spawnPoints;
 
     private void Awake()
     {
-        /*_spawnPoint = transform.Find("MonsterSpawnPoint");*/
+        _spawnPoints = GetComponentsInChildren<Transform>().Skip(1).ToArray();
     }
 
- 
+    private void Start()
+    {
+        _monsterPool = FindAnyObjectByType<ObjectPool>();
+    }
+
     public void Spawn()
     {
-        PooledObject jake = _monsterPool.CreateMonster(MonsterName.Jake, _spawnPoint);
-        PooledObject amber = _monsterPool.CreateMonster(MonsterName.Amber, _spawnPoint);
-
+        int temp = 0;
+        for (int i = 0; i < monsterSpwanInfos.Count; i++)
+        {
+            for (int j = 0; j < monsterSpwanInfos[i].MonsterCount; j++)
+            {
+                _monsterPool.CreateMonster(monsterSpwanInfos[i].monsterName, _spawnPoints[temp++ % _spawnPoints.Length]);
+                Debug.Log(temp);
+            }
+        }
+        Destroy(gameObject);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -28,7 +40,13 @@ public class MonsterSpawner : MonoBehaviour
         {
             Debug.Log("몬스터 소환!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
             Spawn();
-            Destroy(gameObject);
         }
+    }
+
+    [Serializable]
+    public class MonsterSpwanInfo
+    {
+        public MonsterName monsterName;
+        public int MonsterCount;
     }
 }

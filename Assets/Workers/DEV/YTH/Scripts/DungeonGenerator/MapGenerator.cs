@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using Zenject;
 
 public class MapGenerator : MonoBehaviour
 {
@@ -24,6 +25,8 @@ public class MapGenerator : MonoBehaviour
     private Vector3 createPos;
 
     private int random;
+
+    [Inject] PlayerController playerController;
 
     private void Start()
     {
@@ -83,6 +86,8 @@ public class MapGenerator : MonoBehaviour
         yield return Util.GetDelay(0.05f);
         Destroy(wallDestroyer.gameObject);
         Destroy(roomChecker.gameObject);
+
+        playerController.gameObject.SetActive(true);
     }
 
     private void SetBossRoomDir()

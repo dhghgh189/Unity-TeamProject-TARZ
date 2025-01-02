@@ -28,5 +28,4 @@ public class MonsterFactoryInstaller : MonoInstaller
 }
 public class MonsterFactory : PlaceholderFactory<PooledObject>
 {
-
 }

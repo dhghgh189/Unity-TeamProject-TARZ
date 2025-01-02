@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 using Zenject;
 public enum MonsterName
 {
@@ -46,7 +46,9 @@ public class ObjectPool : MonoBehaviour
             }
         }
         PooledObject instance = factoryData.factory.Create();
-        instance.transform.position = transform.position;
+        instance.GetComponent<NavMeshAgent>().enabled = false;
+        instance.gameObject.transform.position = transform.position;
+        instance.GetComponent<NavMeshAgent>().enabled = true;
 
         return instance;
     }

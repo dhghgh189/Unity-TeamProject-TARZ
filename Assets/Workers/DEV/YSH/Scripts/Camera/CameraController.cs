@@ -18,8 +18,8 @@ public class CameraController : MonoBehaviour
 
     private void Start()
     {
-        player = FindAnyObjectByType<PlayerController>();
-        playerInput = FindAnyObjectByType<PlayerInputHandler>();
+        player = FindAnyObjectByType<PlayerController>(FindObjectsInactive.Include);
+        playerInput = FindAnyObjectByType<PlayerInputHandler>(FindObjectsInactive.Include);
 
         lookAt = player.cameraLookPos;
 

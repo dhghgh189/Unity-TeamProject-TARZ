@@ -1297,7 +1297,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3750440984940057028}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: -2012967667, guid: da41a8dd3b5ec434a802d9b5a2a0a777, type: 3}
   m_Name: 
@@ -1331,8 +1331,8 @@ MonoBehaviour:
       startIndex: 
       variableStartIndex: 
       JSONSerialization: '{"EntryTask":{"Type":"BehaviorDesigner.Runtime.Tasks.EntryTask","NodeData":{"Offset":"(420.209473,-151.296387)"},"ID":0,"Name":"Entry","Instant":true},"RootTask":{"Type":"BehaviorDesigner.Runtime.Tasks.Repeater","NodeData":{"Offset":"(-0.303033829,148.181763)"},"ID":1,"Name":"Repeater","Instant":true,"SharedIntcount":{"Type":"BehaviorDesigner.Runtime.SharedInt","Name":null,"Int32mValue":0},"SharedBoolrepeatForever":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":true},"SharedBoolendOnFailure":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(0,130.000031)"},"ID":2,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-229.999954,180)"},"ID":3,"Name":"Sequence","Instant":true,"AbortTypeabortType":"Self","Children":[{"Type":"CondCanMove","NodeData":{"Offset":"(-75.9090652,200)"},"ID":4,"Name":"Cond
-        Can Move","Instant":true,"Single_angle":90,"Single_distance":10,"Single_rate":0.5},{"Type":"ActMove_Block","NodeData":{"Offset":"(92.51001,195.446289)"},"ID":5,"Name":"Act
-        Move   Block","Instant":true,"Single_stopBlockDistance":5}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(210,200)"},"ID":6,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"CondCanAttack","NodeData":{"Offset":"(-80,180)"},"ID":7,"Name":"Cond
+        Can Move","Instant":true,"Single_angle":360,"Single_distance":20,"Single_rate":0.5},{"Type":"ActMove_Block","NodeData":{"Offset":"(92.51001,195.446289)"},"ID":5,"Name":"Act
+        Move   Block","Instant":true,"CondCanMove_condCanMove":4,"Single_stopBlockDistance":5}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(210,200)"},"ID":6,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"CondCanAttack","NodeData":{"Offset":"(-80,180)"},"ID":7,"Name":"Cond
         Can Attack","Instant":true},{"Type":"ActMeleeAttack","NodeData":{"Offset":"(100,180)"},"ID":8,"Name":"Act
         Melee Attack","Instant":true}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Idle","NodeData":{"Offset":"(420,200)"},"ID":9,"Name":"Idle","Instant":true,"Disabled":true}]}]}}'
       fieldSerializationData:

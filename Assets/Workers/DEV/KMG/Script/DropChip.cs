@@ -3,8 +3,7 @@ using Zenject;
 
 public class DropChip : MonoBehaviour
 {
-    [Inject] StatModel statModel;
-    [SerializeField] int amount;
+    [SerializeField] float amount;
     [SerializeField] bool blackChip;
     [SerializeField] Material ChipMaterial;
     [SerializeField] Material blackChipMaterial;
@@ -20,15 +19,22 @@ public class DropChip : MonoBehaviour
     {
         if (!other.transform.CompareTag("Player")) return;
 
+        PlayerController player = other.GetComponent<PlayerController>();
+        if (player == null)
+        {
+            Debug.Log("DropChip Exception!");
+            return;
+        }
+
         if (blackChip)
-            statModel.BlackChip += amount;
+            player.Stat.BlackChip += amount;
         else
-            statModel.Chip += amount;
+            player.Stat.Chip += amount;
 
         gameObject.SetActive(false);
     }
 
-    public void SetDropChip(int amount, bool blackChip)
+    public void SetDropChip(float amount, bool blackChip)
     {
         this.amount = amount;
         this.blackChip = blackChip;

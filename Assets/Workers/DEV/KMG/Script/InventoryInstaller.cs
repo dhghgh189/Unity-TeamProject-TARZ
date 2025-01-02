@@ -14,5 +14,6 @@ public class InventoryInstaller : MonoInstaller
         Container.Bind<AblityAdapter>().FromComponentInHierarchy().AsSingle();
         Container.Bind<PlayerController>().FromComponentInHierarchy().AsSingle();
         Container.Bind<PlayerSkillHandler>().FromComponentInHierarchy().AsSingle();
+        Container.Bind<ChangeInput>().FromComponentInHierarchy().AsSingle();
     }
 }

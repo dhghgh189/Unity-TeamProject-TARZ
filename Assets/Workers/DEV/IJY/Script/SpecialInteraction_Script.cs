@@ -45,14 +45,10 @@ public class SpecialInteraction_Script : MonoBehaviour, Base_InteractionOBJ_Grab
     {
         if (isThrowing)
         {
+            // TODO : 오브젝트 폭발이나 데미지 입히는 기능 구현
             Destroy(this.gameObject, 3f);
         }
         else return;
-    }
-
-    void OnDisable()
-    {
-        Destroy(this.gameObject);
     }
 }
 

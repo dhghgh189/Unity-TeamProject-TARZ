@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1360294611059025817}
   - component: {fileID: 1264562439198478543}
-  - component: {fileID: 4587008790111100338}
   - component: {fileID: 3672911566345587928}
   m_Layer: 0
   m_Name: MonsterSpawner
@@ -27,14 +26,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1114806213098571141}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -23.293972, y: 12.32335, z: -30.957054}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9071525852440382896}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!114 &1264562439198478543
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -47,22 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7fac684803b1984fb02a65963bca241, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4587008790111100338
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1114806213098571141}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be540928a386e574fb0cf1ad01ba5df0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pool: []
-  _monsterPrefab: {fileID: 422953918920400610, guid: 4a839caa195178241bdf5a136def625b,
-    type: 3}
-  _poolSize: 20
+  _monsterPool: {fileID: 0}
+  _spawnPoint: {fileID: 0}
 --- !u!65 &3672911566345587928
 BoxCollider:
   m_ObjectHideFlags: 0

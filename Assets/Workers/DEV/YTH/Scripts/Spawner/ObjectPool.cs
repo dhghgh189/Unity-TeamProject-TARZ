@@ -1,10 +1,10 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 using Zenject;
 public enum MonsterName
 {
-    Jake, Amber, Size
+    Jake, Amber, Arnold, Bomber, FrogZombie, JackTheRipper, Range, ReviveZombie, EliteA, EliteB, DungeonEliteA, DungeonEliteB, Size
 }
 
 public class ObjectPool : MonoBehaviour
@@ -39,14 +39,16 @@ public class ObjectPool : MonoBehaviour
         {
             if (!pooledObject.gameObject.activeSelf)
             {
-                pooledObject.gameObject.transform.position = transform.position;
+                pooledObject.gameObject.transform.position = transform.position + new Vector3(Random.Range(-2, 2), 0, Random.Range(-2, 2));
                 pooledObject.gameObject.SetActive(true);
 
                 return pooledObject;
             }
         }
         PooledObject instance = factoryData.factory.Create();
-        instance.transform.position = transform.position;
+        instance.GetComponent<NavMeshAgent>().enabled = false;
+        instance.gameObject.transform.position = transform.position + new Vector3(Random.Range(-2, 2), 0, Random.Range(-2, 2)); ;
+        instance.GetComponent<NavMeshAgent>().enabled = true;
 
         return instance;
     }

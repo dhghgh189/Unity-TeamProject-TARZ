@@ -3,6 +3,8 @@ using System.Collections.Generic;
 
 public class SaveData
 {
+    // 플레이 중인 레벨
+    public ChapterSaveData chapterSaveData = new();
     // 패시브 강화를 위한 비휘발성 재화
     public float DataChip;
     // 스탯을 저장하는 클래스
@@ -57,4 +59,12 @@ public class BlueChipSaveData
 {
     public string BlueChipName;
     public int BlueChipLevel;
+}
+
+[Serializable]
+public class ChapterSaveData
+{
+    // 챕터가 큰놈
+    public int ChapterNum;
+    public int StageNum;
 }

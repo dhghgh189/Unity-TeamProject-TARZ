@@ -18,8 +18,8 @@ public class CameraController : MonoBehaviour
 
     private void Start()
     {
-        player = FindAnyObjectByType<PlayerController>();
-        playerInput = FindAnyObjectByType<PlayerInputHandler>();
+        player = FindAnyObjectByType<PlayerController>(FindObjectsInactive.Include);
+        playerInput = FindAnyObjectByType<PlayerInputHandler>(FindObjectsInactive.Include);
 
         lookAt = player.cameraLookPos;
 
@@ -42,11 +42,6 @@ public class CameraController : MonoBehaviour
     public void Move(Vector3 r)
     {
         transform.position = lookAt.position;
-        mainCam.transform.position = new Vector3(mainCam.transform.position.x, mainCamYPos, mainCam.transform.position.z);
-
-        //transform.position = lookAt.position;
-        //Vector3 camPosition = new Vector3(mainCam.transform.position.x, mainCamYPos, mainCam.transform.position.z);
-        //mainCam.transform.position = Vector3.SmoothDamp(mainCam.transform.position, camPosition, ref r, smoothTime);
     }
 
     public void Rotate()

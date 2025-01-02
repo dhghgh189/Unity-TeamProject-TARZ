@@ -18,7 +18,7 @@ public class DamagedState : BaseState<PlayerController>
     public override void OnUpdate()
     {
         owner.Movement.Rigid.angularVelocity = Vector3.zero;
-        owner.Movement.Rigid.velocity = Vector3.zero;
+        owner.Movement.Rigid.velocity = new Vector3(0, owner.Movement.Rigid.velocity.y, 0);
 
         if (owner.IsAnimStart == false)
         {

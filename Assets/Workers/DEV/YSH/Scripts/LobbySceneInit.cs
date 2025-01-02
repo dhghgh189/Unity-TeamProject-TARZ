@@ -18,5 +18,7 @@ public class LobbySceneInit : MonoBehaviour
         model.Clear();
         // 블루칩 초기화
         saveData.blueChipSaveDatas.Clear();
+        // 챕터 데이터 초기화
+        saveData.chapterSaveData = new();
     }
 }

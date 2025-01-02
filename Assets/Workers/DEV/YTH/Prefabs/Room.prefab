@@ -222,12 +222,12 @@ GameObject:
   - component: {fileID: 7376044169605512380}
   - component: {fileID: 1570646106217937587}
   - component: {fileID: 6732235454448286711}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Floor (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &3567012105572313950
 Transform:
@@ -1295,7 +1295,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8925691688414606461
 Transform:
   m_ObjectHideFlags: 0
@@ -1405,7 +1405,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5823108859132065131
 Transform:
   m_ObjectHideFlags: 0
@@ -1996,7 +1996,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4071605852841950340
 Transform:
   m_ObjectHideFlags: 0
@@ -2513,6 +2513,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4473681980280892859}
   - component: {fileID: 5438887541560599138}
+  - component: {fileID: 3227697644631016600}
   m_Layer: 0
   m_Name: Room
   m_TagString: Untagged
@@ -2554,11 +2555,38 @@ MonoBehaviour:
   - {fileID: 8142922667486054100}
   - {fileID: 8808633407540306471}
   - {fileID: 5506911252831618815}
-  doors:
-  - {fileID: 6177751545712733991}
-  - {fileID: 8343263075682606494}
-  - {fileID: 3466498864638502142}
-  - {fileID: 3772884861949837037}
+  MonsterCount: 0
+--- !u!114 &3227697644631016600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7926232823591347676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AgentTypeID: 0
+  m_CollectObjects: 0
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_UseGeometry: 0
+  m_DefaultArea: 0
+  m_GenerateLinks: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.16666667
+  m_MinRegionArea: 2
+  m_NavMeshData: {fileID: 23800000, guid: 8020b23040576994c9b072fcb330a520, type: 2}
+  m_BuildHeightMesh: 0
 --- !u!1 &8142922667486054100
 GameObject:
   m_ObjectHideFlags: 0
@@ -2682,7 +2710,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4440144724434321743
 Transform:
   m_ObjectHideFlags: 0

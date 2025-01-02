@@ -1,13 +1,22 @@
 using System.Collections;
 using UnityEngine;
+using Zenject;
 
 public class MapGenerator : MonoBehaviour
 {
     [SerializeField] int roomCount;
     [SerializeField] GameObject roomPrefab;
+    [SerializeField] GameObject clearRoomPrefab;
     [SerializeField] GameObject storePrefab;
     [SerializeField] GameObject wallDestroyer;
     [SerializeField] RoomChecker roomChecker;
+    [SerializeField] GameObject[] monsterSpawners;
+    [SerializeField] GameObject[] obstacles;
+
+    [SerializeField] GameObject movePotalPrefab;
+    [SerializeField] GameObject scenePotalPrefab;
+    [SerializeField] GameObject bossRoomPrefab;
+    private Transform bossRoomTransform;
 
     // 랜덤한 방향을 담을 배열
     private Vector3[] createDir = { Vector3.forward, Vector3.back, Vector3.right, Vector3.left };
@@ -25,9 +34,24 @@ public class MapGenerator : MonoBehaviour
 
     private int random;
 
+    [Inject] PlayerController playerController;
+    [Inject] SaveData saveData;
+
+    [SerializeField] ChapterManager chapterManager;
+
     private void Start()
     {
+        ChapterSaveData chapterSaveData = saveData.chapterSaveData;
+        StageInfo stageInfo = chapterManager.stageInfos[saveData.chapterSaveData.StageNum];
+        roomCount = stageInfo.RoomCount;
+
+        CreateBossRoom();
         StartCoroutine(MapCreater());
+    }
+
+    private void CreateBossRoom()
+    {
+        bossRoomTransform = Instantiate(bossRoomPrefab, new Vector3(3000f, 0, 3000f), Quaternion.identity).transform;
     }
 
     IEnumerator MapCreater()
@@ -45,7 +69,16 @@ public class MapGenerator : MonoBehaviour
             }
 
             // 방 생성
-            Instantiate(roomPrefab, createPos, Quaternion.identity, transform);
+            if (i == 0)
+            {
+                Instantiate(clearRoomPrefab, createPos, Quaternion.identity, transform);
+            }
+            else
+            {
+                Transform roomTransform = Instantiate(roomPrefab, createPos, Quaternion.identity, transform).transform;
+                Instantiate(obstacles[Random.Range(0, obstacles.Length)], createPos + Vector3.up * 0.75f, Quaternion.identity, transform);
+                Instantiate(monsterSpawners[Random.Range(0, monsterSpawners.Length)], createPos, Quaternion.identity, roomTransform);
+            }
 
             // 상점, 보스방 생성을 위한 가장 먼 방 체크
             FindFarRoomPos();
@@ -74,8 +107,14 @@ public class MapGenerator : MonoBehaviour
         // 보스룸 통로 생성
         for (int i = 0; i < 2; i++)
         {
-            Instantiate(roomPrefab, farDistancePos, Quaternion.identity, transform);
+            Instantiate(clearRoomPrefab, farDistancePos, Quaternion.identity, transform);
             yield return Util.GetDelay(0.05f);
+
+            if (i == 1)
+            {
+                Instantiate(movePotalPrefab, farDistancePos + Vector3.up, Quaternion.identity).GetComponent<MovePotal>().SetTarget(bossRoomTransform.position);
+            }
+
             wallDestroyer.transform.position = destroyerY + farDistancePos - bossRoomDir * 25f;
             farDistancePos += bossRoomDir * 50;
         }
@@ -83,6 +122,8 @@ public class MapGenerator : MonoBehaviour
         yield return Util.GetDelay(0.05f);
         Destroy(wallDestroyer.gameObject);
         Destroy(roomChecker.gameObject);
+
+        playerController.gameObject.SetActive(true);
     }
 
     private void SetBossRoomDir()

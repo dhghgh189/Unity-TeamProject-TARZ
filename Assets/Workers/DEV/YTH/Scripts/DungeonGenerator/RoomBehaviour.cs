@@ -1,18 +1,33 @@
-using System.Collections;
-using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class RoomBehaviour : MonoBehaviour
 {
-    public GameObject[] walls; // 0 - Up 1 -Down 2 - Right 3- Left
-    public GameObject[] doors;
+    [SerializeField] GameObject[] walls;
+    public int MonsterCount;
 
-    public void UpdateRoom(bool[] status)
+    public void CloseWall()
     {
-        for (int i = 0; i < status.Length; i++)
+        walls = walls.Where(x => !x.activeSelf).ToArray();
+        foreach (var item in walls)
         {
-            doors[i].SetActive(status[i]);
-            walls[i].SetActive(!status[i]);
+            item.SetActive(true);
+        }
+    }
+    public void OpenWall()
+    {
+        foreach (var item in walls)
+        {
+            item.SetActive(false);
+        }
+    }
+
+    public void MonsterCountChange()
+    {
+        MonsterCount--;
+        if (MonsterCount == 0)
+        {
+            OpenWall();
         }
     }
 }

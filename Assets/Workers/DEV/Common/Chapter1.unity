@@ -8544,6 +8544,8 @@ MonoBehaviour:
   roomCount: 0
   roomPrefab: {fileID: 7926232823591347676, guid: 7453a0b344f0a7d438a7430dbddbee0e,
     type: 3}
+  clearRoomPrefab: {fileID: 7926232823591347676, guid: ddbff4540e0ec284c855d5ecad38d14f,
+    type: 3}
   storePrefab: {fileID: 7926232823591347676, guid: 25087ba3d21cf794aa0fd14d95477093,
     type: 3}
   wallDestroyer: {fileID: 1367817307}
@@ -11966,11 +11968,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stageInfos:
-  - BossName: 0
+  - BossName: 00000000
+    RoomCount: 1
+  - BossName: 0000000000000000
     RoomCount: 3
-  - BossName: 0
-    RoomCount: 4
-  - BossName: 0
+  - BossName: 
     RoomCount: 5
 --- !u!4 &1918820420
 Transform:

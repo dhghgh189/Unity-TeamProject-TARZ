@@ -4,7 +4,7 @@ using Zenject;
 public class MovePotal : MonoBehaviour
 {
     private Transform player;
-    [SerializeField] Transform targetTransform;
+    [SerializeField] Vector3 targetPos;
 
     private void Start()
     {
@@ -13,11 +13,11 @@ public class MovePotal : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        player.transform.position = targetTransform.position;
+        player.transform.position = targetPos;
     }
 
-    public void SetTarget(Transform transform)
+    public void SetTarget(Vector3 pos)
     {
-        targetTransform = transform;
+        targetPos = pos;
     }
 }

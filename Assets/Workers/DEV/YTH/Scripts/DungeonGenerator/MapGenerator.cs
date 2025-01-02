@@ -6,6 +6,7 @@ public class MapGenerator : MonoBehaviour
 {
     [SerializeField] int roomCount;
     [SerializeField] GameObject roomPrefab;
+    [SerializeField] GameObject clearRoomPrefab;
     [SerializeField] GameObject storePrefab;
     [SerializeField] GameObject wallDestroyer;
     [SerializeField] RoomChecker roomChecker;
@@ -49,7 +50,6 @@ public class MapGenerator : MonoBehaviour
     private void CreateBossRoom()
     {
         bossRoomTransform = Instantiate(bossRoomPrefab, new Vector3(3000f, 0, 3000f), Quaternion.identity).transform;
-        Instantiate(scenePotalPrefab, new Vector3(3010f, 0, 3000f), Quaternion.identity).GetComponent<ScenePotal>().SetScene(Define.SceneType.Chapter1);
     }
 
     IEnumerator MapCreater()
@@ -67,7 +67,7 @@ public class MapGenerator : MonoBehaviour
             }
 
             // 방 생성
-            Instantiate(roomPrefab, createPos, Quaternion.identity, transform);
+            Instantiate(i == 0 ? clearRoomPrefab : roomPrefab, createPos, Quaternion.identity, transform);
 
             // 상점, 보스방 생성을 위한 가장 먼 방 체크
             FindFarRoomPos();
@@ -96,12 +96,12 @@ public class MapGenerator : MonoBehaviour
         // 보스룸 통로 생성
         for (int i = 0; i < 2; i++)
         {
-            Instantiate(roomPrefab, farDistancePos, Quaternion.identity, transform);
+            Instantiate(clearRoomPrefab, farDistancePos, Quaternion.identity, transform);
             yield return Util.GetDelay(0.05f);
 
             if (i == 1)
             {
-                Instantiate(movePotalPrefab, farDistancePos + Vector3.up, Quaternion.identity).GetComponent<MovePotal>().SetTarget(bossRoomTransform);
+                Instantiate(movePotalPrefab, farDistancePos + Vector3.up, Quaternion.identity).GetComponent<MovePotal>().SetTarget(bossRoomTransform.position);
             }
 
             wallDestroyer.transform.position = destroyerY + farDistancePos - bossRoomDir * 25f;

@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using static MonsterData;
 
 /// <summary>
 /// 블랙홀 오브젝트에 부착하는 스크립트
@@ -98,8 +99,11 @@ public class BlackHollObject : MonoBehaviour
     {
         if (other.gameObject.layer.Equals(LayerMask.NameToLayer("Monster")))
         {
-            Debug.Log("StartHolidng");
-            StartCoroutine(StartBoilingRoutine(other.gameObject.transform));
+            if(other.gameObject.GetComponent<MonsterData>().MonsterTIer.Equals(MonsterTier.Normal))
+            {
+                Debug.Log("StartHolidng");
+                StartCoroutine(StartBoilingRoutine(other.gameObject.transform));
+            }
         }
     }
 

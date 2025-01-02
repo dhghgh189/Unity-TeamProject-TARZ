@@ -11,10 +11,12 @@ public class CheatUI : MonoBehaviour
     // Zenject로 주입한 클래스
     [Inject] StatModel model;
     [Inject] Inventory inventory;
+    [Inject] ChangeInput inputSystem;
 
     [SerializeField] PlayerController player;
     [SerializeField] SkillSpecDatabase skillData;
     [SerializeField] GameObject dropGear;
+    [SerializeField] Toggle mujeokToggle;
 
     // 각 치트 옵션을 설정할 Dropdown UI
     [Header("드롭다운")]
@@ -43,6 +45,13 @@ public class CheatUI : MonoBehaviour
         Init_AbilityDropdown();
         Init_skillDropdown();
     }
+
+    private void OnEnable()
+    {
+        inputSystem.firstInput = mujeokToggle;
+        inputSystem.firstInput.Select();
+    }
+
     /// <summary>
     /// 스탯 치트 드롭다운 초기화
     /// </summary>

@@ -75,9 +75,13 @@ public class Interactioner : MonoBehaviour
 
         if (targets.First().layer == interactionGrabLayer)
         {
-            if (SpecialOBJ.trigger.IsPlayerIn == false) return null;
-
             SpecialOBJ = targets.First().GetComponent<SpecialInteraction_Script>();
+            if (SpecialOBJ.trigger.IsPlayerIn == false)
+            {
+                SpecialOBJ = null;
+                return null;
+            }
+
             SpecialOBJ.playerController = playerController;
         }
 

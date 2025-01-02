@@ -33,6 +33,9 @@ public class SpecialInteraction_Script : MonoBehaviour, Base_InteractionOBJ_Grab
 
     void ThrowingReady(Transform curPos)
     {
+        trigger = null;
+        this.transform.DetachChildren();
+
         col.enabled = false;
         this.gameObject.transform.parent = playerController.interactioner.gameObject.transform;
         this.transform.position = curPos.position;
@@ -42,7 +45,7 @@ public class SpecialInteraction_Script : MonoBehaviour, Base_InteractionOBJ_Grab
     {
         if (isThrowing)
         {
-            Destroy(this.gameObject);
+            Destroy(this.gameObject, 3f);
         }
         else return;
     }

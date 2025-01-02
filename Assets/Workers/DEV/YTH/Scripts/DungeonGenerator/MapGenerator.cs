@@ -10,6 +10,10 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] GameObject wallDestroyer;
     [SerializeField] RoomChecker roomChecker;
 
+    [SerializeField] GameObject movePotalPrefab;
+    [SerializeField] GameObject bossRoomPrefab;
+    private Transform bossRoomTransform;
+
     // 랜덤한 방향을 담을 배열
     private Vector3[] createDir = { Vector3.forward, Vector3.back, Vector3.right, Vector3.left };
     // 파괴자의 y좌표
@@ -30,7 +34,13 @@ public class MapGenerator : MonoBehaviour
 
     private void Start()
     {
+        CreateBossRoom();
         StartCoroutine(MapCreater());
+    }
+
+    private void CreateBossRoom()
+    {
+        bossRoomTransform = Instantiate(bossRoomPrefab, new Vector3(3000f, 0, 3000f), Quaternion.identity).transform;
     }
 
     IEnumerator MapCreater()
@@ -79,6 +89,12 @@ public class MapGenerator : MonoBehaviour
         {
             Instantiate(roomPrefab, farDistancePos, Quaternion.identity, transform);
             yield return Util.GetDelay(0.05f);
+
+            if (i == 1)
+            {
+                Instantiate(movePotalPrefab, farDistancePos + Vector3.up, Quaternion.identity).GetComponent<MovePotal>().SetTarget(bossRoomTransform);
+            }
+
             wallDestroyer.transform.position = destroyerY + farDistancePos - bossRoomDir * 25f;
             farDistancePos += bossRoomDir * 50;
         }

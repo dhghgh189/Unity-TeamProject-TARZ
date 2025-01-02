@@ -35,6 +35,7 @@ public class SpecialInteraction_Script : MonoBehaviour, Base_InteractionOBJ_Grab
     {
         trigger = null;
         this.transform.DetachChildren();
+        this.gameObject.layer = 0;
 
         col.enabled = false;
         this.gameObject.transform.parent = playerController.interactioner.gameObject.transform;
@@ -46,7 +47,8 @@ public class SpecialInteraction_Script : MonoBehaviour, Base_InteractionOBJ_Grab
         if (isThrowing)
         {
             // TODO : 오브젝트 폭발이나 데미지 입히는 기능 구현
-            Destroy(this.gameObject, 3f);
+
+            Destroy(this.gameObject, 1.5f);
         }
         else return;
     }

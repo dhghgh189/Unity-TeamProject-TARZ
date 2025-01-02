@@ -89,8 +89,11 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
         _autoLockOn.action?.Invoke();
         _animator.SetTrigger("Die");
 
-        GameObject gear = Instantiate(_gear, transform.position, transform.rotation);
+        GameObject gear = Instantiate(_gear, transform.position + Vector3.up*0.5f, transform.rotation);
         gear.GetComponent<DropGear>().SetDropItem(Part.신발, 1, true, true);
+
+        GameObject chip = Instantiate(_chip, transform.position + Vector3.up * 0.5f + Vector3.forward * 0.5f, transform.rotation);
+        chip.GetComponent<DropChip>().SetDropChip(10 * (1 + (player.Stat.GetAbility(AdditionAbility.ChipGetAmount) * 0.01f)), true);
 
         if (ReturnPool != null)
         {

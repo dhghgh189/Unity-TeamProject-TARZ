@@ -16,5 +16,5 @@ public static class Define
 
     public const int USEKEY_MAXCOUNT = 4;
 
-    public enum SceneType { Title, Lobby, Game, Chapter1 }
+    public enum SceneType { Title, Lobby, Chapter1 }
 }

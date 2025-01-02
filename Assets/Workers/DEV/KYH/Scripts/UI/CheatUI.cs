@@ -11,7 +11,7 @@ public class CheatUI : MonoBehaviour
     // Zenject로 주입한 클래스
     [Inject] StatModel model;
     [Inject] Inventory inventory;
-    [Inject] ChangeInput inputSystem;
+    //[Inject] ChangeInput inputSystem;
 
     [SerializeField] PlayerController player;
     [SerializeField] SkillSpecDatabase skillData;
@@ -48,8 +48,8 @@ public class CheatUI : MonoBehaviour
 
     private void OnEnable()
     {
-        inputSystem.firstInput = mujeokToggle;
-        inputSystem.firstInput.Select();
+        //inputSystem.firstInput = mujeokToggle;
+        //inputSystem.firstInput.Select();
     }
 
     /// <summary>

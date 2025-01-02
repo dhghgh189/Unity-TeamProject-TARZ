@@ -4,7 +4,7 @@ using Zenject;
 public class DropChip : MonoBehaviour
 {
     [Inject] StatModel statModel;
-    [SerializeField] int amount;
+    [SerializeField] float amount;
     [SerializeField] bool blackChip;
     [SerializeField] Material ChipMaterial;
     [SerializeField] Material blackChipMaterial;
@@ -28,7 +28,7 @@ public class DropChip : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public void SetDropChip(int amount, bool blackChip)
+    public void SetDropChip(float amount, bool blackChip)
     {
         this.amount = amount;
         this.blackChip = blackChip;

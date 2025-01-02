@@ -44,12 +44,12 @@ public class SettingSceneUI : MonoBehaviour
         inputManager.firstInput.Select();               // 첫 Input으로 지정한 오브젝트를 선택 처리
     }
 
-    private void OnEnable()
-    {
-        activeCPanel = nonSelectPanel;                  // 현재 활성화 중인 패널을 nonSelectPanel로 설정
-        inputManager.firstInput = gameplayButton;       // 설정 패널의 UI 네비게이션 첫 Input을 gameplayButton로 설정
-        inputManager.firstInput.Select();               // 첫 Input으로 지정한 오브젝트를 선택 처리
-    }
+    //private void OnEnable()
+    //{
+    //    activeCPanel = nonSelectPanel;                  // 현재 활성화 중인 패널을 nonSelectPanel로 설정
+    //    inputManager.firstInput = gameplayButton;       // 설정 패널의 UI 네비게이션 첫 Input을 gameplayButton로 설정
+    //    inputManager.firstInput.Select();               // 첫 Input으로 지정한 오브젝트를 선택 처리
+    //}
 
     private void Update()
     {

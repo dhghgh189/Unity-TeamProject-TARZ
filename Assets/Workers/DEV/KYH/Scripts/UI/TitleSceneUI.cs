@@ -49,8 +49,11 @@ public class TitleSceneUI : MonoBehaviour
 
     private void OnEnable()
     {
-        //inputManager.firstInput = newGameButton;  // 타이틀 패널의 UI 네비게이션 첫 Input을 newGameButton로 설정
-        //inputManager.firstInput.Select();         // 첫 Input으로 지정한 오브젝트를 선택 처리
+        if (!LogoPanel.gameObject.activeSelf)
+        {
+            inputManager.firstInput = newGameButton;  // 타이틀 패널의 UI 네비게이션 첫 Input을 newGameButton로 설정
+            inputManager.firstInput.Select();         // 첫 Input으로 지정한 오브젝트를 선택 처리
+        }
     }
 
     private void Update()

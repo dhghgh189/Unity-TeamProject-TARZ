@@ -8,7 +8,7 @@ public class Interactioner : MonoBehaviour
 {
     public bool IsGrabing = false;
     [SerializeField] public Transform GrabPos;
-    [SerializeField] public Example_Interaction_GrabScript exampleScript;
+    [SerializeField] public SpecialInteraction_Script SpecialOBJ;
 
     private int interactionLayer;
     private int interactionGrabLayer;
@@ -34,7 +34,7 @@ public class Interactioner : MonoBehaviour
     {
         if (playerController.PInput.TryInteraction)
         {
-            if (exampleScript != null)
+            if (SpecialOBJ != null)
             {
                 Grab_KickDown();
                 return;
@@ -47,7 +47,7 @@ public class Interactioner : MonoBehaviour
                 (target.transform.position.x, transform.parent.position.y, target.transform.position.z) - transform.parent.position;
             if (RoutineCheck == null) RoutineCheck = StartCoroutine(RotateTransform(transform.parent, dir));
 
-            if (exampleScript != null)
+            if (SpecialOBJ != null)
             {
                 Grab_KickDown();
                 return;
@@ -75,8 +75,10 @@ public class Interactioner : MonoBehaviour
 
         if (targets.First().layer == interactionGrabLayer)
         {
-            exampleScript = targets.First().GetComponent<Example_Interaction_GrabScript>();
-            exampleScript.playerController = playerController;
+            if (SpecialOBJ.trigger.IsPlayerIn == false) return null;
+
+            SpecialOBJ = targets.First().GetComponent<SpecialInteraction_Script>();
+            SpecialOBJ.playerController = playerController;
         }
 
         return targets.First();
@@ -137,14 +139,17 @@ public class Interactioner : MonoBehaviour
 
     IEnumerator CheckGrabing()
     {
+        float curSpeed = playerController.Stat.MoveSpeed;
+        playerController.Stat.MoveSpeed = playerController.Stat.MoveSpeed / 3f;
+
         while (IsGrabing)
         {
-            //playerController.Stat.MoveSpeed = playerController.Stat.MoveSpeed / 3f;
             if (target == null || !target.activeSelf) IsGrabing = false;
             yield return null;
         }
 
         Debug.Log("코루틴 끝!");
+        playerController.Stat.MoveSpeed = curSpeed;
         this.transform.DetachChildren();
         GrabEnding();
         yield break;
@@ -152,11 +157,11 @@ public class Interactioner : MonoBehaviour
 
     void GrabEnding()
     {
-        exampleScript.AddComponent<Rigidbody>();
-        exampleScript.isThrowing = true;
-        exampleScript.col.enabled = true;
-        exampleScript.playerController = null;
-        exampleScript = null;
+        SpecialOBJ.AddComponent<Rigidbody>();
+        SpecialOBJ.isThrowing = true;
+        SpecialOBJ.col.enabled = true;
+        SpecialOBJ.playerController = null;
+        SpecialOBJ = null;
     }
 
     private void OnDrawGizmos()
@@ -167,14 +172,5 @@ public class Interactioner : MonoBehaviour
         Gizmos.color = Color.black;
         Gizmos.DrawLine(transform.position, transform.position + rightDir * range);
         Gizmos.DrawLine(transform.position, transform.position + leftDir * range);
-    }
-
-    private void OnDisable()
-    {
-        if (exampleScript != null)
-        {
-            this.transform.DetachChildren();
-            GrabEnding();
-        }
     }
 }

@@ -1,16 +1,21 @@
 using UnityEngine;
 
-public class Example_Interaction_GrabScript : MonoBehaviour, Base_InteractionOBJ_Grab
+public class SpecialInteraction_Script : MonoBehaviour, Base_InteractionOBJ_Grab
 {
     public PlayerController playerController { get; set; }
     public Collider col;
     public bool isThrowing = false;
+    public Child_SpecialTrigger trigger;
 
 
-    void Start() => Init();
+    void Awake() => Init();
 
     void Init()
     {
+        trigger = new GameObject("UI_trigger").AddComponent<Child_SpecialTrigger>();
+        trigger.transform.position = this.transform.position;
+        trigger.transform.parent = this.transform;
+
         col = GetComponent<Collider>();
     }
 
@@ -40,6 +45,11 @@ public class Example_Interaction_GrabScript : MonoBehaviour, Base_InteractionOBJ
             Destroy(this.gameObject);
         }
         else return;
+    }
+
+    void OnDisable()
+    {
+        Destroy(this.gameObject);
     }
 }
 

@@ -1,14 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Interactioner : MonoBehaviour
 {
     public bool IsGrabing = false;
+    [SerializeField] public Transform GrabPos;
+    [SerializeField] public Example_Interaction_GrabScript exampleScript;
+
     private int interactionLayer;
     private int interactionGrabLayer;
-    [SerializeField] private Example_Interaction_GrabScript exampleScript;
     private Coroutine RoutineCheck;
     private List<GameObject> interactionOBJs = new();
 
@@ -26,7 +29,7 @@ public class Interactioner : MonoBehaviour
         interactionLayer = LayerMask.NameToLayer("Is_Interaction");
         interactionGrabLayer = LayerMask.NameToLayer("Is_Interaction_Grab");
     }
-    // 해결해야 하는 부분 : 상호작용 후 오브젝트가 삭제되었을 경우, 다음 상호작용 실행에 문제가 없게끔 구성
+
     private void Update()
     {
         if (playerController.PInput.TryInteraction)
@@ -52,6 +55,11 @@ public class Interactioner : MonoBehaviour
 
             target.GetComponent<Base_InteractionOBJ>().Activate();
             target = null;
+        }
+
+        if (IsGrabing && playerController.PInput.TryThrow)
+        {
+            IsGrabing = false;
         }
     }
 
@@ -106,7 +114,7 @@ public class Interactioner : MonoBehaviour
 
         if (IsGrabing != true)
         {
-            exampleScript = null;
+            GrabEnding();
             target = null;
         }
     }
@@ -137,9 +145,18 @@ public class Interactioner : MonoBehaviour
         }
 
         Debug.Log("코루틴 끝!");
+        this.transform.DetachChildren();
+        GrabEnding();
+        yield break;
+    }
+
+    void GrabEnding()
+    {
+        exampleScript.AddComponent<Rigidbody>();
+        exampleScript.isThrowing = true;
+        exampleScript.col.enabled = true;
         exampleScript.playerController = null;
         exampleScript = null;
-        yield break;
     }
 
     private void OnDrawGizmos()
@@ -150,5 +167,14 @@ public class Interactioner : MonoBehaviour
         Gizmos.color = Color.black;
         Gizmos.DrawLine(transform.position, transform.position + rightDir * range);
         Gizmos.DrawLine(transform.position, transform.position + leftDir * range);
+    }
+
+    private void OnDisable()
+    {
+        if (exampleScript != null)
+        {
+            this.transform.DetachChildren();
+            GrabEnding();
+        }
     }
 }

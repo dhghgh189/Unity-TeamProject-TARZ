@@ -2,8 +2,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
-using Zenject;
-using Zenject.SpaceFighter;
 
 public class PlayerAttack : MonoBehaviour
 {
@@ -249,7 +247,9 @@ public class PlayerAttack : MonoBehaviour
             AddThrowEffects(tobj);
 
             // 수치 저장
-            damage = ThrowAttackInfo[ThrowCount].Damage;
+            if (player.IsGrabingInput) damage = 20f; // 추후 스텟에서 설정 가능하게 변경 예정
+            else damage = ThrowAttackInfo[ThrowCount].Damage;
+
             throwForce = ThrowAttackInfo[ThrowCount].ThrowForce;
         }
         else

@@ -1,11 +1,10 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
 /// 마나 3스킬의 필요 데이터
 /// </summary>
-public enum ManaMegaFistDataType { FistDamage, FistRange, FistSpeed, FistTime, FistAlpha}
+public enum ManaMegaFistDataType { FistDamage, FistWidth, FistHeight, FistLength, FistSpeed, FistTime, FistAlpha }
 /// <summary>
 /// 마나 3스킬 : 거대 주먹
 /// </summary>
@@ -23,7 +22,11 @@ public class ManaMegaFistSkill : IManaSkill
         Acts = new LinkedList<BaseManaState>();
         Acts.AddLast(new ManaMegaFist_1(owner, this));
 
+#if UNITY_EDITOR
         tmp = Resources.Load("Unmanaged/Gate") as GameObject;
+#else
+        tmp = Resources.Load("Managed/ManaSkill/Gate"") as GameObject;
+#endif
     }
 
     public void SetInit(ManaSkillHandler manaSkillHandler)
@@ -37,7 +40,7 @@ public class ManaMegaFistSkill : IManaSkill
     /// 1번 동작 : 차원문 생성
     /// </summary>
     public class ManaMegaFist_1 : BaseManaState
-    { 
+    {
         private readonly ManaMegaFistSkill parent;
         private string animName = "ManaMegaFist_1";
 

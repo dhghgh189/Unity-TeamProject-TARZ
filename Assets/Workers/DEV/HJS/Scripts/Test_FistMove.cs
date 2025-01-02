@@ -67,7 +67,7 @@ public class Test_FistMove : MonoBehaviour
         while ((elapsedTime * fistSpeed) < fistTime)
         {
             transform.position = Vector3.Lerp(endPos, startPos, (elapsedTime * fistSpeed) / fistTime);
-            curFlow = Remap(Vector3.Magnitude(transform.position - endPos), 0f, length, -flow, flow);
+            curFlow =  Remap(Vector3.Magnitude(transform.position - startPos), length, 0f, -flow, flow);
             SetFlow("_flow", curFlow);
             elapsedTime += Time.deltaTime;
             yield return null;

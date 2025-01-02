@@ -17,6 +17,8 @@ public class CheatUI : MonoBehaviour
     [SerializeField] SkillSpecDatabase skillData;
     [SerializeField] GameObject dropGear;
     [SerializeField] Toggle mujeokToggle;
+    [SerializeField] GameObject cheatUIPanel;
+    [SerializeField] ChangeInput inputManager;
 
     // 각 치트 옵션을 설정할 Dropdown UI
     [Header("드롭다운")]
@@ -46,10 +48,13 @@ public class CheatUI : MonoBehaviour
         Init_skillDropdown();
     }
 
-    private void OnEnable()
+    private void Start()
     {
-        //inputSystem.firstInput = mujeokToggle;
-        //inputSystem.firstInput.Select();
+        if (cheatUIPanel.activeSelf)
+        {
+            inputManager.firstInput = mujeokToggle;
+            inputManager.firstInput.Select();
+        }
     }
 
     /// <summary>

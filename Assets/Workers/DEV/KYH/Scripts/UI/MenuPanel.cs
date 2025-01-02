@@ -24,17 +24,6 @@ public class MenuPanel : MonoBehaviour
     {
         // 메뉴 키 입력 시 메뉴 불러오기
         menuAction = InputSystem.actions.FindAction("Menu");
-
-        // 메뉴 패널 활성화 때 셀렉터블 UI 선택
-        inputManager.firstInput = selectButton;
-        inputManager.firstInput.Select();
-    }
-
-    private void OnEnable()
-    {
-        // 메뉴 패널 활성화 때 셀렉터블 UI 선택
-        inputManager.firstInput = selectButton;
-        inputManager.firstInput.Select();
     }
 
     private void Update()
@@ -57,6 +46,10 @@ public class MenuPanel : MonoBehaviour
                 isActive = true;
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
+
+                // 메뉴 패널 활성화 시 셀렉터블 UI 선택
+                inputManager.firstInput = selectButton;
+                inputManager.firstInput.Select();
             }
         }
     }

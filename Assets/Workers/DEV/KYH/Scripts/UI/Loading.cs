@@ -7,12 +7,21 @@ public class Loading : MonoBehaviour
 {
     Coroutine loadingRoutine;
 
+    /// <summary>
+    /// 로딩 과정 시작
+    /// </summary>
+    /// <param name="sceneType"></param>
     public void StartLoading(Define.SceneType sceneType)
     {
         gameObject.SetActive(true);
         loadingRoutine = StartCoroutine(LoadingRoutine(sceneType));
     }
 
+    /// <summary>
+    /// 로딩 과정 코루틴
+    /// </summary>
+    /// <param name="sceneType"></param>
+    /// <returns></returns>
     IEnumerator LoadingRoutine(Define.SceneType sceneType)
     {
         int currentScene = SceneManager.GetActiveScene().buildIndex;

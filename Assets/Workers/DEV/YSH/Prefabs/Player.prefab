@@ -1045,6 +1045,7 @@ MonoBehaviour:
   activeMinimapToggle: {fileID: 8495024244064414524}
   languageDropdown: {fileID: 5517761725546113219}
   masterVolumeSlider: {fileID: 4466819603563667143}
+  keyboardButton: {fileID: 0}
   minimapActiveToggle: {fileID: 8495024244064414524}
 --- !u!1 &737652755070835523
 GameObject:
@@ -1090,6 +1091,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de58ebf9b47123b4b9fc807961ab7cd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsGrabing: 0
+  exampleScript: {fileID: 0}
   playerController: {fileID: 0}
   target: {fileID: 0}
   range: 2
@@ -9041,7 +9044,6 @@ GameObject:
   - component: {fileID: 1610062816472905815}
   - component: {fileID: 6250954218026018274}
   - component: {fileID: 6816655094803703861}
-  - component: {fileID: 7132570303693772782}
   m_Layer: 16
   m_Name: PlayerMark
   m_TagString: Untagged
@@ -9114,29 +9116,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &7132570303693772782
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5835789146184975543}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!1 &5913231476567316875
 GameObject:
   m_ObjectHideFlags: 0
@@ -15116,6 +15095,7 @@ MonoBehaviour:
   ManaSkillHandler: {fileID: 1923758049850810125}
   SkillHandler: {fileID: 1544264633557032960}
   AblityAdapter: {fileID: 4023006331722013251}
+  interactioner: {fileID: 0}
 --- !u!114 &1669580319450074093
 MonoBehaviour:
   m_ObjectHideFlags: 0

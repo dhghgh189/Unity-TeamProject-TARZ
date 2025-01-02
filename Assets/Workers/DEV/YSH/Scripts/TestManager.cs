@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class TestManager : MonoBehaviour
 {
-    [SerializeField] PlayerController player;
+    [Inject]
+    private PlayerController player;
     [SerializeField] GameObject cheatPanel;
 
     bool isLocked;

@@ -71,7 +71,13 @@ public class Interactioner : MonoBehaviour
         }
     }
 
-
+    /// <summary>
+    /// 상호작용 수행 시 플레이어가 상호작용한 오브젝트를 향해 자연스럽게 회전하는 코루틴.
+    /// 실행되는 동안 플레이어는 다른 동작을 수행할 수 없다.
+    /// </summary>
+    /// <param name="player"></param>
+    /// <param name="target"></param>
+    /// <returns></returns>
     IEnumerator RotateTransform(Transform player, Vector3 target)
     {
         playerController.IsAnimStart = true;
@@ -195,6 +201,7 @@ public class Interactioner : MonoBehaviour
             if (target == null || !target.activeSelf) IsGrabing = false;
 
             // TODO : 포물선과 오버랩 스피어를 통한 범위 확인
+            CheckLoad();
 
             yield return null;
         }
@@ -207,6 +214,7 @@ public class Interactioner : MonoBehaviour
         GrabEnding();
 
         // TODO : 오브젝트 던짐!
+        ThrowSpeOBJ();
 
         yield break;
     }
@@ -231,7 +239,7 @@ public class Interactioner : MonoBehaviour
     /// </summary>
     void CheckLoad()
     {
-
+        Debug.Log("거리 확인중...");
     }
 
 
@@ -240,7 +248,7 @@ public class Interactioner : MonoBehaviour
     /// </summary>
     void ThrowSpeOBJ()
     {
-
+        Debug.Log("던짐!");
     }
 
     //========================================================================

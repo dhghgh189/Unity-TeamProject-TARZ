@@ -31,7 +31,7 @@ public class MSkill_JumpAttack : Action
 
     public override TaskStatus OnUpdate()
     {
-        if (_distance >= 40 && _monsterSkillManager.JumpAttackSkill.CanUseSkill == true && _monsterSkillManager.jumpAttackRoutine == null)
+        if (_distance >= 15 && _monsterSkillManager.JumpAttackSkill.CanUseSkill == true && _monsterSkillManager.jumpAttackRoutine == null)
         {
             _pooledObject.RotateToPlayer();
             _monsterSkillManager.jumpAttackRoutine = StartCoroutine( _monsterSkillManager.JumpAttackRoutine());

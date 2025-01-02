@@ -1,6 +1,5 @@
 using BehaviorDesigner.Runtime.Tasks;
 using UnityEngine;
-using Zenject;
 
 public class CondCanMove : Conditional
 {
@@ -65,7 +64,7 @@ public class CondCanMove : Conditional
         return false;
     }
 
-
+#if UNITY_EDITOR
     // 기즈모 확인
     public override void OnDrawGizmos()
     {
@@ -80,6 +79,7 @@ public class CondCanMove : Conditional
 
         UnityEditor.Handles.color = oldColor;
     }
+#endif
     #endregion
 }
 

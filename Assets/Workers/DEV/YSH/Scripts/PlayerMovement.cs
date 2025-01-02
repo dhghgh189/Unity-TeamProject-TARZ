@@ -1,7 +1,3 @@
-using BehaviorDesigner.Runtime.Tasks.Unity.UnityCharacterController;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour

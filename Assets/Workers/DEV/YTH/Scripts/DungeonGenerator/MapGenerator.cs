@@ -4,7 +4,6 @@ using Zenject;
 
 public class MapGenerator : MonoBehaviour
 {
-    [SerializeField] int roomCount;
     [SerializeField] GameObject roomPrefab;
     [SerializeField] GameObject clearRoomPrefab;
     [SerializeField] GameObject storePrefab;
@@ -33,6 +32,7 @@ public class MapGenerator : MonoBehaviour
     private Vector3 createPos;
 
     private int random;
+    private int roomCount;
 
     [Inject] PlayerController playerController;
     [Inject] SaveData saveData;

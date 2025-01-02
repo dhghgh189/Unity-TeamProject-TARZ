@@ -26,10 +26,10 @@ public class MonsterFactoryInstaller : MonoInstaller
         Container.BindFactory<PooledObject, MonsterFactory>().WithId("JackTheRipper").FromComponentInNewPrefab(jackTheRipper).UnderTransformGroup("MonsterFactory/JackTheRipperFactory");
         Container.BindFactory<PooledObject, MonsterFactory>().WithId("Range").FromComponentInNewPrefab(range).UnderTransformGroup("MonsterFactory/RangeFactory");
         Container.BindFactory<PooledObject, MonsterFactory>().WithId("ReviveZombie").FromComponentInNewPrefab(reviveZombie).UnderTransformGroup("MonsterFactory/ReviveZombieFactory");
-        Container.BindFactory<PooledObject, MonsterFactory>().WithId("EliteA").FromComponentInNewPrefab(eliteA).UnderTransformGroup("MonsterFactory/EliteA");
-        Container.BindFactory<PooledObject, MonsterFactory>().WithId("EliteB").FromComponentInNewPrefab(eliteB).UnderTransformGroup("MonsterFactory/EliteB");
-        Container.BindFactory<PooledObject, MonsterFactory>().WithId("DungeonEliteA").FromComponentInNewPrefab(dungeonEliteA).UnderTransformGroup("MonsterFactory/DungeonEliteA");
-        Container.BindFactory<PooledObject, MonsterFactory>().WithId("DungeonEliteB").FromComponentInNewPrefab(dungeonEliteB).UnderTransformGroup("MonsterFactory/DungeonEliteB");
+        Container.BindFactory<PooledObject, MonsterFactory>().WithId("EliteA").FromComponentInNewPrefab(eliteA).UnderTransformGroup("MonsterFactory/EliteAFactory");
+        Container.BindFactory<PooledObject, MonsterFactory>().WithId("EliteB").FromComponentInNewPrefab(eliteB).UnderTransformGroup("MonsterFactory/EliteBFactory");
+        Container.BindFactory<PooledObject, MonsterFactory>().WithId("DungeonEliteA").FromComponentInNewPrefab(dungeonEliteA).UnderTransformGroup("MonsterFactory/DungeonEliteAFactory");
+        Container.BindFactory<PooledObject, MonsterFactory>().WithId("DungeonEliteB").FromComponentInNewPrefab(dungeonEliteB).UnderTransformGroup("MonsterFactory/DungeonEliteBFactory");
 
         Container.Bind().FromInstance(Container);
     }

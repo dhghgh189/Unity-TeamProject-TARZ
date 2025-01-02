@@ -65,7 +65,7 @@ public class Interactioner : MonoBehaviour
         }
 
         // 특수 오브젝트를 집은 상태에서 기본 공격을 수행할 경우, 물체를 던질 수 있다.
-        if (IsGrabing && playerController.PInput.TryThrow)
+        if (IsGrabing && playerController.PInput.Input.actions["Throw"].WasPressedThisFrame())
         {
             IsGrabing = false;
         }
@@ -204,6 +204,7 @@ public class Interactioner : MonoBehaviour
             if (target == null || !target.activeSelf) IsGrabing = false;
 
             // TODO : 포물선과 오버랩 스피어를 통한 범위 확인
+
             CheckLoad();
 
             yield return null;
@@ -251,7 +252,10 @@ public class Interactioner : MonoBehaviour
     void ThrowSpeOBJ(Rigidbody rigid)
     {
         Debug.Log("던짐!");
+
+        // 임시적 변수. 추후 던지는 힘을 늘리는 효과가 생길 경우 수정할 필요성이 있다.
         float throwForce = 10f;
+        // 다른 쓰레기 오브젝트가 저장된 상태로 던질경우, 중첩되어 두 기능이 모두 사용되고 있음
         rigid.AddForce((transform.forward + (transform.up * 0.3f)) * throwForce, ForceMode.Impulse);
     }
 

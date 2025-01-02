@@ -81,12 +81,12 @@ public class PlayerInputHandler : MonoBehaviour
         move = input.actions["Move"].ReadValue<Vector2>();
         InputDir = new Vector3(move.x, 0, move.y);
         InputLook = input.actions["Look"].ReadValue<Vector2>();
-        TryThrow = input.actions["Throw"].WasPressedThisFrame();
+        TryJump = input.actions["Jump"].WasPressedThisFrame();
         TryInteraction = input.actions["Interact"].WasPressedThisFrame();
 
         for (int i = TryKeyDown.Count - 1; i >= 0; i--)
         {
-            if (TryKeyDown[i] == TryThrow) continue;
+            if (TryKeyDown[i] == TryJump) continue;
             if (TryKeyDown[i] == TryInteraction) continue;
             TryKeyDown[i] = false;
         }

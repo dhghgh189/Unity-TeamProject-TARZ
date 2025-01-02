@@ -11930,12 +11930,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stageInfos:
-  - BossName: 00000000
+  - BossName: 0a0000000b000000
+    RoomCount: 7
+  - BossName: 0500000003000000
     RoomCount: 10
-  - BossName: 0000000000000000
-    RoomCount: 3
-  - BossName: 01000000
-    RoomCount: 5
+  - BossName: 02000000
+    RoomCount: 13
 --- !u!4 &1918820420
 Transform:
   m_ObjectHideFlags: 0
@@ -13916,6 +13916,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4867939594812695208, guid: 33ae2d0021d267348bf9e910fada698d,
+        type: 3}
+      propertyPath: range
+      value: 
+      objectReference: {fileID: 7971317727230852696, guid: f8db29299a351a8439dc176b683878d6,
+        type: 3}
+    - target: {fileID: 4867939594812695208, guid: 33ae2d0021d267348bf9e910fada698d,
+        type: 3}
+      propertyPath: reviveZombie
+      value: 
+      objectReference: {fileID: 4544433378228837646, guid: 5e149e32842455040a864b0595b330bf,
+        type: 3}
     - target: {fileID: 5475535020914699504, guid: 33ae2d0021d267348bf9e910fada698d,
         type: 3}
       propertyPath: m_LocalPosition.x

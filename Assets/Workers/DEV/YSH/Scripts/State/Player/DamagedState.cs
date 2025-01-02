@@ -1,4 +1,5 @@
 using UnityEngine;
+using static UnityEngine.UI.GridLayoutGroup;
 
 public class DamagedState : BaseState<PlayerController>
 {
@@ -11,7 +12,10 @@ public class DamagedState : BaseState<PlayerController>
     public override void OnEnter()
     {
         owner.Anim.CrossFade(Define.HASH_ANIM_DAMAGED, 0.1f);
+
         owner.delay = owner.GetCurrentAnimTime();
+        owner.delay *= 0.5f;
+
         owner.IsAnimStart = true;
     }
 

@@ -8,6 +8,7 @@ using Zenject;
 
 public class CheatUI : MonoBehaviour
 {
+    // Zenject로 주입한 클래스
     [Inject] StatModel model;
     [Inject] Inventory inventory;
 
@@ -15,6 +16,7 @@ public class CheatUI : MonoBehaviour
     [SerializeField] SkillSpecDatabase skillData;
     [SerializeField] GameObject dropGear;
 
+    // 각 치트 옵션을 설정할 Dropdown UI
     [Header("드롭다운")]
     [SerializeField] TMP_Dropdown statDropdown;
     [SerializeField] TMP_Dropdown partsDropdown;
@@ -24,22 +26,26 @@ public class CheatUI : MonoBehaviour
     [SerializeField] TMP_Dropdown skillDropdown;
     [SerializeField] TMP_Dropdown levelDropdown;
 
+    // 각 치트 옵션의 수치를 설정할 InputField UI
     [Header("인풋필드")]
     [SerializeField] TMP_InputField statInputField;
     [SerializeField] TMP_InputField ability01InputField;
     [SerializeField] TMP_InputField ability02InputField;
 
-
+    // Dropdown 리스트
     private List<string> dropdownList;
 
     private void Awake()
     {
+        // 모든 드롭다운을 초기화하는 과정
         Init_StatDropdown();
         Init_PartsDropdown();
         Init_AbilityDropdown();
         Init_skillDropdown();
     }
-
+    /// <summary>
+    /// 스탯 치트 드롭다운 초기화
+    /// </summary>
     private void Init_StatDropdown()
     {
         // 현재 dropdown에 있는 모든 옵션을 제거
@@ -68,6 +74,9 @@ public class CheatUI : MonoBehaviour
         statDropdown.value = 0;
     }
 
+    /// <summary>
+    /// 아이템 파츠 치트 드롭다운 초기화
+    /// </summary>
     private void Init_PartsDropdown()
     {
         // 현재 dropdown에 있는 모든 옵션을 제거
@@ -96,6 +105,9 @@ public class CheatUI : MonoBehaviour
         partsDropdown.value = 0;
     }
 
+    /// <summary>
+    /// 능력치 치트 드롭다운 초기화
+    /// </summary>
     private void Init_AbilityDropdown()
     {
         // 현재 dropdown에 있는 모든 옵션을 제거
@@ -127,6 +139,9 @@ public class CheatUI : MonoBehaviour
         ability02Dropdown.value = 0;
     }
 
+    /// <summary>
+    /// 스킬 치트 드롭다운 초기화
+    /// </summary>
     private void Init_skillDropdown()
     {
         // 현재 dropdown에 있는 모든 옵션을 제거
@@ -155,18 +170,28 @@ public class CheatUI : MonoBehaviour
         skillDropdown.value = 0;
     }
 
+    /// <summary>
+    /// 무적 상태 설정 치트
+    /// </summary>
+    /// <param name="isOn"></param>
     public void MujeokMode(bool isOn)
     {
         Debug.Log($"무적 상태 : {isOn}");
         CheatManager.isMujeok = isOn;
     }
 
+    /// <summary>
+    /// 칩 대량 제공 치트
+    /// </summary>
     public void ChipPlease()
     {
         model.Chip += 1000000f;
         model.BlackChip += 1000000f;
     }
 
+    /// <summary>
+    /// 스탯 수치 설정 치트
+    /// </summary>
     public void SetStat()
     {
         switch ((CheatManager.StatType)statDropdown.value)
@@ -231,6 +256,9 @@ public class CheatUI : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 원하는 아이템 생성 치트
+    /// </summary>
     public void CreateGear()
     {
         Vector3 randomPos = player.transform.position + Random.insideUnitSphere * 5f;
@@ -239,6 +267,9 @@ public class CheatUI : MonoBehaviour
             .GetComponent<DropGear>().SetDropItem(Part.신발, 1, true, true);
     }
 
+    /// <summary>
+    /// 원하는 아이템 획득 치트
+    /// </summary>
     public void GetGear() 
     {
         Gear gear = ScriptableObject.CreateInstance<Gear>();
@@ -265,23 +296,36 @@ public class CheatUI : MonoBehaviour
         inventory.GetGear(gear);
     }
 
+    /// <summary>
+    /// 체력 회복 치트
+    /// </summary>
     public void Heal()
     {
         model.CurrentHp = model.MaxHp;
     }
 
+    /// <summary>
+    /// 마나 무제한 치트
+    /// </summary>
+    /// <param name="isOn"></param>
     public void ManaInfinite(bool isOn)
     {
         Debug.Log($"마나 무한 : {isOn}");
         CheatManager.isManaInfinite = isOn;
     }
 
+    /// <summary>
+    /// 블루칩 스킬 설정 치트
+    /// </summary>
     public void RandomSkill()
     {
         BaseSkillSO[] skill = skillData.ShowSkillArray();
         player.SkillHandler.AddSkill(skill[0].Name);
     }
 
+    /// <summary>
+    /// 블루칩 스킬 획득 치트
+    /// </summary>
     public void GetSkill()
     {
         BaseSkillSO skill = Instantiate(skillData.skillList[skillDropdown.value]);

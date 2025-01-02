@@ -55,6 +55,7 @@ public class TitleSceneUI : MonoBehaviour
 
     private void Update()
     {
+        // 아무 키 입력 시 로고 패널을 Fade-Out으로 비활성화 처리
         if (Input.anyKeyDown && LogoPanel.gameObject.activeSelf)
         {
             anim.Play(fadeOutHash);

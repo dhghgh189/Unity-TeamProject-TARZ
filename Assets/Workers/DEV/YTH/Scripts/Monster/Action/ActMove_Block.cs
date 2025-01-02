@@ -64,7 +64,7 @@ public class ActMove_Block : Action
 
         else if (_condCanMove.IsPlayerWithinSight(_player.gameObject))
         {
-            _agent.SetDestination(_lastPlayerTransform.position);
+            //_agent.SetDestination(_lastPlayerTransform.position);
             return TaskStatus.Failure;
         }
         else

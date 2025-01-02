@@ -13,10 +13,13 @@ public class MSkill_Mine : Action
 
     [SerializeField] Transform _muzzlePoint;
 
+    private Animator _animator;
+
     public override void OnAwake()
     {
         _monsterSkillManager = GetComponent<MonsterSkillManager>();
         _pooledObject = GetComponent<PooledObject>();
+        _animator = GetComponent<Animator>();
     }
 
     public override void OnStart()
@@ -32,6 +35,7 @@ public class MSkill_Mine : Action
             MonsterRotation();
             Debug.Log("mine");
             _monsterSkillManager.mineRoutine = StartCoroutine(_monsterSkillManager.MineRoutine());
+            _animator.SetTrigger("TakeMine");
             return TaskStatus.Success;
         }
         else

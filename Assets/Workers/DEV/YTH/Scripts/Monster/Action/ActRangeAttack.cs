@@ -17,6 +17,8 @@ public class ActRangeAttack : Action
 
     [SerializeField] SharedTransform _muzzlePoint;
 
+ 
+
     private float _distance;
 
     public override void OnAwake()
@@ -38,6 +40,7 @@ public class ActRangeAttack : Action
         {
             MonsterRotation();
             throwRoutine = StartCoroutine(ThrowRoutine());
+            _animator.SetTrigger("Attack");
             return TaskStatus.Success;
         }
         else
@@ -50,16 +53,11 @@ public class ActRangeAttack : Action
     Coroutine throwRoutine;
     IEnumerator ThrowRoutine()
     {
-        ThrowAttack();
-        //_animator.SetTrigger("Throw");
         yield return new WaitForSeconds(_monsterData.RangeAttackSpeed);
         throwRoutine = null;
     }
 
-    public void ThrowAttack()
-    {
-        GameObject projectile = Object.Instantiate(_projectilePrefab.Value, _muzzlePoint.Value.position, _muzzlePoint.Value.rotation);
-    }
+    
     #endregion
 
     public void MonsterRotation()

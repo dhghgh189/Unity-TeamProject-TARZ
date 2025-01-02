@@ -2,16 +2,18 @@ using UnityEngine;
 
 public class Projectile_Mine : MonoBehaviour
 {
-     MonsterSkillManager _monsterSkillManager;
+    MonsterSkillManager _monsterSkillManager;
 
-    [SerializeField] GameObject _bombZombie;
+    [HideInInspector]
+    public GameObject _bombZombie;
 
-    [SerializeField] Rigidbody _rigidBody;
+    private Rigidbody _rigidBody;
 
     private LayerMask WhatIsTarget;
 
     private void Awake()
     {
+        _rigidBody = GetComponent<Rigidbody>();
         WhatIsTarget = (1 << LayerMask.NameToLayer("Player"));
     }
 
@@ -24,7 +26,7 @@ public class Projectile_Mine : MonoBehaviour
     {
         _rigidBody.angularVelocity = Vector3.zero;
         _rigidBody.velocity = Vector3.zero;
-       
+
         IDamagable damagableObj = collision.gameObject.GetComponent<IDamagable>();
         if (damagableObj != null)
         {
@@ -39,7 +41,7 @@ public class Projectile_Mine : MonoBehaviour
 
                 Vector3 targetDir = (destination - source).normalized;
                 float targetAngle = Vector3.Angle(transform.forward, targetDir);
-                if (targetAngle > _monsterSkillManager.BombSkill.Angle) 
+                if (targetAngle > _monsterSkillManager.BombSkill.Angle)
                     continue;
 
                 IDamagable damageble = collider.GetComponent<IDamagable>();

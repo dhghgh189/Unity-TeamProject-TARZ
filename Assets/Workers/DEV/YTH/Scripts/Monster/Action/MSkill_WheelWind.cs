@@ -6,6 +6,8 @@ public class MSkill_WheelWind : Action
 {
     private MonsterSkillManager _monsterSkillManager;
 
+    private Animator _animator;
+
     private PooledObject _pooledObject;
 
     private MonsterData _monsterData;
@@ -21,6 +23,7 @@ public class MSkill_WheelWind : Action
         _monsterSkillManager = GetComponent<MonsterSkillManager>();
         _pooledObject = GetComponent<PooledObject>();
         _monsterData = GetComponent<MonsterData>();
+        _animator = GetComponent<Animator>();
     }
 
     public override void OnStart()
@@ -35,6 +38,7 @@ public class MSkill_WheelWind : Action
         if (_monsterSkillManager.WheelWindSkill.CanUseSkill == true && _monsterData.CurHp <= _monsterData.MaxHp / 2 && _distance <= 10 && _monsterSkillManager.wheelWindRoutine == null)
         {
             _monsterSkillManager.wheelWindRoutine = StartCoroutine(_monsterSkillManager.WheelWindRoutine());
+            _animator.SetTrigger("WheelWind");
             Debug.Log("wheelWind");
             return TaskStatus.Success;
         }

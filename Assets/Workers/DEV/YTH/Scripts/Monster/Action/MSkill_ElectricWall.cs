@@ -11,12 +11,15 @@ public class MSkill_ElectricWall : Action
 
     private PlayerController _player;
 
+    private Animator _animator;
+
     private float _distance;
 
     public override void OnAwake()
     {
         _monsterSkillManager = GetComponent<MonsterSkillManager>();
         _pooledObject = GetComponent<PooledObject>();
+        _animator = GetComponent<Animator>();
     }
 
     public override void OnStart()
@@ -31,6 +34,7 @@ public class MSkill_ElectricWall : Action
         {
             _pooledObject.RotateToPlayer();
             _monsterSkillManager.electricWallRoutine = StartCoroutine(_monsterSkillManager.ElectricWallRoutine());
+            _animator.SetTrigger("ElectricWall");
             Debug.Log("일렉트릭월");
             return TaskStatus.Success;
         }

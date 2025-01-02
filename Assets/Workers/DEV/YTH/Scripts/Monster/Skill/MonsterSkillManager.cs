@@ -47,6 +47,9 @@ public class MonsterSkillManager : MonoBehaviour
     #region Prefab
     [Header("Prefab")]
 
+    [Header("Range")]
+    [SerializeField] GameObject _projectile;
+
     [Header("Bomber")]
     [SerializeField] GameObject _bombPrefab;
 
@@ -90,12 +93,18 @@ public class MonsterSkillManager : MonoBehaviour
     private MonsterData _monsterData;
 
     private LayerMask WhatIsTarget;
+
+    private PooledObject _pooledObject;
+
+    private PlayerController _player;
     #endregion
 
     private void Awake()
     {
         _monsterData = GetComponent<MonsterData>();
         WhatIsTarget = (1 << LayerMask.NameToLayer("Player"));
+        _pooledObject = GetComponent<PooledObject>();
+        _animator = GetComponent<Animator>();
     }
 
     private void Start()
@@ -103,7 +112,7 @@ public class MonsterSkillManager : MonoBehaviour
         LoadSkill();
         SkillInit();
 
-        _animator = GetComponent<Animator>();
+        _player = _pooledObject.player;
     }
 
     public void LoadSkill()
@@ -147,7 +156,7 @@ public class MonsterSkillManager : MonoBehaviour
     public IEnumerator JumpAttackRoutine() // 보스의 도약해서 착지하여 범위 공격
     {
         _jumpAttack.CanUseSkill = false;
-        _animator.SetTrigger("JumpAttack");
+        /*_animator.SetTrigger("JumpAttack");*/
 
         if (jumpRoutine_jumpAttack == null)
         {
@@ -216,15 +225,14 @@ public class MonsterSkillManager : MonoBehaviour
     public Coroutine wheelWindRoutine;
     public IEnumerator WheelWindRoutine() // 가렌 E
     {
-        /*_animator.SetTrigger("WheelWind");*/
-
         WheelWindSkill.CanUseSkill = false;
 
         _wheelWindTrigger.SetActive(true);
 
-        Radiation jackRadiation = _wheelWindTrigger.GetComponent<Radiation>();
-      /*  jackRadiation.Interaval = WheelWindSkill.Interval;
-        jackRadiation.Damage = WheelWindSkill.Damage;*/
+        Radiation jackRadiation = _wheelWindTrigger.GetComponentInChildren<Radiation>();
+        jackRadiation.Interaval = WheelWindSkill.Interval;
+        jackRadiation.Damage = WheelWindSkill.Damage;
+
         yield return Util.GetDelay(WheelWindSkill.Duration);
         _wheelWindTrigger.SetActive(false);
 
@@ -243,6 +251,9 @@ public class MonsterSkillManager : MonoBehaviour
         BombSkill.CanUseSkill = false;
 
         GameObject bomb = Instantiate(_bombPrefab, _muzzlePoint.position, _muzzlePoint.rotation);
+
+         bomb.GetComponent<Projectile_Bomb>()._bombZombie = gameObject;
+
         Rigidbody bombRb = bomb.GetComponent<Rigidbody>();
         bombRb.AddForce((_muzzlePoint.forward + _muzzlePoint.up * 3) * BombSkill.ThrowForce, ForceMode.Impulse);
         yield return Util.GetDelay(BombSkill.CoolTime);    
@@ -260,6 +271,7 @@ public class MonsterSkillManager : MonoBehaviour
         MineSkill.CanUseSkill = false;
 
         GameObject mine = Instantiate(_minePrefab, _muzzlePoint.position, _muzzlePoint.rotation);
+        mine.GetComponent<Projectile_Mine>()._bombZombie = gameObject;
         Rigidbody mineRb = mine.GetComponent<Rigidbody>();
         mineRb.AddForce(_muzzlePoint.forward * MineSkill.ThrowForce, ForceMode.Impulse);
 
@@ -359,8 +371,8 @@ public class MonsterSkillManager : MonoBehaviour
     public IEnumerator ElectricWallRoutine()
     {
         ElectricWallSkill.CanUseSkill = false;
-        _animator.SetTrigger("ElectricWall");
-      
+/*        _animator.SetTrigger("ElectricWall");
+*/      
 
         _electricWallPosition = transform.position + transform.forward * 5f;
 
@@ -386,8 +398,8 @@ public class MonsterSkillManager : MonoBehaviour
     public IEnumerator ThunderRoutine()
     {
         ThunderSkill.CanUseSkill = false;
-        _animator.SetTrigger("Thunder");
-
+/*        _animator.SetTrigger("Thunder");
+*/
         for (int i = 0; i < 11; i++)
         {
             Vector3 randomPos = new Vector3(Random.Range(-30f, 30f), 0, Random.Range(-30f, 30f));
@@ -407,10 +419,9 @@ public class MonsterSkillManager : MonoBehaviour
 
     #region TrippleAttack
     public Coroutine trippleAttackRoutine;
-    public IEnumerator TrippleAttackRoutine() //   // TrippleAttackSkill 애니메이션 재생     //애니메이션에 공격 붙이기
+    public IEnumerator TrippleAttackRoutine() 
     {
         TrippleAttackSkill.CanUseSkill = false;
-         _animator.SetTrigger("TrippleAttack");
 
         yield return Util.GetDelay(TrippleAttackSkill.CoolTime);
         trippleAttackRoutine = null;
@@ -521,8 +532,10 @@ public class MonsterSkillManager : MonoBehaviour
     Coroutine jumpRoutine_frogJumpAttack;
     IEnumerator JumpRoutine_frogJumpAttack()
     {
+        float distance = Vector3.Distance(transform.position, _player.transform.position);
+
         _jumpStartPosition = transform.position;
-        _jumpDirection = transform.forward.normalized * FrogJumpAttackSkill.JumpDistance;
+        _jumpDirection = transform.forward.normalized * distance;
 
         while (_elapsedTime < FrogJumpAttackSkill.InAirTime)
         {
@@ -546,7 +559,7 @@ public class MonsterSkillManager : MonoBehaviour
     public void Revive()
     {
         ReviveSkill.CanUseSkill = false;
-        _animator.SetTrigger("Revive");
+        //_animator.SetTrigger("Revive");
 
         _reviveBefore.SetActive(false);
         _reviveAfter.SetActive(true);
@@ -577,6 +590,13 @@ public class MonsterSkillManager : MonoBehaviour
                 damageble.TakeDamage(_monsterData.Damage);
             }
         }
+    }
+    #endregion
+
+    #region RangeAttack
+    public void ThrowAttack()
+    {
+        GameObject projectile = Object.Instantiate(_projectile, _muzzlePoint.position, _muzzlePoint.rotation);
     }
     #endregion
 }

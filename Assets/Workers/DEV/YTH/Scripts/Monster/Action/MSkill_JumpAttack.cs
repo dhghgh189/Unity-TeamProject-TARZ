@@ -14,8 +14,11 @@ public class MSkill_JumpAttack : Action
 
     private float _distance;
 
+    private Animator _animator;
+
     public override void OnAwake()
     {
+        _animator = GetComponent<Animator>();
         _monsterSkillManager = GetComponent<MonsterSkillManager>();
         _pooledObject = GetComponent<PooledObject>();
     }
@@ -32,6 +35,7 @@ public class MSkill_JumpAttack : Action
         {
             _pooledObject.RotateToPlayer();
             _monsterSkillManager.jumpAttackRoutine = StartCoroutine( _monsterSkillManager.JumpAttackRoutine());
+            _animator.SetTrigger("JumpAttack");
             Debug.Log("점프어택");
             return TaskStatus.Success;
         }

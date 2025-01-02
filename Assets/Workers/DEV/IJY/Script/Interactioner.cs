@@ -114,6 +114,8 @@ public class Interactioner : MonoBehaviour
         if (targets.First().layer == interactionGrabLayer)
         {
             SpecialOBJ = targets.First().GetComponent<SpecialInteraction_Script>();
+
+            if (SpecialOBJ.trigger == null || !SpecialOBJ.trigger.gameObject.activeSelf) return null;
             if (SpecialOBJ.trigger.IsPlayerIn == false)
             {
                 SpecialOBJ = null;
@@ -171,6 +173,7 @@ public class Interactioner : MonoBehaviour
         if (IsGrabing != true)
         {
             GrabEnding();
+            SpecialOBJ = null;
             target = null;
         }
     }
@@ -214,8 +217,8 @@ public class Interactioner : MonoBehaviour
         GrabEnding();
 
         // TODO : 오브젝트 던짐!
-        ThrowSpeOBJ();
-
+        ThrowSpeOBJ(SpecialOBJ.GetComponent<Rigidbody>());
+        SpecialOBJ = null;
         yield break;
     }
 
@@ -230,7 +233,6 @@ public class Interactioner : MonoBehaviour
         SpecialOBJ.isThrowing = true;
         SpecialOBJ.col.enabled = true;
         SpecialOBJ.playerController = null;
-        SpecialOBJ = null;
     }
 
 
@@ -246,9 +248,11 @@ public class Interactioner : MonoBehaviour
     /// <summary>
     /// 특수 오브젝트가 던져졌을 때 실행되는 코드.
     /// </summary>
-    void ThrowSpeOBJ()
+    void ThrowSpeOBJ(Rigidbody rigid)
     {
         Debug.Log("던짐!");
+        float throwForce = 10f;
+        rigid.AddForce((transform.forward + (transform.up * 0.3f)) * throwForce, ForceMode.Impulse);
     }
 
     //========================================================================

@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Diagnostics.CodeAnalysis;
 using UnityEngine;
 
 /// <summary>
@@ -43,28 +42,16 @@ public class GuidedFuncion : MonoBehaviour, IEnable
                 // rigidbody를 움직이기
                 rb.MoveRotation(Quaternion.RotateTowards(transform.rotation, ballTargetRotation, 180f));
             }
-            finally 
+            finally
             {
                 CheckTarget();
             }
         }
     }
 
-    private void Update()
-    {
-       //  // 이게 타겟 설정
-       //  if (target == null)
-       //  {
-       //      if (CheckTarget())
-       //      {
-       //          coroutine = StartCoroutine(TraceRoutine());
-       //      }
-       //  }
-    }
-
     private IEnumerator CheckTargetRoutine()
     {
-        while(target == null)
+        while (target == null)
         {
             if (CheckTarget()) break;
             yield return null;
@@ -97,16 +84,8 @@ public class GuidedFuncion : MonoBehaviour, IEnable
         }
         else if (checkCoroutine is not null)
         {
-            StopCoroutine (checkCoroutine);
+            StopCoroutine(checkCoroutine);
             checkCoroutine = null;
-        }
-    }
-    private void OnDrawGizmos()
-    {
-        if (enabled == true)
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawSphere(transform.position, 3f);
         }
     }
 

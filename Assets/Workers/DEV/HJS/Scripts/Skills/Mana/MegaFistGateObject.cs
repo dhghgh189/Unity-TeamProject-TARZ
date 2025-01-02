@@ -17,12 +17,16 @@ public class MegaFistGateObject : MonoBehaviour
 
     private int fistStartAnimHash;              // 주먹이 나가는 애니메이션의 해쉬
     private int fistReturnAnimHash;             // 주먹이 돌아가는 애니메이션의 해쉬
+    private int fistMoveAnimHash;
+    private int fistBackAnimHash;
 
     private void Awake()
     {
         gateAnimator = GetComponent<Animator>();
         fistStartAnimHash = Animator.StringToHash("FistStartAnimation");
         fistReturnAnimHash = Animator.StringToHash("FistReturnAnimation");
+        fistMoveAnimHash = Animator.StringToHash("FistMoveAnimation");
+        fistBackAnimHash = Animator.StringToHash("FistBackAnimation");
     }
 
     private void Start()
@@ -39,7 +43,8 @@ public class MegaFistGateObject : MonoBehaviour
         gateAnimator.SetFloat("FistAttackSpeed", (fistAttackSpeed > 1) ? fistAttackSpeed : 1);
         yield return Util.GetDelay(1f);
         Debug.Log("시작!");
-        gateAnimator.CrossFade(fistStartAnimHash, 0.01f);
+        //gateAnimator.CrossFade(fistStartAnimHash, 0.01f);
+        gateAnimator.CrossFade(fistMoveAnimHash, 0.01f);
     }
 
     /// <summary>
@@ -55,9 +60,10 @@ public class MegaFistGateObject : MonoBehaviour
 
     private IEnumerator FistReturnRotine()
     {
+        //gateAnimator.SetFloat("FistAttackSpeed", -1f);
         yield return Util.GetDelay(fistReturnTime);
-        gateAnimator.CrossFade(fistReturnAnimHash, 0.01f);
-
+        gateAnimator.CrossFade(fistBackAnimHash, 0.01f);
+        //gateAnimator.CrossFade(fistReturnAnimHash, 0.01f);
     }
 
     public void OnEndAction()
@@ -71,12 +77,13 @@ public class MegaFistGateObject : MonoBehaviour
         // 데미지
         fist.Damage = data.GetData((int)ManaMegaFistDataType.FistDamage);
         // 공격 범위
-        transform.localScale = new Vector3(data.GetData((int)ManaMegaFistDataType.FistRange) * 2f, data.GetData((int)ManaMegaFistDataType.FistRange) * 2f, 0.07f);
+        transform.localScale = new Vector3(data.GetData((int)ManaMegaFistDataType.FistRange) * 2f, data.GetData((int)ManaMegaFistDataType.FistRange) * 2f, data.GetData((int)ManaMegaFistDataType.FistRange) * 0.07f * 2f);
         transform.position += Vector3.up * data.GetData((int)ManaMegaFistDataType.FistRange) * 0.5f;
         // 주먹 속도
         fistAttackSpeed = data.GetData((int)ManaMegaFistDataType.FistSpeed);
         // 주먹 시간
         fistReturnTime = data.GetData((int)ManaMegaFistDataType.FistTime);
-        // TODO : 투명도
+        // 투명도
+        fist.AlphaValue = data.GetData((int)ManaMegaFistDataType.FistAlpha) * 0.01f;
     }
 }

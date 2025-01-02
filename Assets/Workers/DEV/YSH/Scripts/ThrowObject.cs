@@ -9,7 +9,7 @@ public class ThrowObject : MonoBehaviour, IDrainable
 {
     [SerializeField] private LayerMask whatIsTarget;
 
-    [Inject] [HideInInspector] public AblityAdapter adapter;
+    [HideInInspector] public AblityAdapter adapter;
     [HideInInspector] public PlayerSkillHandler handler;
 
     [SerializeField] private bool isCollected;
@@ -31,6 +31,10 @@ public class ThrowObject : MonoBehaviour, IDrainable
         rigid = GetComponent<Rigidbody>();
         Upgrade = GetComponent<ThrowObjectUpgrade>();
         throwEffects = new List<IEffect>();
+    }
+    private void Start()
+    {
+        adapter = FindAnyObjectByType<AblityAdapter>(FindObjectsInactive.Include);
     }
 
     private void OnDisable()

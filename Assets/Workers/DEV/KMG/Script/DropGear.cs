@@ -3,7 +3,7 @@ using Zenject;
 
 public class DropGear : MonoBehaviour
 {
-    [Inject] Inventory inventory;
+    private Inventory inventory;
     [SerializeField] Part part;
     [SerializeField] int tier;
     private void Awake()

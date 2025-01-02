@@ -4,7 +4,7 @@ using UnityEngine.AI;
 using Zenject;
 public enum MonsterName
 {
-    Jake, Amber, Size
+    Jake, Amber, Arnold, Bomber, FrogZombie, JackTheRipper, Range, ReviveZombie, EliteA, EliteB, DungeonEliteA, DungeonEliteB, Size
 }
 
 public class ObjectPool : MonoBehaviour

@@ -11,6 +11,10 @@ public class MonsterFactoryInstaller : MonoInstaller
     [SerializeField] GameObject jackTheRipper;
     [SerializeField] GameObject range;
     [SerializeField] GameObject reviveZombie;
+    [SerializeField] GameObject eliteA;
+    [SerializeField] GameObject eliteB;
+    [SerializeField] GameObject dungeonEliteA;
+    [SerializeField] GameObject dungeonEliteB;
 
     public override void InstallBindings()
     {
@@ -22,6 +26,10 @@ public class MonsterFactoryInstaller : MonoInstaller
         Container.BindFactory<PooledObject, MonsterFactory>().WithId("JackTheRipper").FromComponentInNewPrefab(jackTheRipper).UnderTransformGroup("MonsterFactory/JackTheRipperFactory");
         Container.BindFactory<PooledObject, MonsterFactory>().WithId("Range").FromComponentInNewPrefab(range).UnderTransformGroup("MonsterFactory/RangeFactory");
         Container.BindFactory<PooledObject, MonsterFactory>().WithId("ReviveZombie").FromComponentInNewPrefab(reviveZombie).UnderTransformGroup("MonsterFactory/ReviveZombieFactory");
+        Container.BindFactory<PooledObject, MonsterFactory>().WithId("EliteA").FromComponentInNewPrefab(eliteA).UnderTransformGroup("MonsterFactory/EliteA");
+        Container.BindFactory<PooledObject, MonsterFactory>().WithId("EliteB").FromComponentInNewPrefab(eliteB).UnderTransformGroup("MonsterFactory/EliteB");
+        Container.BindFactory<PooledObject, MonsterFactory>().WithId("DungeonEliteA").FromComponentInNewPrefab(dungeonEliteA).UnderTransformGroup("MonsterFactory/DungeonEliteA");
+        Container.BindFactory<PooledObject, MonsterFactory>().WithId("DungeonEliteB").FromComponentInNewPrefab(dungeonEliteB).UnderTransformGroup("MonsterFactory/DungeonEliteB");
 
         Container.Bind().FromInstance(Container);
     }

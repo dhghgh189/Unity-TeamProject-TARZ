@@ -4305,79 +4305,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &836407671
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 836407674}
-  - component: {fileID: 836407673}
-  - component: {fileID: 836407672}
-  m_Layer: 0
-  m_Name: MonsterFactory
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &836407672
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 836407671}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a813d627c63a38342b322048fb03e8ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  jake: {fileID: 623807605200867391, guid: 4a839caa195178241bdf5a136def625b, type: 3}
-  amber: {fileID: 3632602514074780826, guid: c990824329ec4df47b25a43739973317, type: 3}
-  arnold: {fileID: 8942506606477700167, guid: 37305a29f7e1a5b408ce01591b44f1f8, type: 3}
-  bomber: {fileID: 1133426352577604729, guid: 001a192f20a62694f860bb51ffb3b7c3, type: 3}
-  frogZombie: {fileID: 1124082638942842974, guid: 967c75d39b272ce45bc0704b1ee68307,
-    type: 3}
-  jackTheRipper: {fileID: 9171533847178047461, guid: 61887e00daefdae4d8550f4a2a97d815,
-    type: 3}
-  range: {fileID: 364008909961081413, guid: 7409f86f5b22f3f4681834138e4d22b6, type: 3}
-  reviveZombie: {fileID: 5226637099986443634, guid: 5d8438364fee3484f8ab825afb7457f1,
-    type: 3}
---- !u!114 &836407673
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 836407671}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be540928a386e574fb0cf1ad01ba5df0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  poolTransforms:
-  - {fileID: 1908782547}
-  - {fileID: 867490013}
---- !u!4 &836407674
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 836407671}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1908782547}
-  - {fileID: 867490013}
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &842765321
 GameObject:
   m_ObjectHideFlags: 0
@@ -4728,37 +4655,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 863289786}
   m_CullTransparentMesh: 1
---- !u!1 &867490012
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 867490013}
-  m_Layer: 0
-  m_Name: AmberFactory
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &867490013
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 867490012}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 836407674}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &880360574
 GameObject:
   m_ObjectHideFlags: 0
@@ -11738,37 +11634,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1908450850}
   m_CullTransparentMesh: 1
---- !u!1 &1908782546
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1908782547}
-  m_Layer: 0
-  m_Name: JakeFactory
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1908782547
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1908782546}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 836407674}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1913172540
 GameObject:
   m_ObjectHideFlags: 0
@@ -11969,10 +11834,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stageInfos:
   - BossName: 00000000
-    RoomCount: 1
+    RoomCount: 2
   - BossName: 0000000000000000
     RoomCount: 3
-  - BossName: 
+  - BossName: 01000000
     RoomCount: 5
 --- !u!4 &1918820420
 Transform:
@@ -13718,7 +13583,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _monoInstallers.Array.data[1]
       value: 
-      objectReference: {fileID: 836407672}
+      objectReference: {fileID: 4475472168939986457}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13934,6 +13799,86 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2104339966}
   m_CullTransparentMesh: 1
+--- !u!114 &4475472168939986457 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4867939594812695208, guid: 33ae2d0021d267348bf9e910fada698d,
+    type: 3}
+  m_PrefabInstance: {fileID: 5157228490057587145}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a813d627c63a38342b322048fb03e8ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1001 &5157228490057587145
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5475535020914699504, guid: 33ae2d0021d267348bf9e910fada698d,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5475535020914699504, guid: 33ae2d0021d267348bf9e910fada698d,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5475535020914699504, guid: 33ae2d0021d267348bf9e910fada698d,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5475535020914699504, guid: 33ae2d0021d267348bf9e910fada698d,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5475535020914699504, guid: 33ae2d0021d267348bf9e910fada698d,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5475535020914699504, guid: 33ae2d0021d267348bf9e910fada698d,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5475535020914699504, guid: 33ae2d0021d267348bf9e910fada698d,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5475535020914699504, guid: 33ae2d0021d267348bf9e910fada698d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5475535020914699504, guid: 33ae2d0021d267348bf9e910fada698d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5475535020914699504, guid: 33ae2d0021d267348bf9e910fada698d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5866906235701717916, guid: 33ae2d0021d267348bf9e910fada698d,
+        type: 3}
+      propertyPath: m_Name
+      value: MonsterFactory
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 33ae2d0021d267348bf9e910fada698d, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -13941,7 +13886,7 @@ SceneRoots:
   - {fileID: 946894737}
   - {fileID: 1209105768}
   - {fileID: 1376320462}
-  - {fileID: 836407674}
+  - {fileID: 5157228490057587145}
   - {fileID: 1954373335}
   - {fileID: 2006904290}
   - {fileID: 1834352946}

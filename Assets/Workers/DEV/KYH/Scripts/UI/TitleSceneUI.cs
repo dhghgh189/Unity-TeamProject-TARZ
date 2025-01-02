@@ -15,7 +15,7 @@ public class TitleSceneUI : MonoBehaviour
 
     [Header("<color=orange>Load Game</color>")]
     [SerializeField] private GameObject loadGamePanel;          // 저장된 게임 불러오기 패널
-    [SerializeField] private LoadSceneUI loadScene;             // 저장된 게임 불러오기 패널 클래스
+    //[SerializeField] private LoadSceneUI loadScene;             // 저장된 게임 불러오기 패널 클래스
 
     [Header("<color=green>Settings</color>")]
     [SerializeField] private GameObject settingsPanel;          // 설정 패널

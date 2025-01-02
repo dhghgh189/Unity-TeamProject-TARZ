@@ -1,4 +1,4 @@
-using System.Collections;
+/*using System.Collections;
 using System.IO;
 using System.Collections.Generic;
 using TMPro;
@@ -32,3 +32,4 @@ public class LoadSceneUI : MonoBehaviour
         // TODO : 로비 씬으로 전환
     }
 }
+*/

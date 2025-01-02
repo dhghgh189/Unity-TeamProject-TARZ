@@ -1,4 +1,4 @@
-using TMPro;
+/*using TMPro;
 using UnityEngine;
 using Zenject;
 
@@ -49,7 +49,7 @@ public class SaveSlot : MonoBehaviour
         Debug.Log($"<color=green>{profileId} 로드 완료!</color>");
     }
 
-   /* private void UpdateSlotUI()
+   *//* private void UpdateSlotUI()
     {
         if (PlayerPrefs.HasKey(profileId))
         {
@@ -61,7 +61,7 @@ public class SaveSlot : MonoBehaviour
         {
             SetData(null);
         }
-    }*/
+    }*//*
 
     public System.DateTime? GetLastSavedTime()
     {
@@ -77,3 +77,4 @@ public class SaveSlot : MonoBehaviour
         return null;
     }
 }
+*/

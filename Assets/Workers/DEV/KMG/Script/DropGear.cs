@@ -1,11 +1,14 @@
 using UnityEngine;
 using Zenject;
+using static UnityEngine.Rendering.DebugUI;
 
 public class DropGear : MonoBehaviour
 {
     private Inventory inventory;
     [SerializeField] Part part;
     [SerializeField] int tier;
+
+    private float pValue;
     private void Awake()
     {
         inventory = FindAnyObjectByType<Inventory>();
@@ -13,12 +16,13 @@ public class DropGear : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.transform.CompareTag("Player") || !inventory.GetGear(part, tier)) return;
+        if (!other.transform.CompareTag("Player") || !inventory.GetGear(part, tier, pValue)) return;
         gameObject.SetActive(false);
     }
-    public void SetDropItem(Part part, int tier, bool isRandomPart = false, bool isRandomTier = false)
+    public void SetDropItem(int tier, float pValue, bool isRandomTier = false)
     {
-        this.part = isRandomPart ? (Part)Random.Range(0, (int)Part.Size) : part;
+        part = (Part)Random.Range(0, (int)Part.Size);
         this.tier = isRandomTier ? Random.Range(1, 4) : tier;
+        this.pValue = pValue;
     }
 }

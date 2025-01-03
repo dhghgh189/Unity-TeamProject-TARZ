@@ -11196,6 +11196,7 @@ GameObject:
   - component: {fileID: 1662695333}
   - component: {fileID: 1662695335}
   - component: {fileID: 1662695334}
+  - component: {fileID: 1662695336}
   m_Layer: 5
   m_Name: CheatPanel
   m_TagString: Untagged
@@ -11283,6 +11284,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1662695332}
   m_CullTransparentMesh: 1
+--- !u!114 &1662695336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1662695332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0d88e10b9b9fda4b985629c5a7ea491, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputManager: {fileID: 593819620}
+  mujeokToggle: {fileID: 1340089639}
 --- !u!1 &1722727899
 GameObject:
   m_ObjectHideFlags: 0

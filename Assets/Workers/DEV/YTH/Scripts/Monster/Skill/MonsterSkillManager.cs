@@ -561,10 +561,9 @@ public class MonsterSkillManager : MonoBehaviour
     public void Revive()
     {
         ReviveSkill.CanUseSkill = false;
-        //_animator.SetTrigger("Revive");
 
-        _reviveBefore.SetActive(false);
-        _reviveAfter.SetActive(true);
+        //_reviveBefore.SetActive(false);
+        //_reviveAfter.SetActive(true);
     }
     #endregion
 

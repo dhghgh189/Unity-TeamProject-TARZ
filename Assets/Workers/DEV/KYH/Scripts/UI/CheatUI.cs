@@ -48,15 +48,6 @@ public class CheatUI : MonoBehaviour
         Init_skillDropdown();
     }
 
-    private void Start()
-    {
-        if (cheatUIPanel.activeSelf)
-        {
-            inputManager.firstInput = mujeokToggle;
-            inputManager.firstInput.Select();
-        }
-    }
-
     /// <summary>
     /// 스탯 치트 드롭다운 초기화
     /// </summary>

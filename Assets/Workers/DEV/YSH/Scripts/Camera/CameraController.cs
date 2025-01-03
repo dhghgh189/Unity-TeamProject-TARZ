@@ -6,13 +6,16 @@ public class CameraController : MonoBehaviour
 {
     private PlayerController player;
     private PlayerInputHandler playerInput;
+
     [SerializeField] public bool IsAutoLockOn;
     [SerializeField] public Transform target;
+
     private Transform lookAt;
+
     [Space(5f)]
     [SerializeField] private float sensitivity;
     [SerializeField] private Vector3 delta;
-    private float mainCamYPos;
+
     private float yAngle;
     private Camera mainCam;
 
@@ -28,7 +31,6 @@ public class CameraController : MonoBehaviour
 
         mainCam.transform.position = transform.position + delta;
         mainCam.transform.SetParent(transform);
-        mainCamYPos = mainCam.transform.position.y;
 
         IsAutoLockOn = false;
     }
@@ -50,10 +52,6 @@ public class CameraController : MonoBehaviour
         {
             yAngle += playerInput.InputLook.x * sensitivity;
             transform.rotation = Quaternion.Euler(0, yAngle, 0);
-
-            //yAngle += Input.GetAxisRaw("Mouse X");
-            //Vector3 dir = lookAt.position - transform.position;
-            //transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, yAngle, 0), sensitivity * Time.deltaTime);
         }
         else
         {

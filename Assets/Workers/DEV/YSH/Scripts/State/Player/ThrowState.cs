@@ -45,6 +45,12 @@ public class ThrowState : BaseState<PlayerController>
 
     public override void OnEnter()
     {
+        if (owner.interactioner.SpecialOBJ != null)
+        {
+            owner.ChangeState(EState.Idle);
+            return;
+        }
+
         if (camTrf == null)
             camTrf = Camera.main.transform;
 

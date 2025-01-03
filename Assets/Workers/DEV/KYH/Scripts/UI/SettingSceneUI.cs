@@ -37,19 +37,17 @@ public class SettingSceneUI : MonoBehaviour
     [Header("Setting UI")]
     [SerializeField] private Toggle minimapActiveToggle;
 
-    private void Start()
+    private void OnEnable()
     {
+        if (SceneManager.GetActiveScene().name != "Title")
+        {
+            titlePanel = null;
+        }
+
         activeCPanel = nonSelectPanel;                  // 현재 활성화 중인 패널을 nonSelectPanel로 설정
         inputManager.firstInput = gameplayButton;       // 설정 패널의 UI 네비게이션 첫 Input을 gameplayButton로 설정
         inputManager.firstInput.Select();               // 첫 Input으로 지정한 오브젝트를 선택 처리
     }
-
-    //private void OnEnable()
-    //{
-    //    activeCPanel = nonSelectPanel;                  // 현재 활성화 중인 패널을 nonSelectPanel로 설정
-    //    inputManager.firstInput = gameplayButton;       // 설정 패널의 UI 네비게이션 첫 Input을 gameplayButton로 설정
-    //    inputManager.firstInput.Select();               // 첫 Input으로 지정한 오브젝트를 선택 처리
-    //}
 
     private void Update()
     {
@@ -148,6 +146,8 @@ public class SettingSceneUI : MonoBehaviour
     public void OnClickBackToTitleButton()
     {
         gameObject.SetActive(false);            // 설정 패널 비활성화
-        titlePanel.SetActive(true);             // 타이틀 패널 활성화
+
+        if (SceneManager.GetActiveScene().name != "Title") return;
+        titlePanel.SetActive(true);
     }
 }

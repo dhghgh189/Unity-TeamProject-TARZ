@@ -1,39 +1,47 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Zenject;
 
+public enum UpgrageArmUnit
+{
+    DefaultPowerUnit, SkillPowerUnit, ElementalPowerUnit, MaxHpUnit, MaxStaminaUnit, MoveSpeedUnit, Size
+}
+
 public class ArmUpgradManager : MonoBehaviour, Base_InteractionOBJ
 {
-    [Inject] SaveData saveData;
     [Inject] StatModel statModel;
-    [Inject] SaveManager saveManager;
+
+    private UI_ArmUpgrade[] armUnits;
+    public List<UI_ArmUpgrade> installArmUnits;
 
     [SerializeField] GameObject upgradePanel;
     [SerializeField] TMP_Text upNameText;
     [SerializeField] TMP_Text upInfoText;
     [SerializeField] TMP_Text upCostText;
+    [SerializeField] TMP_Text installUnitsText;
 
     private void Start()
     {
-        // 세이브 데이터의 업글 정보를 순회 하면서 모델에 반영
-        foreach (ArmUpgrade item in saveData.ArmUpgradeDatas)
+        armUnits = GetComponentsInChildren<UI_ArmUpgrade>(true);
+        foreach (var item in armUnits)
         {
-            statModel.SetAbility(item.UpgradeAbility, item.UpgradeValue);
+            item.SavaDataCheck();
         }
     }
-    // UI_ArmUpgrade의 버튼이 클릭되면 스탯을 반영하고 바로 저장함
-    public bool ArmUpgredeExecute(int upNumber, AdditionAbility ability, float value, float cost)
+    public void ArmUnitStatUp(AdditionAbility ability, float value)
     {
-        if (statModel.Chip < cost) return false;
-
-        statModel.Chip -= cost;
         statModel.SetAbility(ability, value);
-        saveData.ArmUpgradeDatas.Add(new ArmUpgrade(upNumber, ability, value));
-        saveManager.Save();
-
-        return true;
+    }
+    public bool IsTryUnitUpgrade(float chip)
+    {
+        if (statModel.Chip >= chip)
+        {
+            statModel.Chip -= chip;
+            return true;
+        }
+        return false;
     }
 
     public void Activate()
@@ -46,12 +54,20 @@ public class ArmUpgradManager : MonoBehaviour, Base_InteractionOBJ
         }
         Time.timeScale = 0f;
         upgradePanel.SetActive(true);
-        GetComponentInChildren<Button>().Select();
+        GetComponentInChildren<UI_ArmUpgrade>().GetComponent<Button>().Select();
     }
     public void SetUpgradeDescription(string name, string info, string cost)
     {
         upNameText.text = name;
         upInfoText.text = info;
         upCostText.text = cost;
+    }
+    public void InstallUnitDescription()
+    {
+        installUnitsText.text = "";
+        foreach (var item in installArmUnits)
+        {
+            installUnitsText.text += item.UnitInfo();
+        }
     }
 }

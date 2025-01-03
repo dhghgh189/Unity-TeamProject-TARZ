@@ -195,9 +195,11 @@ public class Interactioner : MonoBehaviour
     /// <returns></returns>
     IEnumerator CheckGrabing()
     {
+        Destroy(SpecialOBJ.rigidOBJ);
+
         // 플레이어의 스피드 = 기존의 1/3
         float curSpeed = playerController.Stat.MoveSpeed;
-        playerController.Stat.MoveSpeed = curSpeed / 3f;
+        //playerController.Stat.MoveSpeed = curSpeed / 3f;
 
         while (IsGrabing)
         {

@@ -26,8 +26,8 @@ public class ThrowBox_Bomb : SpecialThrowOBJ_Base
         ThrowingOBJLayer = LayerMask.NameToLayer("ThrowObject");
 
         // 인식하는 오브젝트 참조용 레이어 마스크
-        BombBoxLayer = LayerMask.GetMask("Monster");
-        BombBoxLayer += LayerMask.GetMask("Player");
+        BombBoxLayer = LayerMask.NameToLayer("Monster");
+        BombBoxLayer += LayerMask.NameToLayer("Player");
         // 이후 기타 파괴 가능한 장애물 레이어가 추가될 경우, 이어서 추가 예정
     }
 
@@ -37,10 +37,9 @@ public class ThrowBox_Bomb : SpecialThrowOBJ_Base
     private void OnCollisionEnter(Collision collision)
     {
         // 닿은 물체가 쓰레기 오브젝트일 경우, 3초 후 폭발하도록 한다.
-        if (isThrowingOBJ != false && collision.gameObject.layer == ThrowingOBJLayer)
+        if (isThrowingOBJ != true && collision.gameObject.layer == ThrowingOBJLayer)
         {
             isThrowingOBJ = true;
-
             if (CheckBombRoutine != null) return;
             CheckBombRoutine = StartCoroutine(BombWaitRoutine(3f));
             return;
@@ -57,20 +56,18 @@ public class ThrowBox_Bomb : SpecialThrowOBJ_Base
     /// </summary>
     void Bomb()
     {
+        Debug.Log("터졌는지 확인");
         // 범위 내 몬스터, 플레이어 등을 인식하여 리스트로 반환하는 함수 실행
         HitOBJs = CheckBombRange();
 
         // 각 오브젝트의 TakeDamage 함수를 호출하여 범위 데미지를 가해준다.
         foreach (GameObject obj in HitOBJs)
         {
-            if (obj.TryGetComponent<IDamagable>(out hit))
-            {
-                hit.TakeDamage(BombBoxDamage);
-                hit = null;
-            }
+            Debug.Log($"대상 : {obj.name}");
+            obj.GetComponent<IDamagable>().TakeDamage(BombBoxDamage);
         }
 
-        Destroy(this.gameObject, 1.5f);
+        Destroy(this.gameObject, 0.5f);
     }
 
 
@@ -82,14 +79,15 @@ public class ThrowBox_Bomb : SpecialThrowOBJ_Base
     /// <returns></returns>
     IEnumerator BombWaitRoutine(float cool)
     {
+        Debug.Log("루틴 실행");
         while (cool > 0.1f)
         {
             cool -= Time.deltaTime;
             yield return null;
         }
 
-        Bomb();
         CheckBombRoutine = null;
+        Bomb();
         yield break;
     }
 
@@ -105,7 +103,9 @@ public class ThrowBox_Bomb : SpecialThrowOBJ_Base
 
         foreach (Collider _col in collider)
         {
-            if (_col.gameObject.layer != BombBoxLayer) continue;
+            //if (_col.gameObject.layer != BombBoxLayer) continue;
+            //  임시 사용. 위 이프문 현재 동작하지 않음
+            if (_col.gameObject.layer != LayerMask.NameToLayer("Monster") && _col.gameObject.layer != LayerMask.NameToLayer("Player")) continue;
 
             Vector3 source = transform.position; source.y = 0;
             Vector3 destination = _col.transform.position; destination.y = 0;

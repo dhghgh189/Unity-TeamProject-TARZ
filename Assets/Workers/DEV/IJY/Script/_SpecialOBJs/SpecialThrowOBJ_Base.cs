@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class SpecialThrowOBJ_Base : MonoBehaviour, Interaction_Ibase_GrabAct
 {
+    public Rigidbody rigidOBJ { get; set; }
     public PlayerController playerController { get; set; }
     public Collider col;
     public bool isThrowing = false;
@@ -11,6 +12,7 @@ public class SpecialThrowOBJ_Base : MonoBehaviour, Interaction_Ibase_GrabAct
 
     void Init()
     {
+        rigidOBJ = GetComponent<Rigidbody>();
         trigger = new GameObject("UI_trigger").AddComponent<Child_SpecialTrigger>();
         trigger.transform.position = this.transform.position;
         trigger.transform.parent = this.transform;
@@ -32,10 +34,10 @@ public class SpecialThrowOBJ_Base : MonoBehaviour, Interaction_Ibase_GrabAct
 
     void ThrowingReady(Transform curPos)
     {
+        Destroy(trigger.gameObject);
         trigger = null;
-        this.transform.DetachChildren();
-        this.gameObject.layer = 0;
 
+        this.gameObject.layer = 0;
         col.enabled = false;
         this.gameObject.transform.parent = playerController.interactioner.gameObject.transform;
         this.transform.position = curPos.position;

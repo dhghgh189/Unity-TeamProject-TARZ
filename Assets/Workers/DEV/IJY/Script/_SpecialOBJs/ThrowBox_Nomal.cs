@@ -14,7 +14,7 @@ public class ThrowBox_Nomal : SpecialThrowOBJ_Base
         // 임시적 데미지 수치 설정
         NomalBoxDamage = 10f;
 
-        NomalBoxLayer = LayerMask.GetMask("Monster");
+        NomalBoxLayer = LayerMask.NameToLayer("Monster");
     }
 
     //====================================================================

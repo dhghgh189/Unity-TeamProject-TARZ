@@ -4,11 +4,11 @@ public class Projectile : MonoBehaviour // 일반 원딜 쫄몹
 {
     [SerializeField] GameObject _radiation;
 
-    IDamagable damagable;
-
     private Rigidbody _rigidBody;
 
     private MonsterData _monsterData;
+
+    IDamagable damagable;
 
     private void Awake()
     {

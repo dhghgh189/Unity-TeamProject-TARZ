@@ -52,8 +52,6 @@ public class MonsterData : MonoBehaviour
     [SerializeField] float _throwPower; // 일반 원딜 몬스터 일반 공격 던지는 힘
     public float ThrowPower { get { return _throwPower; } set { _throwPower = value; } }
 
-    [SerializeField] float _dangerDistance;
-    public float DangerDistance { get { return _dangerDistance; } set { _dangerDistance = value; } }
 
     [Header("폭탄 좀비")]
     [SerializeField] float _canUseProjectileSkillDistance; // 폭탄 좀비 스킬 가능 거리
@@ -61,9 +59,12 @@ public class MonsterData : MonoBehaviour
 
     private static readonly int jake_Move_Hash = Animator.StringToHash("Jake_Move");
 
-    [Header("개구리 점프 거리")]
+    [Header("개구리 점프 좀비")]
     [SerializeField] float _canJumpDistance;
     public float CanJumpDistance { get { return _canJumpDistance; } set { _canJumpDistance = value; } }
+
+    [SerializeField] float _dangerDistance;
+    public float DangerDistance { get { return _dangerDistance; } set { _dangerDistance = value; } }
 
     private void Awake()
     {

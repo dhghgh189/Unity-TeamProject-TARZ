@@ -661,9 +661,9 @@ MonoBehaviour:
   _angle: 0
   _rangeAttackSpeed: 2
   _throwPower: 20
-  _dangerDistance: 9
-  _canUseProjectileSkillDistance: 11
+  _canUseProjectileSkillDistance: 15
   _canJumpDistance: 0
+  _dangerDistance: 9
 --- !u!114 &471463577207258556
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -699,9 +699,9 @@ MonoBehaviour:
         Can Skill","Instant":true,"CondCanMove_condCanMove":4},{"Type":"BehaviorDesigner.Runtime.Tasks.Selector","NodeData":{"Offset":"(90,240)"},"ID":10,"Name":"Selector","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-264.330536,259.947266)"},"ID":11,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"MSkill_Bomb","NodeData":{"Offset":"(-63.0969543,126.220337)"},"ID":12,"Name":"M
         Skill   Bomb","Instant":true,"Transform_muzzlePoint":0},{"Type":"BehaviorDesigner.Runtime.Tasks.Wait","NodeData":{"Offset":"(70,140)"},"ID":13,"Name":"Wait","Instant":true,"SharedFloatwaitTime":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":4},"SharedBoolrandomWait":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"SharedFloatrandomWaitMin":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1},"SharedFloatrandomWaitMax":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1}}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-20.656311,260)"},"ID":14,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"MSkill_Mine","NodeData":{"Offset":"(-62.4933777,129.343689)"},"ID":15,"Name":"M
         Skill   Mine","Instant":true,"Transform_muzzlePoint":1},{"Type":"BehaviorDesigner.Runtime.Tasks.Wait","NodeData":{"Offset":"(60,130)"},"ID":16,"Name":"Wait","Instant":true,"SharedFloatwaitTime":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":4},"SharedBoolrandomWait":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"SharedFloatrandomWaitMin":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1},"SharedFloatrandomWaitMax":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1}}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(239.343689,256.876648)"},"ID":17,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"MSkill_StimPack","NodeData":{"Offset":"(-36.8766479,132.467041)"},"ID":18,"Name":"M
-        Skill   Stim Pack","Instant":true},{"Type":"BehaviorDesigner.Runtime.Tasks.Wait","NodeData":{"Offset":"(100,130)"},"ID":19,"Name":"Wait","Instant":true,"SharedFloatwaitTime":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":4},"SharedBoolrandomWait":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"SharedFloatrandomWaitMin":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1},"SharedFloatrandomWaitMax":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1}}]}]}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(417.8042,154.972672)"},"ID":20,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"CondCanAttack","NodeData":{"Offset":"(-133.8105,222.098083)"},"ID":21,"Name":"Cond
-        Can Attack","Instant":true},{"Type":"BehaviorDesigner.Runtime.Tasks.Unity.UnityAnimation.Play","NodeData":{"Offset":"(6.060425,219.09137)"},"ID":22,"Name":"Play","Instant":true,"Disabled":true,"SharedGameObjecttargetGameObject":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":null},"SharedStringanimationName":{"Type":"BehaviorDesigner.Runtime.SharedString","Name":null},"PlayModeplayMode":"StopSameLayer"},{"Type":"ActRangeAttack","NodeData":{"Offset":"(145.454514,220)"},"ID":23,"Name":"Act
-        Range Attack","Instant":true,"SharedGameObject_projectilePrefab":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":null,"GameObjectmValue":2},"SharedTransform_muzzlePoint":{"Type":"BehaviorDesigner.Runtime.SharedTransform","Name":null,"TransformmValue":3}},{"Type":"BehaviorDesigner.Runtime.Tasks.Wait","NodeData":{"Offset":"(290.302429,223.030457)"},"ID":24,"Name":"Wait","Instant":true,"Disabled":true,"SharedFloatwaitTime":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":2},"SharedBoolrandomWait":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"SharedFloatrandomWaitMin":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1},"SharedFloatrandomWaitMax":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1}}]}]}]}}'
+        Skill   Stim Pack","Instant":true},{"Type":"BehaviorDesigner.Runtime.Tasks.Wait","NodeData":{"Offset":"(100,130)"},"ID":19,"Name":"Wait","Instant":true,"SharedFloatwaitTime":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":4},"SharedBoolrandomWait":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"SharedFloatrandomWaitMin":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1},"SharedFloatrandomWaitMax":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1}}]}]}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(417.8042,154.972672)"},"ID":20,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"CondCanAttack","NodeData":{"Offset":"(-72.58603,222.098083)"},"ID":21,"Name":"Cond
+        Can Attack","Instant":true},{"Type":"ActRangeAttack","NodeData":{"Offset":"(84.23004,220)"},"ID":22,"Name":"Act
+        Range Attack","Instant":true}]}]}]}}'
       fieldSerializationData:
         typeName: []
         fieldNameHash: 
@@ -709,8 +709,6 @@ MonoBehaviour:
         dataPosition: 
         unityObjects:
         - {fileID: 437704456325355686}
-        - {fileID: 437704456325355686}
-        - {fileID: 8167883818004183144, guid: 989aabf03a1cf174e963c4be9bad5c97, type: 3}
         - {fileID: 437704456325355686}
         byteData: 
         byteDataArray: 

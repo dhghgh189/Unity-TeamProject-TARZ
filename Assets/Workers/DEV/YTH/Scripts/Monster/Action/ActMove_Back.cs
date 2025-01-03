@@ -1,3 +1,4 @@
+using BehaviorDesigner.Runtime;
 using BehaviorDesigner.Runtime.Tasks;
 using System.Collections;
 using UnityEngine;
@@ -5,11 +6,14 @@ using UnityEngine.AI;
 using Zenject;
 public class ActMove_Back : Action
 {
-    private PooledObject _pooledObject;
     [SerializeField] CondCanMove _condCanMove;
 
+    private PooledObject _pooledObject;
+
     private MonsterData _monsterData;
+
     private NavMeshAgent _agent;
+
     private Animator _animator;
 
     private PlayerController _player; 

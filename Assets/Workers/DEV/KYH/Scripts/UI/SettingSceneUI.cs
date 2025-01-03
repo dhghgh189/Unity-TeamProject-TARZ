@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.InputSystem;
 
 public class SettingSceneUI : MonoBehaviour
 {
@@ -52,7 +53,7 @@ public class SettingSceneUI : MonoBehaviour
     private void Update()
     {
         // ESC(컨트롤러 B버튼) 입력 시 행동
-        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Joystick1Button1))
+        if (InputSystem.actions.FindAction("Cancel").WasPressedThisFrame())
         {
             // 현재 활성화 중인 카테고리 패널에 맞는 카테고리 버튼 선택
             if (activeCPanel == gameplayPanel)

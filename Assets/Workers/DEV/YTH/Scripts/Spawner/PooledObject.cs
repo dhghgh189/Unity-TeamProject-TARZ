@@ -8,9 +8,6 @@ using Zenject;
 /// </summary>
 public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
 {
-    private ObjectPool _returnPool; //반납 위치
-    public ObjectPool ReturnPool { get { return _returnPool; } set { _returnPool = value; } }
-
     [HideInInspector]
     [Inject]
     public PlayerController player;
@@ -85,13 +82,28 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
 
     public void Die()
     {
+        int random = UnityEngine.Random.Range(1, 101);
+
         _autoLockOn.action?.Invoke();
         _animator.SetTrigger("Die");
 
-        GameObject gear = Instantiate(_gear, transform.position + Vector3.up * 0.5f, transform.rotation);
-        gear.GetComponent<DropGear>().SetDropItem(Part.신발, 1, true, true);
+        Debug.Log(random);
+        switch (_monsterData.MonsterTIer)
+        {
+            case MonsterData.MonsterTier.Normal:
+                if (random > 50)
+                    Instantiate(_gear, transform.position + Vector3.up * 0.5f, transform.rotation).GetComponent<DropGear>().SetDropItem(1, 25f);
+                break;
+            case MonsterData.MonsterTier.Elite:
+                if (random > 25)
+                    Instantiate(_gear, transform.position + Vector3.up * 0.5f, transform.rotation).GetComponent<DropGear>().SetDropItem(random > 90 ? 3 : random > 75 ? 2 : 1, 50f);
+                break;
+            case MonsterData.MonsterTier.Boss:
+                Instantiate(_gear, transform.position + Vector3.up * 0.5f, transform.rotation).GetComponent<DropGear>().SetDropItem(1, 75f, true);
+                break;
+        }
 
-        int random = UnityEngine.Random.Range(0, 12);
+        random = UnityEngine.Random.Range(0, 12);
         if (_monsterData.MonsterTIer == MonsterData.MonsterTier.Boss)
         {
             GameObject chip = Instantiate(_chip, transform.position + Vector3.up * 0.5f + Vector3.forward * 0.5f, transform.rotation);
@@ -105,15 +117,7 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
 
         /* BossMonsterSpwner 일반칩 다른친구드,ㄹ은 그냥 블랙칩*/
 
-        if (ReturnPool != null)
-        {
-            ReturnPool.ReturnPool(this);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-
+        gameObject.SetActive(false);
     }
 
     public void KnockBack(GameObject attacker)

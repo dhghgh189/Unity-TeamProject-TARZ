@@ -35,6 +35,11 @@ public class CameraController : MonoBehaviour
         IsAutoLockOn = false;
     }
 
+    private void Update()
+    {
+        yAngle += playerInput.InputLook.x * sensitivity * Time.deltaTime;
+    }
+
     void LateUpdate()
     {
         Rotate();
@@ -50,7 +55,6 @@ public class CameraController : MonoBehaviour
     {
         if (IsAutoLockOn == false)
         {
-            yAngle += playerInput.InputLook.x * sensitivity;
             transform.rotation = Quaternion.Euler(0, yAngle, 0);
         }
         else

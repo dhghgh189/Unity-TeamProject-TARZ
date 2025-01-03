@@ -65,7 +65,8 @@ public class PlayerMovement : MonoBehaviour
 
     public void LookRotation(Vector3 dir)
     {
-        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(dir), rotateSpeed * Time.deltaTime);
+        rigid.rotation = Quaternion.Lerp(rigid.rotation, Quaternion.LookRotation(dir), rotateSpeed * Time.deltaTime);
+        //transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(dir), rotateSpeed * Time.deltaTime);
     }
 
     public void LookAt(Vector3 dir)

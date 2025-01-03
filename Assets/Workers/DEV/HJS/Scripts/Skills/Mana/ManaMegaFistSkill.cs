@@ -25,7 +25,7 @@ public class ManaMegaFistSkill : IManaSkill
 #if UNITY_EDITOR
         tmp = Resources.Load("Unmanaged/Gate") as GameObject;
 #else
-        tmp = Resources.Load("Managed/ManaSkill/Gate"") as GameObject;
+        tmp = Resources.Load("Managed/ManaSkill/Gate") as GameObject;
 #endif
     }
 

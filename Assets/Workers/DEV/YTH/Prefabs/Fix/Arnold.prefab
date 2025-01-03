@@ -640,10 +640,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4ad741dc933110747b5dd373339f2f12,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 5654483879488299938}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4ad741dc933110747b5dd373339f2f12,
-        type: 3}
-      insertIndex: -1
       addedObject: {fileID: 6051502428782432029}
   m_SourcePrefab: {fileID: 100100000, guid: 4ad741dc933110747b5dd373339f2f12, type: 3}
 --- !u!4 &8597928924319561469 stripped
@@ -773,12 +769,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _monsterType: 2
   _skillType: 0
-  _monsterTier: 0
+  _monsterTier: 2
   _maxHp: 300
   _curHp: 0
   _damage: 10
   _attackRange: 3
   _isAttacked: 0
+  _isCatched: 0
   _meleeAttackSpeed: 3
   _range: 3
   _angle: 190
@@ -836,18 +833,6 @@ MonoBehaviour:
       Version: 1.7.11
   gizmoViewMode: 2
   showBehaviorDesignerGizmo: 1
---- !u!114 &5654483879488299938
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8942506606477700167}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -2012967667, guid: da41a8dd3b5ec434a802d9b5a2a0a777, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &6051502428782432029
 MonoBehaviour:
   m_ObjectHideFlags: 0

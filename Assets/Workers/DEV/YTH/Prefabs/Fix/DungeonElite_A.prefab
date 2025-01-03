@@ -1111,7 +1111,6 @@ GameObject:
   - component: {fileID: 7699552153815479391}
   - component: {fileID: 4419348136962750131}
   - component: {fileID: 8862835902184979527}
-  - component: {fileID: 3202418254629042748}
   - component: {fileID: 8929721196361635683}
   - component: {fileID: 7641819941000808408}
   m_Layer: 9
@@ -1282,6 +1281,7 @@ MonoBehaviour:
   _damage: 5
   _attackRange: 2
   _isAttacked: 0
+  _isCatched: 0
   _meleeAttackSpeed: 2
   _range: 2
   _angle: 90
@@ -1290,18 +1290,6 @@ MonoBehaviour:
   _dangerDistance: 0
   _canUseProjectileSkillDistance: 0
   _canJumpDistance: 0
---- !u!114 &3202418254629042748
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3750440984940057028}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -2012967667, guid: da41a8dd3b5ec434a802d9b5a2a0a777, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &8929721196361635683
 MonoBehaviour:
   m_ObjectHideFlags: 0

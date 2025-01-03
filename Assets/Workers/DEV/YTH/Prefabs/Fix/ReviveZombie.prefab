@@ -1730,7 +1730,6 @@ GameObject:
   - component: {fileID: 5025518539289168066}
   - component: {fileID: 821674491029385797}
   - component: {fileID: 3033128422359397666}
-  - component: {fileID: 7993469106154084879}
   - component: {fileID: 1688069587922074610}
   m_Layer: 9
   m_Name: ReviveZombie
@@ -1901,6 +1900,7 @@ MonoBehaviour:
   _damage: 5
   _attackRange: 2
   _isAttacked: 0
+  _isCatched: 0
   _meleeAttackSpeed: 2
   _range: 0
   _angle: 0
@@ -1939,7 +1939,7 @@ MonoBehaviour:
       variableStartIndex: 
       JSONSerialization: '{"EntryTask":{"Type":"BehaviorDesigner.Runtime.Tasks.EntryTask","NodeData":{"Offset":"(386.00827,-140.047562)"},"ID":0,"Name":"Entry","Instant":true},"RootTask":{"Type":"BehaviorDesigner.Runtime.Tasks.Repeater","NodeData":{"Offset":"(-2.527483,134.094)"},"ID":1,"Name":"Repeater","Instant":true,"SharedIntcount":{"Type":"BehaviorDesigner.Runtime.SharedInt","Name":null,"Int32mValue":0},"SharedBoolrepeatForever":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":true},"SharedBoolendOnFailure":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Parallel","NodeData":{"Offset":"(2.70119667,137.176712)"},"ID":2,"Name":"Parallel","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-137.778427,192.9863)"},"ID":3,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"MSkill_Revive","NodeData":{"Offset":"(-81.63066,154.356873)"},"ID":4,"Name":"M
         Skill   Revive","Instant":true,"GameObject_reviveBefore":0,"GameObject_reviveAfter":1},{"Type":"BehaviorDesigner.Runtime.Tasks.Wait","NodeData":{"Offset":"(66.22263,147.406586)"},"ID":5,"Name":"Wait","Instant":true,"SharedFloatwaitTime":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1},"SharedBoolrandomWait":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"SharedFloatrandomWaitMin":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1},"SharedFloatrandomWaitMax":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1}}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(125.421677,161.881149)"},"ID":6,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-21.9642982,168.888885)"},"ID":7,"Name":"Sequence","Instant":true,"AbortTypeabortType":"Self","Children":[{"Type":"CondCanMove","NodeData":{"Offset":"(-97.72829,200)"},"ID":8,"Name":"Cond
-        Can Move","Instant":true,"Single_angle":180,"Single_distance":10,"Single_rate":0.5},{"Type":"ActMove_NotStopInAttacking","NodeData":{"Offset":"(101.135857,200)"},"ID":9,"Name":"Act
+        Can Move","Instant":true,"Single_angle":360,"Single_distance":15,"Single_rate":0.5},{"Type":"ActMove_NotStopInAttacking","NodeData":{"Offset":"(101.135857,200)"},"ID":9,"Name":"Act
         Move   Not Stop In Attacking","Instant":true,"CondCanMove_condCanMove":8}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(329.07254,188.888885)"},"ID":10,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"CondCanAttack","NodeData":{"Offset":"(-64.9613647,175.4253)"},"ID":11,"Name":"Cond
         Can Attack","Instant":true},{"Type":"ActMeleeAttack","NodeData":{"Offset":"(100,180)"},"ID":12,"Name":"Act
         Melee Attack","Instant":true}]}]}]}]}}'
@@ -1956,18 +1956,6 @@ MonoBehaviour:
       Version: 1.7.11
   gizmoViewMode: 2
   showBehaviorDesignerGizmo: 1
---- !u!114 &7993469106154084879
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4544433378228837646}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -2012967667, guid: da41a8dd3b5ec434a802d9b5a2a0a777, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1688069587922074610
 MonoBehaviour:
   m_ObjectHideFlags: 0

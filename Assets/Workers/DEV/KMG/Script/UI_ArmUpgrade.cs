@@ -52,6 +52,7 @@ public class UI_ArmUpgrade : MonoBehaviour, ISelectHandler  //, IDeselectHandler
         armUpgradManager.ArmUnitStatUp(upgradeAbility, -upStatList[upTier]);
         SetEventAndDesciption();
         armUpgradManager.InstallUnitDescription();
+        saveManager.Save();
     }
 
     private void UnitUpgrade()

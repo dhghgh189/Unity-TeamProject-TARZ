@@ -71,12 +71,12 @@ public class MonsterJustTrigger : MonoBehaviour
                     // 버프 느낌
                     // 일시적 스탯 향상
                     // 임시 보상 (추후 반격으로 변경 필요)
-                    _playerStat.MoveSpeed += 3f;
+                    
                     Debug.Log("3티어 정상작동");
                     break;
                 case MonsterData.MonsterTier.Elite:
                     // 임시 보상 (추후 반격으로 변경 필요)
-                    _playerStat.CurrentStamina += 10f;
+                   
                     Debug.Log("2티어 정상작동");
                     break;
                 case MonsterData.MonsterTier.Boss:

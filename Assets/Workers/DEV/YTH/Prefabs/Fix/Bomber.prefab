@@ -500,7 +500,6 @@ GameObject:
   - component: {fileID: 982091989418011231}
   - component: {fileID: 4901676695575413763}
   - component: {fileID: 471463577207258556}
-  - component: {fileID: 6165032752821468017}
   - component: {fileID: 3279986922230515307}
   m_Layer: 9
   m_Name: Bomber
@@ -656,6 +655,7 @@ MonoBehaviour:
   _damage: 8
   _attackRange: 11
   _isAttacked: 0
+  _isCatched: 0
   _meleeAttackSpeed: 0
   _range: 0
   _angle: 0
@@ -717,18 +717,6 @@ MonoBehaviour:
       Version: 1.7.11
   gizmoViewMode: 2
   showBehaviorDesignerGizmo: 1
---- !u!114 &6165032752821468017
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1133426352577604729}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -2012967667, guid: da41a8dd3b5ec434a802d9b5a2a0a777, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &3279986922230515307
 MonoBehaviour:
   m_ObjectHideFlags: 0

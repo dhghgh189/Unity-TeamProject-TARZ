@@ -982,7 +982,6 @@ GameObject:
   - component: {fileID: 1007632065120755295}
   - component: {fileID: 5265883692499080226}
   - component: {fileID: 6081754220087457224}
-  - component: {fileID: 8294923860577695752}
   - component: {fileID: 7312654964224428128}
   - component: {fileID: 4321184373748524101}
   m_Layer: 9
@@ -1131,6 +1130,7 @@ MonoBehaviour:
   _damage: 5
   _attackRange: 2
   _isAttacked: 0
+  _isCatched: 0
   _meleeAttackSpeed: 2
   _range: 2
   _angle: 90
@@ -1139,18 +1139,6 @@ MonoBehaviour:
   _dangerDistance: 0
   _canUseProjectileSkillDistance: 0
   _canJumpDistance: 0
---- !u!114 &8294923860577695752
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3505963674830574215}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -2012967667, guid: da41a8dd3b5ec434a802d9b5a2a0a777, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &7312654964224428128
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1180,27 +1168,16 @@ MonoBehaviour:
       startIndex: 
       variableStartIndex: 
       JSONSerialization: '{"EntryTask":{"Type":"BehaviorDesigner.Runtime.Tasks.EntryTask","NodeData":{"Offset":"(437.825836,14.0752106)"},"ID":0,"Name":"Entry","Instant":true},"RootTask":{"Type":"BehaviorDesigner.Runtime.Tasks.Repeater","NodeData":{"Offset":"(-1.56629181,158.192749)"},"ID":1,"Name":"Repeater","Instant":true,"SharedIntcount":{"Type":"BehaviorDesigner.Runtime.SharedInt","Name":null,"Int32mValue":0},"SharedBoolrepeatForever":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":true},"SharedBoolendOnFailure":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(0,130.000015)"},"ID":2,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-230,180)"},"ID":3,"Name":"Sequence","Instant":true,"AbortTypeabortType":"Self","Children":[{"Type":"CondCanMove","NodeData":{"Offset":"(-108.425919,200)"},"ID":4,"Name":"Cond
-        Can Move","Instant":true,"MonsterData_monsterData":0,"GameObject_player":1,"Single_angle":90,"Single_distance":10,"Single_rate":0.5},{"Type":"ActMove_NotStopInAttacking","NodeData":{"Offset":"(93.14815,200)"},"ID":5,"Name":"Act
-        Move   Not Stop In Attacking","Instant":true,"CondCanMove_condCanMove":4,"MonsterData_monsterData":2,"NavMeshAgent_agent":3,"Animator_animator":4,"GameObject_player":5}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(210,199.999969)"},"ID":6,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"CondCanAttack","NodeData":{"Offset":"(-80.18091,175.283264)"},"ID":7,"Name":"Cond
-        Can Attack","Instant":true,"MonsterData_monsterData":6,"GameObject_player":7},{"Type":"ActMeleeAttack","NodeData":{"Offset":"(100,180)"},"ID":8,"Name":"Act
-        Melee Attack","Instant":true,"MonsterData_monsterData":8,"Animator_animator":9,"GameObject_player":10,"Single_angle":90,"Single_range":2}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Idle","NodeData":{"Offset":"(420,199.999969)"},"ID":9,"Name":"Idle","Instant":true,"Disabled":true}]}]}}'
+        Can Move","Instant":true,"Single_angle":120,"Single_distance":15,"Single_rate":0.5},{"Type":"ActMove_NotStopInAttacking","NodeData":{"Offset":"(93.14815,200)"},"ID":5,"Name":"Act
+        Move   Not Stop In Attacking","Instant":true,"CondCanMove_condCanMove":4}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(210,199.999969)"},"ID":6,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"CondCanAttack","NodeData":{"Offset":"(-80.18091,175.283264)"},"ID":7,"Name":"Cond
+        Can Attack","Instant":true},{"Type":"ActMeleeAttack","NodeData":{"Offset":"(100,180)"},"ID":8,"Name":"Act
+        Melee Attack","Instant":true}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Idle","NodeData":{"Offset":"(420,199.999969)"},"ID":9,"Name":"Idle","Instant":true,"Disabled":true}]}]}}'
       fieldSerializationData:
         typeName: []
         fieldNameHash: 
         startIndex: 
         dataPosition: 
-        unityObjects:
-        - {fileID: 6081754220087457224}
-        - {fileID: 7365192204732169291, guid: 744790fd829edc343bb6392bc0fb0f1a, type: 3}
-        - {fileID: 6081754220087457224}
-        - {fileID: 2572802278433401941}
-        - {fileID: 3257136104746624012}
-        - {fileID: 7365192204732169291, guid: 744790fd829edc343bb6392bc0fb0f1a, type: 3}
-        - {fileID: 6081754220087457224}
-        - {fileID: 7365192204732169291, guid: 744790fd829edc343bb6392bc0fb0f1a, type: 3}
-        - {fileID: 6081754220087457224}
-        - {fileID: 3257136104746624012}
-        - {fileID: 7365192204732169291, guid: 744790fd829edc343bb6392bc0fb0f1a, type: 3}
+        unityObjects: []
         byteData: 
         byteDataArray: 
       Version: 1.7.11

@@ -49,10 +49,10 @@ public class ArmUpgradManager : MonoBehaviour, Base_InteractionOBJ
         if (upgradePanel.activeSelf)
         {
             upgradePanel.SetActive(false);
-            Time.timeScale = 1f;
+            //Time.timeScale = 1f;
             return;
         }
-        Time.timeScale = 0f;
+        //Time.timeScale = 0f;
         upgradePanel.SetActive(true);
         GetComponentInChildren<UI_ArmUpgrade>().GetComponent<Button>().Select();
     }

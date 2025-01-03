@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ActRangeAttack : Action
 {
-    [SerializeField] Transform _muzzlePoint;
+    private Transform _muzzlePoint;
 
     private MonsterData _monsterData;
 

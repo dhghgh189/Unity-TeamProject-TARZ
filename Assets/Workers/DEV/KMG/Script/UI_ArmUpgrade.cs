@@ -96,7 +96,7 @@ public class UI_ArmUpgrade : MonoBehaviour, ISelectHandler  //, IDeselectHandler
 
         UnitUpgradebutton.onClick.AddListener(UnitUpgrade);
 
-        armUpgradManager.SetUpgradeDescription(upgradeName, upgradeDescription + $" {upStatList[upTier]}% 강화", upCostList[upTier].ToString());
+        armUpgradManager.SetUpgradeDescription(upgradeName, upStatList[upTier] == 0 ? "미획득" : upgradeDescription + $" {upStatList[upTier]}% 강화", upCostList[upTier] == 0 ? "강화완료" : $"{upCostList[upTier].ToString()} 데이터칩");
     }
 
     public string UnitInfo()

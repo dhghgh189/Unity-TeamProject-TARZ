@@ -4,6 +4,7 @@ using UnityEngine;
 public class MSkill_FrogJump : Action
 {
     private MonsterSkillManager _monsterSkillManager;
+
     private Animator _animator;
 
     private MonsterData _monsterData;

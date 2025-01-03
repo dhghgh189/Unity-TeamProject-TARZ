@@ -13,7 +13,6 @@ public class CondCanSkill : Conditional
 
     private PooledObject _pooledObject;
 
-
     public override void OnAwake()
     {
         _monsterData = GetComponent<MonsterData>();

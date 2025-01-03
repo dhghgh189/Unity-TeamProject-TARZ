@@ -5,13 +5,13 @@ using Zenject;
 
 public class MSkill_Mine : Action
 {
+    [SerializeField] Transform _muzzlePoint;
+
     private MonsterSkillManager _monsterSkillManager;
 
     private PooledObject _pooledObject;
 
     private PlayerController _player;
-
-    [SerializeField] Transform _muzzlePoint;
 
     private Animator _animator;
 

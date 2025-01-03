@@ -6,7 +6,6 @@ using UnityEngine.AI;
 public class MonsterSkillManager : MonoBehaviour
 {
     #region Skill-ScriptableObj
-
     const string SKILL_PATH = "Managed/Skill/Monster";
 
     [Header("MonsterSkill")]

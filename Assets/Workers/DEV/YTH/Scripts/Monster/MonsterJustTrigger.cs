@@ -5,19 +5,21 @@ using Zenject;
 
 public class MonsterJustTrigger : MonoBehaviour
 {
-    private Animator _animator;
-    private MonsterData _monsterData;
-
     [Inject] private StatModel _playerStat; // 젠젝
-
-    private GameObject _justTrigger;
-
-    private GameObject _player;
 
     [Header("저스트 회피 범위")]
     [SerializeField] float _angle; // 시야각
 
     [SerializeField] float _distance; // 시야 거리
+
+    private Animator _animator;
+
+    private MonsterData _monsterData;
+
+    private GameObject _justTrigger;
+
+    private GameObject _player;
+
 
     private void Awake()
     {

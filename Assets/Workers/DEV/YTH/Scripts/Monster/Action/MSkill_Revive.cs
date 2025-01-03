@@ -4,13 +4,15 @@ using Zenject;
 
 public class MSkill_Revive : Action
 {
-    private MonsterSkillManager _monsterSkillManager;
-    private Animator _animator;
-    private MonsterData _monsterData;
-
     [SerializeField] GameObject _reviveBefore;
 
     [SerializeField] GameObject _reviveAfter;
+
+    private MonsterSkillManager _monsterSkillManager;
+
+    private Animator _animator;
+
+    private MonsterData _monsterData;
 
     public override void OnAwake()
     {

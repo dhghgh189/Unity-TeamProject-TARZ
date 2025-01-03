@@ -3,16 +3,14 @@ using UnityEngine;
 
 public class Projectile_Bomb : MonoBehaviour
 {
-    public GameObject _bombZombie;
-
     private MonsterSkillManager _monsterSkillManager;
-    private SphereCollider _sphereCollider;
 
+    private SphereCollider _sphereCollider;
 
     private void Start()
     {
         _sphereCollider = GetComponent<SphereCollider>();
-        _monsterSkillManager = _bombZombie.GetComponent<MonsterSkillManager>();
+        _monsterSkillManager = GetComponentInParent<MonsterSkillManager>();
         _sphereCollider.radius = _monsterSkillManager.BombSkill.Range;
     }
 

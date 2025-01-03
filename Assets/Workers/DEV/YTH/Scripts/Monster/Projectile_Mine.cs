@@ -2,10 +2,7 @@ using UnityEngine;
 
 public class Projectile_Mine : MonoBehaviour
 {
-    MonsterSkillManager _monsterSkillManager;
-
-    [HideInInspector]
-    public GameObject _bombZombie;
+    private MonsterSkillManager _monsterSkillManager;
 
     private Rigidbody _rigidBody;
 
@@ -14,12 +11,8 @@ public class Projectile_Mine : MonoBehaviour
     private void Awake()
     {
         _rigidBody = GetComponent<Rigidbody>();
+        _monsterSkillManager = GetComponentInParent<MonsterSkillManager>();
         WhatIsTarget = (1 << LayerMask.NameToLayer("Player"));
-    }
-
-    private void Start()
-    {
-        _monsterSkillManager = _bombZombie.GetComponent<MonsterSkillManager>();
     }
 
     private void OnCollisionEnter(Collision collision)

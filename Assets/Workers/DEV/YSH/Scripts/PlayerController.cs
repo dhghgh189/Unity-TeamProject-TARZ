@@ -5,6 +5,7 @@ using Unity.Properties;
 using UnityEngine;
 using Zenject;
 using static SkillEnum;
+using static UnityEngine.UI.GridLayoutGroup;
 
 public enum EMachineType { Movement, Attack }
 
@@ -16,6 +17,7 @@ public class PlayerController : MonoBehaviour, IDamagable
     [HideInInspector] [Inject] public Loading loadingObject;
 
     private Animator anim;
+    private Coroutine SternCheckRoutine;
 
     private DrainManager drainManager;
     [SerializeField] private GameObject manaSkillPanel;
@@ -191,16 +193,18 @@ public class PlayerController : MonoBehaviour, IDamagable
         Stat.CurrentHp -= damage;
         if (Stat.CurrentHp > 0)
         {
-            ChangeState(EState.Damaged);
-            StartCoroutine(SternRoutine(delay));
+            if (SternCheckRoutine != null) return;
+
+            anim.CrossFade(Define.HASH_ANIM_DAMAGED, 0.1f);
+            delay = GetCurrentAnimTime() * 0.5f;
+            IsAnimStart = true;
+
+            SternCheckRoutine = StartCoroutine(SternRoutine(delay));
         }
         else
         {
             ChangeState(EState.Dead);
         }
-
-        //ChangeState(EState.Damaged);
-        //StartCoroutine(SternRoutine(delay));
 
         /* 추후 합의 후 재진행 예정
         switch (currentHitTypeView)
@@ -226,20 +230,22 @@ public class PlayerController : MonoBehaviour, IDamagable
 
     IEnumerator SternRoutine(float cool)
     {
+        float MaxCool = cool;
+
         while (!IsAnimStart)
         {
             yield return null;
         }
-
-        float MaxCool = cool;
-
         while (cool > 0.1f)
         {
             cool -= Time.deltaTime;
+            Movement.Rigid.angularVelocity = Vector3.zero;
+            Movement.Rigid.velocity = new Vector3(0, Movement.Rigid.velocity.y, 0);
             yield return null;
         }
 
         IsAnimStart = false;
+        SternCheckRoutine = null;
         yield break;
     }
 
@@ -268,4 +274,12 @@ public class PlayerController : MonoBehaviour, IDamagable
         }
     }
 
+    private void OnDisable()
+    {
+        if (SternCheckRoutine != null)
+        {
+            StopCoroutine(SternCheckRoutine);
+            SternCheckRoutine = null;
+        }
+    }
 }

@@ -18,6 +18,6 @@ public class Example_StaminaScript : MonoBehaviour
 
     public void Script_()
     {
-        model.MoveSpeed = gg;
+        model.CurrentMp = model.MaxMp;
     }
 }

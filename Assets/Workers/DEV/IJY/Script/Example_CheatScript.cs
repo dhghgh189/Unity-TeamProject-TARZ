@@ -1,7 +1,7 @@
 using UnityEngine;
 using Zenject;
 
-public class Example_StaminaScript : MonoBehaviour
+public class Example_CheatScript : MonoBehaviour
 {
     [Inject]
     [SerializeField] StatModel model;
@@ -18,6 +18,6 @@ public class Example_StaminaScript : MonoBehaviour
 
     public void Script_()
     {
-        model.MoveSpeed = gg;
+        model.CurrentMp = model.MaxMp;
     }
 }

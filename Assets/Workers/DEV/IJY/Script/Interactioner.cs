@@ -8,13 +8,12 @@ public class Interactioner : MonoBehaviour
 {
     public bool IsGrabing = false;
     [SerializeField] public Transform GrabPos;
-    [SerializeField] public SpecialInteraction_Script SpecialOBJ;
+    [SerializeField] public SpecialThrowOBJ_Base SpecialOBJ;
 
     private int interactionLayer;
     private int interactionGrabLayer;
     private Coroutine GrabRoutineCheck;
     private Coroutine RotationRoutineCheck;
-    private Vector3 throwAngle = Vector3.zero;
     private List<GameObject> interactionOBJs = new();
 
     [SerializeField] private PlayerController playerController;
@@ -60,7 +59,7 @@ public class Interactioner : MonoBehaviour
             }
 
             // 타겟 내부의 Activate 함수를 통해, 타겟과만 상호작용을 수행한다.
-            target.GetComponent<Base_InteractionOBJ>().Activate();
+            target.GetComponent<Interaction_Ibase_Activate>().Activate();
             // 상호작용이 수행되면 타겟을 비워, 바로 다음 타겟을 설정할 수 있도록 구성한다.
             target = null;
         }
@@ -114,7 +113,7 @@ public class Interactioner : MonoBehaviour
 
         if (targets.First().layer == interactionGrabLayer)
         {
-            SpecialOBJ = targets.First().GetComponent<SpecialInteraction_Script>();
+            SpecialOBJ = targets.First().GetComponent<SpecialThrowOBJ_Base>();
 
             if (SpecialOBJ.trigger == null || !SpecialOBJ.trigger.gameObject.activeSelf) return null;
             if (SpecialOBJ.trigger.IsPlayerIn == false)
@@ -169,7 +168,7 @@ public class Interactioner : MonoBehaviour
         IsGrabing = true;
         GrabRoutineCheck = StartCoroutine(CheckGrabing());
         // Activate_Grab을 실행해 물체를 interactioner의 자식으로 두어 함께 이동이 가능하도록 한다.
-        target.GetComponent<Base_InteractionOBJ_Grab>().Activate_Grab();
+        target.GetComponent<Interaction_Ibase_GrabAct>().Activate_Grab();
 
         if (IsGrabing != true)
         {
@@ -196,18 +195,18 @@ public class Interactioner : MonoBehaviour
     /// <returns></returns>
     IEnumerator CheckGrabing()
     {
+        Destroy(SpecialOBJ.rigidOBJ);
+
         // 플레이어의 스피드 = 기존의 1/3
         float curSpeed = playerController.Stat.MoveSpeed;
-        playerController.Stat.MoveSpeed = curSpeed / 3f;
-
-        Ray ray = Camera.main.ScreenPointToRay(playerController.transform.forward);
+        //playerController.Stat.MoveSpeed = curSpeed / 3f;
 
         while (IsGrabing)
         {
             if (target == null || !target.activeSelf) IsGrabing = false;
 
             // TODO : 포물선과 오버랩 스피어를 통한 범위 확인
-            CheckLoad(ray, throwAngle);
+            Check_BoxPath();
 
             yield return null;
         }
@@ -220,7 +219,7 @@ public class Interactioner : MonoBehaviour
         GrabEnding();
 
         // TODO : 오브젝트 던짐!
-        ThrowSpeOBJ(SpecialOBJ.GetComponent<Rigidbody>(), throwAngle);
+        ThrowSpeOBJ(SpecialOBJ.GetComponent<Rigidbody>());
         SpecialOBJ = null;
         yield break;
     }
@@ -242,34 +241,22 @@ public class Interactioner : MonoBehaviour
     /// <summary>
     /// 특수 오브젝트가 던져졌을 때의 경로를 파악하기 위한 함수.
     /// </summary>
-    void CheckLoad(Ray ray, Vector3 Angle)
+    void Check_BoxPath()
     {
-        if (Physics.Raycast(ray, out RaycastHit hit, 10f))
-        {
-            Angle = transform.forward + (transform.up * 0.3f);
-        }
-        else
-        {
-            Angle = transform.forward * 5f;
-        }
 
-        throwAngle = Angle;
-        Debug.DrawRay(playerController.transform.position, playerController.transform.forward * 10f, Color.blue);
     }
 
 
     /// <summary>
     /// 특수 오브젝트가 던져졌을 때 실행되는 코드.
     /// </summary>
-    void ThrowSpeOBJ(Rigidbody rigid, Vector3 angle)
+    void ThrowSpeOBJ(Rigidbody rigid)
     {
         Debug.Log("던짐!");
 
         // 임시적 변수. 추후 던지는 힘을 늘리는 효과가 생길 경우 수정할 필요성이 있다.
         float throwForce = 10f;;
-        // 다른 쓰레기 오브젝트가 저장된 상태로 던질경우, 중첩되어 두 기능이 모두 사용되고 있음
-        rigid.AddForce(/*(transform.forward + (transform.up * 0.3f))*/angle * throwForce, ForceMode.Impulse);
-        throwAngle = Vector3.zero;
+        rigid.AddForce((transform.forward + (transform.up * 0.3f)) * throwForce, ForceMode.Impulse);
     }
 
     //========================================================================

@@ -9,7 +9,7 @@ public enum UpgrageArmUnit
     DefaultPowerUnit, SkillPowerUnit, ElementalPowerUnit, MaxHpUnit, MaxStaminaUnit, MoveSpeedUnit, Size
 }
 
-public class ArmUpgradManager : MonoBehaviour, Base_InteractionOBJ
+public class ArmUpgradManager : MonoBehaviour, Interaction_Ibase_Activate
 {
     [Inject] StatModel statModel;
 

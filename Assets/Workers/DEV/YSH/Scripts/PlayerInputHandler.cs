@@ -83,23 +83,11 @@ public class PlayerInputHandler : MonoBehaviour
         InputLook = input.actions["Look"].ReadValue<Vector2>();
         TryJump = input.actions["Jump"].WasPressedThisFrame();
         TryInteraction = input.actions["Interact"].WasPressedThisFrame();
-
-        for (int i = TryKeyDown.Count - 1; i >= 0; i--)
-        {
-            if (TryKeyDown[i] == TryJump) continue;
-            if (TryKeyDown[i] == TryInteraction) continue;
-            TryKeyDown[i] = false;
-        }
     }
 
     void AnimStart()
     {
         InputDir = Vector3.zero;
         InputLook = input.actions["Look"].ReadValue<Vector2>();
-
-        for (int i = TryKeyDown.Count - 1; i >= 0; i--)
-        {
-            TryKeyDown[i] = false;
-        }
     }
 }

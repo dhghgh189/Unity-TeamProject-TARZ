@@ -28,7 +28,7 @@ public class CondCanAttack : Conditional
     {
         _distance = Vector3.Distance(transform.position, _player.transform.position);
 
-        if (_distance <=  _monsterData.AttackRange && !_monsterData.IsAttacked)
+        if (_distance <=  _monsterData.AttackRange && !_monsterData.IsAttacked && !_monsterData.IsCatched)
         {
             Debug.Log("CondMonsterCanAttack!!!!!!");
             return TaskStatus.Success;

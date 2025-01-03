@@ -42,6 +42,8 @@ public class PlayerController : MonoBehaviour, IDamagable
     public bool IsAnimStart { get; set; }
     public bool IsGrabingInput { get { return interactioner.IsGrabing; } }
 
+    public CapsuleCollider coll;
+
     private StringBuilder sb;
     void Awake()
     {
@@ -57,6 +59,7 @@ public class PlayerController : MonoBehaviour, IDamagable
         SkillHandler = GetComponent<PlayerSkillHandler>();
         ManaSkillHandler = GetComponent<ManaSkillHandler>();
         interactioner = GetComponentInChildren<Interactioner>();
+        coll = GetComponent<CapsuleCollider>();
 
         Fsm = new PlayerFSM(this, AblityAdapter);
 

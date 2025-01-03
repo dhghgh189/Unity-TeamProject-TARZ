@@ -14,6 +14,7 @@ public class Test_FistCliping : MonoBehaviour
     [Header("Materials")]
     [SerializeField] float flow;
     [SerializeField] float curFlow;
+    [SerializeField] float alphas;
     [Space(2)]
     [Header("Hand")]
     [SerializeField] GameObject handObj;
@@ -37,6 +38,8 @@ public class Test_FistCliping : MonoBehaviour
     [SerializeField] float fistolVisible = 0f;
 
     BoxCollider bc;
+
+    // 데이터 연동 + collider가 늘어나게
 
     [ContextMenu("data")]
     public void SetData()
@@ -85,11 +88,13 @@ public class Test_FistCliping : MonoBehaviour
         {
             transform.position = Vector3.Lerp(startPos, endPos, (elapsedTime * fistSpeed) / fistTime);
             curFlow = Remap(Vector3.Magnitude(transform.position - startPos), 0f, length, -flow, flow);
-            SetFlow(Remap(curFlow, -flow, flow, handUnvisible, fistolVisible));
+            alphas = Remap(curFlow, -flow, flow, handUnvisible, fistolVisible);
+            SetFlow(alphas);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-        SetFlow(curFlow + 0.1f);
+        
+
         transform.position = endPos;
 
         Debug.Log("앞으로 움직이기 종료!");
@@ -113,12 +118,13 @@ public class Test_FistCliping : MonoBehaviour
         while ((elapsedTime * fistSpeed) < fistTime)
         {
             transform.position = Vector3.Lerp(endPos, startPos, (elapsedTime * fistSpeed) / fistTime);
-            curFlow = Remap(Vector3.Magnitude(transform.position - endPos), 0, length, flow, -flow);
-            SetFlow(Remap(curFlow, flow, -flow, fistolVisible, handUnvisible));
+            curFlow = Remap(Vector3.Magnitude(transform.position - startPos), length, 0f, flow, -flow);
+            alphas = Remap(curFlow, flow,-flow, fistolVisible, handUnvisible);
+            SetFlow(alphas);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-        SetFlow(curFlow - 0.1f);
+       
         transform.position = startPos;
 
         Debug.Log("뒤로 움직이기 종료!");

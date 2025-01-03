@@ -126,11 +126,32 @@ public class ManaSkillHandler : MonoBehaviour
     {
         if (selectIndex < 0) return;
 
+        if (curNode.Value.OnCollisionEnterAction(other))
+        {
+            NextStep();
+        }
+    }
+
+    private void OnCollisionStay(Collision other)
+    {
+        if (selectIndex < 0) return;
+
         if (curNode.Value.OnCollisionAction(other))
         {
             NextStep();
         }
     }
+
+    private void OnCollisionExit(Collision other)
+    {
+        if (selectIndex < 0) return;
+
+        if (curNode.Value.OnCollisionExitAction(other))
+        {
+            NextStep();
+        }
+    }
+
 
     /// <summary>
     /// 스킬이 끝나 행동을 초기화하는 작업

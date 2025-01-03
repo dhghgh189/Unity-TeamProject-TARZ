@@ -3,87 +3,56 @@ using UnityEngine;
 
 /// <summary>
 /// 거대 주먹을 소환하는 차원문에 부착하는 스크립트
+/// 주먹만 생성할 뿐 다른 역할을 하지 않는다
 /// </summary>
 public class MegaFistGateObject : MonoBehaviour
 {
     [Header("Fist_Init")]
-    [SerializeField] MegaFistObject fist;       // 거대 주먹
-    [SerializeField] Animator gateAnimator;     // 게이트의 애니메이터
-    [Header("Fist_Data")]
-    [SerializeField] float fistAttackSpeed;     // 주먹이 움직이는 속도
-    [SerializeField] float fistAttackRange;     // 주먹의 공격 범위
-    [SerializeField] float fistReturnTime;      // 주먹이 차원문으로 돌아오는데 걸리는 시간
+    [SerializeField] MegaFistObject fistPrefab;       // 거대 주먹
+    [SerializeField] GameObject instance;
 
-
-    private int fistStartAnimHash;              // 주먹이 나가는 애니메이션의 해쉬
-    private int fistReturnAnimHash;             // 주먹이 돌아가는 애니메이션의 해쉬
-    private int fistMoveAnimHash;
-    private int fistBackAnimHash;
-
-    private void Awake()
+    private IEnumerator StartGate(MegaFistObject fist)
     {
-        gateAnimator = GetComponent<Animator>();
-        fistStartAnimHash = Animator.StringToHash("FistStartAnimation");
-        fistReturnAnimHash = Animator.StringToHash("FistReturnAnimation");
-        fistMoveAnimHash = Animator.StringToHash("FistMoveAnimation");
-        fistBackAnimHash = Animator.StringToHash("FistBackAnimation");
-    }
-
-    private void Start()
-    {
-        StartCoroutine(FistStartRoutine());
-    }
-
-    // 시작할 때 애니메이션 실행
-    private IEnumerator FistStartRoutine()
-    {
-        // 충돌체를 키고
-        fist.Move();
-        // 날아가는 속도를 설정한 다음
-        gateAnimator.SetFloat("FistAttackSpeed", (fistAttackSpeed > 1) ? fistAttackSpeed : 1);
         yield return Util.GetDelay(1f);
-        Debug.Log("시작!");
-        //gateAnimator.CrossFade(fistStartAnimHash, 0.01f);
-        gateAnimator.CrossFade(fistMoveAnimHash, 0.01f);
-    }
-
-    /// <summary>
-    /// 주먹이 다 나갔으면
-    /// </summary>
-    public void OnStartAction()
-    {
-        // 충돌체를 끄고
-        fist.Return();
-        // 다시 돌아오기
-        StartCoroutine(FistReturnRotine());
-    }
-
-    private IEnumerator FistReturnRotine()
-    {
-        //gateAnimator.SetFloat("FistAttackSpeed", -1f);
-        yield return Util.GetDelay(fistReturnTime);
-        gateAnimator.CrossFade(fistBackAnimHash, 0.01f);
-        //gateAnimator.CrossFade(fistReturnAnimHash, 0.01f);
-    }
-
-    public void OnEndAction()
-    {
-        Destroy(gameObject);
+        fist.Move();
     }
 
     // 데미지, 공격 범위, 주먹 속도, 주먹 시간 , 투명도
     public void Init(ManaSkillDataSO data)
     {
-        // 데미지
-        fist.Damage = data.GetData((int)ManaMegaFistDataType.FistDamage);
+        // 거대 주먹 생성
+        instance = Instantiate(fistPrefab.gameObject);
+        MegaFistObject fist = instance.GetComponent<MegaFistObject>();
+
+        if (fist == null) return;
+
+        /* 스팩 설정 */
         // 공격 범위
-        transform.localScale = new Vector3(data.GetData((int)ManaMegaFistDataType.FistRange) * 2f, data.GetData((int)ManaMegaFistDataType.FistRange) * 2f, data.GetData((int)ManaMegaFistDataType.FistRange) * 0.07f * 2f);
-        transform.position += Vector3.up * data.GetData((int)ManaMegaFistDataType.FistRange) * 0.5f;
+        transform.position += Vector3.up * data.GetData((int)ManaMegaFistDataType.FistHeight);
+        instance.transform.position = transform.position;
+        instance.transform.rotation = transform.rotation;  
+        fist.FistBody.localScale = new Vector3(data.GetData((int)ManaMegaFistDataType.FistWidth), data.GetData((int)ManaMegaFistDataType.FistHeight), data.GetData((int)ManaMegaFistDataType.FistLength) * 0.25f);
+        fist.Length = data.GetData((int)ManaMegaFistDataType.FistLength);
         // 주먹 속도
-        fistAttackSpeed = data.GetData((int)ManaMegaFistDataType.FistSpeed);
+        fist.FistSpeed = data.GetData((int)ManaMegaFistDataType.FistSpeed);
         // 주먹 시간
-        fistReturnTime = data.GetData((int)ManaMegaFistDataType.FistTime);
+        fist.FistTime = data.GetData((int)ManaMegaFistDataType.FistTime);
         // 투명도
         fist.AlphaValue = data.GetData((int)ManaMegaFistDataType.FistAlpha) * 0.01f;
+        // 공격력
+        fist.Damage = data.GetData((int)ManaMegaFistDataType.FistDamage);
+        // 파괴 이벤트 설정
+        fist.OnEndEvent.AddListener(IsOver);
+        // 크기 설정
+        fist.SetData();
+
+        StartCoroutine(StartGate(fist));
+    }
+
+    public void IsOver() => Destroy(gameObject);
+
+    private void OnDestroy()
+    {
+        Destroy(instance);
     }
 }

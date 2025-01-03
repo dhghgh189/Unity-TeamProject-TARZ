@@ -6,5 +6,7 @@ using UnityEngine;
 public interface IManaAct
 {
     public void OnAction();
+    public bool OnCollisionEnterAction(Collision other);
     public bool OnCollisionAction(Collision other);
+    public bool OnCollisionExitAction(Collision other);
 }

@@ -28,7 +28,11 @@ public class ManaBlackHollSkill : IManaSkill
         Acts.AddLast(new ManaBlackHoll_2(owner, this));
 
         OnThrowEvent = new UnityEvent();
+#if UNITY_EDITOR
         tmp = Resources.Load("Unmanaged/BlackHoll") as GameObject;
+#else
+        tmp = Resources.Load("Managed/ManaSkill/BlackHoll") as GameObject;
+#endif
     }
 
     public void SetInit(ManaSkillHandler manaSkillHandler)

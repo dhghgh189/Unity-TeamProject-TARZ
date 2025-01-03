@@ -11,6 +11,7 @@ public class Equipment : MonoBehaviour
     [Inject] UI_EquipmentSlot[] uI_EquipmentSlots = new UI_EquipmentSlot[(int)Part.Size];
 
     [Inject] SaveData saveData;
+    [Inject] SaveManager saveManager;
     private void Start()
     {
         foreach (GearSaveData item in saveData.EquipmentGears)
@@ -45,6 +46,7 @@ public class Equipment : MonoBehaviour
             equipmentGears[(int)gear.Part] = gear;
             uI_EquipmentSlots[(int)gear.Part].SetEquipmentSlot(gear);
         }
+        saveManager.Save();
     }
     public void EquipmentSave()
     {

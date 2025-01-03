@@ -14,13 +14,13 @@ public class MonsterSkill : ScriptableObject
     public float CoolTime;
     public float Angle; // 공격 범위 (각도)
     public float Range; // 공격 범위 (거리)
-    public float JumpForce; // 점프 공격 점프 수치
-    public string AnimationName; // 출력할 애니메이션 이름
     public float Interval; // 도트뎀 주기
     public float ThrowForce;
     public bool CanUseSkill = true; // 기본값 true
     public float Duration;
 
+
+    //점프 어택, 대쉬 어택 
    public float InAirTime; // 체공 시간
  
    public float JumpHeight; // Y축 점프 높이

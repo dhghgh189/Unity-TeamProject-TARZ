@@ -2,7 +2,6 @@ using BehaviorDesigner.Runtime.Tasks;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
-using Zenject;
 
 /// <summary>
 /// 1. returnObj로 setdastination  running + 공격 거리 내로 들어오면 succeess
@@ -11,10 +10,13 @@ using Zenject;
 public class ActMove_NotStopInAttacking : Action
 {
     [SerializeField] CondCanMove _condCanMove;
+
     private PooledObject _pooledObject;
 
     private MonsterData _monsterData;
+
     private NavMeshAgent _agent;
+
     private Animator _animator;
 
     private PlayerController _player;
@@ -49,7 +51,15 @@ public class ActMove_NotStopInAttacking : Action
             }
 
             _agent.SetDestination(_player.transform.position);
-            _animator.SetBool("Move", true);
+
+            if (_monsterData.MonsterTyPe == MonsterData.MonsterType.Revive && _monsterData.CurHp <= _monsterData.MaxHp / 2)
+            {
+                _animator.SetBool("Revive", true);
+            }
+            else
+            {
+                _animator.SetBool("Move", true);
+            }
             return TaskStatus.Running;
         }
         else if (_condCanMove.IsPlayerWithinSight(_player.gameObject) == false)

@@ -1,26 +1,25 @@
-using System.Collections;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour // 일반 원딜 쫄몹
 {
-    IDamagable damagable;
-
-    [SerializeField] Rigidbody _rigidBody;
-
-    [SerializeField] GameObject _monster;
-
     [SerializeField] GameObject _radiation;
+
+    private Rigidbody _rigidBody;
 
     private MonsterData _monsterData;
 
+    IDamagable damagable;
+
+    private void Awake()
+    {
+        _monsterData = GetComponentInParent<MonsterData>();
+        _rigidBody = GetComponent<Rigidbody>();
+    }
+
     private void Start()
     {
-        _monsterData = _monster.GetComponent<MonsterData>(); 
-
         _rigidBody.AddForce((transform.forward + transform.up) * _monsterData.ThrowPower, ForceMode.Impulse);
-    }
-    private void Update()
-    {
+
         Destroy(gameObject, 3f);
     }
 

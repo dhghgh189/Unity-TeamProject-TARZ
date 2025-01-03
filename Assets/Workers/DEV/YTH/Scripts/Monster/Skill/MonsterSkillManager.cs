@@ -6,7 +6,6 @@ using UnityEngine.AI;
 public class MonsterSkillManager : MonoBehaviour
 {
     #region Skill-ScriptableObj
-
     const string SKILL_PATH = "Managed/Skill/Monster";
 
     [Header("MonsterSkill")]
@@ -248,20 +247,15 @@ public class MonsterSkillManager : MonoBehaviour
     public Coroutine bombRoutine;
     public IEnumerator BombRoutine()  // 직스 궁 
     {
-        /*_animator.SetTrigger("");*/
-
         BombSkill.CanUseSkill = false;
 
-        GameObject bomb = Instantiate(_bombPrefab, _muzzlePoint.position, _muzzlePoint.rotation);
-
-         bomb.GetComponent<Projectile_Bomb>()._bombZombie = gameObject;
-
+        GameObject bomb = Instantiate(_bombPrefab, _muzzlePoint.position, _muzzlePoint.rotation, transform);
         Rigidbody bombRb = bomb.GetComponent<Rigidbody>();
         bombRb.AddForce((_muzzlePoint.forward + _muzzlePoint.up * 3) * BombSkill.ThrowForce, ForceMode.Impulse);
+
         yield return Util.GetDelay(BombSkill.CoolTime);    
         bombRoutine = null;
         BombSkill.CanUseSkill = true;
-
     }
     #endregion
 
@@ -269,11 +263,9 @@ public class MonsterSkillManager : MonoBehaviour
     public Coroutine mineRoutine;
     public IEnumerator MineRoutine()
     {
-        /*_animator.SetTrigger("");*/
         MineSkill.CanUseSkill = false;
 
-        GameObject mine = Instantiate(_minePrefab, _muzzlePoint.position, _muzzlePoint.rotation);
-        mine.GetComponent<Projectile_Mine>()._bombZombie = gameObject;
+        GameObject mine = Instantiate(_minePrefab, _muzzlePoint.position, _muzzlePoint.rotation, transform);
         Rigidbody mineRb = mine.GetComponent<Rigidbody>();
         mineRb.AddForce(_muzzlePoint.forward * MineSkill.ThrowForce, ForceMode.Impulse);
 
@@ -519,7 +511,7 @@ public class MonsterSkillManager : MonoBehaviour
     public Coroutine frogJumpAttackRoutine;
     public IEnumerator FrogJumpAttackRoutine()
     {
-        _animator.SetTrigger("JumpAttack");
+       /* _animator.SetTrigger("JumpAttack");*/
 
         if (jumpRoutine_frogJumpAttack == null)
         {
@@ -597,7 +589,7 @@ public class MonsterSkillManager : MonoBehaviour
     #region RangeAttack
     public void ThrowAttack()
     {
-        GameObject projectile = Object.Instantiate(_projectile, _muzzlePoint.position, _muzzlePoint.rotation);
+        GameObject projectile = Object.Instantiate(_projectile, _muzzlePoint.position, _muzzlePoint.rotation, transform);
     }
     #endregion
 }

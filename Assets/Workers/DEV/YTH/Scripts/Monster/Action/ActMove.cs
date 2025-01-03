@@ -6,10 +6,13 @@ using Zenject;
 public class ActMove : Action
 {
     [SerializeField] CondCanMove _condCanMove;
+
     private PooledObject _pooledObject;
 
     private MonsterData _monsterData;
+
     private NavMeshAgent _agent;
+
     private Animator _animator;
 
     private PlayerController _player; 

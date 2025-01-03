@@ -4,6 +4,8 @@ using Zenject;
 
 public class MSkill_WheelWind : Action
 {
+    [SerializeField] GameObject _wheelWindTrigger;
+
     private MonsterSkillManager _monsterSkillManager;
 
     private Animator _animator;
@@ -11,8 +13,6 @@ public class MSkill_WheelWind : Action
     private PooledObject _pooledObject;
 
     private MonsterData _monsterData;
-
-    [SerializeField] GameObject _wheelWindTrigger;
 
     private PlayerController _player;
 

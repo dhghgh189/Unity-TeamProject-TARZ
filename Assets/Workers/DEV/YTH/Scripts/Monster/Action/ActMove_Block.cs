@@ -11,17 +11,20 @@ using Zenject;
 public class ActMove_Block : Action
 {
     [SerializeField] CondCanMove _condCanMove;
+
+    private float _stopBlockDistance;
+
     private PooledObject _pooledObject;
 
     private MonsterData _monsterData;
+
     private NavMeshAgent _agent;
+
     private Animator _animator;
 
     private PlayerController _player;
 
     private Vector3 _playerBackRoute;
-
-    [SerializeField] float _stopBlockDistance = 5f; // 공격 거리 보다 조금 멀게
 
     private Transform _lastPlayerTransform; // 플레이어가 시야각에서 사라진 마지막 위치
 
@@ -39,20 +42,22 @@ public class ActMove_Block : Action
     {
         _player = _pooledObject.player;
         keepChaseRoutine = StartCoroutine(KeepChaseRoutine());
+
+        _stopBlockDistance = _monsterData.CanJumpDistance + 2;
     }
 
     public override TaskStatus OnUpdate()
     {
         _distance = Vector3.Distance(transform.position, _player.transform.position);
 
-        _playerBackRoute = _player.transform.position - _player.transform.forward * 10f;
+        _playerBackRoute = _player.transform.position - _player.transform.forward * _stopBlockDistance;
 
-        if (_condCanMove.IsPlayerWithinSight(_player.gameObject) && _distance >= _stopBlockDistance) 
+        if (_condCanMove.IsPlayerWithinSight(_player.gameObject) && _distance > _stopBlockDistance) 
         {
             _agent.SetDestination(_playerBackRoute);
             return TaskStatus.Running;
         }
-        else if (_condCanMove.IsPlayerWithinSight(_player.gameObject) && _distance < _stopBlockDistance)
+        else if (_condCanMove.IsPlayerWithinSight(_player.gameObject) && _distance <=  _stopBlockDistance)
         {
             if (_condCanMove.IsPlayerWithinSight(_player.gameObject) && _distance <= _monsterData.AttackRange)
             {

@@ -3,10 +3,6 @@ using UnityEngine;
 
 public class CondCanMove : Conditional
 {
-    private MonsterData _monsterData;
-
-    private PlayerController _player; // 플레이어 위치 넘겨줄 오브젝트
-
     [Header("인지 범위")]
     [SerializeField] float _angle; // 시야각
 
@@ -14,6 +10,10 @@ public class CondCanMove : Conditional
 
     [Header("회전")]
     [SerializeField] float _rate; // 회전 Lerp 비율
+
+    private MonsterData _monsterData;
+
+    private PlayerController _player; // 플레이어 위치 넘겨줄 오브젝트
 
     private PooledObject _pooledObject;
 

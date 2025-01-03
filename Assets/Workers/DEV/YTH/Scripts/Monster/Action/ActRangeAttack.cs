@@ -1,23 +1,21 @@
-using UnityEngine;
 using BehaviorDesigner.Runtime;
 using BehaviorDesigner.Runtime.Tasks;
-using Zenject;
 using System.Collections;
+using UnityEngine;
 
 public class ActRangeAttack : Action
 {
+    private Transform _muzzlePoint;
+
     private MonsterData _monsterData;
+
+    private MonsterSkillManager _monsterSkillManager;
+
     private Animator _animator;
 
     private PooledObject _pooledObject;
 
     private PlayerController _player;
-
-    [SerializeField] SharedGameObject _projectilePrefab;
-
-    [SerializeField] SharedTransform _muzzlePoint;
-
- 
 
     private float _distance;
 
@@ -25,13 +23,16 @@ public class ActRangeAttack : Action
     {
         _pooledObject = GetComponent<PooledObject>();
         _monsterData = GetComponent<MonsterData>();
+        _monsterSkillManager = GetComponent<MonsterSkillManager>();
         _animator = GetComponent<Animator>();
     }
 
     public override void OnStart()
-	{
+    {
         _player = _pooledObject.player;
         _distance = Vector3.Distance(transform.position, _player.transform.position);
+        _muzzlePoint = transform.Find("MuzzlePoint");
+        _monsterSkillManager.MuzzlePoint = _muzzlePoint;
     }
 
     public override TaskStatus OnUpdate()
@@ -49,16 +50,12 @@ public class ActRangeAttack : Action
         }
     }
 
-    #region 원거리 공격
     Coroutine throwRoutine;
     IEnumerator ThrowRoutine()
     {
         yield return new WaitForSeconds(_monsterData.RangeAttackSpeed);
         throwRoutine = null;
     }
-
-    
-    #endregion
 
     public void MonsterRotation()
     {

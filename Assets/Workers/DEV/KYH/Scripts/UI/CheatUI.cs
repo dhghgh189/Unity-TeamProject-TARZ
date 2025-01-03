@@ -1,8 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Experimental.AI;
 using UnityEngine.UI;
 using Zenject;
 
@@ -267,13 +265,13 @@ public class CheatUI : MonoBehaviour
         Vector3 randomPos = player.transform.position + Random.insideUnitSphere * 5f;
         randomPos.y = 0;
         Instantiate(dropGear, randomPos, Quaternion.identity)
-            .GetComponent<DropGear>().SetDropItem(Part.신발, 1, true, true);
+            .GetComponent<DropGear>().SetDropItem(1, 50f, true);
     }
 
     /// <summary>
     /// 원하는 아이템 획득 치트
     /// </summary>
-    public void GetGear() 
+    public void GetGear()
     {
         Gear gear = ScriptableObject.CreateInstance<Gear>();
         gear.Part = (Part)partsDropdown.value;

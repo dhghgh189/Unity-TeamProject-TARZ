@@ -40,7 +40,7 @@ public class Inventory : MonoBehaviour
     }
 
     // 티어와 부위를 지정해 장비를 인벤토리에 저장하는 함수
-    public bool GetGear(Part part, int tier)
+    public bool GetGear(Part part, int tier, float pValue)
     {
         UI_InventorySlots slot = EmptySlot();
         if (!slot) return false;
@@ -62,9 +62,9 @@ public class Inventory : MonoBehaviour
         }
 
         // 랜덤한 능력치를 랜덤 확률로 상승
-        if (Util.IsRandom(50))
+        if (Util.IsRandom(pValue))
             gear.Abilities.Add(new GearAbility() { ability = (AdditionAbility)Random.Range(0, (int)AdditionAbility.Size), value = 10 });
-        if (Util.IsRandom(50))
+        if (Util.IsRandom(pValue))
             gear.Abilities.Add(new GearAbility() { ability = (AdditionAbility)Random.Range(0, (int)AdditionAbility.Size), value = 10 });
 
         // 이름 변경

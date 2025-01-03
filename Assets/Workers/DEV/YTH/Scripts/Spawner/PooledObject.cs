@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 using Zenject;
 
@@ -9,11 +8,8 @@ using Zenject;
 /// </summary>
 public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
 {
-    private ObjectPool _returnPool; //반납 위치
-    public ObjectPool ReturnPool { get { return _returnPool; } set { _returnPool = value; } }
-
     [HideInInspector]
-    [Inject] 
+    [Inject]
     public PlayerController player;
 
     public event Action OnDie;
@@ -31,10 +27,10 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
 
     [SerializeField] GameObject _chip;
 
-   
+
     private void Start()
     {
-         _autoLockOn = player.GetComponent<AutoLockOn>();
+        _autoLockOn = player.GetComponent<AutoLockOn>();
 
         _animator = GetComponent<Animator>();
         _rigid = GetComponent<Rigidbody>();
@@ -78,7 +74,7 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
             return;
         }
 
-        if (_monsterData.MonsterTIer== MonsterData.MonsterTier.Boss)
+        if (_monsterData.MonsterTIer == MonsterData.MonsterTier.Boss)
             return;
 
         _animator.SetTrigger("TakeDamage");
@@ -86,24 +82,42 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
 
     public void Die()
     {
+        int random = UnityEngine.Random.Range(1, 101);
+
         _autoLockOn.action?.Invoke();
         _animator.SetTrigger("Die");
 
-        GameObject gear = Instantiate(_gear, transform.position + Vector3.up*0.5f, transform.rotation);
-        gear.GetComponent<DropGear>().SetDropItem(Part.신발, 1, true, true);
-
-        GameObject chip = Instantiate(_chip, transform.position + Vector3.up * 0.5f + Vector3.forward * 0.5f, transform.rotation);
-        chip.GetComponent<DropChip>().SetDropChip(10 * (1 + (player.Stat.GetAbility(AdditionAbility.ChipGetAmount) * 0.01f)), true);
-
-        if (ReturnPool != null)
+        Debug.Log(random);
+        switch (_monsterData.MonsterTIer)
         {
-            ReturnPool.ReturnPool(this);
+            case MonsterData.MonsterTier.Normal:
+                if (random > 50)
+                    Instantiate(_gear, transform.position + Vector3.up * 0.5f, transform.rotation).GetComponent<DropGear>().SetDropItem(1, 25f);
+                break;
+            case MonsterData.MonsterTier.Elite:
+                if (random > 25)
+                    Instantiate(_gear, transform.position + Vector3.up * 0.5f, transform.rotation).GetComponent<DropGear>().SetDropItem(random > 90 ? 3 : random > 75 ? 2 : 1, 50f);
+                break;
+            case MonsterData.MonsterTier.Boss:
+                Instantiate(_gear, transform.position + Vector3.up * 0.5f, transform.rotation).GetComponent<DropGear>().SetDropItem(1, 75f, true);
+                break;
+        }
+
+        random = UnityEngine.Random.Range(0, 12);
+        if (_monsterData.MonsterTIer == MonsterData.MonsterTier.Boss)
+        {
+            GameObject chip = Instantiate(_chip, transform.position + Vector3.up * 0.5f + Vector3.forward * 0.5f, transform.rotation);
+            chip.GetComponent<DropChip>().SetDropChip(random, false);
         }
         else
         {
-            Destroy(gameObject);
+            GameObject chip = Instantiate(_chip, transform.position + Vector3.up * 0.5f + Vector3.forward * 0.5f, transform.rotation);
+            chip.GetComponent<DropChip>().SetDropChip(random, true);
         }
-        
+
+        /* BossMonsterSpwner 일반칩 다른친구드,ㄹ은 그냥 블랙칩*/
+
+        gameObject.SetActive(false);
     }
 
     public void KnockBack(GameObject attacker)

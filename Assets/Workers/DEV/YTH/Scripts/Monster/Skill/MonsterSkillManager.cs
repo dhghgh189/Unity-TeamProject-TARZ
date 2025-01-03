@@ -200,8 +200,10 @@ public class MonsterSkillManager : MonoBehaviour
     Coroutine jumpRoutine_jumpAttack;
     IEnumerator JumpRoutine_JumpAttack()
     {
+        float distance = Vector3.Distance(transform.position, _player.transform.position);
+        
         _jumpStartPosition = transform.position;
-        _jumpDirection = transform.forward.normalized * JumpAttackSkill.JumpDistance;
+        _jumpDirection = transform.forward.normalized * distance;
 
         while (_elapsedTime < JumpAttackSkill.InAirTime)
         {
@@ -559,10 +561,9 @@ public class MonsterSkillManager : MonoBehaviour
     public void Revive()
     {
         ReviveSkill.CanUseSkill = false;
-        //_animator.SetTrigger("Revive");
 
-        _reviveBefore.SetActive(false);
-        _reviveAfter.SetActive(true);
+        //_reviveBefore.SetActive(false);
+        //_reviveAfter.SetActive(true);
     }
     #endregion
 

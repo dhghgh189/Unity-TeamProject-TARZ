@@ -38,6 +38,7 @@ public class Loading : MonoBehaviour
         }
 
         oper.allowSceneActivation = true;
+        Debug.Log(SceneManager.GetActiveScene().buildIndex);
 
         yield return Util.GetDelay(0.2f);
         gameObject.SetActive(false);

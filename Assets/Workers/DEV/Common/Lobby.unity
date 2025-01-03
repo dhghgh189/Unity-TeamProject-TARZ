@@ -695,7 +695,7 @@ MonoBehaviour:
   skillData: {fileID: 11400000, guid: 6fdf11afa13837849ab82e5933395cdc, type: 2}
   dropGear: {fileID: 7721173211588356841, guid: 6f50a567d27f5234c89a2742d0a1134a,
     type: 3}
-  mujeokToggle: {fileID: 2112107452}
+  cheatUIPanel: {fileID: 716233807}
   statDropdown: {fileID: 356792620}
   partsDropdown: {fileID: 622671507}
   tierDropdown: {fileID: 951291479}
@@ -6346,6 +6346,7 @@ GameObject:
   - component: {fileID: 716233808}
   - component: {fileID: 716233810}
   - component: {fileID: 716233809}
+  - component: {fileID: 716233811}
   m_Layer: 5
   m_Name: CheatPanel
   m_TagString: Untagged
@@ -8917,7 +8918,7 @@ MonoBehaviour:
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 622671507}
     m_SelectOnDown: {fileID: 508487054}
-    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnLeft: {fileID: 1322634277}
     m_SelectOnRight: {fileID: 1540994190}
   m_Transition: 1
   m_Colors:
@@ -11149,7 +11150,7 @@ MonoBehaviour:
     m_SelectOnUp: {fileID: 2112107452}
     m_SelectOnDown: {fileID: 498093297}
     m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
+    m_SelectOnRight: {fileID: 1051325008}
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
@@ -16772,6 +16773,11 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2474439350485961926, guid: 744790fd829edc343bb6392bc0fb0f1a,
+        type: 3}
+      propertyPath: inputManager
+      value: 
+      objectReference: {fileID: 363177899}
     - target: {fileID: 3159910339269809843, guid: 744790fd829edc343bb6392bc0fb0f1a,
         type: 3}
       propertyPath: m_AnchorMax.x

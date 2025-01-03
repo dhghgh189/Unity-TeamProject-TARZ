@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Example_InteractionScript : MonoBehaviour, Base_InteractionOBJ
+public class Example_InteractionScript : MonoBehaviour, Interaction_Ibase_Activate
 {
     public void Activate()
     {

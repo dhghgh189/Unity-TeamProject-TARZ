@@ -671,12 +671,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d415fde0eade4294f8588370e2ae33f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradeNumber: 6
+  upgrageArmUnit: 0
   upgradeAbility: 3
-  upgradeValue: 10
-  upgradeCost: 30
+  upTier: 0
+  upStatList: []
+  upCostList: []
+  isInstall: 0
   upgradeName: "\uC18D\uC131 \uACF5\uACA9\uB825 UP(\uC18C)"
   upgradeDescription: "\uC18D\uC131 \uACF5\uACA9\uB825\uC744 10% \uAC15\uD654"
+  SetUnitbutton: {fileID: 0}
+  UnitUpgradebutton: {fileID: 0}
 --- !u!114 &32060419
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -903,248 +907,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: -20}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &108002066
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 108002067}
-  - component: {fileID: 108002071}
-  - component: {fileID: 108002070}
-  - component: {fileID: 108002069}
-  - component: {fileID: 108002068}
-  m_Layer: 27
-  m_Name: Cuby (3)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &108002067
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 108002066}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.48, y: -2.2694511, z: 3.02}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 807266573}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &108002068
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 108002066}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b28101cefd5a8a42aab311dd14655e4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  col: {fileID: 0}
-  isThrowing: 0
-  trigger: {fileID: 0}
---- !u!65 &108002069
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 108002066}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!23 &108002070
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 108002066}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 01a78debe819c2c45935a88982a1ab1d, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &108002071
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 108002066}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &111772855
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 111772856}
-  - component: {fileID: 111772860}
-  - component: {fileID: 111772859}
-  - component: {fileID: 111772858}
-  - component: {fileID: 111772857}
-  m_Layer: 27
-  m_Name: Cuby (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &111772856
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 111772855}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.06, y: -2.2694511, z: 1.897533}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 807266573}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &111772857
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 111772855}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b28101cefd5a8a42aab311dd14655e4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  col: {fileID: 0}
-  isThrowing: 0
-  trigger: {fileID: 0}
---- !u!65 &111772858
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 111772855}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!23 &111772859
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 111772855}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 01a78debe819c2c45935a88982a1ab1d, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &111772860
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 111772855}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &112389998
 GameObject:
   m_ObjectHideFlags: 0
@@ -1547,12 +1309,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d415fde0eade4294f8588370e2ae33f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradeNumber: 16
+  upgrageArmUnit: 0
   upgradeAbility: 10
-  upgradeValue: 20
-  upgradeCost: 100
+  upTier: 0
+  upStatList: []
+  upCostList: []
+  isInstall: 0
   upgradeName: "\uC774\uB3D9 \uC18D\uB3C4 UP(\uC911)"
   upgradeDescription: "\uC774\uB3D9 \uC18D\uB3C4\uB97C 20% \uC0C1\uC2B9"
+  SetUnitbutton: {fileID: 0}
+  UnitUpgradebutton: {fileID: 0}
 --- !u!114 &144411529
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2199,12 +1965,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d415fde0eade4294f8588370e2ae33f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradeNumber: 12
+  upgrageArmUnit: 0
   upgradeAbility: 8
-  upgradeValue: 10
-  upgradeCost: 30
+  upTier: 0
+  upStatList: []
+  upCostList: []
+  isInstall: 0
   upgradeName: "\uC2A4\uD14C\uBBF8\uB098 \uD68C\uBCF5 \uC18D\uB3C4 UP(\uC18C)"
   upgradeDescription: "\uC2A4\uD14C\uBBF8\uB098 \uD68C\uBCF5 \uC18D\uB3C4 10% \uC0C1\uC2B9"
+  SetUnitbutton: {fileID: 0}
+  UnitUpgradebutton: {fileID: 0}
 --- !u!114 &224988331
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2338,12 +2108,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d415fde0eade4294f8588370e2ae33f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradeNumber: 8
+  upgrageArmUnit: 0
   upgradeAbility: 3
-  upgradeValue: 30
-  upgradeCost: 1000
+  upTier: 0
+  upStatList: []
+  upCostList: []
+  isInstall: 0
   upgradeName: "\uC18D\uC131 \uACF5\uACA9\uB825 UP(\uB300)"
   upgradeDescription: "\uC18D\uC131 \uACF5\uACA9\uB825\uC744 30% \uAC15\uD654"
+  SetUnitbutton: {fileID: 0}
+  UnitUpgradebutton: {fileID: 0}
 --- !u!114 &243447067
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3499,7 +3273,7 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
-          m_FloatArgument: 5
+          m_FloatArgument: 0.1
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
@@ -3592,12 +3366,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d415fde0eade4294f8588370e2ae33f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradeNumber: 17
+  upgrageArmUnit: 0
   upgradeAbility: 10
-  upgradeValue: 30
-  upgradeCost: 1000
+  upTier: 0
+  upStatList: []
+  upCostList: []
+  isInstall: 0
   upgradeName: "\uC774\uB3D9 \uC18D\uB3C4 UP(\uB300)"
   upgradeDescription: "\uC774\uB3D9 \uC18D\uB3C4\uB97C 30% \uC0C1\uC2B9"
+  SetUnitbutton: {fileID: 0}
+  UnitUpgradebutton: {fileID: 0}
 --- !u!114 &325274177
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3731,12 +3509,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d415fde0eade4294f8588370e2ae33f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradeNumber: 20
+  upgrageArmUnit: 0
   upgradeAbility: 0
-  upgradeValue: 10
-  upgradeCost: 9999
+  upTier: 0
+  upStatList: []
+  upCostList: []
+  isInstall: 0
   upgradeName: "\uD589\uC6B4\uC774\uB791 \uACBD\uD5D8\uCE58\uB294 \uC5C6\uB294\uB385"
   upgradeDescription: "\uACBD\uD5D8\uCE58\uB294 \uBB54\uB370"
+  SetUnitbutton: {fileID: 0}
+  UnitUpgradebutton: {fileID: 0}
 --- !u!114 &330116729
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3960,12 +3742,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d415fde0eade4294f8588370e2ae33f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradeNumber: 22
+  upgrageArmUnit: 0
   upgradeAbility: 0
-  upgradeValue: 10
-  upgradeCost: 9999
+  upTier: 0
+  upStatList: []
+  upCostList: []
+  isInstall: 0
   upgradeName: "\uD589\uC6B4\uC774\uB791 \uACBD\uD5D8\uCE58\uB294 \uC5C6\uB294\uB385"
   upgradeDescription: "\uACBD\uD5D8\uCE58\uB294 \uBB54\uB370"
+  SetUnitbutton: {fileID: 0}
+  UnitUpgradebutton: {fileID: 0}
 --- !u!114 &346156137
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4104,7 +3890,7 @@ MonoBehaviour:
   skillData: {fileID: 11400000, guid: 6fdf11afa13837849ab82e5933395cdc, type: 2}
   dropGear: {fileID: 7721173211588356841, guid: 6f50a567d27f5234c89a2742d0a1134a,
     type: 3}
-  mujeokToggle: {fileID: 0}
+  cheatUIPanel: {fileID: 0}
   statDropdown: {fileID: 474637620}
   partsDropdown: {fileID: 1387187309}
   tierDropdown: {fileID: 1141958065}
@@ -4871,12 +4657,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d415fde0eade4294f8588370e2ae33f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradeNumber: 1
+  upgrageArmUnit: 0
   upgradeAbility: 1
-  upgradeValue: 20
-  upgradeCost: 100
+  upTier: 0
+  upStatList: []
+  upCostList: []
+  isInstall: 0
   upgradeName: "\uAE30\uBCF8 \uACF5\uACA9\uB825 UP(\uC911) "
   upgradeDescription: "\uAE30\uBCF8 \uACF5\uACA9\uB825\uC744 20% \uAC15\uD654"
+  SetUnitbutton: {fileID: 0}
+  UnitUpgradebutton: {fileID: 0}
 --- !u!114 &408213756
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5497,6 +5287,127 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &459197514
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 459197515}
+  - component: {fileID: 459197519}
+  - component: {fileID: 459197518}
+  - component: {fileID: 459197517}
+  - component: {fileID: 459197516}
+  m_Layer: 27
+  m_Name: Cuby (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &459197515
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 459197514}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -2.56, y: -2.2694511, z: 2.47}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 807266573}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &459197516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 459197514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04c5a5f2f35d34445868cbf80965ef32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  col: {fileID: 0}
+  isThrowing: 0
+  trigger: {fileID: 0}
+--- !u!65 &459197517
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 459197514}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &459197518
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 459197514}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 01a78debe819c2c45935a88982a1ab1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &459197519
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 459197514}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &464799678
 GameObject:
   m_ObjectHideFlags: 0
@@ -6423,12 +6334,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d415fde0eade4294f8588370e2ae33f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradeNumber: 10
+  upgrageArmUnit: 0
   upgradeAbility: 6
-  upgradeValue: 20
-  upgradeCost: 100
+  upTier: 0
+  upStatList: []
+  upCostList: []
+  isInstall: 0
   upgradeName: "\uCD5C\uB300 \uCCB4\uB825 UP(\uC911)"
   upgradeDescription: "\uCD5C\uB300 \uCCB4\uB825\uC744 20% \uAC15\uD654"
+  SetUnitbutton: {fileID: 0}
+  UnitUpgradebutton: {fileID: 0}
 --- !u!114 &538968521
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6562,12 +6477,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d415fde0eade4294f8588370e2ae33f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradeNumber: 19
+  upgrageArmUnit: 0
   upgradeAbility: 0
-  upgradeValue: 10
-  upgradeCost: 9999
+  upTier: 0
+  upStatList: []
+  upCostList: []
+  isInstall: 0
   upgradeName: "\uD589\uC6B4\uC774\uB791 \uACBD\uD5D8\uCE58\uB294 \uC5C6\uB294\uB385"
   upgradeDescription: "\uACBD\uD5D8\uCE58\uB294 \uBB54\uB370"
+  SetUnitbutton: {fileID: 0}
+  UnitUpgradebutton: {fileID: 0}
 --- !u!114 &549259852
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7188,12 +7107,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d415fde0eade4294f8588370e2ae33f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradeNumber: 3
+  upgrageArmUnit: 0
   upgradeAbility: 2
-  upgradeValue: 10
-  upgradeCost: 30
+  upTier: 0
+  upStatList: []
+  upCostList: []
+  isInstall: 0
   upgradeName: "\uC2A4\uD0AC \uACF5\uACA9\uB825 UP(\uC18C) "
   upgradeDescription: "\uC2A4\uD0AC \uACF5\uACA9\uB825\uC744 10% \uAC15\uD654"
+  SetUnitbutton: {fileID: 0}
+  UnitUpgradebutton: {fileID: 0}
 --- !u!114 &579265538
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7276,6 +7199,127 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 579265535}
   m_CullTransparentMesh: 1
+--- !u!1 &581752421
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 581752422}
+  - component: {fileID: 581752426}
+  - component: {fileID: 581752425}
+  - component: {fileID: 581752424}
+  - component: {fileID: 581752423}
+  m_Layer: 27
+  m_Name: Cuby (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &581752422
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 581752421}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.4, y: -2.2694511, z: 2.47}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 807266573}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &581752423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 581752421}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04c5a5f2f35d34445868cbf80965ef32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  col: {fileID: 0}
+  isThrowing: 0
+  trigger: {fileID: 0}
+--- !u!65 &581752424
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 581752421}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &581752425
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 581752421}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 01a78debe819c2c45935a88982a1ab1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &581752426
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 581752421}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &585671664
 GameObject:
   m_ObjectHideFlags: 0
@@ -7461,12 +7505,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d415fde0eade4294f8588370e2ae33f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradeNumber: 21
+  upgrageArmUnit: 0
   upgradeAbility: 0
-  upgradeValue: 10
-  upgradeCost: 9999
+  upTier: 0
+  upStatList: []
+  upCostList: []
+  isInstall: 0
   upgradeName: "\uD589\uC6B4\uC774\uB791 \uACBD\uD5D8\uCE58\uB294 \uC5C6\uB294\uB385"
   upgradeDescription: "\uACBD\uD5D8\uCE58\uB294 \uBB54\uB370"
+  SetUnitbutton: {fileID: 0}
+  UnitUpgradebutton: {fileID: 0}
 --- !u!114 &597106979
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9115,12 +9163,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d415fde0eade4294f8588370e2ae33f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradeNumber: 9
+  upgrageArmUnit: 0
   upgradeAbility: 6
-  upgradeValue: 10
-  upgradeCost: 30
+  upTier: 0
+  upStatList: []
+  upCostList: []
+  isInstall: 0
   upgradeName: "\uCD5C\uB300 \uCCB4\uB825 UP(\uC18C)"
   upgradeDescription: "\uCD5C\uB300 \uCCB4\uB825\uC744 10% \uAC15\uD654"
+  SetUnitbutton: {fileID: 0}
+  UnitUpgradebutton: {fileID: 0}
 --- !u!114 &713890118
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9329,12 +9381,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d415fde0eade4294f8588370e2ae33f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradeNumber: 15
+  upgrageArmUnit: 0
   upgradeAbility: 10
-  upgradeValue: 10
-  upgradeCost: 30
+  upTier: 0
+  upStatList: []
+  upCostList: []
+  isInstall: 0
   upgradeName: "\uC774\uB3D9 \uC18D\uB3C4 UP(\uC18C)"
   upgradeDescription: "\uC774\uB3D9 \uC18D\uB3C4\uB97C 10% \uC0C1\uC2B9"
+  SetUnitbutton: {fileID: 0}
+  UnitUpgradebutton: {fileID: 0}
 --- !u!114 &740024063
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10517,10 +10573,10 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1935208529}
-  - {fileID: 111772856}
-  - {fileID: 1198682186}
-  - {fileID: 108002067}
-  - {fileID: 1482128756}
+  - {fileID: 581752422}
+  - {fileID: 459197515}
+  - {fileID: 1573804873}
+  - {fileID: 1029158227}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &820879131
@@ -11747,12 +11803,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d415fde0eade4294f8588370e2ae33f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradeNumber: 18
+  upgrageArmUnit: 0
   upgradeAbility: 0
-  upgradeValue: 10
-  upgradeCost: 9999
+  upTier: 0
+  upStatList: []
+  upCostList: []
+  isInstall: 0
   upgradeName: "\uD589\uC6B4\uC774\uB791 \uACBD\uD5D8\uCE58\uB294 \uC5C6\uB294\uB385"
   upgradeDescription: "\uACBD\uD5D8\uCE58\uB294 \uBB54\uB370"
+  SetUnitbutton: {fileID: 0}
+  UnitUpgradebutton: {fileID: 0}
 --- !u!114 &996413671
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12006,6 +12066,127 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1018143456}
   m_CullTransparentMesh: 1
+--- !u!1 &1029158226
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1029158227}
+  - component: {fileID: 1029158231}
+  - component: {fileID: 1029158230}
+  - component: {fileID: 1029158229}
+  - component: {fileID: 1029158228}
+  m_Layer: 27
+  m_Name: Cuby (4)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1029158227
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1029158226}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.18, y: -2.2694511, z: 3.67}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 807266573}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1029158228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1029158226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04c5a5f2f35d34445868cbf80965ef32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  col: {fileID: 0}
+  isThrowing: 0
+  trigger: {fileID: 0}
+--- !u!65 &1029158229
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1029158226}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &1029158230
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1029158226}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 01a78debe819c2c45935a88982a1ab1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1029158231
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1029158226}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &1043275850
 GameObject:
   m_ObjectHideFlags: 0
@@ -13266,127 +13447,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1159981264}
   m_CullTransparentMesh: 1
---- !u!1 &1198682185
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1198682186}
-  - component: {fileID: 1198682190}
-  - component: {fileID: 1198682189}
-  - component: {fileID: 1198682188}
-  - component: {fileID: 1198682187}
-  m_Layer: 27
-  m_Name: Cuby (2)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1198682186
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1198682185}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.95, y: -2.2694511, z: 1.897533}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 807266573}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1198682187
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1198682185}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b28101cefd5a8a42aab311dd14655e4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  col: {fileID: 0}
-  isThrowing: 0
-  trigger: {fileID: 0}
---- !u!65 &1198682188
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1198682185}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!23 &1198682189
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1198682185}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 01a78debe819c2c45935a88982a1ab1d, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &1198682190
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1198682185}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &1208449243
 GameObject:
   m_ObjectHideFlags: 0
@@ -14244,12 +14304,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d415fde0eade4294f8588370e2ae33f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradeNumber: 5
+  upgrageArmUnit: 0
   upgradeAbility: 2
-  upgradeValue: 30
-  upgradeCost: 1000
+  upTier: 0
+  upStatList: []
+  upCostList: []
+  isInstall: 0
   upgradeName: "\uC2A4\uD0AC \uACF5\uACA9\uB825 UP(\uB300) "
   upgradeDescription: "\uC2A4\uD0AC \uACF5\uACA9\uB825\uC744 30% \uAC15\uD654"
+  SetUnitbutton: {fileID: 0}
+  UnitUpgradebutton: {fileID: 0}
 --- !u!114 &1255608031
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14383,12 +14447,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d415fde0eade4294f8588370e2ae33f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradeNumber: 7
+  upgrageArmUnit: 0
   upgradeAbility: 3
-  upgradeValue: 20
-  upgradeCost: 100
+  upTier: 0
+  upStatList: []
+  upCostList: []
+  isInstall: 0
   upgradeName: "\uC18D\uC131 \uACF5\uACA9\uB825 UP(\uC911)"
   upgradeDescription: "\uC18D\uC131 \uACF5\uACA9\uB825\uC744 20% \uAC15\uD654"
+  SetUnitbutton: {fileID: 0}
+  UnitUpgradebutton: {fileID: 0}
 --- !u!114 &1283977869
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15015,12 +15083,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d415fde0eade4294f8588370e2ae33f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradeNumber: 14
+  upgrageArmUnit: 0
   upgradeAbility: 8
-  upgradeValue: 30
-  upgradeCost: 1000
+  upTier: 0
+  upStatList: []
+  upCostList: []
+  isInstall: 0
   upgradeName: "\uC2A4\uD14C\uBBF8\uB098 \uD68C\uBCF5 \uC18D\uB3C4 UP(\uB300)"
   upgradeDescription: "\uC2A4\uD14C\uBBF8\uB098 \uD68C\uBCF5 \uC18D\uB3C4 30% \uC0C1\uC2B9"
+  SetUnitbutton: {fileID: 0}
+  UnitUpgradebutton: {fileID: 0}
 --- !u!114 &1346496809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15260,12 +15332,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d415fde0eade4294f8588370e2ae33f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradeNumber: 4
+  upgrageArmUnit: 0
   upgradeAbility: 2
-  upgradeValue: 20
-  upgradeCost: 100
+  upTier: 0
+  upStatList: []
+  upCostList: []
+  isInstall: 0
   upgradeName: "\uC2A4\uD0AC \uACF5\uACA9\uB825 UP(\uC911) "
   upgradeDescription: "\uC2A4\uD0AC \uACF5\uACA9\uB825\uC744 20% \uAC15\uD654"
+  SetUnitbutton: {fileID: 0}
+  UnitUpgradebutton: {fileID: 0}
 --- !u!114 &1374046446
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16335,127 +16411,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &1482128755
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1482128756}
-  - component: {fileID: 1482128760}
-  - component: {fileID: 1482128759}
-  - component: {fileID: 1482128758}
-  - component: {fileID: 1482128757}
-  m_Layer: 27
-  m_Name: Cuby (4)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1482128756
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1482128755}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.63, y: -2.2694511, z: 3.31}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 807266573}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1482128757
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1482128755}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b28101cefd5a8a42aab311dd14655e4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  col: {fileID: 0}
-  isThrowing: 0
-  trigger: {fileID: 0}
---- !u!65 &1482128758
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1482128755}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!23 &1482128759
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1482128755}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 01a78debe819c2c45935a88982a1ab1d, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &1482128760
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1482128755}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &1491615470
 GameObject:
   m_ObjectHideFlags: 0
@@ -16734,12 +16689,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d415fde0eade4294f8588370e2ae33f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradeNumber: 13
+  upgrageArmUnit: 0
   upgradeAbility: 8
-  upgradeValue: 20
-  upgradeCost: 100
+  upTier: 0
+  upStatList: []
+  upCostList: []
+  isInstall: 0
   upgradeName: "\uC2A4\uD14C\uBBF8\uB098 \uD68C\uBCF5 \uC18D\uB3C4 UP(\uC911)"
   upgradeDescription: "\uC2A4\uD14C\uBBF8\uB098 \uD68C\uBCF5 \uC18D\uB3C4 20% \uC0C1\uC2B9"
+  SetUnitbutton: {fileID: 0}
+  UnitUpgradebutton: {fileID: 0}
 --- !u!114 &1509587885
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17582,6 +17541,127 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 0
+--- !u!1 &1573804872
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1573804873}
+  - component: {fileID: 1573804877}
+  - component: {fileID: 1573804876}
+  - component: {fileID: 1573804875}
+  - component: {fileID: 1573804874}
+  m_Layer: 27
+  m_Name: Cuby (3)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1573804873
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1573804872}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1.84, y: -2.2694511, z: 3.65}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 807266573}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1573804874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1573804872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04c5a5f2f35d34445868cbf80965ef32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  col: {fileID: 0}
+  isThrowing: 0
+  trigger: {fileID: 0}
+--- !u!65 &1573804875
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1573804872}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &1573804876
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1573804872}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 01a78debe819c2c45935a88982a1ab1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1573804877
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1573804872}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &1575685761
 GameObject:
   m_ObjectHideFlags: 0
@@ -18203,10 +18283,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2820e6cf3e0a0648a14d4604a088330, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  installArmUnits: []
   upgradePanel: {fileID: 883113343}
   upNameText: {fileID: 1320948621}
   upInfoText: {fileID: 112390001}
   upCostText: {fileID: 452308637}
+  installUnitsText: {fileID: 0}
 --- !u!65 &1649527468
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -19484,12 +19566,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d415fde0eade4294f8588370e2ae33f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradeNumber: 2
+  upgrageArmUnit: 0
   upgradeAbility: 1
-  upgradeValue: 30
-  upgradeCost: 1000
+  upTier: 0
+  upStatList: []
+  upCostList: []
+  isInstall: 0
   upgradeName: "\uAE30\uBCF8 \uACF5\uACA9\uB825 UP(\uB300) "
   upgradeDescription: "\uAE30\uBCF8 \uACF5\uACA9\uB825\uC744 30% \uAC15\uD654"
+  SetUnitbutton: {fileID: 0}
+  UnitUpgradebutton: {fileID: 0}
 --- !u!114 &1787267742
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21023,7 +21109,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Move Slow
+  m_text: MaxMP
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -21112,7 +21198,7 @@ GameObject:
   - component: {fileID: 1935208528}
   - component: {fileID: 1935208527}
   - component: {fileID: 1935208526}
-  - component: {fileID: 1935208531}
+  - component: {fileID: 1935208530}
   m_Layer: 27
   m_Name: Cuby
   m_TagString: Untagged
@@ -21206,7 +21292,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 807266573}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1935208531
+--- !u!114 &1935208530
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -21215,7 +21301,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1935208525}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b28101cefd5a8a42aab311dd14655e4, type: 3}
+  m_Script: {fileID: 11500000, guid: 04c5a5f2f35d34445868cbf80965ef32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   col: {fileID: 0}
@@ -21834,12 +21920,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d415fde0eade4294f8588370e2ae33f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradeNumber: 23
+  upgrageArmUnit: 0
   upgradeAbility: 0
-  upgradeValue: 10
-  upgradeCost: 9999
+  upTier: 0
+  upStatList: []
+  upCostList: []
+  isInstall: 0
   upgradeName: "\uD589\uC6B4\uC774\uB791 \uACBD\uD5D8\uCE58\uB294 \uC5C6\uB294\uB385"
   upgradeDescription: "\uACBD\uD5D8\uCE58\uB294 \uBB54\uB370"
+  SetUnitbutton: {fileID: 0}
+  UnitUpgradebutton: {fileID: 0}
 --- !u!114 &2026470738
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22375,12 +22465,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d415fde0eade4294f8588370e2ae33f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradeNumber: 0
+  upgrageArmUnit: 0
   upgradeAbility: 1
-  upgradeValue: 10
-  upgradeCost: 30
+  upTier: 0
+  upStatList: []
+  upCostList: []
+  isInstall: 0
   upgradeName: "\uAE30\uBCF8 \uACF5\uACA9\uB825 UP(\uC18C)"
   upgradeDescription: "\uAE30\uBCF8 \uACF5\uACA9\uB825\uC744 10% \uAC15\uD654"
+  SetUnitbutton: {fileID: 0}
+  UnitUpgradebutton: {fileID: 0}
 --- !u!114 &2065070603
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23075,12 +23169,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d415fde0eade4294f8588370e2ae33f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradeNumber: 11
+  upgrageArmUnit: 0
   upgradeAbility: 6
-  upgradeValue: 30
-  upgradeCost: 1000
+  upTier: 0
+  upStatList: []
+  upCostList: []
+  isInstall: 0
   upgradeName: "\uCD5C\uB300 \uCCB4\uB825 UP(\uB300)"
   upgradeDescription: "\uCD5C\uB300 \uCCB4\uB825\uC744 30% \uAC15\uD654"
+  SetUnitbutton: {fileID: 0}
+  UnitUpgradebutton: {fileID: 0}
 --- !u!114 &2146951114
 MonoBehaviour:
   m_ObjectHideFlags: 0

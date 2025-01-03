@@ -6,6 +6,7 @@ public class ScenePotal : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("Player")) return;
+        FindAnyObjectByType<SaveManager>().Save();
         Util.ChangeScene(sceneType);
     }
     public void SetScene(Define.SceneType sceneType)

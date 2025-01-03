@@ -8,7 +8,6 @@ using Zenject;
 public class Inventory : MonoBehaviour
 {
     [Inject] SaveData saveData;
-    [Inject] SaveManager saveManager;
 
     // 인벤토리 슬롯들을 보관할 배열 12개임
     [Inject] UI_InventorySlots[] inventorySlots;
@@ -78,7 +77,6 @@ public class Inventory : MonoBehaviour
         }
 
         slot.SetInventorySlots(gear);
-        saveManager.Save();
         return true;
     }
 

@@ -168,6 +168,8 @@ public class ManaSkillHandler : MonoBehaviour
     /// </summary>
     public void OnAction()
     {
+        if (selectIndex < 0) return;
+
         curNode.Value.OnAction();
     }
 

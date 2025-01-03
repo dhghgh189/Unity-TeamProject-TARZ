@@ -6,14 +6,11 @@ public class SpecialThrowOBJ_Base : MonoBehaviour, Interaction_Ibase_GrabAct
     public Collider col;
     public bool isThrowing = false;
     public Child_SpecialTrigger trigger;
-    private IThrowBox throwBox;
 
     void Awake() => Init();
 
     void Init()
     {
-        throwBox = this.gameObject.GetComponent<IThrowBox>();
-
         trigger = new GameObject("UI_trigger").AddComponent<Child_SpecialTrigger>();
         trigger.transform.position = this.transform.position;
         trigger.transform.parent = this.transform;
@@ -42,15 +39,6 @@ public class SpecialThrowOBJ_Base : MonoBehaviour, Interaction_Ibase_GrabAct
         col.enabled = false;
         this.gameObject.transform.parent = playerController.interactioner.gameObject.transform;
         this.transform.position = curPos.position;
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (isThrowing)
-        {
-            throwBox.ThrowingBox(collision.gameObject);
-        }
-        else return;
     }
 }
 

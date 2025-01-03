@@ -1,21 +1,39 @@
 using UnityEngine;
 
-public class ThrowBox_Nomal : SpecialThrowOBJ_Base, IThrowBox
+public class ThrowBox_Nomal : SpecialThrowOBJ_Base
 {
+    [Header("중형 상자")]
     private LayerMask NomalBoxLayer;
+    [SerializeField] private float NomalBoxDamage;
 
-    void Start()
+
+    void Start() => Init();
+
+    void Init()
     {
-        NomalBoxLayer = LayerMask.NameToLayer("Monster");
+        // 임시적 데미지 수치 설정
+        NomalBoxDamage = 10f;
+
+        NomalBoxLayer = LayerMask.GetMask("Monster");
     }
 
-    public void ThrowingBox(GameObject OBJ)
+    //====================================================================
+
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (isThrowing)
+        {
+            ThrowingBox(collision.gameObject);
+        }
+    }
+
+    private void ThrowingBox(GameObject OBJ)
     {
         if (OBJ.layer == NomalBoxLayer)
         {
-            OBJ.GetComponent<IDamagable>().TakeDamage(10f);
+            OBJ.GetComponent<IDamagable>().TakeDamage(NomalBoxDamage);
         }
-
         Destroy(this.gameObject, 1.5f);
     }
 }

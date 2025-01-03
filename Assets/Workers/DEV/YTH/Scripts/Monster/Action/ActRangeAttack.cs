@@ -15,7 +15,7 @@ public class ActRangeAttack : Action
 
     [SerializeField] SharedGameObject _projectilePrefab;
 
-    [SerializeField] SharedTransform _muzzlePoint;
+   private SharedTransform _muzzlePoint;
 
  
 
@@ -32,6 +32,7 @@ public class ActRangeAttack : Action
 	{
         _player = _pooledObject.player;
         _distance = Vector3.Distance(transform.position, _player.transform.position);
+        _muzzlePoint = transform.Find("MuzzlePoint");
     }
 
     public override TaskStatus OnUpdate()

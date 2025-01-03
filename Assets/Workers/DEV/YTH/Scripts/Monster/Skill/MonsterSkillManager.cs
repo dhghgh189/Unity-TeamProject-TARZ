@@ -519,7 +519,7 @@ public class MonsterSkillManager : MonoBehaviour
     public Coroutine frogJumpAttackRoutine;
     public IEnumerator FrogJumpAttackRoutine()
     {
-        _animator.SetTrigger("JumpAttack");
+       /* _animator.SetTrigger("JumpAttack");*/
 
         if (jumpRoutine_frogJumpAttack == null)
         {

@@ -39,8 +39,13 @@ public class ObjectPool : MonoBehaviour
         {
             if (!pooledObject.gameObject.activeSelf)
             {
+                MonsterData monsterData = pooledObject.GetComponent<MonsterData>();
+                monsterData.CurHp = monsterData.MaxHp;
+                monsterData.IsAttacked = false; 
+                monsterData.IsCatched = false; 
                 pooledObject.gameObject.transform.position = transform.position + new Vector3(Random.Range(-2, 2), 0, Random.Range(-2, 2));
                 pooledObject.gameObject.SetActive(true);
+                
 
                 return pooledObject;
             }

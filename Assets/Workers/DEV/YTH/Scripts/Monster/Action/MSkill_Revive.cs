@@ -30,6 +30,7 @@ public class MSkill_Revive : Action
         if (_monsterData.CurHp <= _monsterData.MaxHp / 2 && _monsterSkillManager.ReviveSkill.CanUseSkill)
         {
             _monsterSkillManager.Revive();
+            _animator.SetBool("Move", false);   
             _animator.SetBool("Revive", true);
             Debug.Log("부활");
             return TaskStatus.Success;

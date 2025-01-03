@@ -8,22 +8,20 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Scriptables/MonsterSkill")]
 public class MonsterSkill : ScriptableObject
 {
-    public string SkillName;
-    public string SkillDescription;
-    public float Damage;
-    public float CoolTime;
-    public float Angle; // 공격 범위 (각도)
-    public float Range; // 공격 범위 (거리)
-    public float JumpForce; // 점프 공격 점프 수치
-    public string AnimationName; // 출력할 애니메이션 이름
-    public float Interval; // 도트뎀 주기
-    public float ThrowForce;
-    public bool CanUseSkill = true; // 기본값 true
-    public float Duration;
+    public string SkillName { get; set; }
+    public string SkillDescription { get; set; }
+    public float Damage { get; set; }
+    public float CoolTime { get; set; }
+    public float Angle { get; set; } // 공격 범위 (각도)
+    public float Range { get; set; } // 공격 범위 (거리)
+    
+    public float Interval { get; set; } // 도트뎀 주기
+    public float ThrowForce { get; set; }
+    public bool CanUseSkill { get; set; }// 기본값 true
+    public float Duration { get; set; }
 
-   public float InAirTime; // 체공 시간
- 
-   public float JumpHeight; // Y축 점프 높이
-  
-   public float JumpDistance; // Z축 점프 거리
+    // 점프어택, 대쉬어택
+    public float InAirTime { get; set; } // 체공 시간
+    public float JumpHeight { get; set; } // Y축 점프 높이
+    public float JumpDistance { get; set; } // Z축 점프 거리
 }

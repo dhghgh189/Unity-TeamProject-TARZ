@@ -311,7 +311,7 @@ GameObject:
   - component: {fileID: 17998804}
   - component: {fileID: 17998803}
   m_Layer: 26
-  m_Name: Default Power Up Button (3)
+  m_Name: Max Hp Up Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -348,10 +348,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d415fde0eade4294f8588370e2ae33f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgrageArmUnit: 0
-  upgradeAbility: 1
+  upgrageArmUnit: 3
+  upgradeAbility: 6
   upTier: 0
   upStatList:
+  - 0
   - 10
   - 20
   - 30
@@ -359,9 +360,10 @@ MonoBehaviour:
   - 100
   - 200
   - 300
+  - 0
   isInstall: 0
-  upgradeName: "\uAE30\uBCF8 \uACF5\uACA9\uB825 \uAC15\uD654 \uC720\uB2DB"
-  upgradeDescription: "\uC18D\uC131 \uACF5\uACA9\uB825 10% \uAC15\uD654"
+  upgradeName: "\uCD5C\uB300 \uCCB4\uB825 \uAC15\uD654 \uC720\uB2DB"
+  upgradeDescription: "\uCD5C\uB300 \uCCB4\uB825"
   SetUnitbutton: {fileID: 851946950}
   UnitUpgradebutton: {fileID: 849278353}
 --- !u!114 &17998804
@@ -3386,7 +3388,7 @@ GameObject:
   - component: {fileID: 459365956}
   - component: {fileID: 459365955}
   m_Layer: 26
-  m_Name: Default Power Up Button (4)
+  m_Name: Max Stamina Up Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3423,10 +3425,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d415fde0eade4294f8588370e2ae33f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgrageArmUnit: 0
-  upgradeAbility: 1
+  upgrageArmUnit: 4
+  upgradeAbility: 7
   upTier: 0
   upStatList:
+  - 0
   - 10
   - 20
   - 30
@@ -3434,9 +3437,10 @@ MonoBehaviour:
   - 100
   - 200
   - 300
+  - 0
   isInstall: 0
-  upgradeName: "\uAE30\uBCF8 \uACF5\uACA9\uB825 \uAC15\uD654 \uC720\uB2DB"
-  upgradeDescription: "\uC18D\uC131 \uACF5\uACA9\uB825 10% \uAC15\uD654"
+  upgradeName: "\uCD5C\uB300 \uC2A4\uD14C\uBBF8\uB098 \uAC15\uD654 \uC720\uB2DB"
+  upgradeDescription: "\uCD5C\uB300 \uC2A4\uD14C\uBBF8\uB098"
   SetUnitbutton: {fileID: 851946950}
   UnitUpgradebutton: {fileID: 849278353}
 --- !u!114 &459365956
@@ -4019,10 +4023,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2820e6cf3e0a0648a14d4604a088330, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  installArmUnits: []
   upgradePanel: {fileID: 1264670430}
   upNameText: {fileID: 1479775105}
   upInfoText: {fileID: 663754770}
   upCostText: {fileID: 1037363817}
+  installUnitsText: {fileID: 579987305}
 --- !u!1 &489100355
 GameObject:
   m_ObjectHideFlags: 0
@@ -4846,6 +4852,7 @@ MonoBehaviour:
   upgradeAbility: 1
   upTier: 0
   upStatList:
+  - 0
   - 10
   - 20
   - 30
@@ -4853,9 +4860,10 @@ MonoBehaviour:
   - 100
   - 200
   - 300
+  - 0
   isInstall: 0
   upgradeName: "\uAE30\uBCF8 \uACF5\uACA9\uB825 \uAC15\uD654 \uC720\uB2DB"
-  upgradeDescription: "\uC18D\uC131 \uACF5\uACA9\uB825 10% \uAC15\uD654"
+  upgradeDescription: "\uAE30\uBCF8 \uACF5\uACA9\uB825"
   SetUnitbutton: {fileID: 851946950}
   UnitUpgradebutton: {fileID: 849278353}
 --- !u!114 &524946515
@@ -5123,8 +5131,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uAE30\uBCF8 \uACF5\uACA9\uB825 10%\n\uAE30\uBCF8 \uACF5\uACA9\uB825 10%\n\uAE30\uBCF8
-    \uACF5\uACA9\uB825 10%"
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2a51c3ef91c7891478d3e21f9fd9c554, type: 2}
   m_sharedMaterial: {fileID: 5730513949926655633, guid: 2a51c3ef91c7891478d3e21f9fd9c554,
@@ -6527,7 +6534,7 @@ GameObject:
   - component: {fileID: 739696638}
   - component: {fileID: 739696637}
   m_Layer: 26
-  m_Name: Default Power Up Button (5)
+  m_Name: Move Speed Up Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6564,10 +6571,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d415fde0eade4294f8588370e2ae33f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgrageArmUnit: 0
-  upgradeAbility: 1
+  upgrageArmUnit: 5
+  upgradeAbility: 10
   upTier: 0
   upStatList:
+  - 0
   - 10
   - 20
   - 30
@@ -6575,9 +6583,10 @@ MonoBehaviour:
   - 100
   - 200
   - 300
+  - 0
   isInstall: 0
-  upgradeName: "\uAE30\uBCF8 \uACF5\uACA9\uB825 \uAC15\uD654 \uC720\uB2DB"
-  upgradeDescription: "\uC18D\uC131 \uACF5\uACA9\uB825 10% \uAC15\uD654"
+  upgradeName: "\uC774\uB3D9\uC18D\uB3C4 \uAC15\uD654 \uC720\uB2DB"
+  upgradeDescription: "\uC774\uB3D9\uC18D\uB3C4"
   SetUnitbutton: {fileID: 851946950}
   UnitUpgradebutton: {fileID: 849278353}
 --- !u!114 &739696638
@@ -6855,7 +6864,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_SelectedColor: {r: 1, g: 0, b: 0, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -7102,7 +7111,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_SelectedColor: {r: 1, g: 0, b: 0, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -9577,7 +9586,7 @@ GameObject:
   - component: {fileID: 1147528217}
   - component: {fileID: 1147528216}
   m_Layer: 26
-  m_Name: Default Power Up Button (2)
+  m_Name: Elemental Power Up Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9614,10 +9623,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d415fde0eade4294f8588370e2ae33f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgrageArmUnit: 0
-  upgradeAbility: 1
+  upgrageArmUnit: 2
+  upgradeAbility: 3
   upTier: 0
   upStatList:
+  - 0
   - 10
   - 20
   - 30
@@ -9625,9 +9635,10 @@ MonoBehaviour:
   - 100
   - 200
   - 300
+  - 0
   isInstall: 0
-  upgradeName: "\uAE30\uBCF8 \uACF5\uACA9\uB825 \uAC15\uD654 \uC720\uB2DB"
-  upgradeDescription: "\uC18D\uC131 \uACF5\uACA9\uB825 10% \uAC15\uD654"
+  upgradeName: "\uC18D\uC131 \uACF5\uACA9\uB825 \uAC15\uD654 \uC720\uB2DB"
+  upgradeDescription: "\uC18D\uC131 \uACF5\uACA9\uB825"
   SetUnitbutton: {fileID: 851946950}
   UnitUpgradebutton: {fileID: 849278353}
 --- !u!114 &1147528217
@@ -10639,6 +10650,7 @@ MonoBehaviour:
   upgradeAbility: 2
   upTier: 0
   upStatList:
+  - 0
   - 10
   - 20
   - 30
@@ -10646,9 +10658,10 @@ MonoBehaviour:
   - 100
   - 200
   - 300
+  - 0
   isInstall: 0
   upgradeName: "\uC2A4\uD0AC \uACF5\uACA9\uB825 \uAC15\uD654 \uC720\uB2DB"
-  upgradeDescription: "\uC2A4\uD0AC \uACF5\uACA9\uB825 10% \uAC15\uD654"
+  upgradeDescription: "\uC2A4\uD0AC \uACF5\uACA9\uB825"
   SetUnitbutton: {fileID: 851946950}
   UnitUpgradebutton: {fileID: 849278353}
 --- !u!114 &1262731485

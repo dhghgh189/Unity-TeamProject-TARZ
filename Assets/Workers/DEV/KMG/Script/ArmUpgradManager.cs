@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,18 +12,24 @@ public enum UpgrageArmUnit
 
 public class ArmUpgradManager : MonoBehaviour, Base_InteractionOBJ
 {
-    [Inject] SaveData saveData;
     [Inject] StatModel statModel;
-    [Inject] SaveManager saveManager;
+
+    private UI_ArmUpgrade[] armUnits;
+    public List<UI_ArmUpgrade> installArmUnits;
 
     [SerializeField] GameObject upgradePanel;
     [SerializeField] TMP_Text upNameText;
     [SerializeField] TMP_Text upInfoText;
     [SerializeField] TMP_Text upCostText;
+    [SerializeField] TMP_Text installUnitsText;
 
     private void Start()
     {
-
+        armUnits = GetComponentsInChildren<UI_ArmUpgrade>(true);
+        foreach (var item in armUnits)
+        {
+            item.SavaDataCheck();
+        }
     }
     public void ArmUnitStatUp(AdditionAbility ability, float value)
     {
@@ -54,5 +62,13 @@ public class ArmUpgradManager : MonoBehaviour, Base_InteractionOBJ
         upNameText.text = name;
         upInfoText.text = info;
         upCostText.text = cost;
+    }
+    public void InstallUnitDescription()
+    {
+        installUnitsText.text = "";
+        foreach (var item in installArmUnits)
+        {
+            installUnitsText.text += item.UnitInfo();
+        }
     }
 }

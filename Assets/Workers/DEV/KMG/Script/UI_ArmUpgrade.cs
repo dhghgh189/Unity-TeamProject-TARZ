@@ -7,6 +7,7 @@ using Zenject;
 public class UI_ArmUpgrade : MonoBehaviour, ISelectHandler  //, IDeselectHandler
 {
     [Inject] SaveData saveData;
+    [Inject] SaveManager saveManager;
     [Inject] ArmUpgradManager armUpgradManager;
 
     [Header("강화 능력 정보")]
@@ -22,7 +23,7 @@ public class UI_ArmUpgrade : MonoBehaviour, ISelectHandler  //, IDeselectHandler
 
     [SerializeField] Button SetUnitbutton;
     [SerializeField] Button UnitUpgradebutton;
-    private void Start()
+    public void SavaDataCheck()
     {
         upTier = saveData.ArmUnitInfos[(int)upgrageArmUnit].Tier;
         isInstall = saveData.ArmUnitInfos[(int)upgrageArmUnit].IsInstall;
@@ -32,18 +33,25 @@ public class UI_ArmUpgrade : MonoBehaviour, ISelectHandler  //, IDeselectHandler
 
     private void UnitInstall()
     {
+        if (armUpgradManager.installArmUnits.Count == 3)
+            return;
         isInstall = true;
+        armUpgradManager.installArmUnits.Add(this);
         saveData.ArmUnitInfos[(int)upgrageArmUnit].IsInstall = true;
         armUpgradManager.ArmUnitStatUp(upgradeAbility, upStatList[upTier]);
         SetEventAndDesciption();
+        armUpgradManager.InstallUnitDescription();
+        saveManager.Save();
     }
 
     private void UnitUnInstall()
     {
         isInstall = false;
+        armUpgradManager.installArmUnits.Remove(this);
         saveData.ArmUnitInfos[(int)upgrageArmUnit].IsInstall = false;
         armUpgradManager.ArmUnitStatUp(upgradeAbility, -upStatList[upTier]);
         SetEventAndDesciption();
+        armUpgradManager.InstallUnitDescription();
     }
 
     private void UnitUpgrade()
@@ -58,7 +66,9 @@ public class UI_ArmUpgrade : MonoBehaviour, ISelectHandler  //, IDeselectHandler
             upTier++;
             UnitInstall();
         }
+        armUpgradManager.InstallUnitDescription();
         SetEventAndDesciption();
+        saveManager.Save();
     }
 
     public void OnSelect(BaseEventData eventData)
@@ -70,6 +80,8 @@ public class UI_ArmUpgrade : MonoBehaviour, ISelectHandler  //, IDeselectHandler
     {
         SetUnitbutton.onClick.RemoveAllListeners();
         UnitUpgradebutton.onClick.RemoveAllListeners();
+
+        SetUnitbutton.interactable = upTier != 0;
 
         if (isInstall)
         {
@@ -84,6 +96,11 @@ public class UI_ArmUpgrade : MonoBehaviour, ISelectHandler  //, IDeselectHandler
 
         UnitUpgradebutton.onClick.AddListener(UnitUpgrade);
 
-        armUpgradManager.SetUpgradeDescription(upgradeName, upgradeDescription, upCostList[upTier].ToString());
+        armUpgradManager.SetUpgradeDescription(upgradeName, upgradeDescription + $" {upStatList[upTier]}% 강화", upCostList[upTier].ToString());
+    }
+
+    public string UnitInfo()
+    {
+        return $"{upgradeAbility.ToDescription()} {upStatList[upTier]}%\n";
     }
 }

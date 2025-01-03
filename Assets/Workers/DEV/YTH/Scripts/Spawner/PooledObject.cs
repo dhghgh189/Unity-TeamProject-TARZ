@@ -1,5 +1,7 @@
+using BehaviorDesigner.Runtime.Tasks.Unity.UnityGameObject;
 using System;
 using System.Collections;
+using Unity.Mathematics;
 using UnityEngine;
 using Zenject;
 
@@ -26,6 +28,8 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
     [SerializeField] GameObject _gear;
 
     [SerializeField] GameObject _chip;
+
+    [Inject] Transform dropPool;
 
 
     private void Start()
@@ -83,39 +87,16 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
     public void Die()
     {
         int random = UnityEngine.Random.Range(1, 101);
+        Vector3 curPos = new Vector3(transform.position.x, 1f, transform.position.z);
 
         _autoLockOn.action?.Invoke();
         _animator.SetTrigger("Die");
 
         Debug.Log(random);
-        switch (_monsterData.MonsterTIer)
-        {
-            case MonsterData.MonsterTier.Normal:
-                if (random > 50)
-                    Instantiate(_gear, transform.position + Vector3.up * 0.5f, transform.rotation).GetComponent<DropGear>().SetDropItem(1, 25f);
-                break;
-            case MonsterData.MonsterTier.Elite:
-                if (random > 25)
-                    Instantiate(_gear, transform.position + Vector3.up * 0.5f, transform.rotation).GetComponent<DropGear>().SetDropItem(random > 90 ? 3 : random > 75 ? 2 : 1, 50f);
-                break;
-            case MonsterData.MonsterTier.Boss:
-                Instantiate(_gear, transform.position + Vector3.up * 0.5f, transform.rotation).GetComponent<DropGear>().SetDropItem(1, 75f, true);
-                break;
-        }
 
+        DropGearItem(random, curPos);
         random = UnityEngine.Random.Range(0, 12);
-        if (_monsterData.MonsterTIer == MonsterData.MonsterTier.Boss)
-        {
-            GameObject chip = Instantiate(_chip, transform.position + Vector3.up * 0.5f + Vector3.forward * 0.5f, transform.rotation);
-            chip.GetComponent<DropChip>().SetDropChip(random, false);
-        }
-        else
-        {
-            GameObject chip = Instantiate(_chip, transform.position + Vector3.up * 0.5f + Vector3.forward * 0.5f, transform.rotation);
-            chip.GetComponent<DropChip>().SetDropChip(random, true);
-        }
-
-        /* BossMonsterSpwner 일반칩 다른친구드,ㄹ은 그냥 블랙칩*/
+        DropChipItem(random, curPos + Vector3.right * 0.5f);
 
         gameObject.SetActive(false);
     }
@@ -159,5 +140,65 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
         _monsterData.IsAttacked = false;
 
         isAttackedRoutine = null;
+    }
+
+    private void DropGearItem(float random, Vector3 curPos)
+    {
+        bool dropGear = false;
+        int dropGearTier = 1;
+        float dropGearPvalue = 0;
+        bool dropGearRandomTier = false;
+        switch (_monsterData.MonsterTIer)
+        {
+            case MonsterData.MonsterTier.Normal:
+                if (random > 50)
+                {
+                    dropGearTier = 1;
+                    dropGearPvalue = 25f;
+                    dropGear = true;
+                }
+                break;
+            case MonsterData.MonsterTier.Elite:
+                if (random > 25)
+                {
+                    dropGearTier = random > 90 ? 3 : random > 75 ? 2 : 1;
+                    dropGearPvalue = 50f;
+                    dropGear = true;
+                }
+                break;
+            case MonsterData.MonsterTier.Boss:
+                dropGearPvalue = 75f;
+                dropGear = true;
+                break;
+        }
+        if (dropGear)
+        {
+            foreach(var item in dropPool.GetComponentsInChildren<DropGear>(true))
+            {
+                if(!item.gameObject.activeSelf)
+                {
+                    item.SetDropItem(dropGearTier, dropGearPvalue, dropGearRandomTier);
+                    item.transform.position = curPos;
+                    item.gameObject.SetActive(true);
+                    return;
+                }
+            }
+            Instantiate(_gear, curPos, transform.rotation, dropPool).GetComponent<DropGear>().SetDropItem(dropGearTier, dropGearPvalue, dropGearRandomTier);
+        }
+    }
+
+    private void DropChipItem(float random, Vector3 curPos)
+    {
+        foreach(var item in dropPool.GetComponentsInChildren<DropChip>(true))
+        {
+            if (!item.gameObject.activeSelf)
+            {
+                item.SetDropChip(random, _monsterData.MonsterTIer != MonsterData.MonsterTier.Boss);
+                item.transform.position = curPos;
+                item.gameObject.SetActive(true);
+                return;
+            }
+        }
+        Instantiate(_chip, curPos, transform.rotation, dropPool).GetComponent<DropChip>().SetDropChip(random, _monsterData.MonsterTIer != MonsterData.MonsterTier.Boss);
     }
 }

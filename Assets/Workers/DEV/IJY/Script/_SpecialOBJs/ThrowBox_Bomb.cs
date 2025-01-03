@@ -26,8 +26,7 @@ public class ThrowBox_Bomb : SpecialThrowOBJ_Base
         ThrowingOBJLayer = LayerMask.NameToLayer("ThrowObject");
 
         // 인식하는 오브젝트 참조용 레이어 마스크
-        BombBoxLayer = LayerMask.NameToLayer("Monster");
-        BombBoxLayer += LayerMask.NameToLayer("Player");
+        BombBoxLayer = 1 << LayerMask.NameToLayer("Monster") | 1 << LayerMask.NameToLayer("Player");
         // 이후 기타 파괴 가능한 장애물 레이어가 추가될 경우, 이어서 추가 예정
     }
 
@@ -63,8 +62,11 @@ public class ThrowBox_Bomb : SpecialThrowOBJ_Base
         // 각 오브젝트의 TakeDamage 함수를 호출하여 범위 데미지를 가해준다.
         foreach (GameObject obj in HitOBJs)
         {
-            Debug.Log($"대상 : {obj.name}");
-            obj.GetComponent<IDamagable>().TakeDamage(BombBoxDamage);
+            if (obj.TryGetComponent<IDamagable>(out IDamagable hit))
+            {
+                hit.TakeDamage(BombBoxDamage);
+            }
+            //obj.GetComponent<IDamagable>().TakeDamage(BombBoxDamage);
         }
 
         Destroy(this.gameObject, 0.5f);
@@ -99,13 +101,15 @@ public class ThrowBox_Bomb : SpecialThrowOBJ_Base
     List<GameObject> CheckBombRange()
     {
         List<GameObject> _targets = new List<GameObject>();
+        // 해당 범위를 납작한 원으로 재구성할 필요가 있어보임.
         Collider[] collider = Physics.OverlapSphere(this.transform.position, 5f);
 
         foreach (Collider _col in collider)
         {
             //if (_col.gameObject.layer != BombBoxLayer) continue;
             //  임시 사용. 위 이프문 현재 동작하지 않음
-            if (_col.gameObject.layer != LayerMask.NameToLayer("Monster") && _col.gameObject.layer != LayerMask.NameToLayer("Player")) continue;
+            //if (_col.gameObject.layer != LayerMask.NameToLayer("Monster") && _col.gameObject.layer != LayerMask.NameToLayer("Player")) continue;
+            if (((1 << _col.gameObject.layer) & BombBoxLayer.value) == 0) continue;
 
             Vector3 source = transform.position; source.y = 0;
             Vector3 destination = _col.transform.position; destination.y = 0;

@@ -16,7 +16,7 @@ public class Gear : ScriptableObject
     public List<GearAbility> Abilities;
 
     private string[] firstName = { "강력한", "기본적인", "전략적인", "신비로운", "치명적인", "예리한", "건강한", "활발한", "기력의", "흡수하는", "재빠른", "가벼운", "부유한" };
-    private string[] lastName = { "전사", "달인", "전술가", "점술가", "CriticalDamage", "칼날", "트레이너", "MaxStaminaPer", "장어", "흡수", "토끼", "주머니", "부자" };
+    private string[] lastName = { "전사", "달인", "전술가", "점술가", "일격", "칼날", "트레이너", "경주마", "장어", "흡수", "토끼", "주머니", "부자" };
     private string[] tier = { "", "낡은", "일반", "좋은" };
     public void SetName()
     {

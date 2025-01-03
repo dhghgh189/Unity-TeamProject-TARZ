@@ -2305,6 +2305,7 @@ GameObject:
   - component: {fileID: 2823986646949256125}
   - component: {fileID: 4393239675580763175}
   - component: {fileID: 5022225755371944463}
+  - component: {fileID: 1816378847153904570}
   m_Layer: 9
   m_Name: Range
   m_TagString: Untagged
@@ -2350,7 +2351,8 @@ Animator:
   m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
     are already bound by a Humanoid avatar. These transforms can only be changed
     by Humanoid clips.\n\tTransform 'Bip001 Ponytail2'\n\tTransform 'Bip001 Ponytail2'\n\tTransform
-    'Bip001 Ponytail2'\n\tFrom animation clip 'Amber_Idle'"
+    'Bip001 Ponytail2'\n\tFrom animation clip 'Amber_Idle'\n\tFrom animation clip
+    'Amber_Die'\n\tFrom animation clip 'Amber_Damage'"
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
@@ -2402,9 +2404,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
-  m_Height: 1
+  m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!195 &1639591381480422576
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -2515,6 +2517,25 @@ MonoBehaviour:
       Version: 1.7.11
   gizmoViewMode: 2
   showBehaviorDesignerGizmo: 1
+--- !u!114 &1816378847153904570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7971317727230852696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03a14c639c0a11f439c061e57d8114bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _projectile: {fileID: 8167883818004183144, guid: 989aabf03a1cf174e963c4be9bad5c97,
+    type: 3}
+  _bombPrefab: {fileID: 0}
+  _minePrefab: {fileID: 0}
+  _jackTheRipper: {fileID: 0}
+  _electricWallPrefab: {fileID: 0}
+  _thunderPrefab: {fileID: 0}
 --- !u!1 &7976254287920628283
 GameObject:
   m_ObjectHideFlags: 0

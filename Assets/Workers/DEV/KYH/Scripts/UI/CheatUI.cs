@@ -16,9 +16,7 @@ public class CheatUI : MonoBehaviour
     [SerializeField] PlayerController player;
     [SerializeField] SkillSpecDatabase skillData;
     [SerializeField] GameObject dropGear;
-    [SerializeField] Toggle mujeokToggle;
     [SerializeField] GameObject cheatUIPanel;
-    [SerializeField] ChangeInput inputManager;
 
     // 각 치트 옵션을 설정할 Dropdown UI
     [Header("드롭다운")]

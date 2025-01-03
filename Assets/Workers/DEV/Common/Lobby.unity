@@ -544,9 +544,7 @@ MonoBehaviour:
   skillData: {fileID: 11400000, guid: 6fdf11afa13837849ab82e5933395cdc, type: 2}
   dropGear: {fileID: 7721173211588356841, guid: 6f50a567d27f5234c89a2742d0a1134a,
     type: 3}
-  mujeokToggle: {fileID: 2112107452}
   cheatUIPanel: {fileID: 716233807}
-  inputManager: {fileID: 363177899}
   statDropdown: {fileID: 356792620}
   partsDropdown: {fileID: 622671507}
   tierDropdown: {fileID: 951291479}
@@ -6840,6 +6838,7 @@ GameObject:
   - component: {fileID: 716233808}
   - component: {fileID: 716233810}
   - component: {fileID: 716233809}
+  - component: {fileID: 716233811}
   m_Layer: 5
   m_Name: CheatPanel
   m_TagString: Untagged
@@ -6927,6 +6926,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 716233807}
   m_CullTransparentMesh: 1
+--- !u!114 &716233811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 716233807}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0d88e10b9b9fda4b985629c5a7ea491, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputManager: {fileID: 363177899}
+  mujeokToggle: {fileID: 2112107452}
 --- !u!1 &734350880
 GameObject:
   m_ObjectHideFlags: 0
@@ -9496,7 +9509,7 @@ MonoBehaviour:
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 622671507}
     m_SelectOnDown: {fileID: 508487054}
-    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnLeft: {fileID: 1322634277}
     m_SelectOnRight: {fileID: 1540994190}
   m_Transition: 1
   m_Colors:
@@ -11704,7 +11717,7 @@ MonoBehaviour:
     m_SelectOnUp: {fileID: 2112107452}
     m_SelectOnDown: {fileID: 498093297}
     m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
+    m_SelectOnRight: {fileID: 1051325008}
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}

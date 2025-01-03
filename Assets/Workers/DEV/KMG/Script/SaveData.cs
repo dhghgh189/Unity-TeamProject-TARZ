@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 public class SaveData
 {
@@ -13,8 +14,8 @@ public class SaveData
     public GearSaveData[] EquipmentGears = new GearSaveData[(int)Part.Size];
     // 인벤토리의 장비들을 저장하는 리스트
     public List<GearSaveData> InventoryGears = new();
-    // 패시브 강화 상태를 저장하는 리스트
-    public List<ArmUpgrade> ArmUpgradeDatas = new();
+    // 암 유닛 강화 상태를 저장하는 리스트
+    public ArmUnitInfo[] ArmUnitInfos = Enumerable.Range(0, (int)UpgrageArmUnit.Size).Select(_ => new ArmUnitInfo()).ToArray();
     // 블루칩 상태를 저장하는 리스트
     public List<BlueChipSaveData> blueChipSaveDatas = new();
 }
@@ -41,17 +42,10 @@ public class GearSaveData
     public List<GearAbility> Abilities;
 }
 [Serializable]
-public class ArmUpgrade
+public class ArmUnitInfo
 {
-    public int UpgradeNumber;
-    public AdditionAbility UpgradeAbility;
-    public float UpgradeValue;
-    public ArmUpgrade(int upgradeNumber, AdditionAbility upgradeAbility, float upgradeValue)
-    {
-        UpgradeNumber = upgradeNumber;
-        UpgradeAbility = upgradeAbility;
-        UpgradeValue = upgradeValue;
-    }
+    public int Tier;
+    public bool IsInstall;
 }
 
 [Serializable]

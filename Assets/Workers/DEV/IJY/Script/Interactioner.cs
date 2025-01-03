@@ -14,6 +14,7 @@ public class Interactioner : MonoBehaviour
     private int interactionGrabLayer;
     private Coroutine GrabRoutineCheck;
     private Coroutine RotationRoutineCheck;
+    private Vector3 throwAngle = Vector3.zero;
     private List<GameObject> interactionOBJs = new();
 
     [SerializeField] private PlayerController playerController;
@@ -199,13 +200,14 @@ public class Interactioner : MonoBehaviour
         float curSpeed = playerController.Stat.MoveSpeed;
         playerController.Stat.MoveSpeed = curSpeed / 3f;
 
+        Ray ray = Camera.main.ScreenPointToRay(playerController.transform.forward);
+
         while (IsGrabing)
         {
             if (target == null || !target.activeSelf) IsGrabing = false;
 
             // TODO : 포물선과 오버랩 스피어를 통한 범위 확인
-
-            CheckLoad();
+            CheckLoad(ray, throwAngle);
 
             yield return null;
         }
@@ -218,7 +220,7 @@ public class Interactioner : MonoBehaviour
         GrabEnding();
 
         // TODO : 오브젝트 던짐!
-        ThrowSpeOBJ(SpecialOBJ.GetComponent<Rigidbody>());
+        ThrowSpeOBJ(SpecialOBJ.GetComponent<Rigidbody>(), throwAngle);
         SpecialOBJ = null;
         yield break;
     }
@@ -240,23 +242,34 @@ public class Interactioner : MonoBehaviour
     /// <summary>
     /// 특수 오브젝트가 던져졌을 때의 경로를 파악하기 위한 함수.
     /// </summary>
-    void CheckLoad()
+    void CheckLoad(Ray ray, Vector3 Angle)
     {
-        Debug.Log("거리 확인중...");
+        if (Physics.Raycast(ray, out RaycastHit hit, 10f))
+        {
+            Angle = transform.forward + (transform.up * 0.3f);
+        }
+        else
+        {
+            Angle = transform.forward * 5f;
+        }
+
+        throwAngle = Angle;
+        Debug.DrawRay(playerController.transform.position, playerController.transform.forward * 10f, Color.blue);
     }
 
 
     /// <summary>
     /// 특수 오브젝트가 던져졌을 때 실행되는 코드.
     /// </summary>
-    void ThrowSpeOBJ(Rigidbody rigid)
+    void ThrowSpeOBJ(Rigidbody rigid, Vector3 angle)
     {
         Debug.Log("던짐!");
 
         // 임시적 변수. 추후 던지는 힘을 늘리는 효과가 생길 경우 수정할 필요성이 있다.
-        float throwForce = 10f;
+        float throwForce = 10f;;
         // 다른 쓰레기 오브젝트가 저장된 상태로 던질경우, 중첩되어 두 기능이 모두 사용되고 있음
-        rigid.AddForce((transform.forward + (transform.up * 0.3f)) * throwForce, ForceMode.Impulse);
+        rigid.AddForce(/*(transform.forward + (transform.up * 0.3f))*/angle * throwForce, ForceMode.Impulse);
+        throwAngle = Vector3.zero;
     }
 
     //========================================================================

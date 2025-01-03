@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ThrowBox_Nomal : SpecialInteraction_Script, IThrowBox
+public class ThrowBox_Nomal : SpecialThrowOBJ_Base, IThrowBox
 {
     private LayerMask NomalBoxLayer;
 

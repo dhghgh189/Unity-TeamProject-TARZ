@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Child_SpecialTrigger : MonoBehaviour
 {
-    private SpecialInteraction_Script SpecialOBJ;
+    private SpecialThrowOBJ_Base SpecialOBJ;
     private SphereCollider col;
     private LayerMask playerLayer;
     public bool IsPlayerIn = false;
@@ -11,7 +11,7 @@ public class Child_SpecialTrigger : MonoBehaviour
 
     void Init()
     {
-        SpecialOBJ = GetComponentInParent<SpecialInteraction_Script>();
+        SpecialOBJ = GetComponentInParent<SpecialThrowOBJ_Base>();
         playerLayer = LayerMask.NameToLayer("Player");
 
         col = gameObject.AddComponent<SphereCollider>();

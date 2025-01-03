@@ -1,7 +1,7 @@
 using UnityEngine;
 using Zenject;
 
-public class Example_StaminaScript : MonoBehaviour
+public class Example_CheatScript : MonoBehaviour
 {
     [Inject]
     [SerializeField] StatModel model;

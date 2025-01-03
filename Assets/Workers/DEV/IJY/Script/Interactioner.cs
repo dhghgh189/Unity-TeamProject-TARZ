@@ -8,7 +8,7 @@ public class Interactioner : MonoBehaviour
 {
     public bool IsGrabing = false;
     [SerializeField] public Transform GrabPos;
-    [SerializeField] public SpecialInteraction_Script SpecialOBJ;
+    [SerializeField] public SpecialThrowOBJ_Base SpecialOBJ;
 
     private int interactionLayer;
     private int interactionGrabLayer;
@@ -113,7 +113,7 @@ public class Interactioner : MonoBehaviour
 
         if (targets.First().layer == interactionGrabLayer)
         {
-            SpecialOBJ = targets.First().GetComponent<SpecialInteraction_Script>();
+            SpecialOBJ = targets.First().GetComponent<SpecialThrowOBJ_Base>();
 
             if (SpecialOBJ.trigger == null || !SpecialOBJ.trigger.gameObject.activeSelf) return null;
             if (SpecialOBJ.trigger.IsPlayerIn == false)

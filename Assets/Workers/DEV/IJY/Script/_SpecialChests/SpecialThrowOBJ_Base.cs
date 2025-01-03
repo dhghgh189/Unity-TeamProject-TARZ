@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SpecialInteraction_Script : MonoBehaviour, Interaction_Ibase_GrabAct
+public class SpecialThrowOBJ_Base : MonoBehaviour, Interaction_Ibase_GrabAct
 {
     public PlayerController playerController { get; set; }
     public Collider col;

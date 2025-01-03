@@ -15,7 +15,17 @@ public class BaseManaState : BaseState<PlayerController>, IManaAct
     {
     }
 
+    public virtual bool OnCollisionEnterAction(Collision other)
+    {
+        return false;
+    }
+
     public virtual bool OnCollisionAction(Collision other)
+    {
+        return false; 
+    }
+
+    public virtual bool OnCollisionExitAction(Collision other)
     {
         return false;
     }

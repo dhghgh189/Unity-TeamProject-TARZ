@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using static MonsterData;
 
 /// <summary>
@@ -17,8 +18,9 @@ public class ManaRushSkill : IManaSkill
     public LinkedList<BaseManaState> Acts { get; private set; } // 행동이 들어있는 연결리스트
     public ManaSkillDataSO SkillData { get => skillData; set => skillData = value; }
 
-    public Transform collider;      // 충돌한 오브젝트를 담아두는 변수
+    public Collider collider;      // 충돌한 오브젝트를 담아두는 변수
     public Quaternion quaternion;   // 해당 충돌체의 방향
+    public Vector3 pos;             // 해당 충돌체의 기존 위치
 
     public ManaRushSkill(PlayerController owner)
     {
@@ -112,17 +114,30 @@ public class ManaRush_1 : BaseManaState
     {
         base.OnExit();
         owner.Movement.Rigid.velocity = Vector3.zero;
+        parent.collider = null;
     }
 
     public override bool OnCollisionAction(Collision other)
     {
+        if (parent.collider != null) return false;
+
         if (other.gameObject.layer.Equals(LayerMask.NameToLayer("Monster")))
         {
             if (other.gameObject.GetComponent<MonsterData>().MonsterTIer.Equals(MonsterTier.Normal))
             {
                 Debug.Log("마나1 잡는 행동으로 넘어가기 요청!");
-                parent.collider = other.gameObject.transform;
+                // 잡힌 적의 정보 저장
+                parent.collider = other.collider;
+                parent.pos = other.gameObject.transform.position;
                 parent.quaternion = other.transform.rotation;
+                // 충돌 끄기
+                Physics.IgnoreCollision(owner.coll, other.collider, true);
+
+                parent.collider.GetComponent<MonsterData>().IsCatched = true;
+                parent.collider.GetComponent<NavMeshAgent>().enabled = false;
+                parent.collider.GetComponent<Rigidbody>().useGravity = false;
+                parent.collider.GetComponent<Rigidbody>().isKinematic = true;
+
                 owner.Movement.Rigid.velocity = Vector3.zero;
                 return true;
             }
@@ -172,6 +187,7 @@ public class ManaRush_2 : BaseManaState
 
         // 충돌한 몬스터 손에 잡기
         parent.collider.transform.parent = grabPoint;
+        parent.collider.transform.localPosition = Vector3.zero;
 
         owner.Anim.CrossFade(Animator.StringToHash(animName), 0.01f);
         owner.StartCoroutine(AnimRoutine());
@@ -211,6 +227,12 @@ public class ManaRush_2 : BaseManaState
     public override void OnExit()
     {
         LeaveMonster();
+        parent.collider.GetComponent<MonsterData>().IsCatched = false;
+        parent.collider.GetComponent<NavMeshAgent>().enabled = true;
+        parent.collider.GetComponent<Rigidbody>().useGravity = true;
+        parent.collider.GetComponent<Rigidbody>().isKinematic = false;
+        Physics.IgnoreCollision(owner.coll, parent.collider, false);
+        parent.collider = null;
     }
     private void LeaveMonster()
     {
@@ -240,6 +262,15 @@ public class ManaRush_3 : BaseManaState
 
     public override void OnEnter()
     {
+        if (parent.collider is not null)
+        {
+            Physics.IgnoreCollision(owner.coll, parent.collider, false);
+            parent.collider.GetComponent<MonsterData>().IsCatched = false;
+            parent.collider.GetComponent<NavMeshAgent>().enabled = true;
+            parent.collider.GetComponent<Rigidbody>().useGravity = true;
+            parent.collider.GetComponent<Rigidbody>().isKinematic = false;
+        }
+
         animTimer = 999f;
         Debug.Log("충격파 입장");
         damage = parent.SkillData.GetData((int)ManaRushDataType.RangeAttackDamage);
@@ -285,6 +316,7 @@ public class ManaRush_3 : BaseManaState
     public override void OnExit()
     {
         base.OnExit();
+        parent.collider = null;
     }
 
     public override void OnAction()

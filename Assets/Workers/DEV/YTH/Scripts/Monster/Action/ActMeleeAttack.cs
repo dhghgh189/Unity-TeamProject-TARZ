@@ -31,7 +31,7 @@ public class ActMeleeAttack : Action
 
     public override TaskStatus OnUpdate()
     {
-        if (_distance <= _monsterData.AttackRange)
+        if (_distance <= _monsterData.AttackRange && !_monsterData.IsCatched)
         {
             if (attackRoutine == null)
             {

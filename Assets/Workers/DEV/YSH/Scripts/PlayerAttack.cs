@@ -33,6 +33,9 @@ public class PlayerAttack : MonoBehaviour
     // 제곱 값 반환 (sqrMagnitude와 비교하기 위함)
     public float CounterRange => counterRange * counterRange;
     public MonsterData CounterTarget { get; private set; }
+    // 일반 카운터시 몬스터를 던지는 힘 (추후 인스펙터로 뺄 것)
+    private float counterThrowForce = 10f;
+    public float CounterThrowForce => counterThrowForce;
 
     [HideInInspector]
     public bool IsEndJumpMelee;

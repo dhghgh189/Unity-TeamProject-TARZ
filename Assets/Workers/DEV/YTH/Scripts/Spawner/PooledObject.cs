@@ -31,6 +31,7 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
 
     [Inject] Transform dropPool;
 
+    private MonsterSkillManager _skill;
 
     private void Start()
     {
@@ -39,6 +40,7 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
         _animator = GetComponent<Animator>();
         _rigid = GetComponent<Rigidbody>();
         _monsterData = GetComponent<MonsterData>();
+        _skill = GetComponent<MonsterSkillManager>();
     }
 
     private void OnEnable()
@@ -200,5 +202,27 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
             }
         }
         Instantiate(_chip, curPos, transform.rotation, dropPool).GetComponent<DropChip>().SetDropChip(random, _monsterData.MonsterTIer != MonsterData.MonsterTier.Boss);
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        // 일반 몹이 던져진 후 충돌했을 때
+        if (_monsterData.IsCountered 
+            && _monsterData.MonsterTIer == MonsterData.MonsterTier.Normal)
+        {
+            // constraints 복원
+            _monsterData.rigid.constraints = RigidbodyConstraints.FreezeAll;
+            // 충돌 켜기
+            Physics.IgnoreCollision(player.coll, _monsterData.coll, false);
+
+            _monsterData.IsCatched = false;
+            _monsterData.agent.enabled = true;
+
+            // 범위 타격 실행
+            _skill.Explosion(2f, 360f, 50f);
+
+            // 반격 상황 종료
+            _monsterData.IsCountered = false;
+        }  
     }
 }

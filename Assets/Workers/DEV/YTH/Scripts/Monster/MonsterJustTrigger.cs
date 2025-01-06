@@ -71,6 +71,7 @@ public class MonsterJustTrigger : MonoBehaviour
         {
             Debug.Log("저스트회피 성공!");
             _playerStat.CurrentMp += 10;
+            _monsterData.IsCountered = true;
             _playerAttack.JustCounter(_monsterData);
         }
         else

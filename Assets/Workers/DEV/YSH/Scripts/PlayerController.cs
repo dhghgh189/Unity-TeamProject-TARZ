@@ -49,6 +49,9 @@ public class PlayerController : MonoBehaviour, IDamagable
     public CapsuleCollider coll;
 
     private StringBuilder sb;
+
+    public Transform GrabPoint { get; private set; }
+
     void Awake()
     {
         drainManager = GetComponentInChildren<DrainManager>();
@@ -64,6 +67,7 @@ public class PlayerController : MonoBehaviour, IDamagable
         ManaSkillHandler = GetComponent<ManaSkillHandler>();
         interactioner = GetComponentInChildren<Interactioner>();
         coll = GetComponent<CapsuleCollider>();
+        GrabPoint = GameObject.FindWithTag("GrabPoint").transform;
 
         Fsm = new PlayerFSM(this, AblityAdapter);
 

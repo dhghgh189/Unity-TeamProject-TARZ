@@ -28,6 +28,12 @@ public class PlayerAttack : MonoBehaviour
     public float JumpMeleeRange;
     public float JumpMeleeFallForce;    // 하강 시 가해줄 힘
 
+    // 반격 스펙 설정 (추후 인스펙터로 뺄 것)
+    private float counterRange = 2f;
+    // 제곱 값 반환 (sqrMagnitude와 비교하기 위함)
+    public float CounterRange => counterRange * counterRange;
+    public MonsterData CounterTarget { get; private set; }
+
     [HideInInspector]
     public bool IsEndJumpMelee;
 
@@ -424,37 +430,10 @@ public class PlayerAttack : MonoBehaviour
     }
     #endregion
 
-    public void BossCounter(MonsterData monster)
+    public void JustCounter(MonsterData monster)
     {
-        bossCounterRoutine = StartCoroutine(BossCounterRoutine(monster));
-    }
-
-    Coroutine bossCounterRoutine;
-    IEnumerator BossCounterRoutine(MonsterData monster)
-    {
-        player.IsImortal = true;
-
-        Vector3 monsterPos;
-        while (true)
-        {
-            monsterPos = monster.transform.position - transform.position;
-            if (monsterPos.magnitude < 2)
-            {
-                break;
-            }
-            else
-            {
-                player.Movement.Rigid.velocity = monsterPos.normalized * player.Stat.MoveSpeed;
-                transform.forward = monsterPos.normalized;
-            }
-            yield return null;
-        }
-
-        //근접 공격
-        player.Anim.CrossFade($"Melee1" , 0.01f);
-
-        player.IsImortal = false;
-        yield return null;
+        CounterTarget = monster;
+        player.ChangeState(EState.Counter);
     }
 
     private void OnDrawGizmos()

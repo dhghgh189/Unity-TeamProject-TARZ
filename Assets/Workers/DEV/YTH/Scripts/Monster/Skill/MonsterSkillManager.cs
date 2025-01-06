@@ -584,6 +584,30 @@ public class MonsterSkillManager : MonoBehaviour
             }
         }
     }
+
+    public void Explosion(float range, float angle, float damage)
+    {
+        Collider[] colliders = Physics.OverlapSphere(transform.position, range, (1 << gameObject.layer));
+        foreach (Collider collider in colliders)
+        {
+            // 공격 범위 확인
+            Vector3 source = transform.position;
+            source.y = 0;
+            Vector3 destination = collider.transform.position;
+            destination.y = 0;
+
+            Vector3 targetDir = (destination - source).normalized;
+            float targetAngle = Vector3.Angle(transform.forward, targetDir);
+            if (targetAngle > angle * 0.5f)
+                continue;
+
+            IDamagable damageble = collider.GetComponent<IDamagable>();
+            if (damageble != null)
+            {
+                damageble.TakeDamage(damage);
+            }
+        }
+    }
     #endregion
 
     #region RangeAttack

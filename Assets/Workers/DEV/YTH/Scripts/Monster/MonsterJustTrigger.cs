@@ -20,7 +20,7 @@ public class MonsterJustTrigger : MonoBehaviour
 
     private GameObject _player;
 
-
+    private PlayerAttack _playerAttack;
     private void Awake()
     {
         _animator = GetComponent<Animator>();
@@ -32,6 +32,7 @@ public class MonsterJustTrigger : MonoBehaviour
     private void Start()
     {
         _player = GameObject.FindGameObjectWithTag("Player");
+        _playerAttack = _player.GetComponent<PlayerAttack>();
     }
 
     private void Update()
@@ -67,27 +68,10 @@ public class MonsterJustTrigger : MonoBehaviour
 
         if (player.Fsm.CurrentState.type == EState.Dash)
         {
-            switch (_monsterData.MonsterTIer)
-            {
-                case MonsterData.MonsterTier.Normal:
-                    // 버프 느낌
-                    // 일시적 스탯 향상
-                    // 임시 보상 (추후 반격으로 변경 필요)
-                    
-                    Debug.Log("3티어 정상작동");
-                    break;
-                case MonsterData.MonsterTier.Elite:
-                    // 임시 보상 (추후 반격으로 변경 필요)
-                   
-                    Debug.Log("2티어 정상작동");
-                    break;
-                case MonsterData.MonsterTier.Boss:
-                    // 임시 보상 (추후 반격으로 변경 필요)
-                    _playerStat.CurrentMp += 10f;
-                    Debug.Log("1티어 정상작동");
-                    break;
-            }
-            Debug.Log("Just Success!");
+            Debug.Log("저스트회피 성공!");
+            _playerStat.CurrentMp += 10;
+            _monsterData.IsCountered = true;
+            _playerAttack.JustCounter(_monsterData);
         }
         else
         {

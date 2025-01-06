@@ -128,13 +128,7 @@ public class BlackHollObject : MonoBehaviour
     {
         /* NavMeshAgent -> Rigidbody 물리(강체) 적용하기 위한 행동 */
         yield return null;
-        NavMeshAgent agent = other.gameObject.GetComponent<NavMeshAgent>();
-        Rigidbody rigid = other.gameObject.GetComponent<Rigidbody>();
-        MonsterData monsterData = other.gameObject.GetComponent<MonsterData>();
-        monsterData.IsCatched = true;
-        agent.enabled = false;
-        rigid.useGravity = true;
-        rigid.isKinematic = false;
+        SetHold(other.gameObject);
         Debug.Log("초기설정");
 
         Debug.Log("물리 적용");
@@ -189,6 +183,10 @@ public class BlackHollObject : MonoBehaviour
         Charge();
     }
 
+    /// <summary>
+    /// 잡는 함수 -> 물리(강체)를 사용하기 위한 설정
+    /// </summary>
+    /// <param name="other">사용 요청을 한 물체</param>
     private void SetHold(GameObject other)
     {
         NavMeshAgent agent = other.GetComponent<NavMeshAgent>();
@@ -200,6 +198,10 @@ public class BlackHollObject : MonoBehaviour
         rigid.isKinematic = false;
     }
 
+    /// <summary>
+    /// 놓아주는 함수 -> NavMesh를 활성화하기 위한 설정
+    /// </summary>
+    /// <param name="other"></param>
     private void SetPut(GameObject other)
     {
         /* Rigidbody -> NavMeshAgent 다시 navMesh를 활성화하기 위한 행동 */

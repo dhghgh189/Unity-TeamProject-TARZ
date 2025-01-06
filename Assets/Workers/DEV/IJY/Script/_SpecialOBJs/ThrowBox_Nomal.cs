@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class ThrowBox_Nomal : SpecialThrowOBJ_Base
 {
+    public ThrowBox_Nomal() => box_type = Box_Type.Nomal;
+
     [Header("중형 상자")]
     private LayerMask NomalBoxLayer;
     [SerializeField] private float NomalBoxDamage;

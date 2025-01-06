@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class ThrowBox_Bomb : SpecialThrowOBJ_Base
 {
-    private IDamagable hit;
+    public ThrowBox_Bomb() => box_type = Box_Type.Bomb;
+
     private LayerMask ThrowingOBJLayer;
     private LayerMask BombBoxLayer;
     private bool isThrowingOBJ = false;
@@ -55,8 +56,6 @@ public class ThrowBox_Bomb : SpecialThrowOBJ_Base
     /// </summary>
     void Bomb()
     {
-        Debug.Log("터졌는지 확인");
-        // 범위 내 몬스터, 플레이어 등을 인식하여 리스트로 반환하는 함수 실행
         HitOBJs = CheckBombRange();
 
         // 각 오브젝트의 TakeDamage 함수를 호출하여 범위 데미지를 가해준다.
@@ -66,7 +65,6 @@ public class ThrowBox_Bomb : SpecialThrowOBJ_Base
             {
                 hit.TakeDamage(BombBoxDamage);
             }
-            //obj.GetComponent<IDamagable>().TakeDamage(BombBoxDamage);
         }
 
         Destroy(this.gameObject, 0.5f);
@@ -81,7 +79,6 @@ public class ThrowBox_Bomb : SpecialThrowOBJ_Base
     /// <returns></returns>
     IEnumerator BombWaitRoutine(float cool)
     {
-        Debug.Log("루틴 실행");
         while (cool > 0.1f)
         {
             cool -= Time.deltaTime;
@@ -90,6 +87,7 @@ public class ThrowBox_Bomb : SpecialThrowOBJ_Base
 
         CheckBombRoutine = null;
         Bomb();
+
         yield break;
     }
 
@@ -101,14 +99,13 @@ public class ThrowBox_Bomb : SpecialThrowOBJ_Base
     List<GameObject> CheckBombRange()
     {
         List<GameObject> _targets = new List<GameObject>();
+
         // 해당 범위를 납작한 원으로 재구성할 필요가 있어보임.
         Collider[] collider = Physics.OverlapSphere(this.transform.position, 5f);
 
         foreach (Collider _col in collider)
         {
-            //if (_col.gameObject.layer != BombBoxLayer) continue;
-            //  임시 사용. 위 이프문 현재 동작하지 않음
-            //if (_col.gameObject.layer != LayerMask.NameToLayer("Monster") && _col.gameObject.layer != LayerMask.NameToLayer("Player")) continue;
+            // 두 개 이상의 레이어를 검사하기 위해서는 비트 연산이 필요하다.
             if (((1 << _col.gameObject.layer) & BombBoxLayer.value) == 0) continue;
 
             Vector3 source = transform.position; source.y = 0;
@@ -123,6 +120,10 @@ public class ThrowBox_Bomb : SpecialThrowOBJ_Base
         return _targets;
     }
 
+    public void CheckPath()
+    {
+        Debug.Log($"폭탄상자 : {gameObject.name}");
+    }
 
     /// <summary>
     /// 씬 이동 시 스크립트 정리

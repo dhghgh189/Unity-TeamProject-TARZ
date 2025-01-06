@@ -4,6 +4,7 @@ using System.Text;
 using Unity.Properties;
 using UnityEngine;
 using Zenject;
+using Zenject.SpaceFighter;
 using static SkillEnum;
 using static UnityEngine.UI.GridLayoutGroup;
 
@@ -290,6 +291,26 @@ public class PlayerController : MonoBehaviour, IDamagable
         {
             SkillHandler.PlayerCollision((ActTimingType)Enum.Parse(typeof(ActTimingType), sb.ToString()), collision.gameObject);
         }
+    }
+
+    public void InfStamina(float value)
+    {
+        
+        steminaRoutine = StartCoroutine(SteminaRoutine(value));
+       
+    }
+
+    Coroutine steminaRoutine;
+    IEnumerator SteminaRoutine(float value)
+    {
+        Debug.Log("루틴 시작합니다~!~!");
+        Stat.StaminaCostRate = 0;
+        Stat.CurrentStamina = Stat.MaxStamina;
+        yield return Util.GetDelay(value);
+        Stat.StaminaCostRate = 1;
+
+        steminaRoutine = null;
+        Debug.Log("종료로그");
     }
 
     private void OnDisable()

@@ -3,15 +3,15 @@ using Zenject;
 
 public class HJS_Installer : MonoInstaller
 {
-    SaveData saveData = new();
+    InGameSaveData saveData = new();
     public override void InstallBindings()
     {
         if (!string.IsNullOrEmpty(PlayerPrefs.GetString("SaveData")))
         {
-            saveData = JsonUtility.FromJson<SaveData>(PlayerPrefs.GetString("SaveData"));
+            saveData = JsonUtility.FromJson<InGameSaveData>(PlayerPrefs.GetString("SaveData"));
             Debug.Log(JsonUtility.ToJson(saveData, true));
         }
-        Container.Bind<SaveData>().FromInstance(saveData);
+        Container.Bind<InGameSaveData>().FromInstance(saveData);
 
         Container.Bind<StatModel>().FromComponentInHierarchy().AsSingle();
         Container.Bind<Equipment>().FromComponentInHierarchy().AsSingle();

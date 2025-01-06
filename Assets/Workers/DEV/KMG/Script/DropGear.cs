@@ -1,6 +1,4 @@
 using UnityEngine;
-using Zenject;
-using static UnityEngine.Rendering.DebugUI;
 
 public class DropGear : MonoBehaviour
 {

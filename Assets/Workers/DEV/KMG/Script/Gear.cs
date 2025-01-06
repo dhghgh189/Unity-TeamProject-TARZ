@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum Part
 {
-    모자, 셔츠, 안경, 장갑, 바지, 귀걸이, 반지, 신발, 목걸이, Size
+    장갑, 신발, 셔츠, 귀걸이, 안경, 모자, 바지, 목걸이, 반지, Size
 }
 [Serializable]
 [CreateAssetMenu(fileName = "Gear", menuName = "Scriptables/Gear")]

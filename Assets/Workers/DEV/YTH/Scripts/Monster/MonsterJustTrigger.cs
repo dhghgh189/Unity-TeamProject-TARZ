@@ -53,8 +53,7 @@ public class MonsterJustTrigger : MonoBehaviour
     IEnumerator JustRoutine() // 켜진 트리거는 아주 짧은 시간 뒤 꺼짐
     {
         _justTrigger.SetActive(true);
-        /*yield return Util.GetDelay(0.25f);*/
-        yield return Util.GetDelay(2f);
+        yield return Util.GetDelay(0.25f);
         _justTrigger.SetActive(false);
 
         justRoutine = null;

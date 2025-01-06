@@ -219,7 +219,7 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
             _monsterData.agent.enabled = true;
 
             // 범위 타격 실행
-            _skill.Explosion(2f, 360f, 50f);
+            _skill.Explosion(4f, 360f, 50f);
 
             // 반격 상황 종료
             _monsterData.IsCountered = false;

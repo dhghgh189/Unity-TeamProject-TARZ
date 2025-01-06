@@ -1,15 +1,20 @@
-using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
+using Zenject;
 
 public class UI_EquipmentSlot : MonoBehaviour
 {
+    [Inject] Inventory inventory;
+
     [SerializeField] Gear gear;
-    private TMP_Text gearNameText;
+
+    private Image image;
+
     public void SetEquipmentSlot(Gear gear)
     {
-        if (gearNameText == null)
-            gearNameText = GetComponentInChildren<TMP_Text>();
         this.gear = gear;
-        gearNameText.text = gear.GearName;
+        if (!image)
+            image = GetComponent<Image>();
+        image.sprite = inventory.GetSprite(((int)gear.Part * 3) + (gear.Tier - 1));
     }
 }

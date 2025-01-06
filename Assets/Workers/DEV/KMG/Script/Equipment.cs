@@ -1,5 +1,5 @@
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Zenject;
 
 public class Equipment : MonoBehaviour
@@ -11,6 +11,7 @@ public class Equipment : MonoBehaviour
     [Inject] UI_EquipmentSlot[] uI_EquipmentSlots = new UI_EquipmentSlot[(int)Part.Size];
 
     [Inject] SaveData saveData;
+
     private void Start()
     {
         foreach (GearSaveData item in saveData.EquipmentGears)

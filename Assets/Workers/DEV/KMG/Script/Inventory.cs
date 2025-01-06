@@ -12,16 +12,22 @@ public class Inventory : MonoBehaviour
     // 인벤토리 슬롯들을 보관할 배열 12개임
     [Inject] UI_InventorySlots[] inventorySlots;
 
+    // 인벤토리 캔버스
+    [SerializeField] GameObject canvas;
+
     // 장비들의 기본 능력치로 지정된 베이스 장비가 담길 배열
     [SerializeField] Gear[] baseGears = new Gear[(int)Part.Size];
 
     // 선택된 장비의 선택지들
     [SerializeField] GameObject selectPanel;
-    [SerializeField] Button[] SelectButtons;
+    private Button[] SelectButtons;
 
+    // 선택된 버튼 위치를 기억
     private Button selectedButton;
 
     private InputAction inventoryAction;
+
+    [SerializeField] Sprite[] gearSprite;
 
     private void Start()
     {
@@ -149,8 +155,6 @@ public class Inventory : MonoBehaviour
         selectedButton = null;
     }
 
-    // 테스트용
-    [SerializeField] GameObject canvas;
     private void Update()
     {
         //if (Input.GetKeyDown(KeyCode.R))
@@ -166,7 +170,7 @@ public class Inventory : MonoBehaviour
                 return;
             }
             canvas.SetActive(true);
-            GetComponentInChildren<Button>().Select();
+            GetComponentInChildren<Button>(true).Select();
         }
     }
 
@@ -176,5 +180,10 @@ public class Inventory : MonoBehaviour
         {
             slot.ClearSlot();
         }
+    }
+
+    public Sprite GetSprite(int index)
+    {
+        return index > gearSprite.Length - 1 ? null : gearSprite[index];
     }
 }

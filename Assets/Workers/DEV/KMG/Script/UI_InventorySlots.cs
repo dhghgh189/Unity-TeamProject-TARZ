@@ -4,14 +4,18 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Zenject;
 
-public class UI_InventorySlots : MonoBehaviour
+public class UI_InventorySlots : MonoBehaviour, ISelectHandler, IDeselectHandler
 {
     [Inject] StatModel statModel;
     [Inject] Equipment equipment;
     [Inject] Inventory inventory;
-    [SerializeField] Gear gear;
-    [SerializeField] TMP_Text gearName;
+
     public bool IsEmpty = true;
+    [SerializeField] Gear gear;
+
+    private Image image;
+    private GameObject outline;
+
     private void Start()
     {
         GetComponent<Button>().onClick.AddListener(() => inventory.SelectSlot(this));
@@ -23,9 +27,7 @@ public class UI_InventorySlots : MonoBehaviour
         equipment.ChangeGear(gear, out oldGear);
 
         // 장착하고 인벤토리 슬롯을 초기화
-        gear = null;
-        IsEmpty = true;
-        gearName.text = string.Empty;
+        ClearSlot();
 
         // 이전 장비 부위가 있다면 슬롯에 저장
         if (oldGear)
@@ -34,20 +36,19 @@ public class UI_InventorySlots : MonoBehaviour
     // 해당 슬롯에 장비를 보관시키는 함수
     public void SetInventorySlots(Gear gear)
     {
-        if(gearName == null)
-            gearName = GetComponentInChildren<TMP_Text>();
-
         IsEmpty = false;
         this.gear = gear;
-        gearName.text = gear.GearName;
+
+        if (!image)
+            image = GetComponent<Image>();
+
+        image.sprite = inventory.GetSprite(((int)gear.Part * 3) + (gear.Tier - 1));
     }
 
     public void GearSell()
     {
         statModel.Chip += gear.Tier;
-        gear = null;
-        IsEmpty = true;
-        gearName.text = string.Empty;
+        ClearSlot();
     }
 
     public GearSaveData SaveInventoyGear()
@@ -62,6 +63,18 @@ public class UI_InventorySlots : MonoBehaviour
         // 장착하고 인벤토리 슬롯을 초기화
         gear = null;
         IsEmpty = true;
-        gearName.text = string.Empty;
+        image.sprite = null;
+    }
+
+    public void OnSelect(BaseEventData eventData)
+    {
+        if (!outline) 
+            outline = GetComponentsInChildren<Image>(true)[1].gameObject;
+        outline.SetActive(true);
+    }
+
+    public void OnDeselect(BaseEventData eventData)
+    {
+        outline.SetActive(false);
     }
 }

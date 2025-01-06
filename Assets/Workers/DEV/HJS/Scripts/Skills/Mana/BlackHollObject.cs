@@ -108,6 +108,7 @@ public class BlackHollObject : MonoBehaviour
             if(other.gameObject.GetComponent<MonsterData>().MonsterTIer.Equals(MonsterTier.Normal))
             {
                 Debug.Log("StartHolidng");
+                enemies.Add(other.gameObject);
                 StartCoroutine(StartBoilingRoutine(other.gameObject.transform));
             }
         }
@@ -134,54 +135,19 @@ public class BlackHollObject : MonoBehaviour
         agent.enabled = false;
         rigid.useGravity = true;
         rigid.isKinematic = false;
+        Debug.Log("초기설정");
 
-        /* 물리 적용 */
-        Vector3 relativeDirection = other.position - transform.position;
-        Vector3 gravityDirection = relativeDirection.normalized;
+        Debug.Log("물리 적용");
+        while(true)
+        { 
+            /* 물리 적용 */
+            Vector3 relativeDirection = other.position - transform.position;
+            Vector3 gravityDirection = relativeDirection.normalized;
 
-        rigid.AddForce(-gravityDirection * absorptionSpeed);
-
-        /* 해당 적용이 다 끝나는 조건 */
-        yield return new WaitForFixedUpdate();
-        yield return new WaitUntil(() => rigid.velocity.magnitude < 0.05f);
-
-        /* Rigidbody -> NavMeshAgent 다시 navMesh를 활성화하기 위한 행동 */
-        rigid.velocity = Vector3.zero;
-        rigid.angularVelocity = Vector3.zero;
-        rigid.useGravity = false;
-        rigid.isKinematic = true;
-        agent.Warp(other.position);
-        agent.enabled = false;
-
-        yield return null;
-        /* 모든 작업이 끝나면 할 행동 */
-        // 블랙홀에 잡힌걸 푼다
-        monsterData.IsCatched = false;
-
-        while (true)
-        {
-            if (agent != null)
-            {
-                // 거리를 계산하고
-                //Vector3 relativeDirection = other.position  - transform.position;
-                // 
-                // // 정규화를 진행하고
-                //Vector3 gravityDirection = relativeDirection.normalized;
-                // 
-                
-                // // 1. 현재 있는 오브젝트 방향으로 힘의 량만큼 끌어당기기
-                // other.gameObject.GetComponent<Rigidbody>().velocity = -gravityDirection * absorptionSpeed;
-                // other.gameObject.transform.Translate( -gravityDirection * absorptionSpeed * Time.deltaTime);
-
-                // 2. 폭발하는 힘으로 끌어당기기
-                // Debug.Log($"{other.gameObject.name} is moving toward {-gravityDirection * absorptionSpeed}");
-                // rb.AddExplosionForce(-absorptionSpeed * 6000 * Time.deltaTime, transform.position, absorptionRange);
-
-                // 3. navMeshAgent의 방향을 설정
-                agent.velocity = -gravityDirection * absorptionSpeed;
-                Debug.Log($"{other.gameObject.name}이 당겨지고 있다! / {absorptionRange} 범위안에 들어오면 힘은 {-gravityDirection * absorptionSpeed} 이정도로 {transform.position}여기로 당기게 한다!");
-            }
-
+            rigid.AddExplosionForce(absorptionSpeed * -256f * Time.deltaTime, transform.position, absorptionRange);
+            /* 해당 적용이 다 끝나는 조건 */
+            yield return new WaitForFixedUpdate();
+            // yield return new WaitUntil(() => rigid.velocity.magnitude < 0.05f);
         }
     }
 
@@ -192,18 +158,16 @@ public class BlackHollObject : MonoBehaviour
         {
             IDamagable damagable = collider.gameObject.GetComponent<IDamagable>();
             if (damagable != null) { damagable.TakeDamage(explosionDamage); Debug.Log($"{collider.gameObject.name}에게 {explosionDamage}만큼의 피해를 입혔다!"); }
-            NavMeshAgent agent = collider.gameObject.GetComponent<NavMeshAgent>();
-            if (agent != null) { agent.velocity = Vector3.zero; }
         }
     }
 
     private void OnDestroy()
     {
-       //  foreach(var enemy in enemies)
-       //  {
-       //      if (enemy is null) continue;
-       //      SetPut(enemy);
-       //  }
+        foreach(var enemy in enemies)
+        {
+            if (enemy is null) continue;
+            SetPut(enemy);
+        }
 
         Explosion();
         StopAllCoroutines();
@@ -223,5 +187,29 @@ public class BlackHollObject : MonoBehaviour
 
         // 값 설정후 모으기 시작
         Charge();
+    }
+
+    private void SetHold(GameObject other)
+    {
+        NavMeshAgent agent = other.GetComponent<NavMeshAgent>();
+        Rigidbody rigid = other.GetComponent<Rigidbody>();
+        MonsterData monsterData = other.GetComponent<MonsterData>();
+        monsterData.IsCatched = true;
+        agent.enabled = false;
+        rigid.useGravity = true;
+        rigid.isKinematic = false;
+    }
+
+    private void SetPut(GameObject other)
+    {
+        /* Rigidbody -> NavMeshAgent 다시 navMesh를 활성화하기 위한 행동 */
+        NavMeshAgent agent = other.GetComponent<NavMeshAgent>();
+        Rigidbody rigid = other.GetComponent<Rigidbody>();
+        MonsterData monsterData = other.GetComponent<MonsterData>();
+        agent.enabled = true;
+        rigid.useGravity = false;
+        rigid.isKinematic = true;
+        monsterData.IsCatched = false;
+        Debug.Log("원복 끝");
     }
 }

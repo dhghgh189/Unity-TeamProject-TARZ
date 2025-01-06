@@ -1,54 +1,73 @@
 using System;
 using System.Collections.Generic;
+using UnityEditor.PackageManager.Requests;
 using UnityEngine;
+using UnityEngine.Events;
 using static SkillEnum;
 
-[CreateAssetMenu(menuName = "Scriptables/Base_ActiveSkill")]
-public class ActiveSkillSO : ScriptableObject
+public enum Test_Timing { Enter, Update, Exit, Act, Collision }
+public enum Test_Status { None, Success, Failure }
+[Serializable]
+public class ActiveSkillSO
 {
-    [Header("Skill_Defualt_Options")]
-    [SerializeField] Target who;
-    [SerializeField] RefeatType refeat;
-    [SerializeField] ActConditionType when;
+    [SerializeField] string IndexName;
+    private int level;
+    private BaseSkillSO parent;
 
-    [Header("SkillOptions")]
-    public bool Create;
+    public Test_Timing act;                   // 발동 시점
+    [Header("생성")]
+    public bool Create;                       // 생성 여부
+    [SerializeField] GameObject createObject; // 생성 여부가 True일 때 -> 생성할 오브젝트 (ex. 폭발, 독구름)
+    public Vector3[] performance_Act;         // 스킬의 정보
+    [Space(5)]
+    [Header("상태 이상 효과")]
+    public bool Interaction;                  // 상태이상 효과 여부
+    public InteractionType type;              // 상태이상 종류
+    public Vector3[] performance_Interaction; // 스킬의 정보
+    [Space(5)]
+    [Header("특수 효과")]
+    public bool UniqueEffect;                 // 특수 효과 여부
+    public Test_Status status;                // 특수 효과를 적용할 함수의 종류
+    public GameObject UniqueEffectObject;     // 특수 효과가 들어있는 함수
 
-    [Space(2)]
-    [Header("Settings")]
-    [SerializeField] CreateSetting createSetting;
-
-    #region 프로퍼티
-    public Target Target => who;
-    public RefeatType Refeat => refeat;
-    public ActConditionType CollisionType => when;
-    #endregion
-
-    [Serializable]
-    public class CreateSetting
+    public void Use(GameObject requester, GameObject target = null)
     {
-        public List<GameObject> CreateObject; // 생성 여부가 True일 때 -> 생성할 오브젝트 (ex. 폭발, 독구름)
-    }
-    public void Use(GameObject obj, GameObject ga)
-    {
-
         if (Create)
         {
-            foreach (GameObject gameObject in createSetting.CreateObject)
+            Debug.Log(createObject.name);
+            GameObject game = UnityEngine.Object.Instantiate(createObject, requester.transform.position + Vector3.up, Quaternion.identity);
+            FloorSpawner flooring = game.GetComponent<FloorSpawner>();
+            // 설치물이 장판이라면
+            if (flooring is not null)
             {
-                Debug.Log(gameObject.name);
-                GameObject game = Instantiate(gameObject, obj.transform.position + Vector3.up, Quaternion.identity);
-
-                FloorSpawner flooring = game.GetComponent<FloorSpawner>();
-                // 설치물이 장판이라면
-                if (flooring is not null)
-                {
-                    flooring.SetTarget = obj.transform;
-                    Debug.Log($"floor 부착! {obj.name}");
-                }
-                Debug.Log($"충돌한 {obj.name}의 위치에서 {game.name}을 생성하겠다!");
+                flooring.SetTarget = requester.transform;
+                Debug.Log($"floor 부착! {requester.name}");
             }
+            Debug.Log($"충돌한 {requester.name}의 위치에서 {game.name}을 생성하겠다!");
+        }
+
+        // 상호작용
+        if (Interaction)
+        {
+            Spec skillLevelSpec = new Spec();
+            // 새로운 상호작용을 만들어서
+            Interaction interaction = new Interaction(type);
+            // 스킬의 레벨에 맞게 값을 설정하고
+            interaction.SetSpec(skillLevelSpec, level);
+            // 상호작용 하기
+            interaction.Activate(requester, target);
+        }
+
+        // 특수 효과
+        if(UniqueEffect && !status.Equals(Test_Status.None))
+        {
+            
         }
     }
+}
 
+[Serializable]
+public class ActiveSkills
+{
+    public List<ActiveSkillSO> activeSkillSOs;
 }

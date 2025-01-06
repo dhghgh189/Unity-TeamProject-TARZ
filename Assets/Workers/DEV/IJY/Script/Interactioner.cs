@@ -6,30 +6,54 @@ using UnityEngine;
 
 public class Interactioner : MonoBehaviour
 {
-    public bool IsGrabing = false;
+    #region 특수 오브젝트 스크립트별 참조
+    private Box_Type boxType;
+    private ThrowBox_Bomb bomb;
+    #endregion
+
     [SerializeField] public Transform GrabPos;
     [SerializeField] public SpecialThrowOBJ_Base SpecialOBJ;
+    [SerializeField] private GameObject target;
+    [SerializeField] private GameObject RangeCircle; // 임시적 사용. 추후 리소스 폴더를 통해 생성 예정
 
+    public bool IsGrabing = false;
     private int interactionLayer;
     private int interactionGrabLayer;
+    public GameObject curCircle;
     private Coroutine GrabRoutineCheck;
     private Coroutine RotationRoutineCheck;
+
+    private PlayerController playerController;
+    private LineRenderer lineRenderer;
     private List<GameObject> interactionOBJs = new();
 
-    [SerializeField] private PlayerController playerController;
-    [SerializeField] private GameObject target;
     [Header("인식 범위")]
     [SerializeField] float range;
     [SerializeField] float angle;
+    [Header("특수 오브젝트 사용 시 관련된 수치 목록")]
+    [SerializeField] float throwForce = 10f;
+    [SerializeField] float arc = 0.05f;
+
 
     private void Start() => Init();
 
     void Init()
     {
+        boxType = Box_Type.None;
         playerController = GetComponentInParent<PlayerController>();
+        lineRenderer = GetComponentInParent<LineRenderer>();
         interactionLayer = LayerMask.NameToLayer("Is_Interaction");
         interactionGrabLayer = LayerMask.NameToLayer("Is_Interaction_Grab");
+        lineRenderer.enabled = false;
+
+        if (curCircle == null)
+        {
+            curCircle = Instantiate(RangeCircle, playerController.transform.position, playerController.transform.rotation);
+            curCircle.transform.parent = this.transform;
+        }
+        curCircle.SetActive(false);
     }
+
 
     private void Update()
     {
@@ -50,6 +74,7 @@ public class Interactioner : MonoBehaviour
             Vector3 dir = new Vector3
                 (target.transform.position.x, transform.parent.position.y, target.transform.position.z) - transform.parent.position;
             if (RotationRoutineCheck == null) RotationRoutineCheck = StartCoroutine(RotateTransform(transform.parent, dir));
+
 
             // 위에서 설정된 타겟이 특수 오브젝트일 경우, 해당 오브젝트를 습득하는 함수를 실행한다.
             if (SpecialOBJ != null)
@@ -195,30 +220,32 @@ public class Interactioner : MonoBehaviour
     /// <returns></returns>
     IEnumerator CheckGrabing()
     {
+        lineRenderer.enabled = true;
+        curCircle.SetActive(true);
         Destroy(SpecialOBJ.rigidOBJ);
 
         // 플레이어의 스피드 = 기존의 1/3
         float curSpeed = playerController.Stat.MoveSpeed;
-        //playerController.Stat.MoveSpeed = curSpeed / 3f;
+        playerController.Stat.MoveSpeed = curSpeed / 3f;
 
         while (IsGrabing)
         {
             if (target == null || !target.activeSelf) IsGrabing = false;
-
-            // TODO : 포물선과 오버랩 스피어를 통한 범위 확인
-            Check_BoxPath();
-
+            Check_BoxPath(arc);
             yield return null;
         }
 
         // 오브젝트를 던졌을 때, 플레이어의 속도는 다시 원래대로 돌아온다.
+
         playerController.Stat.MoveSpeed = curSpeed;
         GrabRoutineCheck = null;
+        lineRenderer.enabled = false;
+        curCircle.SetActive(false);
         // 오브젝트가 독립적으로 움직일 수 있도록 자식 종속성을 해제한다.
         this.transform.DetachChildren();
         GrabEnding();
 
-        // TODO : 오브젝트 던짐!
+        // 리지드바디를 통해 물체를 던지는 함수 호출
         ThrowSpeOBJ(SpecialOBJ.GetComponent<Rigidbody>());
         SpecialOBJ = null;
         yield break;
@@ -235,15 +262,46 @@ public class Interactioner : MonoBehaviour
         SpecialOBJ.isThrowing = true;
         SpecialOBJ.col.enabled = true;
         SpecialOBJ.playerController = null;
+        bomb = null;
+        boxType = Box_Type.None;
+        curCircle.SetActive(false);
     }
 
 
     /// <summary>
     /// 특수 오브젝트가 던져졌을 때의 경로를 파악하기 위한 함수.
+    /// 라인 렌더러가 갖고 있는 position 수 만큼 반복하여, 포물선을 이루도록 한다. position의 수가 많을 수록 곡선은 더 자연스러워진다.
+    /// i 수치에 곱해지는 소수값이 작을수록 포물선은 촘촘해지나, 그만큼 짧아진다.
+    /// i 수치에 곱해지는 소수값이 클 수록 포물선은 길어지나, 그만큼 촘촘하지 않아 각지게 출력된다.
+    /// 
+    /// 현재 카메라가 y축으로 움직이지 않아 범위 확인이 어렵다. 추후 개선이 필요해보임
     /// </summary>
-    void Check_BoxPath()
+    void Check_BoxPath(float t)
     {
+        for (int i = 0; i < lineRenderer.positionCount; i++)
+        {
+            // 포물선 운동 공식을 응용하여 식을 작성하였다.
+            Vector3 point = 0.5f * Physics.gravity * Mathf.Pow(i * t, 2) +
+                (playerController.transform.forward + (playerController.transform.up * 0.3f)) * throwForce * (i * t);
+            // 선은 붙잡은 오브젝트의 위치에서부터 시작됨
+            point += GrabPos.position;
+            lineRenderer.SetPosition(i, point);
+        }
 
+        boxType = SpecialOBJ.box_type;
+        switch (boxType)
+        {
+            case Box_Type.Nomal: break;
+            case Box_Type.Bomb:
+                {
+                    if (bomb == null) bomb = SpecialOBJ.GetComponent<ThrowBox_Bomb>();
+                    bomb.CheckPath(curCircle, lineRenderer.GetPosition(lineRenderer.positionCount - 1));
+                    break;
+                }
+            default:
+                boxType = Box_Type.None;
+                break;
+        }
     }
 
 
@@ -252,11 +310,9 @@ public class Interactioner : MonoBehaviour
     /// </summary>
     void ThrowSpeOBJ(Rigidbody rigid)
     {
-        Debug.Log("던짐!");
-
-        // 임시적 변수. 추후 던지는 힘을 늘리는 효과가 생길 경우 수정할 필요성이 있다.
-        float throwForce = 10f;;
-        rigid.AddForce((transform.forward + (transform.up * 0.3f)) * throwForce, ForceMode.Impulse);
+        rigid.AddForce
+            ((playerController.transform.forward + (playerController.transform.up * 0.3f))
+            * throwForce, ForceMode.Impulse);
     }
 
     //========================================================================
@@ -285,11 +341,24 @@ public class Interactioner : MonoBehaviour
             StopCoroutine(RotationRoutineCheck);
             RotationRoutineCheck = null;
         }
-
         if (GrabRoutineCheck != null)
         {
             StopCoroutine(GrabRoutineCheck);
             GrabRoutineCheck = null;
         }
+        if (lineRenderer.enabled != false)
+        {
+            lineRenderer.enabled = false;
+        }
+        if (boxType != Box_Type.None)
+        {
+            boxType = Box_Type.None;
+        }
+        if (bomb != null)
+        {
+            bomb = null;
+        }
+
+        curCircle.SetActive(false);
     }
 }

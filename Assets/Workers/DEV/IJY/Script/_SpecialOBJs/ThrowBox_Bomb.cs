@@ -1,16 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using UnityEngine;
 
 public class ThrowBox_Bomb : SpecialThrowOBJ_Base
 {
-    private IDamagable hit;
-    private LayerMask ThrowingOBJLayer;
-    private LayerMask BombBoxLayer;
+    public ThrowBox_Bomb() => box_type = Box_Type.Bomb;
+
     private bool isThrowingOBJ = false;
+    private LayerMask ThrowingOBJLayer;
+    [SerializeField] private LayerMask BombBoxLayer;
     private Coroutine CheckBombRoutine;
 
     [Header("폭탄 상자")]
+    [SerializeField] float range = 5.0f;
+    [SerializeField] Vector3 Circle_R = new Vector3(5f, 0f, 5f);
     [SerializeField] private float BombBoxDamage;
     [SerializeField] private List<GameObject> HitOBJs;
 
@@ -23,11 +28,10 @@ public class ThrowBox_Bomb : SpecialThrowOBJ_Base
         BombBoxDamage = 20f;
 
         // 쓰레기 오브젝트 참조 레이어마스크
-        ThrowingOBJLayer = LayerMask.NameToLayer("ThrowObject");
+        ThrowingOBJLayer = (1 << LayerMask.NameToLayer("ThrowObject"));
 
         // 인식하는 오브젝트 참조용 레이어 마스크
-        BombBoxLayer = LayerMask.NameToLayer("Monster");
-        BombBoxLayer += LayerMask.NameToLayer("Player");
+        BombBoxLayer = (1 << LayerMask.NameToLayer("Monster")) | (1 << LayerMask.NameToLayer("Player"));
         // 이후 기타 파괴 가능한 장애물 레이어가 추가될 경우, 이어서 추가 예정
     }
 
@@ -44,8 +48,10 @@ public class ThrowBox_Bomb : SpecialThrowOBJ_Base
             CheckBombRoutine = StartCoroutine(BombWaitRoutine(3f));
             return;
         }
+        // 플레이어가 직접적으로 던졌을 경우, 플레이어에게는 데미지를 가하지 않되, 범위 내의 객체들에게 폭발 데미지를 가한다.
         if (isThrowing)
         {
+            BombBoxLayer &= ~(1 << LayerMask.NameToLayer("Player"));
             Bomb();
         }
     }
@@ -56,18 +62,17 @@ public class ThrowBox_Bomb : SpecialThrowOBJ_Base
     /// </summary>
     void Bomb()
     {
-        Debug.Log("터졌는지 확인");
-        // 범위 내 몬스터, 플레이어 등을 인식하여 리스트로 반환하는 함수 실행
         HitOBJs = CheckBombRange();
 
         // 각 오브젝트의 TakeDamage 함수를 호출하여 범위 데미지를 가해준다.
         foreach (GameObject obj in HitOBJs)
         {
-            Debug.Log($"대상 : {obj.name}");
-            obj.GetComponent<IDamagable>().TakeDamage(BombBoxDamage);
+            if (obj.TryGetComponent<IDamagable>(out IDamagable hit))
+            {
+                hit.TakeDamage(BombBoxDamage);
+            }
         }
-
-        Destroy(this.gameObject, 0.5f);
+        Destroy(this.gameObject, 3);
     }
 
 
@@ -79,7 +84,6 @@ public class ThrowBox_Bomb : SpecialThrowOBJ_Base
     /// <returns></returns>
     IEnumerator BombWaitRoutine(float cool)
     {
-        Debug.Log("루틴 실행");
         while (cool > 0.1f)
         {
             cool -= Time.deltaTime;
@@ -88,6 +92,7 @@ public class ThrowBox_Bomb : SpecialThrowOBJ_Base
 
         CheckBombRoutine = null;
         Bomb();
+
         yield break;
     }
 
@@ -98,25 +103,19 @@ public class ThrowBox_Bomb : SpecialThrowOBJ_Base
     /// <returns></returns>
     List<GameObject> CheckBombRange()
     {
-        List<GameObject> _targets = new List<GameObject>();
-        Collider[] collider = Physics.OverlapSphere(this.transform.position, 5f);
+        List<GameObject> list = new();
+        Collider[] collider = Physics.OverlapSphere(this.transform.position, range, BombBoxLayer);
+        foreach (Collider e in collider) list.Add(e.gameObject);
+        return list;
+    }
 
-        foreach (Collider _col in collider)
-        {
-            //if (_col.gameObject.layer != BombBoxLayer) continue;
-            //  임시 사용. 위 이프문 현재 동작하지 않음
-            if (_col.gameObject.layer != LayerMask.NameToLayer("Monster") && _col.gameObject.layer != LayerMask.NameToLayer("Player")) continue;
+    public void CheckPath(GameObject Circle, Vector3 pos)
+    {
+        // 현재 점을 기준으로 앞 방향에 서클이 생김, 추후 중앙값으로 올 수 있게끔 수정할 필요가 있음
+        pos.y = 0.01f;
+        Circle.transform.position = pos;
 
-            Vector3 source = transform.position; source.y = 0;
-            Vector3 destination = _col.transform.position; destination.y = 0;
-            Vector3 targetDir = (destination - source).normalized;
-            float targetAngle = Vector3.Angle(transform.forward, targetDir);
-
-            if (targetAngle > 360f * 0.5f) continue;
-            _targets.Add(_col.gameObject);
-        }
-
-        return _targets;
+        if (Circle.transform.localScale != Circle_R) Circle.transform.localScale = Circle_R;
     }
 
 
@@ -131,5 +130,12 @@ public class ThrowBox_Bomb : SpecialThrowOBJ_Base
             CheckBombRoutine = null;
         }
         HitOBJs.Clear();
+    }
+
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, range);
     }
 }

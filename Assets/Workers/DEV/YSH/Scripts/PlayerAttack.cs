@@ -34,7 +34,7 @@ public class PlayerAttack : MonoBehaviour
     public float CounterRange => counterRange * counterRange;
     public MonsterData CounterTarget { get; private set; }
     // 일반 카운터시 몬스터를 던지는 힘 (추후 인스펙터로 뺄 것)
-    private float counterThrowForce = 10f;
+    private float counterThrowForce = 14f;
     public float CounterThrowForce => counterThrowForce;
 
     [HideInInspector]
@@ -72,6 +72,8 @@ public class PlayerAttack : MonoBehaviour
 
     public event UnityAction OnChangedStack;
 
+    private Transform mainCamTrf;
+
     private void Awake()
     {
         player = GetComponent<PlayerController>();
@@ -86,6 +88,11 @@ public class PlayerAttack : MonoBehaviour
 
         GenerateThrowEffects();
         GenerateMeleeEffects();
+    }
+
+    private void Start()
+    {
+        mainCamTrf = Camera.main.transform;
     }
 
     public void GenerateThrowEffects()
@@ -437,6 +444,18 @@ public class PlayerAttack : MonoBehaviour
     {
         CounterTarget = monster;
         player.ChangeState(EState.Counter);
+    }
+
+    private void CounterThrow()
+    {
+        MonsterData monster = CounterTarget;
+        monster.transform.parent = null;
+        monster.transform.position = player.GrabPoint.position;
+        monster.transform.rotation = Quaternion.identity;
+        monster.rigid.constraints = RigidbodyConstraints.None;
+        monster.rigid.AddForce((mainCamTrf.forward + Vector3.up * 0.2f) * CounterThrowForce, ForceMode.Impulse);
+        monster.rigid.AddTorque(mainCamTrf.right * 3f, ForceMode.Impulse);
+        monster.coll.enabled = true;
     }
 
     private void OnDrawGizmos()

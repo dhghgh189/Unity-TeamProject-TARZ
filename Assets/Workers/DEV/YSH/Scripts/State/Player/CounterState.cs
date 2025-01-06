@@ -34,6 +34,9 @@ public class CounterState : BaseState<PlayerController>
     public override void OnUpdate()
     {
         base.OnUpdate();
+
+        owner.transform.forward = mainCamTrf.forward;
+
         if (counterRoutine == null)
         {
             owner.ChangeState(EState.Idle);
@@ -56,20 +59,14 @@ public class CounterState : BaseState<PlayerController>
         // 몬스터 집어들기
         Grab(monster);
 
-        // 애니메이션 (추후 추가 필요)
-        //owner.Anim.CrossFade($"Melee1", 0.01f);
-
-        //yield return Util.GetDelay(0.1f);
-        //yield return Util.GetDelay(owner.GetCurrentAnimTime());
-
         // 던지기 전 잠시 대기
         yield return Util.GetDelay(0.5f);
 
-        // 던지기
-        Throw(monster);
+        // 애니메이션
+        owner.Anim.CrossFade(Define.HASH_ANIM_COUNTER_THROW, 0.01f);
 
-        yield return Util.GetDelay(0.5f);
-        monster.coll.enabled = true;
+        yield return Util.GetDelay(0.1f);
+        yield return Util.GetDelay(owner.GetCurrentAnimTime());
 
         // 카운터 끝
         counterRoutine = null;
@@ -87,16 +84,6 @@ public class CounterState : BaseState<PlayerController>
         monster.transform.parent = owner.GrabPoint;
         monster.transform.localPosition = Vector3.zero;
         monster.transform.localRotation = Quaternion.identity;
-    }
-
-    private void Throw(MonsterData monster)
-    {
-        monster.transform.parent = null;
-        monster.transform.position = owner.GrabPoint.position;
-        monster.transform.rotation = Quaternion.identity;
-        monster.rigid.constraints = RigidbodyConstraints.None;
-        monster.rigid.AddForce((mainCamTrf.forward + Vector3.up) * owner.Attack.CounterThrowForce, ForceMode.Impulse);
-        monster.rigid.AddTorque(mainCamTrf.right * 3f, ForceMode.Impulse);
     }
 
     IEnumerator BossCounterRoutine(MonsterData monster)

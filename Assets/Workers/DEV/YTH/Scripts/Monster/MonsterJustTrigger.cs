@@ -69,20 +69,9 @@ public class MonsterJustTrigger : MonoBehaviour
 
         if (player.Fsm.CurrentState.type == EState.Dash)
         {
-            switch (_monsterData.MonsterTIer)
-            {
-                case MonsterData.MonsterTier.Normal:
-                    _playerStat.CurrentMp += 10;
-
-                    Debug.Log("일반 몹 저스트 회피 !!");
-                    break;
-                case MonsterData.MonsterTier.Elite:
-                case MonsterData.MonsterTier.Boss:
-                    _playerAttack.BossCounter(_monsterData);
-                    _playerStat.CurrentMp += 10;
-                    Debug.Log("2티어 정상작동");
-                    break;
-            }
+            Debug.Log("저스트회피 성공!");
+            _playerStat.CurrentMp += 10;
+            _playerAttack.JustCounter(_monsterData);
         }
         else
         {

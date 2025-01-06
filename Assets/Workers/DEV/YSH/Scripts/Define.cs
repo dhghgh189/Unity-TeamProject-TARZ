@@ -13,6 +13,7 @@ public static class Define
     public static readonly int HASH_ANIM_DRAIN = Animator.StringToHash("Drain");
     public static readonly int HASH_ANIM_DAMAGED = Animator.StringToHash("Damage");
     public static readonly int HASH_ANIM_DEAD = Animator.StringToHash("Die");
+    public static readonly int HASH_ANIM_COUNTER_THROW = Animator.StringToHash("CounterThrow");
 
     public const int USEKEY_MAXCOUNT = 4;
 

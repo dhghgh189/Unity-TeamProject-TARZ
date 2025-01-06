@@ -1,7 +1,9 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
+using static UnityEngine.UI.GridLayoutGroup;
 
 public class PlayerAttack : MonoBehaviour
 {
@@ -421,6 +423,39 @@ public class PlayerAttack : MonoBehaviour
         CanUseCombo = false;
     }
     #endregion
+
+    public void BossCounter(MonsterData monster)
+    {
+        bossCounterRoutine = StartCoroutine(BossCounterRoutine(monster));
+    }
+
+    Coroutine bossCounterRoutine;
+    IEnumerator BossCounterRoutine(MonsterData monster)
+    {
+        player.IsImortal = true;
+
+        Vector3 monsterPos;
+        while (true)
+        {
+            monsterPos = monster.transform.position - transform.position;
+            if (monsterPos.magnitude < 2)
+            {
+                break;
+            }
+            else
+            {
+                player.Movement.Rigid.velocity = monsterPos.normalized * player.Stat.MoveSpeed;
+                transform.forward = monsterPos.normalized;
+            }
+            yield return null;
+        }
+
+        //근접 공격
+        player.Anim.CrossFade($"Melee1" , 0.01f);
+
+        player.IsImortal = false;
+        yield return null;
+    }
 
     private void OnDrawGizmos()
     {

@@ -44,6 +44,8 @@ public class PlayerController : MonoBehaviour, IDamagable
     public bool IsAnimStart { get; set; }
     public bool IsGrabingInput { get { return interactioner.IsGrabing; } }
 
+    public bool IsImortal { get; set; }
+
     public CapsuleCollider coll;
 
     private StringBuilder sb;
@@ -182,6 +184,13 @@ public class PlayerController : MonoBehaviour, IDamagable
     public void TakeDamage(float damage)
     {
         if (stat.CurrentHp <= 0) return;
+
+        if (IsImortal)
+        {
+            Debug.Log("무적 판정!!");
+            return;
+        }
+
 
         if (CheatManager.isMujeok)
         {

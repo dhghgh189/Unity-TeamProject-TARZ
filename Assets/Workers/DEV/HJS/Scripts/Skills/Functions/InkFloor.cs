@@ -14,7 +14,7 @@ public class InkFloor : MonoBehaviour, ISpec
         coll = GetComponent<SphereCollider>();
     }
 
-    public void SetSpec(BaseSkillSO.Spec spec, int level)
+    public void SetSpec(Spec spec, int level)
     {
         coll.radius = spec.Range(level);
         operationTime = spec.Time(level);

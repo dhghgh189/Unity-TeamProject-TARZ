@@ -4,7 +4,7 @@ using UnityEngine;
 using static SkillEnum;
 
 [Serializable]
-public class PassiveSkillSO
+public class PassiveSkill
 {
     private StatModel statModel;
     private SkillSpecDatabase skillSpecDatabase;
@@ -218,6 +218,14 @@ public class PassiveSkillSO
         {
             if (conditionsFunc())
             {
+                // cs 8506 why?
+                // _ = conditionSetting.resultModifyType switch
+                // {
+                //     PassiveResultModifyType.Hp => statModel.MaxHp += (statModel.MaxHp * (conditionSetting.IsIncrease ? 1 : -1) * conditionSetting.Amount),
+                //     PassiveResultModifyType.Stemina => statModel.MaxStamina += (statModel.MaxStamina * (conditionSetting.IsIncrease ? 1 : -1) * conditionSetting.Amount),
+                //     PassiveResultModifyType.Power => statModel.SetAbility(AdditionAbility.AllPowerPer, statModel.GetAbility(AdditionAbility.AllPowerPer) * (conditionSetting.IsIncrease ? 1 : -1) * conditionSetting.Amount),
+                //     _ => throw new NotImplementedException(),
+                // };
                 if (conditionSetting.isChanged) return;
 
                 conditionSetting.isChanged = true;
@@ -283,10 +291,4 @@ public class PassiveSkillSO
     }
     #endregion
 
-}
-
-[Serializable]
-public class PassiveSkills
-{
-    public List<PassiveSkillSO> passiveSkillSOs;
 }

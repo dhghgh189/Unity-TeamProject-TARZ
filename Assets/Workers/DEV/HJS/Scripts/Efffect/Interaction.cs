@@ -64,7 +64,7 @@ public class Interaction : IEffect, ISpec
     /// </summary>
     /// <param name="spec">스킬의 능력치</param>
     /// <param name="level">스킬의 레벨</param>
-    public void SetSpec(BaseSkillSO.Spec spec, int level)
+    public void SetSpec(Spec spec, int level)
     {
         degree = spec.interactioDegree(level);
         duration = spec.InteractionDuration(level);

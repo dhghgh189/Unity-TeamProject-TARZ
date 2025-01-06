@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -38,10 +37,13 @@ public class Loading : MonoBehaviour
         }
 
         oper.allowSceneActivation = true;
+
         Debug.Log(SceneManager.GetActiveScene().buildIndex);
 
         yield return Util.GetDelay(0.2f);
         gameObject.SetActive(false);
+
+        loadingRoutine = null;
 
         //while (true)
         //{
@@ -51,5 +53,10 @@ public class Loading : MonoBehaviour
         //    gameObject.SetActive(false);
         //    yield break;
         //}
+    }
+
+    public bool IsUnLoading()
+    {
+        return loadingRoutine == null;
     }
 }

@@ -27,7 +27,7 @@ public class PlayerSkillHandler : MonoBehaviour
     [Header("Etc")]
     [Inject][SerializeField] StatModel model;
     [Inject] private AblityAdapter adapter;
-    [Inject] private SaveData saveData;
+    [Inject] private InGameSaveData saveData;
 
     [Header("Test")]
     private UnityEvent<GameObject, GameObject>[] onEnterEvents;     // 행동에 입장했을 때

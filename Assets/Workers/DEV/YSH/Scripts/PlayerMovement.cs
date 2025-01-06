@@ -87,4 +87,9 @@ public class PlayerMovement : MonoBehaviour
     {
         isGrounded = Physics.CheckBox(transform.position + transform.up * 0.05f, new Vector3(0.5f, 0.1f, 0.5f), Quaternion.identity, whatIsGround);
     }
+
+    public void Stop()
+    {
+        rigid.velocity = Vector3.zero;
+    }
 }

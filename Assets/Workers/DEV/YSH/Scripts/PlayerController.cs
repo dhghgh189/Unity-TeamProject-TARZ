@@ -4,6 +4,7 @@ using System.Text;
 using Unity.Properties;
 using UnityEngine;
 using Zenject;
+using Zenject.SpaceFighter;
 using static SkillEnum;
 using static UnityEngine.UI.GridLayoutGroup;
 
@@ -44,9 +45,14 @@ public class PlayerController : MonoBehaviour, IDamagable
     public bool IsAnimStart { get; set; }
     public bool IsGrabingInput { get { return interactioner.IsGrabing; } }
 
+    public bool IsImortal { get; set; }
+
     public CapsuleCollider coll;
 
     private StringBuilder sb;
+
+    public Transform GrabPoint { get; private set; }
+
     void Awake()
     {
         drainManager = GetComponentInChildren<DrainManager>();
@@ -62,6 +68,7 @@ public class PlayerController : MonoBehaviour, IDamagable
         ManaSkillHandler = GetComponent<ManaSkillHandler>();
         interactioner = GetComponentInChildren<Interactioner>();
         coll = GetComponent<CapsuleCollider>();
+        GrabPoint = GameObject.FindWithTag("GrabPoint").transform;
 
         Fsm = new PlayerFSM(this, AblityAdapter);
 
@@ -183,10 +190,22 @@ public class PlayerController : MonoBehaviour, IDamagable
     {
         if (stat.CurrentHp <= 0) return;
 
+        if (IsImortal)
+        {
+            Debug.Log("무적 판정!!");
+            return;
+        }
+
         if (CheatManager.isMujeok)
         {
             Debug.Log("무적이당");
             return; 
+        }
+
+        // 점프 근접 공격 중 피격당하면 종료시키기
+        if (!Attack.IsEndJumpMelee)
+        {
+            Attack.EndJumpMelee();
         }
 
         Debug.Log("아야");
@@ -256,9 +275,9 @@ public class PlayerController : MonoBehaviour, IDamagable
         return stat.CurrentStamina >= amount;
     }
 
-    public float GetCurrentAnimTime()
+    public float GetCurrentAnimTime(int layer = 0)
     {
-        AnimatorStateInfo info = anim.GetCurrentAnimatorStateInfo(0);
+        AnimatorStateInfo info = anim.GetCurrentAnimatorStateInfo(layer);
         // 현재 재생되는 애니메이션의 총 길이와 speed를 계산하여 실제 재생 시간을 반환 
         return (info.length / info.speed);
     }
@@ -272,6 +291,26 @@ public class PlayerController : MonoBehaviour, IDamagable
         {
             SkillHandler.PlayerCollision((ActTimingType)Enum.Parse(typeof(ActTimingType), sb.ToString()), collision.gameObject);
         }
+    }
+
+    public void InfStamina(float value)
+    {
+        
+        steminaRoutine = StartCoroutine(SteminaRoutine(value));
+       
+    }
+
+    Coroutine steminaRoutine;
+    IEnumerator SteminaRoutine(float value)
+    {
+        Debug.Log("루틴 시작합니다~!~!");
+        Stat.StaminaCostRate = 0;
+        Stat.CurrentStamina = Stat.MaxStamina;
+        yield return Util.GetDelay(value);
+        Stat.StaminaCostRate = 1;
+
+        steminaRoutine = null;
+        Debug.Log("종료로그");
     }
 
     private void OnDisable()

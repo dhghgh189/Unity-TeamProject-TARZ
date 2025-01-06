@@ -5,7 +5,7 @@ public class BossRoomBehaviour : MonoBehaviour
     [SerializeField] GameObject movePotal;
     [SerializeField] GameObject scenePotal;
     private ChapterManager chapterManager;
-    private SaveData saveData;
+    private InGameSaveData saveData;
     public int BossCount;
 
     private void Start()

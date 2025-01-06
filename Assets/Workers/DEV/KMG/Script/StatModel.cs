@@ -1,7 +1,6 @@
 using System;
 using System.ComponentModel;
 using UnityEngine;
-using Zenject;
 public enum AdditionAbility
 {
     [Description("공격력%")] AllPowerPer,
@@ -22,7 +21,6 @@ public enum AdditionAbility
 
 public class StatModel : MonoBehaviour
 {
-    [Inject] SaveData saveData;
     [Header("기본 능력치")]
 
     [SerializeField] float maxHp;
@@ -62,28 +60,30 @@ public class StatModel : MonoBehaviour
     [Header("실시간 능력치")]
 
     [SerializeField] float currentHp;
-    public float CurrentHp { 
-        get => currentHp; 
-        set 
+    public float CurrentHp
+    {
+        get => currentHp;
+        set
         {
             currentHp = Mathf.Clamp(value, 0, MaxHp);
             OnCurHpChange?.Invoke(currentHp);
-        } 
+        }
     }
 
     [SerializeField] float currentMp;
-    public float CurrentMp { 
-        get => currentMp; 
-        set 
+    public float CurrentMp
+    {
+        get => currentMp;
+        set
         {
             currentMp = Mathf.Clamp(value, 0, maxMp);
-            OnCurMpChange?.Invoke(currentMp); 
-        } 
+            OnCurMpChange?.Invoke(currentMp);
+        }
     }
 
     [SerializeField] float currentStamina;
-    public float CurrentStamina 
-    { 
+    public float CurrentStamina
+    {
         get => currentStamina;
         set
         {
@@ -104,25 +104,25 @@ public class StatModel : MonoBehaviour
     }
 
     [SerializeField] float chip;
-    public float Chip 
+    public float Chip
     {
         get => chip;
-        set 
+        set
         {
-            chip = value; 
-            OnChipChange?.Invoke(value); 
+            chip = value;
+            OnChipChange?.Invoke(value);
         }
     }
 
     [SerializeField] float blackChip;
-    public float BlackChip 
-    { 
-        get => blackChip; 
-        set 
+    public float BlackChip
+    {
+        get => blackChip;
+        set
         {
-            blackChip = value; 
-            OnBlackChipChange?.Invoke(value); 
-        } 
+            blackChip = value;
+            OnBlackChipChange?.Invoke(value);
+        }
     }
 
     [Header("추가 능력치")] // 아이템으로 상승하는 능력치 편의상 배열로 만들었음
@@ -167,11 +167,6 @@ public class StatModel : MonoBehaviour
         baseStat.currentMp = currentMp;
         baseStat.currentStamina = currentStamina;
         baseStat.blackChip = 0;
-}
-
-    private void Start()
-    {
-        Chip = saveData.DataChip;
     }
 
     public void AllCheck()

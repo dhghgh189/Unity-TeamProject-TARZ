@@ -1,7 +1,9 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
+using static UnityEngine.UI.GridLayoutGroup;
 
 public class PlayerAttack : MonoBehaviour
 {
@@ -25,6 +27,17 @@ public class PlayerAttack : MonoBehaviour
     public float JumpMeleeAngle;
     public float JumpMeleeRange;
     public float JumpMeleeFallForce;    // 하강 시 가해줄 힘
+
+    // 반격 스펙 설정 (추후 인스펙터로 뺄 것)
+    private float counterMeleeRange = 2f;
+    // 제곱 값 반환 (sqrMagnitude와 비교하기 위함)
+    public float CounterMeleeRange => counterMeleeRange * counterMeleeRange;
+    // 보스 반격 데미지
+    private float counterMeleeDamage = 100f;
+    public MonsterData CounterTarget { get; set; }
+    // 일반 카운터시 몬스터를 던지는 힘 (추후 인스펙터로 뺄 것)
+    private float counterThrowForce = 14f;
+    public float CounterThrowForce => counterThrowForce;
 
     [HideInInspector]
     public bool IsEndJumpMelee;
@@ -61,6 +74,8 @@ public class PlayerAttack : MonoBehaviour
 
     public event UnityAction OnChangedStack;
 
+    private Transform mainCamTrf;
+
     private void Awake()
     {
         player = GetComponent<PlayerController>();
@@ -75,6 +90,11 @@ public class PlayerAttack : MonoBehaviour
 
         GenerateThrowEffects();
         GenerateMeleeEffects();
+    }
+
+    private void Start()
+    {
+        mainCamTrf = Camera.main.transform;
     }
 
     public void GenerateThrowEffects()
@@ -421,6 +441,30 @@ public class PlayerAttack : MonoBehaviour
         CanUseCombo = false;
     }
     #endregion
+
+    public void JustCounter(MonsterData monster)
+    {
+        CounterTarget = monster;
+        player.ChangeState(EState.Counter);
+    }
+
+    private void CounterThrow()
+    {
+        Debug.Log("Counter Throw");
+        MonsterData monster = CounterTarget;
+        monster.transform.parent = null;
+        monster.transform.position = player.GrabPoint.position;
+        monster.transform.rotation = Quaternion.identity;
+        monster.rigid.constraints = RigidbodyConstraints.None;
+        monster.rigid.AddForce((mainCamTrf.forward + Vector3.up * 0.2f) * CounterThrowForce, ForceMode.Impulse);
+        monster.rigid.AddTorque(mainCamTrf.right * 3f, ForceMode.Impulse);
+        monster.coll.enabled = true;
+    }
+
+    public void CounterMelee()
+    {
+        CounterTarget.pooledObject.TakeDamage(counterMeleeDamage);
+    }
 
     private void OnDrawGizmos()
     {

@@ -46,11 +46,13 @@ public class Interactioner : MonoBehaviour
         interactionGrabLayer = LayerMask.NameToLayer("Is_Interaction_Grab");
         lineRenderer.enabled = false;
 
-        if (curCircle == null)
-        {
-            curCircle = Instantiate(RangeCircle, playerController.transform.position, playerController.transform.rotation);
-            curCircle.transform.parent = this.transform;
-        }
+        //if (curCircle == null)
+        //{
+        //    curCircle = Instantiate(RangeCircle, playerController.transform.position, playerController.transform.rotation);
+        //    curCircle.transform.parent = this.transform;
+        //}
+
+        curCircle = RangeCircle;
         curCircle.SetActive(false);
     }
 

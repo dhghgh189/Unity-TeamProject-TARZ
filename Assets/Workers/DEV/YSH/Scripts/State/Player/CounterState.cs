@@ -35,7 +35,9 @@ public class CounterState : BaseState<PlayerController>
     {
         base.OnUpdate();
 
-        owner.transform.forward = mainCamTrf.forward;
+        // 일반 몬스터 반격 시 카메라 회전하면 캐릭터도 같이 회전
+        if (owner.Attack.CounterTarget.MonsterTIer == MonsterData.MonsterTier.Normal)
+            owner.transform.forward = mainCamTrf.forward;
 
         if (counterRoutine == null)
         {
@@ -47,6 +49,7 @@ public class CounterState : BaseState<PlayerController>
     {
         base.OnExit();
         owner.IsImortal = false;
+        owner.Attack.CounterTarget = null;
     }
 
     Coroutine counterRoutine;
@@ -66,7 +69,7 @@ public class CounterState : BaseState<PlayerController>
         owner.Anim.CrossFade(Define.HASH_ANIM_COUNTER_THROW, 0.01f);
 
         yield return Util.GetDelay(0.1f);
-        yield return Util.GetDelay(owner.GetCurrentAnimTime());
+        yield return Util.GetDelay(owner.GetCurrentAnimTime(1));
 
         // 카운터 끝
         counterRoutine = null;
@@ -93,7 +96,7 @@ public class CounterState : BaseState<PlayerController>
         while (true)
         {
             monsterPos = monster.transform.position - owner.transform.position;
-            if (monsterPos.sqrMagnitude < owner.Attack.CounterRange)
+            if (monsterPos.sqrMagnitude < owner.Attack.CounterMeleeRange)
             {
                 break;
             }
@@ -106,9 +109,10 @@ public class CounterState : BaseState<PlayerController>
         }
 
         //근접 공격
-        owner.Anim.CrossFade($"Melee1", 0.01f);
+        owner.Anim.CrossFade(Define.HASH_ANIM_COUNTER_MELEE, 0.01f);
 
         yield return Util.GetDelay(0.1f);
+        owner.Movement.Rigid.AddForce((-owner.transform.forward + Vector3.up * 0.5f) * 12f, ForceMode.Impulse);
         yield return Util.GetDelay(owner.GetCurrentAnimTime());
 
         // 카운터 끝

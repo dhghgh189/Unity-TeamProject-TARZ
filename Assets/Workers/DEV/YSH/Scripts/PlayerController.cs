@@ -195,11 +195,16 @@ public class PlayerController : MonoBehaviour, IDamagable
             return;
         }
 
-
         if (CheatManager.isMujeok)
         {
             Debug.Log("무적이당");
             return; 
+        }
+
+        // 점프 근접 공격 중 피격당하면 종료시키기
+        if (!Attack.IsEndJumpMelee)
+        {
+            Attack.EndJumpMelee();
         }
 
         Debug.Log("아야");

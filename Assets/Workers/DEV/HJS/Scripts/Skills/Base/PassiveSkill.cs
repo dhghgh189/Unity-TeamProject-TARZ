@@ -1,16 +1,15 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using UnityEngine;
 using static SkillEnum;
 
 [Serializable]
-public class PassiveSkillSO
+public class PassiveSkill
 {
     private StatModel statModel;
     private SkillSpecDatabase skillSpecDatabase;
     private int level;
-    private TestBaseSkillSO parent;
+    private BaseSkillSO parent;
     private Dictionary<ConditionType, Func<bool>> conditions;
 
     [SerializeField] PassiveType passiveType;
@@ -27,7 +26,7 @@ public class PassiveSkillSO
     #region 패시브 프로퍼티
     public StatModel StatModel { set { statModel = value; Debug.Log("<color=yellow>패시브 스킬 StatModel 설정</color>"); } }
     public SkillSpecDatabase SkillSpecDatabase { set { skillSpecDatabase = value; Debug.Log("<color=yellow>패시브 스킬 스펙SO 설정</color>"); } }
-    public TestBaseSkillSO Parent { set { parent = value; Debug.Log("<color=yellow>패시브 스킬부모 설정</color>"); } }
+    public BaseSkillSO Parent { set { parent = value; Debug.Log("<color=yellow>패시브 스킬부모 설정</color>"); } }
     public ModifySetting GetModifySetting => modifySetting;
     public ConditionSetting GetConditionSetting => conditionSetting;
     public ToggleSetting GetToggleSetting => toggleSetting;
@@ -219,6 +218,14 @@ public class PassiveSkillSO
         {
             if (conditionsFunc())
             {
+                // cs 8506 why?
+                // _ = conditionSetting.resultModifyType switch
+                // {
+                //     PassiveResultModifyType.Hp => statModel.MaxHp += (statModel.MaxHp * (conditionSetting.IsIncrease ? 1 : -1) * conditionSetting.Amount),
+                //     PassiveResultModifyType.Stemina => statModel.MaxStamina += (statModel.MaxStamina * (conditionSetting.IsIncrease ? 1 : -1) * conditionSetting.Amount),
+                //     PassiveResultModifyType.Power => statModel.SetAbility(AdditionAbility.AllPowerPer, statModel.GetAbility(AdditionAbility.AllPowerPer) * (conditionSetting.IsIncrease ? 1 : -1) * conditionSetting.Amount),
+                //     _ => throw new NotImplementedException(),
+                // };
                 if (conditionSetting.isChanged) return;
 
                 conditionSetting.isChanged = true;
@@ -284,10 +291,4 @@ public class PassiveSkillSO
     }
     #endregion
 
-}
-
-[Serializable]
-public class PassiveSkills
-{
-    public List<PassiveSkillSO> passiveSkillSOs;
 }

@@ -8,7 +8,7 @@ public class Explosion : MonoBehaviour, ISpec
     [SerializeField] float damage;  // 공격 데미지
     [SerializeField] float range;   // 공격 범위
 
-    public void SetSpec(BaseSkillSO.Spec spec, int level)
+    public void SetSpec(Spec spec, int level)
     {
         damage = spec.Power(level);
         range = spec.Range(level);

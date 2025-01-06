@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25c111dc76cf86e4691bd3de2e344909, type: 3}
+  m_Name: New Test Base Skill SO
+  m_EditorClassIdentifier: 
+  Name: "\uC774\uB984"
+  Description: "\uC124"
+  Icon: {fileID: 0}
+  MaxLevel: 1
+  skillType: -1
+  skill: 0
+  active:
+    activeSkillSOs:
+    - IndexName: "\uC7A5\uD310\uC0DD\uC131"
+      act: 3
+      Create: 0
+      createObject: {fileID: 0}
+      performance_Act:
+      - {x: 0, y: 0, z: 0}
+      - {x: 0, y: 0, z: 0}
+      - {x: 0, y: 0, z: 0}
+      Interaction: 0
+      type: 0
+      performance_Interaction:
+      - {x: 0, y: 0, z: 0}
+      - {x: 0, y: 0, z: 0}
+      - {x: 0, y: 0, z: 0}
+      UniqueEffect: 0
+      status: 0
+      UniqueEffectObject: {fileID: 0}
+  passive:
+    passiveSkillSOs:
+    - passiveType: 0
+      modifySetting:
+        ModifyType: 0
+        inputType: 0
+        Amount: -0.05
+        TempValue: 0
+      conditionSetting:
+        modifyType: 0
+        Condition: 0
+        CompareValue: 0
+        MaxValue: 0
+        isChanged: 0
+        resultModifyType: 0
+        Amount: 0
+      toggleSetting:
+        ToggleType: 1
+        On: 0
+        Name: 
+  onChangeLevel:
+    m_PersistentCalls:
+      m_Calls: []
+  model: {fileID: 0}

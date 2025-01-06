@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class BossMonsterSpwner : MonoBehaviour
 {
-    private SaveData saveData;
+    private InGameSaveData saveData;
     private ChapterManager chapterManager;
     private ObjectPool _monsterPool;
     private void Start()

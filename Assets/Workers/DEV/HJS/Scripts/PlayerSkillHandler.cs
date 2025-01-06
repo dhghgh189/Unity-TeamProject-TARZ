@@ -28,7 +28,7 @@ public class PlayerSkillHandler : MonoBehaviour
     [Inject] [SerializeField] StatModel model;
     [Inject] private AblityAdapter adapter;
 
-    [Inject] private SaveData saveData;
+    [Inject] private InGameSaveData saveData;
 
     private void Awake()
     {

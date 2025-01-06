@@ -2,7 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-public class SaveData
+[Serializable]
+public class InGameSaveData
 {
     // 플레이 중인 레벨
     public ChapterSaveData chapterSaveData = new();
@@ -14,8 +15,6 @@ public class SaveData
     public GearSaveData[] EquipmentGears = new GearSaveData[(int)Part.Size];
     // 인벤토리의 장비들을 저장하는 리스트
     public List<GearSaveData> InventoryGears = new();
-    // 암 유닛 강화 상태를 저장하는 리스트
-    public ArmUnitInfo[] ArmUnitInfos = Enumerable.Range(0, (int)UpgrageArmUnit.Size).Select(_ => new ArmUnitInfo()).ToArray();
     // 블루칩 상태를 저장하는 리스트
     public List<BlueChipSaveData> blueChipSaveDatas = new();
 }
@@ -41,12 +40,6 @@ public class GearSaveData
     public string GearName;
     public List<GearAbility> Abilities;
 }
-[Serializable]
-public class ArmUnitInfo
-{
-    public int Tier;
-    public bool IsInstall;
-}
 
 [Serializable]
 public class BlueChipSaveData
@@ -59,6 +52,6 @@ public class BlueChipSaveData
 public class ChapterSaveData
 {
     // 챕터가 큰놈
-    public int ChapterNum;
+    public Define.SceneType Chapter;
     public int StageNum;
 }

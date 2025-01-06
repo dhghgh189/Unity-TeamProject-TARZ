@@ -3,8 +3,10 @@ using Zenject;
 
 public class InventoryInstaller : MonoInstaller
 {
+    [Inject] SaveSlotData saveSlotData;
     public override void InstallBindings()
     {
+        Container.Bind<InGameSaveData>().FromInstance(saveSlotData.InGameSaveData);
         Container.Bind<SaveManager>().FromComponentInHierarchy().AsSingle();
         Container.Bind<Equipment>().FromComponentInHierarchy().AsSingle();
         Container.Bind<Inventory>().FromComponentInHierarchy().AsSingle();

@@ -35,14 +35,14 @@ public class MapGenerator : MonoBehaviour
     private int roomCount;
 
     [Inject] PlayerController playerController;
-    [Inject] SaveData saveData;
+    [Inject] InGameSaveData saveData;
 
     [SerializeField] ChapterManager chapterManager;
 
     private void Start()
     {
         ChapterSaveData chapterSaveData = saveData.chapterSaveData;
-        StageInfo stageInfo = chapterManager.stageInfos[saveData.chapterSaveData.StageNum];
+        StageInfo stageInfo = chapterManager.stageInfos[chapterSaveData.StageNum];
         roomCount = stageInfo.RoomCount;
 
         CreateBossRoom();

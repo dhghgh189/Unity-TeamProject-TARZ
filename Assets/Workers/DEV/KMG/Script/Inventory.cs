@@ -7,7 +7,7 @@ using Zenject;
 
 public class Inventory : MonoBehaviour
 {
-    [Inject] SaveData saveData;
+    [Inject] InGameSaveData saveData;
 
     // 인벤토리 슬롯들을 보관할 배열 12개임
     [Inject] UI_InventorySlots[] inventorySlots;

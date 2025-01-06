@@ -6,7 +6,7 @@ using Zenject;
 
 public class UI_ArmUpgrade : MonoBehaviour, ISelectHandler  //, IDeselectHandler
 {
-    [Inject] SaveData saveData;
+    [Inject] SaveSlotData saveSlotData;
     [Inject] SaveManager saveManager;
     [Inject] ArmUpgradManager armUpgradManager;
 
@@ -25,8 +25,8 @@ public class UI_ArmUpgrade : MonoBehaviour, ISelectHandler  //, IDeselectHandler
     [SerializeField] Button UnitUpgradebutton;
     public void SavaDataCheck()
     {
-        upTier = saveData.ArmUnitInfos[(int)upgrageArmUnit].Tier;
-        isInstall = saveData.ArmUnitInfos[(int)upgrageArmUnit].IsInstall;
+        upTier = saveSlotData.ArmUnitInfos[(int)upgrageArmUnit].Tier;
+        isInstall = saveSlotData.ArmUnitInfos[(int)upgrageArmUnit].IsInstall;
         if (isInstall)
             UnitInstall();
     }
@@ -37,18 +37,18 @@ public class UI_ArmUpgrade : MonoBehaviour, ISelectHandler  //, IDeselectHandler
             return;
         isInstall = true;
         armUpgradManager.installArmUnits.Add(this);
-        saveData.ArmUnitInfos[(int)upgrageArmUnit].IsInstall = true;
+        saveSlotData.ArmUnitInfos[(int)upgrageArmUnit].IsInstall = true;
         armUpgradManager.ArmUnitStatUp(upgradeAbility, upStatList[upTier]);
         SetEventAndDesciption();
         armUpgradManager.InstallUnitDescription();
-        saveManager.Save();
+        //saveManager.Save();
     }
 
     private void UnitUnInstall()
     {
         isInstall = false;
         armUpgradManager.installArmUnits.Remove(this);
-        saveData.ArmUnitInfos[(int)upgrageArmUnit].IsInstall = false;
+        saveSlotData.ArmUnitInfos[(int)upgrageArmUnit].IsInstall = false;
         armUpgradManager.ArmUnitStatUp(upgradeAbility, -upStatList[upTier]);
         SetEventAndDesciption();
         armUpgradManager.InstallUnitDescription();
@@ -59,7 +59,7 @@ public class UI_ArmUpgrade : MonoBehaviour, ISelectHandler  //, IDeselectHandler
     {
         if (upTier == upStatList.Length - 1 || !armUpgradManager.IsTryUnitUpgrade(upCostList[upTier])) return;
 
-        saveData.ArmUnitInfos[(int)upgrageArmUnit].Tier = ++upTier;
+        saveSlotData.ArmUnitInfos[(int)upgrageArmUnit].Tier = ++upTier;
         if (isInstall)
         {
             upTier--;

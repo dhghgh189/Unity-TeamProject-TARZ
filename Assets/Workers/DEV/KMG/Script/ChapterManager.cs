@@ -5,7 +5,7 @@ using Zenject;
 public class ChapterManager : MonoBehaviour
 {
     public StageInfo[] stageInfos;
-    [Inject] public SaveData saveData;
+    [Inject] public InGameSaveData saveData;
 }
 
 [Serializable]

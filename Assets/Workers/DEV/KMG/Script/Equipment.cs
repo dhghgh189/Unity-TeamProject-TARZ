@@ -10,7 +10,7 @@ public class Equipment : MonoBehaviour
 
     [Inject] UI_EquipmentSlot[] uI_EquipmentSlots = new UI_EquipmentSlot[(int)Part.Size];
 
-    [Inject] SaveData saveData;
+    [Inject] InGameSaveData saveData;
 
     private void Start()
     {

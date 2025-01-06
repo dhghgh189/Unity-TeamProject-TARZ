@@ -1,9 +1,10 @@
+using System.IO;
 using UnityEngine;
 using Zenject;
 
 public class SaveManager : MonoBehaviour
 {
-    [Inject] SaveData saveData;
+    [Inject] SaveSlotData slotData;
     [Inject] StatModel statModel;
     [Inject] Inventory inventory;
     [Inject] Equipment equipment;
@@ -13,22 +14,22 @@ public class SaveManager : MonoBehaviour
     public void Save()
     {
         // statModel을 StatSaveData로 변환시켜서 저장
-        saveData.StatSaveData = JsonUtility.FromJson<StatSaveData>(JsonUtility.ToJson(statModel));
+        slotData.InGameSaveData.StatSaveData = JsonUtility.FromJson<StatSaveData>(JsonUtility.ToJson(statModel));
 
         // 장착 장비들 저장
         equipment.EquipmentSave();
 
         // 인벤토리 저장
         inventory.InventorySave();
-        
-        // 데이터 칩 저장
-        saveData.DataChip = statModel.Chip;
 
-        saveData.blueChipSaveDatas = handler.SaveBlueChips();
+        // 데이터 칩 저장
+        slotData.DataChip = statModel.Chip;
+
+        slotData.InGameSaveData.blueChipSaveDatas = handler.SaveBlueChips();
 
         // PlayerPrefs으로 세이브 데이터 저장
-        PlayerPrefs.SetString("SaveData", JsonUtility.ToJson(saveData));
-        Debug.Log(JsonUtility.ToJson(saveData, true));
+        File.WriteAllText(slotData.SlotPath, JsonUtility.ToJson(slotData));
+        Debug.Log(File.ReadAllText(slotData.SlotPath));
     }
     [ContextMenu("Reset")]
     public void Reset()

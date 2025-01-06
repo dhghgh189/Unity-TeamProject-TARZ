@@ -70,6 +70,7 @@ public class MonsterData : MonoBehaviour
     public CapsuleCollider coll { get; private set; }
     public NavMeshAgent agent { get; private set; }
     public Rigidbody rigid { get; private set; }
+    public PooledObject pooledObject { get; private set; }
 
     public bool IsCountered { get; set; }
 
@@ -79,6 +80,7 @@ public class MonsterData : MonoBehaviour
         coll = GetComponent<CapsuleCollider>();
         agent = GetComponent<NavMeshAgent>();
         rigid = GetComponent<Rigidbody>();
+        pooledObject = GetComponent<PooledObject>();
     }
 }
 

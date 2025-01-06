@@ -29,10 +29,12 @@ public class PlayerAttack : MonoBehaviour
     public float JumpMeleeFallForce;    // 하강 시 가해줄 힘
 
     // 반격 스펙 설정 (추후 인스펙터로 뺄 것)
-    private float counterRange = 2f;
+    private float counterMeleeRange = 2f;
     // 제곱 값 반환 (sqrMagnitude와 비교하기 위함)
-    public float CounterRange => counterRange * counterRange;
-    public MonsterData CounterTarget { get; private set; }
+    public float CounterMeleeRange => counterMeleeRange * counterMeleeRange;
+    // 보스 반격 데미지
+    private float counterMeleeDamage = 100f;
+    public MonsterData CounterTarget { get; set; }
     // 일반 카운터시 몬스터를 던지는 힘 (추후 인스펙터로 뺄 것)
     private float counterThrowForce = 14f;
     public float CounterThrowForce => counterThrowForce;
@@ -448,6 +450,7 @@ public class PlayerAttack : MonoBehaviour
 
     private void CounterThrow()
     {
+        Debug.Log("Counter Throw");
         MonsterData monster = CounterTarget;
         monster.transform.parent = null;
         monster.transform.position = player.GrabPoint.position;
@@ -456,6 +459,11 @@ public class PlayerAttack : MonoBehaviour
         monster.rigid.AddForce((mainCamTrf.forward + Vector3.up * 0.2f) * CounterThrowForce, ForceMode.Impulse);
         monster.rigid.AddTorque(mainCamTrf.right * 3f, ForceMode.Impulse);
         monster.coll.enabled = true;
+    }
+
+    public void CounterMelee()
+    {
+        CounterTarget.pooledObject.TakeDamage(counterMeleeDamage);
     }
 
     private void OnDrawGizmos()

@@ -274,9 +274,9 @@ public class PlayerController : MonoBehaviour, IDamagable
         return stat.CurrentStamina >= amount;
     }
 
-    public float GetCurrentAnimTime()
+    public float GetCurrentAnimTime(int layer = 0)
     {
-        AnimatorStateInfo info = anim.GetCurrentAnimatorStateInfo(0);
+        AnimatorStateInfo info = anim.GetCurrentAnimatorStateInfo(layer);
         // 현재 재생되는 애니메이션의 총 길이와 speed를 계산하여 실제 재생 시간을 반환 
         return (info.length / info.speed);
     }

@@ -8227,6 +8227,12 @@ PrefabInstance:
       propertyPath: GrabPos
       value: 
       objectReference: {fileID: 2066210400}
+    - target: {fileID: 7333010151708067289, guid: 744790fd829edc343bb6392bc0fb0f1a,
+        type: 3}
+      propertyPath: RangeCircle
+      value: 
+      objectReference: {fileID: 1214952415524032597, guid: 4ed8b603e0381b24d875140764aed37e,
+        type: 3}
     - target: {fileID: 7365192204732169291, guid: 744790fd829edc343bb6392bc0fb0f1a,
         type: 3}
       propertyPath: m_Name
@@ -10456,10 +10462,12 @@ MonoBehaviour:
   col: {fileID: 0}
   isThrowing: 0
   trigger: {fileID: 0}
+  BombBoxLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  range: 5
   BombBoxDamage: 0
   HitOBJs: []
-  range: 5
-  angle: 360
 --- !u!65 &799874266
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13383,10 +13391,12 @@ MonoBehaviour:
   col: {fileID: 0}
   isThrowing: 0
   trigger: {fileID: 0}
+  BombBoxLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  range: 5
   BombBoxDamage: 0
   HitOBJs: []
-  range: 5
-  angle: 360
 --- !u!65 &1133755455
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14516,10 +14526,12 @@ MonoBehaviour:
   col: {fileID: 0}
   isThrowing: 0
   trigger: {fileID: 0}
+  BombBoxLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  range: 5
   BombBoxDamage: 0
   HitOBJs: []
-  range: 5
-  angle: 360
 --- !u!65 &1232341160
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -20412,10 +20424,12 @@ MonoBehaviour:
   col: {fileID: 0}
   isThrowing: 0
   trigger: {fileID: 0}
+  BombBoxLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  range: 5
   BombBoxDamage: 0
   HitOBJs: []
-  range: 5
-  angle: 360
 --- !u!65 &1822318538
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -22407,10 +22421,12 @@ MonoBehaviour:
   col: {fileID: 0}
   isThrowing: 0
   trigger: {fileID: 0}
+  BombBoxLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  range: 5
   BombBoxDamage: 0
   HitOBJs: []
-  range: 5
-  angle: 360
 --- !u!65 &1953485495
 BoxCollider:
   m_ObjectHideFlags: 0

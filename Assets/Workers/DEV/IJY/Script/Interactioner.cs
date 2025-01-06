@@ -14,12 +14,12 @@ public class Interactioner : MonoBehaviour
     [SerializeField] public Transform GrabPos;
     [SerializeField] public SpecialThrowOBJ_Base SpecialOBJ;
     [SerializeField] private GameObject target;
+    [SerializeField] private GameObject RangeCircle; // 임시적 사용. 추후 리소스 폴더를 통해 생성 예정
 
     public bool IsGrabing = false;
-
     private int interactionLayer;
     private int interactionGrabLayer;
-
+    public GameObject curCircle;
     private Coroutine GrabRoutineCheck;
     private Coroutine RotationRoutineCheck;
 
@@ -45,6 +45,13 @@ public class Interactioner : MonoBehaviour
         interactionLayer = LayerMask.NameToLayer("Is_Interaction");
         interactionGrabLayer = LayerMask.NameToLayer("Is_Interaction_Grab");
         lineRenderer.enabled = false;
+
+        if (curCircle == null)
+        {
+            curCircle = Instantiate(RangeCircle, playerController.transform.position, playerController.transform.rotation);
+            curCircle.transform.parent = this.transform;
+        }
+        curCircle.SetActive(false);
     }
 
 
@@ -214,6 +221,7 @@ public class Interactioner : MonoBehaviour
     IEnumerator CheckGrabing()
     {
         lineRenderer.enabled = true;
+        curCircle.SetActive(true);
         Destroy(SpecialOBJ.rigidOBJ);
 
         // 플레이어의 스피드 = 기존의 1/3
@@ -228,9 +236,11 @@ public class Interactioner : MonoBehaviour
         }
 
         // 오브젝트를 던졌을 때, 플레이어의 속도는 다시 원래대로 돌아온다.
+
         playerController.Stat.MoveSpeed = curSpeed;
         GrabRoutineCheck = null;
         lineRenderer.enabled = false;
+        curCircle.SetActive(false);
         // 오브젝트가 독립적으로 움직일 수 있도록 자식 종속성을 해제한다.
         this.transform.DetachChildren();
         GrabEnding();
@@ -254,6 +264,7 @@ public class Interactioner : MonoBehaviour
         SpecialOBJ.playerController = null;
         bomb = null;
         boxType = Box_Type.None;
+        curCircle.SetActive(false);
     }
 
 
@@ -284,7 +295,7 @@ public class Interactioner : MonoBehaviour
             case Box_Type.Bomb:
                 {
                     if (bomb == null) bomb = SpecialOBJ.GetComponent<ThrowBox_Bomb>();
-                    bomb.CheckPath();
+                    bomb.CheckPath(curCircle, lineRenderer.GetPosition(lineRenderer.positionCount - 1));
                     break;
                 }
             default:
@@ -347,5 +358,7 @@ public class Interactioner : MonoBehaviour
         {
             bomb = null;
         }
+
+        curCircle.SetActive(false);
     }
 }

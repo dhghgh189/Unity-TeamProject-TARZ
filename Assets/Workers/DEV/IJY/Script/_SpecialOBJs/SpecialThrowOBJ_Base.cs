@@ -3,6 +3,7 @@ using UnityEngine;
 public class SpecialThrowOBJ_Base : MonoBehaviour, Interaction_Ibase_GrabAct
 {
     public Box_Type box_type { get; protected set; }
+    public bool isDestroy = false;
 
     public Rigidbody rigidOBJ { get; set; }
     public PlayerController playerController { get; set; }

@@ -6,12 +6,14 @@ public class ThrowBox_Bomb : SpecialThrowOBJ_Base
 {
     public ThrowBox_Bomb() => box_type = Box_Type.Bomb;
 
-    private LayerMask ThrowingOBJLayer;
-    private LayerMask BombBoxLayer;
     private bool isThrowingOBJ = false;
+    private LayerMask ThrowingOBJLayer;
+    [SerializeField]private LayerMask BombBoxLayer;
     private Coroutine CheckBombRoutine;
 
     [Header("폭탄 상자")]
+    [SerializeField] float range = 5.0f;
+    [SerializeField] float angle = 360f;
     [SerializeField] private float BombBoxDamage;
     [SerializeField] private List<GameObject> HitOBJs;
 
@@ -24,10 +26,10 @@ public class ThrowBox_Bomb : SpecialThrowOBJ_Base
         BombBoxDamage = 20f;
 
         // 쓰레기 오브젝트 참조 레이어마스크
-        ThrowingOBJLayer = LayerMask.NameToLayer("ThrowObject");
+        ThrowingOBJLayer = (1 << LayerMask.NameToLayer("ThrowObject"));
 
         // 인식하는 오브젝트 참조용 레이어 마스크
-        BombBoxLayer = 1 << LayerMask.NameToLayer("Monster") | 1 << LayerMask.NameToLayer("Player");
+        BombBoxLayer = (1 << LayerMask.NameToLayer("Monster")) | (1 << LayerMask.NameToLayer("Player"));
         // 이후 기타 파괴 가능한 장애물 레이어가 추가될 경우, 이어서 추가 예정
     }
 
@@ -46,7 +48,10 @@ public class ThrowBox_Bomb : SpecialThrowOBJ_Base
         }
         if (isThrowing)
         {
-            Bomb();
+            // 제외를 안시켜줘 왜
+            BombBoxLayer &= ~LayerMask.NameToLayer("Player");
+            if (CheckBombRoutine != null) return;
+            CheckBombRoutine = StartCoroutine(BombWaitRoutine(1f));
         }
     }
 
@@ -67,7 +72,7 @@ public class ThrowBox_Bomb : SpecialThrowOBJ_Base
             }
         }
 
-        Destroy(this.gameObject, 0.5f);
+        Destroy(this.gameObject);
     }
 
 
@@ -99,9 +104,7 @@ public class ThrowBox_Bomb : SpecialThrowOBJ_Base
     List<GameObject> CheckBombRange()
     {
         List<GameObject> _targets = new List<GameObject>();
-
-        // 해당 범위를 납작한 원으로 재구성할 필요가 있어보임.
-        Collider[] collider = Physics.OverlapSphere(this.transform.position, 5f);
+        Collider[] collider = Physics.OverlapSphere(this.transform.position, range);
 
         foreach (Collider _col in collider)
         {
@@ -113,8 +116,13 @@ public class ThrowBox_Bomb : SpecialThrowOBJ_Base
             Vector3 targetDir = (destination - source).normalized;
             float targetAngle = Vector3.Angle(transform.forward, targetDir);
 
-            if (targetAngle > 360f * 0.5f) continue;
+            if (targetAngle > angle * 0.5f) continue;
             _targets.Add(_col.gameObject);
+        }
+
+        foreach (GameObject _target in _targets)
+        {
+            Debug.Log($"리스트 목록 : {_target.name}");
         }
 
         return _targets;
@@ -122,7 +130,7 @@ public class ThrowBox_Bomb : SpecialThrowOBJ_Base
 
     public void CheckPath()
     {
-        Debug.Log($"폭탄상자 : {gameObject.name}");
+        //Debug.Log($"폭탄상자 : {gameObject.name}");
     }
 
     /// <summary>
@@ -136,5 +144,20 @@ public class ThrowBox_Bomb : SpecialThrowOBJ_Base
             CheckBombRoutine = null;
         }
         HitOBJs.Clear();
+    }
+
+    private void OnDrawGizmos()
+    {
+        // 거리 시각적으로 그리기
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, range);
+
+        // 각도 시각적으로 그리기
+        Vector3 rightDir = Quaternion.Euler(0, angle * 0.5f, 0) * transform.forward;
+        Vector3 leftDir = Quaternion.Euler(0, angle * -0.5f, 0) * transform.forward;
+
+        Gizmos.color = Color.blue;
+        Gizmos.DrawLine(transform.position, transform.position + rightDir * range);
+        Gizmos.DrawLine(transform.position, transform.position + leftDir * range);
     }
 }

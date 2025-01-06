@@ -6,8 +6,10 @@ using UnityEngine;
 
 public class Interactioner : MonoBehaviour
 {
+    #region 특수 오브젝트 스크립트별 참조
     private Box_Type boxType;
     private ThrowBox_Bomb bomb;
+    #endregion
 
     [SerializeField] public Transform GrabPos;
     [SerializeField] public SpecialThrowOBJ_Base SpecialOBJ;
@@ -260,6 +262,8 @@ public class Interactioner : MonoBehaviour
     /// 라인 렌더러가 갖고 있는 position 수 만큼 반복하여, 포물선을 이루도록 한다. position의 수가 많을 수록 곡선은 더 자연스러워진다.
     /// i 수치에 곱해지는 소수값이 작을수록 포물선은 촘촘해지나, 그만큼 짧아진다.
     /// i 수치에 곱해지는 소수값이 클 수록 포물선은 길어지나, 그만큼 촘촘하지 않아 각지게 출력된다.
+    /// 
+    /// 현재 카메라가 y축으로 움직이지 않아 범위 확인이 어렵다. 추후 개선이 필요해보임
     /// </summary>
     void Check_BoxPath(float t)
     {

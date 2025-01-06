@@ -5335,6 +5335,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04c5a5f2f35d34445868cbf80965ef32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDestroy: 0
   col: {fileID: 0}
   isThrowing: 0
   trigger: {fileID: 0}
@@ -6176,37 +6177,6 @@ Transform:
   m_Children:
   - {fileID: 820879132}
   m_Father: {fileID: 1570319152}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &529704463
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 529704464}
-  m_Layer: 6
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &529704464
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 529704463}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1891672008}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &534523861
 GameObject:
@@ -7307,6 +7277,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04c5a5f2f35d34445868cbf80965ef32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDestroy: 0
   col: {fileID: 0}
   isThrowing: 0
   trigger: {fileID: 0}
@@ -8245,7 +8216,7 @@ PrefabInstance:
         type: 3}
       propertyPath: e
       value: 
-      objectReference: {fileID: 529704463}
+      objectReference: {fileID: 0}
     - target: {fileID: 7333010151708067289, guid: 744790fd829edc343bb6392bc0fb0f1a,
         type: 3}
       propertyPath: range
@@ -8314,11 +8285,7 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 7132570303693772782, guid: 744790fd829edc343bb6392bc0fb0f1a, type: 3}
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 7889668715304265457, guid: 744790fd829edc343bb6392bc0fb0f1a,
-        type: 3}
-      insertIndex: 0
-      addedObject: {fileID: 529704464}
+    m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7365192204732169291, guid: 744790fd829edc343bb6392bc0fb0f1a,
         type: 3}
@@ -10485,11 +10452,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46901e2f2dbc5914f96d13c00418596e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDestroy: 0
   col: {fileID: 0}
   isThrowing: 0
   trigger: {fileID: 0}
   BombBoxDamage: 0
   HitOBJs: []
+  range: 5
+  angle: 360
 --- !u!65 &799874266
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12367,6 +12337,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04c5a5f2f35d34445868cbf80965ef32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDestroy: 0
   col: {fileID: 0}
   isThrowing: 0
   trigger: {fileID: 0}
@@ -13408,11 +13379,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46901e2f2dbc5914f96d13c00418596e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDestroy: 0
   col: {fileID: 0}
   isThrowing: 0
   trigger: {fileID: 0}
   BombBoxDamage: 0
   HitOBJs: []
+  range: 5
+  angle: 360
 --- !u!65 &1133755455
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14538,11 +14512,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46901e2f2dbc5914f96d13c00418596e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDestroy: 0
   col: {fileID: 0}
   isThrowing: 0
   trigger: {fileID: 0}
   BombBoxDamage: 0
   HitOBJs: []
+  range: 5
+  angle: 360
 --- !u!65 &1232341160
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -18173,6 +18150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04c5a5f2f35d34445868cbf80965ef32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDestroy: 0
   col: {fileID: 0}
   isThrowing: 0
   trigger: {fileID: 0}
@@ -20430,11 +20408,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46901e2f2dbc5914f96d13c00418596e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDestroy: 0
   col: {fileID: 0}
   isThrowing: 0
   trigger: {fileID: 0}
   BombBoxDamage: 0
   HitOBJs: []
+  range: 5
+  angle: 360
 --- !u!65 &1822318538
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -21382,12 +21363,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 630581313}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &1891672008 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7889668715304265457, guid: 744790fd829edc343bb6392bc0fb0f1a,
-    type: 3}
-  m_PrefabInstance: {fileID: 630581313}
-  m_PrefabAsset: {fileID: 0}
 --- !u!120 &1891672019
 LineRenderer:
   serializedVersion: 2
@@ -22203,6 +22178,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04c5a5f2f35d34445868cbf80965ef32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDestroy: 0
   col: {fileID: 0}
   isThrowing: 0
   trigger: {fileID: 0}
@@ -22427,11 +22403,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46901e2f2dbc5914f96d13c00418596e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDestroy: 0
   col: {fileID: 0}
   isThrowing: 0
   trigger: {fileID: 0}
   BombBoxDamage: 0
   HitOBJs: []
+  range: 5
+  angle: 360
 --- !u!65 &1953485495
 BoxCollider:
   m_ObjectHideFlags: 0

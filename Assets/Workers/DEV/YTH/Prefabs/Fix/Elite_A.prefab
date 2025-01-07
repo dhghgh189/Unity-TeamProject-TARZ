@@ -190,6 +190,7 @@ MonoBehaviour:
   _isAttacked: 0
   _isCatched: 0
   _isDead: 0
+  isMoving: 0
   _meleeAttackSpeed: 2
   _range: 2
   _angle: 90
@@ -1316,6 +1317,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5844133992929023397}
+  - component: {fileID: 7862634526260158125}
   m_Layer: 9
   m_Name: JustTrigger
   m_TagString: Untagged
@@ -1338,6 +1340,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5308138838905806333}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &7862634526260158125
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3653630656908131983}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 2
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3735769641584969785
 GameObject:
   m_ObjectHideFlags: 0

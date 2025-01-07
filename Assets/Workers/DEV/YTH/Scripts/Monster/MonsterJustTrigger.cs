@@ -66,17 +66,17 @@ public class MonsterJustTrigger : MonoBehaviour
         if (player == null)
             return;
 
-        if (player.Fsm.CurrentState.type == EState.Dash)
-        {
-            Debug.Log("저스트회피 성공!");
-            _playerStat.CurrentMp += 10;
-            _monsterData.IsCountered = true;
-            _playerAttack.JustCounter(_monsterData);
-        }
-        else
-        {
-            Debug.Log($"Just Failed...");
-        }
+        //if (player.Fsm.CurrentState.type == EState.Dash)
+        //{
+        //    Debug.Log("저스트회피 성공!");
+        //    _playerStat.CurrentMp += 10;
+        //    _monsterData.IsCountered = true;
+        //    _playerAttack.JustCounter(_monsterData);
+        //}
+        //else
+        //{
+        //    Debug.Log($"Just Failed...");
+        //}
     }
 
     #region 저스트회피 범위 판정

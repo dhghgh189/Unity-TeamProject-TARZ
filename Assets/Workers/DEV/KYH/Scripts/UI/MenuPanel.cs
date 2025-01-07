@@ -41,8 +41,6 @@ public class MenuPanel : MonoBehaviour
             {
                 menuPanel.SetActive(false);
                 isActive = false;
-                Cursor.visible = false;
-                Cursor.lockState = CursorLockMode.Locked;
                 playerController.PInput.IsCanControl = true;
             }
             // 메뉴 패널이 비활성화 되어 있으면 메뉴 패널을 활성화

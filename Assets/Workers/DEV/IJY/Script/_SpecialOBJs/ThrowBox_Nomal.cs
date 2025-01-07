@@ -37,6 +37,7 @@ public class ThrowBox_Nomal : SpecialThrowOBJ_Base
         if (OBJ.layer == NomalBoxLayer)
         {
             OBJ.GetComponent<IDamagable>().TakeDamage(NomalBoxDamage);
+            DropBlueChips();
             Destroy(this.gameObject);
         }
         else
@@ -44,5 +45,10 @@ public class ThrowBox_Nomal : SpecialThrowOBJ_Base
             isDestroy = true;
             Destroy(this.gameObject, 3.0f);
         }
+    }
+
+    void DropBlueChips()
+    {
+        Debug.Log("블루칩 흩뿌리는 기능 구현");
     }
 }

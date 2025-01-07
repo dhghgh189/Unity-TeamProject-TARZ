@@ -10,7 +10,7 @@ public class ThrowBox_Bomb : SpecialThrowOBJ_Base
 
     private bool isThrowingOBJ = false;
     private LayerMask ThrowingOBJLayer;
-    [SerializeField] private LayerMask BombBoxLayer;
+    private LayerMask BombBoxLayer;
     private Coroutine CheckBombRoutine;
 
     [Header("폭탄 상자")]
@@ -28,7 +28,7 @@ public class ThrowBox_Bomb : SpecialThrowOBJ_Base
         BombBoxDamage = 20f;
 
         // 쓰레기 오브젝트 참조 레이어마스크
-        ThrowingOBJLayer = (1 << LayerMask.NameToLayer("ThrowObject"));
+        ThrowingOBJLayer = LayerMask.NameToLayer("ThrowObject");
 
         // 인식하는 오브젝트 참조용 레이어 마스크
         BombBoxLayer = (1 << LayerMask.NameToLayer("Monster")) | (1 << LayerMask.NameToLayer("Player"));

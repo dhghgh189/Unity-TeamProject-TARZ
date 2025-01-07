@@ -66,12 +66,31 @@ public class ActiveSkillSO
         // 특수 효과
         if(UniqueEffect && !status.Equals(Test_Status.None))
         {
-            
+            // TODO: 특수 효과
+            // UniqueObject의 스크립트에서 Test_Status에 맞는 함수 실행
+            // 매개변수로 Test_Status를 넘겨줘서 실행
         }
     }
 
+    private void Init()
+    {
+        skillLevelSpec = new Spec();
+        skillLevelSpec.ActValues = performance_Act;
+        skillLevelSpec.InteractionValues = performance_Interaction;
+    }
 
+    public void ConnectTrigger(UnityEvent<GameObject, GameObject>[] Events)
+    {
+        Init();
+        Events[(int)ConditionState].AddListener(Use);
+        Debug.Log($"{parent.Name}스킬 중 {IndexName}기능 연결완료!");
+    }
 
+    public void DisconnectTrigger(UnityEvent<GameObject, GameObject>[] Events)
+    {
+        Events[(int)ConditionState].RemoveListener(Use);
+        Debug.Log($"{parent.Name}스킬 중 {IndexName}기능 해제완료!");
+    }
 }
 
 [Serializable]

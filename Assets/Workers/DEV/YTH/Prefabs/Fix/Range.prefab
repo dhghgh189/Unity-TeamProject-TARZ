@@ -597,7 +597,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6aca9047411259f44a559199c52ce03a, type: 2}
+  - {fileID: 2100000, guid: 3b79f95d36c9e3b4682107eb45ca8b24, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2306,6 +2306,7 @@ GameObject:
   - component: {fileID: 4393239675580763175}
   - component: {fileID: 5022225755371944463}
   - component: {fileID: 1816378847153904570}
+  - component: {fileID: 4500376956640820175}
   m_Layer: 9
   m_Name: Range
   m_TagString: Untagged
@@ -2345,7 +2346,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 109b7ff79ef97974aaff8ef1bb662828, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
@@ -2465,6 +2466,7 @@ MonoBehaviour:
   _attackRange: 10
   _isAttacked: 0
   _isCatched: 0
+  _isDead: 0
   _meleeAttackSpeed: 0
   _range: 0
   _angle: 0
@@ -2534,6 +2536,19 @@ MonoBehaviour:
   _jackTheRipper: {fileID: 0}
   _electricWallPrefab: {fileID: 0}
   _thunderPrefab: {fileID: 0}
+--- !u!114 &4500376956640820175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7971317727230852696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1b0e8d4ba24f904ba58fbcbc1e499df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DissolveTime: 2
 --- !u!1 &7976254287920628283
 GameObject:
   m_ObjectHideFlags: 0

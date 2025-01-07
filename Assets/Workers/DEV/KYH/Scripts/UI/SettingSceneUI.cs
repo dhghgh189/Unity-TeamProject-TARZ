@@ -43,6 +43,7 @@ public class SettingSceneUI : MonoBehaviour
         if (SceneManager.GetActiveScene().name != "Title")
         {
             titlePanel = null;
+
         }
 
         activeCPanel = nonSelectPanel;                  // 현재 활성화 중인 패널을 nonSelectPanel로 설정
@@ -94,6 +95,8 @@ public class SettingSceneUI : MonoBehaviour
         keySettingsPanel.SetActive(false);
         activeMinimapToggle.Select();           // activeMinimapToggle 오브젝트를 UI 네비게이션 Input 시작으로 선택
     }
+
+
 
     public void OnCheckMinimapActiveToggle()
     {

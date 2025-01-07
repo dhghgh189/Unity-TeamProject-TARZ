@@ -53,11 +53,14 @@ public class ThrowBox_Nomal : SpecialThrowOBJ_Base
     {
         Vector3 position = transform.position;
 
-        while (Nomal_DropCount > 0)
+        while (Nomal_DropCount >= 1)
         {
             Nomal_DropCount--;
             position.x += Nomal_DropSpred * Random.value - Nomal_DropSpred / 2;
             position.z += Nomal_DropSpred * Random.value - Nomal_DropSpred / 2;
+            if (position.y <= 0f) position.y = 0.1f;
+
+            // 추후 오브젝트 풀로 변경 예정
             Instantiate(DropChip, position, transform.rotation);
         }
 

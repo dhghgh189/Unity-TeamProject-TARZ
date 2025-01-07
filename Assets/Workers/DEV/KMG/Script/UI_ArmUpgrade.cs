@@ -7,7 +7,6 @@ using Zenject;
 public class UI_ArmUpgrade : MonoBehaviour, ISelectHandler  //, IDeselectHandler
 {
     [Inject] SaveSlotData saveSlotData;
-    [Inject] SaveManager saveManager;
     [Inject] ArmUpgradManager armUpgradManager;
 
     [Header("강화 능력 정보")]
@@ -52,7 +51,6 @@ public class UI_ArmUpgrade : MonoBehaviour, ISelectHandler  //, IDeselectHandler
         armUpgradManager.ArmUnitStatUp(upgradeAbility, -upStatList[upTier]);
         SetEventAndDesciption();
         armUpgradManager.InstallUnitDescription();
-        saveManager.Save();
     }
 
     private void UnitUpgrade()
@@ -69,7 +67,6 @@ public class UI_ArmUpgrade : MonoBehaviour, ISelectHandler  //, IDeselectHandler
         }
         armUpgradManager.InstallUnitDescription();
         SetEventAndDesciption();
-        saveManager.Save();
     }
 
     public void OnSelect(BaseEventData eventData)

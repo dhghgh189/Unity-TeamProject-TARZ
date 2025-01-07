@@ -16,25 +16,26 @@ MonoBehaviour:
   Description: "\uC124"
   Icon: {fileID: 0}
   MaxLevel: 1
+  SkillTier: 1
   skillType: 1
   active:
     activeSkillSOs:
     - IndexName: "\uC7A5\uD310\uC0DD\uC131"
-      ConditionState: 0
-      act: 0
-      Create: 0
+      Target: 1
+      ConditionState: 2
+      act: 4
+      ConditionType: 0
+      Create: 1
       createObject: {fileID: 7651433285117243063, guid: 38c06a08db4b26c46b4dcc7e1fb168a1,
         type: 3}
       performance_Act:
-      - {x: 0, y: 0, z: 0}
-      - {x: 0, y: 0, z: 0}
-      - {x: 0, y: 0, z: 0}
+      - {x: 1, y: 1, z: 1}
+      - {x: 2, y: 2, z: 2}
+      - {x: 3, y: 3, z: 3}
       Interaction: 0
-      type: 0
+      type: 4
       performance_Interaction:
-      - {x: 0, y: 0, z: 0}
-      - {x: 0, y: 0, z: 0}
-      - {x: 0, y: 0, z: 0}
+      - {x: 10, y: 20, z: 30}
       UniqueEffect: 0
       status: 0
       UniqueEffectObject: {fileID: 0}
@@ -58,9 +59,8 @@ MonoBehaviour:
       toggleSetting:
         ToggleType: 0
         On: 0
-        Timing: 0
+        Timing: 3
         Name: 
   onChangeLevel:
     m_PersistentCalls:
       m_Calls: []
-  model: {fileID: 0}

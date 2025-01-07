@@ -12,6 +12,7 @@ public class MenuPanel : MonoBehaviour
 {
     [Inject] SaveManager saveManager;
     [Inject] private ChangeInput inputManager;
+    [Inject] PlayerController playerController;
     //[Inject] SaveSlot saveSlot;
     private InputAction menuAction;
     private bool isActive;
@@ -38,6 +39,8 @@ public class MenuPanel : MonoBehaviour
                 isActive = false;
                 Cursor.visible = false;
                 Cursor.lockState = CursorLockMode.Locked;
+
+                playerController.PInput.IsCanControl = true;
             }
             // 메뉴 패널이 비활성화 되어 있으면 메뉴 패널을 활성화
             else
@@ -46,6 +49,8 @@ public class MenuPanel : MonoBehaviour
                 isActive = true;
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
+
+                playerController.PInput.IsCanControl = false;
 
                 // 메뉴 패널 활성화 시 셀렉터블 UI 선택
                 inputManager.firstInput = selectButton;

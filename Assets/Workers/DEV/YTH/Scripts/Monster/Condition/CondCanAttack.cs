@@ -1,7 +1,5 @@
 using BehaviorDesigner.Runtime.Tasks;
-using System.Runtime.CompilerServices;
 using UnityEngine;
-using Zenject;
 
 public class CondCanAttack : Conditional
 {
@@ -20,7 +18,7 @@ public class CondCanAttack : Conditional
     }
 
     public override void OnStart()
-    {  
+    {
         _player = _pooledObject.player;
     }
 
@@ -28,7 +26,7 @@ public class CondCanAttack : Conditional
     {
         _distance = Vector3.Distance(transform.position, _player.transform.position);
 
-        if (_distance <=  _monsterData.AttackRange && !_monsterData.IsAttacked && !_monsterData.IsCatched)
+        if (_distance <= _monsterData.AttackRange && !_monsterData.IsAttacked && !_monsterData.IsCatched && _monsterData.IsDead == false)
         {
             Debug.Log("CondMonsterCanAttack!!!!!!");
             return TaskStatus.Success;
@@ -38,4 +36,16 @@ public class CondCanAttack : Conditional
             return TaskStatus.Failure;
         }
     }
+
+    /*public bool IsValid()
+    {
+        if (_distance <= _monsterData.AttackRange
+             && !_monsterData.IsAttacked
+             && !_monsterData.IsCatched
+             && _monsterData.IsDead == false)
+        {
+            return true;
+        }
+        return false;
+    }*/
 }

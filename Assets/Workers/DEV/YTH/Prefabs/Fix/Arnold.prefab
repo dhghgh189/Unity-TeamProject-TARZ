@@ -371,6 +371,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 924068109602819586, guid: 4ad741dc933110747b5dd373339f2f12,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c3a327ef6d72d1b4cac7d975b4de6bdd, type: 2}
     - target: {fileID: 927691993178542573, guid: 4ad741dc933110747b5dd373339f2f12,
         type: 3}
       propertyPath: m_Layer
@@ -506,6 +511,11 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 6abf232809f77c74f968a4022251b645, type: 2}
+    - target: {fileID: 5866666021909216657, guid: 4ad741dc933110747b5dd373339f2f12,
+        type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6067667327417526380, guid: 4ad741dc933110747b5dd373339f2f12,
         type: 3}
       propertyPath: m_Layer
@@ -641,6 +651,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 6051502428782432029}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4ad741dc933110747b5dd373339f2f12,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4600464374582450025}
   m_SourcePrefab: {fileID: 100100000, guid: 4ad741dc933110747b5dd373339f2f12, type: 3}
 --- !u!4 &8597928924319561469 stripped
 Transform:
@@ -776,6 +790,7 @@ MonoBehaviour:
   _attackRange: 3
   _isAttacked: 0
   _isCatched: 0
+  _isDead: 0
   _meleeAttackSpeed: 3
   _range: 3
   _angle: 190
@@ -853,3 +868,16 @@ MonoBehaviour:
     type: 3}
   _thunderPrefab: {fileID: 2390178603253332089, guid: dee049f6313377d48b4411be8e1a8132,
     type: 3}
+--- !u!114 &4600464374582450025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8942506606477700167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1b0e8d4ba24f904ba58fbcbc1e499df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DissolveTime: 2

@@ -42,14 +42,19 @@ public class PlayerFSM
     public void ChangeState(EState state)
     {
         if (curState != null)
+        {
+            owner.SkillHandler.ActivateSkill(curState.type, SkillEnum.ActionTimingType.Exit);
             curState.OnExit();
+        }
 
         bool isOk = Adapter.IsPlayerCollision(state);
         Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Monster"), isOk);
 
         curState = States[(int)state];
-        curState.OnEnter();
 
+        owner.SkillHandler.ActivateSkill(curState.type, SkillEnum.ActionTimingType.Enter);
+        curState.OnEnter();
+        
         // test
         owner.currentStateView = curState.type;
     }
@@ -59,6 +64,7 @@ public class PlayerFSM
         if (curState == null)
             return;
 
+        owner.SkillHandler.ActivateSkill(curState.type, SkillEnum.ActionTimingType.Update);
         curState.OnUpdate();
     }
 

@@ -24,8 +24,6 @@ public class DashState : BaseState<PlayerController>
         // 스테미너를 감소시킨다.
         owner.Stat.ChangeStamina(-owner.Stat.DashStaminaAmount);
 
-        owner.SkillHandler.Use(SkillEnum.ActTimingType.Dash);
-
         if (camTrf == null)
             camTrf = Camera.main.transform;
 

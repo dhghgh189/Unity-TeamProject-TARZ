@@ -14,7 +14,6 @@ public class DrainState : BaseState<PlayerController>
     public override void OnEnter()
     {
         base.OnEnter();
-        owner.SkillHandler.Use(SkillEnum.ActTimingType.Drain);
 
         owner.Movement.Move(Vector3.zero);
         owner.Anim.CrossFade(Define.HASH_ANIM_DRAIN, 0.125f);

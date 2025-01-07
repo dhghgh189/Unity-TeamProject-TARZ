@@ -229,8 +229,8 @@ public class ManaRush_2 : BaseManaState
         LeaveMonster();
         parent.collider.GetComponent<MonsterData>().IsCatched = false;
         parent.collider.GetComponent<NavMeshAgent>().enabled = true;
-        parent.collider.GetComponent<Rigidbody>().useGravity = true;
-        parent.collider.GetComponent<Rigidbody>().isKinematic = false;
+        parent.collider.GetComponent<Rigidbody>().useGravity = false;
+        parent.collider.GetComponent<Rigidbody>().isKinematic = true;
         Physics.IgnoreCollision(owner.coll, parent.collider, false);
         parent.collider = null;
     }
@@ -267,8 +267,8 @@ public class ManaRush_3 : BaseManaState
             Physics.IgnoreCollision(owner.coll, parent.collider, false);
             parent.collider.GetComponent<MonsterData>().IsCatched = false;
             parent.collider.GetComponent<NavMeshAgent>().enabled = true;
-            parent.collider.GetComponent<Rigidbody>().useGravity = true;
-            parent.collider.GetComponent<Rigidbody>().isKinematic = false;
+            parent.collider.GetComponent<Rigidbody>().useGravity = false;
+            parent.collider.GetComponent<Rigidbody>().isKinematic = true;
         }
 
         animTimer = 999f;

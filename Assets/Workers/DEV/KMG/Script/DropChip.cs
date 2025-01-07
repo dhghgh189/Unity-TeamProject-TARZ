@@ -15,11 +15,12 @@ public class DropChip : MonoBehaviour
         else
             transform.GetComponent<Renderer>().material = ChipMaterial;
     }
-    private void OnTriggerEnter(Collider other)
+
+    private void OnCollisionEnter(Collision other)
     {
         if (!other.transform.CompareTag("Player")) return;
 
-        PlayerController player = other.GetComponent<PlayerController>();
+        PlayerController player = other.gameObject.GetComponent<PlayerController>();
         if (player == null)
         {
             Debug.Log("DropChip Exception!");

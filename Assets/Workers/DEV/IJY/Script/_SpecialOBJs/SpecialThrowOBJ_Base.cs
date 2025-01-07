@@ -5,10 +5,10 @@ public class SpecialThrowOBJ_Base : MonoBehaviour, Interaction_Ibase_GrabAct
     public Box_Type box_type { get; protected set; }
     public bool isDestroy = false;
 
+    public bool isThrowing = false;
     public Rigidbody rigidOBJ { get; set; }
     public PlayerController playerController { get; set; }
     public Collider col;
-    public bool isThrowing = false;
     public Child_SpecialTrigger trigger;
 
     void Awake() => Init();
@@ -30,7 +30,6 @@ public class SpecialThrowOBJ_Base : MonoBehaviour, Interaction_Ibase_GrabAct
 
         if (playerController.IsGrabingInput == true)
         {
-            Debug.Log($"{gameObject.name} : 활성화됨");
             ThrowingReady(playerController.interactioner.GrabPos);
         }
     }

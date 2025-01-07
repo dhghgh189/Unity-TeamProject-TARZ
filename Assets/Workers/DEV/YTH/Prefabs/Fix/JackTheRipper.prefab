@@ -407,7 +407,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ffa08d059d115334b9c8bc94e3316ad4, type: 2}
+  - {fileID: 2100000, guid: 61b9ad19e19ef514f84f6f74319f65c1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -930,7 +930,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 4bc71696ac9e76b479d392d36f2a3f29, type: 2}
+  - {fileID: 2100000, guid: d90afe66213af73419565c0f485c834e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1893,7 +1893,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 4bc71696ac9e76b479d392d36f2a3f29, type: 2}
+  - {fileID: 2100000, guid: d90afe66213af73419565c0f485c834e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3410,6 +3410,7 @@ GameObject:
   - component: {fileID: 5669642506712829951}
   - component: {fileID: 3619387374991910270}
   - component: {fileID: 2024205838076093750}
+  - component: {fileID: 3359570103943454600}
   m_Layer: 9
   m_Name: JackTheRipper
   m_TagString: Zombie
@@ -3625,14 +3626,15 @@ MonoBehaviour:
   _damage: 5
   _attackRange: 3
   _isAttacked: 0
+  _isCatched: 0
   _meleeAttackSpeed: 2
   _range: 3
   _angle: 90
   _rangeAttackSpeed: 0
   _throwPower: 0
-  _dangerDistance: 0
   _canUseProjectileSkillDistance: 0
   _canJumpDistance: 0
+  _dangerDistance: 0
 --- !u!114 &2024205838076093750
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3651,6 +3653,20 @@ MonoBehaviour:
   _jackTheRipper: {fileID: 0}
   _electricWallPrefab: {fileID: 0}
   _thunderPrefab: {fileID: 0}
+--- !u!114 &3359570103943454600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9171533847178047461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1b0e8d4ba24f904ba58fbcbc1e499df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DissolveTime: 2
+  materials: []
 --- !u!1 &9216871677216032204
 GameObject:
   m_ObjectHideFlags: 0

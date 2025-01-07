@@ -4,7 +4,12 @@ using Zenject;
 public class Merchant : MonoBehaviour, Interaction_Ibase_Activate
 {
     [SerializeField] UI_Merchant.EMerchant merchant;
-    [Inject] UI_Merchant uI_Merchant;
+    private UI_Merchant uI_Merchant;
+
+    private void Start()
+    {
+        uI_Merchant = FindAnyObjectByType<UI_Merchant>();
+    }
 
     public void Activate()
     {

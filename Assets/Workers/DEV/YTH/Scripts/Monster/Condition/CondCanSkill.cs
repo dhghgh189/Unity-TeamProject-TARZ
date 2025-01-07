@@ -27,7 +27,7 @@ public class CondCanSkill : Conditional
 
     public override TaskStatus OnUpdate()
     {
-        if (_monsterData.SkillTyPe == SkillType.Skill && _condCanMove.IsPlayerWithinSight(_player.gameObject) && !_monsterData.IsAttacked)
+        if (_monsterData.SkillTyPe == SkillType.Skill && _condCanMove.IsPlayerWithinSight(_player.gameObject) && !_monsterData.IsAttacked && _monsterData.IsDead == false)
         {
             Debug.Log("CondMonsterCanSkill@@@@@@");
             return TaskStatus.Success;

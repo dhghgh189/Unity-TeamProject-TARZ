@@ -57,6 +57,9 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
 
     public void TakeDamage(float damage)
     {
+        if (_monsterData.IsDead)
+            return;
+
         RotateToPlayer();
 
         _rigid.angularVelocity = Vector3.zero;
@@ -90,6 +93,8 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
 
     public void Die()
     {
+        _monsterData.IsDead = true;
+
         int random = UnityEngine.Random.Range(1, 101);
         Vector3 curPos = new Vector3(transform.position.x, 1f, transform.position.z);
 

@@ -559,6 +559,11 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: fadffcf40727ee6408b4a1c9dfe5f993, type: 2}
+    - target: {fileID: 5866666021909216657, guid: 6df8f01820cdb694a8e6468a4e18ea0e,
+        type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6311696543851329281, guid: 6df8f01820cdb694a8e6468a4e18ea0e,
         type: 3}
       propertyPath: m_Layer
@@ -797,6 +802,7 @@ MonoBehaviour:
   _attackRange: 1
   _isAttacked: 0
   _isCatched: 0
+  _isDead: 0
   _meleeAttackSpeed: 2
   _range: 0
   _angle: 0
@@ -882,4 +888,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DissolveTime: 2
-  materials: []

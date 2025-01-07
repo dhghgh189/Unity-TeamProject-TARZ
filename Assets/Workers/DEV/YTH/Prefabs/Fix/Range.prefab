@@ -2346,7 +2346,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 109b7ff79ef97974aaff8ef1bb662828, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
@@ -2466,6 +2466,7 @@ MonoBehaviour:
   _attackRange: 10
   _isAttacked: 0
   _isCatched: 0
+  _isDead: 0
   _meleeAttackSpeed: 0
   _range: 0
   _angle: 0
@@ -2548,7 +2549,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DissolveTime: 2
-  materials: []
 --- !u!1 &7976254287920628283
 GameObject:
   m_ObjectHideFlags: 0

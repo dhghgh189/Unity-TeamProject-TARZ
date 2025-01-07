@@ -1026,7 +1026,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 5c62b6bd07707af4597f1ebb5cf9b5be, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
@@ -1056,8 +1056,8 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
+  m_UseGravity: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
@@ -1156,6 +1156,7 @@ MonoBehaviour:
   _attackRange: 2
   _isAttacked: 0
   _isCatched: 0
+  _isDead: 0
   _meleeAttackSpeed: 2
   _range: 2
   _angle: 90
@@ -1239,7 +1240,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DissolveTime: 2
-  materials: []
 --- !u!1 &3532740754939166182
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,6 +6,9 @@ public class DissolveController : MonoBehaviour
 {
     [SerializeField] float DissolveTime;
     private List<Material> materials = new List<Material>();
+    public float ReturnDissolveTime { get { return DissolveTime; } }
+
+    private Renderer renderers;
     private float dissolveFloat = -1;
 
     private void Awake()

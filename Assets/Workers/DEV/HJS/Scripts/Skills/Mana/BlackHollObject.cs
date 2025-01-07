@@ -1,10 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using static MonsterData;
-using static UnityEditor.Progress;
 
 /// <summary>
 /// 블랙홀 오브젝트에 부착하는 스크립트
@@ -105,7 +103,7 @@ public class BlackHollObject : MonoBehaviour
     {
         if (other.gameObject.layer.Equals(LayerMask.NameToLayer("Monster")))
         {
-            if(other.gameObject.GetComponent<MonsterData>().MonsterTIer.Equals(MonsterTier.Normal))
+            if (other.gameObject.GetComponent<MonsterData>().MonsterTIer.Equals(MonsterTier.Normal))
             {
                 Debug.Log("StartHolidng");
                 enemies.Add(other.gameObject);
@@ -132,8 +130,8 @@ public class BlackHollObject : MonoBehaviour
         Debug.Log("초기설정");
 
         Debug.Log("물리 적용");
-        while(true)
-        { 
+        while (true)
+        {
             /* 물리 적용 */
             Vector3 relativeDirection = other.position - transform.position;
             Vector3 gravityDirection = relativeDirection.normalized;
@@ -157,7 +155,7 @@ public class BlackHollObject : MonoBehaviour
 
     private void OnDestroy()
     {
-        foreach(var enemy in enemies)
+        foreach (var enemy in enemies)
         {
             if (enemy is null) continue;
             SetPut(enemy);

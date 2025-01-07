@@ -1,9 +1,7 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using System;
-using UnityEditor;
 
 [Flags]
 public enum Test_Skill { Attack = 1 << 0, Dash = 1 << 1 }
@@ -27,12 +25,8 @@ public class TestBaseSkillSO : ScriptableObject
     // 무슨타입? 플레이어의 행동이나 아니면 그 외 모든 것이냐
     [Header("스킬 종류")]
     public Test_Type skillType;
-    [ShowFlags((int)Test_Type.Act, "skillType")]
     [Tooltip("스킬이 발동할 수 있는 행동 조건")] public Test_Skill skill;              // 플레이어의 행동 조건
-    [ShowFlags((int)Test_Type.Act, "skillType")]
     [SerializeField] ActiveSkills active;           // 행동 스킬
-
-    [ShowFlags((int)Test_Type.Etc, "skillType")]
     [SerializeField] PassiveSkills passive;         // 그외 스킬들
 
     [HideInInspector]
@@ -55,7 +49,7 @@ public class TestBaseSkillSO : ScriptableObject
 
     public void TriggerAllSkills(GameObject requester, GameObject target = null)
     {
-        foreach(ActiveSkillSO active in ActiveSkills)
+        foreach (ActiveSkillSO active in ActiveSkills)
         {
 
         }

@@ -62,8 +62,9 @@ public class ActMove_NotStopInAttacking : Action
 
             if (_monsterData.MonsterTyPe == MonsterData.MonsterType.Revive  && _monsterData.CurHp <= _monsterData.MaxHp *0.5f )
             {
-                _animator.CrossFade(Hash_Crawl, 0.05f);
-                _animator.SetLayerWeight(1, 1);
+                _animator.CrossFade(Hash_Move, 0.05f);
+                /*  _animator.CrossFade(Hash_Crawl, 0.05f);*/
+                /* _animator.SetLayerWeight(1, 1);*/
             }
             else
             {

@@ -879,6 +879,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1788551240539783752}
+  - component: {fileID: 4654190381690617670}
   m_Layer: 9
   m_Name: JustTrigger
   m_TagString: Untagged
@@ -901,6 +902,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 3607628360024507343}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &4654190381690617670
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3289476460769992665}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 2
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3368431026058826040
 GameObject:
   m_ObjectHideFlags: 0
@@ -1157,6 +1179,7 @@ MonoBehaviour:
   _isAttacked: 0
   _isCatched: 0
   _isDead: 0
+  isMoving: 0
   _meleeAttackSpeed: 2
   _range: 2
   _angle: 90
@@ -2203,7 +2226,6 @@ GameObject:
   - component: {fileID: 870532171283276757}
   - component: {fileID: 9067404223173944884}
   - component: {fileID: 2852194859533990448}
-  - component: {fileID: 3067017402303866419}
   m_Layer: 16
   m_Name: MonsterMark
   m_TagString: Untagged
@@ -2276,29 +2298,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &3067017402303866419
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6970418039792187543}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.0000019669533, y: -0.000000029802322, z: 0.0000003874302}
 --- !u!1 &6997362495331477164
 GameObject:
   m_ObjectHideFlags: 0

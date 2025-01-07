@@ -1,15 +1,24 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class DissolveController : MonoBehaviour
 {
     [SerializeField] float DissolveTime;
+    private List<Material> materials = new List<Material>();
+    public float ReturnDissolveTime { get { return DissolveTime; } }
+
     private Renderer renderers;
     private float dissolveFloat = -1;
+
     private void Awake()
     {
-        renderers = GetComponentInChildren<Renderer>();
+        foreach (var render in GetComponentsInChildren<Renderer>())
+        {
+            materials.AddRange(render.materials);
+        }
     }
+
     [ContextMenu("Dissolve")]
     public void StartDissolve()
     {
@@ -19,12 +28,20 @@ public class DissolveController : MonoBehaviour
     {
         while (dissolveFloat < 1)
         {
-            foreach (var item in renderers.materials)
+            for (int i = 0; i < materials.Count; i++)
             {
-                item.SetFloat("_Dissolve_Float", dissolveFloat);
+                materials[i].SetFloat("_Dissolve_Float", dissolveFloat);
+
+                dissolveFloat += 2 * (1 / DissolveTime) * Time.deltaTime;
+                yield return null;
             }
-            dissolveFloat += 2 * (1 / DissolveTime) * Time.deltaTime;
-            yield return null;
+        }
+    }
+    public void DissolveReset()
+    {
+        foreach (var item in materials)
+        {
+            item.SetFloat("_Dissolve_Float", -1);
         }
     }
 }

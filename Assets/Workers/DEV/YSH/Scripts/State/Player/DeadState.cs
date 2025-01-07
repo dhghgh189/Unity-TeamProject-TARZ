@@ -18,6 +18,7 @@ public class DeadState : BaseState<PlayerController>
         timer = 0;
         owner.Anim.CrossFade(Define.HASH_ANIM_DEAD, 0.125f);
         owner.StartCoroutine(GameOverRoutine());
+        owner.saveData.chapterSaveData = new();
     }
 
     public override void OnUpdate()

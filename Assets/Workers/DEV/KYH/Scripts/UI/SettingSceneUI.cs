@@ -6,11 +6,15 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.InputSystem;
+using Zenject;
 
 public class SettingSceneUI : MonoBehaviour
 {
+    private PlayerController playerController;
+
     [SerializeField] private GameObject titlePanel;         // 타이틀 패널
     [SerializeField] private GameObject activeCPanel;       // 현재 활성화 중인 패널
+    private CameraController camera;
 
     [Header("<color=yellow>Input Manager</color>")]
     [SerializeField] private ChangeInput inputManager;      // UI 네비게이션 InputManager 참조용
@@ -37,12 +41,36 @@ public class SettingSceneUI : MonoBehaviour
 
     [Header("Setting UI")]
     [SerializeField] private Toggle minimapActiveToggle;
+    [SerializeField] public Slider sensitivitySlider;
+
+    private void Start()
+    {
+        playerController = FindAnyObjectByType<PlayerController>();
+        camera = FindAnyObjectByType<CameraController>();
+        inputManager = FindAnyObjectByType<ChangeInput>();
+
+        if (SceneManager.GetActiveScene().name == "Title")
+        {
+            camera = null;
+        }
+        else
+        {
+            if (!PlayerPrefs.HasKey("Sensitivity"))
+            {
+                PlayerPrefs.SetFloat("Sensitivity", 5f);
+            }
+
+            camera.Sensitivity = PlayerPrefs.GetFloat("Sensitivity");
+            sensitivitySlider.value = camera.Sensitivity;
+        }
+    }
 
     private void OnEnable()
     {
         if (SceneManager.GetActiveScene().name != "Title")
         {
             titlePanel = null;
+            sensitivitySlider.interactable = true;
         }
 
         activeCPanel = nonSelectPanel;                  // 현재 활성화 중인 패널을 nonSelectPanel로 설정
@@ -93,6 +121,12 @@ public class SettingSceneUI : MonoBehaviour
         soundPanel.SetActive(false);
         keySettingsPanel.SetActive(false);
         activeMinimapToggle.Select();           // activeMinimapToggle 오브젝트를 UI 네비게이션 Input 시작으로 선택
+    }
+
+    public void ChangeSensitivity()
+    {
+        camera.Sensitivity = sensitivitySlider.value;
+        PlayerPrefs.SetFloat("Sensitivity", camera.Sensitivity);
     }
 
     public void OnCheckMinimapActiveToggle()
@@ -147,8 +181,16 @@ public class SettingSceneUI : MonoBehaviour
     public void OnClickBackToTitleButton()
     {
         gameObject.SetActive(false);            // 설정 패널 비활성화
-
-        if (SceneManager.GetActiveScene().name != "Title") return;
-        titlePanel.SetActive(true);
+        
+        if (SceneManager.GetActiveScene().name == "Title")
+        {
+            titlePanel.SetActive(true);
+        }
+        else
+        {
+            playerController.PInput.IsCanControl = true;
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+        }
     }
 }

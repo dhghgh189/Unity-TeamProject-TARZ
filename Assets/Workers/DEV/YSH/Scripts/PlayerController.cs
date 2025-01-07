@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour, IDamagable
 {
     [Inject] private StatModel stat;
     [HideInInspector] [Inject] public Loading loadingObject;
+    [HideInInspector] [Inject] public InGameSaveData saveData;
 
     private Animator anim;
     private Coroutine SternCheckRoutine;

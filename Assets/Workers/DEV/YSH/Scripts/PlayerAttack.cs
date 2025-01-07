@@ -456,6 +456,8 @@ public class PlayerAttack : MonoBehaviour
         monster.transform.position = player.GrabPoint.position;
         monster.transform.rotation = Quaternion.identity;
         monster.rigid.constraints = RigidbodyConstraints.None;
+        monster.rigid.isKinematic = false;
+        monster.rigid.useGravity = true;
         monster.rigid.AddForce((mainCamTrf.forward + Vector3.up * 0.2f) * CounterThrowForce, ForceMode.Impulse);
         monster.rigid.AddTorque(mainCamTrf.right * 3f, ForceMode.Impulse);
         monster.coll.enabled = true;

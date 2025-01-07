@@ -72,7 +72,6 @@ public class PlayerSkillHandler : MonoBehaviour
     public void Use(GameObject throwObject) => onActionThrowObjectEvents?.Invoke(throwObject, null);
     // 던지는 물체 -> 헨들러에게 충돌 되었다고 요청
     public void ThrowObjectCollision(GameObject to, GameObject collider) => onCollisionThrowObjectEvents?.Invoke(to, collider);
-
     // 플레이어 -> 스킬 사용 요쳥
     public void ActivateSkill(EState state, ActionTimingType act, GameObject collider = null)
     {

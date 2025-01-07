@@ -1,7 +1,5 @@
-using BehaviorDesigner.Runtime.Tasks.Unity.UnityGameObject;
 using System;
 using System.Collections;
-using Unity.Mathematics;
 using UnityEngine;
 using Zenject;
 
@@ -24,6 +22,8 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
 
     private AutoLockOn _autoLockOn;
 
+    private DissolveController _dissolve;
+
     [Header("Drop Item")]
     [SerializeField] GameObject _gear;
 
@@ -33,19 +33,20 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
 
     private MonsterSkillManager _skill;
 
-    private void Start()
+    private void Awake()
     {
         _autoLockOn = player.GetComponent<AutoLockOn>();
-
         _animator = GetComponent<Animator>();
         _rigid = GetComponent<Rigidbody>();
         _monsterData = GetComponent<MonsterData>();
         _skill = GetComponent<MonsterSkillManager>();
+        _dissolve = GetComponent<DissolveController>();
     }
 
     private void OnEnable()
     {
         OnDie += Die;
+        _dissolve.DissolveReset();
     }
 
     private void OnDisable()
@@ -55,6 +56,9 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
 
     public void TakeDamage(float damage)
     {
+        if (_monsterData.IsDead)
+            return;
+
         RotateToPlayer();
 
         _rigid.angularVelocity = Vector3.zero;
@@ -88,6 +92,8 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
 
     public void Die()
     {
+        _monsterData.IsDead = true;
+
         int random = UnityEngine.Random.Range(1, 101);
         Vector3 curPos = new Vector3(transform.position.x, 1f, transform.position.z);
 
@@ -99,6 +105,17 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
         DropGearItem(random, curPos);
         random = UnityEngine.Random.Range(0, 12);
         DropChipItem(random, curPos + Vector3.right * 0.5f);
+    }
+
+    public void DieDissolve()
+    {
+        StartCoroutine(DissolveRoutine());
+    }
+
+    IEnumerator DissolveRoutine()
+    {
+        _dissolve.StartDissolve();
+        yield return Util.GetDelay(_dissolve.ReturnDissolveTime);
 
         gameObject.SetActive(false);
     }
@@ -175,9 +192,9 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
         }
         if (dropGear)
         {
-            foreach(var item in dropPool.GetComponentsInChildren<DropGear>(true))
+            foreach (var item in dropPool.GetComponentsInChildren<DropGear>(true))
             {
-                if(!item.gameObject.activeSelf)
+                if (!item.gameObject.activeSelf)
                 {
                     item.SetDropItem(dropGearTier, dropGearPvalue, dropGearRandomTier);
                     item.transform.position = curPos;
@@ -191,7 +208,7 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
 
     private void DropChipItem(float random, Vector3 curPos)
     {
-        foreach(var item in dropPool.GetComponentsInChildren<DropChip>(true))
+        foreach (var item in dropPool.GetComponentsInChildren<DropChip>(true))
         {
             if (!item.gameObject.activeSelf)
             {
@@ -207,7 +224,7 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
     private void OnCollisionEnter(Collision other)
     {
         // 일반 몹이 던져진 후 충돌했을 때
-        if (_monsterData.IsCountered 
+        if (_monsterData.IsCountered
             && _monsterData.MonsterTIer == MonsterData.MonsterTier.Normal)
         {
             // constraints 복원
@@ -217,12 +234,14 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
 
             _monsterData.IsCatched = false;
             _monsterData.agent.enabled = true;
+            _monsterData.rigid.isKinematic = true;
+            _monsterData.rigid.useGravity = false;
 
             // 범위 타격 실행
             _skill.Explosion(4f, 360f, 50f);
 
             // 반격 상황 종료
             _monsterData.IsCountered = false;
-        }  
+        }
     }
 }

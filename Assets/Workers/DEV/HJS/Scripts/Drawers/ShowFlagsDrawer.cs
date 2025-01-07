@@ -9,7 +9,6 @@ public class ShowFlagsDrawer : PropertyDrawer
     {
         ShowFlagsAttribute showFlags = (ShowFlagsAttribute)attribute;
         SerializedProperty conditionProperty = property.serializedObject.FindProperty(showFlags.ConditionField);
-
         if(conditionProperty.intValue == 0)
         {
             // 경고 메시지 출력

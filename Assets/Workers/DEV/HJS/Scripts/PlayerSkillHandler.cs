@@ -10,10 +10,9 @@ using ActTiming = SkillEnum.ActTimingType;
 public class PlayerSkillHandler : MonoBehaviour
 {
     [Header("Evnets")]
-    private UnityEvent<GameObject, GameObject>[] onActionPlayerEvents;         // 기본 상태에서의 할일 - Enter
-    private UnityEvent<GameObject, GameObject>[] onCollisionPlayerEvents;      // 상태에서의 충돌 - OnCollision or OnTrigger
     private UnityEvent<GameObject, GameObject> onCollisionThrowObjectEvents;   // ThrowObject의 충돌 - OnCollision or OnTrigger
     private UnityEvent<GameObject, GameObject> onActionThrowObjectEvents;      // 기본 ThrowObject에서의 할일 - Enter
+    private Dictionary<ActionTimingType, UnityEvent<GameObject, GameObject>[]> eventDic;
 
     public SkillContainer Container;
 
@@ -28,16 +27,6 @@ public class PlayerSkillHandler : MonoBehaviour
     [Inject] private AblityAdapter adapter;
     [Inject] private InGameSaveData saveData;
 
-    [Header("Test")]
-    private UnityEvent<GameObject, GameObject>[] onEnterEvents;     // 행동에 입장했을 때
-    private UnityEvent<GameObject, GameObject>[] onUpdateEvents;    // 행동 도중(플레이어 중심)
-    private UnityEvent<GameObject, GameObject>[] onActionEvents;    // 행동 도중(기술 중심)
-    private UnityEvent<GameObject, GameObject>[] onExitEvents;      // 행동이 끝났을 때
-    private UnityEvent<GameObject, GameObject>[] onCollisionEvents;  // 행동 중 충돌했을 때
-    [SerializeField] TestBaseSkillSO testSkillSO;
-    [SerializeField] Test_Skill test;
-    [SerializeField] Test_Timing timin;
-
     private void Awake()
     {
         drainManager = GetComponentInChildren<DrainManager>();
@@ -46,34 +35,27 @@ public class PlayerSkillHandler : MonoBehaviour
 
     private void Start()
     {
-        onActionPlayerEvents = new UnityEvent<GameObject, GameObject>[(int)ActTiming.None];
-        onCollisionPlayerEvents = new UnityEvent<GameObject, GameObject>[(int)ActTiming.None];
+        eventDic = new Dictionary<ActionTimingType, UnityEvent<GameObject, GameObject>[]>
+        {
+            { ActionTimingType.Enter, new UnityEvent<GameObject, GameObject>[(int)EState.Length] },     // 행동에 입장했을 때
+            { ActionTimingType.Update, new UnityEvent<GameObject, GameObject>[(int)EState.Length] },    // 행동 도중(플레이어 중심)
+            { ActionTimingType.Act, new UnityEvent<GameObject, GameObject>[(int)EState.Length] },       // 행동 도중(기술 중심)
+            { ActionTimingType.Exit, new UnityEvent<GameObject, GameObject>[(int)EState.Length] },      // 행동이 끝났을 때
+            { ActionTimingType.Collision, new UnityEvent<GameObject, GameObject>[(int)EState.Length] }, // 행동 중 충돌했을 때
+        };
+        
         onCollisionThrowObjectEvents = new UnityEvent<GameObject, GameObject>();
         onActionThrowObjectEvents = new UnityEvent<GameObject, GameObject>();
 
-        onEnterEvents = new UnityEvent<GameObject, GameObject>[(int)EState.Length];
-        onUpdateEvents = new UnityEvent<GameObject, GameObject>[(int)EState.Length];
-        onExitEvents = new UnityEvent<GameObject, GameObject>[(int)EState.Length];
-        onActionEvents = new UnityEvent<GameObject, GameObject>[(int)EState.Length];
-        onCollisionEvents = new UnityEvent<GameObject, GameObject>[(int)EState.Length];
-
-        for (int i = 0; i < (int)ActTiming.None; i++)
+        foreach(var value in eventDic.Values)
         {
-            onActionPlayerEvents[i] = new UnityEvent<GameObject, GameObject>();
-            onCollisionPlayerEvents[i] = new UnityEvent<GameObject, GameObject>();
+            for (int i = 0; i < (int)EState.Length; i++)
+            {
+                value[i] = new UnityEvent<GameObject, GameObject>();
+            }
         }
+
         skillDic = new Dictionary<string, int>();
-
-        for (int i = 0; i < (int)EState.Length; i++)
-        {
-            onEnterEvents[i] = new UnityEvent<GameObject, GameObject>();
-            onUpdateEvents[i] = new UnityEvent<GameObject, GameObject>();
-            onExitEvents[i] = new UnityEvent<GameObject, GameObject>();
-            onActionEvents[i] = new UnityEvent<GameObject, GameObject>();
-            onCollisionEvents[i] = new UnityEvent<GameObject, GameObject>();
-        }
-
-        TestSkill(null, 1);
 
         LoadSkills();
     }
@@ -86,134 +68,34 @@ public class PlayerSkillHandler : MonoBehaviour
         }
     }
 
-    // 플레이어 -> 헨들러에게 스킬 사용 요청
-    public void Use(ActTiming act) => onActionPlayerEvents[(int)act]?.Invoke(gameObject, null);
     // 던지는 물체 -> 헨들러에게 스킬 사용 요청
     public void Use(GameObject throwObject) => onActionThrowObjectEvents?.Invoke(throwObject, null);
-    // 플레이어 -> 헨들러에게 충돌 되었다고 요청
-    public void PlayerCollision(ActTiming act, GameObject collider) => onCollisionPlayerEvents[(int)act]?.Invoke(gameObject, collider);
     // 던지는 물체 -> 헨들러에게 충돌 되었다고 요청
     public void ThrowObjectCollision(GameObject to, GameObject collider) => onCollisionThrowObjectEvents?.Invoke(to, collider);
-
-    //public void Update()
-    //{
-    //    if(Input.GetKeyDown(KeyCode.F9))
-    //    {
-    //        switch (timin)
-    //        {
-    //            case Test_Timing.Enter:
-    //                onEnterEvents[(int)test]?.Invoke(gameObject,null);
-    //                break;
-    //            case Test_Timing.Update:
-    //                onUpdateEvents[(int)test]?.Invoke(gameObject, null);
-    //                break;
-    //            case Test_Timing.Exit:
-    //                onExitEvents[(int)test]?.Invoke(gameObject, null);
-    //                break;
-    //            case Test_Timing.Act:
-    //                onActionEvents[(int)test]?.Invoke(gameObject, null);
-    //                break;
-    //            case Test_Timing.Collision:
-    //                onCollisionEvents[(int)test]?.Invoke(gameObject, null);
-    //                break;
-    //        }
-    //    }
-    //}
-
-    //테스트 용 스킬 추가
-    public void TestSkill(string skillName, int setLevel = 1)
+    // 플레이어 -> 스킬 사용 요쳥
+    public void ActivateSkill(EState state, ActionTimingType act, GameObject collider = null)
     {
-        TestBaseSkillSO skill = Instantiate(testSkillSO);
+        if (eventDic == null) return;
 
-        // 액티브 스킬 보여주기
-        foreach (ActiveSkillSO act in skill.ActiveSkills)
+        if(eventDic.TryGetValue(act, out var onResultEvent))
         {
-            switch (act.act)
-            {
-                // TODO
-                // TestBaseSkill이 이벤트를 가지고
-                // 해당 이벤트를 여기서 바로 연결하는 그 그림?
-                // 그래서 Foreach문은 여기서 돌리지 말고 TestBase에서돌리고
-                // -> 문제가 skill.skill => 각 State임 이거 어떻게 판단할거임?
-                // 그래서 매게변수로 넘겨주려고 생각했다는데...
-                case Test_Timing.Enter:
-                    onEnterEvents[(int)skill.skill].AddListener(act.Use);
-                    break;
-                case Test_Timing.Update:
-                    onUpdateEvents[(int)skill.skill].AddListener(act.Use);
-                    break;
-                case Test_Timing.Exit:
-                    onExitEvents[(int)skill.skill].AddListener(act.Use);
-                    break;
-                case Test_Timing.Act:
-                    onActionEvents[(int)skill.skill].AddListener(act.Use);
-                    break;
-                case Test_Timing.Collision:
-                    onCollisionEvents[(int)skill.skill].AddListener(act.Use);
-                    break;
-            }
-        }
-
-        foreach (PassiveSkillSO psivSkill in skill.PassiveSkills)
-        {
-            psivSkill.Parent = skill;
-            psivSkill.StatModel = model;
-
-            // 패시브 스킬의 종류에 따라 실행
-            switch (psivSkill.GetPassiveType)
-            {
-                // 수정 - 직접적으로 값을 수정한다.
-                case PassiveType.Modify:
-                    switch (psivSkill.GetModifySetting.ModifyType)
-                    {
-                        case PassiveModifyType.DashSpeed:
-                            model.DashSpeed += psivSkill.GetModifySetting.Amount;
-                            break;
-                        case PassiveModifyType.DrainRadius:
-                            drainManager.MaxRadius += psivSkill.GetModifySetting.Amount;
-                            break;
-                        default:
-                            psivSkill.SetValue();
-                            break;
-                    }
-                    model.AllCheck();
-                    break;
-                // 조건 - 조건에 맞으면 특정 행동을 수행한다.
-                case PassiveType.Condition:
-                    switch (psivSkill.GetConditionSetting.modifyType)
-                    {
-                        case PassiveModifyType.MaxHp:
-                            psivSkill.GetConditionSetting.MaxValue = model.MaxHp;
-                            model.OnMaxHpChange += psivSkill.GetConditionSetting.SetMax;    // 최대 체력 연결
-                            model.OnCurHpChange += psivSkill.ConditionCheck;                // 현재 체력 연결
-                            Debug.Log("hp 스킬 연결!");
-                            break;
-                        case PassiveModifyType.MaxStamina:
-                            psivSkill.GetConditionSetting.MaxValue = model.MaxStamina;
-                            model.OnMaxStaminaChange += psivSkill.GetConditionSetting.SetMax;
-                            model.OnCurStaminaChange += psivSkill.ConditionCheck;
-                            Debug.Log("스테미너 스킬 연결!");
-                            break;
-                    }
-                    model.AllCheck();
-                    break;
-                // 활성화/비활성화 - 특정 기능의 활성화 여부 설정한다.
-                case PassiveType.Toggle:
-                    switch (psivSkill.GetToggleSetting.ToggleType)
-                    {
-                        case ToggleType.Collision:
-                            adapter.SetOnPlayerCollision((EState)Enum.Parse(typeof(EState), skill.skill.ToString()), psivSkill.GetToggleSetting.On);
-                            break;
-                        case ToggleType.Function:
-                            adapter.SetEnable(psivSkill.GetToggleSetting.Name);
-                            break;
-                    }
-                    break;
-            }
-
+            onResultEvent[(int)state]?.Invoke(gameObject, collider);
         }
     }
 
+    public void CollisionEvent(EState curState, GameObject target) 
+    {
+        if (eventDic.TryGetValue(ActionTimingType.Collision, out UnityEvent<GameObject, GameObject>[] events))
+        {
+            events[(int)curState]?.Invoke(gameObject, target);
+            Debug.Log($"{curState} 충돌 작동!");
+        }
+        else
+        {
+            Debug.Log($"{curState} 오작동!");
+            return;
+        }
+    }
 
     public void AddSkill(string skillName, int setLevel = 1)
     {
@@ -223,110 +105,6 @@ public class PlayerSkillHandler : MonoBehaviour
         {
             return;
         }
-
-        #region 액티브 스킬 넣기
-        foreach (ActiveSkill actSkill in skill.activeSkills)
-        {
-            // 해당 스킬의 레벨에 따라 변경하기 위해 부모 설정
-            actSkill.Parent = skill;
-            // 레벨 변경의 대한 수치를 가져오기 위한 데이터베이스 넣기
-            actSkill.SetModel(model);
-
-            skill.onChangeLevel.AddListener(actSkill.UpdateLevel);
-
-            // 스킬의 사용 주체에 따라 실행
-            switch (actSkill.Target)
-            {
-                // 플레이어
-                case Target.Player:
-                    // 충돌 설정이 되어 있다면 -> 충돌 이벤트로 연결
-                    if (actSkill.CollisionType == ActConditionType.Collision)
-                    {
-                        onCollisionPlayerEvents[(int)skill.Timing].AddListener(actSkill.Use);
-                    }
-                    // 아니라면 -> 기본 이벤트로 연결
-                    else
-                    {
-                        onActionPlayerEvents[(int)skill.Timing].AddListener(actSkill.Use);
-                    }
-                    break;
-                // 던지는 물체
-                case Target.ThrowObject:
-                    // 충돌 설정이 되어 있다면 -> 충돌 이벤트로 연결
-                    if (actSkill.CollisionType == ActConditionType.Collision)
-                    {
-                        onCollisionThrowObjectEvents.AddListener(actSkill.Use);
-                    }
-                    // 아니라면 -> 기본 이벤트로 연결
-                    else
-                    {
-                        // TODO: 호출 할 곳 구현
-                        onActionThrowObjectEvents.AddListener(actSkill.Use);
-                    }
-                    break;
-            }
-        }
-        #endregion
-
-        #region 패시브 스킬 넣기
-        foreach (PassiveSkill psivSkill in skill.passiveSkills)
-        {
-            psivSkill.Parent = skill;
-            psivSkill.StatModel = model;
-
-            // 패시브 스킬의 종류에 따라 실행
-            switch (psivSkill.GetPassiveType)
-            {
-                // 수정 - 직접적으로 값을 수정한다.
-                case PassiveType.Modify:
-                    switch (psivSkill.GetModifySetting.ModifyType)
-                    {
-                        case PassiveModifyType.DashSpeed:
-                            model.DashSpeed += psivSkill.GetModifySetting.Amount;
-                            break;
-                        case PassiveModifyType.DrainRadius:
-                            drainManager.MaxRadius += psivSkill.GetModifySetting.Amount;
-                            break;
-                        default:
-                            psivSkill.SetValue();
-                            break;
-                    }
-                    model.AllCheck();
-                    break;
-                // 조건 - 조건에 맞으면 특정 행동을 수행한다.
-                case PassiveType.Condition:
-                    switch (psivSkill.GetConditionSetting.modifyType)
-                    {
-                        case PassiveModifyType.MaxHp:
-                            psivSkill.GetConditionSetting.MaxValue = model.MaxHp;
-                            model.OnMaxHpChange += psivSkill.GetConditionSetting.SetMax;    // 최대 체력 연결
-                            model.OnCurHpChange += psivSkill.ConditionCheck;                // 현재 체력 연결
-                            Debug.Log("hp 스킬 연결!");
-                            break;
-                        case PassiveModifyType.MaxStamina:
-                            psivSkill.GetConditionSetting.MaxValue = model.MaxStamina;
-                            model.OnMaxStaminaChange += psivSkill.GetConditionSetting.SetMax;
-                            model.OnCurStaminaChange += psivSkill.ConditionCheck;
-                            Debug.Log("스테미너 스킬 연결!");
-                            break;
-                    }
-                    model.AllCheck();
-                    break;
-                // 활성화/비활성화 - 특정 기능의 활성화 여부 설정한다.
-                case PassiveType.Toggle:
-                    switch (psivSkill.GetToggleSetting.ToggleType)
-                    {
-                        case ToggleType.Collision:
-                            adapter.SetOnPlayerCollision((EState)Enum.Parse(typeof(EState), skill.Timing.ToString()), psivSkill.GetToggleSetting.On);
-                            break;
-                        case ToggleType.Function:
-                            adapter.SetEnable(psivSkill.GetToggleSetting.Name);
-                            break;
-                    }
-                    break;
-            }
-        }
-        #endregion
 
         // 스킬리스트에 있으면 레벨 올려주기 <- 제거했다가 다시 추가했을 때
         if (skillDic.ContainsKey(skill.Name))
@@ -348,8 +126,95 @@ public class PlayerSkillHandler : MonoBehaviour
             }
             Debug.Log("딕션에 추가!");
         }
+
+        #region 액티브 스킬 넣기
+        foreach (ActiveSkill actSkill in skill.ActiveSkills)
+        {
+            // 해당 스킬의 레벨에 따라 변경하기 위해 부모 설정
+            actSkill.Parent = skill;
+            // 레벨 변경의 대한 수치를 가져오기 위한 데이터베이스 넣기
+            actSkill.SetModel(model);
+
+            skill.onChangeLevel.AddListener(actSkill.UpdateLevel);
+
+            if (actSkill.Target == Target.Player)
+            {
+                if (eventDic.TryGetValue(actSkill.ActTiming, out UnityEvent<GameObject, GameObject>[] onResultEvent))
+                {
+                    onResultEvent[(int)actSkill.ConditionState].AddListener(actSkill.Use);
+                }
+            }
+            else if (actSkill.Target == Target.ThrowObject)
+            {
+                if (actSkill.ConditionType == ActConditionType.Start)
+                    onActionThrowObjectEvents.AddListener(actSkill.Use);
+                else if (actSkill.ConditionType == ActConditionType.Collision)
+                    onCollisionThrowObjectEvents.AddListener(actSkill.Use);
+            }
+        }
+        #endregion
+
+        #region 패시브 스킬 넣기
+        foreach (PassiveSkill psivSkill in skill.PassiveSkills)
+        {
+            psivSkill.Parent = skill;
+            psivSkill.StatModel = model;
+
+            // 패시브 스킬의 종류에 따라 실행
+            switch (psivSkill.GetPassiveType)
+            {
+                // 수정 - 직접적으로 값을 수정한다.
+                case PassiveType.Modify:
+                    switch (psivSkill.GetModifySetting.ModifyType)
+                    {
+                        case PassiveModifyType.DashSpeed:
+                            model.DashSpeed += psivSkill.GetModifySetting.Amount(skill.SkillLevel);
+                            break;
+                        case PassiveModifyType.DrainRadius:
+                            drainManager.MaxRadius += psivSkill.GetModifySetting.Amount(skill.SkillLevel);
+                            break;
+                        default:
+                            psivSkill.SetValue();
+                            break;
+                    }
+                    model.AllCheck();
+                    break;
+                // 조건 - 조건에 맞으면 특정 행동을 수행한다.
+                case PassiveType.Condition:
+                    switch (psivSkill.GetConditionSetting.modifyType)
+                    {
+                        case PassiveModifyType.MaxHp:
+                            psivSkill.GetConditionSetting.MaxValue = model.MaxHp;
+                            model.OnMaxHpChange += psivSkill.GetConditionSetting.SetMax;    // 최대 체력 연결
+                            model.OnCurHpChange += psivSkill.ConditionCheck;                // 현재 체력 연결
+                            Debug.Log("hp 스킬 연결!");
+                            break;
+                        case PassiveModifyType.MaxStamina:
+                            psivSkill.GetConditionSetting.MaxValue = model.MaxStamina;
+                            model.OnMaxStaminaChange += psivSkill.GetConditionSetting.SetMax;
+                            model.OnCurStaminaChange += psivSkill.ConditionCheck;
+                            Debug.Log("스테미너 스킬 연결!");
+                            break;
+                    }
+                    model.AllCheck();
+                    break;
+                // 활성화/비활성화 - 특정 기능의 활성화 여부 설정한다.
+                case PassiveType.Toggle:
+                    switch (psivSkill.GetToggleSetting.ToggleType)
+                    {
+                        case ToggleType.Collision:
+                            adapter.SetOnPlayerCollision(psivSkill.GetToggleSetting.Timing, psivSkill.GetToggleSetting.On);
+                            break;
+                        case ToggleType.Function:
+                            adapter.SetEnable(psivSkill.GetToggleSetting.Name);
+                            break;
+                    }
+                    break;
+            }
+        }
+        #endregion
         // 디버그로 정보 보여주기
-        Debug.Log($"Add Skill Name : {skill.Name}  / Skill Act Timing : {skill.Timing} / Skill Level : {skill.SkillLevel}");
+        Debug.Log($"Add Skill Name : {skill.Name}  / Skill Tier : {skill.SkillTier} / Skill Level : {skill.SkillLevel}");
     }
 
     public List<BlueChipSaveData> SaveBlueChips()
@@ -367,7 +232,7 @@ public class PlayerSkillHandler : MonoBehaviour
         // 스킬이 없을 때 예외처리
         if (skill is null) return;
 
-        foreach (ActiveSkill actSkill in skill.activeSkills)
+        foreach (ActiveSkill actSkill in skill.ActiveSkills)
         {
             // 해당 스킬의 레벨에 따라 변경하기 위해 부모 설정
             actSkill.Parent = skill;
@@ -377,33 +242,24 @@ public class PlayerSkillHandler : MonoBehaviour
             skill.onChangeLevel.RemoveListener(actSkill.UpdateLevel);
 
             // 스킬의 사용 주체에 따라 실행
-            switch (actSkill.Target)
+            if (actSkill.Target == Target.Player)
             {
-                case Target.Player:
-                    if (actSkill.CollisionType == ActConditionType.Collision)
-                    {
-                        onCollisionPlayerEvents[(int)skill.Timing].RemoveListener(actSkill.Use);
-                    }
-                    else
-                    {
-                        onActionPlayerEvents[(int)skill.Timing].RemoveListener(actSkill.Use);
-                    }
-                    break;
-                case Target.ThrowObject:
-                    if (actSkill.CollisionType == ActConditionType.Collision)
-                    {
-                        onCollisionThrowObjectEvents.RemoveListener(actSkill.Use);
-                    }
-                    else
-                    {
-                        onActionThrowObjectEvents.RemoveListener(actSkill.Use);
-                    }
-                    break;
+                if (eventDic.TryGetValue(actSkill.ActTiming, out UnityEvent<GameObject, GameObject>[] te))
+                {
+                    te[(int)actSkill.ConditionState].RemoveListener(actSkill.Use);
+                }
+            }
+            else if (actSkill.Target == Target.ThrowObject)
+            {
+                if (actSkill.ConditionType == ActConditionType.Start)
+                    onActionThrowObjectEvents.RemoveListener(actSkill.Use);
+                else if (actSkill.ConditionType == ActConditionType.Collision)
+                    onCollisionThrowObjectEvents.RemoveListener(actSkill.Use);
             }
         }
 
         #region 패시브 스킬 빼기
-        foreach (PassiveSkill psivSkill in skill.passiveSkills)
+        foreach (PassiveSkill psivSkill in skill.PassiveSkills)
         {
             psivSkill.Parent = skill;
 
@@ -415,10 +271,10 @@ public class PlayerSkillHandler : MonoBehaviour
                     switch (psivSkill.GetModifySetting.ModifyType)
                     {
                         case PassiveModifyType.DashSpeed:
-                            model.DashSpeed -= psivSkill.GetModifySetting.Amount;
+                            model.DashSpeed -= psivSkill.GetModifySetting.Amount(skill.SkillLevel);
                             break;
                         case PassiveModifyType.DrainRadius:
-                            drainManager.MaxRadius -= psivSkill.GetModifySetting.Amount;
+                            drainManager.MaxRadius -= psivSkill.GetModifySetting.Amount(skill.SkillLevel);
                             break;
                         default:
                             psivSkill.ResetValue();
@@ -445,7 +301,7 @@ public class PlayerSkillHandler : MonoBehaviour
                     switch (psivSkill.GetToggleSetting.ToggleType)
                     {
                         case ToggleType.Collision:
-                            adapter.SetOffPlayerCollision((EState)Enum.Parse(typeof(EState), skill.Timing.ToString()), psivSkill.GetToggleSetting.On);
+                            adapter.SetOffPlayerCollision(psivSkill.GetToggleSetting.Timing, psivSkill.GetToggleSetting.On);
                             break;
                         case ToggleType.Function:
                             adapter.SetDisable(psivSkill.GetToggleSetting.Name);
@@ -460,22 +316,12 @@ public class PlayerSkillHandler : MonoBehaviour
         skillDic[skill.Name] = 0;
         // 스킬 제거하기
         Destroy(skill);
-        Debug.Log($"Remove Active Skill Name : {skill.Name}  / Skill Act Timing : {skill.Timing}");
+        Debug.Log($"Remove Active Skill Name : {skill.Name}");
     }
 
     // 플레이어가 사망 -> 파괴되었을 때
     private void OnDestroy()
     {
-        // 이벤트들에 달려있는 모든 리스터 연결 종료
-        //onCollisionThrowObjectEvents.RemoveAllListeners();
-        //onActionThrowObjectEvents.RemoveAllListeners();
-
-        //for (int i = 0; i < (int)ActTiming.None; i++)
-        //{
-        //    onActionPlayerEvents[i].RemoveAllListeners();
-        //    onCollisionPlayerEvents[i].RemoveAllListeners();
-        //}
-
         Clear();
     }
 
@@ -485,10 +331,14 @@ public class PlayerSkillHandler : MonoBehaviour
         onCollisionThrowObjectEvents.RemoveAllListeners();
         onActionThrowObjectEvents.RemoveAllListeners();
 
-        for (int i = 0; i < (int)ActTiming.None; i++)
+        if (eventDic == null) return;
+
+        foreach (var item in eventDic.Values)
         {
-            onActionPlayerEvents[i].RemoveAllListeners();
-            onCollisionPlayerEvents[i].RemoveAllListeners();
+            for (int i = 0; i < (int)EState.Length; i++)
+            {
+                item[i].RemoveAllListeners();
+            }
         }
 
         skillDic.Clear();

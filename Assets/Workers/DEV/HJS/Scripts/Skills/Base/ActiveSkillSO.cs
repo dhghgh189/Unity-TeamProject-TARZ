@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
-using UnityEditor.PackageManager.Requests;
 using UnityEngine;
-using UnityEngine.Events;
 using static SkillEnum;
 
 public enum Test_Timing { Enter, Update, Exit, Act, Collision }
@@ -59,9 +57,9 @@ public class ActiveSkillSO
         }
 
         // 특수 효과
-        if(UniqueEffect && !status.Equals(Test_Status.None))
+        if (UniqueEffect && !status.Equals(Test_Status.None))
         {
-            
+
         }
     }
 }

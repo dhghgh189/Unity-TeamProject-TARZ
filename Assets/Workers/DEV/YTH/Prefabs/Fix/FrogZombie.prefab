@@ -559,6 +559,11 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: fadffcf40727ee6408b4a1c9dfe5f993, type: 2}
+    - target: {fileID: 5866666021909216657, guid: 6df8f01820cdb694a8e6468a4e18ea0e,
+        type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6311696543851329281, guid: 6df8f01820cdb694a8e6468a4e18ea0e,
         type: 3}
       propertyPath: m_Layer
@@ -608,7 +613,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 6aca9047411259f44a559199c52ce03a, type: 2}
+      objectReference: {fileID: 2100000, guid: 3b79f95d36c9e3b4682107eb45ca8b24, type: 2}
     - target: {fileID: 9205127719463393231, guid: 6df8f01820cdb694a8e6468a4e18ea0e,
         type: 3}
       propertyPath: m_Layer
@@ -658,6 +663,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 3504531506990529700}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6df8f01820cdb694a8e6468a4e18ea0e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8002531343321688789}
   m_SourcePrefab: {fileID: 100100000, guid: 6df8f01820cdb694a8e6468a4e18ea0e, type: 3}
 --- !u!4 &347440832924576484 stripped
 Transform:
@@ -793,6 +802,8 @@ MonoBehaviour:
   _attackRange: 1
   _isAttacked: 0
   _isCatched: 0
+  _isDead: 0
+  isMoving: 0
   _meleeAttackSpeed: 2
   _range: 0
   _angle: 0
@@ -865,3 +876,16 @@ MonoBehaviour:
   _jackTheRipper: {fileID: 0}
   _electricWallPrefab: {fileID: 0}
   _thunderPrefab: {fileID: 0}
+--- !u!114 &8002531343321688789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1124082638942842974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1b0e8d4ba24f904ba58fbcbc1e499df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DissolveTime: 2

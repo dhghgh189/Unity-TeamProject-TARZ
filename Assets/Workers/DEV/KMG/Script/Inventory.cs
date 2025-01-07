@@ -9,6 +9,8 @@ public class Inventory : MonoBehaviour
 {
     [Inject] InGameSaveData saveData;
 
+    [Inject] PlayerController playerController;
+
     // 인벤토리 슬롯들을 보관할 배열 12개임
     [Inject] UI_InventorySlots[] inventorySlots;
 
@@ -167,8 +169,10 @@ public class Inventory : MonoBehaviour
             {
                 canvas.SetActive(false);
                 SelectButtonReset();
+                playerController.PInput.IsCanControl = true;
                 return;
             }
+            playerController.PInput.IsCanControl = false;
             canvas.SetActive(true);
             GetComponentInChildren<Button>(true).Select();
         }
@@ -185,5 +189,40 @@ public class Inventory : MonoBehaviour
     public Sprite GetSprite(int index)
     {
         return index > gearSprite.Length - 1 ? null : gearSprite[index];
+    }
+
+    public Gear StoreGear()
+    {
+        float random = Random.Range(1, 101);
+        int stage = saveData.chapterSaveData.StageNum;
+        
+        Part part = (Part)Random.Range(0, (int)Part.Size);
+        Gear gear = Instantiate(baseGears.Where(x => x.Part == part).First());
+        gear.Tier = random > 100 - (10 * stage) ? 3 : random > 90 - (20 * stage) ? 2 : 1;
+
+        // 장갑은 4개중 하나의 기본 능력치를 가지므로 능력치 3개를 삭제
+        if (part == Part.장갑)
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                gear.Abilities.RemoveAt(Random.Range(0, gear.Abilities.Count));
+            }
+        }
+
+        // 랜덤한 능력치를 랜덤 확률로 상승
+        if (Util.IsRandom(50))
+            gear.Abilities.Add(new GearAbility() { ability = (AdditionAbility)Random.Range(0, (int)AdditionAbility.Size), value = 10 });
+        if (Util.IsRandom(50))
+            gear.Abilities.Add(new GearAbility() { ability = (AdditionAbility)Random.Range(0, (int)AdditionAbility.Size), value = 10 });
+
+        // 이름 변경
+        gear.SetName();
+
+        // 베이스 능력치에 티어를 곱하기
+        foreach (var item in gear.Abilities)
+        {
+            item.value *= gear.Tier;
+        }
+        return gear;
     }
 }

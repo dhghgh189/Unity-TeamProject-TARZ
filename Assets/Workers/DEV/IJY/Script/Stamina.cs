@@ -11,17 +11,19 @@ public class Stamina : MonoBehaviour
 
     [SerializeField] public bool IsGetPostion; // 추후 스테미나 회복 포션 획득 시 활성화 예정
     [Inject][SerializeField] private StatModel stat;
-    [SerializeField] private Slider gauge_Stamina;
+    [SerializeField] public Image gauge_Stamina;
 
     private void Start()
     {
-        stat.OnMaxStaminaChange += SliderMaxValueChange;
+
+
+        //stat.OnMaxStaminaChange += SliderMaxValueChange;
         stat.OnCurStaminaChange += OnSaveStamina;
         OnSaveStamina(stat.CurrentStamina);
         StartCoroutine(StaminaRoutine());
         _IsChangeStam = false;
-        SliderMaxValueChange(stat.MaxStamina);
-        gauge_Stamina.value = stat.MaxStamina;
+        //SliderMaxValueChange(stat.MaxStamina);
+        gauge_Stamina.fillAmount = stat.MaxStamina / stat.MaxStamina;
     }
 
     private void OnSaveStamina(float lastStamina)
@@ -32,7 +34,7 @@ public class Stamina : MonoBehaviour
             _waitTime = 1f;
         }
         _lastStamina = lastStamina;
-        gauge_Stamina.value = _lastStamina;
+        gauge_Stamina.fillAmount = (stat.MaxStamina - (stat.MaxStamina - _lastStamina)) / stat.MaxStamina;
     }
 
     IEnumerator StaminaRoutine()
@@ -60,8 +62,13 @@ public class Stamina : MonoBehaviour
             yield return null;
         }
     }
-    private void SliderMaxValueChange(float maxStamina)
+    //private void SliderMaxValueChange(float maxStamina)
+    //{
+    //    gauge_Stamina.maxValue = maxStamina;
+    //}
+
+    private void OnDestroy()
     {
-        gauge_Stamina.maxValue = maxStamina;
+        stat.OnCurStaminaChange -= OnSaveStamina;
     }
 }

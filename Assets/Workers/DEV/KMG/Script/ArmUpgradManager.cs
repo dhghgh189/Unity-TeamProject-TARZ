@@ -12,6 +12,8 @@ public enum UpgrageArmUnit
 public class ArmUpgradManager : MonoBehaviour, Interaction_Ibase_Activate
 {
     [Inject] StatModel statModel;
+    [Inject] SaveManager saveManager;
+    [Inject] PlayerController playerController;
 
     private UI_ArmUpgrade[] armUnits;
     public List<UI_ArmUpgrade> installArmUnits;
@@ -49,10 +51,11 @@ public class ArmUpgradManager : MonoBehaviour, Interaction_Ibase_Activate
         if (upgradePanel.activeSelf)
         {
             upgradePanel.SetActive(false);
-            //Time.timeScale = 1f;
+            playerController.PInput.IsCanControl = true;
+            saveManager.Save();
             return;
         }
-        //Time.timeScale = 0f;
+        playerController.PInput.IsCanControl = false;
         upgradePanel.SetActive(true);
         GetComponentInChildren<UI_ArmUpgrade>().GetComponent<Button>().Select();
     }

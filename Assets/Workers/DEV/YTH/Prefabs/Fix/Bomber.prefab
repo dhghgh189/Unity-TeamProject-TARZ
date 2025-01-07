@@ -501,6 +501,7 @@ GameObject:
   - component: {fileID: 4901676695575413763}
   - component: {fileID: 471463577207258556}
   - component: {fileID: 3279986922230515307}
+  - component: {fileID: 7478331571887074797}
   m_Layer: 9
   m_Name: Bomber
   m_TagString: Bomber
@@ -540,7 +541,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: a26ee1ddce5780543a59eec7c7d69669, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
@@ -656,6 +657,8 @@ MonoBehaviour:
   _attackRange: 11
   _isAttacked: 0
   _isCatched: 0
+  _isDead: 0
+  isMoving: 0
   _meleeAttackSpeed: 0
   _range: 0
   _angle: 0
@@ -727,7 +730,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03a14c639c0a11f439c061e57d8114bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _projectile: {fileID: 0}
+  _projectile: {fileID: 8167883818004183144, guid: 989aabf03a1cf174e963c4be9bad5c97,
+    type: 3}
   _bombPrefab: {fileID: 1616805512990888026, guid: 7be3fa168ddd78a4f8fe83cd4cad94ad,
     type: 3}
   _minePrefab: {fileID: 1616805512990888026, guid: b7038b1d288993b4682a50c66df34277,
@@ -735,6 +739,19 @@ MonoBehaviour:
   _jackTheRipper: {fileID: 0}
   _electricWallPrefab: {fileID: 0}
   _thunderPrefab: {fileID: 0}
+--- !u!114 &7478331571887074797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1133426352577604729}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1b0e8d4ba24f904ba58fbcbc1e499df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DissolveTime: 2
 --- !u!1 &1167656469733048691
 GameObject:
   m_ObjectHideFlags: 0
@@ -1015,7 +1032,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d7f857dc5f3797544ad6215886e4b569, type: 2}
+  - {fileID: 2100000, guid: 724f5b12d06e7684ca30df64aa9c8961, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2214,7 +2231,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d7f857dc5f3797544ad6215886e4b569, type: 2}
+  - {fileID: 2100000, guid: 724f5b12d06e7684ca30df64aa9c8961, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

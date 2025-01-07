@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Events;
 using Zenject;
@@ -96,30 +95,30 @@ public class PlayerSkillHandler : MonoBehaviour
     // 던지는 물체 -> 헨들러에게 충돌 되었다고 요청
     public void ThrowObjectCollision(GameObject to, GameObject collider) => onCollisionThrowObjectEvents?.Invoke(to, collider);
 
-    public void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.F9))
-        {
-            switch (timin)
-            {
-                case Test_Timing.Enter:
-                    onEnterEvents[(int)test]?.Invoke(gameObject,null);
-                    break;
-                case Test_Timing.Update:
-                    onUpdateEvents[(int)test]?.Invoke(gameObject, null);
-                    break;
-                case Test_Timing.Exit:
-                    onExitEvents[(int)test]?.Invoke(gameObject, null);
-                    break;
-                case Test_Timing.Act:
-                    onActionEvents[(int)test]?.Invoke(gameObject, null);
-                    break;
-                case Test_Timing.Collision:
-                    onCollisionEvents[(int)test]?.Invoke(gameObject, null);
-                    break;
-            }
-        }
-    }
+    //public void Update()
+    //{
+    //    if(Input.GetKeyDown(KeyCode.F9))
+    //    {
+    //        switch (timin)
+    //        {
+    //            case Test_Timing.Enter:
+    //                onEnterEvents[(int)test]?.Invoke(gameObject,null);
+    //                break;
+    //            case Test_Timing.Update:
+    //                onUpdateEvents[(int)test]?.Invoke(gameObject, null);
+    //                break;
+    //            case Test_Timing.Exit:
+    //                onExitEvents[(int)test]?.Invoke(gameObject, null);
+    //                break;
+    //            case Test_Timing.Act:
+    //                onActionEvents[(int)test]?.Invoke(gameObject, null);
+    //                break;
+    //            case Test_Timing.Collision:
+    //                onCollisionEvents[(int)test]?.Invoke(gameObject, null);
+    //                break;
+    //        }
+    //    }
+    //}
 
     //테스트 용 스킬 추가
     public void TestSkill(string skillName, int setLevel = 1)

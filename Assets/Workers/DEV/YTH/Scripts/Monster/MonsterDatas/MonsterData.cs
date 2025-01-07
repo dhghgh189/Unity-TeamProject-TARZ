@@ -37,6 +37,12 @@ public class MonsterData : MonoBehaviour
     [SerializeField] bool _isCatched; // 잡힌 상태 (이동 불가)
     public bool IsCatched { get { return _isCatched; } set { _isCatched = value; } }
 
+    [SerializeField] bool _isDead; // 사망 시
+    public bool IsDead { get { return _isDead;  }  set { _isDead = value; } }
+
+    [SerializeField] bool isMoving;
+    public bool IsMoving { get { return isMoving;  } set { isMoving = value; } }
+
     [Header("근거리 몬스터 평타")]
     [SerializeField] float _meleeAttackSpeed; // 근접 공격 속도
     public float MeleeAttackSpeed { get { return _meleeAttackSpeed; } set { _meleeAttackSpeed = value; } }

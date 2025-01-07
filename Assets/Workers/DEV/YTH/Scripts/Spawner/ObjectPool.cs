@@ -43,6 +43,7 @@ public class ObjectPool : MonoBehaviour
                 monsterData.CurHp = monsterData.MaxHp;
                 monsterData.IsAttacked = false; 
                 monsterData.IsCatched = false; 
+                monsterData.IsDead = false;
                 pooledObject.gameObject.transform.position = transform.position + new Vector3(Random.Range(-2, 2), 0, Random.Range(-2, 2));
                 pooledObject.gameObject.SetActive(true);
                 

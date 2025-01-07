@@ -13,13 +13,14 @@ public class PlayerView : MonoBehaviour
     private PlayerAttack attack;
 
     [Header("플레이어 정보")]
-    [SerializeField] private Slider hpSlider;
+    //[SerializeField] private Slider hpSlider;
     [SerializeField] private Image hpImage;
-    [SerializeField] private Slider mpSlider;
+    //[SerializeField] private Slider mpSlider;
     [SerializeField] private Image mpImage;
 
     [Header("쓰레기 오브젝트")]
-    [SerializeField] private TMP_Text numberingText;
+    [SerializeField] private TMP_Text currentTObj;
+    [SerializeField] private TMP_Text maxTObj;
 
     private void Start()
     {
@@ -27,12 +28,12 @@ public class PlayerView : MonoBehaviour
         attack = player.Attack;
 
         // 슬라이더의 최대값을 각 스탯의 최대값으로 설정
-        hpSlider.maxValue = statModel.MaxHp;
-        mpSlider.maxValue = statModel.MaxMp;
+        //hpSlider.maxValue = statModel.MaxHp;
+        //mpSlider.maxValue = statModel.MaxMp;
 
         // 슬라이더의 조절 값을 각 스탯의 현재 값으로 설정
-        hpSlider.value = statModel.CurrentHp;
-        mpSlider.value = statModel.CurrentMp;
+        //hpSlider.value = statModel.CurrentHp;
+        //mpSlider.value = statModel.CurrentMp;
 
         // 플레이어의 각 스탯 변동 이벤트 구독
         statModel.OnCurHpChange += Player_OnCurHPChanged;
@@ -53,8 +54,10 @@ public class PlayerView : MonoBehaviour
     public void Player_OnCurHPChanged(float curHP)
     {
         //Debug.Log($"Hp Change : {curHP}");
-        hpSlider.value = curHP;
-        hpImage.enabled = curHP > 0;
+        //hpSlider.value = curHP;
+        hpImage.fillAmount = (statModel.MaxHp - (statModel.MaxHp - curHP)) / statModel.MaxHp;
+
+        if (curHP <= 0) hpImage.fillAmount = 0;
     }
 
     /// <summary>
@@ -63,8 +66,10 @@ public class PlayerView : MonoBehaviour
     /// <param name="curMP"></param>
     public void Player_OnCurMPChanged(float curMP)
     {
-        mpSlider.value = curMP;
-        mpImage.enabled = curMP > 0;
+        //mpSlider.value = curMP;
+        mpImage.fillAmount = (statModel.MaxMp - (statModel.MaxMp - curMP)) / statModel.MaxMp;
+
+        if (curMP <= 0) mpImage.fillAmount = 0;
     }
 
     /// <summary>
@@ -72,7 +77,8 @@ public class PlayerView : MonoBehaviour
     /// </summary>
     public void Player_OnTObjectChanged()
     {
-        numberingText.text = $"{attack.ObjectCount} / {attack.MaxObjectCount}";
+        currentTObj.text = $"{attack.ObjectCount}";
+        maxTObj.text = $"{attack.MaxObjectCount}";
     }
 
     /// <summary>

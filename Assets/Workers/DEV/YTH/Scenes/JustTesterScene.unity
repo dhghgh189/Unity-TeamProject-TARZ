@@ -13475,6 +13475,79 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1470190435}
   m_CullTransparentMesh: 1
+--- !u!1001 &1488048740
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3632602514074780826, guid: c990824329ec4df47b25a43739973317,
+        type: 3}
+      propertyPath: m_Name
+      value: Amber
+      objectReference: {fileID: 0}
+    - target: {fileID: 4116932251100257824, guid: c990824329ec4df47b25a43739973317,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4.0616875
+      objectReference: {fileID: 0}
+    - target: {fileID: 4116932251100257824, guid: c990824329ec4df47b25a43739973317,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4116932251100257824, guid: c990824329ec4df47b25a43739973317,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.3454676
+      objectReference: {fileID: 0}
+    - target: {fileID: 4116932251100257824, guid: c990824329ec4df47b25a43739973317,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.46827894
+      objectReference: {fileID: 0}
+    - target: {fileID: 4116932251100257824, guid: c990824329ec4df47b25a43739973317,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4116932251100257824, guid: c990824329ec4df47b25a43739973317,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.88358074
+      objectReference: {fileID: 0}
+    - target: {fileID: 4116932251100257824, guid: c990824329ec4df47b25a43739973317,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4116932251100257824, guid: c990824329ec4df47b25a43739973317,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4116932251100257824, guid: c990824329ec4df47b25a43739973317,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -235.845
+      objectReference: {fileID: 0}
+    - target: {fileID: 4116932251100257824, guid: c990824329ec4df47b25a43739973317,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8069005698398294671, guid: c990824329ec4df47b25a43739973317,
+        type: 3}
+      propertyPath: DissolveTime
+      value: 2
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c990824329ec4df47b25a43739973317, type: 3}
 --- !u!1 &1489305534
 GameObject:
   m_ObjectHideFlags: 0
@@ -17967,6 +18040,71 @@ MonoBehaviour:
     RoomCount: 10
   - BossName: 02000000
     RoomCount: 13
+  saveData:
+    chapterSaveData:
+      Chapter: 0
+      StageNum: 0
+    DataChip: 0
+    StatSaveData:
+      maxHp: 0
+      maxStamina: 0
+      currentHp: 0
+      currentMp: 0
+      currentStamina: 0
+      blackChip: 0
+      additionAbility:
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    EquipmentGears:
+    - Part: 0
+      Tier: 0
+      GearName: 
+      Abilities: []
+    - Part: 0
+      Tier: 0
+      GearName: 
+      Abilities: []
+    - Part: 0
+      Tier: 0
+      GearName: 
+      Abilities: []
+    - Part: 0
+      Tier: 0
+      GearName: 
+      Abilities: []
+    - Part: 0
+      Tier: 0
+      GearName: 
+      Abilities: []
+    - Part: 0
+      Tier: 0
+      GearName: 
+      Abilities: []
+    - Part: 0
+      Tier: 0
+      GearName: 
+      Abilities: []
+    - Part: 0
+      Tier: 0
+      GearName: 
+      Abilities: []
+    - Part: 0
+      Tier: 0
+      GearName: 
+      Abilities: []
+    InventoryGears: []
+    blueChipSaveDatas: []
 --- !u!4 &1918820420
 Transform:
   m_ObjectHideFlags: 0
@@ -23029,3 +23167,4 @@ SceneRoots:
   - {fileID: 112244373}
   - {fileID: 1101878326043708891}
   - {fileID: 5002731705317641590}
+  - {fileID: 1488048740}

@@ -4,6 +4,8 @@ using UnityEngine;
 public class DissolveController : MonoBehaviour
 {
     [SerializeField] float DissolveTime;
+    public float ReturnDissolveTime { get { return DissolveTime; } }
+
     private Renderer renderers;
     private float dissolveFloat = -1;
     private void Awake()

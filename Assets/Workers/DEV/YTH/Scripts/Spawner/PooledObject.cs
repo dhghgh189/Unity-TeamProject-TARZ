@@ -24,6 +24,8 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
 
     private AutoLockOn _autoLockOn;
 
+    private DissolveController _dissolve;
+
     [Header("Drop Item")]
     [SerializeField] GameObject _gear;
 
@@ -36,11 +38,11 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
     private void Start()
     {
         _autoLockOn = player.GetComponent<AutoLockOn>();
-
         _animator = GetComponent<Animator>();
         _rigid = GetComponent<Rigidbody>();
         _monsterData = GetComponent<MonsterData>();
         _skill = GetComponent<MonsterSkillManager>();
+        _dissolve = GetComponent<DissolveController>();
     }
 
     private void OnEnable()
@@ -99,6 +101,17 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
         DropGearItem(random, curPos);
         random = UnityEngine.Random.Range(0, 12);
         DropChipItem(random, curPos + Vector3.right * 0.5f);
+    }
+
+    public void DieDissolve()
+    {
+        StartCoroutine(DissolveRoutine());
+    }
+
+    IEnumerator DissolveRoutine()
+    {
+        _dissolve.StartDissolve();
+        yield return Util.GetDelay(_dissolve.ReturnDissolveTime);
 
         gameObject.SetActive(false);
     }

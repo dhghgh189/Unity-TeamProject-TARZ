@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 8909307872111423613}
   - component: {fileID: 3272144951322454711}
   - component: {fileID: 6777108976283475361}
+  - component: {fileID: 721351539252127389}
   m_Layer: 9
   m_Name: Elite_A
   m_TagString: Untagged
@@ -258,6 +259,19 @@ MonoBehaviour:
   _jackTheRipper: {fileID: 0}
   _electricWallPrefab: {fileID: 0}
   _thunderPrefab: {fileID: 0}
+--- !u!114 &721351539252127389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 118192175531285063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1b0e8d4ba24f904ba58fbcbc1e499df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DissolveTime: 2
 --- !u!1 &378279677182070566
 GameObject:
   m_ObjectHideFlags: 0
@@ -701,8 +715,8 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -5567897635444601682, guid: 184882967936b72468a7b476b727fd1d, type: 3}
-  - {fileID: -710910164944623929, guid: 184882967936b72468a7b476b727fd1d, type: 3}
+  - {fileID: 2100000, guid: 8953cc5559fe0ec4792dbbb205f8352b, type: 2}
+  - {fileID: 2100000, guid: af2fbdff45a9ce540895505dfee91f70, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

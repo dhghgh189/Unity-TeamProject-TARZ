@@ -55,6 +55,11 @@ public class SettingSceneUI : MonoBehaviour
         }
         else
         {
+            if (!PlayerPrefs.HasKey("Sensitivity"))
+            {
+                PlayerPrefs.SetFloat("Sensitivity", 5f);
+            }
+
             camera.Sensitivity = PlayerPrefs.GetFloat("Sensitivity");
             sensitivitySlider.value = camera.Sensitivity;
         }

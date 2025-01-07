@@ -12,6 +12,7 @@ public enum UpgrageArmUnit
 public class ArmUpgradManager : MonoBehaviour, Interaction_Ibase_Activate
 {
     [Inject] StatModel statModel;
+    [Inject] SaveManager saveManager;
     [Inject] PlayerController playerController;
 
     private UI_ArmUpgrade[] armUnits;
@@ -51,6 +52,7 @@ public class ArmUpgradManager : MonoBehaviour, Interaction_Ibase_Activate
         {
             upgradePanel.SetActive(false);
             playerController.PInput.IsCanControl = true;
+            saveManager.Save();
             return;
         }
         playerController.PInput.IsCanControl = false;

@@ -289,7 +289,7 @@ public class PassiveSkillSO
 }
 
 [Serializable]
-public class PassiveSkills
+public class PassiveSkillSOs
 {
     public List<PassiveSkillSO> passiveSkillSOs;
 }

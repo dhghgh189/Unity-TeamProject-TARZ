@@ -1,20 +1,24 @@
 using System;
 using System.Collections.Generic;
-using UnityEditor.PackageManager.Requests;
 using UnityEngine;
-using UnityEngine.Events;
 using static SkillEnum;
-public enum Test_Timing { Enter, Update, Exit, Act, Collision, Length }
-public enum Test_Status { None, Success, Failure }
+
 [Serializable]
 public class ActiveSkillSO
 {
     [SerializeField] string IndexName;
+    [Tooltip("Player = 플레이어 / ThrowObject = 던지는 물체")]
+    public Target Target;
     private int level;
-    private BaseSkillSO parent;
+    private TestBaseSkillSO parent;
 
+    [Header("Target => Player")]
     [Tooltip("스킬이 발동할 수 있는 행동 조건")] public EState ConditionState;              // 플레이어의 행동 조건
-    public Test_Timing act;                   // 발동 시점
+    public ActionTimingType act;                   // 발동 시점
+    [Space(2)]
+    [Header("Target => ThrowObject")]
+    public ActConditionType ConditionType;
+    [Space(3)]
     [Header("생성")]
     public bool Create;                       // 생성 여부
     [SerializeField] GameObject createObject; // 생성 여부가 True일 때 -> 생성할 오브젝트 (ex. 폭발, 독구름)
@@ -29,13 +33,18 @@ public class ActiveSkillSO
     [Space(5)]
     [Header("특수 효과")]
     public bool UniqueEffect;                 // 특수 효과 여부
-    public Test_Status status;                // 특수 효과를 적용할 함수의 종류
+    public UniqueEffectType status;                // 특수 효과를 적용할 함수의 종류
     public GameObject UniqueEffectObject;     // 특수 효과가 들어있는 함수
 
     private Spec skillLevelSpec;              // 입력한 스펙이 저장되는 구조체
+    public TestBaseSkillSO Parent { set { parent = value; Debug.Log("<color=yellow>액티브 스킬부모 설정</color>"); } }
+    public void SetModel(StatModel statModel) => skillLevelSpec.statModel = statModel;
 
     public void Use(GameObject requester, GameObject target = null)
     {
+        skillLevelSpec.ActValues = performance_Act;
+        skillLevelSpec.InteractionValues = performance_Interaction;
+
         if (Create)
         {
             Debug.Log(createObject.name);
@@ -64,37 +73,21 @@ public class ActiveSkillSO
         }
 
         // 특수 효과
-        if(UniqueEffect && !status.Equals(Test_Status.None))
+        if (UniqueEffect && !status.Equals(UniqueEffectType.None))
         {
             // TODO: 특수 효과
             // UniqueObject의 스크립트에서 Test_Status에 맞는 함수 실행
             // 매개변수로 Test_Status를 넘겨줘서 실행
         }
     }
-
-    private void Init()
+    public void UpdateLevel(int level)
     {
-        skillLevelSpec = new Spec();
-        skillLevelSpec.ActValues = performance_Act;
-        skillLevelSpec.InteractionValues = performance_Interaction;
-    }
-
-    public void ConnectTrigger(UnityEvent<GameObject, GameObject>[] Events)
-    {
-        Init();
-        Events[(int)ConditionState].AddListener(Use);
-        Debug.Log($"{parent.Name}스킬 중 {IndexName}기능 연결완료!");
-    }
-
-    public void DisconnectTrigger(UnityEvent<GameObject, GameObject>[] Events)
-    {
-        Events[(int)ConditionState].RemoveListener(Use);
-        Debug.Log($"{parent.Name}스킬 중 {IndexName}기능 해제완료!");
+        this.level = level;
     }
 }
 
 [Serializable]
-public class ActiveSkills
+public class ActiveSkillSOs
 {
     public List<ActiveSkillSO> activeSkillSOs;
 }

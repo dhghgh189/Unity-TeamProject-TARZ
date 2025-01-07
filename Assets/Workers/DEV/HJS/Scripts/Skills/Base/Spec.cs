@@ -7,20 +7,17 @@ public struct Spec
 {
     [HideInInspector]
     public StatModel statModel;
-    [Header("Active")]
-    [SerializeField] List<float> power;
-    [SerializeField] List<float> range;
-    [SerializeField] List<float> time;
-    [Header("Interaction")]
-    [SerializeField, Range(0f, 1f)] List<float> degree;
-    [SerializeField] List<float> damage;
-    [SerializeField] List<float> duration;
+    [SerializeField] Vector3[] actValue;
+    [SerializeField] Vector3[] interactionValue;
 
-    public float Power(int level) => power[level - 1] * statModel.SkillPowerPer;
-    public float Range(int level) => range[level - 1];
-    public float Time(int level) => time[level - 1];
+    public float Power(int level) { return (level < actValue.Length) ? actValue[level - 1].x * statModel.SkillPowerPer : 0; }
+    public float Range(int level) { return (level < actValue.Length) ? actValue[level - 1].y : 0; }
+    public float Time(int level) { return (level < actValue.Length) ? actValue[level - 1].z : 0; }
 
-    public float interactioDegree(int level) { return (degree.Count > 0) ? degree[level - 1] * statModel.SkillPowerPer : 0; }
-    public float InteractionDuration(int level) { return (duration.Count > 0) ? duration[level - 1] : 0; }
-    public float InteractionDamage(int level) { return (damage.Count > 0) ? damage[level - 1] : 0; }
+    public float InteractionDamage(int level) { return (level < interactionValue.Length) ? interactionValue[level - 1].x * statModel.SkillPowerPer : 0; }
+    public float interactioDegree(int level) { return (level < interactionValue.Length) ? interactionValue[level - 1].y : 0; }
+    public float InteractionDuration(int level) { return (level < interactionValue.Length) ? interactionValue[level - 1].z : 0; }
+
+    public Vector3[] ActValues { set { actValue = value; } }
+    public Vector3[] InteractionValues { set { interactionValue = value; } }
 }

@@ -6,8 +6,6 @@ using System;
 using UnityEditor;
 
 [Flags]
-public enum Test_Skill { Attack = 1 << 0, Dash = 1 << 1 }
-[Flags]
 public enum Test_Type { None = 0, Act = 1 << 0, Etc = 1 << 1 }
 [CreateAssetMenu(menuName = "Scriptables/Test_Base_Skill")]
 public class TestBaseSkillSO : ScriptableObject
@@ -28,8 +26,6 @@ public class TestBaseSkillSO : ScriptableObject
     [Header("스킬 종류")]
     public Test_Type skillType;
     [ShowFlags((int)Test_Type.Act, "skillType")]
-    [Tooltip("스킬이 발동할 수 있는 행동 조건")] public Test_Skill skill;              // 플레이어의 행동 조건
-    [ShowFlags((int)Test_Type.Act, "skillType")]
     [SerializeField] ActiveSkills active;           // 행동 스킬
 
     [ShowFlags((int)Test_Type.Etc, "skillType")]
@@ -42,10 +38,4 @@ public class TestBaseSkillSO : ScriptableObject
 
     public List<ActiveSkillSO> ActiveSkills => active.activeSkillSOs;
     public List<PassiveSkillSO> PassiveSkills => passive.passiveSkillSOs;
-
-    public bool CheckAct(Test_Skill curAct)
-    {
-        // 포함이 되어있는지 확인
-        return (curAct & skill) != 0;
-    }
 }

@@ -45,7 +45,7 @@ public class PassiveSkill
         public PassiveModifyType ModifyType;
         public PassiveModifyInputType inputType;
         [Tooltip("ex) 100% = 100, 50% = 50")] [SerializeField] Vector3 amount;
-        public float Amount(int value) => amount[value];
+        public float Amount(int value) => amount[value - 1];
         [HideInInspector] public float TempValue;
     }
 

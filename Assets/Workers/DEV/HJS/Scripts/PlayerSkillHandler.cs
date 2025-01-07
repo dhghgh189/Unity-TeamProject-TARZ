@@ -76,6 +76,8 @@ public class PlayerSkillHandler : MonoBehaviour
     // 플레이어 -> 스킬 사용 요쳥
     public void ActivateSkill(EState state, ActionTimingType act, GameObject collider = null)
     {
+        if (eventDic == null) return;
+
         if(eventDic.TryGetValue(act, out var onResultEvent))
         {
             onResultEvent[(int)state]?.Invoke(gameObject, collider);
@@ -167,10 +169,10 @@ public class PlayerSkillHandler : MonoBehaviour
                     switch (psivSkill.GetModifySetting.ModifyType)
                     {
                         case PassiveModifyType.DashSpeed:
-                            model.DashSpeed += psivSkill.GetModifySetting.Amount(skill.SkillLevel - 1);
+                            model.DashSpeed += psivSkill.GetModifySetting.Amount(skill.SkillLevel);
                             break;
                         case PassiveModifyType.DrainRadius:
-                            drainManager.MaxRadius += psivSkill.GetModifySetting.Amount(skill.SkillLevel - 1);
+                            drainManager.MaxRadius += psivSkill.GetModifySetting.Amount(skill.SkillLevel);
                             break;
                         default:
                             psivSkill.SetValue();
@@ -270,10 +272,10 @@ public class PlayerSkillHandler : MonoBehaviour
                     switch (psivSkill.GetModifySetting.ModifyType)
                     {
                         case PassiveModifyType.DashSpeed:
-                            model.DashSpeed -= psivSkill.GetModifySetting.Amount(skill.SkillLevel - 1);
+                            model.DashSpeed -= psivSkill.GetModifySetting.Amount(skill.SkillLevel);
                             break;
                         case PassiveModifyType.DrainRadius:
-                            drainManager.MaxRadius -= psivSkill.GetModifySetting.Amount(skill.SkillLevel - 1);
+                            drainManager.MaxRadius -= psivSkill.GetModifySetting.Amount(skill.SkillLevel);
                             break;
                         default:
                             psivSkill.ResetValue();
@@ -329,6 +331,8 @@ public class PlayerSkillHandler : MonoBehaviour
         // 이벤트들에 달려있는 모든 리스터 연결 종료
         onCollisionThrowObjectEvents.RemoveAllListeners();
         onActionThrowObjectEvents.RemoveAllListeners();
+
+        if (eventDic == null) return;
 
         foreach (var item in eventDic.Values)
         {

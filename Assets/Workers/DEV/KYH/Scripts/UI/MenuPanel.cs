@@ -20,11 +20,15 @@ public class MenuPanel : MonoBehaviour
     [SerializeField] private GameObject menuPanel;      // 메뉴 패널 UI
     [SerializeField] private Button selectButton;       // 셀렉터블 선택 버튼
     [SerializeField] private GameObject settingsPanel;  // 설정 패널
+    [SerializeField] private Button settingsButton;
 
     private void Start()
     {
         // 메뉴 키 입력 시 메뉴 불러오기
         menuAction = InputSystem.actions.FindAction("Menu");
+
+        inputManager.firstInput = settingsButton;
+        inputManager.firstInput.Select();
     }
 
     private void Update()
@@ -39,7 +43,6 @@ public class MenuPanel : MonoBehaviour
                 isActive = false;
                 Cursor.visible = false;
                 Cursor.lockState = CursorLockMode.Locked;
-
                 playerController.PInput.IsCanControl = true;
             }
             // 메뉴 패널이 비활성화 되어 있으면 메뉴 패널을 활성화
@@ -59,6 +62,11 @@ public class MenuPanel : MonoBehaviour
         }
     }
 
+    /*private void OnDisable()
+    {
+        playerController.PInput.IsCanControl = true;
+    }*/
+
     /// <summary>
     /// 설정 버튼 클릭
     /// </summary>
@@ -74,6 +82,7 @@ public class MenuPanel : MonoBehaviour
     public void OnClickBackToGameButton()
     {
         menuPanel.SetActive(false);
+        playerController.PInput.IsCanControl = true;
     }
 
     public void OnClickBackToMenuButton()

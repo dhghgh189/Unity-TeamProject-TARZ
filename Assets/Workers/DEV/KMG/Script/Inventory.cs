@@ -9,6 +9,8 @@ public class Inventory : MonoBehaviour
 {
     [Inject] InGameSaveData saveData;
 
+    [Inject] PlayerController playerController;
+
     // 인벤토리 슬롯들을 보관할 배열 12개임
     [Inject] UI_InventorySlots[] inventorySlots;
 
@@ -167,8 +169,10 @@ public class Inventory : MonoBehaviour
             {
                 canvas.SetActive(false);
                 SelectButtonReset();
+                playerController.PInput.IsCanControl = true;
                 return;
             }
+            playerController.PInput.IsCanControl = false;
             canvas.SetActive(true);
             GetComponentInChildren<Button>(true).Select();
         }

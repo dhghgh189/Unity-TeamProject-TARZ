@@ -48,8 +48,16 @@ public class SettingSceneUI : MonoBehaviour
         playerController = FindAnyObjectByType<PlayerController>();
         camera = FindAnyObjectByType<CameraController>();
         inputManager = FindAnyObjectByType<ChangeInput>();
-        camera.Sensitivity = PlayerPrefs.GetFloat("Sensitivity");
-        sensitivitySlider.value = camera.Sensitivity;
+
+        if (SceneManager.GetActiveScene().name == "Title")
+        {
+            camera = null;
+        }
+        else
+        {
+            camera.Sensitivity = PlayerPrefs.GetFloat("Sensitivity");
+            sensitivitySlider.value = camera.Sensitivity;
+        }
     }
 
     private void OnEnable()
@@ -168,11 +176,16 @@ public class SettingSceneUI : MonoBehaviour
     public void OnClickBackToTitleButton()
     {
         gameObject.SetActive(false);            // 설정 패널 비활성화
-        playerController.PInput.IsCanControl = true;
-
-        if (SceneManager.GetActiveScene().name != "Title") return;
-        titlePanel.SetActive(true);
-
         
+        if (SceneManager.GetActiveScene().name == "Title")
+        {
+            titlePanel.SetActive(true);
+        }
+        else
+        {
+            playerController.PInput.IsCanControl = true;
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+        }
     }
 }

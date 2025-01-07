@@ -371,6 +371,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 924068109602819586, guid: 4ad741dc933110747b5dd373339f2f12,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c3a327ef6d72d1b4cac7d975b4de6bdd, type: 2}
     - target: {fileID: 927691993178542573, guid: 4ad741dc933110747b5dd373339f2f12,
         type: 3}
       propertyPath: m_Layer
@@ -780,6 +785,7 @@ MonoBehaviour:
   _attackRange: 3
   _isAttacked: 0
   _isCatched: 0
+  _isDead: 0
   _meleeAttackSpeed: 3
   _range: 3
   _angle: 190

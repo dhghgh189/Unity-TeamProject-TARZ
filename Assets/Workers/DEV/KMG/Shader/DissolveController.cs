@@ -37,4 +37,11 @@ public class DissolveController : MonoBehaviour
             }
         }
     }
+    public void DissolveReset()
+    {
+        foreach (var item in materials)
+        {
+            item.SetFloat("_Dissolve_Float", -1);
+        }
+    }
 }

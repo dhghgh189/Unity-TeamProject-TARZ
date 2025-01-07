@@ -7229,6 +7229,7 @@ MonoBehaviour:
   masterVolumeSlider: {fileID: 6678374311935388647}
   keyboardButton: {fileID: 6068090146564458988}
   minimapActiveToggle: {fileID: 3493093510785618571}
+  sensitivitySlider: {fileID: 0}
 --- !u!1 &3231170924435381544
 GameObject:
   m_ObjectHideFlags: 0
@@ -14490,12 +14491,24 @@ MonoBehaviour:
   m_HandleRect: {fileID: 6173033188261279326}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
+  m_MaxValue: 10
   m_WholeNumbers: 0
-  m_Value: 0.5
+  m_Value: 5
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1440757682427754623}
+        m_TargetAssemblyTypeName: SettingSceneUI, Assembly-CSharp
+        m_MethodName: OnChangeSensitivityValue
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7566301496925149531
 GameObject:
   m_ObjectHideFlags: 0

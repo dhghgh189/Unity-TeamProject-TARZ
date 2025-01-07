@@ -22,7 +22,7 @@ public class PlayerInputHandler : MonoBehaviour
     public bool TryManaSkill { get; private set; }
     public bool TryLockOnToggle { get; private set; }
 
-    [HideInInspector] public bool IsCanControl;
+     public bool IsCanControl;
 
     [HideInInspector] public bool[] UseKeyPressed;
 

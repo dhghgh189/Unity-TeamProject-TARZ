@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject.SpaceFighter;
@@ -14,6 +15,7 @@ public class CameraController : MonoBehaviour
 
     [Space(5f)]
     [SerializeField] private float sensitivity;
+    public float Sensitivity { get { return sensitivity; } set { sensitivity = value; } }
     [SerializeField] private Vector3 delta;
 
     private float yAngle;

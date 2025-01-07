@@ -1113,6 +1113,7 @@ GameObject:
   - component: {fileID: 8862835902184979527}
   - component: {fileID: 8929721196361635683}
   - component: {fileID: 7641819941000808408}
+  - component: {fileID: 7698306464251817098}
   m_Layer: 9
   m_Name: DungeonElite_A
   m_TagString: Untagged
@@ -1152,7 +1153,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 5c62b6bd07707af4597f1ebb5cf9b5be, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
@@ -1282,6 +1283,7 @@ MonoBehaviour:
   _attackRange: 2
   _isAttacked: 0
   _isCatched: 0
+  _isDead: 0
   _meleeAttackSpeed: 2
   _range: 2
   _angle: 90
@@ -1352,6 +1354,19 @@ MonoBehaviour:
   _jackTheRipper: {fileID: 0}
   _electricWallPrefab: {fileID: 0}
   _thunderPrefab: {fileID: 0}
+--- !u!114 &7698306464251817098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3750440984940057028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1b0e8d4ba24f904ba58fbcbc1e499df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DissolveTime: 2
 --- !u!1 &4028563729834772731
 GameObject:
   m_ObjectHideFlags: 0
@@ -2617,7 +2632,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 8554655104631171556, guid: 016b42a8f038b3249a9aa2bb00ef4da3, type: 3}
+  - {fileID: 2100000, guid: 8934f29e9e70beb47a6d1b66cabe2b07, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

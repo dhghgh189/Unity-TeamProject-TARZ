@@ -1,7 +1,5 @@
-using BehaviorDesigner.Runtime.Tasks.Unity.UnityGameObject;
 using System;
 using System.Collections;
-using Unity.Mathematics;
 using UnityEngine;
 using Zenject;
 
@@ -193,9 +191,9 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
         }
         if (dropGear)
         {
-            foreach(var item in dropPool.GetComponentsInChildren<DropGear>(true))
+            foreach (var item in dropPool.GetComponentsInChildren<DropGear>(true))
             {
-                if(!item.gameObject.activeSelf)
+                if (!item.gameObject.activeSelf)
                 {
                     item.SetDropItem(dropGearTier, dropGearPvalue, dropGearRandomTier);
                     item.transform.position = curPos;
@@ -209,7 +207,7 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
 
     private void DropChipItem(float random, Vector3 curPos)
     {
-        foreach(var item in dropPool.GetComponentsInChildren<DropChip>(true))
+        foreach (var item in dropPool.GetComponentsInChildren<DropChip>(true))
         {
             if (!item.gameObject.activeSelf)
             {
@@ -225,7 +223,7 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
     private void OnCollisionEnter(Collision other)
     {
         // 일반 몹이 던져진 후 충돌했을 때
-        if (_monsterData.IsCountered 
+        if (_monsterData.IsCountered
             && _monsterData.MonsterTIer == MonsterData.MonsterTier.Normal)
         {
             // constraints 복원
@@ -235,12 +233,14 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
 
             _monsterData.IsCatched = false;
             _monsterData.agent.enabled = true;
+            _monsterData.rigid.isKinematic = true;
+            _monsterData.rigid.useGravity = false;
 
             // 범위 타격 실행
             _skill.Explosion(4f, 360f, 50f);
 
             // 반격 상황 종료
             _monsterData.IsCountered = false;
-        }  
+        }
     }
 }

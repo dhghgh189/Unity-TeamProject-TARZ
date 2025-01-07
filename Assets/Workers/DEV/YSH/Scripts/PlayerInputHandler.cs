@@ -22,12 +22,19 @@ public class PlayerInputHandler : MonoBehaviour
     public bool TryManaSkill { get; private set; }
     public bool TryLockOnToggle { get; private set; }
 
+    [HideInInspector] public bool IsCanControl;
+
     [HideInInspector] public bool[] UseKeyPressed;
+
+    private void Awake()
+    {
+        IsCanControl = true;
+    }
 
     private void Start()
     {
         UseKeyPressed = new bool[Define.USEKEY_MAXCOUNT];
-        
+
         controller = GetComponent<PlayerController>();
         input = GetComponent<PlayerInput>();
 
@@ -53,20 +60,20 @@ public class PlayerInputHandler : MonoBehaviour
             return;
         }
 
-        move = input.actions["Move"].ReadValue<Vector2>();
+        move = IsCanControl ? input.actions["Move"].ReadValue<Vector2>() : Vector2.zero;
         InputDir = new Vector3(move.x, 0, move.y);
 
-        InputLook = input.actions["Look"].ReadValue<Vector2>();
-        TryThrow = input.actions["Throw"].WasPressedThisFrame();
-        TryMelee = input.actions["Melee"].WasPressedThisFrame();
-        TryManaSkill = input.actions["ManaSkillMode"].IsPressed();
-        TryLockOnToggle = input.actions["LockOnToggle"].WasPressedThisFrame();
+        InputLook = IsCanControl ? input.actions["Look"].ReadValue<Vector2>() : Vector2.zero;
+        TryThrow = IsCanControl && input.actions["Throw"].WasPressedThisFrame();
+        TryMelee = IsCanControl && input.actions["Melee"].WasPressedThisFrame();
+        TryManaSkill = IsCanControl && input.actions["ManaSkillMode"].IsPressed();
+        TryLockOnToggle = IsCanControl && input.actions["LockOnToggle"].WasPressedThisFrame();
 
         if (!TryManaSkill)
         {
-            TryDash = input.actions["Dash"].WasPressedThisFrame();
-            TryJump = input.actions["Jump"].WasPressedThisFrame();
-            TryDrain = input.actions["Drain"].IsPressed();
+            TryDash = IsCanControl && input.actions["Dash"].WasPressedThisFrame();
+            TryJump = IsCanControl && input.actions["Jump"].WasPressedThisFrame();
+            TryDrain = IsCanControl && input.actions["Drain"].IsPressed();
             TryInteraction = input.actions["Interact"].WasPressedThisFrame();
         }
 

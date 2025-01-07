@@ -44,7 +44,8 @@ public class PassiveSkill
         // Stat의 값 조절
         public PassiveModifyType ModifyType;
         public PassiveModifyInputType inputType;
-        [Tooltip("ex) 100% = 100, 50% = 50")] public float Amount;
+        [Tooltip("ex) 100% = 100, 50% = 50")] [SerializeField] Vector3 amount;
+        public float Amount(int value) => amount[value];
         [HideInInspector] public float TempValue;
     }
 
@@ -61,52 +62,52 @@ public class PassiveSkill
                 tempValue = statModel.MaxHp;
                 if (GetModifySetting.inputType == PassiveModifyInputType.Value)
                 {
-                    statModel.MaxHp = GetModifySetting.Amount;
+                    statModel.MaxHp = GetModifySetting.Amount(level);
                     statModel.CurrentHp = statModel.CurrentHp;
                 }
                 else if (GetModifySetting.inputType == PassiveModifyInputType.Percent)
                 {
-                    statModel.SetAbility(AdditionAbility.MaxHpPer, GetModifySetting.Amount);
+                    statModel.SetAbility(AdditionAbility.MaxHpPer, GetModifySetting.Amount(level));
                 }
                 break;
             case PassiveModifyType.MaxStamina:
                 tempValue = statModel.MaxStamina;
                 if (GetModifySetting.inputType == PassiveModifyInputType.Value)
                 {
-                    statModel.MaxStamina = GetModifySetting.Amount;
+                    statModel.MaxStamina = GetModifySetting.Amount(level);
                     statModel.CurrentStamina = statModel.CurrentStamina;
                 }
                 else if (GetModifySetting.inputType == PassiveModifyInputType.Percent)
                 {
-                    statModel.SetAbility(AdditionAbility.MaxStaminaPer, GetModifySetting.Amount);
+                    statModel.SetAbility(AdditionAbility.MaxStaminaPer, GetModifySetting.Amount(level));
                 }
                 break;
             case PassiveModifyType.CurStamina:
                 if (GetModifySetting.inputType == PassiveModifyInputType.Value)
                 {
-                    statModel.CurrentStamina = GetModifySetting.Amount;
+                    statModel.CurrentStamina = GetModifySetting.Amount(level);
                 }
                 else if (GetModifySetting.inputType == PassiveModifyInputType.Percent)
                 {
-                    statModel.CurrentStamina = statModel.CurrentStamina * (GetModifySetting.Amount * 0.01f);
+                    statModel.CurrentStamina = statModel.CurrentStamina * (GetModifySetting.Amount(level) * 0.01f);
                 }
                 break;
             case PassiveModifyType.MoveSpeed:
                 tempValue = statModel.MoveSpeed;
                 if (GetModifySetting.inputType == PassiveModifyInputType.Value)
                 {
-                    statModel.MoveSpeed = GetModifySetting.Amount;
+                    statModel.MoveSpeed = GetModifySetting.Amount(level);
                     Debug.Log("TestOn");
                 }
                 else if (GetModifySetting.inputType == PassiveModifyInputType.Percent)
                 {
-                    statModel.SetAbility(AdditionAbility.MoveSpeedPer, GetModifySetting.Amount);
+                    statModel.SetAbility(AdditionAbility.MoveSpeedPer, GetModifySetting.Amount(level));
                 }
                 break;
             case PassiveModifyType.AllPower:
                 if (GetModifySetting.inputType == PassiveModifyInputType.Percent)
                 {
-                    statModel.SetAbility(AdditionAbility.AllPowerPer, GetModifySetting.Amount);
+                    statModel.SetAbility(AdditionAbility.AllPowerPer, GetModifySetting.Amount(level));
                 }
                 else
                 {
@@ -116,21 +117,21 @@ public class PassiveSkill
             case PassiveModifyType.DefaultPower:
                 if (GetModifySetting.inputType == PassiveModifyInputType.Percent)
                 {
-                    statModel.SetAbility(AdditionAbility.DefaultPowerPer, GetModifySetting.Amount);
+                    statModel.SetAbility(AdditionAbility.DefaultPowerPer, GetModifySetting.Amount(level));
                 }
                 else Debug.LogWarning("<Color=red>추가 능력치는 수치를 값으로 설정할 수 없습니다.</color>");
                 break;
             case PassiveModifyType.StaminaCostRate:
                 if (GetModifySetting.inputType == PassiveModifyInputType.Percent)
                 {
-                    statModel.StaminaCostRate = Mathf.Clamp((GetModifySetting.Amount * 0.01f), 0f, 1f);
+                    statModel.StaminaCostRate = Mathf.Clamp((GetModifySetting.Amount(level) * 0.01f), 0f, 1f);
                 }
                 else Debug.LogWarning("<Color=red>추가 능력치는 수치를 값으로 설정할 수 없습니다.</color>");
                 break;
             case PassiveModifyType.StaminaChargeRate:
                 if (GetModifySetting.inputType == PassiveModifyInputType.Percent)
                 {
-                    statModel.StaminaChargeRate = Mathf.Clamp((GetModifySetting.Amount * 0.01f), 0f, 1f);
+                    statModel.StaminaChargeRate = Mathf.Clamp((GetModifySetting.Amount(level) * 0.01f), 0f, 1f);
                 }
                 else Debug.LogWarning("<Color=red>추가 능력치는 수치를 값으로 설정할 수 없습니다.</color>");
                 break;
@@ -146,27 +147,27 @@ public class PassiveSkill
         {
             case PassiveModifyType.MaxHp:
                 if (GetModifySetting.inputType == PassiveModifyInputType.Value) statModel.MaxHp = GetModifySetting.TempValue;
-                else if (GetModifySetting.inputType == PassiveModifyInputType.Percent) statModel.SetAbility(AdditionAbility.MaxHpPer, -(GetModifySetting.Amount));
+                else if (GetModifySetting.inputType == PassiveModifyInputType.Percent) statModel.SetAbility(AdditionAbility.MaxHpPer, -(GetModifySetting.Amount(level)));
                 break;
             case PassiveModifyType.MaxStamina:
                 if (GetModifySetting.inputType == PassiveModifyInputType.Value) statModel.MaxStamina = GetModifySetting.TempValue;
-                else if (GetModifySetting.inputType == PassiveModifyInputType.Percent) statModel.SetAbility(AdditionAbility.MaxStaminaPer, -(GetModifySetting.Amount));
+                else if (GetModifySetting.inputType == PassiveModifyInputType.Percent) statModel.SetAbility(AdditionAbility.MaxStaminaPer, -(GetModifySetting.Amount(level)));
                 break;
             case PassiveModifyType.MoveSpeed:
                 if (GetModifySetting.inputType == PassiveModifyInputType.Value) statModel.MoveSpeed = GetModifySetting.TempValue;
-                else if (GetModifySetting.inputType == PassiveModifyInputType.Percent) statModel.SetAbility(AdditionAbility.MoveSpeedPer, -(GetModifySetting.Amount));
+                else if (GetModifySetting.inputType == PassiveModifyInputType.Percent) statModel.SetAbility(AdditionAbility.MoveSpeedPer, -(GetModifySetting.Amount(level)));
                 break;
             case PassiveModifyType.AllPower:
-                if (GetModifySetting.inputType == PassiveModifyInputType.Percent) statModel.SetAbility(AdditionAbility.AllPowerPer, -(GetModifySetting.Amount));
+                if (GetModifySetting.inputType == PassiveModifyInputType.Percent) statModel.SetAbility(AdditionAbility.AllPowerPer, -(GetModifySetting.Amount(level)));
                 break;
             case PassiveModifyType.DefaultPower:
-                if (GetModifySetting.inputType == PassiveModifyInputType.Percent) statModel.SetAbility(AdditionAbility.DefaultPowerPer, -(GetModifySetting.Amount));
+                if (GetModifySetting.inputType == PassiveModifyInputType.Percent) statModel.SetAbility(AdditionAbility.DefaultPowerPer, -(GetModifySetting.Amount(level)));
                 break;
             case PassiveModifyType.StaminaCostRate:
-                if (GetModifySetting.inputType == PassiveModifyInputType.Percent) statModel.StaminaCostRate += Mathf.Clamp((1 - GetModifySetting.Amount * 0.01f), 0f, 1f);
+                if (GetModifySetting.inputType == PassiveModifyInputType.Percent) statModel.StaminaCostRate += Mathf.Clamp((1 - GetModifySetting.Amount(level) * 0.01f), 0f, 1f);
                 break;
             case PassiveModifyType.StaminaChargeRate:
-                if (GetModifySetting.inputType == PassiveModifyInputType.Percent) statModel.StaminaChargeRate += Mathf.Clamp((1 - GetModifySetting.Amount * 0.01f), 0f, 1f);
+                if (GetModifySetting.inputType == PassiveModifyInputType.Percent) statModel.StaminaChargeRate += Mathf.Clamp((1 - GetModifySetting.Amount(level) * 0.01f), 0f, 1f);
                 break;
         }
     }
@@ -286,9 +287,21 @@ public class PassiveSkill
         public ToggleType ToggleType;
         [Header("Toggle -> Collision")]
         public bool On;
+        public EState Timing;  // 타이밍
         [Header("Toggle -> Function")]
         public string Name;
     }
     #endregion
 
+    public void UpdateLevel(int level)
+    {
+        this.level = level;
+        
+    }
+}
+
+[Serializable]
+public class PassiveSkills
+{
+    public List<PassiveSkill> passiveSkills;
 }

@@ -34,8 +34,6 @@ public class Stamina : MonoBehaviour
             _waitTime = 1f;
         }
         _lastStamina = lastStamina;
-        Debug.Log(gauge_Stamina.fillAmount);
-        Debug.Log(gauge_Stamina);
         gauge_Stamina.fillAmount = (stat.MaxStamina - (stat.MaxStamina - _lastStamina)) / stat.MaxStamina;
     }
 

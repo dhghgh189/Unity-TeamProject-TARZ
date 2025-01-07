@@ -35,7 +35,7 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
 
     private MonsterSkillManager _skill;
 
-    private void Start()
+    private void Awake()
     {
         _autoLockOn = player.GetComponent<AutoLockOn>();
         _animator = GetComponent<Animator>();
@@ -48,6 +48,7 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
     private void OnEnable()
     {
         OnDie += Die;
+        _dissolve.DissolveReset();
     }
 
     private void OnDisable()

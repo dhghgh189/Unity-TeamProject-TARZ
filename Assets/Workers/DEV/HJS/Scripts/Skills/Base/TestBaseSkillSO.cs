@@ -43,21 +43,9 @@ public class TestBaseSkillSO : ScriptableObject
     public List<ActiveSkillSO> ActiveSkills => active.activeSkillSOs;
     public List<PassiveSkillSO> PassiveSkills => passive.passiveSkillSOs;
 
-    public void ConnectTrigger(UnityEvent<GameObject, GameObject>[] lists)
-    {
-    }
-
-    private bool CheckAct(Test_Skill curAct)
+    public bool CheckAct(Test_Skill curAct)
     {
         // 포함이 되어있는지 확인
         return (curAct & skill) != 0;
-    }
-
-    public void TriggerAllSkills(GameObject requester, GameObject target = null)
-    {
-        foreach(ActiveSkillSO active in ActiveSkills)
-        {
-
-        }
     }
 }

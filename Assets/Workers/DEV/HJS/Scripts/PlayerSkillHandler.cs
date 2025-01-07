@@ -35,6 +35,7 @@ public class PlayerSkillHandler : MonoBehaviour
     private UnityEvent<GameObject, GameObject>[] onActionEvents;    // 행동 도중(기술 중심)
     private UnityEvent<GameObject, GameObject>[] onExitEvents;      // 행동이 끝났을 때
     private UnityEvent<GameObject, GameObject>[] onCollisionEvents;  // 행동 중 충돌했을 때
+    private UnityEvent<GameObject, GameObject>[,] onEvents;
     [SerializeField] TestBaseSkillSO testSkillSO;
     [SerializeField] Test_Skill test;
     [SerializeField] Test_Timing timin;
@@ -58,6 +59,8 @@ public class PlayerSkillHandler : MonoBehaviour
         onActionEvents = new UnityEvent<GameObject, GameObject>[(int)EState.Length];
         onCollisionEvents = new UnityEvent<GameObject, GameObject>[(int)EState.Length];
 
+        onEvents = new UnityEvent<GameObject, GameObject>[(int)EState.Length, (int)Test_Timing.Length];
+
         for (int i = 0; i < (int)ActTiming.None; i++)
         {
             onActionPlayerEvents[i] = new UnityEvent<GameObject, GameObject>();
@@ -72,6 +75,10 @@ public class PlayerSkillHandler : MonoBehaviour
             onExitEvents[i] = new UnityEvent<GameObject, GameObject>();
             onActionEvents[i] = new UnityEvent<GameObject, GameObject>();
             onCollisionEvents[i] = new UnityEvent<GameObject, GameObject>();
+            for(int j = 0; j < (int)Test_Timing.Length; j++)
+            {
+                onEvents[i,j] = new UnityEvent<GameObject, GameObject>();
+            }
         }
 
         TestSkill(null, 1);
@@ -127,30 +134,40 @@ public class PlayerSkillHandler : MonoBehaviour
         TestBaseSkillSO skill = Instantiate(testSkillSO);
 
         // 액티브 스킬 보여주기
+        // skill.ConnectTrigger(onEvents);
         foreach (ActiveSkillSO act in skill.ActiveSkills)
         {
             switch (act.act)
             {
-                // TODO
-                // TestBaseSkill이 이벤트를 가지고
-                // 해당 이벤트를 여기서 바로 연결하는 그 그림?
-                // 그래서 Foreach문은 여기서 돌리지 말고 TestBase에서돌리고
-                // -> 문제가 skill.skill => 각 State임 이거 어떻게 판단할거임?
-                // 그래서 매게변수로 넘겨주려고 생각했다는데...
                 case Test_Timing.Enter:
-                    onEnterEvents[(int)skill.skill].AddListener(act.Use);
+                    foreach(Test_Skill s in Enum.GetValues(typeof(Test_Skill)))
+                    {
+                        if(skill.CheckAct(s)) onEnterEvents[(int)s].AddListener(act.Use);
+                    }
                     break;
                 case Test_Timing.Update:
-                    onUpdateEvents[(int)skill.skill].AddListener(act.Use);
+                    foreach (Test_Skill s in Enum.GetValues(typeof(Test_Skill)))
+                    {
+                        if (skill.CheckAct(s)) onUpdateEvents[(int)s].AddListener(act.Use);
+                    }
                     break;
                 case Test_Timing.Exit:
-                    onExitEvents[(int)skill.skill].AddListener(act.Use);
+                    foreach (Test_Skill s in Enum.GetValues(typeof(Test_Skill)))
+                    {
+                        if (skill.CheckAct(s)) onExitEvents[(int)s].AddListener(act.Use);
+                    }
                     break;
                 case Test_Timing.Act:
-                    onActionEvents[(int)skill.skill].AddListener(act.Use);
+                    foreach (Test_Skill s in Enum.GetValues(typeof(Test_Skill)))
+                    {
+                        if (skill.CheckAct(s)) onActionEvents[(int)s].AddListener(act.Use);
+                    }
                     break;
                 case Test_Timing.Collision:
-                    onCollisionEvents[(int)skill.skill].AddListener(act.Use);
+                    foreach (Test_Skill s in Enum.GetValues(typeof(Test_Skill)))
+                    {
+                        if (skill.CheckAct(s)) onCollisionEvents[(int)s].AddListener(act.Use);
+                    }
                     break;
             }
         }
@@ -213,6 +230,7 @@ public class PlayerSkillHandler : MonoBehaviour
             }
 
         }
+        Debug.Log($"Add Skill Name : {skill.Name}  / Skill type : {skill.skillType} / Skill Condition : {skill.skill}");
     }
 
 

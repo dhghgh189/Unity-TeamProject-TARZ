@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using static SkillEnum;
 
-public enum Test_Timing { Enter, Update, Exit, Act, Collision }
+public enum Test_Timing { Enter, Update, Exit, Act, Collision, Length }
 public enum Test_Status { None, Success, Failure }
 [Serializable]
 public class ActiveSkillSO
@@ -64,6 +64,9 @@ public class ActiveSkillSO
             
         }
     }
+
+
+
 }
 
 [Serializable]

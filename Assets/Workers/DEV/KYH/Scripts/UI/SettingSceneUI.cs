@@ -48,6 +48,7 @@ public class SettingSceneUI : MonoBehaviour
         playerController = FindAnyObjectByType<PlayerController>();
         camera = FindAnyObjectByType<CameraController>();
         inputManager = FindAnyObjectByType<ChangeInput>();
+        camera.Sensitivity = PlayerPrefs.GetFloat("Sensitivity");
         sensitivitySlider.value = camera.Sensitivity;
     }
 
@@ -112,6 +113,7 @@ public class SettingSceneUI : MonoBehaviour
     public void ChangeSensitivity()
     {
         camera.Sensitivity = sensitivitySlider.value;
+        PlayerPrefs.SetFloat("Sensitivity", camera.Sensitivity);
     }
 
     public void OnCheckMinimapActiveToggle()

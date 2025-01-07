@@ -21,7 +21,7 @@ public class EnemyController : MonoBehaviour, IDamagable, IKnockBack
 
     public void TakeDamage(float damage)
     {
-        Debug.Log($"TakeDamage : {damage}");
+        Debug.Log($"{this.gameObject.name} TakeDamage : {damage}");
     }
 
     public void KnockBack(GameObject attacker)

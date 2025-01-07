@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 1707786796968138096}
   - component: {fileID: 7609633761366355748}
   - component: {fileID: 3173119163056142133}
-  - component: {fileID: 2313455153643120284}
   - component: {fileID: 1847953301331568674}
+  - component: {fileID: 2313455153643120284}
   m_Layer: 27
   m_Name: NomalBox
   m_TagString: Untagged
@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 2641190163738093171}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.9530784, y: -2.2694511, z: 2.47}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -107,23 +107,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2313455153643120284
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2641190163738093171}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04c5a5f2f35d34445868cbf80965ef32, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isDestroy: 0
-  col: {fileID: 0}
-  isThrowing: 0
-  trigger: {fileID: 0}
-  NomalBoxDamage: 0
 --- !u!54 &1847953301331568674
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -151,3 +134,23 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &2313455153643120284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2641190163738093171}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04c5a5f2f35d34445868cbf80965ef32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDestroy: 0
+  isThrowing: 0
+  col: {fileID: 0}
+  trigger: {fileID: 0}
+  NomalBoxDamage: 10
+  Nomal_DropCount: 5
+  Nomal_DropSpred: 2
+  DropChip: {fileID: 790199856513174846, guid: 1a89e32ec97e86d47bd1098f5827fbeb, type: 3}

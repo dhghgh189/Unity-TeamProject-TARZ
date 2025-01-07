@@ -5,8 +5,11 @@ public class ThrowBox_Nomal : SpecialThrowOBJ_Base
     public ThrowBox_Nomal() => box_type = Box_Type.Nomal;
 
     [Header("중형 상자")]
-    private LayerMask NomalBoxLayer;
     [SerializeField] private float NomalBoxDamage;
+    [SerializeField] private int Nomal_DropCount;
+    [SerializeField] private float Nomal_DropSpred;
+    [SerializeField] private GameObject DropChip;
+    private LayerMask NomalBoxLayer;
 
 
     void Start() => Init();
@@ -37,18 +40,27 @@ public class ThrowBox_Nomal : SpecialThrowOBJ_Base
         if (OBJ.layer == NomalBoxLayer)
         {
             OBJ.GetComponent<IDamagable>().TakeDamage(NomalBoxDamage);
-            DropBlueChips();
-            Destroy(this.gameObject);
+            DropBlackChips(0.0f);
         }
         else
         {
             isDestroy = true;
-            Destroy(this.gameObject, 3.0f);
+            DropBlackChips(3.0f);
         }
     }
 
-    void DropBlueChips()
+    void DropBlackChips(float DestroyTime)
     {
-        Debug.Log("블루칩 흩뿌리는 기능 구현");
+        Vector3 position = transform.position;
+
+        while (Nomal_DropCount > 0)
+        {
+            Nomal_DropCount--;
+            position.x += Nomal_DropSpred * Random.value - Nomal_DropSpred / 2;
+            position.z += Nomal_DropSpred * Random.value - Nomal_DropSpred / 2;
+            Instantiate(DropChip, position, transform.rotation);
+        }
+
+        Destroy(this.gameObject, DestroyTime);
     }
 }

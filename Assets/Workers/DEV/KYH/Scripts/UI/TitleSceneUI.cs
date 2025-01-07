@@ -66,18 +66,7 @@ public class TitleSceneUI : MonoBehaviour
         }
     }
 
-    // 새로 시작 버튼 클릭
-    public void OnClickNewGameButton()
-    {
-        //gameObject.SetActive(false);    // 타이틀 패널 비활성화
-        //loadGamePanel.SetActive(true);  // 저장된 게임 불러오기 패널 활성화
-        //Util.ChangeScene(Define.SceneType.Lobby);  // 로비 씬으로 전환
-
-        LoadingObject.StartLoading(Define.SceneType.Lobby);
-        gameObject.SetActive(false);
-    }
-
-    // 저장된 게임 시작 버튼 클릭
+    // 게임 시작 버튼 클릭
     public void OnClickLoadGameButton()
     {
         gameObject.SetActive(false);    // 타이틀 패널 비활성화

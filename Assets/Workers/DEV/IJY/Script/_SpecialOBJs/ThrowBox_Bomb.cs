@@ -10,11 +10,11 @@ public class ThrowBox_Bomb : SpecialThrowOBJ_Base
 
     private bool isThrowingOBJ = false;
     private LayerMask ThrowingOBJLayer;
-    [SerializeField] private LayerMask BombBoxLayer;
+    private LayerMask BombBoxLayer;
     private Coroutine CheckBombRoutine;
 
     [Header("폭탄 상자")]
-    [SerializeField] float range = 5.0f;
+    [SerializeField] float range;
     [SerializeField] Vector3 Circle_R = new Vector3(5f, 0f, 5f);
     [SerializeField] private float BombBoxDamage;
     [SerializeField] private List<GameObject> HitOBJs;
@@ -24,14 +24,11 @@ public class ThrowBox_Bomb : SpecialThrowOBJ_Base
 
     void Init()
     {
-        // 임시적 데미지 수치 설정
-        BombBoxDamage = 20f;
-
         // 쓰레기 오브젝트 참조 레이어마스크
-        ThrowingOBJLayer = (1 << LayerMask.NameToLayer("ThrowObject"));
-
+        ThrowingOBJLayer = LayerMask.NameToLayer("ThrowObject");
         // 인식하는 오브젝트 참조용 레이어 마스크
         BombBoxLayer = (1 << LayerMask.NameToLayer("Monster")) | (1 << LayerMask.NameToLayer("Player"));
+
         // 이후 기타 파괴 가능한 장애물 레이어가 추가될 경우, 이어서 추가 예정
     }
 
@@ -72,7 +69,7 @@ public class ThrowBox_Bomb : SpecialThrowOBJ_Base
                 hit.TakeDamage(BombBoxDamage);
             }
         }
-        Destroy(this.gameObject, 3);
+        Destroy(this.gameObject);
     }
 
 

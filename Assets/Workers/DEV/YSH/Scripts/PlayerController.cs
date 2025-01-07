@@ -290,8 +290,9 @@ public class PlayerController : MonoBehaviour, IDamagable
 
         if (collision.gameObject.layer.Equals(LayerMask.NameToLayer("Monster")) && Enum.IsDefined(typeof(ActTimingType), sb.ToString()))
         {
-            SkillHandler.PlayerCollision((ActTimingType)Enum.Parse(typeof(ActTimingType), sb.ToString()), collision.gameObject);
+            //SkillHandler.PlayerCollision((ActTimingType)Enum.Parse(typeof(ActTimingType), sb.ToString()), collision.gameObject);
         }
+        SkillHandler.CollisionEvent(currentStateView, collision.gameObject);
     }
 
     public void InfStamina(float value)

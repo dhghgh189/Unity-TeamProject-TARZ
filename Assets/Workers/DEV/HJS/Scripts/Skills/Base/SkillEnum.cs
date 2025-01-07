@@ -1,7 +1,27 @@
+using System;
 using UnityEngine;
 
 public class SkillEnum : MonoBehaviour
 {
+    /// <summary>
+    /// 스킬의 종류
+    /// </summary>
+    [Flags]
+    public enum SkillType 
+    {
+        /// <summary>
+        /// 아무 내용도 없는 타입, 단순 테스트 용
+        /// </summary>
+        None = 0,
+        /// <summary>
+        /// 플레이어의 행동이 주체
+        /// </summary>
+        Act = 1 << 0, 
+        /// <summary>
+        /// 플레이어의 행동이 주체가 아닌 모든 상황
+        /// </summary>
+        Etc = 1 << 1 
+    }
     /// <summary>
     /// 스킬을 발동 타이밍
     /// </summary>
@@ -14,6 +34,14 @@ public class SkillEnum : MonoBehaviour
     /// 누가 스킬의 주최가 될건지
     /// </summary>
     public enum Target { Player, ThrowObject }
+    /// <summary>
+    /// 스킬의 발동 시점
+    /// </summary>
+    public enum ActionTimingType { Enter, Update, Exit, Act, Collision, Length }
+    /// <summary>
+    /// 특수 효과를 적용할 함수의 종류, 선택한 특수 효과를 작동한다
+    /// </summary>
+    public enum UniqueEffectType { None, Success, Failure }
     /// <summary>
     /// 해당 능력의 사용될 빈도수
     /// </summary>

@@ -30,7 +30,6 @@ public class HJS_PlayerController : MonoBehaviour
         // 스킬 사용
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            skillHandler.Use(timing);
             if (timing.Equals(ActTiming.Attack))
             {
                 GameObject instance = Instantiate(throwPrefab, muzzlePoint.position, muzzlePoint.rotation);
@@ -75,7 +74,6 @@ public class HJS_PlayerController : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         Debug.Log("충돌 발생!");
-        skillHandler.PlayerCollision(timing, collision.gameObject);
         if (timing.Equals(ActTiming.Dash) && coroutine is not null)
         {
             Debug.Log("Stop");

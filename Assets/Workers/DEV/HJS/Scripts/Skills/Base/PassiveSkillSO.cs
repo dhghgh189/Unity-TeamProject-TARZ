@@ -13,6 +13,7 @@ public class PassiveSkillSO
     private TestBaseSkillSO parent;
     private Dictionary<ConditionType, Func<bool>> conditions;
 
+    [SerializeField] string indexName;
     [SerializeField] PassiveType passiveType;
 
     [Space(2)]
@@ -279,6 +280,7 @@ public class PassiveSkillSO
         public ToggleType ToggleType;
         [Header("Toggle -> Collision")]
         public bool On;
+        public EState Timing;  // 타이밍
         [Header("Toggle -> Function")]
         public string Name;
     }
@@ -287,7 +289,7 @@ public class PassiveSkillSO
 }
 
 [Serializable]
-public class PassiveSkills
+public class PassiveSkillSOs
 {
     public List<PassiveSkillSO> passiveSkillSOs;
 }

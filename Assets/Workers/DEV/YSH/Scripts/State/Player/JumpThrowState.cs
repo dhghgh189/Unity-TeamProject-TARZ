@@ -27,7 +27,6 @@ public class JumpThrowState : BaseState<PlayerController>
         lookDir = camTrf.forward;   // 공격 시전 시 바라봤던 방향을 기억해둔다.
         owner.Movement.LookAt(lookDir);
 
-        owner.SkillHandler.Use(SkillEnum.ActTimingType.Attack);
         throwRoutine = owner.StartCoroutine(ThrowRoutine());
     }
 

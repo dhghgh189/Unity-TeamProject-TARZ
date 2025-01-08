@@ -2,17 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
-using Zenject.SpaceFighter;
 
 [RequireComponent(typeof(Rigidbody))]
 public class ThrowObject : MonoBehaviour, IDrainable
 {
+    [Inject]
+    [SerializeField] private RandomModeling setModeling;
     [SerializeField] private LayerMask whatIsTarget;
+
 
     [HideInInspector] public AblityAdapter adapter;
     [HideInInspector] public PlayerSkillHandler handler;
 
     [SerializeField] private bool isCollected;
+    private Mesh mesh;
     private Rigidbody rigid;
     private PlayerController owner;
 
@@ -28,6 +31,7 @@ public class ThrowObject : MonoBehaviour, IDrainable
 
     private void Awake()
     {
+        mesh = GetComponent<Mesh>();
         rigid = GetComponent<Rigidbody>();
         Upgrade = GetComponent<ThrowObjectUpgrade>();
         throwEffects = new List<IEffect>();
@@ -35,6 +39,10 @@ public class ThrowObject : MonoBehaviour, IDrainable
     private void Start()
     {
         adapter = FindAnyObjectByType<AblityAdapter>(FindObjectsInactive.Include);
+    }
+    void OnEnable()
+    {
+        mesh = setModeling.SetRandom(setModeling.ThrowObjectMeshs);
     }
 
     private void OnDisable()

@@ -185,6 +185,7 @@ public class SettingSceneUI : MonoBehaviour
     // 타이틀 화면으로 돌아가기 버튼 클릭
     public void OnClickBackToTitleButton()
     {
+        activeCPanel.SetActive(false);
         gameObject.SetActive(false);            // 설정 패널 비활성화
         
         if (SceneManager.GetActiveScene().name == "Title")

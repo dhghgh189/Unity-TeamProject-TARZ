@@ -16,28 +16,32 @@ MonoBehaviour:
   Description: "\uB300\uC26C\uAC00 \uAE38\uC5B4\uC9C4\uB2E4."
   Icon: {fileID: 0}
   MaxLevel: 3
-  Timing: 3
-  activeSkills: []
-  passiveSkills:
-  - passiveType: 0
-    modifySetting:
-      ModifyType: -2
-      inputType: 0
-      Amount: 0.5
-      TempValue: 0
-    conditionSetting:
-      modifyType: 0
-      Condition: 0
-      CompareValue: 0
-      MaxValue: 0
-      isChanged: 0
-      resultModifyType: 0
-      Amount: 0
-    toggleSetting:
-      ToggleType: 0
-      On: 0
-      Name: 
+  SkillTier: 2
+  SkillType: 2
+  active:
+    activeSkills: []
+  passive:
+    passiveSkills:
+    - indexName: "\uB300\uC26C \uC18D\uB3C4 \uC99D\uAC00"
+      passiveType: 0
+      modifySetting:
+        ModifyType: -2
+        inputType: 0
+        amount: {x: 10, y: 14.3, z: 18.6}
+        TempValue: 0
+      conditionSetting:
+        modifyType: 0
+        Condition: 0
+        CompareValue: 0
+        MaxValue: 0
+        isChanged: 0
+        resultModifyType: 0
+        Amount: 0
+      toggleSetting:
+        ToggleType: 0
+        On: 0
+        Timing: 0
+        Name: 
   onChangeLevel:
     m_PersistentCalls:
       m_Calls: []
-  model: {fileID: 0}

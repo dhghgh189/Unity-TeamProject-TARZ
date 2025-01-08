@@ -17,28 +17,32 @@ MonoBehaviour:
     \uD655\uC7A5\uB41C\uB2E4."
   Icon: {fileID: 0}
   MaxLevel: 3
-  Timing: 3
-  activeSkills: []
-  passiveSkills:
-  - passiveType: 0
-    modifySetting:
-      ModifyType: -1
-      inputType: 0
-      Amount: 3
-      TempValue: 0
-    conditionSetting:
-      modifyType: 0
-      Condition: 0
-      CompareValue: 0
-      MaxValue: 0
-      isChanged: 0
-      resultModifyType: 0
-      Amount: 0
-    toggleSetting:
-      ToggleType: 0
-      On: 0
-      Name: 
+  SkillTier: 3
+  SkillType: 2
+  active:
+    activeSkills: []
+  passive:
+    passiveSkills:
+    - indexName: 
+      passiveType: 0
+      modifySetting:
+        ModifyType: -1
+        inputType: 0
+        amount: {x: 3, y: 5, z: 7}
+        TempValue: 0
+      conditionSetting:
+        modifyType: 0
+        Condition: 0
+        CompareValue: 0
+        MaxValue: 0
+        isChanged: 0
+        resultModifyType: 0
+        Amount: 0
+      toggleSetting:
+        ToggleType: 0
+        On: 0
+        Timing: 0
+        Name: 
   onChangeLevel:
     m_PersistentCalls:
       m_Calls: []
-  model: {fileID: 0}

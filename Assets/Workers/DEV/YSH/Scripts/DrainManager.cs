@@ -75,7 +75,6 @@ public class DrainManager : MonoBehaviour
         {
             drainable.DoDrain(this);
         }
-        // player.SkillHandler.PlayerCollision(SkillEnum.ActTimingType.Drain, other.gameObject);
         player.SkillHandler.ActivateSkill(EState.Drain, SkillEnum.ActionTimingType.Act, other.gameObject);
     }
 

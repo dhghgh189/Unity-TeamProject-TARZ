@@ -17,33 +17,29 @@ MonoBehaviour:
     \uB0B4\uB824 \uB290\uB824\uC9C4\uB2E4."
   Icon: {fileID: 0}
   MaxLevel: 3
-  Timing: 0
-  activeSkills:
-  - who: 1
-    refeat: 0
-    when: 1
-    Create: 0
-    Interaction: 1
-    createSetting:
-      CreateObject: []
-    interactionSetting:
+  SkillTier: 1
+  SkillType: 1
+  active:
+    activeSkills:
+    - IndexName: "\uB358\uC9C4 \uBB3C\uCCB4 \uC2AC\uB85C\uC6B0"
+      Target: 1
+      ConditionState: 0
+      ActTiming: 0
+      ConditionType: 1
+      Create: 0
+      createObject: {fileID: 0}
+      performance_Act: []
+      Interaction: 1
       type: 0
-    skillLevelSpec:
-      statModel: {fileID: 0}
-      power: []
-      range: []
-      time: []
-      degree:
-      - 0.8
-      - 0.6
-      - 0.4
-      damage: []
-      duration:
-      - 3
-      - 4
-      - 5
-  passiveSkills: []
+      performance_Interaction:
+      - {x: 0, y: 85, z: 1}
+      - {x: 0, y: 70, z: 1}
+      - {x: 0, y: 55, z: 1}
+      UniqueEffect: 0
+      status: 0
+      UniqueEffectObject: {fileID: 0}
+  passive:
+    passiveSkills: []
   onChangeLevel:
     m_PersistentCalls:
       m_Calls: []
-  model: {fileID: 0}

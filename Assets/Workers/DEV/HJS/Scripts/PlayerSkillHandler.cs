@@ -5,7 +5,6 @@ using UnityEngine;
 using UnityEngine.Events;
 using Zenject;
 using static SkillEnum;
-using ActTiming = SkillEnum.ActTimingType;
 
 public class PlayerSkillHandler : MonoBehaviour
 {
@@ -20,7 +19,8 @@ public class PlayerSkillHandler : MonoBehaviour
     private PlayerMovement playerMovement;
 
     [Header("SkillList")]
-    [SerializeField] Dictionary<string, int> skillDic;
+    [SerializeField] Dictionary<string, int> skillLevelDic;
+    [SerializeField] Dictionary<string, BaseSkillSO> skillDic;
 
     [Header("Etc")]
     [Inject][SerializeField] StatModel model;
@@ -55,8 +55,9 @@ public class PlayerSkillHandler : MonoBehaviour
             }
         }
 
-        skillDic = new Dictionary<string, int>();
-
+        skillLevelDic = new Dictionary<string, int>();
+        skillDic = new Dictionary<string, BaseSkillSO>();
+        // Skill 저장하기
         LoadSkills();
     }
 
@@ -99,33 +100,32 @@ public class PlayerSkillHandler : MonoBehaviour
 
     public void AddSkill(string skillName, int setLevel = 1)
     {
-        BaseSkillSO skill = Instantiate(Container.Skills.Where(x => x.Name == skillName).First());
-
-        if (LevelUp(skill))
+        if (LevelUp(skillName, setLevel))
         {
             return;
         }
 
+        BaseSkillSO skill = Instantiate(Container.Skills.Where(x => x.Name == skillName).First());
+
         // 스킬리스트에 있으면 레벨 올려주기 <- 제거했다가 다시 추가했을 때
-        if (skillDic.ContainsKey(skill.Name))
+        if (skillLevelDic.ContainsKey(skill.Name))
         {
             Debug.Log("스킬 레벨업");
-            int level = skillDic[skill.Name];
-            level += setLevel;
-            skillDic[skill.Name] = level;
+            int level = skillLevelDic[skill.Name];
+            level += (setLevel >= skill.MaxLevel ? skill.MaxLevel : setLevel);
+            skillLevelDic[skill.Name] = level;
             skill.SkillLevel = level;
             Debug.Log($"스킬 : {skill.Name} / {level}");
         }
         // 스킬리스트에 없으면 넣어두기
         else
         {
-            skillDic.Add(skill.Name, setLevel);
-            if (setLevel == 1)
-            {
-                skill.SkillLevel = 1;
-            }
+            skillLevelDic.Add(skill.Name, setLevel);
+            skill.SkillLevel = (setLevel == 1) ? 1 : (setLevel >= skill.MaxLevel ? skill.MaxLevel : setLevel);
             Debug.Log("딕션에 추가!");
         }
+        // 생성한 스킬 넣어두기
+        skillDic[skillName] = skill;
 
         #region 액티브 스킬 넣기
         foreach (ActiveSkill actSkill in skill.ActiveSkills)
@@ -159,7 +159,7 @@ public class PlayerSkillHandler : MonoBehaviour
         {
             psivSkill.Parent = skill;
             psivSkill.StatModel = model;
-
+            skill.onChangeLevel.AddListener(psivSkill.UpdateLevel);
             // 패시브 스킬의 종류에 따라 실행
             switch (psivSkill.GetPassiveType)
             {
@@ -220,7 +220,7 @@ public class PlayerSkillHandler : MonoBehaviour
     public List<BlueChipSaveData> SaveBlueChips()
     {
         List<BlueChipSaveData> blueChips = new();
-        foreach (var item in skillDic)
+        foreach (var item in skillLevelDic)
         {
             blueChips.Add(new BlueChipSaveData() { BlueChipName = item.Key, BlueChipLevel = item.Value });
         }
@@ -262,6 +262,7 @@ public class PlayerSkillHandler : MonoBehaviour
         foreach (PassiveSkill psivSkill in skill.PassiveSkills)
         {
             psivSkill.Parent = skill;
+            skill.onChangeLevel.RemoveListener(psivSkill.UpdateLevel);
 
             // 패시브 스킬의 종류에 따라 실행
             switch (psivSkill.GetPassiveType)
@@ -313,9 +314,10 @@ public class PlayerSkillHandler : MonoBehaviour
         #endregion
 
         // 스킬 리스트에서 제거하기
-        skillDic[skill.Name] = 0;
+        skillLevelDic[skill.Name] = 0;
         // 스킬 제거하기
-        Destroy(skill);
+        Destroy(skillDic[skill.name]);
+        skillDic[skill.name] = null;
         Debug.Log($"Remove Active Skill Name : {skill.Name}");
     }
 
@@ -341,16 +343,23 @@ public class PlayerSkillHandler : MonoBehaviour
             }
         }
 
+        foreach(var item in skillDic.Values)
+        {
+            if(item is not null) Destroy(item);
+        }
+
         skillDic.Clear();
+        skillLevelDic.Clear();
+        eventDic.Clear();
     }
 
-    public bool LevelUp(BaseSkillSO skill)
+    public bool LevelUp(string skillName, int skillLevel = 1)
     {
         // 스킬에 등록이 되어있다면 -> 기존에 한번이라도 장착은 한 스킬
-        if (skillDic.ContainsKey(skill.Name))
+        if (skillLevelDic.ContainsKey(skillName))
         {
             // 해당 스킬의 레벨을 가져온다
-            int level = skillDic[skill.Name];
+            int level = skillLevelDic[skillName];
 
             // 가져왔는데 레벨이 0이다 -> 삭제한 스킬
             if (level == 0)
@@ -358,23 +367,51 @@ public class PlayerSkillHandler : MonoBehaviour
                 // 등록을 위한 false 반환
                 return false;
             }
+
+            // 스킬의 최대 레벨을 가져온다
+            int maxLevel = skillDic[skillName].MaxLevel;
+
             // 스킬이 이미 최대 레벨에 도달했다
-            else if (level >= skill.MaxLevel)
+            if (level >= maxLevel)
             {
                 // 등록할 행동을 안하기 위한 true 반환
                 return true;
             }
 
             // 레벨을 올려주는 로직
-            level = (level >= skill.SkillLevel) ? level + 1 : skill.SkillLevel;
-            skillDic[skill.Name] = level;
-            skill.SkillLevel = level;
+            skillLevelDic[skillName] = (level >= skillLevel) ? level + 1 : skillLevel;  // 만약 현재 레벨이 더 높다 -> 1레벨 업, 추가하는 스킬이 더 높다 해당 스킬의 레벨로
 
-            Debug.Log($"<color=white>{skill.name} 스킬 {level}로 레벨업!</color>");
+            skillDic[skillName].SkillLevel = skillLevelDic[skillName];                  // 장착한 스킬의 레벨 최신화
+
+            UpdatePassiveByLevel(skillDic[skillName], level);
+
+            Debug.Log($"<color=white>{skillName} 스킬 {skillLevelDic[skillName]}로 레벨업!</color>");
             // 등록하는 행동을 안하기 위한 true 반환
             return true;
         }
         // 스킬 등록이 안되어 있다 -> 한번도 장착을 안한 스킬 -> 등록을 위한 false 반환
         return false;
+    }
+
+    // TODO: 해당 내용들을 StatModel에서 관리하기 -> Skill안에서만 해결하기로
+    private void UpdatePassiveByLevel(BaseSkillSO skill, int level)
+    {
+        foreach(PassiveSkill psivSkill in skill.PassiveSkills)
+        {
+            if(psivSkill.GetPassiveType.Equals(PassiveType.Modify))
+            {
+                switch (psivSkill.GetModifySetting.ModifyType)
+                {
+                    case PassiveModifyType.DashSpeed:
+                        model.DashSpeed -= psivSkill.GetModifySetting.Amount(level);
+                        model.DashSpeed += psivSkill.GetModifySetting.Amount(skill.SkillLevel);
+                        break;
+                    case PassiveModifyType.DrainRadius:
+                        drainManager.MaxRadius -= psivSkill.GetModifySetting.Amount(level);
+                        drainManager.MaxRadius += psivSkill.GetModifySetting.Amount(skill.SkillLevel);
+                        break;
+                }
+            }
+        }
     }
 }

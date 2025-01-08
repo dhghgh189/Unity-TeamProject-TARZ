@@ -1,19 +1,21 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Timeline;
 using static SkillEnum;
 
 [Serializable]
 public class PassiveSkill
 {
+    [SerializeField] string indexName;
     private StatModel statModel;
     private SkillSpecDatabase skillSpecDatabase;
     private int level;
     private BaseSkillSO parent;
     private Dictionary<ConditionType, Func<bool>> conditions;
 
+    [Space(2)]
     [SerializeField] PassiveType passiveType;
-
     [Space(2)]
     [Header("Settings")]
     [Space(3)]
@@ -26,7 +28,7 @@ public class PassiveSkill
     #region 패시브 프로퍼티
     public StatModel StatModel { set { statModel = value; Debug.Log("<color=yellow>패시브 스킬 StatModel 설정</color>"); } }
     public SkillSpecDatabase SkillSpecDatabase { set { skillSpecDatabase = value; Debug.Log("<color=yellow>패시브 스킬 스펙SO 설정</color>"); } }
-    public BaseSkillSO Parent { set { parent = value; Debug.Log("<color=yellow>패시브 스킬부모 설정</color>"); } }
+    public BaseSkillSO Parent { set { parent = value; Debug.Log("<color=yellow>패시브 스킬부모 설정</color>"); level = parent.SkillLevel; } }
     public ModifySetting GetModifySetting => modifySetting;
     public ConditionSetting GetConditionSetting => conditionSetting;
     public ToggleSetting GetToggleSetting => toggleSetting;
@@ -55,7 +57,7 @@ public class PassiveSkill
     public void SetValue()
     {
         float tempValue = 0f;
-
+        
         switch (GetModifySetting.ModifyType)
         {
             case PassiveModifyType.MaxHp:
@@ -141,8 +143,9 @@ public class PassiveSkill
     /// <summary>
     /// 변경한 값을 원복해주는 함수
     /// </summary>
-    public void ResetValue()
+    public void ResetValue(int setLevel = -1)
     {
+        int level = (setLevel == -1) ? this.level : setLevel;
         switch (GetModifySetting.ModifyType)
         {
             case PassiveModifyType.MaxHp:
@@ -193,7 +196,8 @@ public class PassiveSkill
         [Header("Result")]
         [HideInInspector] public bool isChanged;
         public PassiveResultModifyType resultModifyType;
-        public float Amount;
+        public float Amount(int value) => amount[value - 1];
+        [SerializeField] Vector3 amount;
     }
 
     /// <summary>
@@ -202,6 +206,7 @@ public class PassiveSkill
     /// <param name="data">조건의 대상</param>
     public void ConditionCheck(float data)
     {
+        // 비율 계산
         float value = (conditionSetting.CompareValue * 0.01f) * conditionSetting.MaxValue;
         Debug.Log($"{parent.Name} 스킬의 조건 : {GetConditionSetting.modifyType}의 값이 {value} 보다(와) {conditionSetting.Condition} 이다 / {conditionSetting.MaxValue}, {conditionSetting.CompareValue}");
 
@@ -215,29 +220,23 @@ public class PassiveSkill
                 { ConditionType.NotEqual, () => !data.Equals(value)},
             };
 
+        float amount = conditionSetting.Amount(level);
+
         if (conditions.TryGetValue(conditionSetting.Condition, out Func<bool> conditionsFunc))
         {
             if (conditionsFunc())
             {
-                // cs 8506 why?
-                // _ = conditionSetting.resultModifyType switch
-                // {
-                //     PassiveResultModifyType.Hp => statModel.MaxHp += (statModel.MaxHp * (conditionSetting.IsIncrease ? 1 : -1) * conditionSetting.Amount),
-                //     PassiveResultModifyType.Stemina => statModel.MaxStamina += (statModel.MaxStamina * (conditionSetting.IsIncrease ? 1 : -1) * conditionSetting.Amount),
-                //     PassiveResultModifyType.Power => statModel.SetAbility(AdditionAbility.AllPowerPer, statModel.GetAbility(AdditionAbility.AllPowerPer) * (conditionSetting.IsIncrease ? 1 : -1) * conditionSetting.Amount),
-                //     _ => throw new NotImplementedException(),
-                // };
                 if (conditionSetting.isChanged) return;
 
                 conditionSetting.isChanged = true;
 
                 switch (conditionSetting.resultModifyType)
                 {
-                    case PassiveResultModifyType.MaxHp: Debug.Log("HP+"); statModel.SetAbility(AdditionAbility.MaxHpPer, (conditionSetting.Amount)); break;
-                    case PassiveResultModifyType.MaxStamina: Debug.Log("ST+"); statModel.SetAbility(AdditionAbility.MaxStaminaPer, (conditionSetting.Amount)); break;
-                    case PassiveResultModifyType.AllPower: Debug.Log("AP+"); statModel.SetAbility(AdditionAbility.AllPowerPer, (conditionSetting.Amount)); break;
-                    case PassiveResultModifyType.DefaultPower: Debug.Log("DP+"); statModel.SetAbility(AdditionAbility.DefaultPowerPer, (conditionSetting.Amount)); break;
-                    case PassiveResultModifyType.StaminaCostRate: Debug.Log("SC+"); statModel.StaminaCostRate = Mathf.Clamp(conditionSetting.Amount * 0.01f, 0f, 1f); break;
+                    case PassiveResultModifyType.MaxHp: Debug.Log("HP+"); statModel.SetAbility(AdditionAbility.MaxHpPer, (amount)); break;
+                    case PassiveResultModifyType.MaxStamina: Debug.Log("ST+"); statModel.SetAbility(AdditionAbility.MaxStaminaPer, (amount)); break;
+                    case PassiveResultModifyType.AllPower: Debug.Log("AP+"); statModel.SetAbility(AdditionAbility.AllPowerPer, (amount)); break;
+                    case PassiveResultModifyType.DefaultPower: Debug.Log("DP+"); statModel.SetAbility(AdditionAbility.DefaultPowerPer, (amount)); break;
+                    case PassiveResultModifyType.StaminaCostRate: Debug.Log("SC+"); statModel.StaminaCostRate = Mathf.Clamp(amount * 0.01f, 0f, 1f); break;
                 }
             }
             else if (conditionSetting.isChanged)
@@ -245,11 +244,11 @@ public class PassiveSkill
                 conditionSetting.isChanged = false;
                 switch (conditionSetting.resultModifyType)
                 {
-                    case PassiveResultModifyType.MaxHp: Debug.Log("HP-"); statModel.SetAbility(AdditionAbility.MaxHpPer, (-conditionSetting.Amount)); break;
-                    case PassiveResultModifyType.MaxStamina: Debug.Log("ST-"); statModel.SetAbility(AdditionAbility.MaxStaminaPer, (-conditionSetting.Amount)); break;
-                    case PassiveResultModifyType.AllPower: Debug.Log("AP-"); statModel.SetAbility(AdditionAbility.AllPowerPer, (-conditionSetting.Amount)); break;
-                    case PassiveResultModifyType.DefaultPower: Debug.Log("DP-"); statModel.SetAbility(AdditionAbility.DefaultPowerPer, (-conditionSetting.Amount)); break;
-                    case PassiveResultModifyType.StaminaCostRate: Debug.Log("SC-"); statModel.StaminaCostRate += Mathf.Clamp(1 - conditionSetting.Amount * 0.01f, 0f, 1f); break;
+                    case PassiveResultModifyType.MaxHp: Debug.Log("HP-"); statModel.SetAbility(AdditionAbility.MaxHpPer, (-amount)); break;
+                    case PassiveResultModifyType.MaxStamina: Debug.Log("ST-"); statModel.SetAbility(AdditionAbility.MaxStaminaPer, (-amount)); break;
+                    case PassiveResultModifyType.AllPower: Debug.Log("AP-"); statModel.SetAbility(AdditionAbility.AllPowerPer, (-amount)); break;
+                    case PassiveResultModifyType.DefaultPower: Debug.Log("DP-"); statModel.SetAbility(AdditionAbility.DefaultPowerPer, (-amount)); break;
+                    case PassiveResultModifyType.StaminaCostRate: Debug.Log("SC-"); statModel.StaminaCostRate += Mathf.Clamp(1 - amount * 0.01f, 0f, 1f); break;
                 }
             }
         }
@@ -259,17 +258,22 @@ public class PassiveSkill
         }
     }
 
-    public void ReturnValue()
+    /// <summary>
+    /// 값을 원복시켜주는 함수
+    /// </summary>
+    public void ReturnValue(int level = -1)
     {
+        float amount = conditionSetting.Amount((level == -1) ?  this.level: level);
         if (conditionSetting.isChanged)
         {
+            conditionSetting.isChanged = false;
             switch (conditionSetting.resultModifyType)
             {
-                case PassiveResultModifyType.MaxHp: Debug.Log("HP-"); statModel.SetAbility(AdditionAbility.MaxHpPer, (-conditionSetting.Amount)); break;
-                case PassiveResultModifyType.MaxStamina: Debug.Log("ST-"); statModel.SetAbility(AdditionAbility.MaxStaminaPer, (-conditionSetting.Amount)); break;
-                case PassiveResultModifyType.AllPower: Debug.Log("AP-"); statModel.SetAbility(AdditionAbility.AllPowerPer, (-conditionSetting.Amount)); break;
-                case PassiveResultModifyType.DefaultPower: Debug.Log("DP-"); statModel.SetAbility(AdditionAbility.DefaultPowerPer, (-conditionSetting.Amount)); break;
-                case PassiveResultModifyType.StaminaCostRate: Debug.Log("SC-"); statModel.StaminaCostRate = Mathf.Lerp(0f, 1f, 1 - conditionSetting.Amount * 0.01f); break;
+                case PassiveResultModifyType.MaxHp: Debug.Log("HP-"); statModel.SetAbility(AdditionAbility.MaxHpPer, (-amount)); break;
+                case PassiveResultModifyType.MaxStamina: Debug.Log("ST-"); statModel.SetAbility(AdditionAbility.MaxStaminaPer, (-amount)); break;
+                case PassiveResultModifyType.AllPower: Debug.Log("AP-"); statModel.SetAbility(AdditionAbility.AllPowerPer, (-amount)); break;
+                case PassiveResultModifyType.DefaultPower: Debug.Log("DP-"); statModel.SetAbility(AdditionAbility.DefaultPowerPer, (-amount)); break;
+                case PassiveResultModifyType.StaminaCostRate: Debug.Log("SC-"); statModel.StaminaCostRate = Mathf.Lerp(0f, 1f, 1 - amount * 0.01f); break;
             }
         }
     }
@@ -295,8 +299,22 @@ public class PassiveSkill
 
     public void UpdateLevel(int level)
     {
-        this.level = level;
+        // 레벨에 따라 감소했던것도 증가해야 함
+        // 1. 기존의 정보를 빼주고 새로 다시 넣기 ex) 10, 20 -> -10 +20
+        int curLevel = this.level;
+        this.level = level; // 레벨을 최신으로 변경하고
+
+        if (passiveType.Equals(PassiveType.Modify)) // Modify의 경우
+        {
+            ResetValue(curLevel);       //  우선 증가한 값을 빼주고
+            SetValue();                 // 다시 넣어준다
+        }
+        else if(passiveType.Equals(PassiveType.Condition)) // Condition의 경우
+        {
+            ReturnValue(curLevel);    // 정보를 빼주면 StatModel에서 변화를 감지해서 다시 재검사를 함
+        }
         
+        Debug.Log($"<color=blue>{parent.Name}스킬 갱신!</color>");
     }
 }
 

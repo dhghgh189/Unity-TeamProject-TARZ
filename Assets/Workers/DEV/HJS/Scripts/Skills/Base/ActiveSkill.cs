@@ -37,7 +37,7 @@ public class ActiveSkill
     public GameObject UniqueEffectObject;     // 특수 효과가 들어있는 함수
 
     private Spec skillLevelSpec;              // 입력한 스펙이 저장되는 구조체
-    public BaseSkillSO Parent { set { parent = value; Debug.Log("<color=yellow>액티브 스킬부모 설정</color>"); } }
+    public BaseSkillSO Parent { set { parent = value; Debug.Log("<color=yellow>액티브 스킬부모 설정</color>"); level = parent.SkillLevel; } }
     public void SetModel(StatModel statModel) => skillLevelSpec.statModel = statModel;
 
     public void Use(GameObject requester, GameObject target = null)
@@ -52,13 +52,15 @@ public class ActiveSkill
             game.GetComponent<ISpec>()?.SetSpec(skillLevelSpec, level);
 
             FloorSpawner flooring = game.GetComponent<FloorSpawner>();
-            // 설치물이 장판이라면
+            // 설치물이 장판이라면 -> 상태이상 스테이트 사용해야 한다.
             if (flooring is not null)
             {
+                Spec skillLevelSpec = new();
+                skillLevelSpec.statModel = this.skillLevelSpec.statModel;
+                skillLevelSpec.InteractionValues = performance_Act;
+                flooring.SetSpec(skillLevelSpec, level);
                 flooring.SetTarget = requester.transform;
-                Debug.Log($"floor 부착! {requester.name}");
             }
-            Debug.Log($"충돌한 {requester.name}의 위치에서 {game.name}을 생성하겠다!");
         }
 
         // 상호작용

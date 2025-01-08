@@ -329,8 +329,7 @@ public class CheatUI : MonoBehaviour
     /// </summary>
     public void GetSkill()
     {
-        BaseSkillSO skill = Instantiate(skillData.skillList[skillDropdown.value]);
-        skill.SkillLevel = levelDropdown.value + 1;
+        BaseSkillSO skill = skillData.skillList[skillDropdown.value];
         player.SkillHandler.AddSkill(skill.Name, levelDropdown.value + 1);
     }
 }

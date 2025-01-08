@@ -6,8 +6,6 @@ public class Projectile : MonoBehaviour // 일반 원딜 쫄몹
 
     private Rigidbody _rigidBody;
 
-    private MonsterData _monsterData;
-
     IDamagable damagable;
 
     private PooledObject _pooledObject;
@@ -18,7 +16,6 @@ public class Projectile : MonoBehaviour // 일반 원딜 쫄몹
 
     private void Awake()
     {
-        _monsterData = GetComponentInParent<MonsterData>();
         _rigidBody = GetComponent<Rigidbody>();
         _pooledObject = GetComponentInParent<PooledObject>();
     }
@@ -30,6 +27,8 @@ public class Projectile : MonoBehaviour // 일반 원딜 쫄몹
         _distance = Vector3.Distance(transform.position, _player.transform.position);
 
         _rigidBody.AddForce((transform.forward + transform.up) * _distance * 0.7f, ForceMode.Impulse);
+
+        transform.parent = null;
 
         Destroy(gameObject, 3f);
     }

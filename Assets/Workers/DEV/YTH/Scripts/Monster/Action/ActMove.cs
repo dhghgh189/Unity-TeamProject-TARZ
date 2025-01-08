@@ -79,8 +79,6 @@ public class ActMove : Action
         yield return null;
         keepChaseRoutine = null;
     }
-
-
 }
 
 

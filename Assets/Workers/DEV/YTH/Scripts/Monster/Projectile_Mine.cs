@@ -13,6 +13,11 @@ public class Projectile_Mine : MonoBehaviour
         _rigidBody = GetComponent<Rigidbody>();
         _monsterSkillManager = GetComponentInParent<MonsterSkillManager>();
         WhatIsTarget = (1 << LayerMask.NameToLayer("Player"));
+       
+    }
+    private void Start()
+    {
+        transform.parent = null;
     }
 
     private void OnCollisionEnter(Collision collision)

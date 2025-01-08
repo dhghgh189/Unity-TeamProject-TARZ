@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 604305059695827611}
   - component: {fileID: 1558921255945470385}
   - component: {fileID: 8246197228115549351}
-  - component: {fileID: 6319498686623657948}
   - component: {fileID: 3982486454248507007}
   - component: {fileID: -3653694920345201789}
+  - component: {fileID: 7470190255486506465}
   m_Layer: 13
   m_Name: Projectile_Mine
   m_TagString: Untagged
@@ -86,27 +86,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &6319498686623657948
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1616805512990888026}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &3982486454248507007
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -146,5 +125,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 202d2f84733d2344fb6ac57127ebf0da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bombZombie: {fileID: 3471556509123995877, guid: 001a192f20a62694f860bb51ffb3b7c3,
-    type: 3}
+--- !u!65 &7470190255486506465
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1616805512990888026}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.15508342, y: 0.15509486, z: 0.32849848}
+  m_Center: {x: -0.00009405117, y: 0.000000005989618, z: 0.010588502}

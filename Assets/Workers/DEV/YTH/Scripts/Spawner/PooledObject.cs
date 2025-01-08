@@ -152,9 +152,10 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
 
     public void RotateToPlayer()
     {
-        //피격 시 플레이어 방향으로 회전
-        Quaternion lookRot = Quaternion.LookRotation(player.transform.position);
-        transform.rotation = Quaternion.Lerp(transform.rotation, lookRot, 0.7f * Time.deltaTime); // 속도 빠르게 수정할 것
+        //피격 시 플레이어 방향으로 회전 // 속도 빠르게 수정할 것
+        /*Quaternion lookRot = Quaternion.LookRotation(player.transform.position);
+        transform.rotation = Quaternion.Lerp(transform.rotation, lookRot, 0.5f * Time.deltaTime);*/
+        transform.LookAt(transform.position);
     }
 
     Coroutine isAttackedRoutine;

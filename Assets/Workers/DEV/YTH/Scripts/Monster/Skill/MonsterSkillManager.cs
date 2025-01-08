@@ -249,11 +249,13 @@ public class MonsterSkillManager : MonoBehaviour
     public Coroutine bombRoutine;
     public IEnumerator BombRoutine()  // 직스 궁 
     {
+        float distance = Vector3.Distance(transform.position, _player.transform.position);
+
         BombSkill.CanUseSkill = false;
 
         GameObject bomb = Instantiate(_bombPrefab, _muzzlePoint.position, _muzzlePoint.rotation, transform);
         Rigidbody bombRb = bomb.GetComponent<Rigidbody>();
-        bombRb.AddForce((_muzzlePoint.forward + _muzzlePoint.up * 3) * BombSkill.ThrowForce, ForceMode.Impulse);
+        bombRb.AddForce((_muzzlePoint.forward + _muzzlePoint.up * 3) * distance, ForceMode.Impulse);
 
         yield return Util.GetDelay(BombSkill.CoolTime);    
         bombRoutine = null;
@@ -265,15 +267,16 @@ public class MonsterSkillManager : MonoBehaviour
     public Coroutine mineRoutine;
     public IEnumerator MineRoutine()
     {
+        float distance = Vector3.Distance(transform.position, _player.transform.position);
+
         MineSkill.CanUseSkill = false;
 
         GameObject mine = Instantiate(_minePrefab, _muzzlePoint.position, _muzzlePoint.rotation, transform);
         Rigidbody mineRb = mine.GetComponent<Rigidbody>();
-        mineRb.AddForce(_muzzlePoint.forward * MineSkill.ThrowForce, ForceMode.Impulse);
+        mineRb.AddForce((_muzzlePoint.forward +_muzzlePoint.up) * distance, ForceMode.Impulse);
 
         yield return Util.GetDelay(MineSkill.CoolTime);
         mineRoutine = null;
-
         MineSkill.CanUseSkill = true;
     }
     #endregion

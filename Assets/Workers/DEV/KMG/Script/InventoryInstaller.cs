@@ -18,6 +18,9 @@ public class InventoryInstaller : MonoInstaller
         Container.Bind<PlayerSkillHandler>().FromComponentInHierarchy().AsSingle();
         Container.Bind<ChangeInput>().FromComponentInHierarchy().AsSingle();
         Container.Bind<UI_Merchant>().FromComponentInHierarchy().AsSingle();
+        Container.Bind<ObjectPool_other>().FromInstance(this.gameObject.GetComponentInParent<ObjectPool_other>());
+        Container.Bind<RandomModeling>().FromInstance(this.gameObject.GetComponentInParent<RandomModeling>());
+
         GameObject DropPool = new GameObject("DropPool");
         Container.Bind<Transform>().FromInstance(DropPool.transform);
     }

@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public interface Interaction_Ibase_Activate
 {
     public void Activate();

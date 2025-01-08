@@ -3730,6 +3730,8 @@ GameObject:
   - component: {fileID: 7288490328440660171}
   - component: {fileID: 8312333662424167209}
   - component: {fileID: 3018901927317791617}
+  - component: {fileID: 5233273012102796230}
+  - component: {fileID: 9021257895543258765}
   m_Layer: 5
   m_Name: Inventory And Equipment
   m_TagString: Untagged
@@ -3896,6 +3898,39 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+--- !u!114 &5233273012102796230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7292694189894201133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e783ca97df20c4040af70eb16e415ed4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ThrowObjectOBJs:
+  - {fileID: 1000010880751780, guid: c3c0707254334a64ca8198f7486e977d, type: 3}
+  - {fileID: 1000011501826600, guid: b34bf25cecb5fc24c91de3edea19cb13, type: 3}
+  - {fileID: 1000013931470818, guid: 5c02591794acece409986647ed6329a7, type: 3}
+  - {fileID: 1000013656696560, guid: cd34118c604e29141afea74caecd70f2, type: 3}
+  - {fileID: 1000010714891294, guid: 5a0537415d4017c4fad7a4986f502dc1, type: 3}
+  - {fileID: 1000013356204050, guid: 676e107eeafc5524b97910d76516565d, type: 3}
+  - {fileID: 1000010646675420, guid: 1a73058088a4b204bb3a13aff5c48489, type: 3}
+  - {fileID: 1000010986879176, guid: 8f226a393243a0141bace5fd6b60bafa, type: 3}
+--- !u!114 &9021257895543258765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7292694189894201133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e3565d9bb59b25418632c49f363ed34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7469346547636914050
 GameObject:
   m_ObjectHideFlags: 0

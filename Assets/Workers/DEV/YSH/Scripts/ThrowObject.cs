@@ -2,12 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
-using Zenject.SpaceFighter;
 
 [RequireComponent(typeof(Rigidbody))]
 public class ThrowObject : MonoBehaviour, IDrainable
 {
+    [Inject]
+    [SerializeField] private RandomModeling setModeling;
+    [SerializeField] private GameObject modeling;
     [SerializeField] private LayerMask whatIsTarget;
+
 
     [HideInInspector] public AblityAdapter adapter;
     [HideInInspector] public PlayerSkillHandler handler;
@@ -34,6 +37,7 @@ public class ThrowObject : MonoBehaviour, IDrainable
     }
     private void Start()
     {
+        setModeling.SetRandom(modeling, setModeling.ThrowObjectOBJs);
         adapter = FindAnyObjectByType<AblityAdapter>(FindObjectsInactive.Include);
     }
 

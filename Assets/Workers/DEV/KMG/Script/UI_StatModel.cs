@@ -6,6 +6,7 @@ public class UI_StatModel : MonoBehaviour
 {
     [Inject] StatModel statModel;
     [SerializeField] private TMP_Text statText;
+    [SerializeField] private TMP_Text statValueText;
     [SerializeField] private TMP_Text maxHp;
     [SerializeField] private TMP_Text maxStamina;
     [SerializeField] private TMP_Text moveSpeed;
@@ -41,12 +42,14 @@ public class UI_StatModel : MonoBehaviour
     private void StatModel_OnStatChange()
     {
         statText.text = string.Empty;
+        statValueText.text = string.Empty;
         for (int i = 0; i < (int)AdditionAbility.Size; i++)
         {
             float value = statModel.GetAbility((AdditionAbility)i);
             if (value > 0)
             {
-                statText.text += $"{((AdditionAbility)i).ToDescription()}\t\t{value}\n";
+                statText.text += $"{((AdditionAbility)i).ToDescription()}\n";
+                statValueText.text += $"{value}\n";
             }
         }
     }

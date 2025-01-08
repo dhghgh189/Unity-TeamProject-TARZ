@@ -1,14 +1,15 @@
 using UnityEngine;
+using Zenject;
 
 public class ThrowBox_Nomal : SpecialThrowOBJ_Base
 {
+    [Inject] private ObjectPool_other pool;
     public ThrowBox_Nomal() => box_type = Box_Type.Nomal;
 
     [Header("중형 상자")]
     [SerializeField] private float NomalBoxDamage;
     [SerializeField] private int Nomal_DropCount;
     [SerializeField] private float Nomal_DropSpred;
-    [SerializeField] private GameObject DropChip;
     private LayerMask NomalBoxLayer;
 
 
@@ -16,9 +17,6 @@ public class ThrowBox_Nomal : SpecialThrowOBJ_Base
 
     void Init()
     {
-        // 임시적 데미지 수치 설정
-        NomalBoxDamage = 10f;
-
         NomalBoxLayer = LayerMask.NameToLayer("Monster");
     }
 
@@ -60,8 +58,7 @@ public class ThrowBox_Nomal : SpecialThrowOBJ_Base
             position.z += Nomal_DropSpred * Random.value - Nomal_DropSpred / 2;
             if (position.y <= 0f) position.y = 0.1f;
 
-            // 추후 오브젝트 풀로 변경 예정
-            Instantiate(DropChip, position, transform.rotation);
+            pool.DropChipItem(Random.Range(1, 50), position);
         }
 
         Destroy(this.gameObject, DestroyTime);

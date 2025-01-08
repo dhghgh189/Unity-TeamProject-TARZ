@@ -21,6 +21,11 @@ public class PlayerView : MonoBehaviour
     [Header("쓰레기 오브젝트")]
     [SerializeField] private TMP_Text currentTObj;
     [SerializeField] private TMP_Text maxTObj;
+    [SerializeField] private Image tObjFill;
+    [SerializeField] private Button active01;
+    [SerializeField] private Button active02;
+    [SerializeField] private Button active03;
+    [SerializeField] private Button active04;
 
     private void Start()
     {
@@ -45,6 +50,11 @@ public class PlayerView : MonoBehaviour
         Player_OnCurHPChanged(statModel.MaxHp);
         Player_OnCurMPChanged(0);
         Player_OnTObjectChanged();
+
+        active01.interactable = false;
+        active02.interactable = false;
+        active03.interactable = false;
+        active04.interactable = false;
     }
 
     /// <summary>
@@ -53,10 +63,7 @@ public class PlayerView : MonoBehaviour
     /// <param name="curHP"></param>
     public void Player_OnCurHPChanged(float curHP)
     {
-        //Debug.Log($"Hp Change : {curHP}");
-        //hpSlider.value = curHP;
         hpImage.fillAmount = (statModel.MaxHp - (statModel.MaxHp - curHP)) / statModel.MaxHp;
-
         if (curHP <= 0) hpImage.fillAmount = 0;
     }
 
@@ -66,10 +73,15 @@ public class PlayerView : MonoBehaviour
     /// <param name="curMP"></param>
     public void Player_OnCurMPChanged(float curMP)
     {
-        //mpSlider.value = curMP;
+        // MP를 이미지 Fill Amount 값에 대비하여 MP 변동값 동기화
         mpImage.fillAmount = (statModel.MaxMp - (statModel.MaxMp - curMP)) / statModel.MaxMp;
-
         if (curMP <= 0) mpImage.fillAmount = 0;
+
+        // 스킬 사용 타이밍마다 스킬 사용 가능을 Interactable로 알려주기
+        active01.interactable = (curMP >= 100);
+        active02.interactable = (curMP >= 200);
+        active03.interactable = (curMP >= 300);
+        active04.interactable = (curMP >= 400);
     }
 
     /// <summary>
@@ -79,6 +91,9 @@ public class PlayerView : MonoBehaviour
     {
         currentTObj.text = $"{attack.ObjectCount}";
         maxTObj.text = $"{attack.MaxObjectCount}";
+
+        tObjFill.fillAmount = (attack.MaxObjectCount - (attack.MaxObjectCount - attack.ObjectCount)) / attack.MaxObjectCount;
+        if (attack.ObjectCount <= 0) tObjFill.fillAmount = 0;
     }
 
     /// <summary>

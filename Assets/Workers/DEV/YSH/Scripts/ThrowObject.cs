@@ -8,6 +8,7 @@ public class ThrowObject : MonoBehaviour, IDrainable
 {
     [Inject]
     [SerializeField] private RandomModeling setModeling;
+    [SerializeField] private GameObject modeling;
     [SerializeField] private LayerMask whatIsTarget;
 
 
@@ -15,7 +16,6 @@ public class ThrowObject : MonoBehaviour, IDrainable
     [HideInInspector] public PlayerSkillHandler handler;
 
     [SerializeField] private bool isCollected;
-    private Mesh mesh;
     private Rigidbody rigid;
     private PlayerController owner;
 
@@ -31,18 +31,14 @@ public class ThrowObject : MonoBehaviour, IDrainable
 
     private void Awake()
     {
-        mesh = GetComponent<Mesh>();
         rigid = GetComponent<Rigidbody>();
         Upgrade = GetComponent<ThrowObjectUpgrade>();
         throwEffects = new List<IEffect>();
     }
     private void Start()
     {
+        setModeling.SetRandom(modeling, setModeling.ThrowObjectOBJs);
         adapter = FindAnyObjectByType<AblityAdapter>(FindObjectsInactive.Include);
-    }
-    void OnEnable()
-    {
-        mesh = setModeling.SetRandom(setModeling.ThrowObjectMeshs);
     }
 
     private void OnDisable()

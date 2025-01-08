@@ -4,12 +4,18 @@ using UnityEngine;
 
 public class RandomModeling : MonoBehaviour
 {
-    public List<Mesh> ThrowObjectMeshs = new();
+    public List<GameObject> ThrowObjectOBJs = new();
 
 
-    public Mesh SetRandom(List<Mesh> list)
+    public void SetRandom(GameObject obj, List<GameObject> list)
     {
         int path = Random.Range(0, list.Count - 1);
-        return list[path];
+        obj.GetComponent<MeshFilter>().sharedMesh = list[path].GetComponent<MeshFilter>().sharedMesh;
+        obj.GetComponent<MeshRenderer>().sharedMaterial = list[path].GetComponent<MeshRenderer>().sharedMaterial;
+
+        if (obj.transform.rotation != new Quaternion(0, 0, 0, 0))
+        {
+            obj.transform.rotation = list[path].transform.rotation;
+        }
     }
 }

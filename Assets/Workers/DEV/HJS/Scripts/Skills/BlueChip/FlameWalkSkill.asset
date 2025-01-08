@@ -18,9 +18,27 @@ MonoBehaviour:
   Icon: {fileID: 0}
   MaxLevel: 3
   SkillTier: 1
-  SkillType: 0
+  SkillType: 1
   active:
-    activeSkills: []
+    activeSkills:
+    - IndexName: "\uBD88\uAF43 \uC7A5\uD310 \uC0DD\uC131\uAE30 \uC0DD\uC131"
+      Target: 0
+      ConditionState: 2
+      ActTiming: 0
+      ConditionType: 0
+      Create: 1
+      createObject: {fileID: 9077476385755021717, guid: 8aae627e019dc2241847a04b0604a312,
+        type: 3}
+      performance_Act:
+      - {x: 5, y: 0, z: 0}
+      - {x: 10, y: 0, z: 0}
+      - {x: 15, y: 0, z: 0}
+      Interaction: 0
+      type: 0
+      performance_Interaction: []
+      UniqueEffect: 0
+      status: 0
+      UniqueEffectObject: {fileID: 0}
   passive:
     passiveSkills: []
   onChangeLevel:

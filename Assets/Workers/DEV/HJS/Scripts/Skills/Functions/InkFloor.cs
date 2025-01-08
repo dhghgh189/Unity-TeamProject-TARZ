@@ -7,7 +7,7 @@ public class InkFloor : MonoBehaviour, ISpec
 {
     private float operationTime;
     private Interaction interaction;
-    private SphereCollider coll;
+    [SerializeField] SphereCollider coll;
 
     private void Awake()
     {
@@ -37,9 +37,4 @@ public class InkFloor : MonoBehaviour, ISpec
         }
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.black;
-        Gizmos.DrawWireSphere(transform.position, coll.radius);
-    }
 }

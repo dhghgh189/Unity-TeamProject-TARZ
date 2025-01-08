@@ -10,10 +10,6 @@ using UnityEngine.AI;
 /// </summary>
 public class ActMove_NotStopInAttacking : Action
 {
-    public int Hash_Move = Animator.StringToHash("Revive_Walk");
-    public int Hash_Crawl = Animator.StringToHash("Revive_Crawl");
-
-
     [SerializeField] CondCanMove _condCanMove;
 
     private PooledObject _pooledObject;

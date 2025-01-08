@@ -1,12 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
-using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using TMPro;
-using UnityEngine.InputSystem;
-using Zenject;
 
 public class SettingSceneUI : MonoBehaviour
 {
@@ -15,6 +11,7 @@ public class SettingSceneUI : MonoBehaviour
     [SerializeField] private GameObject titlePanel;         // 타이틀 패널
     [SerializeField] private GameObject activeCPanel;       // 현재 활성화 중인 패널
     private CameraController camera;
+    [SerializeField] private GameObject background;
 
     [Header("<color=yellow>Input Manager</color>")]
     [SerializeField] private ChangeInput inputManager;      // UI 네비게이션 InputManager 참조용
@@ -53,8 +50,8 @@ public class SettingSceneUI : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "Title")
         {
             camera = null;
-            sensitivitySlider.interactable = false;
             sensitivityText.text = $"{(int)sensitivitySlider.value}";
+            background.SetActive(true);
         }
         else
         {
@@ -64,8 +61,8 @@ public class SettingSceneUI : MonoBehaviour
             }
 
             camera.Sensitivity = PlayerPrefs.GetFloat("Sensitivity");
-            sensitivitySlider.interactable = true;
             sensitivitySlider.value = camera.Sensitivity;
+            background.SetActive(false);
         }
     }
 
@@ -74,11 +71,14 @@ public class SettingSceneUI : MonoBehaviour
         if (SceneManager.GetActiveScene().name != "Title")
         {
             titlePanel = null;
-            sensitivitySlider.interactable = true;
+            gameplayButton.interactable = true;
+            inputManager.firstInput = gameplayButton;
+            inputManager.firstInput.Select();
         }
 
+        gameplayButton.interactable = false;
         activeCPanel = nonSelectPanel;                  // 현재 활성화 중인 패널을 nonSelectPanel로 설정
-        inputManager.firstInput = gameplayButton;       // 설정 패널의 UI 네비게이션 첫 Input을 gameplayButton로 설정
+        inputManager.firstInput = soundButton;          // 설정 패널의 UI 네비게이션 첫 Input을 gameplayButton로 설정
         inputManager.firstInput.Select();               // 첫 Input으로 지정한 오브젝트를 선택 처리
     }
 
@@ -187,7 +187,7 @@ public class SettingSceneUI : MonoBehaviour
     {
         activeCPanel.SetActive(false);
         gameObject.SetActive(false);            // 설정 패널 비활성화
-        
+
         if (SceneManager.GetActiveScene().name == "Title")
         {
             titlePanel.SetActive(true);

@@ -10,15 +10,26 @@ public class Projectile : MonoBehaviour // 일반 원딜 쫄몹
 
     IDamagable damagable;
 
+    private PooledObject _pooledObject;
+
+    private PlayerController _player;
+
+    private float _distance;
+
     private void Awake()
     {
         _monsterData = GetComponentInParent<MonsterData>();
         _rigidBody = GetComponent<Rigidbody>();
+        _pooledObject = GetComponentInParent<PooledObject>();
     }
 
     private void Start()
     {
-        _rigidBody.AddForce((transform.forward + transform.up) * _monsterData.ThrowPower, ForceMode.Impulse);
+        _player = _pooledObject.player;
+
+        _distance = Vector3.Distance(transform.position, _player.transform.position);
+
+        _rigidBody.AddForce((transform.forward + transform.up) * _distance * 0.7f, ForceMode.Impulse);
 
         Destroy(gameObject, 3f);
     }
@@ -29,12 +40,15 @@ public class Projectile : MonoBehaviour // 일반 원딜 쫄몹
         _rigidBody.angularVelocity = Vector3.zero;
 
         _radiation.SetActive(true);
-
-        IDamagable damagableObj = collider.gameObject.GetComponent<IDamagable>();
-        damagable = damagableObj;
-        if (damagable != null)
+        
+        if (collider.gameObject.CompareTag("Player"))
         {
-            damagable.TakeDamage(5);
+            IDamagable damagableObj = collider.gameObject.GetComponent<IDamagable>();
+            damagable = damagableObj;
+            if (damagable != null)
+            {
+                damagable.TakeDamage(5);
+            }
         }
     }
 }

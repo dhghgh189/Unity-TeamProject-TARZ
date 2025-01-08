@@ -52,9 +52,13 @@ public class ActiveSkill
             game.GetComponent<ISpec>()?.SetSpec(skillLevelSpec, level);
 
             FloorSpawner flooring = game.GetComponent<FloorSpawner>();
-            // 설치물이 장판이라면
+            // 설치물이 장판이라면 -> 상태이상 스테이트 사용해야 한다.
             if (flooring is not null)
             {
+                Spec skillLevelSpec = new();
+                skillLevelSpec.statModel = this.skillLevelSpec.statModel;
+                skillLevelSpec.InteractionValues = performance_Act;
+                flooring.SetSpec(skillLevelSpec, level);
                 flooring.SetTarget = requester.transform;
             }
         }

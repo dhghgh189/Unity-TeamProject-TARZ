@@ -178,30 +178,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ThrowObject (65)
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 4766049548964259805, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 4727878797104988335, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 1407591239831133029, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 8759322460190473424, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6345096115040528078}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 5288706749598624188}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6168459064163699483}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6235343052081346930}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
 --- !u!4 &4559986933375263822 stripped
 Transform:
@@ -209,82 +189,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 103637420394741714}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &5935349553768342449 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-    type: 3}
-  m_PrefabInstance: {fileID: 103637420394741714}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &6345096115040528078
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5935349553768342449}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b24a630794942d74ab16bdc98b0e2956, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  whatIsTarget:
-    serializedVersion: 2
-    m_Bits: 512
-  adapter: {fileID: 0}
-  handler: {fileID: 0}
-  isCollected: 0
---- !u!114 &5288706749598624188
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5935349553768342449}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d074954e16471b54d840b355c42aafc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  name: ThrowObjectConvertMine
-  enable: 0
-  render: {fileID: 0}
-  meshFilter: {fileID: 0}
-  defaultDamage: 0
-  damage: 0
-  mesh: {fileID: 0}
-  material: {fileID: 0}
-  layer: 
---- !u!114 &6168459064163699483
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5935349553768342449}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4077dfed7408a124ea5e854f27d32d96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enable: 0
-  name: ThrowObjectUpgrade
-  increaseDamage: 0
-  isUpgraded: 0
---- !u!114 &6235343052081346930
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5935349553768342449}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcd14377e66e6e14c98ff2bb86c5d344, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  enable: 0
-  name: GuidedFuncion
 --- !u!1001 &123765428356872346
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -753,30 +657,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ThrowObject (53)
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 4766049548964259805, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 4727878797104988335, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 1407591239831133029, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 8759322460190473424, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1467357559040436814}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 4088912604133031579}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 3199098681648340125}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 4099640457961467382}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
 --- !u!4 &4152831260647604663 stripped
 Transform:
@@ -784,82 +668,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 547662742834141739}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &6104375356258125384 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-    type: 3}
-  m_PrefabInstance: {fileID: 547662742834141739}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1467357559040436814
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6104375356258125384}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b24a630794942d74ab16bdc98b0e2956, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  whatIsTarget:
-    serializedVersion: 2
-    m_Bits: 512
-  adapter: {fileID: 0}
-  handler: {fileID: 0}
-  isCollected: 0
---- !u!114 &4088912604133031579
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6104375356258125384}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d074954e16471b54d840b355c42aafc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  name: ThrowObjectConvertMine
-  enable: 0
-  render: {fileID: 0}
-  meshFilter: {fileID: 0}
-  defaultDamage: 0
-  damage: 0
-  mesh: {fileID: 0}
-  material: {fileID: 0}
-  layer: 
---- !u!114 &3199098681648340125
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6104375356258125384}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4077dfed7408a124ea5e854f27d32d96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enable: 0
-  name: ThrowObjectUpgrade
-  increaseDamage: 0
-  isUpgraded: 0
---- !u!114 &4099640457961467382
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6104375356258125384}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcd14377e66e6e14c98ff2bb86c5d344, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  enable: 0
-  name: GuidedFuncion
 --- !u!1001 &554405045907225431
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -923,30 +731,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ThrowObject (85)
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 4766049548964259805, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 4727878797104988335, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 1407591239831133029, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 8759322460190473424, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 600606031252120445}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 3023536245888649858}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1044535655334578002}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8442630176965419102}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
 --- !u!4 &4146062807653834955 stripped
 Transform:
@@ -954,82 +742,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 554405045907225431}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &6097606868900357940 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-    type: 3}
-  m_PrefabInstance: {fileID: 554405045907225431}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &600606031252120445
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6097606868900357940}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b24a630794942d74ab16bdc98b0e2956, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  whatIsTarget:
-    serializedVersion: 2
-    m_Bits: 512
-  adapter: {fileID: 0}
-  handler: {fileID: 0}
-  isCollected: 0
---- !u!114 &3023536245888649858
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6097606868900357940}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d074954e16471b54d840b355c42aafc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  name: ThrowObjectConvertMine
-  enable: 0
-  render: {fileID: 0}
-  meshFilter: {fileID: 0}
-  defaultDamage: 0
-  damage: 0
-  mesh: {fileID: 0}
-  material: {fileID: 0}
-  layer: 
---- !u!114 &1044535655334578002
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6097606868900357940}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4077dfed7408a124ea5e854f27d32d96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enable: 0
-  name: ThrowObjectUpgrade
-  increaseDamage: 0
-  isUpgraded: 0
---- !u!114 &8442630176965419102
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6097606868900357940}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcd14377e66e6e14c98ff2bb86c5d344, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  enable: 0
-  name: GuidedFuncion
 --- !u!1001 &634249261427825235
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1228,30 +940,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ThrowObject (86)
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 4766049548964259805, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 4727878797104988335, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 1407591239831133029, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 8759322460190473424, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 977855845088820672}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1875420437260746257}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2118073370570495442}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 158840684219568332}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
 --- !u!4 &3965020638933683245 stripped
 Transform:
@@ -1259,82 +951,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 666241481558562737}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &6489790757994482642 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-    type: 3}
-  m_PrefabInstance: {fileID: 666241481558562737}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &977855845088820672
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6489790757994482642}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b24a630794942d74ab16bdc98b0e2956, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  whatIsTarget:
-    serializedVersion: 2
-    m_Bits: 512
-  adapter: {fileID: 0}
-  handler: {fileID: 0}
-  isCollected: 0
---- !u!114 &1875420437260746257
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6489790757994482642}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d074954e16471b54d840b355c42aafc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  name: ThrowObjectConvertMine
-  enable: 0
-  render: {fileID: 0}
-  meshFilter: {fileID: 0}
-  defaultDamage: 0
-  damage: 0
-  mesh: {fileID: 0}
-  material: {fileID: 0}
-  layer: 
---- !u!114 &2118073370570495442
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6489790757994482642}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4077dfed7408a124ea5e854f27d32d96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enable: 0
-  name: ThrowObjectUpgrade
-  increaseDamage: 0
-  isUpgraded: 0
---- !u!114 &158840684219568332
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6489790757994482642}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcd14377e66e6e14c98ff2bb86c5d344, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  enable: 0
-  name: GuidedFuncion
 --- !u!1001 &967439840252717896
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1668,30 +1284,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ThrowObject (95)
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 4766049548964259805, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 4727878797104988335, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 1407591239831133029, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 8759322460190473424, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8511459310266889007}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1168857576808517253}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6550022047661860254}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6292050032069864659}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
 --- !u!4 &3712164815979719296 stripped
 Transform:
@@ -1699,82 +1295,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 989701618972569884}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &6814660057063452031 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-    type: 3}
-  m_PrefabInstance: {fileID: 989701618972569884}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &8511459310266889007
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6814660057063452031}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b24a630794942d74ab16bdc98b0e2956, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  whatIsTarget:
-    serializedVersion: 2
-    m_Bits: 512
-  adapter: {fileID: 0}
-  handler: {fileID: 0}
-  isCollected: 0
---- !u!114 &1168857576808517253
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6814660057063452031}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d074954e16471b54d840b355c42aafc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  name: ThrowObjectConvertMine
-  enable: 0
-  render: {fileID: 0}
-  meshFilter: {fileID: 0}
-  defaultDamage: 0
-  damage: 0
-  mesh: {fileID: 0}
-  material: {fileID: 0}
-  layer: 
---- !u!114 &6550022047661860254
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6814660057063452031}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4077dfed7408a124ea5e854f27d32d96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enable: 0
-  name: ThrowObjectUpgrade
-  increaseDamage: 0
-  isUpgraded: 0
---- !u!114 &6292050032069864659
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6814660057063452031}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcd14377e66e6e14c98ff2bb86c5d344, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  enable: 0
-  name: GuidedFuncion
 --- !u!1001 &999212569936815024
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1838,30 +1358,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ThrowObject (68)
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 4766049548964259805, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 4727878797104988335, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 1407591239831133029, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 8759322460190473424, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8593681723463280022}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8413799128678321240}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6490846389472708003}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6489705992312835183}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
 --- !u!4 &3739545502239291436 stripped
 Transform:
@@ -1869,82 +1369,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 999212569936815024}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &6841886881412693971 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-    type: 3}
-  m_PrefabInstance: {fileID: 999212569936815024}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &8593681723463280022
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6841886881412693971}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b24a630794942d74ab16bdc98b0e2956, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  whatIsTarget:
-    serializedVersion: 2
-    m_Bits: 512
-  adapter: {fileID: 0}
-  handler: {fileID: 0}
-  isCollected: 0
---- !u!114 &8413799128678321240
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6841886881412693971}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d074954e16471b54d840b355c42aafc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  name: ThrowObjectConvertMine
-  enable: 0
-  render: {fileID: 0}
-  meshFilter: {fileID: 0}
-  defaultDamage: 0
-  damage: 0
-  mesh: {fileID: 0}
-  material: {fileID: 0}
-  layer: 
---- !u!114 &6490846389472708003
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6841886881412693971}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4077dfed7408a124ea5e854f27d32d96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enable: 0
-  name: ThrowObjectUpgrade
-  increaseDamage: 0
-  isUpgraded: 0
---- !u!114 &6489705992312835183
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6841886881412693971}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcd14377e66e6e14c98ff2bb86c5d344, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  enable: 0
-  name: GuidedFuncion
 --- !u!1001 &1000256748437675074
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2953,30 +2377,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ThrowObject (76)
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 4766049548964259805, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 4727878797104988335, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 1407591239831133029, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 8759322460190473424, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6349212008867041041}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8210449070059644977}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2074365296993434689}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 3007660725636441785}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
 --- !u!4 &2998742565469432987 stripped
 Transform:
@@ -2984,82 +2388,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1703994680124356359}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &4939155170727947108 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-    type: 3}
-  m_PrefabInstance: {fileID: 1703994680124356359}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &6349212008867041041
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4939155170727947108}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b24a630794942d74ab16bdc98b0e2956, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  whatIsTarget:
-    serializedVersion: 2
-    m_Bits: 512
-  adapter: {fileID: 0}
-  handler: {fileID: 0}
-  isCollected: 0
---- !u!114 &8210449070059644977
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4939155170727947108}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d074954e16471b54d840b355c42aafc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  name: ThrowObjectConvertMine
-  enable: 0
-  render: {fileID: 0}
-  meshFilter: {fileID: 0}
-  defaultDamage: 0
-  damage: 0
-  mesh: {fileID: 0}
-  material: {fileID: 0}
-  layer: 
---- !u!114 &2074365296993434689
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4939155170727947108}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4077dfed7408a124ea5e854f27d32d96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enable: 0
-  name: ThrowObjectUpgrade
-  increaseDamage: 0
-  isUpgraded: 0
---- !u!114 &3007660725636441785
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4939155170727947108}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcd14377e66e6e14c98ff2bb86c5d344, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  enable: 0
-  name: GuidedFuncion
 --- !u!1001 &1731274852025837591
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3123,30 +2451,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ThrowObject (64)
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 4766049548964259805, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 4727878797104988335, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 1407591239831133029, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 8759322460190473424, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 3751309386827004610}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 5229467563983957166}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8140685324577318050}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2905055959906660943}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
 --- !u!4 &2755880908186760075 stripped
 Transform:
@@ -3154,82 +2462,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1731274852025837591}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &5415596253715330164 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-    type: 3}
-  m_PrefabInstance: {fileID: 1731274852025837591}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &3751309386827004610
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5415596253715330164}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b24a630794942d74ab16bdc98b0e2956, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  whatIsTarget:
-    serializedVersion: 2
-    m_Bits: 512
-  adapter: {fileID: 0}
-  handler: {fileID: 0}
-  isCollected: 0
---- !u!114 &5229467563983957166
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5415596253715330164}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d074954e16471b54d840b355c42aafc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  name: ThrowObjectConvertMine
-  enable: 0
-  render: {fileID: 0}
-  meshFilter: {fileID: 0}
-  defaultDamage: 0
-  damage: 0
-  mesh: {fileID: 0}
-  material: {fileID: 0}
-  layer: 
---- !u!114 &8140685324577318050
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5415596253715330164}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4077dfed7408a124ea5e854f27d32d96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enable: 0
-  name: ThrowObjectUpgrade
-  increaseDamage: 0
-  isUpgraded: 0
---- !u!114 &2905055959906660943
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5415596253715330164}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcd14377e66e6e14c98ff2bb86c5d344, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  enable: 0
-  name: GuidedFuncion
 --- !u!1001 &2064548436441127693
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3698,30 +2930,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ThrowObject (62)
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 4766049548964259805, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 4727878797104988335, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 1407591239831133029, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 8759322460190473424, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 4519119425679222754}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 9255134038338639}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 7211794578140750783}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 7734964588415312127}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
 --- !u!4 &2149618731617654495 stripped
 Transform:
@@ -3729,82 +2941,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2588611575997336899}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &8125111467805200672 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-    type: 3}
-  m_PrefabInstance: {fileID: 2588611575997336899}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &4519119425679222754
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8125111467805200672}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b24a630794942d74ab16bdc98b0e2956, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  whatIsTarget:
-    serializedVersion: 2
-    m_Bits: 512
-  adapter: {fileID: 0}
-  handler: {fileID: 0}
-  isCollected: 0
---- !u!114 &9255134038338639
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8125111467805200672}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d074954e16471b54d840b355c42aafc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  name: ThrowObjectConvertMine
-  enable: 0
-  render: {fileID: 0}
-  meshFilter: {fileID: 0}
-  defaultDamage: 0
-  damage: 0
-  mesh: {fileID: 0}
-  material: {fileID: 0}
-  layer: 
---- !u!114 &7211794578140750783
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8125111467805200672}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4077dfed7408a124ea5e854f27d32d96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enable: 0
-  name: ThrowObjectUpgrade
-  increaseDamage: 0
-  isUpgraded: 0
---- !u!114 &7734964588415312127
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8125111467805200672}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcd14377e66e6e14c98ff2bb86c5d344, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  enable: 0
-  name: GuidedFuncion
 --- !u!1001 &2621036922646858035
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4003,30 +3139,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ThrowObject (67)
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 4766049548964259805, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 4727878797104988335, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 1407591239831133029, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 8759322460190473424, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6417049971491802814}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6823445091701561623}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 528771753372489854}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6289542252973478511}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
 --- !u!4 &1897835997883436395 stripped
 Transform:
@@ -4034,82 +3150,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2625059355579062007}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &8593075642338724500 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-    type: 3}
-  m_PrefabInstance: {fileID: 2625059355579062007}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &6417049971491802814
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8593075642338724500}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b24a630794942d74ab16bdc98b0e2956, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  whatIsTarget:
-    serializedVersion: 2
-    m_Bits: 512
-  adapter: {fileID: 0}
-  handler: {fileID: 0}
-  isCollected: 0
---- !u!114 &6823445091701561623
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8593075642338724500}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d074954e16471b54d840b355c42aafc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  name: ThrowObjectConvertMine
-  enable: 0
-  render: {fileID: 0}
-  meshFilter: {fileID: 0}
-  defaultDamage: 0
-  damage: 0
-  mesh: {fileID: 0}
-  material: {fileID: 0}
-  layer: 
---- !u!114 &528771753372489854
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8593075642338724500}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4077dfed7408a124ea5e854f27d32d96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enable: 0
-  name: ThrowObjectUpgrade
-  increaseDamage: 0
-  isUpgraded: 0
---- !u!114 &6289542252973478511
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8593075642338724500}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcd14377e66e6e14c98ff2bb86c5d344, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  enable: 0
-  name: GuidedFuncion
 --- !u!1001 &2701618554487427027
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4173,30 +3213,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ThrowObject (51)
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 4766049548964259805, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 4727878797104988335, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 1407591239831133029, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 8759322460190473424, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 4891148733885054950}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 967294538321721879}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8285597145343306639}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 7474883811869818956}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
 --- !u!4 &1965383191460205647 stripped
 Transform:
@@ -4204,82 +3224,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2701618554487427027}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &8525519245149311920 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-    type: 3}
-  m_PrefabInstance: {fileID: 2701618554487427027}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &4891148733885054950
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8525519245149311920}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b24a630794942d74ab16bdc98b0e2956, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  whatIsTarget:
-    serializedVersion: 2
-    m_Bits: 512
-  adapter: {fileID: 0}
-  handler: {fileID: 0}
-  isCollected: 0
---- !u!114 &967294538321721879
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8525519245149311920}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d074954e16471b54d840b355c42aafc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  name: ThrowObjectConvertMine
-  enable: 0
-  render: {fileID: 0}
-  meshFilter: {fileID: 0}
-  defaultDamage: 0
-  damage: 0
-  mesh: {fileID: 0}
-  material: {fileID: 0}
-  layer: 
---- !u!114 &8285597145343306639
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8525519245149311920}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4077dfed7408a124ea5e854f27d32d96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enable: 0
-  name: ThrowObjectUpgrade
-  increaseDamage: 0
-  isUpgraded: 0
---- !u!114 &7474883811869818956
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8525519245149311920}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcd14377e66e6e14c98ff2bb86c5d344, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  enable: 0
-  name: GuidedFuncion
 --- !u!1001 &2839989873188554188
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4343,30 +3287,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ThrowObject (57)
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 4766049548964259805, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 4727878797104988335, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 1407591239831133029, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 8759322460190473424, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 5526555907083541062}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8598403689873401929}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 3702387366014126701}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1329308851322061244}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
 --- !u!4 &1824461312286907984 stripped
 Transform:
@@ -4374,82 +3298,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2839989873188554188}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &8378668833697569199 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-    type: 3}
-  m_PrefabInstance: {fileID: 2839989873188554188}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &5526555907083541062
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8378668833697569199}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b24a630794942d74ab16bdc98b0e2956, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  whatIsTarget:
-    serializedVersion: 2
-    m_Bits: 512
-  adapter: {fileID: 0}
-  handler: {fileID: 0}
-  isCollected: 0
---- !u!114 &8598403689873401929
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8378668833697569199}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d074954e16471b54d840b355c42aafc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  name: ThrowObjectConvertMine
-  enable: 0
-  render: {fileID: 0}
-  meshFilter: {fileID: 0}
-  defaultDamage: 0
-  damage: 0
-  mesh: {fileID: 0}
-  material: {fileID: 0}
-  layer: 
---- !u!114 &3702387366014126701
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8378668833697569199}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4077dfed7408a124ea5e854f27d32d96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enable: 0
-  name: ThrowObjectUpgrade
-  increaseDamage: 0
-  isUpgraded: 0
---- !u!114 &1329308851322061244
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8378668833697569199}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcd14377e66e6e14c98ff2bb86c5d344, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  enable: 0
-  name: GuidedFuncion
 --- !u!1001 &2899466135298595399
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4513,30 +3361,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ThrowObject (59)
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 4766049548964259805, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 4727878797104988335, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 1407591239831133029, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 8759322460190473424, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 3964755040423231686}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 7857987524322042303}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 5097655671354668704}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 5238959303822064587}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
 --- !u!4 &1586563723838800347 stripped
 Transform:
@@ -4544,82 +3372,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2899466135298595399}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &8868238857130018340 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-    type: 3}
-  m_PrefabInstance: {fileID: 2899466135298595399}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &3964755040423231686
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8868238857130018340}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b24a630794942d74ab16bdc98b0e2956, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  whatIsTarget:
-    serializedVersion: 2
-    m_Bits: 512
-  adapter: {fileID: 0}
-  handler: {fileID: 0}
-  isCollected: 0
---- !u!114 &7857987524322042303
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8868238857130018340}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d074954e16471b54d840b355c42aafc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  name: ThrowObjectConvertMine
-  enable: 0
-  render: {fileID: 0}
-  meshFilter: {fileID: 0}
-  defaultDamage: 0
-  damage: 0
-  mesh: {fileID: 0}
-  material: {fileID: 0}
-  layer: 
---- !u!114 &5097655671354668704
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8868238857130018340}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4077dfed7408a124ea5e854f27d32d96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enable: 0
-  name: ThrowObjectUpgrade
-  increaseDamage: 0
-  isUpgraded: 0
---- !u!114 &5238959303822064587
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8868238857130018340}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcd14377e66e6e14c98ff2bb86c5d344, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  enable: 0
-  name: GuidedFuncion
 --- !u!1001 &2993219652205554838
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4683,30 +3435,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ThrowObject (92)
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 4766049548964259805, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 4727878797104988335, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 1407591239831133029, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 8759322460190473424, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 3263954925761168507}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 7757449789213704876}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 5525346473752220937}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8603728984255994662}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
 --- !u!4 &1707549467994994442 stripped
 Transform:
@@ -4714,82 +3446,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2993219652205554838}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &8837368953364574453 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-    type: 3}
-  m_PrefabInstance: {fileID: 2993219652205554838}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &3263954925761168507
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8837368953364574453}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b24a630794942d74ab16bdc98b0e2956, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  whatIsTarget:
-    serializedVersion: 2
-    m_Bits: 512
-  adapter: {fileID: 0}
-  handler: {fileID: 0}
-  isCollected: 0
---- !u!114 &7757449789213704876
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8837368953364574453}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d074954e16471b54d840b355c42aafc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  name: ThrowObjectConvertMine
-  enable: 0
-  render: {fileID: 0}
-  meshFilter: {fileID: 0}
-  defaultDamage: 0
-  damage: 0
-  mesh: {fileID: 0}
-  material: {fileID: 0}
-  layer: 
---- !u!114 &5525346473752220937
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8837368953364574453}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4077dfed7408a124ea5e854f27d32d96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enable: 0
-  name: ThrowObjectUpgrade
-  increaseDamage: 0
-  isUpgraded: 0
---- !u!114 &8603728984255994662
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8837368953364574453}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcd14377e66e6e14c98ff2bb86c5d344, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  enable: 0
-  name: GuidedFuncion
 --- !u!1001 &3013928977992731038
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5258,30 +3914,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ThrowObject (50)
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 4766049548964259805, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 4727878797104988335, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 1407591239831133029, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 8759322460190473424, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1312771270238998263}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 4894694125391678790}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 3330917099960382544}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6612072465425780396}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
 --- !u!4 &1061509082986043776 stripped
 Transform:
@@ -5289,82 +3925,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 3495741882374963740}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &7182669587188031103 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-    type: 3}
-  m_PrefabInstance: {fileID: 3495741882374963740}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1312771270238998263
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7182669587188031103}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b24a630794942d74ab16bdc98b0e2956, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  whatIsTarget:
-    serializedVersion: 2
-    m_Bits: 512
-  adapter: {fileID: 0}
-  handler: {fileID: 0}
-  isCollected: 0
---- !u!114 &4894694125391678790
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7182669587188031103}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d074954e16471b54d840b355c42aafc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  name: ThrowObjectConvertMine
-  enable: 0
-  render: {fileID: 0}
-  meshFilter: {fileID: 0}
-  defaultDamage: 0
-  damage: 0
-  mesh: {fileID: 0}
-  material: {fileID: 0}
-  layer: 
---- !u!114 &3330917099960382544
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7182669587188031103}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4077dfed7408a124ea5e854f27d32d96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enable: 0
-  name: ThrowObjectUpgrade
-  increaseDamage: 0
-  isUpgraded: 0
---- !u!114 &6612072465425780396
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7182669587188031103}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcd14377e66e6e14c98ff2bb86c5d344, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  enable: 0
-  name: GuidedFuncion
 --- !u!1001 &3511160470127433535
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5833,30 +4393,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ThrowObject (87)
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 4766049548964259805, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 4727878797104988335, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 1407591239831133029, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 8759322460190473424, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6818665809612752107}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 969514264253905428}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2276441415341867057}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1219182952116002359}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
 --- !u!4 &824580158895773682 stripped
 Transform:
@@ -5864,82 +4404,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 3839632123401129070}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &7379064723078287373 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-    type: 3}
-  m_PrefabInstance: {fileID: 3839632123401129070}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &6818665809612752107
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7379064723078287373}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b24a630794942d74ab16bdc98b0e2956, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  whatIsTarget:
-    serializedVersion: 2
-    m_Bits: 512
-  adapter: {fileID: 0}
-  handler: {fileID: 0}
-  isCollected: 0
---- !u!114 &969514264253905428
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7379064723078287373}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d074954e16471b54d840b355c42aafc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  name: ThrowObjectConvertMine
-  enable: 0
-  render: {fileID: 0}
-  meshFilter: {fileID: 0}
-  defaultDamage: 0
-  damage: 0
-  mesh: {fileID: 0}
-  material: {fileID: 0}
-  layer: 
---- !u!114 &2276441415341867057
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7379064723078287373}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4077dfed7408a124ea5e854f27d32d96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enable: 0
-  name: ThrowObjectUpgrade
-  increaseDamage: 0
-  isUpgraded: 0
---- !u!114 &1219182952116002359
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7379064723078287373}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcd14377e66e6e14c98ff2bb86c5d344, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  enable: 0
-  name: GuidedFuncion
 --- !u!1001 &4019061675420912273
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6003,30 +4467,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ThrowObject (94)
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 4766049548964259805, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 4727878797104988335, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 1407591239831133029, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 8759322460190473424, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 4513737346531473617}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8560054061052038127}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 9171051692906597138}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 3636581847187561098}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
 --- !u!4 &720278072746053901 stripped
 Transform:
@@ -6034,82 +4478,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 4019061675420912273}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &7271125487704594162 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-    type: 3}
-  m_PrefabInstance: {fileID: 4019061675420912273}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &4513737346531473617
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7271125487704594162}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b24a630794942d74ab16bdc98b0e2956, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  whatIsTarget:
-    serializedVersion: 2
-    m_Bits: 512
-  adapter: {fileID: 0}
-  handler: {fileID: 0}
-  isCollected: 0
---- !u!114 &8560054061052038127
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7271125487704594162}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d074954e16471b54d840b355c42aafc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  name: ThrowObjectConvertMine
-  enable: 0
-  render: {fileID: 0}
-  meshFilter: {fileID: 0}
-  defaultDamage: 0
-  damage: 0
-  mesh: {fileID: 0}
-  material: {fileID: 0}
-  layer: 
---- !u!114 &9171051692906597138
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7271125487704594162}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4077dfed7408a124ea5e854f27d32d96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enable: 0
-  name: ThrowObjectUpgrade
-  increaseDamage: 0
-  isUpgraded: 0
---- !u!114 &3636581847187561098
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7271125487704594162}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcd14377e66e6e14c98ff2bb86c5d344, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  enable: 0
-  name: GuidedFuncion
 --- !u!1001 &4096840413493336947
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6173,30 +4541,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ThrowObject (78)
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 4766049548964259805, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 4727878797104988335, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 1407591239831133029, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 8759322460190473424, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 4355008059226467223}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 3531461239260401819}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 5914598729950669404}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8408652267048587555}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
 --- !u!4 &496105135016870127 stripped
 Transform:
@@ -6204,82 +4552,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 4096840413493336947}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &7778930356330055440 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-    type: 3}
-  m_PrefabInstance: {fileID: 4096840413493336947}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &4355008059226467223
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7778930356330055440}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b24a630794942d74ab16bdc98b0e2956, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  whatIsTarget:
-    serializedVersion: 2
-    m_Bits: 512
-  adapter: {fileID: 0}
-  handler: {fileID: 0}
-  isCollected: 0
---- !u!114 &3531461239260401819
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7778930356330055440}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d074954e16471b54d840b355c42aafc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  name: ThrowObjectConvertMine
-  enable: 0
-  render: {fileID: 0}
-  meshFilter: {fileID: 0}
-  defaultDamage: 0
-  damage: 0
-  mesh: {fileID: 0}
-  material: {fileID: 0}
-  layer: 
---- !u!114 &5914598729950669404
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7778930356330055440}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4077dfed7408a124ea5e854f27d32d96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enable: 0
-  name: ThrowObjectUpgrade
-  increaseDamage: 0
-  isUpgraded: 0
---- !u!114 &8408652267048587555
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7778930356330055440}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcd14377e66e6e14c98ff2bb86c5d344, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  enable: 0
-  name: GuidedFuncion
 --- !u!1001 &4301364412259048641
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6343,30 +4615,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ThrowObject (91)
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 4766049548964259805, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 4727878797104988335, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 1407591239831133029, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 8759322460190473424, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2808727503191708790}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2610801044821827628}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 3101720126639858093}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 3884617843732498597}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
 --- !u!4 &399103476181010269 stripped
 Transform:
@@ -6374,82 +4626,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 4301364412259048641}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &7538794273522008226 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-    type: 3}
-  m_PrefabInstance: {fileID: 4301364412259048641}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2808727503191708790
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7538794273522008226}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b24a630794942d74ab16bdc98b0e2956, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  whatIsTarget:
-    serializedVersion: 2
-    m_Bits: 512
-  adapter: {fileID: 0}
-  handler: {fileID: 0}
-  isCollected: 0
---- !u!114 &2610801044821827628
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7538794273522008226}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d074954e16471b54d840b355c42aafc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  name: ThrowObjectConvertMine
-  enable: 0
-  render: {fileID: 0}
-  meshFilter: {fileID: 0}
-  defaultDamage: 0
-  damage: 0
-  mesh: {fileID: 0}
-  material: {fileID: 0}
-  layer: 
---- !u!114 &3101720126639858093
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7538794273522008226}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4077dfed7408a124ea5e854f27d32d96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enable: 0
-  name: ThrowObjectUpgrade
-  increaseDamage: 0
-  isUpgraded: 0
---- !u!114 &3884617843732498597
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7538794273522008226}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcd14377e66e6e14c98ff2bb86c5d344, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  enable: 0
-  name: GuidedFuncion
 --- !u!1001 &4397094762633970325
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6513,30 +4689,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ThrowObject (71)
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 4766049548964259805, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 4727878797104988335, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 1407591239831133029, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 8759322460190473424, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 3932127763137993244}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1495947601680410117}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8547408588698499544}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1573984038377741425}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
 --- !u!4 &233620074329987337 stripped
 Transform:
@@ -6544,82 +4700,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 4397094762633970325}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &7938499466472267510 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-    type: 3}
-  m_PrefabInstance: {fileID: 4397094762633970325}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &3932127763137993244
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7938499466472267510}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b24a630794942d74ab16bdc98b0e2956, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  whatIsTarget:
-    serializedVersion: 2
-    m_Bits: 512
-  adapter: {fileID: 0}
-  handler: {fileID: 0}
-  isCollected: 0
---- !u!114 &1495947601680410117
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7938499466472267510}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d074954e16471b54d840b355c42aafc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  name: ThrowObjectConvertMine
-  enable: 0
-  render: {fileID: 0}
-  meshFilter: {fileID: 0}
-  defaultDamage: 0
-  damage: 0
-  mesh: {fileID: 0}
-  material: {fileID: 0}
-  layer: 
---- !u!114 &8547408588698499544
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7938499466472267510}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4077dfed7408a124ea5e854f27d32d96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enable: 0
-  name: ThrowObjectUpgrade
-  increaseDamage: 0
-  isUpgraded: 0
---- !u!114 &1573984038377741425
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7938499466472267510}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcd14377e66e6e14c98ff2bb86c5d344, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  enable: 0
-  name: GuidedFuncion
 --- !u!1001 &4493906612892682138
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6953,107 +5033,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ThrowObject (52)
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 4766049548964259805, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 4727878797104988335, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 1407591239831133029, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 8759322460190473424, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 7622819685923174767}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1164543519230751795}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 316947799121744372}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 3096078271110210399}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
---- !u!1 &1432625237501982323 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-    type: 3}
-  m_PrefabInstance: {fileID: 4669982432284568080}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &7622819685923174767
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1432625237501982323}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b24a630794942d74ab16bdc98b0e2956, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  whatIsTarget:
-    serializedVersion: 2
-    m_Bits: 512
-  adapter: {fileID: 0}
-  handler: {fileID: 0}
-  isCollected: 0
---- !u!114 &1164543519230751795
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1432625237501982323}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d074954e16471b54d840b355c42aafc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  name: ThrowObjectConvertMine
-  enable: 0
-  render: {fileID: 0}
-  meshFilter: {fileID: 0}
-  defaultDamage: 0
-  damage: 0
-  mesh: {fileID: 0}
-  material: {fileID: 0}
-  layer: 
---- !u!114 &316947799121744372
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1432625237501982323}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4077dfed7408a124ea5e854f27d32d96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enable: 0
-  name: ThrowObjectUpgrade
-  increaseDamage: 0
-  isUpgraded: 0
---- !u!114 &3096078271110210399
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1432625237501982323}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcd14377e66e6e14c98ff2bb86c5d344, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  enable: 0
-  name: GuidedFuncion
 --- !u!4 &9148919826816921996 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4483441574383033244, guid: a6a424693f63ae04788f8ca7d29163b6,
@@ -7393,107 +5377,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ThrowObject (61)
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 4766049548964259805, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 4727878797104988335, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 1407591239831133029, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 8759322460190473424, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8019943951046559945}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1049428660162992430}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 4278109238135609810}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 7813276402705059573}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
---- !u!1 &1623174427806072972 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-    type: 3}
-  m_PrefabInstance: {fileID: 5019268233326451951}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &8019943951046559945
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1623174427806072972}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b24a630794942d74ab16bdc98b0e2956, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  whatIsTarget:
-    serializedVersion: 2
-    m_Bits: 512
-  adapter: {fileID: 0}
-  handler: {fileID: 0}
-  isCollected: 0
---- !u!114 &1049428660162992430
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1623174427806072972}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d074954e16471b54d840b355c42aafc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  name: ThrowObjectConvertMine
-  enable: 0
-  render: {fileID: 0}
-  meshFilter: {fileID: 0}
-  defaultDamage: 0
-  damage: 0
-  mesh: {fileID: 0}
-  material: {fileID: 0}
-  layer: 
---- !u!114 &4278109238135609810
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1623174427806072972}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4077dfed7408a124ea5e854f27d32d96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enable: 0
-  name: ThrowObjectUpgrade
-  increaseDamage: 0
-  isUpgraded: 0
---- !u!114 &7813276402705059573
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1623174427806072972}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcd14377e66e6e14c98ff2bb86c5d344, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  enable: 0
-  name: GuidedFuncion
 --- !u!4 &8903730292351747955 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4483441574383033244, guid: a6a424693f63ae04788f8ca7d29163b6,
@@ -7848,107 +5736,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ThrowObject (55)
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 4766049548964259805, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 4727878797104988335, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 1407591239831133029, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 8759322460190473424, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 5633125705596677136}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 3455701851319664039}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6651029488368664472}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 3954617063282461788}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
---- !u!1 &1866867106211825067 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-    type: 3}
-  m_PrefabInstance: {fileID: 5388232505116350920}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &5633125705596677136
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1866867106211825067}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b24a630794942d74ab16bdc98b0e2956, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  whatIsTarget:
-    serializedVersion: 2
-    m_Bits: 512
-  adapter: {fileID: 0}
-  handler: {fileID: 0}
-  isCollected: 0
---- !u!114 &3455701851319664039
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1866867106211825067}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d074954e16471b54d840b355c42aafc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  name: ThrowObjectConvertMine
-  enable: 0
-  render: {fileID: 0}
-  meshFilter: {fileID: 0}
-  defaultDamage: 0
-  damage: 0
-  mesh: {fileID: 0}
-  material: {fileID: 0}
-  layer: 
---- !u!114 &6651029488368664472
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1866867106211825067}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4077dfed7408a124ea5e854f27d32d96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enable: 0
-  name: ThrowObjectUpgrade
-  increaseDamage: 0
-  isUpgraded: 0
---- !u!114 &3954617063282461788
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1866867106211825067}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcd14377e66e6e14c98ff2bb86c5d344, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  enable: 0
-  name: GuidedFuncion
 --- !u!4 &8430380825597297236 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4483441574383033244, guid: a6a424693f63ae04788f8ca7d29163b6,
@@ -8153,107 +5945,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ThrowObject (88)
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 4766049548964259805, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 4727878797104988335, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 1407591239831133029, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 8759322460190473424, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1731821827006539744}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 7159190185578460463}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2758550544843473863}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2655963036817021273}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
---- !u!1 &1766290556475696556 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-    type: 3}
-  m_PrefabInstance: {fileID: 5453215593042688463}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1731821827006539744
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1766290556475696556}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b24a630794942d74ab16bdc98b0e2956, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  whatIsTarget:
-    serializedVersion: 2
-    m_Bits: 512
-  adapter: {fileID: 0}
-  handler: {fileID: 0}
-  isCollected: 0
---- !u!114 &7159190185578460463
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1766290556475696556}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d074954e16471b54d840b355c42aafc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  name: ThrowObjectConvertMine
-  enable: 0
-  render: {fileID: 0}
-  meshFilter: {fileID: 0}
-  defaultDamage: 0
-  damage: 0
-  mesh: {fileID: 0}
-  material: {fileID: 0}
-  layer: 
---- !u!114 &2758550544843473863
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1766290556475696556}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4077dfed7408a124ea5e854f27d32d96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enable: 0
-  name: ThrowObjectUpgrade
-  increaseDamage: 0
-  isUpgraded: 0
---- !u!114 &2655963036817021273
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1766290556475696556}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcd14377e66e6e14c98ff2bb86c5d344, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  enable: 0
-  name: GuidedFuncion
 --- !u!4 &8472912379997299283 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4483441574383033244, guid: a6a424693f63ae04788f8ca7d29163b6,
@@ -8458,107 +6154,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ThrowObject (81)
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 4766049548964259805, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 4727878797104988335, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 1407591239831133029, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 8759322460190473424, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 5373859374048017412}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 7546168755216614671}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1228396215262215869}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 5358872555401188791}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
---- !u!1 &2266161400948693858 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-    type: 3}
-  m_PrefabInstance: {fileID: 5502744115345737473}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &5373859374048017412
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2266161400948693858}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b24a630794942d74ab16bdc98b0e2956, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  whatIsTarget:
-    serializedVersion: 2
-    m_Bits: 512
-  adapter: {fileID: 0}
-  handler: {fileID: 0}
-  isCollected: 0
---- !u!114 &7546168755216614671
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2266161400948693858}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d074954e16471b54d840b355c42aafc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  name: ThrowObjectConvertMine
-  enable: 0
-  render: {fileID: 0}
-  meshFilter: {fileID: 0}
-  defaultDamage: 0
-  damage: 0
-  mesh: {fileID: 0}
-  material: {fileID: 0}
-  layer: 
---- !u!114 &1228396215262215869
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2266161400948693858}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4077dfed7408a124ea5e854f27d32d96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enable: 0
-  name: ThrowObjectUpgrade
-  increaseDamage: 0
-  isUpgraded: 0
---- !u!114 &5358872555401188791
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2266161400948693858}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcd14377e66e6e14c98ff2bb86c5d344, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  enable: 0
-  name: GuidedFuncion
 --- !u!4 &8243222041451060381 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4483441574383033244, guid: a6a424693f63ae04788f8ca7d29163b6,
@@ -8763,107 +6363,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ThrowObject (82)
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 4766049548964259805, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 4727878797104988335, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 1407591239831133029, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 8759322460190473424, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 5433343075334232300}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1277861808771357467}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 5289549533002785468}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2059998105933916658}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
---- !u!1 &265139465355740794 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-    type: 3}
-  m_PrefabInstance: {fileID: 5801585919173925401}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &5433343075334232300
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 265139465355740794}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b24a630794942d74ab16bdc98b0e2956, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  whatIsTarget:
-    serializedVersion: 2
-    m_Bits: 512
-  adapter: {fileID: 0}
-  handler: {fileID: 0}
-  isCollected: 0
---- !u!114 &1277861808771357467
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 265139465355740794}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d074954e16471b54d840b355c42aafc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  name: ThrowObjectConvertMine
-  enable: 0
-  render: {fileID: 0}
-  meshFilter: {fileID: 0}
-  defaultDamage: 0
-  damage: 0
-  mesh: {fileID: 0}
-  material: {fileID: 0}
-  layer: 
---- !u!114 &5289549533002785468
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 265139465355740794}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4077dfed7408a124ea5e854f27d32d96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enable: 0
-  name: ThrowObjectUpgrade
-  increaseDamage: 0
-  isUpgraded: 0
---- !u!114 &2059998105933916658
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 265139465355740794}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcd14377e66e6e14c98ff2bb86c5d344, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  enable: 0
-  name: GuidedFuncion
 --- !u!4 &7979039318600876421 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4483441574383033244, guid: a6a424693f63ae04788f8ca7d29163b6,
@@ -9203,107 +6707,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ThrowObject (77)
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 4766049548964259805, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 4727878797104988335, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 1407591239831133029, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 8759322460190473424, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1172438868692495868}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 5786604506159655219}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2052207323618173955}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 7241031289496495002}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
---- !u!1 &122976536619177628 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-    type: 3}
-  m_PrefabInstance: {fileID: 5952157636099476223}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1172438868692495868
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 122976536619177628}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b24a630794942d74ab16bdc98b0e2956, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  whatIsTarget:
-    serializedVersion: 2
-    m_Bits: 512
-  adapter: {fileID: 0}
-  handler: {fileID: 0}
-  isCollected: 0
---- !u!114 &5786604506159655219
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 122976536619177628}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d074954e16471b54d840b355c42aafc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  name: ThrowObjectConvertMine
-  enable: 0
-  render: {fileID: 0}
-  meshFilter: {fileID: 0}
-  defaultDamage: 0
-  damage: 0
-  mesh: {fileID: 0}
-  material: {fileID: 0}
-  layer: 
---- !u!114 &2052207323618173955
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 122976536619177628}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4077dfed7408a124ea5e854f27d32d96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enable: 0
-  name: ThrowObjectUpgrade
-  increaseDamage: 0
-  isUpgraded: 0
---- !u!114 &7241031289496495002
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 122976536619177628}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcd14377e66e6e14c98ff2bb86c5d344, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  enable: 0
-  name: GuidedFuncion
 --- !u!4 &7827869190341464419 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4483441574383033244, guid: a6a424693f63ae04788f8ca7d29163b6,
@@ -10183,107 +7591,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ThrowObject (1)
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 4766049548964259805, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 4727878797104988335, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 1407591239831133029, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 8759322460190473424, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8930397394400831939}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2573109036905317536}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 3819247219969671968}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2717735750074645246}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
---- !u!1 &3733361379275282945 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-    type: 3}
-  m_PrefabInstance: {fileID: 6980923789881099874}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &8930397394400831939
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3733361379275282945}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b24a630794942d74ab16bdc98b0e2956, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  whatIsTarget:
-    serializedVersion: 2
-    m_Bits: 512
-  adapter: {fileID: 0}
-  handler: {fileID: 0}
-  isCollected: 0
---- !u!114 &2573109036905317536
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3733361379275282945}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d074954e16471b54d840b355c42aafc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  name: ThrowObjectConvertMine
-  enable: 0
-  render: {fileID: 0}
-  meshFilter: {fileID: 0}
-  defaultDamage: 0
-  damage: 0
-  mesh: {fileID: 0}
-  material: {fileID: 0}
-  layer: 
---- !u!114 &3819247219969671968
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3733361379275282945}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4077dfed7408a124ea5e854f27d32d96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enable: 0
-  name: ThrowObjectUpgrade
-  increaseDamage: 0
-  isUpgraded: 0
---- !u!114 &2717735750074645246
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3733361379275282945}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcd14377e66e6e14c98ff2bb86c5d344, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  enable: 0
-  name: GuidedFuncion
 --- !u!4 &6834594415097306622 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4483441574383033244, guid: a6a424693f63ae04788f8ca7d29163b6,
@@ -11163,107 +8475,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ThrowObject (70)
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 4766049548964259805, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 4727878797104988335, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 1407591239831133029, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 8759322460190473424, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 4500333984351245501}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 5044266491042946463}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 7781212792994522557}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8664865329663483471}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
---- !u!1 &4576824191271948641 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-    type: 3}
-  m_PrefabInstance: {fileID: 7830224893862972674}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &4500333984351245501
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4576824191271948641}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b24a630794942d74ab16bdc98b0e2956, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  whatIsTarget:
-    serializedVersion: 2
-    m_Bits: 512
-  adapter: {fileID: 0}
-  handler: {fileID: 0}
-  isCollected: 0
---- !u!114 &5044266491042946463
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4576824191271948641}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d074954e16471b54d840b355c42aafc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  name: ThrowObjectConvertMine
-  enable: 0
-  render: {fileID: 0}
-  meshFilter: {fileID: 0}
-  defaultDamage: 0
-  damage: 0
-  mesh: {fileID: 0}
-  material: {fileID: 0}
-  layer: 
---- !u!114 &7781212792994522557
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4576824191271948641}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4077dfed7408a124ea5e854f27d32d96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enable: 0
-  name: ThrowObjectUpgrade
-  increaseDamage: 0
-  isUpgraded: 0
---- !u!114 &8664865329663483471
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4576824191271948641}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcd14377e66e6e14c98ff2bb86c5d344, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  enable: 0
-  name: GuidedFuncion
 --- !u!4 &5950080112762164894 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4483441574383033244, guid: a6a424693f63ae04788f8ca7d29163b6,
@@ -11333,107 +8549,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ThrowObject (74)
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 4766049548964259805, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 4727878797104988335, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 1407591239831133029, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 8759322460190473424, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 4955353227584746957}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 7405700605421354131}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 4758150493037564225}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 4198750789268884603}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
---- !u!1 &4505941187205800459 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-    type: 3}
-  m_PrefabInstance: {fileID: 7901276328560066152}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &4955353227584746957
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4505941187205800459}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b24a630794942d74ab16bdc98b0e2956, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  whatIsTarget:
-    serializedVersion: 2
-    m_Bits: 512
-  adapter: {fileID: 0}
-  handler: {fileID: 0}
-  isCollected: 0
---- !u!114 &7405700605421354131
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4505941187205800459}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d074954e16471b54d840b355c42aafc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  name: ThrowObjectConvertMine
-  enable: 0
-  render: {fileID: 0}
-  meshFilter: {fileID: 0}
-  defaultDamage: 0
-  damage: 0
-  mesh: {fileID: 0}
-  material: {fileID: 0}
-  layer: 
---- !u!114 &4758150493037564225
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4505941187205800459}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4077dfed7408a124ea5e854f27d32d96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enable: 0
-  name: ThrowObjectUpgrade
-  increaseDamage: 0
-  isUpgraded: 0
---- !u!114 &4198750789268884603
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4505941187205800459}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcd14377e66e6e14c98ff2bb86c5d344, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  enable: 0
-  name: GuidedFuncion
 --- !u!4 &6025423426944493044 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4483441574383033244, guid: a6a424693f63ae04788f8ca7d29163b6,
@@ -11503,107 +8623,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ThrowObject (58)
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 4766049548964259805, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 4727878797104988335, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 1407591239831133029, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 8759322460190473424, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 53974825310626208}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6819887899199077430}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 415575319962661652}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 5412427933900067777}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
---- !u!1 &4347745448525155031 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-    type: 3}
-  m_PrefabInstance: {fileID: 8032418582331365044}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &53974825310626208
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4347745448525155031}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b24a630794942d74ab16bdc98b0e2956, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  whatIsTarget:
-    serializedVersion: 2
-    m_Bits: 512
-  adapter: {fileID: 0}
-  handler: {fileID: 0}
-  isCollected: 0
---- !u!114 &6819887899199077430
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4347745448525155031}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d074954e16471b54d840b355c42aafc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  name: ThrowObjectConvertMine
-  enable: 0
-  render: {fileID: 0}
-  meshFilter: {fileID: 0}
-  defaultDamage: 0
-  damage: 0
-  mesh: {fileID: 0}
-  material: {fileID: 0}
-  layer: 
---- !u!114 &415575319962661652
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4347745448525155031}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4077dfed7408a124ea5e854f27d32d96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enable: 0
-  name: ThrowObjectUpgrade
-  increaseDamage: 0
-  isUpgraded: 0
---- !u!114 &5412427933900067777
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4347745448525155031}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcd14377e66e6e14c98ff2bb86c5d344, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  enable: 0
-  name: GuidedFuncion
 --- !u!4 &5854820798854466856 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4483441574383033244, guid: a6a424693f63ae04788f8ca7d29163b6,
@@ -11823,107 +8847,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ThrowObject (49)
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 4766049548964259805, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 4727878797104988335, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 1407591239831133029, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 8759322460190473424, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6205327446983769693}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6973979740461808388}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 3764142878117401081}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8510628522389708646}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
---- !u!1 &2393741883599786097 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-    type: 3}
-  m_PrefabInstance: {fileID: 8221020784945187858}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &6205327446983769693
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2393741883599786097}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b24a630794942d74ab16bdc98b0e2956, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  whatIsTarget:
-    serializedVersion: 2
-    m_Bits: 512
-  adapter: {fileID: 0}
-  handler: {fileID: 0}
-  isCollected: 0
---- !u!114 &6973979740461808388
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2393741883599786097}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d074954e16471b54d840b355c42aafc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  name: ThrowObjectConvertMine
-  enable: 0
-  render: {fileID: 0}
-  meshFilter: {fileID: 0}
-  defaultDamage: 0
-  damage: 0
-  mesh: {fileID: 0}
-  material: {fileID: 0}
-  layer: 
---- !u!114 &3764142878117401081
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2393741883599786097}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4077dfed7408a124ea5e854f27d32d96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enable: 0
-  name: ThrowObjectUpgrade
-  increaseDamage: 0
-  isUpgraded: 0
---- !u!114 &8510628522389708646
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2393741883599786097}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcd14377e66e6e14c98ff2bb86c5d344, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  enable: 0
-  name: GuidedFuncion
 --- !u!4 &5489479491515537294 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4483441574383033244, guid: a6a424693f63ae04788f8ca7d29163b6,
@@ -12128,107 +9056,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ThrowObject (79)
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 4766049548964259805, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 4727878797104988335, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 1407591239831133029, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 8759322460190473424, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 322452316549680055}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 3109610776359111418}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 9064166387273309513}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 9066685265996715207}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
---- !u!1 &2600670692419619887 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-    type: 3}
-  m_PrefabInstance: {fileID: 8591136773097295948}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &322452316549680055
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2600670692419619887}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b24a630794942d74ab16bdc98b0e2956, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  whatIsTarget:
-    serializedVersion: 2
-    m_Bits: 512
-  adapter: {fileID: 0}
-  handler: {fileID: 0}
-  isCollected: 0
---- !u!114 &3109610776359111418
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2600670692419619887}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d074954e16471b54d840b355c42aafc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  name: ThrowObjectConvertMine
-  enable: 0
-  render: {fileID: 0}
-  meshFilter: {fileID: 0}
-  defaultDamage: 0
-  damage: 0
-  mesh: {fileID: 0}
-  material: {fileID: 0}
-  layer: 
---- !u!114 &9064166387273309513
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2600670692419619887}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4077dfed7408a124ea5e854f27d32d96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enable: 0
-  name: ThrowObjectUpgrade
-  increaseDamage: 0
-  isUpgraded: 0
---- !u!114 &9066685265996715207
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2600670692419619887}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcd14377e66e6e14c98ff2bb86c5d344, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  enable: 0
-  name: GuidedFuncion
 --- !u!4 &5260691702176484304 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4483441574383033244, guid: a6a424693f63ae04788f8ca7d29163b6,
@@ -12568,107 +9400,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ThrowObject (73)
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 4766049548964259805, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 4727878797104988335, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 1407591239831133029, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
-    - {fileID: 8759322460190473424, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 4436277240500195457}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 5836049563449502950}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 3801915003843620256}
-    - targetCorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1001655602002405021}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a6a424693f63ae04788f8ca7d29163b6, type: 3}
---- !u!1 &3370334380987576130 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5993914347992276067, guid: a6a424693f63ae04788f8ca7d29163b6,
-    type: 3}
-  m_PrefabInstance: {fileID: 9073482303488832289}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &4436277240500195457
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3370334380987576130}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b24a630794942d74ab16bdc98b0e2956, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  whatIsTarget:
-    serializedVersion: 2
-    m_Bits: 512
-  adapter: {fileID: 0}
-  handler: {fileID: 0}
-  isCollected: 0
---- !u!114 &5836049563449502950
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3370334380987576130}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d074954e16471b54d840b355c42aafc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  name: ThrowObjectConvertMine
-  enable: 0
-  render: {fileID: 0}
-  meshFilter: {fileID: 0}
-  defaultDamage: 0
-  damage: 0
-  mesh: {fileID: 0}
-  material: {fileID: 0}
-  layer: 
---- !u!114 &3801915003843620256
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3370334380987576130}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4077dfed7408a124ea5e854f27d32d96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enable: 0
-  name: ThrowObjectUpgrade
-  increaseDamage: 0
-  isUpgraded: 0
---- !u!114 &1001655602002405021
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3370334380987576130}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcd14377e66e6e14c98ff2bb86c5d344, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  enable: 0
-  name: GuidedFuncion
 --- !u!4 &4887283347080816829 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4483441574383033244, guid: a6a424693f63ae04788f8ca7d29163b6,

@@ -6,7 +6,6 @@ using Zenject;
 [RequireComponent(typeof(Rigidbody))]
 public class ThrowObject : MonoBehaviour, IDrainable
 {
-    [Inject]
     [SerializeField] private RandomModeling setModeling;
     [SerializeField] private GameObject modeling;
     [SerializeField] private LayerMask whatIsTarget;
@@ -34,6 +33,7 @@ public class ThrowObject : MonoBehaviour, IDrainable
         rigid = GetComponent<Rigidbody>();
         Upgrade = GetComponent<ThrowObjectUpgrade>();
         throwEffects = new List<IEffect>();
+        setModeling = FindAnyObjectByType<RandomModeling>();
     }
     private void Start()
     {

@@ -47,7 +47,7 @@ public class UI_InventorySlots : MonoBehaviour, ISelectHandler, IDeselectHandler
 
     public void GearSell()
     {
-        statModel.Chip += gear.Tier;
+        statModel.Chip += gear.Tier + 1;
         ClearSlot();
     }
 

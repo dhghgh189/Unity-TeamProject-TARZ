@@ -186,6 +186,7 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
                 }
                 break;
             case MonsterData.MonsterTier.Boss:
+                dropGearRandomTier = true;
                 dropGearPvalue = 75f;
                 dropGear = true;
                 break;

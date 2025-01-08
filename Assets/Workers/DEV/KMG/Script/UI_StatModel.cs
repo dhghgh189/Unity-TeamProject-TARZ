@@ -6,80 +6,59 @@ public class UI_StatModel : MonoBehaviour
 {
     [Inject] StatModel statModel;
     [SerializeField] private TMP_Text statText;
-    [SerializeField] private TMP_Text hpText;
-    [SerializeField] private TMP_Text mpText;
-    [SerializeField] private TMP_Text staminaText;
-    [SerializeField] private TMP_Text chipText;
-    [SerializeField] private TMP_Text blackChipText;
+    [SerializeField] private TMP_Text statValueText;
+    [SerializeField] private TMP_Text maxHp;
+    [SerializeField] private TMP_Text maxStamina;
+    [SerializeField] private TMP_Text moveSpeed;
     private void Awake()
     {
         statModel.OnStatChange += StatModel_OnStatChange;
-        statModel.OnCurHpChange += StatModel_OnCurHpChange;
-        statModel.OnCurMpChange += StatModel_OnCurMpChange;
-        statModel.OnCurStaminaChange += StatModel_OnCurStaminaChange;
-        statModel.OnChipChange += StatModel_OnChipChange;
-        statModel.OnBlackChipChange += StatModel_OnBlackChipChange;
+        statModel.OnMaxHpChange += StatModel_OnMaxHpChange;
+        statModel.OnMaxStaminaChange += StatModel_OnMaxStaminaChange;
+        statModel.OnMoveSpeedChange += StatModel_OnMoveSpeedChange;
 
-        hpText.text = $"체력: {statModel.CurrentHp}/{statModel.MaxHp}";
-        mpText.text = $"마나: {statModel.CurrentMp}";
-        staminaText.text = $"스테미나: {statModel.CurrentStamina}/{statModel.MaxStamina}";
-        chipText.text = $"데이터 칩: {statModel.Chip}";
-        blackChipText.text = $"블랙 데이터 칩: {statModel.BlackChip}";
+        maxHp.text = $"체력\t\t{statModel.MaxHp}";
+        maxStamina.text = $"스테미나\t{statModel.MaxStamina}";
+        moveSpeed.text = $"이동속도\t{statModel.MoveSpeed}";
 
         // UI 갱신을 위한 의미있는 함수
         statModel.SetAbility(AdditionAbility.AllPowerPer, 0);
     }
 
-    private void StatModel_OnCurHpChange(float currentHp)
+    private void StatModel_OnMoveSpeedChange(float obj)
     {
-        hpText.text = $"체력: {currentHp}/{statModel.MaxHp}";
+        moveSpeed.text = $"이동속도\t{statModel.MoveSpeed}";
     }
 
-    private void StatModel_OnCurMpChange(float curreentMp)
+    private void StatModel_OnMaxStaminaChange(float currentStamina)
     {
-        mpText.text = $"마나: {curreentMp}";
+        maxStamina.text = $"스테미나\t{statModel.MaxStamina}";
     }
-
-    private void StatModel_OnCurStaminaChange(float currentStamina)
+    private void StatModel_OnMaxHpChange(float currentHp)
     {
-        staminaText.text = $"스테미나: {currentStamina}/{statModel.MaxStamina}";
-    }
-
-    private void StatModel_OnChipChange(float chip)
-    {
-        chipText.text = $"데이터 칩: {chip}";
-    }
-
-    private void StatModel_OnBlackChipChange(float blackChip)
-    {
-        blackChipText.text = $"블랙 데이터 칩: {blackChip}";
+        maxHp.text = $"체력\t\t{statModel.MaxHp}";
     }
 
     private void StatModel_OnStatChange()
     {
         statText.text = string.Empty;
+        statValueText.text = string.Empty;
         for (int i = 0; i < (int)AdditionAbility.Size; i++)
         {
             float value = statModel.GetAbility((AdditionAbility)i);
             if (value > 0)
             {
-                statText.text += $"{((AdditionAbility)i).ToDescription()} : {value}\n";
+                statText.text += $"{((AdditionAbility)i).ToDescription()}\n";
+                statValueText.text += $"{value}\n";
             }
         }
-
-        // UI 갱신을 위한
-        statModel.CurrentHp += 0;
-        statModel.CurrentMp += 0;
-        statModel.ChangeStamina(0);
     }
 
     private void OnDestroy()
     {
         statModel.OnStatChange -= StatModel_OnStatChange;
-        statModel.OnCurHpChange -= StatModel_OnCurHpChange;
-        statModel.OnCurMpChange -= StatModel_OnCurMpChange;
-        statModel.OnCurStaminaChange -= StatModel_OnCurStaminaChange;
-        statModel.OnChipChange -= StatModel_OnChipChange;
-        statModel.OnBlackChipChange -= StatModel_OnBlackChipChange;
+        statModel.OnMaxHpChange -= StatModel_OnMaxHpChange;
+        statModel.OnMaxStaminaChange -= StatModel_OnMaxStaminaChange;
+        statModel.OnMoveSpeedChange -= StatModel_OnMoveSpeedChange;
     }
 }

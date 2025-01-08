@@ -55,4 +55,9 @@ public class Equipment : MonoBehaviour
             saveData.EquipmentGears[i] = JsonUtility.FromJson<GearSaveData>(JsonUtility.ToJson(equipmentGears[i]));
         }
     }
+
+    public Gear GetPartGear(Part part)
+    {
+        return equipmentGears[(int)part];
+    }
 }

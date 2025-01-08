@@ -24,6 +24,8 @@ public class ArmUpgradManager : MonoBehaviour, Interaction_Ibase_Activate
     [SerializeField] TMP_Text upCostText;
     [SerializeField] TMP_Text installUnitsText;
 
+    [SerializeField] TMP_Text dataChipText;
+
     private void Start()
     {
         armUnits = GetComponentsInChildren<UI_ArmUpgrade>(true);
@@ -31,6 +33,9 @@ public class ArmUpgradManager : MonoBehaviour, Interaction_Ibase_Activate
         {
             item.SavaDataCheck();
         }
+
+        statModel.OnChipChange += DataChipChange;
+        dataChipText.text = $"{statModel.Chip}";
     }
     public void ArmUnitStatUp(AdditionAbility ability, float value)
     {
@@ -72,5 +77,10 @@ public class ArmUpgradManager : MonoBehaviour, Interaction_Ibase_Activate
         {
             installUnitsText.text += item.UnitInfo();
         }
+    }
+
+    private void DataChipChange(float chip)
+    {
+        dataChipText.text = $"{chip}";
     }
 }

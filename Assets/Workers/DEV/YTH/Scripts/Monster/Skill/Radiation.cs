@@ -18,14 +18,17 @@ public class Radiation : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        IDamagable damagable = other.GetComponent<IDamagable>();
-        _damagable = damagable;
-
-        if (_damagable != null)
+        if (other.gameObject.CompareTag("Player"))
         {
-            if (takeDOTRoutine == null)
+            IDamagable damagable = other.GetComponent<IDamagable>();
+            _damagable = damagable;
+
+            if (_damagable != null)
             {
-                takeDOTRoutine = StartCoroutine(TakeDOTRoutine(_damage));
+                if (takeDOTRoutine == null)
+                {
+                    takeDOTRoutine = StartCoroutine(TakeDOTRoutine(_damage));
+                }
             }
         }
     }

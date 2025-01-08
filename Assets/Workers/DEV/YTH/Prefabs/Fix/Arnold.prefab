@@ -754,6 +754,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _angle: 45
   _distance: 3
+  time: 0.25
 --- !u!114 &9112775609412227576
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -784,19 +785,12 @@ MonoBehaviour:
   _monsterType: 2
   _skillType: 0
   _monsterTier: 2
-  _maxHp: 300
+  _maxHp: 500
   _curHp: 0
   _damage: 10
   _attackRange: 3
-  _isAttacked: 0
-  _isCatched: 0
-  _isDead: 0
-  isMoving: 0
-  _meleeAttackSpeed: 3
-  _range: 3
-  _angle: 190
-  _rangeAttackSpeed: 0
-  _throwPower: 0
+  _attackSpeed: 2
+  _angle: 200
   _canUseProjectileSkillDistance: 0
   _canJumpDistance: 0
   _dangerDistance: 0
@@ -864,7 +858,6 @@ MonoBehaviour:
   _projectile: {fileID: 0}
   _bombPrefab: {fileID: 0}
   _minePrefab: {fileID: 0}
-  _jackTheRipper: {fileID: 0}
   _electricWallPrefab: {fileID: 2390178603253332089, guid: dee049f6313377d48b4411be8e1a8132,
     type: 3}
   _thunderPrefab: {fileID: 2390178603253332089, guid: dee049f6313377d48b4411be8e1a8132,

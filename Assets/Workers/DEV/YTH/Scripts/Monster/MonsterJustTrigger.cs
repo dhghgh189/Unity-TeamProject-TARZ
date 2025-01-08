@@ -21,6 +21,9 @@ public class MonsterJustTrigger : MonoBehaviour
     private GameObject _player;
 
     private PlayerAttack _playerAttack;
+
+    [SerializeField] private float time = 0.25f; 
+
     private void Awake()
     {
         _animator = GetComponent<Animator>();
@@ -53,7 +56,7 @@ public class MonsterJustTrigger : MonoBehaviour
     IEnumerator JustRoutine() // 켜진 트리거는 아주 짧은 시간 뒤 꺼짐
     {
         _justTrigger.SetActive(true);
-        yield return Util.GetDelay(0.25f);
+        yield return Util.GetDelay(time);
         _justTrigger.SetActive(false);
 
         justRoutine = null;
@@ -66,17 +69,17 @@ public class MonsterJustTrigger : MonoBehaviour
         if (player == null)
             return;
 
-        //if (player.Fsm.CurrentState.type == EState.Dash)
-        //{
-        //    Debug.Log("저스트회피 성공!");
-        //    _playerStat.CurrentMp += 10;
-        //    _monsterData.IsCountered = true;
-        //    _playerAttack.JustCounter(_monsterData);
-        //}
-        //else
-        //{
-        //    Debug.Log($"Just Failed...");
-        //}
+        if (player.Fsm.CurrentState.type == EState.Dash)
+        {
+            Debug.Log("저스트회피 성공!");
+            _playerStat.CurrentMp += 10;
+            _monsterData.IsCountered = true;
+            _playerAttack.JustCounter(_monsterData);
+        }
+        else
+        {
+            Debug.Log($"Just Failed...");
+        }
     }
 
     #region 저스트회피 범위 판정

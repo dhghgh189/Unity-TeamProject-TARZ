@@ -7,11 +7,16 @@ public class Projectile_Bomb : MonoBehaviour
 
     private SphereCollider _sphereCollider;
 
-    private void Start()
+    private void Awake()
     {
         _sphereCollider = GetComponent<SphereCollider>();
         _monsterSkillManager = GetComponentInParent<MonsterSkillManager>();
         _sphereCollider.radius = _monsterSkillManager.BombSkill.Range;
+    }
+
+    private void Start()
+    {
+        transform.parent = null;    
     }
 
     private void OnCollisionEnter(Collision collision)

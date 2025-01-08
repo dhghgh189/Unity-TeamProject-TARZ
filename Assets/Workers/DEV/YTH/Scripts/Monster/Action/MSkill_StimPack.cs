@@ -1,7 +1,5 @@
-using UnityEngine;
-using BehaviorDesigner.Runtime;
 using BehaviorDesigner.Runtime.Tasks;
-using Zenject;
+using UnityEngine;
 
 public class MSkill_StimPack : Action
 {
@@ -16,11 +14,14 @@ public class MSkill_StimPack : Action
     }
 
     public override TaskStatus OnUpdate()
-	{
-        if (_monsterData.CurHp <= 0)
+    {
+        if (_monsterData.CurHp <= 0 && _monsterSkillManager.JackTheRipper != null)
         {
-            _monsterSkillManager.StimPak();
-            Debug.Log("스팀팩");
+            if (_monsterSkillManager.stimPakRoutine == null)
+            {
+                _monsterSkillManager.stimPakRoutine = StartCoroutine(_monsterSkillManager.StimPak());
+                Debug.Log("스팀팩");
+            }
             return TaskStatus.Success;
         }
         else

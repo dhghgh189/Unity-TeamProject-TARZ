@@ -4,6 +4,7 @@ using UnityEngine;
 public class CounterState : BaseState<PlayerController>
 {
     private Transform mainCamTrf;
+    private float exceptionTimer;
     public CounterState(PlayerController owner)
     {
         this.owner = owner;
@@ -18,6 +19,7 @@ public class CounterState : BaseState<PlayerController>
             mainCamTrf = Camera.main.transform;
 
         owner.IsImortal = true;
+        exceptionTimer = 0;
 
         switch (owner.Attack.CounterTarget.MonsterTIer)
         {
@@ -35,13 +37,25 @@ public class CounterState : BaseState<PlayerController>
     {
         base.OnUpdate();
 
+        exceptionTimer += Time.deltaTime;
+
+        // 예외처리
+        if (exceptionTimer >= 5f)
+        {
+            Debug.LogWarning("<color=red>CounterState Exception!!</color>");
+            owner.ChangeState(EState.Idle);
+            return;
+        }
+
         // 일반 몬스터 반격 시 카메라 회전하면 캐릭터도 같이 회전
         if (owner.Attack.CounterTarget.MonsterTIer == MonsterData.MonsterTier.Normal)
             owner.transform.forward = mainCamTrf.forward;
 
         if (counterRoutine == null)
         {
+            Debug.Log("플레이어의 반격 정상 종료");
             owner.ChangeState(EState.Idle);
+            return;
         }
     }
 

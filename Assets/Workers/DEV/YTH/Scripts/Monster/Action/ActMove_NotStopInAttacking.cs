@@ -10,10 +10,6 @@ using UnityEngine.AI;
 /// </summary>
 public class ActMove_NotStopInAttacking : Action
 {
-    public int Hash_Move = Animator.StringToHash("Revive_Walk");
-    public int Hash_Crawl = Animator.StringToHash("Revive_Crawl");
-
-
     [SerializeField] CondCanMove _condCanMove;
 
     private PooledObject _pooledObject;
@@ -42,8 +38,6 @@ public class ActMove_NotStopInAttacking : Action
     {
         _player = _pooledObject.player;
         keepChaseRoutine = StartCoroutine(KeepChaseRoutine());
-
-        _monsterData.IsMoving = true;
     }
 
     public override TaskStatus OnUpdate()
@@ -54,22 +48,13 @@ public class ActMove_NotStopInAttacking : Action
         {
             if (_distance <= _monsterData.AttackRange || _distance <= _monsterData.CanJumpDistance)
             {
-                _monsterData.IsMoving = false;
                 return TaskStatus.Success;
             }
 
             _agent.SetDestination(_player.transform.position);
 
-            if (_monsterData.MonsterTyPe == MonsterData.MonsterType.Revive  && _monsterData.CurHp <= _monsterData.MaxHp *0.5f )
-            {
-                _animator.CrossFade(Hash_Move, 0.05f);
-                /*  _animator.CrossFade(Hash_Crawl, 0.05f);*/
-                /* _animator.SetLayerWeight(1, 1);*/
-            }
-            else
-            {
-                _animator.CrossFade(Hash_Move, 0.05f);
-            }
+            _animator.SetBool("Move", true);
+            
             return TaskStatus.Running;
         }
         else if (_condCanMove.IsPlayerWithinSight(_player.gameObject) == false)

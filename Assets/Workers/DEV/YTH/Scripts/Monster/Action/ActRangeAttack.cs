@@ -53,7 +53,7 @@ public class ActRangeAttack : Action
     Coroutine throwRoutine;
     IEnumerator ThrowRoutine()
     {
-        yield return new WaitForSeconds(_monsterData.RangeAttackSpeed);
+        yield return new WaitForSeconds(_monsterData.AttackSpeed);
         throwRoutine = null;
     }
 

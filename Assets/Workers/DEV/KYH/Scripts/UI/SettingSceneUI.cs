@@ -42,6 +42,7 @@ public class SettingSceneUI : MonoBehaviour
     [Header("Setting UI")]
     [SerializeField] private Toggle minimapActiveToggle;
     [SerializeField] public Slider sensitivitySlider;
+    [SerializeField] private TMP_Text sensitivityText;
 
     private void Start()
     {
@@ -52,6 +53,8 @@ public class SettingSceneUI : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "Title")
         {
             camera = null;
+            sensitivitySlider.interactable = false;
+            sensitivityText.text = $"{(int)sensitivitySlider.value}";
         }
         else
         {
@@ -61,6 +64,7 @@ public class SettingSceneUI : MonoBehaviour
             }
 
             camera.Sensitivity = PlayerPrefs.GetFloat("Sensitivity");
+            sensitivitySlider.interactable = true;
             sensitivitySlider.value = camera.Sensitivity;
         }
     }
@@ -126,6 +130,7 @@ public class SettingSceneUI : MonoBehaviour
     public void ChangeSensitivity()
     {
         camera.Sensitivity = sensitivitySlider.value;
+        sensitivityText.text = $"{(int)sensitivitySlider.value}";
         PlayerPrefs.SetFloat("Sensitivity", camera.Sensitivity);
     }
 

@@ -11,10 +11,17 @@ public class LoadSceneUI : MonoBehaviour
     [Inject] ChangeInput inputManager;
 
     [SerializeField] private Button saveSlot_01;
+    [SerializeField] private GameObject titlePanel;
 
     private void Start()
     {
         inputManager.firstInput = saveSlot_01;
         inputManager.firstInput.Select();
+    }
+
+    public void OnClickBackButton()
+    {
+        gameObject.SetActive(false);
+        titlePanel.SetActive(true);
     }
 }

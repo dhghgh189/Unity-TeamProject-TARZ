@@ -134,8 +134,14 @@ public class Inventory : MonoBehaviour
         if (slots.IsEmpty) return;
         // 선택한 슬롯 위치를 저장
         selectedButton = EventSystem.current.currentSelectedGameObject.GetComponent<Button>();
+
         // 선택지를 활성화
         selectPanel.SetActive(true);
+
+        // 이벤트 삭제
+        foreach (var item in SelectButtons)
+            item.onClick.RemoveAllListeners();
+
         // 이벤트 지정
         SelectButtons[0].onClick.AddListener(() => { slots.GearSell(); SelectButtonReset(); });
         SelectButtons[1].onClick.AddListener(() => { slots.EquipGear(); SelectButtonReset(); });
@@ -146,11 +152,6 @@ public class Inventory : MonoBehaviour
     // 교체 혹은 분해 후 SelectPanel 리셋 함수
     private void SelectButtonReset()
     {
-        // 이벤트 삭제
-        foreach (var item in SelectButtons)
-        {
-            item.onClick.RemoveAllListeners();
-        }
         selectPanel.SetActive(false);
         // selectPanel닫고 selectedButton이 있다면 해당 버튼을 선택 아니면 첫 번째 버튼을 선택
         if (selectedButton)
@@ -167,7 +168,7 @@ public class Inventory : MonoBehaviour
             if (canvas.activeSelf)
             {
                 canvas.SetActive(false);
-                SelectButtonReset();
+                selectPanel.SetActive(false);
                 Time.timeScale = 1f;
                 playerController.PInput.IsCanControl = true;
                 return;

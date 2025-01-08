@@ -23,8 +23,6 @@ public class SpikeTrap : Trap
 
     private BoxCollider coll;
 
-
-
     protected override void Init()
     {
         coll = GetComponent<BoxCollider>();

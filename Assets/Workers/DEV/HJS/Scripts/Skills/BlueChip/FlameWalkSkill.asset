@@ -17,34 +17,12 @@ MonoBehaviour:
     \uC0DD\uAE34"
   Icon: {fileID: 0}
   MaxLevel: 3
-  Timing: 2
-  activeSkills:
-  - who: 0
-    refeat: 0
-    when: 0
-    Create: 1
-    Interaction: 0
-    createSetting:
-      CreateObject:
-      - {fileID: 9077476385755021717, guid: 8aae627e019dc2241847a04b0604a312, type: 3}
-    interactionSetting:
-      type: 0
-    skillLevelSpec:
-      statModel: {fileID: 0}
-      power:
-      - 2
-      - 4
-      - 6
-      range: []
-      time:
-      - 3
-      - 3
-      - 3
-      degree: []
-      damage: []
-      duration: []
-  passiveSkills: []
+  SkillTier: 1
+  SkillType: 0
+  active:
+    activeSkills: []
+  passive:
+    passiveSkills: []
   onChangeLevel:
     m_PersistentCalls:
       m_Calls: []
-  model: {fileID: 0}

@@ -16,28 +16,32 @@ MonoBehaviour:
   Description: "HP\uAC00 20% \uC774\uD558\uC77C\uB54C \uB370\uBBF8\uC9C0\uAC00 \uC0C1\uC2B9\uD55C\uB2E4."
   Icon: {fileID: 0}
   MaxLevel: 3
-  Timing: 3
-  activeSkills: []
-  passiveSkills:
-  - passiveType: 1
-    modifySetting:
-      ModifyType: 0
-      inputType: 0
-      Amount: 0
-      TempValue: 0
-    conditionSetting:
-      modifyType: 0
-      Condition: 3
-      CompareValue: 20
-      MaxValue: 0
-      isChanged: 0
-      resultModifyType: 3
-      Amount: 50
-    toggleSetting:
-      ToggleType: 0
-      On: 0
-      Name: 
+  SkillTier: 2
+  SkillType: 2
+  active:
+    activeSkills: []
+  passive:
+    passiveSkills:
+    - indexName: "\uC870\uAC74"
+      passiveType: 1
+      modifySetting:
+        ModifyType: 0
+        inputType: 0
+        amount: {x: 0, y: 0, z: 0}
+        TempValue: 0
+      conditionSetting:
+        modifyType: 0
+        Condition: 3
+        CompareValue: 20
+        MaxValue: 0
+        isChanged: 0
+        resultModifyType: 3
+        amount: {x: 10, y: 15, z: 20}
+      toggleSetting:
+        ToggleType: 0
+        On: 0
+        Timing: 0
+        Name: 
   onChangeLevel:
     m_PersistentCalls:
       m_Calls: []
-  model: {fileID: 0}

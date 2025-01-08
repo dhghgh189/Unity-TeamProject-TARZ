@@ -16,46 +16,52 @@ MonoBehaviour:
   Description: "\uACF5\uACA9\uB825\uACFC \uC2A4\uD53C\uB4DC\uAC00 \uB300\uD3ED \uC0C1\uC2B9\uD55C\uB2E4."
   Icon: {fileID: 0}
   MaxLevel: 3
-  Timing: 3
-  activeSkills: []
-  passiveSkills:
-  - passiveType: 0
-    modifySetting:
-      ModifyType: 3
-      inputType: 1
-      Amount: 50
-      TempValue: 0
-    conditionSetting:
-      modifyType: 0
-      Condition: 0
-      CompareValue: 0
-      MaxValue: 0
-      isChanged: 0
-      resultModifyType: 0
-      Amount: 0
-    toggleSetting:
-      ToggleType: 0
-      On: 0
-      Name: 
-  - passiveType: 0
-    modifySetting:
-      ModifyType: 2
-      inputType: 0
-      Amount: 10
-      TempValue: 0
-    conditionSetting:
-      modifyType: 0
-      Condition: 0
-      CompareValue: 0
-      MaxValue: 0
-      isChanged: 0
-      resultModifyType: 0
-      Amount: 0
-    toggleSetting:
-      ToggleType: 0
-      On: 0
-      Name: 
+  SkillTier: 1
+  SkillType: 2
+  active:
+    activeSkills: []
+  passive:
+    passiveSkills:
+    - indexName: "\uACF5\uACA9\uB825 \uC99D\uAC00"
+      passiveType: 0
+      modifySetting:
+        ModifyType: 4
+        inputType: 1
+        amount: {x: 5, y: 10, z: 15}
+        TempValue: 0
+      conditionSetting:
+        modifyType: 0
+        Condition: 0
+        CompareValue: 0
+        MaxValue: 0
+        isChanged: 0
+        resultModifyType: 0
+        Amount: 0
+      toggleSetting:
+        ToggleType: 1
+        On: 0
+        Timing: 0
+        Name: GuidedFuncion
+    - indexName: "\uC774\uB3D9\uC18D\uB3C4 \uC99D\uAC00"
+      passiveType: 0
+      modifySetting:
+        ModifyType: 3
+        inputType: 1
+        amount: {x: 5, y: 10, z: 15}
+        TempValue: 0
+      conditionSetting:
+        modifyType: 0
+        Condition: 0
+        CompareValue: 0
+        MaxValue: 0
+        isChanged: 0
+        resultModifyType: 0
+        Amount: 0
+      toggleSetting:
+        ToggleType: 1
+        On: 0
+        Timing: 0
+        Name: GuidedFuncion
   onChangeLevel:
     m_PersistentCalls:
       m_Calls: []
-  model: {fileID: 0}

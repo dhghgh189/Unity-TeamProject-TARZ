@@ -17,46 +17,52 @@ MonoBehaviour:
     \uC18C\uBAA8\uB7C9\uC774 \uC904\uC5B4\uB4E0\uB2E4."
   Icon: {fileID: 0}
   MaxLevel: 3
-  Timing: 3
-  activeSkills: []
-  passiveSkills:
-  - passiveType: 0
-    modifySetting:
-      ModifyType: -2
-      inputType: 0
-      Amount: -0.25
-      TempValue: 0
-    conditionSetting:
-      modifyType: 0
-      Condition: 0
-      CompareValue: 0
-      MaxValue: 0
-      isChanged: 0
-      resultModifyType: 0
-      Amount: 0
-    toggleSetting:
-      ToggleType: 0
-      On: 0
-      Name: 
-  - passiveType: 0
-    modifySetting:
-      ModifyType: 5
-      inputType: 1
-      Amount: 80
-      TempValue: 0
-    conditionSetting:
-      modifyType: 0
-      Condition: 0
-      CompareValue: 0
-      MaxValue: 0
-      isChanged: 0
-      resultModifyType: 0
-      Amount: 0
-    toggleSetting:
-      ToggleType: 0
-      On: 0
-      Name: 
+  SkillTier: 2
+  SkillType: 2
+  active:
+    activeSkills: []
+  passive:
+    passiveSkills:
+    - indexName: "\uB300\uC26C  \uAC10\uC18C"
+      passiveType: 0
+      modifySetting:
+        ModifyType: -2
+        inputType: 0
+        amount: {x: -8.6, y: -4.2, z: 0}
+        TempValue: 0
+      conditionSetting:
+        modifyType: 0
+        Condition: 0
+        CompareValue: 0
+        MaxValue: 0
+        isChanged: 0
+        resultModifyType: 0
+        Amount: 0
+      toggleSetting:
+        ToggleType: 0
+        On: 0
+        Timing: 0
+        Name: 
+    - indexName: "\uC2A4\uD14C\uBBF8\uB098 \uC18C\uBAA8\uB7C9 \uAC10\uC18C"
+      passiveType: 0
+      modifySetting:
+        ModifyType: 6
+        inputType: 1
+        amount: {x: 90, y: 80, z: 70}
+        TempValue: 0
+      conditionSetting:
+        modifyType: 0
+        Condition: 0
+        CompareValue: 0
+        MaxValue: 0
+        isChanged: 0
+        resultModifyType: 0
+        Amount: 0
+      toggleSetting:
+        ToggleType: 0
+        On: 0
+        Timing: 0
+        Name: 
   onChangeLevel:
     m_PersistentCalls:
       m_Calls: []
-  model: {fileID: 0}

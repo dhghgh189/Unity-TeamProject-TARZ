@@ -12,33 +12,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7319c5f99579ca4c9935249024bb467, type: 3}
   m_Name: CliffEdgeSkill
   m_EditorClassIdentifier: 
-  Name: "\uBCBC\uB7C9\uB05D"
+  Name: "\uBCBC\uB791\uB05D"
   Description: "HP\uAC00 10% \uC774\uD558\uC778 \uACBD\uC6B0 \uC2A4\uD0DC\uBBF8\uB098\uB97C 
     \uC18C\uBE44\uD558\uC9C0 \uC54A\uB294\uB2E4."
   Icon: {fileID: 0}
-  MaxLevel: 3
-  Timing: 3
-  activeSkills: []
-  passiveSkills:
-  - passiveType: 1
-    modifySetting:
-      ModifyType: 0
-      inputType: 0
-      Amount: 0
-      TempValue: 0
-    conditionSetting:
-      modifyType: 0
-      Condition: 3
-      CompareValue: 10
-      MaxValue: 0
-      isChanged: 0
-      resultModifyType: 5
-      Amount: 0
-    toggleSetting:
-      ToggleType: 0
-      On: 0
-      Name: 
+  MaxLevel: 1
+  SkillTier: 2
+  SkillType: 2
+  active:
+    activeSkills: []
+  passive:
+    passiveSkills:
+    - indexName: "\uC2A4\uD14C\uBBF8\uB098 \uC870\uAC74"
+      passiveType: 1
+      modifySetting:
+        ModifyType: 0
+        inputType: 0
+        amount: {x: 0, y: 0, z: 0}
+        TempValue: 0
+      conditionSetting:
+        modifyType: 0
+        Condition: 3
+        CompareValue: 10
+        MaxValue: 0
+        isChanged: 0
+        resultModifyType: 5
+        Amount: 0
+      toggleSetting:
+        ToggleType: 0
+        On: 0
+        Timing: 0
+        Name: 
   onChangeLevel:
     m_PersistentCalls:
       m_Calls: []
-  model: {fileID: 0}

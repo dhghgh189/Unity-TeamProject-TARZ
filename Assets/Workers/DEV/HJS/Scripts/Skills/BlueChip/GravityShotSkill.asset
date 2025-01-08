@@ -17,37 +17,31 @@ MonoBehaviour:
     \uC8FC\uBCC0 \uC801\uC744 \uB04C\uC5B4\uB2F9\uAE34\uB2E4"
   Icon: {fileID: 0}
   MaxLevel: 3
-  Timing: 0
-  activeSkills:
-  - who: 1
-    refeat: 0
-    when: 1
-    Create: 1
-    Interaction: 0
-    createSetting:
-      CreateObject:
-      - {fileID: 7651433285117243063, guid: 38c06a08db4b26c46b4dcc7e1fb168a1, type: 3}
-    interactionSetting:
+  SkillTier: 1
+  SkillType: 1
+  active:
+    activeSkills:
+    - IndexName: "\uB358\uC9C0\uB294 \uC624\uBE0C\uC81D\uD2B8 \uBE14\uB799\uD64D
+        \uC0DD\uC131"
+      Target: 1
+      ConditionState: 0
+      ActTiming: 0
+      ConditionType: 1
+      Create: 1
+      createObject: {fileID: 7651433285117243063, guid: 38c06a08db4b26c46b4dcc7e1fb168a1,
+        type: 3}
+      performance_Act:
+      - {x: 0, y: 2, z: 1}
+      - {x: 0, y: 2, z: 2}
+      - {x: 0, y: 2, z: 3}
+      Interaction: 0
       type: 0
-    skillLevelSpec:
-      statModel: {fileID: 0}
-      power:
-      - 3
-      - 4
-      - 5
-      range:
-      - 2
-      - 3
-      - 4
-      time:
-      - 3
-      - 3
-      - 3
-      degree: []
-      damage: []
-      duration: []
-  passiveSkills: []
+      performance_Interaction: []
+      UniqueEffect: 0
+      status: 0
+      UniqueEffectObject: {fileID: 0}
+  passive:
+    passiveSkills: []
   onChangeLevel:
     m_PersistentCalls:
       m_Calls: []
-  model: {fileID: 0}

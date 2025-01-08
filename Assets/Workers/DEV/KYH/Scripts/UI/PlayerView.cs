@@ -63,8 +63,6 @@ public class PlayerView : MonoBehaviour
     /// <param name="curHP"></param>
     public void Player_OnCurHPChanged(float curHP)
     {
-        //Debug.Log($"Hp Change : {curHP}");
-        //hpSlider.value = curHP;
         hpImage.fillAmount = (statModel.MaxHp - (statModel.MaxHp - curHP)) / statModel.MaxHp;
         if (curHP <= 0) hpImage.fillAmount = 0;
     }
@@ -75,26 +73,15 @@ public class PlayerView : MonoBehaviour
     /// <param name="curMP"></param>
     public void Player_OnCurMPChanged(float curMP)
     {
-        //mpSlider.value = curMP;
+        // MP를 이미지 Fill Amount 값에 대비하여 MP 변동값 동기화
         mpImage.fillAmount = (statModel.MaxMp - (statModel.MaxMp - curMP)) / statModel.MaxMp;
         if (curMP <= 0) mpImage.fillAmount = 0;
 
-        if (curMP >= 100)
-        {
-            active01.interactable = true;
-        }
-        else if (curMP >= 200)
-        {
-            active02.interactable = true;
-        }
-        else if (curMP >= 300)
-        {
-            active03.interactable = true;
-        }
-        else if (curMP >= 400)
-        {
-            active04.interactable = true;
-        }
+        // 스킬 사용 타이밍마다 스킬 사용 가능을 Interactable로 알려주기
+        active01.interactable = (curMP >= 100);
+        active02.interactable = (curMP >= 200);
+        active03.interactable = (curMP >= 300);
+        active04.interactable = (curMP >= 400);
     }
 
     /// <summary>

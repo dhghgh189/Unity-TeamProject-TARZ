@@ -11,7 +11,6 @@ public class SettingSceneUI : MonoBehaviour
     [SerializeField] private GameObject titlePanel;         // 타이틀 패널
     [SerializeField] private GameObject activeCPanel;       // 현재 활성화 중인 패널
     private CameraController camera;
-    [SerializeField] private GameObject background;
 
     [Header("<color=yellow>Input Manager</color>")]
     [SerializeField] private ChangeInput inputManager;      // UI 네비게이션 InputManager 참조용
@@ -38,6 +37,7 @@ public class SettingSceneUI : MonoBehaviour
 
     [Header("Setting UI")]
     [SerializeField] private Toggle minimapActiveToggle;
+    [SerializeField] private GameObject minimap;
     [SerializeField] public Slider sensitivitySlider;
     [SerializeField] private TMP_Text sensitivityText;
 
@@ -45,13 +45,14 @@ public class SettingSceneUI : MonoBehaviour
     {
         playerController = FindAnyObjectByType<PlayerController>();
         camera = FindAnyObjectByType<CameraController>();
+        minimap = GameObject.Find("Minimap");
         inputManager = FindAnyObjectByType<ChangeInput>();
 
         if (SceneManager.GetActiveScene().name == "Title")
         {
             camera = null;
+            minimap = null;
             sensitivityText.text = $"{(int)sensitivitySlider.value}";
-            background.SetActive(true);
         }
         else
         {
@@ -62,24 +63,25 @@ public class SettingSceneUI : MonoBehaviour
 
             camera.Sensitivity = PlayerPrefs.GetFloat("Sensitivity");
             sensitivitySlider.value = camera.Sensitivity;
-            background.SetActive(false);
         }
     }
 
     private void OnEnable()
     {
-        if (SceneManager.GetActiveScene().name != "Title")
+        if (SceneManager.GetActiveScene().name == "Title")
+        {
+            gameplayButton.interactable = false;
+            activeCPanel = nonSelectPanel;                  // 현재 활성화 중인 패널을 nonSelectPanel로 설정
+            inputManager.firstInput = soundButton;          // 설정 패널의 UI 네비게이션 첫 Input을 gameplayButton로 설정
+            inputManager.firstInput.Select();               // 첫 Input으로 지정한 오브젝트를 선택 처리
+        }
+        else
         {
             titlePanel = null;
             gameplayButton.interactable = true;
             inputManager.firstInput = gameplayButton;
             inputManager.firstInput.Select();
         }
-
-        gameplayButton.interactable = false;
-        activeCPanel = nonSelectPanel;                  // 현재 활성화 중인 패널을 nonSelectPanel로 설정
-        inputManager.firstInput = soundButton;          // 설정 패널의 UI 네비게이션 첫 Input을 gameplayButton로 설정
-        inputManager.firstInput.Select();               // 첫 Input으로 지정한 오브젝트를 선택 처리
     }
 
     private void Update()
@@ -136,14 +138,8 @@ public class SettingSceneUI : MonoBehaviour
 
     public void OnCheckMinimapActiveToggle()
     {
-        if (minimapActiveToggle.isOn == true)
-        {
-            // TODO : 체크가 활성화 되어 있을 때 미니맵 활성화
-        }
-        else
-        {
-            // TODO : 체크가 비활성화 되어 있을 때 미니맵 비활성화
-        }
+        bool isActive = minimapActiveToggle.isOn;
+        minimap.SetActive(isActive);
     }
 
     // 언어 카테고리 버튼 클릭
@@ -185,8 +181,12 @@ public class SettingSceneUI : MonoBehaviour
     // 타이틀 화면으로 돌아가기 버튼 클릭
     public void OnClickBackToTitleButton()
     {
-        activeCPanel.SetActive(false);
-        gameObject.SetActive(false);            // 설정 패널 비활성화
+        if (activeCPanel != null)
+        {
+            activeCPanel.SetActive(false);
+        }
+
+            gameObject.SetActive(false);            // 설정 패널 비활성화
 
         if (SceneManager.GetActiveScene().name == "Title")
         {

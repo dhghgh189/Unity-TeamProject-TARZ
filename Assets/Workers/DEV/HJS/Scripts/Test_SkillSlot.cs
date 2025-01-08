@@ -41,7 +41,7 @@ public class Test_SkillSlot : MonoBehaviour, IPointerClickHandler
         }
         else if (eventData.button == PointerEventData.InputButton.Left)
         {
-            playerSkillHandler.LevelUp(skill);
+            playerSkillHandler.LevelUp(skill.name, 1);
         }
     }
 

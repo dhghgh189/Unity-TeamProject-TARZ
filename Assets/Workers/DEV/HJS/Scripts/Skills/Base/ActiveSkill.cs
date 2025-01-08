@@ -37,7 +37,7 @@ public class ActiveSkill
     public GameObject UniqueEffectObject;     // 특수 효과가 들어있는 함수
 
     private Spec skillLevelSpec;              // 입력한 스펙이 저장되는 구조체
-    public BaseSkillSO Parent { set { parent = value; Debug.Log("<color=yellow>액티브 스킬부모 설정</color>"); } }
+    public BaseSkillSO Parent { set { parent = value; Debug.Log("<color=yellow>액티브 스킬부모 설정</color>"); level = parent.SkillLevel; } }
     public void SetModel(StatModel statModel) => skillLevelSpec.statModel = statModel;
 
     public void Use(GameObject requester, GameObject target = null)
@@ -56,9 +56,7 @@ public class ActiveSkill
             if (flooring is not null)
             {
                 flooring.SetTarget = requester.transform;
-                Debug.Log($"floor 부착! {requester.name}");
             }
-            Debug.Log($"충돌한 {requester.name}의 위치에서 {game.name}을 생성하겠다!");
         }
 
         // 상호작용

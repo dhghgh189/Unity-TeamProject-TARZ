@@ -71,6 +71,7 @@ public class UI_InventorySlots : MonoBehaviour, ISelectHandler, IDeselectHandler
         if (!outline) 
             outline = GetComponentsInChildren<Image>(true)[1].gameObject;
         outline.SetActive(true);
+        inventory.GearChange.SetGearInfo(gear);
     }
 
     public void OnDeselect(BaseEventData eventData)

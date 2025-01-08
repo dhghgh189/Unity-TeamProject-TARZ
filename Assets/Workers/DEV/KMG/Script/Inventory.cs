@@ -31,8 +31,11 @@ public class Inventory : MonoBehaviour
 
     [SerializeField] Sprite[] gearSprite;
 
+    [HideInInspector] public UI_GearChange GearChange;
+
     private void Start()
     {
+        GearChange = GetComponent<UI_GearChange>();
         SelectButtons = selectPanel.GetComponentsInChildren<Button>();
         foreach (var item in saveData.InventoryGears)
         {
@@ -159,20 +162,18 @@ public class Inventory : MonoBehaviour
 
     private void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.R))
-        //{
-        //    GetGear((Part)Random.Range(0, (int)Part.Size), Random.Range(1, 4));
-        //}
         if (inventoryAction.WasPressedThisFrame())
         {
             if (canvas.activeSelf)
             {
                 canvas.SetActive(false);
                 SelectButtonReset();
+                Time.timeScale = 1f;
                 playerController.PInput.IsCanControl = true;
                 return;
             }
             playerController.PInput.IsCanControl = false;
+            Time.timeScale = 0f;
             canvas.SetActive(true);
             GetComponentInChildren<Button>(true).Select();
         }
@@ -195,7 +196,7 @@ public class Inventory : MonoBehaviour
     {
         float random = Random.Range(1, 101);
         int stage = saveData.chapterSaveData.StageNum;
-        
+
         Part part = (Part)Random.Range(0, (int)Part.Size);
         Gear gear = Instantiate(baseGears.Where(x => x.Part == part).First());
         gear.Tier = random > 100 - (10 * stage) ? 3 : random > 90 - (20 * stage) ? 2 : 1;

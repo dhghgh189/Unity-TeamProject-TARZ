@@ -10,11 +10,19 @@ using UnityEngine.UI;
 public class LanguageSelector : MonoBehaviour
 {
     [SerializeField] private TMP_Dropdown languageDropdown;
-    private int selectLanguage;
+
+    private const string SelectedLanguageFileName = "Language.json";
+
+    [System.Serializable]
+    private class Language
+    {
+        public string selectedLocaleCode;
+    }
 
     private void Start()
     {
-        PlayerPrefs.GetInt("CurrentLanguage");
+        LoadLanguageSetting();
+
         languageDropdown.onValueChanged.AddListener(OnLanguageChange);
         InitDropdown();
     }
@@ -39,6 +47,47 @@ public class LanguageSelector : MonoBehaviour
         Locale selectLocales = locales[index];
         LocalizationSettings.SelectedLocale = selectLocales;
 
-        PlayerPrefs.SetInt("CurrentLanguage", index);
+        SaveLanguageSetting(selectLocales.Identifier.Code);
+    }
+
+    private void SaveLanguageSetting(string localeCode)
+    {
+        Language language = new Language
+        {
+            selectedLocaleCode = localeCode
+        };
+
+        string json = JsonUtility.ToJson(language, true);
+        string path = Path.Combine(Application.persistentDataPath, SelectedLanguageFileName);
+        File.WriteAllText(path, json);
+    }
+
+    private void LoadLanguageSetting()
+    {
+        string path = Path.Combine(Application.persistentDataPath, SelectedLanguageFileName);
+
+        if (File.Exists(path))
+        {
+            string json = File.ReadAllText(path);
+            Language language = JsonUtility.FromJson<Language>(json);
+
+            if (!string.IsNullOrEmpty(language.selectedLocaleCode))
+            {
+                IList<Locale> availableLocales = LocalizationSettings.AvailableLocales.Locales;
+
+                foreach (Locale locale in availableLocales)
+                {
+                    if (locale.Identifier.Code == language.selectedLocaleCode)
+                    {
+                        LocalizationSettings.SelectedLocale = locale;
+                        break;
+                    }
+                }
+            }
+        }
+        else
+        {
+            Debug.LogWarning("No Language Setting Save Files.");
+        }
     }
 }

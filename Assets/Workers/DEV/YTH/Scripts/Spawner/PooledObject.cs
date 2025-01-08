@@ -59,10 +59,10 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
         if (_monsterData.IsDead)
             return;
 
-        RotateToPlayer();
-
         _rigid.angularVelocity = Vector3.zero;
         _rigid.velocity = Vector3.zero;
+
+        RotateToPlayer();
 
         Debug.Log($"몬스터 피격 : {damage}");
         _monsterData.CurHp -= damage;

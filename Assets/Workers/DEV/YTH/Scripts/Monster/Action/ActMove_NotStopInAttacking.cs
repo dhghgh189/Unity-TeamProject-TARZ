@@ -60,16 +60,8 @@ public class ActMove_NotStopInAttacking : Action
 
             _agent.SetDestination(_player.transform.position);
 
-            if (_monsterData.MonsterTyPe == MonsterData.MonsterType.Revive  && _monsterData.CurHp <= _monsterData.MaxHp *0.5f )
-            {
-                _animator.CrossFade(Hash_Move, 0.05f);
-                /*  _animator.CrossFade(Hash_Crawl, 0.05f);*/
-                /* _animator.SetLayerWeight(1, 1);*/
-            }
-            else
-            {
-                _animator.CrossFade(Hash_Move, 0.05f);
-            }
+            _animator.SetBool("Move", true);
+            
             return TaskStatus.Running;
         }
         else if (_condCanMove.IsPlayerWithinSight(_player.gameObject) == false)

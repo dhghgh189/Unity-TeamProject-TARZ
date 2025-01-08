@@ -51,7 +51,7 @@ public class ActMeleeAttack : Action
     Coroutine attackRoutine;
     IEnumerator AttackRoutine()
     {
-        yield return new WaitForSeconds(_monsterData.MeleeAttackSpeed);
+        yield return new WaitForSeconds(_monsterData.AttackSpeed);
         attackRoutine = null;
     }
 }

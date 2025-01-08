@@ -38,8 +38,6 @@ public class ActMove_NotStopInAttacking : Action
     {
         _player = _pooledObject.player;
         keepChaseRoutine = StartCoroutine(KeepChaseRoutine());
-
-        _monsterData.IsMoving = true;
     }
 
     public override TaskStatus OnUpdate()
@@ -50,7 +48,6 @@ public class ActMove_NotStopInAttacking : Action
         {
             if (_distance <= _monsterData.AttackRange || _distance <= _monsterData.CanJumpDistance)
             {
-                _monsterData.IsMoving = false;
                 return TaskStatus.Success;
             }
 

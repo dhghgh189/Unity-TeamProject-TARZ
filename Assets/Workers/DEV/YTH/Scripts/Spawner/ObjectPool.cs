@@ -16,7 +16,6 @@ public class ObjectPool : MonoBehaviour
     [Header("Pool Transforms")]
     [SerializeField] Transform[] poolTransforms;
 
-
     public class MonsterFactoryData
     {
         public Transform PoolTransform;

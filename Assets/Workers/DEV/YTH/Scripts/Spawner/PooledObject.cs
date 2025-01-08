@@ -24,6 +24,10 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
 
     private DissolveController _dissolve;
 
+    private MonsterSkillManager _skill;
+
+    private CapsuleCollider _capsuleCollider;
+
     [Header("Drop Item")]
     [SerializeField] GameObject _gear;
 
@@ -31,7 +35,6 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
 
     [Inject] Transform dropPool;
 
-    private MonsterSkillManager _skill;
 
     private void Awake()
     {
@@ -41,6 +44,7 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
         _monsterData = GetComponent<MonsterData>();
         _skill = GetComponent<MonsterSkillManager>();
         _dissolve = GetComponent<DissolveController>();
+        _capsuleCollider = GetComponent<CapsuleCollider>();
     }
 
     private void OnEnable()
@@ -93,6 +97,8 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
     public void Die()
     {
         _monsterData.IsDead = true;
+
+        _capsuleCollider.enabled = false;
 
         int random = UnityEngine.Random.Range(1, 101);
         Vector3 curPos = new Vector3(transform.position.x, 1f, transform.position.z);

@@ -147,6 +147,7 @@ GameObject:
   - component: {fileID: 1863505909480887007}
   - component: {fileID: 7400841531307722752}
   - component: {fileID: -5193902790705427876}
+  - component: {fileID: 637912664003335822}
   m_Layer: 0
   m_Name: ProjectContext
   m_TagString: Untagged
@@ -217,6 +218,7 @@ MonoBehaviour:
   input: {fileID: 7400841531307722752}
   loadingObject: {fileID: 3544200162294493952}
   throwObjectStack: {fileID: -5193902790705427876}
+  bagSkillManager: {fileID: 637912664003335822}
 --- !u!114 &1863505909480887007
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -287,6 +289,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stackTransform: {fileID: 6974235259229525102}
+--- !u!114 &637912664003335822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3849400053811429710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce3e624bbbf63d5409137d03df47b2ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnChargeEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &1395578014432126290
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -7,6 +7,7 @@ public class ProjectInstaller : MonoInstaller
     [SerializeField] ChangeInput input;
     [SerializeField] Loading loadingObject;
     [SerializeField] ThrowObjectStack throwObjectStack;
+    [SerializeField] BagSkillManager bagSkillManager;
     public override void InstallBindings()
     {
         Container.Bind<StatModel>().FromInstance(statModel);
@@ -14,6 +15,7 @@ public class ProjectInstaller : MonoInstaller
         Container.Bind<Loading>().FromInstance(loadingObject);
         Container.Bind<SaveSlotData>().FromInstance(new SaveSlotData());
         Container.Bind<ThrowObjectStack>().FromInstance(throwObjectStack);
+        Container.Bind<BagSkillManager>().FromInstance(bagSkillManager);
     }
     public void SaveSlotBind(SaveSlotData saveSlotData)
     {

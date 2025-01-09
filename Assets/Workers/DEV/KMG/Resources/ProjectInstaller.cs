@@ -6,12 +6,14 @@ public class ProjectInstaller : MonoInstaller
     [SerializeField] StatModel statModel;
     [SerializeField] ChangeInput input;
     [SerializeField] Loading loadingObject;
+    [SerializeField] ThrowObjectStack throwObjectStack;
     public override void InstallBindings()
     {
         Container.Bind<StatModel>().FromInstance(statModel);
         Container.Bind<ChangeInput>().FromInstance(input);
         Container.Bind<Loading>().FromInstance(loadingObject);
         Container.Bind<SaveSlotData>().FromInstance(new SaveSlotData());
+        Container.Bind<ThrowObjectStack>().FromInstance(throwObjectStack);
     }
     public void SaveSlotBind(SaveSlotData saveSlotData)
     {

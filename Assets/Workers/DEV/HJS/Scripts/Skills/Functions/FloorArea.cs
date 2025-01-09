@@ -29,8 +29,8 @@ public class FloorArea : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        // 이미 연산했으면 안하기
-        if (lists.Contains(other.gameObject)) return;
+        // 이미 연산했거나 플레이어 이면
+        if (other.gameObject.CompareTag("Player") || lists.Contains(other.gameObject)) return;
 
         Debug.Log("나 충돌합!");
 

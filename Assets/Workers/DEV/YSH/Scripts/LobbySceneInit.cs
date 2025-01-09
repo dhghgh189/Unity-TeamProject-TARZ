@@ -6,8 +6,8 @@ public class LobbySceneInit : MonoBehaviour
 {
     [Inject] private StatModel model;
     [Inject] private SaveSlotData saveData;
-    [Inject] private PlayerController player;
     [Inject] private Loading loadingObject;
+    [Inject] private ThrowObjectStack throwObjectStack;
 
     private void Awake()
     {
@@ -20,6 +20,9 @@ public class LobbySceneInit : MonoBehaviour
         model.Clear();
         // 블루칩 초기화
         saveData.InGameSaveData.blueChipSaveDatas.Clear();
+        // 쓰레기 초기화
+        throwObjectStack.Clear();
+
         // 인게임 중인지 판단
         if (saveData.InGameSaveData.chapterSaveData.Chapter > Define.SceneType.Lobby)
         {

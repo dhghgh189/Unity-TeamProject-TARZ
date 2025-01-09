@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
+using Zenject;
 using static UnityEngine.UI.GridLayoutGroup;
 
 public class PlayerAttack : MonoBehaviour
@@ -43,7 +44,6 @@ public class PlayerAttack : MonoBehaviour
     public bool IsEndJumpMelee;
 
     [Space(10f)]
-    [SerializeField] private Transform stackTransform;
     [SerializeField] private int maxObjectCount;
     [SerializeField] private float comboCheckTime;
     private PlayerController player;
@@ -54,7 +54,7 @@ public class PlayerAttack : MonoBehaviour
 
     private EffectGenerator generator;
 
-    private Stack<ThrowObject> objectStack;
+    [Inject] ThrowObjectStack objectStack;
     public int ObjectCount => objectStack.Count;
     public int MaxObjectCount => maxObjectCount + (int)player.Stat.GetAbility(AdditionAbility.MaxObject);
 
@@ -83,7 +83,6 @@ public class PlayerAttack : MonoBehaviour
         MeleeCount = 0;
         ThrowCount = 0;
 
-        objectStack = new Stack<ThrowObject>();
         meleeEffects = new List<IEffect>();
 
         generator = new EffectGenerator();
@@ -225,7 +224,7 @@ public class PlayerAttack : MonoBehaviour
             return;
 
         objectStack.Push(tobj);
-        tobj.transform.parent = stackTransform;
+        tobj.transform.parent = objectStack.stackTransform;
         tobj.gameObject.SetActive(false);
 
         // 이벤트

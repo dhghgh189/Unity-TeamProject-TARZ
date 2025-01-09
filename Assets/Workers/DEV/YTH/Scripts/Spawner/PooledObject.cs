@@ -27,6 +27,7 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
     private MonsterSkillManager _skill;
 
     private CapsuleCollider _capsuleCollider;
+    public CapsuleCollider CapsuleCollider { get { return _capsuleCollider; } set { _capsuleCollider = value; } }
 
     [Header("Drop Item")]
     [SerializeField] GameObject _gear;

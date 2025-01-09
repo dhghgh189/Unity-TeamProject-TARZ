@@ -13,6 +13,8 @@ public class ObjectPool : MonoBehaviour
 
     [Inject] DiContainer container;
 
+    
+
     [Header("Pool Transforms")]
     [SerializeField] Transform[] poolTransforms;
 
@@ -43,6 +45,7 @@ public class ObjectPool : MonoBehaviour
                 monsterData.IsAttacked = false; 
                 monsterData.IsCatched = false; 
                 monsterData.IsDead = false;
+                pooledObject.CapsuleCollider.enabled = true;
                 pooledObject.gameObject.transform.position = transform.position + new Vector3(Random.Range(-2, 2), 0, Random.Range(-2, 2));
                 pooledObject.gameObject.SetActive(true);
                 

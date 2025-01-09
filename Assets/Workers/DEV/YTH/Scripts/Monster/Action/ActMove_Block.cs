@@ -2,7 +2,6 @@ using BehaviorDesigner.Runtime.Tasks;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
-using Zenject;
 
 /// <summary>
 /// 1. 플레이어 뒤로 가다가 stopblockDistance보다 클때 running 
@@ -13,6 +12,7 @@ public class ActMove_Block : Action
     [SerializeField] CondCanMove _condCanMove;
 
     private float _stopBlockDistance;
+    public float StopBlockDistance { get { return _stopBlockDistance; } set { _stopBlockDistance = value; } }
 
     private PooledObject _pooledObject;
 
@@ -52,25 +52,19 @@ public class ActMove_Block : Action
 
         _playerBackRoute = _player.transform.position - _player.transform.forward * _stopBlockDistance;
 
-        if (_condCanMove.IsPlayerWithinSight(_player.gameObject) && _distance > _stopBlockDistance) 
+        if (_condCanMove.IsPlayerWithinSight(_player.gameObject) && _distance > _stopBlockDistance)
         {
             _agent.SetDestination(_playerBackRoute);
             return TaskStatus.Running;
         }
-        else if (_condCanMove.IsPlayerWithinSight(_player.gameObject) && _distance <=  _stopBlockDistance)
+        else if (_condCanMove.IsPlayerWithinSight(_player.gameObject) && _distance <= _stopBlockDistance+1)
         {
-            if (_condCanMove.IsPlayerWithinSight(_player.gameObject) && _distance <= _monsterData.AttackRange)
+            if (_condCanMove.IsPlayerWithinSight(_player.gameObject) && _distance <= _monsterData.CanJumpDistance)
             {
                 return TaskStatus.Success;
             }
             _agent.SetDestination(_player.transform.position);
             return TaskStatus.Running;
-        }
-
-        else if (_condCanMove.IsPlayerWithinSight(_player.gameObject))
-        {
-            //_agent.SetDestination(_lastPlayerTransform.position);
-            return TaskStatus.Failure;
         }
         else
         {

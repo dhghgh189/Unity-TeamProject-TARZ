@@ -27,6 +27,7 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
     private MonsterSkillManager _skill;
 
     private CapsuleCollider _capsuleCollider;
+    public CapsuleCollider CapsuleCollider { get { return _capsuleCollider; } set { _capsuleCollider = value; } }
 
     [Header("Drop Item")]
     [SerializeField] GameObject _gear;
@@ -110,6 +111,7 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
         Vector3 curPos = new Vector3(transform.position.x, 1f, transform.position.z);
 
         _autoLockOn.action?.Invoke();
+        _animator.SetBool("Move", false);
         _animator.SetTrigger("Die");
 
         Debug.Log(random);

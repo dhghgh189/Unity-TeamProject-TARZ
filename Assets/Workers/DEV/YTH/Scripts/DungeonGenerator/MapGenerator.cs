@@ -76,7 +76,7 @@ public class MapGenerator : MonoBehaviour
             else
             {
                 Transform roomTransform = Instantiate(roomPrefab, createPos, Quaternion.identity, transform).transform;
-                Instantiate(obstacles[Random.Range(0, obstacles.Length)], createPos + Vector3.up * 0.75f, Quaternion.identity, transform);
+                Instantiate(obstacles[Random.Range(0, obstacles.Length)], createPos , Quaternion.identity, transform);
                 Instantiate(monsterSpawners[Random.Range(0, monsterSpawners.Length)], createPos, Quaternion.identity, roomTransform);
             }
 

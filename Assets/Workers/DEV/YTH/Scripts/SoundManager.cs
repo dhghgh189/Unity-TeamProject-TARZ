@@ -1,9 +1,12 @@
 using System.Collections.Generic;
+using UnityEditor.Localization.Plugins.XLIFF.V12;
 using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
     private static SoundManager instance = null;
+
+    [SerializeField] SoundDataSO _soundData;
 
     [SerializeField] private AudioSource bgmSource;     // BGM 소스
     [SerializeField] private AudioSource sfxSource;     // SFX 소스
@@ -41,10 +44,14 @@ public class SoundManager : MonoBehaviour
     /// </summary>
     public void PlayBGM(AudioClip clip)
     {
+        if (clip == null)
+            return;
+
         if (bgmSource.isPlaying)
         {
             bgmSource.Stop();
         }
+
         bgmSource.clip = clip;
         bgmSource.Play();
     }
@@ -65,6 +72,10 @@ public class SoundManager : MonoBehaviour
     /// </summary>
     public void PlaySFX(AudioClip clip)
     {
+        if (clip == null)
+            return;
+
+        sfxSource.clip = clip;
         sfxSource.PlayOneShot(clip);
     }
 

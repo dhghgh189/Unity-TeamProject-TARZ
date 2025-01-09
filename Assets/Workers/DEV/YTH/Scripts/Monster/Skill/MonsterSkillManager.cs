@@ -150,6 +150,9 @@ public class MonsterSkillManager : MonoBehaviour
 
         // 부활 좀비 스킬 초기화
         ReviveSkill.CanUseSkill = true;
+
+        //개구리 좀비 스킬 초기화
+        FrogJumpAttackSkill.CanUseSkill = true;
     }
 
     #region JumpAttack
@@ -514,14 +517,34 @@ public class MonsterSkillManager : MonoBehaviour
     public Coroutine frogJumpAttackRoutine;
     public IEnumerator FrogJumpAttackRoutine()
     {
-       /* _animator.SetTrigger("JumpAttack");*/
-
         if (jumpRoutine_frogJumpAttack == null)
         {
             jumpRoutine_frogJumpAttack = StartCoroutine(JumpRoutine_frogJumpAttack());
             Debug.Log("점프!!");
         }
-        yield return null;
+
+        Collider[] colliders = Physics.OverlapSphere(transform.position, FrogJumpAttackSkill.Range, WhatIsTarget);
+        foreach (Collider collider in colliders)
+        {
+            // 공격 범위 확인
+            Vector3 source = transform.position;
+            source.y = 0;
+            Vector3 destination = collider.transform.position;
+            destination.y = 0;
+
+            Vector3 targetDir = (destination - source).normalized;
+            float targetAngle = Vector3.Angle(transform.forward, targetDir);
+            if (targetAngle > FrogJumpAttackSkill.Angle)
+                continue;
+
+            IDamagable damageble = collider.GetComponent<IDamagable>();
+            if (damageble != null)
+            {
+                damageble.TakeDamage(FrogJumpAttackSkill.Damage);
+            }
+        }
+
+        yield return Util.GetDelay(FrogJumpAttackSkill.CoolTime);
         frogJumpAttackRoutine = null;
     }
 
@@ -565,6 +588,8 @@ public class MonsterSkillManager : MonoBehaviour
     #region MeleeAttack
     public void MeleeAttack()
     {
+        _pooledObject.RotateToPlayer();
+
         //내적 이용하여 공격 범위 (전방 부채꼴) 정해서
         Collider[] colliders = Physics.OverlapSphere(transform.position, _monsterData.AttackRange, WhatIsTarget);
         foreach (Collider collider in colliders)

@@ -51,12 +51,12 @@ public class MonsterData : MonoBehaviour
     [SerializeField] float _canUseProjectileSkillDistance; // 폭탄 좀비 스킬 가능 거리
     public float CanUseProjectileSkillDistance { get { return _canUseProjectileSkillDistance; } set { _canUseProjectileSkillDistance = value; } }
 
+    [SerializeField] float _dangerDistance;
+    public float DangerDistance { get { return _dangerDistance; } set { _dangerDistance = value; } }
+
     [Header("개구리 점프 좀비")]
     [SerializeField] float _canJumpDistance;
     public float CanJumpDistance { get { return _canJumpDistance; } set { _canJumpDistance = value; } }
-
-    [SerializeField] float _dangerDistance;
-    public float DangerDistance { get { return _dangerDistance; } set { _dangerDistance = value; } }
 
     public CapsuleCollider coll { get; private set; }
     public NavMeshAgent agent { get; private set; }

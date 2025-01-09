@@ -65,7 +65,7 @@ public class SkillEnum : MonoBehaviour
     /// <summary>
     /// 패시브 - 결과 값의 종류
     /// </summary>
-    public enum PassiveResultModifyType { MaxHp = 0, MaxStamina, MoveSpeed, AllPower, DefaultPower, StaminaCostRate, StaminaChargeRate }
+    public enum PassiveResultModifyType { MaxHp = 0, MaxStamina, MoveSpeed, AllPower, DefaultPower, StaminaCostRate, StaminaChargeRate, ExtraDamage }
     /// <summary>
     /// 패시브 - 조건의 종류
     /// </summary>

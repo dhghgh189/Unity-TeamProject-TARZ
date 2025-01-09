@@ -237,6 +237,7 @@ public class PassiveSkill
                     case PassiveResultModifyType.AllPower: Debug.Log("AP+"); statModel.SetAbility(AdditionAbility.AllPowerPer, (amount)); break;
                     case PassiveResultModifyType.DefaultPower: Debug.Log("DP+"); statModel.SetAbility(AdditionAbility.DefaultPowerPer, (amount)); break;
                     case PassiveResultModifyType.StaminaCostRate: Debug.Log("SC+"); statModel.StaminaCostRate = Mathf.Clamp(amount * 0.01f, 0f, 1f); break;
+                    case PassiveResultModifyType.ExtraDamage: Debug.Log("ED+"); statModel.ExtraDamage += amount; break;
                 }
             }
             else if (conditionSetting.isChanged)
@@ -249,6 +250,7 @@ public class PassiveSkill
                     case PassiveResultModifyType.AllPower: Debug.Log("AP-"); statModel.SetAbility(AdditionAbility.AllPowerPer, (-amount)); break;
                     case PassiveResultModifyType.DefaultPower: Debug.Log("DP-"); statModel.SetAbility(AdditionAbility.DefaultPowerPer, (-amount)); break;
                     case PassiveResultModifyType.StaminaCostRate: Debug.Log("SC-"); statModel.StaminaCostRate += Mathf.Clamp(1 - amount * 0.01f, 0f, 1f); break;
+                    case PassiveResultModifyType.ExtraDamage: Debug.Log("ED-"); statModel.ExtraDamage -= amount; break;
                 }
             }
         }
@@ -274,6 +276,7 @@ public class PassiveSkill
                 case PassiveResultModifyType.AllPower: Debug.Log("AP-"); statModel.SetAbility(AdditionAbility.AllPowerPer, (-amount)); break;
                 case PassiveResultModifyType.DefaultPower: Debug.Log("DP-"); statModel.SetAbility(AdditionAbility.DefaultPowerPer, (-amount)); break;
                 case PassiveResultModifyType.StaminaCostRate: Debug.Log("SC-"); statModel.StaminaCostRate = Mathf.Lerp(0f, 1f, 1 - amount * 0.01f); break;
+                case PassiveResultModifyType.ExtraDamage: Debug.Log("ED-"); statModel.ExtraDamage -= amount; break;
             }
         }
     }
@@ -313,7 +316,8 @@ public class PassiveSkill
         {
             ReturnValue(curLevel);    // 정보를 빼주면 StatModel에서 변화를 감지해서 다시 재검사를 함
         }
-        
+        // 다시 한번 확인
+        statModel.AllCheck();
         Debug.Log($"<color=blue>{parent.Name}스킬 갱신!</color>");
     }
 }

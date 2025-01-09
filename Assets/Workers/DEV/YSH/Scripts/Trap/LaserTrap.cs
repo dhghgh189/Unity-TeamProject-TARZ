@@ -12,6 +12,8 @@ public class LaserTrap : Trap
     [SerializeField] private Transform rayPoint2;
     [SerializeField] private LayerMask whatIsTarget;
 
+    [SerializeField] private Transform laserParent;
+
     private Vector3 laserDir;
     private float laserDistance;
     private RaycastHit[] hits;
@@ -19,26 +21,26 @@ public class LaserTrap : Trap
     private IDamagable target;
 
     private float timer;
-    private float nextRayTime;
 
     private WaitQueue damagedQueue;
 
     public override void Activate()
     {
         isActive = true;
-        nextRayTime = Time.time;
         timer = 0f;
+        idleRoutine = null;
+        laserParent.gameObject.SetActive(true);
     }
 
     public override void Deactivate()
     {
         isActive = false;
+        laserParent.gameObject.SetActive(false);
     }
 
     protected override void Init()
     {
-        base.Init();
-        damagedQueue = GetComponent<WaitQueue>();
+        damagedQueue = GetComponentInParent<WaitQueue>();
 
         // Ray Point1 에서 Ray Point2로 향하는 벡터
         Vector3 laserVector = rayPoint2.position - rayPoint1.position;
@@ -46,6 +48,19 @@ public class LaserTrap : Trap
         // 매번 계산하지 않도록 미리 저장
         laserDir = laserVector.normalized;
         laserDistance = laserVector.magnitude;
+
+        laserParent.position = rayPoint1.position;
+        laserParent.localScale = new Vector3(laserParent.localScale.x, laserParent.localScale.y, laserDistance);
+
+        base.Init();
+    }
+
+    private Coroutine idleRoutine;
+    private IEnumerator IdleRoutine()
+    {
+        yield return Util.GetDelay(interval);
+        idleRoutine = null;
+        laserParent.gameObject.SetActive(true);
     }
 
     private void Update()
@@ -54,22 +69,22 @@ public class LaserTrap : Trap
             return;
 
         // 휴면 시간이 끝나지 않았으면 return
-        if (Time.time < nextRayTime)
+        if (idleRoutine != null)
             return;
 
         // ray를 쏘는 턴 동안 타이머 동작
         timer += Time.deltaTime;
         if (timer >= rayTime)   // 턴이 종료된 경우
         {
-            // 휴면 시간 저장
-            nextRayTime = Time.time + interval;
+            // 휴면 상태
+            idleRoutine = StartCoroutine(IdleRoutine());
+            laserParent.gameObject.SetActive(false);
             // 타이머 초기화
             timer = 0;
             return;
         }
 
         // 쉬는 시간도 아니고 아직 턴 중인 경우 아래의 laser 로직 실행
-        Debug.DrawRay(rayPoint1.position, laserDir * laserDistance, Color.red);
         hits = Physics.RaycastAll(rayPoint1.position, laserDir, laserDistance, whatIsTarget);
         for (int i = 0; i < hits.Length; i++)
         {

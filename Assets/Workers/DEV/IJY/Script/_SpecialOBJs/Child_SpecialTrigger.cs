@@ -5,12 +5,20 @@ public class Child_SpecialTrigger : MonoBehaviour
     private SpecialThrowOBJ_Base SpecialOBJ;
     private SphereCollider col;
     private LayerMask playerLayer;
-    public bool IsPlayerIn = false;
+
+    private bool IsPlayerIn;
+
+    // 해당 bool형을 통해 UI 온오프를 판단
+    // 해당 bool형을 통해 한 번 UI가 on 상태가 되면, 해당 위치에 UI를 띄운 후 나머지에는 UI를 띄우지 않도록 함수 최상단에서 activeSelf를 통해 return 하도록 한다.
+    public bool isPlayerIn { get { return IsPlayerIn;} set { IsPlayerIn = value; } }
+
 
     void Start() => Init();
 
     void Init()
     {
+        IsPlayerIn = false;
+
         SpecialOBJ = GetComponentInParent<SpecialThrowOBJ_Base>();
         playerLayer = LayerMask.NameToLayer("Player");
 

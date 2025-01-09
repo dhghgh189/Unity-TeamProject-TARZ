@@ -135,7 +135,7 @@ public class Interactioner : MonoBehaviour
             SpecialOBJ = targets.First().GetComponent<SpecialThrowOBJ_Base>();
 
             if (SpecialOBJ.trigger == null || !SpecialOBJ.trigger.gameObject.activeSelf) return null;
-            if (SpecialOBJ.trigger.IsPlayerIn == false)
+            if (SpecialOBJ.trigger.isPlayerIn == false)
             {
                 SpecialOBJ = null;
                 return null;

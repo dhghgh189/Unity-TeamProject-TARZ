@@ -269,6 +269,7 @@ GameObject:
   - component: {fileID: 2633411}
   - component: {fileID: 2633410}
   - component: {fileID: 2633409}
+  - component: {fileID: 2633413}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -352,8 +353,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1382396169}
-  - {fileID: 1149207571}
   - {fileID: 322189816}
+  - {fileID: 1149207571}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -361,6 +362,22 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &2633413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2633408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb0043410065b484eb4236dcec75366c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  model: {fileID: 0}
+  player: {fileID: 0}
+  staminaUsing: 10
+  damageUsing: 0
 --- !u!1 &18112208
 GameObject:
   m_ObjectHideFlags: 0
@@ -3359,7 +3376,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 678.6094, y: 314.1}
+  m_AnchoredPosition: {x: 678.6094, y: 19.699982}
   m_SizeDelta: {x: 424.59, y: 85.2916}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &322189817
@@ -3406,10 +3423,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-        m_MethodName: TakeDamage
-        m_Mode: 4
+      - m_Target: {fileID: 2633413}
+        m_TargetAssemblyTypeName: Example_Script, Assembly-CSharp
+        m_MethodName: Script__
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -11383,9 +11400,8 @@ GameObject:
   - component: {fileID: 1149207575}
   - component: {fileID: 1149207574}
   - component: {fileID: 1149207573}
-  - component: {fileID: 1149207572}
   m_Layer: 5
-  m_Name: Button (1)
+  m_Name: Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11408,24 +11424,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 678.6102, y: 205}
+  m_AnchoredPosition: {x: 678.6102, y: -89.400024}
   m_SizeDelta: {x: 424.5938, y: 102.1531}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1149207572
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1149207570}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb0043410065b484eb4236dcec75366c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  model: {fileID: 0}
-  ee: 5
-  gg: 5
 --- !u!114 &1149207573
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11470,8 +11471,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1149207572}
-        m_TargetAssemblyTypeName: Example_StaminaScript, Assembly-CSharp
+      - m_Target: {fileID: 2633413}
+        m_TargetAssemblyTypeName: Example_Script, Assembly-CSharp
         m_MethodName: Script_
         m_Mode: 1
         m_Arguments:
@@ -13802,7 +13803,6 @@ GameObject:
   - component: {fileID: 1382396173}
   - component: {fileID: 1382396172}
   - component: {fileID: 1382396171}
-  - component: {fileID: 1382396174}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -13827,7 +13827,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 678.6102, y: 427.4}
+  m_AnchoredPosition: {x: 678.6102, y: 133}
   m_SizeDelta: {x: 424.5938, y: 102.1531}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1382396171
@@ -13874,8 +13874,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1382396174}
-        m_TargetAssemblyTypeName: Example_StaminaScript, Assembly-CSharp
+      - m_Target: {fileID: 2633413}
+        m_TargetAssemblyTypeName: Example_Script, Assembly-CSharp
         m_MethodName: Script
         m_Mode: 1
         m_Arguments:
@@ -13924,21 +13924,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1382396168}
   m_CullTransparentMesh: 1
---- !u!114 &1382396174
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1382396168}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb0043410065b484eb4236dcec75366c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  model: {fileID: 0}
-  ee: 5
-  gg: 0
 --- !u!1 &1394167323
 GameObject:
   m_ObjectHideFlags: 0

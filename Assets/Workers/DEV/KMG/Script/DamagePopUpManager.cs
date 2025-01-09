@@ -1,20 +1,25 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class DamagePopUpManager : MonoBehaviour
 {
     [SerializeField] GameObject popUpPrefab;
 
-    public void SetDamagePopUp(Vector3 pos, string text, Color color)
+    private Queue<DamagePopUp> popUpQueue = new();
+
+    public void ShowDamagePopUp(Vector3 pos, string text, Color color)
     {
-        foreach (DamagePopUp item in GetComponentsInChildren<DamagePopUp>(true))
+        if (popUpQueue.Count > 0)
         {
-            if (!item.gameObject.activeSelf)
-            {
-                item.gameObject.SetActive(true);
-                item.PopUpInit(pos, text, color);
-                return;
-            }
+            popUpQueue.Dequeue().PopUpInitAndStart(pos, text, color);
+            return;
         }
-        Instantiate(popUpPrefab, pos, Quaternion.identity, transform).GetComponent<DamagePopUp>().PopUpInit(pos, text, color);
+        Instantiate(popUpPrefab, pos, Quaternion.identity, transform).GetComponent<DamagePopUp>().PopUpInitAndStart(pos, text, color);
+    }
+
+    public void ReturnPool(DamagePopUp damagePopUp)
+    {
+        damagePopUp.gameObject.SetActive(false);
+        popUpQueue.Enqueue(damagePopUp);
     }
 }

@@ -12,19 +12,24 @@ public class DamagePopUp : MonoBehaviour
     private Camera cam;
 
     private Vector3 originScale;
+
+    private DamagePopUpManager damagePopUpManager;
     private void Awake()
     {
         tmp = GetComponent<TMP_Text>();
         cam = Camera.main;
         originScale = transform.localScale;
+
+        damagePopUpManager = GetComponentInParent<DamagePopUpManager>();
     }
     private void Update()
     {
         transform.forward = cam.transform.forward;
     }
 
-    public void PopUpInit(Vector3 pos, string text, Color color)
+    public void PopUpInitAndStart(Vector3 pos, string text, Color color)
     {
+        gameObject.SetActive(true);
         transform.position = pos;
         tmp.text = text;
         tmp.color = new Color(color.r, color.g, color.b, 0);
@@ -50,6 +55,6 @@ public class DamagePopUp : MonoBehaviour
             time += Time.deltaTime;
             yield return null;
         }
-        gameObject.SetActive(false);
+        damagePopUpManager.ReturnPool(this);
     }
 }

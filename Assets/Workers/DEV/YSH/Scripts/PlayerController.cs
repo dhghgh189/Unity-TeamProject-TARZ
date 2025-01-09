@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour, IDamagable
 
     public Transform cameraLookPos; 
 
+    [HideInInspector] public BagSkillHandler BagSkillHandler;
     [HideInInspector] public ManaSkillHandler ManaSkillHandler;
     [HideInInspector] public PlayerSkillHandler SkillHandler;
     [HideInInspector] public AblityAdapter AblityAdapter;
@@ -56,6 +57,7 @@ public class PlayerController : MonoBehaviour, IDamagable
 
     void Awake()
     {
+        this.BagSkillHandler = GetComponent<BagSkillHandler>();
         drainManager = GetComponentInChildren<DrainManager>();
         this.ManaSkillHandler = GetComponent<ManaSkillHandler>();
         SkillHandler = GetComponent<PlayerSkillHandler>();

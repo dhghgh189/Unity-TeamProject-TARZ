@@ -294,6 +294,8 @@ public class PlayerAttack : MonoBehaviour
         }
         // 최종 데미지 = 타수별 공격력 + (타수별 공격력 * 현재 스탯상 증가량)
         damage = damage * player.Stat.DefaultPowerPer;
+        // 최종 추가 데미지 추가
+        damage += player.Stat.ExtraDamage;
         Debug.Log($"final damage : {damage}");
         tobj.SetDamage(damage);
         tobj.adapter = player.AblityAdapter;
@@ -327,6 +329,8 @@ public class PlayerAttack : MonoBehaviour
         }
         // 최종 데미지 = 타수별 공격력 + (타수별 공격력 * 현재 스탯상 증가량)
         damage = damage * player.Stat.DefaultPowerPer;
+        // 최종 추가 데미지 추가
+        damage += player.Stat.ExtraDamage;
         Debug.Log($"final damage : {damage}");
         tobj.SetDamage(damage);
         tobj.adapter = player.AblityAdapter;
@@ -359,6 +363,8 @@ public class PlayerAttack : MonoBehaviour
 
             // 최종 데미지 = 타수별 공격력 + (타수별 공격력 * 현재 스탯상 증가량)
             float damage = MeleeAttackInfo[MeleeCount].Damage * player.Stat.DefaultPowerPer;
+            // 최종 추가 데미지 추가
+            damage += player.Stat.ExtraDamage;
             damagable.TakeDamage(damage);
 
             // Mp 회복
@@ -401,6 +407,8 @@ public class PlayerAttack : MonoBehaviour
 
             // 최종 데미지 = 타수별 공격력 + (타수별 공격력 * 현재 스탯상 증가량)
             float damage = JumpMeleeDamage * player.Stat.DefaultPowerPer;
+            // 최종 추가 데미지 추가
+            damage += player.Stat.ExtraDamage;
             damagable.TakeDamage(damage);
 
             Debug.Log($"<color=yellow>jump melee hit : {col.name}</color>");
@@ -465,6 +473,15 @@ public class PlayerAttack : MonoBehaviour
     public void CounterMelee()
     {
         CounterTarget.pooledObject.TakeDamage(counterMeleeDamage);
+    }
+
+    public void RemoveThrowObject(int count)
+    {
+        for(int i = 0; i < count; i++)
+            Destroy(objectStack.Pop());
+
+        // 이벤트
+        OnChangedStack?.Invoke();
     }
 
     private void OnDrawGizmos()

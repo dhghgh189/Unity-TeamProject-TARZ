@@ -183,7 +183,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4e6589720da476459dc6dd71624b071, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _scriptableObjectInstallers: []
+  _scriptableObjectInstallers:
+  - {fileID: 11400000, guid: 0ed6e8ae1e554be4990263d46d09d0ca, type: 2}
   _monoInstallers:
   - {fileID: -3270969759130882203}
   _installerPrefabs: []
@@ -240,6 +241,7 @@ MonoBehaviour:
   DashStaminaAmount: 30
   StaminaCostRate: 1
   StaminaChargeRate: 1
+  ExtraDamage: 0
   currentHp: 100
   currentMp: 0
   currentStamina: 100

@@ -57,6 +57,8 @@ public class StatModel : MonoBehaviour
 
     public float StaminaChargeRate = 1f;
 
+    public float ExtraDamage;   // 스킬의 능력 중 최종 데미지에서 추가 피해량
+
     [Header("실시간 능력치")]
 
     [SerializeField] float currentHp;

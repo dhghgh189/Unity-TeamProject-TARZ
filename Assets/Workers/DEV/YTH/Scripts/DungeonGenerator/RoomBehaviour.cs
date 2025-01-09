@@ -4,7 +4,13 @@ using UnityEngine;
 public class RoomBehaviour : MonoBehaviour
 {
     [SerializeField] GameObject[] walls;
+    [SerializeField] BagSkillManager bagSkillManager;
     public int MonsterCount;
+
+    private void Awake()
+    {
+        bagSkillManager = FindAnyObjectByType<BagSkillManager>();
+    }
 
     public void CloseWall()
     {
@@ -28,6 +34,7 @@ public class RoomBehaviour : MonoBehaviour
         if (MonsterCount == 0)
         {
             OpenWall();
+            bagSkillManager.OnChargeEvent?.Invoke();
         }
     }
 }

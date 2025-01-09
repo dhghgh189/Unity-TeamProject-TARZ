@@ -1,7 +1,4 @@
-using ModestTree;
 using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.TerrainTools;
 using UnityEngine;
 
 public class SpikeTrap : Trap
@@ -78,11 +75,11 @@ public class SpikeTrap : Trap
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!isActive 
+        if (!isActive
             || spikeRoutine != null)
             return;
 
-        if (other.gameObject.layer == LayerMask.NameToLayer("Player") 
+        if (other.gameObject.layer == LayerMask.NameToLayer("Player")
             || other.gameObject.layer == LayerMask.NameToLayer("Monster"))
         {
             Debug.Log("<color=red>Spike Trap 발동!</color>");

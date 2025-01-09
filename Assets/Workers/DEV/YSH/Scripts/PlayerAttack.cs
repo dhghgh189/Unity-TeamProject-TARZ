@@ -476,6 +476,15 @@ public class PlayerAttack : MonoBehaviour
         CounterTarget.pooledObject.TakeDamage(counterMeleeDamage);
     }
 
+    public void RemoveThrowObject(int count)
+    {
+        for(int i = 0; i < count; i++)
+            Destroy(objectStack.Pop());
+
+        // 이벤트
+        OnChangedStack?.Invoke();
+    }
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;

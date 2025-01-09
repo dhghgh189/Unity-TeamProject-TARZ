@@ -28,6 +28,8 @@ public class SaveManager : MonoBehaviour
         slotData.InGameSaveData.blueChipSaveDatas = handler.SaveBlueChips();
 
         // PlayerPrefs으로 세이브 데이터 저장
+        if (string.IsNullOrEmpty(slotData.SlotPath))
+            return;   
         File.WriteAllText(slotData.SlotPath, JsonUtility.ToJson(slotData));
         Debug.Log(File.ReadAllText(slotData.SlotPath));
     }

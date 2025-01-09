@@ -108,7 +108,6 @@ public class ThrowBox_Bomb : SpecialThrowOBJ_Base
 
     public void CheckPath(GameObject Circle, Vector3 pos)
     {
-        // 현재 점을 기준으로 앞 방향에 서클이 생김, 추후 중앙값으로 올 수 있게끔 수정할 필요가 있음
         pos.y = 0.01f;
         Circle.transform.position = pos;
 

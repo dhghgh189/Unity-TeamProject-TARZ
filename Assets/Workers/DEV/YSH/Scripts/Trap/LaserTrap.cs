@@ -5,8 +5,9 @@ using UnityEngine;
 public class LaserTrap : Trap
 {
     [SerializeField] private float damage;
-    [SerializeField] private float rayTime;     // 레이저를 발사하는 시간 (1턴)
-    [SerializeField] private float interval;    // 1턴 발사 후 쉬는 시간
+    [SerializeField] private float rayTime;         // 레이저를 발사하는 시간 (1턴)
+    [SerializeField] private float interval;        // 1턴 발사 후 쉬는 시간
+    [SerializeField] private float damageWaitTime;  // 피격 후 다음 피격까지 대기할 시간 (연속 피격 방지)
     [SerializeField] private Transform rayPoint1;
     [SerializeField] private Transform rayPoint2;
     [SerializeField] private LayerMask whatIsTarget;
@@ -19,6 +20,8 @@ public class LaserTrap : Trap
 
     private float timer;
     private float nextRayTime;
+
+    private WaitQueue damagedQueue;
 
     public override void Activate()
     {
@@ -35,6 +38,8 @@ public class LaserTrap : Trap
     protected override void Init()
     {
         base.Init();
+        damagedQueue = GetComponent<WaitQueue>();
+
         // Ray Point1 에서 Ray Point2로 향하는 벡터
         Vector3 laserVector = rayPoint2.position - rayPoint1.position;
 
@@ -68,13 +73,18 @@ public class LaserTrap : Trap
         hits = Physics.RaycastAll(rayPoint1.position, laserDir, laserDistance, whatIsTarget);
         for (int i = 0; i < hits.Length; i++)
         {
-            // 연속적으로 피격하는게 아닌 텀을 두고 피격하도록 구현 필요!
-            // 임시 코드
+            // 레이저에 감지된 오브젝트가 아직 대기열에 있는 경우 피격하지 않는다.
+            if (damagedQueue.IsTargetInQueue(hits[i].collider.gameObject))
+                continue;
+
             target = hits[i].collider.GetComponent<IDamagable>();
             if (target == null) 
                 continue;
 
             target.TakeDamage(damage);
+
+            // 연속 피격 당하지 않도록 waitQueue에 넣어놓는다.
+            damagedQueue.Add(hits[i].collider.gameObject, damageWaitTime);
         }
     }
 }

@@ -63,10 +63,10 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
         if (_monsterData.IsDead)
             return;
 
-        RotateToPlayer();
-
         _rigid.angularVelocity = Vector3.zero;
         _rigid.velocity = Vector3.zero;
+
+        RotateToPlayer();
 
         Debug.Log($"몬스터 피격 : {damage}");
         _monsterData.CurHp -= damage;
@@ -155,8 +155,7 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
         //피격 시 플레이어 방향으로 회전 // 속도 빠르게 수정할 것
         /*Quaternion lookRot = Quaternion.LookRotation(player.transform.position);
         transform.rotation = Quaternion.Lerp(transform.rotation, lookRot, 0.5f * Time.deltaTime);*/
-
-        transform.LookAt(player.transform.position);
+        transform.LookAt(transform.position);
     }
 
     Coroutine isAttackedRoutine;

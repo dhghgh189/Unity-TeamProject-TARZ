@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Zenject;
 
 [RequireComponent(typeof(Rigidbody))]
 public class ThrowObject : MonoBehaviour, IDrainable
@@ -9,7 +8,6 @@ public class ThrowObject : MonoBehaviour, IDrainable
     [SerializeField] private RandomModeling setModeling;
     [SerializeField] private GameObject modeling;
     [SerializeField] private LayerMask whatIsTarget;
-
 
     [HideInInspector] public AblityAdapter adapter;
     [HideInInspector] public PlayerSkillHandler handler;
@@ -28,12 +26,15 @@ public class ThrowObject : MonoBehaviour, IDrainable
 
     private List<IEffect> throwEffects;
 
+    private BoxCollider coll;
+
     private void Awake()
     {
         rigid = GetComponent<Rigidbody>();
         Upgrade = GetComponent<ThrowObjectUpgrade>();
         throwEffects = new List<IEffect>();
         setModeling = FindAnyObjectByType<RandomModeling>();
+        coll = GetComponent<BoxCollider>();
     }
     private void Start()
     {
@@ -64,6 +65,7 @@ public class ThrowObject : MonoBehaviour, IDrainable
     {
         if (adapter.IsEnable("GuidedFuncion")) GetComponent<GuidedFuncion>().StartCheckTarget();
         handler.Use(gameObject);
+        rigid.rotation = Quaternion.identity;
         rigid.AddForce(dir * throwForce, ForceMode.Impulse);
     }
 
@@ -76,6 +78,9 @@ public class ThrowObject : MonoBehaviour, IDrainable
         handler = owner.SkillHandler;
         player.AddObjectStack(this);
 
+        // 던질 때 플레이어랑 부딪히는 문제 방지
+        Debug.Log($"Player와 {gameObject.name} 충돌 무시");
+        Physics.IgnoreCollision(owner.coll, coll, true);
         isCollected = true;
     }
 
@@ -86,6 +91,9 @@ public class ThrowObject : MonoBehaviour, IDrainable
             return;
 
         rigid.velocity = Vector3.zero;
+
+        Debug.Log($"Player와 {gameObject.name} 충돌 다시 적용");
+        Physics.IgnoreCollision(owner.coll, coll, true);
 
         // 부딪힌 오브젝트가 target이 아니면
         if (((1 << other.gameObject.layer) & whatIsTarget.value) == 0)
@@ -173,7 +181,7 @@ public class ThrowObject : MonoBehaviour, IDrainable
 
     public void ActiveThrowEffects(GameObject target)
     {
-        foreach(var effect in throwEffects)
+        foreach (var effect in throwEffects)
         {
             effect.Activate(owner.gameObject, target);
         }

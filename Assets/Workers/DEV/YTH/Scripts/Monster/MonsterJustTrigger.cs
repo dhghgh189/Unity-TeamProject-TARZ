@@ -64,6 +64,9 @@ public class MonsterJustTrigger : MonoBehaviour
 
     private void OnTriggerExit(Collider other) 
     {
+        if (_monsterData.IsDead)
+            return;
+
         // 플레이어가 대쉬기로 나갈 시에 보상을 얻음
         PlayerController player = other.GetComponent<PlayerController>();
         if (player == null)

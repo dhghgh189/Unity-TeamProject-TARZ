@@ -186,7 +186,7 @@ public class SettingSceneUI : MonoBehaviour
             activeCPanel.SetActive(false);
         }
 
-            gameObject.SetActive(false);            // 설정 패널 비활성화
+        gameObject.SetActive(false);            // 설정 패널 비활성화
 
         if (SceneManager.GetActiveScene().name == "Title")
         {

@@ -39,13 +39,14 @@ public class MenuPanel : MonoBehaviour
             // 메뉴 패널이 활성화 되어 있으면 메뉴 패널을 비활성화
             if (isActive)
             {
-                menuPanel.SetActive(false);
-                isActive = false;
-                playerController.PInput.IsCanControl = true;
+                ClosePanel();
             }
             // 메뉴 패널이 비활성화 되어 있으면 메뉴 패널을 활성화
             else
             {
+                if (settingsPanel.activeSelf)
+                    return;
+
                 menuPanel.SetActive(true);
                 isActive = true;
                 Cursor.visible = true;
@@ -71,6 +72,7 @@ public class MenuPanel : MonoBehaviour
     public void OnClickSettingsButton()
     {
         settingsPanel.SetActive(true);
+        isActive = false;
         menuPanel.SetActive(false);
     }
 
@@ -79,8 +81,7 @@ public class MenuPanel : MonoBehaviour
     /// </summary>
     public void OnClickBackToGameButton()
     {
-        menuPanel.SetActive(false);
-        playerController.PInput.IsCanControl = true;
+        ClosePanel();
     }
 
     public void OnClickBackToMenuButton()
@@ -99,5 +100,14 @@ public class MenuPanel : MonoBehaviour
         //}
 
         SceneManager.LoadScene(0);
+    }
+
+    private void ClosePanel()
+    {
+        menuPanel.SetActive(false);
+        isActive = false;
+        playerController.PInput.IsCanControl = true;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 }

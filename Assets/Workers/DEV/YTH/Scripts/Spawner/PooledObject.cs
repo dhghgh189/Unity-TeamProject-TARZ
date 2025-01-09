@@ -68,6 +68,9 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
 
         RotateToPlayer();
 
+        // 크리티컬
+        damage *= Util.IsRandom(player.Stat.GetAbility(AdditionAbility.Critical)) ? (2 + (player.Stat.GetAbility(AdditionAbility.CriticalDamage) * 0.01f)) : 1;
+
         Debug.Log($"몬스터 피격 : {damage}");
         _monsterData.CurHp -= damage;
 

@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class MSkill_FrogJump : Action
 {
+    [SerializeField] ActMove_Block _actMoveBlock;
+
     private MonsterSkillManager _monsterSkillManager;
 
     private Animator _animator;
@@ -26,22 +28,27 @@ public class MSkill_FrogJump : Action
     public override void OnStart()
     {
         _player = _pooledObject.player;
+
+        _distance = Vector3.Distance(transform.position, _player.transform.position);
     }
 
     public override TaskStatus OnUpdate()
     {
-        _distance = Vector3.Distance(transform.position, _player.transform.position);
-
-        if (_monsterSkillManager.frogJumpAttackRoutine == null && _distance >= _monsterData.CanJumpDistance)
+        if (_monsterSkillManager.frogJumpAttackRoutine == null && _distance <= _monsterData.CanJumpDistance)
         {
+            _pooledObject.RotateToPlayer();
             _monsterSkillManager.frogJumpAttackRoutine = StartCoroutine(_monsterSkillManager.FrogJumpAttackRoutine());
             _animator.SetTrigger("Jump");
             Debug.Log("개구리 점프!!");
             return TaskStatus.Success;
         }
+        else if (_distance <= _monsterData.AttackRange)
+        {
+            return TaskStatus.Failure;
+        }
         else
         {
-            return TaskStatus.Success;
+            return TaskStatus.Failure;
         }
     }
 }

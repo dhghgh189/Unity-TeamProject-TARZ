@@ -35,6 +35,7 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
 
     [Inject] Transform dropPool;
 
+    [Inject] DamagePopUpManager _damagePopUpManager;
 
     private void Awake()
     {
@@ -70,6 +71,8 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
 
         // 크리티컬
         damage *= Util.IsRandom(player.Stat.GetAbility(AdditionAbility.Critical)) ? (2 + (player.Stat.GetAbility(AdditionAbility.CriticalDamage) * 0.01f)) : 1;
+
+        _damagePopUpManager.SetDamagePopUp(transform.position + Vector3.up * 2, $"{damage}", Color.white);
 
         Debug.Log($"몬스터 피격 : {damage}");
         _monsterData.CurHp -= damage;

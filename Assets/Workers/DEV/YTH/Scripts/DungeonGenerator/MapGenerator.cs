@@ -15,6 +15,7 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] GameObject scenePotalPrefab;
     [SerializeField] GameObject bossRoomPrefab;
     [SerializeField] GameObject NPCPrefab;
+    [SerializeField] GameObject[] SpecialPrefab;
 
     private Transform bossRoomTransform;
 
@@ -85,6 +86,7 @@ public class MapGenerator : MonoBehaviour
                 Transform roomTransform = Instantiate(roomPrefab, createPos, Quaternion.identity, transform).transform;
                 Instantiate(obstacles[Random.Range(0, obstacles.Length)], createPos, Quaternion.identity, transform);
                 Instantiate(monsterSpawners[Random.Range(0, monsterSpawners.Length)], createPos, Quaternion.identity, roomTransform);
+                Instantiate(SpecialPrefab[Random.Range(0, SpecialPrefab.Length)], createPos+ new Vector3(Random.Range(-15,15), 3f, Random.Range(-15, 15)),Quaternion.identity, roomTransform);
             }
 
             // 상점, 보스방 생성을 위한 가장 먼 방 체크

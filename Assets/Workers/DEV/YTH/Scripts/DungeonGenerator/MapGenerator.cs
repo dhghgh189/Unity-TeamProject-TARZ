@@ -5,7 +5,6 @@ using Zenject;
 public class MapGenerator : MonoBehaviour
 {
     [SerializeField] GameObject roomPrefab;
-    [SerializeField] GameObject clearRoomPrefab;
     [SerializeField] GameObject storePrefab;
     [SerializeField] GameObject wallDestroyer;
     [SerializeField] RoomChecker roomChecker;
@@ -15,6 +14,8 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] GameObject movePotalPrefab;
     [SerializeField] GameObject scenePotalPrefab;
     [SerializeField] GameObject bossRoomPrefab;
+    [SerializeField] GameObject NPCPrefab;
+
     private Transform bossRoomTransform;
 
     // 랜덤한 방향을 담을 배열
@@ -71,12 +72,18 @@ public class MapGenerator : MonoBehaviour
             // 방 생성
             if (i == 0)
             {
-                Instantiate(clearRoomPrefab, createPos, Quaternion.identity, transform);
+                Instantiate(roomPrefab, createPos, Quaternion.identity, transform);
+
+                // 일정확률로 돌발퀘스트 NPC 생성
+                if (Util.IsRandom(50))
+                {
+                    Instantiate(NPCPrefab, createPos + Vector3.forward * 10f, Quaternion.identity, transform);
+                }
             }
             else
             {
                 Transform roomTransform = Instantiate(roomPrefab, createPos, Quaternion.identity, transform).transform;
-                Instantiate(obstacles[Random.Range(0, obstacles.Length)], createPos , Quaternion.identity, transform);
+                Instantiate(obstacles[Random.Range(0, obstacles.Length)], createPos, Quaternion.identity, transform);
                 Instantiate(monsterSpawners[Random.Range(0, monsterSpawners.Length)], createPos, Quaternion.identity, roomTransform);
             }
 
@@ -107,7 +114,7 @@ public class MapGenerator : MonoBehaviour
         // 보스룸 통로 생성
         for (int i = 0; i < 2; i++)
         {
-            Instantiate(clearRoomPrefab, farDistancePos, Quaternion.identity, transform);
+            Instantiate(roomPrefab, farDistancePos, Quaternion.identity, transform);
             yield return Util.GetDelay(0.05f);
 
             if (i == 1)

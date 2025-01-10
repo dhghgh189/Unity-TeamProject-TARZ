@@ -17,6 +17,8 @@ public class ThrowState : BaseState<PlayerController>
 
     private Vector3 lookDir;
 
+    private bool wasPressedCombo;
+
     public ThrowState(PlayerController owner)
     {
         this.owner = owner;
@@ -56,6 +58,10 @@ public class ThrowState : BaseState<PlayerController>
 
         // Attack 시작 시에는 콤보 진행 불가능하도록 set
         owner.Attack.CanUseCombo = false;
+        // 버퍼로 사용할 변수
+        wasPressedCombo = false;
+        // 공격 시작시에는 움직이지 못하도록 set
+        owner.Attack.CanMoveWhileAttack = false;
 
         // 최초 진입시점 때의 입력값을 기억한다.
         inputDir = owner.PInput.InputDir;
@@ -149,15 +155,34 @@ public class ThrowState : BaseState<PlayerController>
             return;
         }
 
+        // EndCombo 시점에 콤보 입력 버퍼가 확인된 경우
+        if (!owner.Attack.CanUseCombo && wasPressedCombo)
+        {
+            // 애니메이션이 끝나기 전에 전이하므로 카운트를 수동으로 증가
+            owner.Attack.ThrowCount++;
+
+            // 마지막 공격이후라면 콤보 초기화
+            if (owner.Attack.ThrowCount >= owner.Attack.ThrowCountMax)
+                owner.Attack.ThrowCount = 0;
+
+            OnEnter();
+            return;
+        }
+
+        // 콤보 입력 종료 후 유저가 이동을 입력한 경우 이동으로 캔슬
+        if (owner.Attack.CanMoveWhileAttack && owner.PInput.InputDir != Vector3.zero)
+        {
+            owner.ChangeState(EState.Move);
+            return;
+        }
+
         // 콤보가 가능한 상황에 입력이 확인된 경우 
         // 물건 스택또한 존재해야 함
         if (owner.Attack.CanUseCombo
             && owner.PInput.TryThrow
             && owner.Attack.ObjectCount > 0)
         {
-            // 애니메이션이 끝나기 전에 전이하므로 카운트를 수동으로 증가
-            owner.Attack.ThrowCount++;
-            OnEnter();
+            wasPressedCombo = true;
             return;
         }
 

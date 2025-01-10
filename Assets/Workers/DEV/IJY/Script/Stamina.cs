@@ -12,6 +12,8 @@ public class Stamina : MonoBehaviour
     [SerializeField] public bool IsGetPostion; // 추후 스테미나 회복 포션 획득 시 활성화 예정
     [Inject][SerializeField] private StatModel stat;
     [SerializeField] public Image gauge_Stamina;
+    [SerializeField] private float regenWaitTime; // 스테미너 사용 직후 리젠 대기 시간
+    [SerializeField] private float exhaustionWaitTime; // 스테미너 모두 소진 후 리젠 대기 시간
 
     private void Start()
     {
@@ -31,7 +33,7 @@ public class Stamina : MonoBehaviour
         if (lastStamina < _lastStamina)
         {
             _IsChangeStam = true;
-            _waitTime = 1f;
+            _waitTime = regenWaitTime;
         }
         _lastStamina = lastStamina;
         gauge_Stamina.fillAmount = (stat.MaxStamina - (stat.MaxStamina - _lastStamina)) / stat.MaxStamina;
@@ -44,7 +46,7 @@ public class Stamina : MonoBehaviour
         {
             if (stat.CurrentStamina <= 0.0f && _IsChangeStam == true)
             {
-                _waitTime = 3.0f;
+                _waitTime = exhaustionWaitTime;
                 _IsChangeStam = false;
             }
             if (_waitTime > 0.0f)

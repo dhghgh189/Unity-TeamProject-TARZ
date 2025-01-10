@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Unity.Mathematics;
 using UnityEngine;
 using Zenject;
 
@@ -33,6 +34,8 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
     [SerializeField] GameObject _gear;
 
     [SerializeField] GameObject _chip;
+
+    [SerializeField] GameObject _bluChip;
 
     [Inject] Transform dropPool;
 
@@ -119,6 +122,9 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
         DropGearItem(random, curPos);
         random = UnityEngine.Random.Range(0, 12);
         DropChipItem(random, curPos + Vector3.right * 0.5f);
+
+        if (_monsterData.MonsterTIer != MonsterData.MonsterTier.Normal)
+            DropBlueChip(curPos);
     }
 
     public void DieDissolve()
@@ -259,5 +265,31 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
             // 반격 상황 종료
             _monsterData.IsCountered = false;
         }
+    }
+
+    private void DropBlueChip(Vector3 curPos)
+    {
+        int tier = UnityEngine.Random.Range(1, 4);
+        if (_monsterData.MonsterTIer == MonsterData.MonsterTier.Elite)
+        {
+            tier = (UnityEngine.Random.Range(0, 1f)) switch
+            {
+                < 0.5f => 3,
+                <= 0.5f and < 0.8f => 2,
+                _ => 1,
+            };
+        }
+
+        foreach (var item in dropPool.GetComponentsInChildren<DropBlueChip>(true))
+        {
+            if (!item.gameObject.activeSelf)
+            {
+                item.DropChipInit(tier);
+                item.transform.position = curPos;
+                item.gameObject.SetActive(true);
+                return;
+            }
+        }
+        Instantiate(_bluChip, curPos, transform.rotation, dropPool).GetComponent<DropBlueChip>().DropChipInit(tier);
     }
 }

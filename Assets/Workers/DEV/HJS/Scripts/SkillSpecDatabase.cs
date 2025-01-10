@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 /// <summary>
@@ -40,5 +41,11 @@ public class SkillSpecDatabase : ScriptableObject
     public BaseSkillSO RerollSkill()
     {
         return skillList[Random.Range(0, skillList.Count)];
+    }
+
+    public BaseSkillSO GetSkill(int tier)
+    {
+        BaseSkillSO[] tierSkills = skillList.Where(x => x.SkillTier == tier).ToArray();
+        return tierSkills[Random.Range(0, tierSkills.Length)];
     }
 }

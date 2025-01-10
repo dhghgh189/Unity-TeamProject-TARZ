@@ -5,6 +5,7 @@ using Zenject;
 public class MapGenerator : MonoBehaviour
 {
     [SerializeField] GameObject roomPrefab;
+    [SerializeField] GameObject startRoomPrefab;
     [SerializeField] GameObject storePrefab;
     [SerializeField] GameObject wallDestroyer;
     [SerializeField] RoomChecker roomChecker;
@@ -65,6 +66,11 @@ public class MapGenerator : MonoBehaviour
             if (!roomChecker.IsEmptyRoom())
             {
                 i--;
+                random = Random.Range(0, 4);
+                while (createPos.z == 50 && random == 1)
+                {
+                    random = Random.Range(0, 4);
+                }
                 createPos += createDir[random] * 50f;
                 wallDestroyer.transform.position = destroyerY + createPos - createDir[random] * 25f;
                 continue;
@@ -73,7 +79,7 @@ public class MapGenerator : MonoBehaviour
             // 방 생성
             if (i == 0)
             {
-                Instantiate(roomPrefab, createPos, Quaternion.identity, transform);
+                Instantiate(startRoomPrefab, createPos, Quaternion.identity, transform);
 
                 // 일정확률로 돌발퀘스트 NPC 생성
                 if (Util.IsRandom(50))
@@ -94,6 +100,14 @@ public class MapGenerator : MonoBehaviour
 
             // 랜덤 방향 지정
             random = Random.Range(0, 4);
+            while (createPos.z == 50 && random == 1)
+            {
+                random = Random.Range(0, 4);
+            }
+            if (i == 0)
+            {
+                random = 0;
+            }
             createPos += createDir[random] * 50f;
 
             // 진행 방향의 벽 제거

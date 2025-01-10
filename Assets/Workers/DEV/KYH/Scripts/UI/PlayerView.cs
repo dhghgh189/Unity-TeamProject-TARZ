@@ -8,15 +8,14 @@ using Zenject;
 public class PlayerView : MonoBehaviour
 {
     [Inject] StatModel statModel;
-    [Inject] PlayerController player;
 
+    private PlayerController player;
     private PlayerAttack attack;
 
     [Header("플레이어 정보")]
-    //[SerializeField] private Slider hpSlider;
     [SerializeField] private Image hpImage;
-    //[SerializeField] private Slider mpSlider;
     [SerializeField] private Image mpImage;
+    [SerializeField] private GameObject interactionAlarm;
 
     [Header("쓰레기 오브젝트")]
     [SerializeField] private TMP_Text currentTObj;
@@ -30,15 +29,8 @@ public class PlayerView : MonoBehaviour
     private void Start()
     {
         // 플레이어의 PlayerAttack 불러오기
+        player = GetComponent<PlayerController>();
         attack = player.Attack;
-
-        // 슬라이더의 최대값을 각 스탯의 최대값으로 설정
-        //hpSlider.maxValue = statModel.MaxHp;
-        //mpSlider.maxValue = statModel.MaxMp;
-
-        // 슬라이더의 조절 값을 각 스탯의 현재 값으로 설정
-        //hpSlider.value = statModel.CurrentHp;
-        //mpSlider.value = statModel.CurrentMp;
 
         // 플레이어의 각 스탯 변동 이벤트 구독
         statModel.OnCurHpChange += Player_OnCurHPChanged;
@@ -51,6 +43,7 @@ public class PlayerView : MonoBehaviour
         Player_OnCurMPChanged(0);
         Player_OnTObjectChanged();
 
+        // 마나 스킬 활성화 상태를 시작할 때 모두 비활성화로 초기화
         active01.interactable = false;
         active02.interactable = false;
         active03.interactable = false;
@@ -94,6 +87,22 @@ public class PlayerView : MonoBehaviour
 
         tObjFill.fillAmount = (attack.MaxObjectCount - (attack.MaxObjectCount - attack.ObjectCount)) / attack.MaxObjectCount;
         if (attack.ObjectCount <= 0) tObjFill.fillAmount = 0;
+    }
+
+    public void SetActiveUI()
+    {
+        if (interactionAlarm != null)
+        {
+            interactionAlarm.SetActive(true);
+        }
+    }
+
+    public void HideUI()
+    {
+        if (interactionAlarm != null)
+        {
+            interactionAlarm.SetActive(false);
+        }
     }
 
     /// <summary>

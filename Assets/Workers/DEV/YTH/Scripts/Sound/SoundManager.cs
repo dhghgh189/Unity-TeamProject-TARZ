@@ -11,11 +11,16 @@ public class SoundManager : MonoBehaviour
     [SerializeField] SoundDataSO _soundData;
     public static SoundDataSO SoundData { get { return Instance._soundData; } private set { } }
 
-    [SerializeField] private AudioSource bgmSource;     // BGM 소스
-    [SerializeField] private AudioSource sfxSource;     // SFX 소스
+    // BGM 소스
+    private AudioSource bgmSource;
+    public static AudioSource BGM { get { return Instance.bgmSource; } }
+
+    // SFX 소스
+    private AudioSource sfxSource;
+    public static AudioSource SFX { get { return Instance.sfxSource; } }
 
     /// <summary>
-    /// 사운드 매니저를 싱글톤으로 선언
+    /// 사운드 매니저를 싱글톤으로 선언                                //추후 젠젝트로 뺄 것
     /// </summary>
     private void Awake()
     {
@@ -28,6 +33,10 @@ public class SoundManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        //bgmSource, sfxSource 불러오기
+        sfxSource = gameObject.AddComponent<AudioSource>();
+        bgmSource = gameObject.AddComponent<AudioSource>();
     }
 
     private void Start()
@@ -36,53 +45,53 @@ public class SoundManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 배경 음악 재생
+    /// 배경 음악 교체 후 재생
     /// </summary>
-    public void PlayBGM(AudioClip clip)
+    public static void PlayBGM(AudioClip clip)
     {
         if (clip == null)
             return;
 
-        if (bgmSource.isPlaying)
+        if (BGM.isPlaying)
         {
-            bgmSource.Stop();
+            BGM.Stop();
         }
 
-        bgmSource.clip = clip;
-        bgmSource.Play();
+        BGM.clip = clip;
+        BGM.Play();
     }
 
     /// <summary>
     /// 배경 음악 정지
     /// </summary>
-    public void StopBGM()
+    public static void StopBGM()
     {
-        if (bgmSource.isPlaying == false)
+        if (BGM.isPlaying == false)
             return;
 
-        bgmSource.Stop();
+        BGM.Stop();
     }
 
     /// <summary>
-    /// 효과음 재생
+    /// 효과음 교체 후 재생
     /// </summary>
-    public void PlaySFX(AudioClip clip)
+    public static void PlaySFX(AudioClip clip)
     {
         if (clip == null)
             return;
 
-        sfxSource.clip = clip;
-        sfxSource.PlayOneShot(clip);
+        SFX.clip = clip;
+        SFX.PlayOneShot(clip);
     }
 
     /// <summary>
     /// 효과음 정지
     /// </summary>
-    public void StopSFX()
+    public static void StopSFX()
     {
-        if (sfxSource.isPlaying == false)
+        if (SFX.isPlaying == false)
             return;
 
-        sfxSource.Stop();
+        SFX.Stop();
     }
 }

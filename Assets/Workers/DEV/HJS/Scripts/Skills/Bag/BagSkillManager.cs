@@ -20,7 +20,7 @@ public class BagSkillManager : MonoBehaviour
     [HideInInspector] public UnityEvent OnChargeEvent;
 
     private PlayerController owner;
-    [HideInInspector] public PlayerController Owner { get { return owner; } set { owner = value; } }
+    [HideInInspector] public PlayerController Owner { get { return owner; } set { owner = value; UpdateOwner(owner); } }
 
     /// <summary>
     /// 가방 스킬을 담아놓는 배열
@@ -78,6 +78,19 @@ public class BagSkillManager : MonoBehaviour
             if (act is null) continue;
    
             act.RetrunFeature();
+        }
+    }
+
+    private void UpdateOwner(PlayerController owner)
+    {
+        // 혹시 모르는 예외상황 처리
+        if (skillArr == null) return;
+
+        // 장착한 마나 스킬의 초기화 함수를 돌아본다
+        foreach (IBagAct act in skillArr)
+        {
+            if (act is null) continue;
+            act.player = owner;
         }
     }
 

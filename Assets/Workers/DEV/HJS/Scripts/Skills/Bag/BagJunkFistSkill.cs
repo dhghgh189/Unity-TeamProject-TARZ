@@ -23,10 +23,22 @@ public class BagJunkFistSkill : IBagAct
 
     private LinkedList<BaseBagState> acts;
     public LinkedList<BaseBagState> Acts { get => acts; set { } }
-    public PlayerController player { get => owner; set { owner = value; } }
+    public PlayerController player 
+    { 
+        get => owner; 
+        set 
+        { 
+            owner = value;
+            foreach (var state in acts)
+            {
+                state.UpdateOwner(value);
+            }
+        } 
+    }
+    public float CurGauge { get => curGauge; set => curGauge = value; }
 
     /* 특수 정보들 */
-    public int ResultDamage;
+    public float ResultDamage;
     public MeleeAttackInfo[] MeleeAttackInfo;
     public MeleeAttackInfo[] temp;
 
@@ -59,8 +71,6 @@ public class BagJunkFistSkill : IBagAct
 
         // 기존의 공격 모션 담아두기
         temp = owner.Attack.MeleeAttackInfo;
-        // 변경할 공격 모션 담아두기
-        MeleeAttackInfo = new MeleeAttackInfo[] {  };
     }
 
     // 게이지 충전
@@ -74,37 +84,58 @@ public class BagJunkFistSkill : IBagAct
     {
         // 2. 파편 계산 - Damage 체크
         ResultDamage = owner.Attack.ObjectCount / 10;
-        int removeCount = ResultDamage * 3;
+        int removeCount = (int)ResultDamage * 3;
         Debug.Log($"<color=green>데미지 증가량 : {ResultDamage}</color>");
         owner.Attack.RemoveThrowObject(removeCount);
-        owner.Stat.ExtraDamage += ResultDamage;
+        ResultDamage *= skilldata.Getdata((int)JunkFistDataType.IncreaseDamage).value;
+
+        // 변경할 공격 모션 담아두기
+        MeleeAttackInfo = new MeleeAttackInfo[]
+        {
+            new MeleeAttackInfo(){ 
+                Damage = skilldata.Getdata((int)JunkFistDataType.DefaultDamage).value + ResultDamage, 
+                Angle = skilldata.Getdata((int)JunkFistDataType.Angle).value, 
+                Range = skilldata.Getdata((int) JunkFistDataType.Range).value, 
+                EffectInfo = new EffectInfo(){ EffectDatas = new EffectData[1]{ new EffectData() { EffectType = EEffectType.KnockBack } } } },
+            new MeleeAttackInfo(){
+                Damage = skilldata.Getdata((int)JunkFistDataType.DefaultDamage).value + ResultDamage,
+                Angle = skilldata.Getdata((int)JunkFistDataType.Angle).value,
+                Range = skilldata.Getdata((int) JunkFistDataType.Range).value,
+                EffectInfo = new EffectInfo(){ EffectDatas = new EffectData[1]{ new EffectData() { EffectType = EEffectType.KnockBack } } } },
+        };
+
         // 3. 특수 기믹 발동 -> 모든 공격 상태 진입 x -> 30초간
         owner.StartCoroutine(BuffRoutine());
         // 4. 기본 근접 공격의 방식을 변경
-        //  owner.Attack.MeleeAttackInfo = MeleeAttackInfo;
-        //  owner.Attack.GenerateMeleeEffects();
     }
 
     public void RetrunFeature()
     {
-        // TODO: 변경할 데이터
-        // 전체 -> 상태 전이 막아놓거 풀기
-        owner.StateTransfer.OnEnableState(new EState[]{ EState.Throw, EState.JumpThrow, EState.Melee, EState.JumpMelee});
-        owner.Stat.ExtraDamage -= ResultDamage;
     }
 
     private IEnumerator BuffRoutine()
     {
         // 버프
-        owner.StateTransfer.OnDisableState(new EState[] { EState.Throw, EState.JumpThrow, EState.Melee, EState.JumpMelee });
+        owner.StateTransfer.OnDisableState(new EState[] { EState.Throw, EState.JumpThrow, EState.JumpMelee });
         owner.Stat.ExtraDamage += ResultDamage;
-        Use();
+        // 기존 Melee -> JunkFistMelee
+
+        // 4. 기본 근접 공격의 방식을 변경
+        owner.Attack.MeleeAttackInfo = MeleeAttackInfo;
+        owner.Attack.GenerateMeleeEffects();
+        owner.Fsm.ChangeStateAct(new JunkFistMeleeState(owner), EState.Melee);
         Debug.Log("버프 작동!");
-        yield return Util.GetDelay(5f);    // 필요 데이터 - 지속 시간
+        Use();
+
+        yield return Util.GetDelay(10f);    // 필요 데이터 - 지속 시간
 
         // 정상 종료
-        owner.StateTransfer.OnEnableState(new EState[] { EState.Throw, EState.JumpThrow, EState.Melee, EState.JumpMelee });
+        owner.StateTransfer.OnEnableState(new EState[] { EState.Throw, EState.JumpThrow, EState.JumpMelee });
         owner.Stat.ExtraDamage -= ResultDamage;
+        // 기존 JunkFistMelee -> Melee
+        owner.Attack.MeleeAttackInfo = temp;
+        owner.Attack.GenerateMeleeEffects();
+        owner.Fsm.ChangeStateAct(new MeleeState(owner), EState.Melee);
         Debug.Log("버프 끝!");
     }
 
@@ -170,7 +201,7 @@ public class BagJunkFistSkill : IBagAct
 
             if (animTimer <= 0)
             {
-                // TODO: 근접 공격외 공격 요소 봉인 + 공격 모션 변경
+                // 근접 공격외 공격 요소 봉인 + 공격 모션 변경
                 parent.Feature();
 
                 owner.BagSkillHandler.NextStep();
@@ -182,6 +213,12 @@ public class BagJunkFistSkill : IBagAct
         {
             base.OnExit();
             Debug.Log("자 끝나버렸다");
+        }
+
+        public override void OnAction()
+        {
+            base.OnAction();
+            // TODO: 건틀릿 생성
         }
     }
 }

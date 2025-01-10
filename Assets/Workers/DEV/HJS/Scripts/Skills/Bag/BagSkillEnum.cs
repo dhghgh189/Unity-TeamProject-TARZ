@@ -8,4 +8,6 @@ public class BagSkillEnum
     { 
         JunkFist,
     }
+
+    public enum JunkFistDataType { DefaultDamage, IncreaseDamage, Angle, Range, OperationTime }
 }

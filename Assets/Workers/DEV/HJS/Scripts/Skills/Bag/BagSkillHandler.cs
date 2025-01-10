@@ -39,6 +39,7 @@ public class BagSkillHandler : MonoBehaviour
         {
             { BagIndexKey.JunkFist, new BagJunkFistSkill(player, container) },
         };
+        manager.Owner = player;
     }
 
     private void Update()

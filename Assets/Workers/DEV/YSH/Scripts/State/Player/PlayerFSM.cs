@@ -44,7 +44,7 @@ public class PlayerFSM
 
     public void ChangeState(EState state)
     {
-        if (!StateTransfer.CanTransState[(int)state]) return;
+        if (state != EState.Idle && !StateTransfer.CanTransState[(int)state]) return;
 
         if (curState != null)
         {
@@ -79,5 +79,10 @@ public class PlayerFSM
             return;
 
         curState.OnFixedUpdate();
+    }
+
+    public void ChangeStateAct(BaseState<PlayerController> act, EState state)
+    {
+        States[(int)state] = act;
     }
 }

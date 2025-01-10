@@ -45,7 +45,6 @@ public class SettingSceneUI : MonoBehaviour
     {
         playerController = FindAnyObjectByType<PlayerController>();
         camera = FindAnyObjectByType<CameraController>();
-        minimap = GameObject.Find("Minimap");
         inputManager = FindAnyObjectByType<ChangeInput>();
 
         if (SceneManager.GetActiveScene().name == "Title")
@@ -138,8 +137,7 @@ public class SettingSceneUI : MonoBehaviour
 
     public void OnCheckMinimapActiveToggle()
     {
-        bool isActive = minimapActiveToggle.isOn;
-        minimap.SetActive(isActive);
+        minimap.SetActive(minimapActiveToggle.isOn);
     }
 
     // 언어 카테고리 버튼 클릭

@@ -1,7 +1,10 @@
 using UnityEngine;
+using Zenject;
 
 public class Child_SpecialTrigger : MonoBehaviour
 {
+    private PlayerView player;
+
     private SpecialThrowOBJ_Base SpecialOBJ;
     private SphereCollider col;
     private LayerMask playerLayer;
@@ -17,6 +20,8 @@ public class Child_SpecialTrigger : MonoBehaviour
 
     void Init()
     {
+        player = FindAnyObjectByType<PlayerView>();
+
         IsPlayerIn = false;
 
         SpecialOBJ = GetComponentInParent<SpecialThrowOBJ_Base>();
@@ -33,7 +38,9 @@ public class Child_SpecialTrigger : MonoBehaviour
 
         if (other.gameObject.layer == playerLayer)
         {
+            Debug.Log(IsPlayerIn);
             IsPlayerIn = true;
+            player.SetActiveUI();
         }
     }
 
@@ -43,7 +50,14 @@ public class Child_SpecialTrigger : MonoBehaviour
 
         if (other.gameObject.layer == playerLayer)
         {
+            Debug.Log(IsPlayerIn);
             IsPlayerIn = false;
+            player.HideUI();
         }
+    }
+
+    private void OnDestroy()
+    {
+        player.HideUI();
     }
 }

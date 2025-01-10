@@ -7562,6 +7562,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 4921992969517809171}
+    - targetCorrespondingSourceObject: {fileID: 7702907222811596189, guid: 69f4a245570104645aaaa087fd433c0d,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5277618163099269945}
   m_SourcePrefab: {fileID: 100100000, guid: 69f4a245570104645aaaa087fd433c0d, type: 3}
 --- !u!1 &7365192204732169291 stripped
 GameObject:
@@ -7672,6 +7676,7 @@ MonoBehaviour:
   manaSkillPanel: {fileID: 1697502009573946168}
   currentStateView: 0
   cameraLookPos: {fileID: 6075622225480372493}
+  StateTransfer: {fileID: 0}
   BagSkillHandler: {fileID: 0}
   ManaSkillHandler: {fileID: 1923758049850810125}
   SkillHandler: {fileID: 1544264633557032960}
@@ -7970,7 +7975,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 22e60ccaccf208c47b9f2a8380089ea3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -8064,13 +8069,27 @@ LineRenderer:
     numCapVertices: 0
     alignment: 0
     textureMode: 0
-    textureScale: {x: 1, y: 1}
+    textureScale: {x: 3, y: 1}
     shadowBias: 0.5
     generateLightingData: 0
   m_MaskInteraction: 0
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
+--- !u!114 &5277618163099269945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7365192204732169291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4aa8bbe8b1a80654a961897ff9b339db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  selectIndex: 0
 --- !u!4 &7889668715304265457 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7038538950256463655, guid: 69f4a245570104645aaaa087fd433c0d,

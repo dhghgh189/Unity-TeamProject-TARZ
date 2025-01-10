@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Zenject;
 
 public class Reward_Interaction : InteractionOBJ_Base, Interaction_Ibase_Activate
 {

@@ -8,6 +8,10 @@ public class SoundDataSO : ScriptableObject
     [Serializable]
     public struct Sound
     {
+        [Header("BGM")]
+        public AudioClip lobbyBGM;
+
+        [Header("SFX")]
         public AudioClip M_TakeDamage;
 
        /* public AudioClip MSkill_Bomb;

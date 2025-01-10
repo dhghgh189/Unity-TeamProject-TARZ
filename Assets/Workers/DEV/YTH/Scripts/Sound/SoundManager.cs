@@ -4,39 +4,35 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
-    private static SoundManager instance = null;
+    public static SoundManager Instance { get; private set; }
+
+    const string SOUND_PATH = "Managed/Sound";
 
     [SerializeField] SoundDataSO _soundData;
+    public static SoundDataSO SoundData { get { return Instance._soundData; } private set { } }
 
     [SerializeField] private AudioSource bgmSource;     // BGM 소스
     [SerializeField] private AudioSource sfxSource;     // SFX 소스
-    
-    public static SoundManager Instance
-    {
-        get
-        {
-            if (null == instance)
-            {
-                return null;
-            }
-            return instance;
-        }
-    }
 
     /// <summary>
     /// 사운드 매니저를 싱글톤으로 선언
     /// </summary>
     private void Awake()
     {
-        if (instance == null)
+        if (Instance == null)
         {
-            instance = this;
+            Instance = this;
             DontDestroyOnLoad(gameObject);
         }
         else
         {
             Destroy(gameObject);
         }
+    }
+
+    private void Start()
+    {
+        _soundData = Resources.Load<SoundDataSO>($"{SOUND_PATH}/SoundData");
     }
 
     /// <summary>

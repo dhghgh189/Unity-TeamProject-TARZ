@@ -12,7 +12,7 @@ public class InputDeviceManager : MonoBehaviour
     [SerializeField] private Image keyboardImage;
     [SerializeField] private Image gamepadImage;
 
-    public enum DeviceType { KeyboardMouse, Gamepad }
+    public enum DeviceType { KeyboardMouse, Gamepad, Both }
 
     private DeviceType currentDevice;
 
@@ -53,6 +53,9 @@ public class InputDeviceManager : MonoBehaviour
             case DeviceType.Gamepad:
                 EnableGamepad();
                 break;
+            case DeviceType.Both:
+                EnableBoth();
+                break;
         }
     }
 
@@ -80,6 +83,19 @@ public class InputDeviceManager : MonoBehaviour
         InputSystem.DisableDevice(Mouse.current);
         keyboardImage.gameObject.SetActive(false);
         gamepadImage.gameObject.SetActive(true);
+    }
+
+    private void EnableBoth()
+    {
+        if (Gamepad.current != null)
+        {
+            InputSystem.EnableDevice(Gamepad.current);
+        }
+
+        InputSystem.EnableDevice(Keyboard.current);
+        InputSystem.EnableDevice(Mouse.current);
+        keyboardImage.gameObject.SetActive(false);
+        //gamepadImage.gameObject.SetActive(true);
     }
 
     private void SaveDevice()

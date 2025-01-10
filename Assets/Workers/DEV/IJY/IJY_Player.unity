@@ -9054,6 +9054,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b75004138ba3654b9576f1a6d6100a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  trigger: {fileID: 0}
 --- !u!1 &937445960
 GameObject:
   m_ObjectHideFlags: 0
@@ -9212,6 +9213,41 @@ PrefabInstance:
       propertyPath: inputManager
       value: 
       objectReference: {fileID: 1001048250}
+    - target: {fileID: 4921992969517809171, guid: 744790fd829edc343bb6392bc0fb0f1a,
+        type: 3}
+      propertyPath: m_Loop
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4921992969517809171, guid: 744790fd829edc343bb6392bc0fb0f1a,
+        type: 3}
+      propertyPath: m_Parameters.alignment
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4921992969517809171, guid: 744790fd829edc343bb6392bc0fb0f1a,
+        type: 3}
+      propertyPath: m_Parameters.shadowBias
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4921992969517809171, guid: 744790fd829edc343bb6392bc0fb0f1a,
+        type: 3}
+      propertyPath: m_Parameters.textureMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4921992969517809171, guid: 744790fd829edc343bb6392bc0fb0f1a,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 22e60ccaccf208c47b9f2a8380089ea3, type: 2}
+    - target: {fileID: 4921992969517809171, guid: 744790fd829edc343bb6392bc0fb0f1a,
+        type: 3}
+      propertyPath: m_Parameters.textureScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4921992969517809171, guid: 744790fd829edc343bb6392bc0fb0f1a,
+        type: 3}
+      propertyPath: m_Parameters.textureScale.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6967186716888972681, guid: 744790fd829edc343bb6392bc0fb0f1a,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -10809,7 +10845,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
@@ -15522,6 +15558,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b75004138ba3654b9576f1a6d6100a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  trigger: {fileID: 0}
 --- !u!1 &1528373034
 GameObject:
   m_ObjectHideFlags: 0
@@ -20359,6 +20396,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b75004138ba3654b9576f1a6d6100a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  trigger: {fileID: 0}
 --- !u!1 &1934505139
 GameObject:
   m_ObjectHideFlags: 0
@@ -20686,6 +20724,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b75004138ba3654b9576f1a6d6100a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  trigger: {fileID: 0}
 --- !u!1 &1961593902
 GameObject:
   m_ObjectHideFlags: 0

@@ -15,8 +15,9 @@ public class PlayerFSM
     public BaseState<PlayerController> CurrentState => curState;
 
     public AblityAdapter Adapter;
+    public PlayerStateTransfer StateTransfer;
 
-    public PlayerFSM(PlayerController owner, AblityAdapter adapter)
+    public PlayerFSM(PlayerController owner, AblityAdapter adapter, PlayerStateTransfer stateTransfer)
     {
         this.owner = owner;
 
@@ -37,11 +38,14 @@ public class PlayerFSM
         States[(int)EState.Dead] = new DeadState(owner);
 
         Adapter = adapter;
+        StateTransfer = stateTransfer;
         ChangeState(EState.Idle);
     }
 
     public void ChangeState(EState state)
     {
+        if (!StateTransfer.CanTransState[(int)state]) return;
+
         if (curState != null)
         {
             owner.SkillHandler.ActivateSkill(curState.type, SkillEnum.ActionTimingType.Exit);

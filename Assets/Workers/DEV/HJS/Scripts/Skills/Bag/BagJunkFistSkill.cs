@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.InteropServices;
 using UnityEngine;
 using Zenject;
@@ -22,9 +23,12 @@ public class BagJunkFistSkill : IBagAct
 
     private LinkedList<BaseBagState> acts;
     public LinkedList<BaseBagState> Acts { get => acts; set { } }
+    public PlayerController player { get => owner; set { owner = value; } }
 
     /* 특수 정보들 */
-    public float ResultDamage;
+    public int ResultDamage;
+    public MeleeAttackInfo[] MeleeAttackInfo;
+    public MeleeAttackInfo[] temp;
 
     public BagJunkFistSkill(PlayerController owner, BagSkillContainerSO container)
     {
@@ -52,35 +56,56 @@ public class BagJunkFistSkill : IBagAct
 
         acts = new LinkedList<BaseBagState>();
         acts.AddLast(new BagJunkFist_1(owner, this));
+
+        // 기존의 공격 모션 담아두기
+        temp = owner.Attack.MeleeAttackInfo;
+        // 변경할 공격 모션 담아두기
+        MeleeAttackInfo = new MeleeAttackInfo[] {  };
     }
 
-    public void Charge()
+    // 게이지 충전
+    public void Charge() => curGauge = (curGauge + chargeAmount >= maxGauge) ? maxGauge : curGauge + chargeAmount;
+    //게이지 사용 가능한지 확인
+    public bool IsCanUse() => curGauge >= useAmount;
+    // 게이지 사용
+    public void Use() => curGauge -= useAmount;
+    // 특수 능력
+    public void Feature()
     {
-        // 게이지 충전
-        curGauge = (curGauge + chargeAmount >= maxGauge) ? maxGauge : curGauge + chargeAmount;
-    }
-    
-    public bool IsCanUse()
-    {
-        //게이지 사용 가능한지 확인
-        return curGauge >= useAmount;
-    }
-    
-    public void Use()
-    {
-        // 플로우에 따라 절차적으로 진행
-        // 1.게이지 소모
-        curGauge -= useAmount;
         // 2. 파편 계산 - Damage 체크
-        int increaseDamage = owner.Attack.ObjectCount / 10;
-        Debug.Log($"계산한 데미지 : {increaseDamage}");
-        int removeCount = increaseDamage * 3;
+        ResultDamage = owner.Attack.ObjectCount / 10;
+        int removeCount = ResultDamage * 3;
+        Debug.Log($"<color=green>데미지 증가량 : {ResultDamage}</color>");
         owner.Attack.RemoveThrowObject(removeCount);
+        owner.Stat.ExtraDamage += ResultDamage;
         // 3. 특수 기믹 발동 -> 모든 공격 상태 진입 x -> 30초간
-        // 이건 상태 갈 수 있냐 해주는 Bool 리스트를 변경하면 되는데
+        owner.StartCoroutine(BuffRoutine());
         // 4. 기본 근접 공격의 방식을 변경
-        // 이게 진짜 대박임 -> 그러면 List를 교체하는 방식으로 ?
-        // 무슨 방법인데 -> 뭐긴 뭐야 Attack 방식을 변경하고 애니메이션 방법도 변경해야지
+        //  owner.Attack.MeleeAttackInfo = MeleeAttackInfo;
+        //  owner.Attack.GenerateMeleeEffects();
+    }
+
+    public void RetrunFeature()
+    {
+        // TODO: 변경할 데이터
+        // 전체 -> 상태 전이 막아놓거 풀기
+        owner.StateTransfer.OnEnableState(new EState[]{ EState.Throw, EState.JumpThrow, EState.Melee, EState.JumpMelee});
+        owner.Stat.ExtraDamage -= ResultDamage;
+    }
+
+    private IEnumerator BuffRoutine()
+    {
+        // 버프
+        owner.StateTransfer.OnDisableState(new EState[] { EState.Throw, EState.JumpThrow, EState.Melee, EState.JumpMelee });
+        owner.Stat.ExtraDamage += ResultDamage;
+        Use();
+        Debug.Log("버프 작동!");
+        yield return Util.GetDelay(5f);    // 필요 데이터 - 지속 시간
+
+        // 정상 종료
+        owner.StateTransfer.OnEnableState(new EState[] { EState.Throw, EState.JumpThrow, EState.Melee, EState.JumpMelee });
+        owner.Stat.ExtraDamage -= ResultDamage;
+        Debug.Log("버프 끝!");
     }
 
     /// <summary>
@@ -89,7 +114,7 @@ public class BagJunkFistSkill : IBagAct
     public class BagJunkFist_1 : BaseBagState
     {
         private BagJunkFistSkill parent;
-        private string animName = "Idle";
+        private string animName = "Drain";
 
         private Transform camTrf;
         private Vector3 moveDir;
@@ -146,7 +171,7 @@ public class BagJunkFistSkill : IBagAct
             if (animTimer <= 0)
             {
                 // TODO: 근접 공격외 공격 요소 봉인 + 공격 모션 변경
-                parent.Use();
+                parent.Feature();
 
                 owner.BagSkillHandler.NextStep();
             }

@@ -9,6 +9,8 @@ public class BaseBagState : BaseState<PlayerController>
         this.owner = owner;
     }
 
+    public void UpdateOwner(PlayerController owner) => this.owner = owner;
+
     public virtual void OnAction()
     {
     }

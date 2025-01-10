@@ -7797,6 +7797,7 @@ MonoBehaviour:
   maxObjectCount: 50
   comboCheckTime: 0.2
   CanUseCombo: 0
+  CanMoveWhileAttack: 0
 --- !u!54 &7420254743281234535
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -7868,6 +7869,8 @@ MonoBehaviour:
   IsGetPostion: 0
   stat: {fileID: 0}
   gauge_Stamina: {fileID: 7873174449751312792}
+  regenWaitTime: 0.3
+  exhaustionWaitTime: 1
 --- !u!114 &7876092388261278334
 MonoBehaviour:
   m_ObjectHideFlags: 0

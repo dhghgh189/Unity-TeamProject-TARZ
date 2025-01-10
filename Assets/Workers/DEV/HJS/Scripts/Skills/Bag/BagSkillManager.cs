@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 using Zenject;
 
 /// <summary>
@@ -18,6 +19,9 @@ public class BagSkillManager : MonoBehaviour
     /// </summary>
     [HideInInspector] public UnityEvent OnChargeEvent;
 
+    private PlayerController owner;
+    [HideInInspector] public PlayerController Owner { get { return owner; } set { owner = value; } }
+
     /// <summary>
     /// 가방 스킬을 담아놓는 배열
     /// </summary>
@@ -29,6 +33,12 @@ public class BagSkillManager : MonoBehaviour
     {
         OnChargeEvent = new UnityEvent();
         skillArr ??= new IBagAct[4];
+    }
+
+    private void Start()
+    {
+        SceneManager.sceneLoaded -= LoadedsceneEvent;
+        SceneManager.sceneLoaded += LoadedsceneEvent;
     }
 
     public bool IsCanUse(int index)
@@ -53,6 +63,22 @@ public class BagSkillManager : MonoBehaviour
         }
         skillArr[index] = bagSkill;
         OnChargeEvent.AddListener(skillArr[index].Charge);
+    }
+
+    // TODO: 씬이 변경되었을 때 -> Manager안의 스킬들 순회
+    // 그래서 버프와 같이 스탯이 증가한 애들을 다시 원복시켜주는 함수 실행
+    private void LoadedsceneEvent(Scene scene, LoadSceneMode mode)
+    {
+        // 혹시 모르는 예외상황 처리
+        if (skillArr == null) return;
+
+        // 장착한 마나 스킬의 초기화 함수를 돌아본다
+        foreach(IBagAct act in skillArr)
+        {
+            if (act is null) continue;
+   
+            act.RetrunFeature();
+        }
     }
 
     private void OnDestroy()

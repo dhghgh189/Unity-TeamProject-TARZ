@@ -29,8 +29,9 @@ public class PlayerController : MonoBehaviour, IDamagable
     public EState currentStateView;
     private TakeHitType currentHitTypeView;
 
-    public Transform cameraLookPos; 
+    public Transform cameraLookPos;
 
+    [HideInInspector][Inject] public PlayerStateTransfer StateTransfer;
     [HideInInspector] public BagSkillHandler BagSkillHandler;
     [HideInInspector] public ManaSkillHandler ManaSkillHandler;
     [HideInInspector] public PlayerSkillHandler SkillHandler;
@@ -73,7 +74,7 @@ public class PlayerController : MonoBehaviour, IDamagable
         coll = GetComponent<CapsuleCollider>();
         GrabPoint = GameObject.FindWithTag("GrabPoint").transform;
 
-        Fsm = new PlayerFSM(this, AblityAdapter);
+        Fsm = new PlayerFSM(this, AblityAdapter, StateTransfer);
 
         IsAnimStart = false;
 
@@ -86,6 +87,7 @@ public class PlayerController : MonoBehaviour, IDamagable
     private void Start()
     {
         manaSkillPanel.SetActive(false);
+        Debug.Log("다시 시작!");
     }
 
     private void Update()

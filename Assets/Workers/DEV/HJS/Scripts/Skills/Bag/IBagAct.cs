@@ -4,6 +4,7 @@ using UnityEngine;
 
 public interface IBagAct
 {
+    public float CurGauge { get; set; }
     public PlayerController player { get; set; }
 
     public LinkedList<BaseBagState> Acts { get; set; }

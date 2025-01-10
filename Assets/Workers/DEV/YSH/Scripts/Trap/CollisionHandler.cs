@@ -8,14 +8,20 @@ public class CollisionHandler : MonoBehaviour
     private Collider coll;
     public Collider Coll => coll;
 
+    public event Action<Collision> OnCollisionEntered;
     public event Action<Collision> OnCollisionStayed;
 
-    public event Action<Collider> OnTriggered;
+    public event Action<Collider> OnTriggerEntered;
     public event Action<Collider> OnTriggerStayed;
 
     private void Awake()
     {
         coll = GetComponent<Collider>();
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        OnCollisionEntered?.Invoke(other);
     }
 
     private void OnCollisionStay(Collision other)
@@ -30,6 +36,6 @@ public class CollisionHandler : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        OnTriggered?.Invoke(other);
+        OnTriggerEntered?.Invoke(other);
     }
 }

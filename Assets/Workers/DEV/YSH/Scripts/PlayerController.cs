@@ -1,12 +1,9 @@
 using System;
 using System.Collections;
 using System.Text;
-using Unity.Properties;
 using UnityEngine;
 using Zenject;
-using Zenject.SpaceFighter;
 using static SkillEnum;
-using static UnityEngine.UI.GridLayoutGroup;
 
 public enum EMachineType { Movement, Attack }
 
@@ -15,8 +12,8 @@ public enum EMpAmountType { Melee, Throw, Length }
 public class PlayerController : MonoBehaviour, IDamagable
 {
     [Inject] private StatModel stat;
-    [HideInInspector] [Inject] public Loading loadingObject;
-    [HideInInspector] [Inject] public InGameSaveData saveData;
+    [HideInInspector][Inject] public Loading loadingObject;
+    [HideInInspector][Inject] public InGameSaveData saveData;
 
     private Animator anim;
     private Coroutine SternCheckRoutine;
@@ -29,7 +26,7 @@ public class PlayerController : MonoBehaviour, IDamagable
     public EState currentStateView;
     private TakeHitType currentHitTypeView;
 
-    public Transform cameraLookPos; 
+    public Transform cameraLookPos;
 
     [HideInInspector] public BagSkillHandler BagSkillHandler;
     [HideInInspector] public ManaSkillHandler ManaSkillHandler;
@@ -109,7 +106,7 @@ public class PlayerController : MonoBehaviour, IDamagable
         CheckManaSkillInput();
 
         // 키 감지 되지 않으면 return
-        if (!isTryManaSkill)    
+        if (!isTryManaSkill)
             return;
 
         for (int i = 0; i < Define.USEKEY_MAXCOUNT; i++)
@@ -202,7 +199,7 @@ public class PlayerController : MonoBehaviour, IDamagable
         if (CheatManager.isMujeok)
         {
             Debug.Log("무적이당");
-            return; 
+            return;
         }
 
         // 점프 근접 공격 중 피격당하면 종료시키기
@@ -299,9 +296,9 @@ public class PlayerController : MonoBehaviour, IDamagable
 
     public void InfStamina(float value)
     {
-        
+
         steminaRoutine = StartCoroutine(SteminaRoutine(value));
-       
+
     }
 
     Coroutine steminaRoutine;

@@ -8,7 +8,7 @@ public class SoundManager : MonoBehaviour
 
     const string SOUND_PATH = "Managed/Sound";
 
-    [SerializeField] SoundDataSO _soundData;
+    private SoundDataSO _soundData;
     public static SoundDataSO SoundData { get { return Instance._soundData; } private set { } }
 
     // BGM 소스

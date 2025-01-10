@@ -50,7 +50,7 @@ public class LaserTrap : Trap
         laserDistance = laserVector.magnitude;
 
         laserParent.position = rayPoint1.position;
-        laserParent.localScale = new Vector3(laserParent.localScale.x, laserParent.localScale.y, laserDistance);
+        laserParent.localScale = new Vector3(laserParent.localScale.x, laserParent.localScale.y, laserDistance / transform.parent.localScale.z);
 
         base.Init();
     }

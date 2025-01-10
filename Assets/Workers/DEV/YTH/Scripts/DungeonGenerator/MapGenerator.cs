@@ -11,6 +11,8 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] RoomChecker roomChecker;
     [SerializeField] GameObject[] monsterSpawners;
     [SerializeField] GameObject[] obstacles;
+    [SerializeField] GameObject[] traps;
+    [SerializeField] GameObject trapRoomPrefab;
 
     [SerializeField] GameObject movePotalPrefab;
     [SerializeField] GameObject scenePotalPrefab;
@@ -37,6 +39,8 @@ public class MapGenerator : MonoBehaviour
     private int random;
     private int roomCount;
 
+    [SerializeField] int maxTrapCount;
+
     [Inject] PlayerController playerController;
     [Inject] InGameSaveData saveData;
 
@@ -48,6 +52,16 @@ public class MapGenerator : MonoBehaviour
         StageInfo stageInfo = chapterManager.stageInfos[chapterSaveData.StageNum];
         roomCount = stageInfo.RoomCount;
 
+        // 시작 지점 생성 (비전투 비행기 방)
+        Instantiate(startRoomPrefab, createPos, Quaternion.identity, transform);
+
+        // 일정확률로 돌발퀘스트 NPC 생성
+        if (Util.IsRandom(50))
+        {
+            Instantiate(NPCPrefab, createPos + Vector3.forward * 10f, Quaternion.identity, transform);
+        }
+
+        // 절차적 맵 생성 시작
         CreateBossRoom();
         StartCoroutine(MapCreater());
     }
@@ -76,24 +90,23 @@ public class MapGenerator : MonoBehaviour
                 continue;
             }
 
-            // 방 생성
-            if (i == 0)
-            {
-                Instantiate(startRoomPrefab, createPos, Quaternion.identity, transform);
 
-                // 일정확률로 돌발퀘스트 NPC 생성
-                if (Util.IsRandom(50))
-                {
-                    Instantiate(NPCPrefab, createPos + Vector3.forward * 10f, Quaternion.identity, transform);
-                }
+            if (maxTrapCount > 0 && Util.IsRandom(50))
+            {
+                maxTrapCount--;
+                Debug.Log("트랩 방 생성!");
+                Transform roomTransform = Instantiate(trapRoomPrefab, createPos, Quaternion.identity, transform).transform;
+                // 트랩만 있는 방 생성
             }
             else
             {
+                // 방 생성
                 Transform roomTransform = Instantiate(roomPrefab, createPos, Quaternion.identity, transform).transform;
                 Instantiate(obstacles[Random.Range(0, obstacles.Length)], createPos, Quaternion.identity, transform);
                 Instantiate(monsterSpawners[Random.Range(0, monsterSpawners.Length)], createPos, Quaternion.identity, roomTransform);
-                Instantiate(SpecialPrefab[Random.Range(0, SpecialPrefab.Length)], createPos+ new Vector3(Random.Range(-15,15), 3f, Random.Range(-15, 15)),Quaternion.identity, roomTransform);
+                Instantiate(SpecialPrefab[Random.Range(0, SpecialPrefab.Length)], createPos + new Vector3(Random.Range(-15, 15), 3f, Random.Range(-15, 15)), Quaternion.identity, roomTransform);
             }
+            
 
             // 상점, 보스방 생성을 위한 가장 먼 방 체크
             FindFarRoomPos();

@@ -160,6 +160,11 @@ public class ThrowState : BaseState<PlayerController>
         {
             // 애니메이션이 끝나기 전에 전이하므로 카운트를 수동으로 증가
             owner.Attack.ThrowCount++;
+
+            // 마지막 공격이후라면 콤보 초기화
+            if (owner.Attack.ThrowCount >= owner.Attack.ThrowCountMax)
+                owner.Attack.ThrowCount = 0;
+
             OnEnter();
             return;
         }

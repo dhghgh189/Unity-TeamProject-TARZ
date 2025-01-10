@@ -3,7 +3,7 @@ using Zenject;
 
 public class ThrowBox_Nomal : SpecialThrowOBJ_Base
 {
-    [Inject] private ObjectPool_other pool;
+     private ObjectPool_other pool;
     public ThrowBox_Nomal() => box_type = Box_Type.Nomal;
 
     [Header("중형 상자")]
@@ -18,6 +18,8 @@ public class ThrowBox_Nomal : SpecialThrowOBJ_Base
     void Init()
     {
         NomalBoxLayer = LayerMask.NameToLayer("Monster");
+
+        pool = FindObjectOfType<ObjectPool_other>();
     }
 
     //====================================================================

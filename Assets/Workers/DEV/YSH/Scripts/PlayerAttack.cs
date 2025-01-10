@@ -71,6 +71,7 @@ public class PlayerAttack : MonoBehaviour
     public float ComboCheckTime => comboCheckTime;
 
     public bool CanUseCombo;
+    public bool CanMoveWhileAttack;
 
     public event UnityAction OnChangedStack;
 
@@ -446,6 +447,7 @@ public class PlayerAttack : MonoBehaviour
     {
         // 콤보가 불가능하도록 flag set
         CanUseCombo = false;
+        CanMoveWhileAttack = true;
     }
     #endregion
 

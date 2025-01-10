@@ -56,6 +56,8 @@ public class ThrowState : BaseState<PlayerController>
 
         // Attack 시작 시에는 콤보 진행 불가능하도록 set
         owner.Attack.CanUseCombo = false;
+        // 공격 시작시에는 움직이지 못하도록 set
+        owner.Attack.CanMoveWhileAttack = false;
 
         // 최초 진입시점 때의 입력값을 기억한다.
         inputDir = owner.PInput.InputDir;
@@ -146,6 +148,13 @@ public class ThrowState : BaseState<PlayerController>
             && owner.IsEnoughStamina(owner.Stat.DashStaminaAmount))
         {
             owner.ChangeState(EState.Dash);
+            return;
+        }
+
+        // 콤보 입력 종료 후 유저가 이동을 입력한 경우 이동으로 캔슬
+        if (owner.Attack.CanMoveWhileAttack && owner.PInput.InputDir != Vector3.zero)
+        {
+            owner.ChangeState(EState.Move);
             return;
         }
 

@@ -447,6 +447,11 @@ public class PlayerAttack : MonoBehaviour
     {
         // 콤보가 불가능하도록 flag set
         CanUseCombo = false;
+    }
+
+    public void CanMove()
+    {
+        // 공격 중 이동 가능하도록 flag set
         CanMoveWhileAttack = true;
     }
     #endregion

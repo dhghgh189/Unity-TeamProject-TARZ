@@ -17,6 +17,8 @@ public class ThrowState : BaseState<PlayerController>
 
     private Vector3 lookDir;
 
+    private bool wasPressedCombo;
+
     public ThrowState(PlayerController owner)
     {
         this.owner = owner;
@@ -56,6 +58,8 @@ public class ThrowState : BaseState<PlayerController>
 
         // Attack 시작 시에는 콤보 진행 불가능하도록 set
         owner.Attack.CanUseCombo = false;
+        // 버퍼로 사용할 변수
+        wasPressedCombo = false;
         // 공격 시작시에는 움직이지 못하도록 set
         owner.Attack.CanMoveWhileAttack = false;
 
@@ -151,6 +155,15 @@ public class ThrowState : BaseState<PlayerController>
             return;
         }
 
+        // EndCombo 시점에 콤보 입력 버퍼가 확인된 경우
+        if (!owner.Attack.CanUseCombo && wasPressedCombo)
+        {
+            // 애니메이션이 끝나기 전에 전이하므로 카운트를 수동으로 증가
+            owner.Attack.ThrowCount++;
+            OnEnter();
+            return;
+        }
+
         // 콤보 입력 종료 후 유저가 이동을 입력한 경우 이동으로 캔슬
         if (owner.Attack.CanMoveWhileAttack && owner.PInput.InputDir != Vector3.zero)
         {
@@ -164,9 +177,7 @@ public class ThrowState : BaseState<PlayerController>
             && owner.PInput.TryThrow
             && owner.Attack.ObjectCount > 0)
         {
-            // 애니메이션이 끝나기 전에 전이하므로 카운트를 수동으로 증가
-            owner.Attack.ThrowCount++;
-            OnEnter();
+            wasPressedCombo = true;
             return;
         }
 

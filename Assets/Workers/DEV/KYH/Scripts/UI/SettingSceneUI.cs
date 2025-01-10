@@ -3,9 +3,11 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Zenject;
 
 public class SettingSceneUI : MonoBehaviour
 {
+    [Inject] private ChangeInput inputManager;
     private PlayerController playerController;
 
     [SerializeField] private GameObject titlePanel;         // 타이틀 패널
@@ -13,7 +15,7 @@ public class SettingSceneUI : MonoBehaviour
     private CameraController camera;
 
     [Header("<color=yellow>Input Manager</color>")]
-    [SerializeField] private ChangeInput inputManager;      // UI 네비게이션 InputManager 참조용
+    //[SerializeField] private ChangeInput inputManager;      // UI 네비게이션 InputManager 참조용
 
     [Header("<color=orange>Category Buttons</color>")]
     [SerializeField] private Button gameplayButton;         // 게임 플레이 카테고리 버튼
@@ -40,12 +42,13 @@ public class SettingSceneUI : MonoBehaviour
     [SerializeField] private GameObject minimap;
     [SerializeField] public Slider sensitivitySlider;
     [SerializeField] private TMP_Text sensitivityText;
+    [SerializeField] private TMP_Dropdown inputDeviceDropdown;
 
     private void Start()
     {
         playerController = FindAnyObjectByType<PlayerController>();
         camera = FindAnyObjectByType<CameraController>();
-        inputManager = FindAnyObjectByType<ChangeInput>();
+        //inputManager = FindAnyObjectByType<ChangeInput>();
 
         if (SceneManager.GetActiveScene().name == "Title")
         {
@@ -69,15 +72,13 @@ public class SettingSceneUI : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name == "Title")
         {
-            gameplayButton.interactable = false;
+            minimapActiveToggle.interactable = false;
             activeCPanel = nonSelectPanel;                  // 현재 활성화 중인 패널을 nonSelectPanel로 설정
-            inputManager.firstInput = langueButton;          // 설정 패널의 UI 네비게이션 첫 Input을 gameplayButton로 설정
-            inputManager.firstInput.Select();               // 첫 Input으로 지정한 오브젝트를 선택 처리
         }
         else
         {
             titlePanel = null;
-            gameplayButton.interactable = true;
+
             inputManager.firstInput = gameplayButton;
             inputManager.firstInput.Select();
         }
@@ -125,7 +126,14 @@ public class SettingSceneUI : MonoBehaviour
         languagePanel.SetActive(false);
         soundPanel.SetActive(false);
         keySettingsPanel.SetActive(false);
-        activeMinimapToggle.Select();           // activeMinimapToggle 오브젝트를 UI 네비게이션 Input 시작으로 선택
+        if (activeMinimapToggle.interactable == false)
+        {
+            sensitivitySlider.Select();
+        }
+        else
+        {
+            activeMinimapToggle.Select();           // activeMinimapToggle 오브젝트를 UI 네비게이션 Input 시작으로 선택
+        }
     }
 
     public void ChangeSensitivity()

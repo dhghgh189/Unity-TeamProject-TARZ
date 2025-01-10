@@ -33,7 +33,7 @@ public class StatModel : MonoBehaviour
     public float MaxMp { get => maxMp; private set { } }
 
     [SerializeField] float moveSpeed;
-    public float MoveSpeed { get => moveSpeed + (moveSpeed * GetAbility(AdditionAbility.MoveSpeedPer) * 0.01f); set { moveSpeed = value; OnMoveSpeedChange?.Invoke(MoveSpeed); } }
+    public float MoveSpeed { get => (moveSpeed + (moveSpeed * GetAbility(AdditionAbility.MoveSpeedPer) * 0.01f)) * SpeedRate; set { moveSpeed = value; OnMoveSpeedChange?.Invoke(MoveSpeed); } }
     public float AllPowerPer { get => GetAbility(AdditionAbility.AllPowerPer); private set { } }
     public float DefaultPowerPer { get => 1 + ((AllPowerPer + (GetAbility(AdditionAbility.DefaultPowerPer))) * 0.01f); private set { } }
     public float SkillPowerPer { get => 1 + ((AllPowerPer + (GetAbility(AdditionAbility.SkillPowerPer))) * 0.01f); private set { } }
@@ -58,6 +58,8 @@ public class StatModel : MonoBehaviour
     public float StaminaChargeRate = 1f;
 
     public float ExtraDamage;   // 스킬의 능력 중 최종 데미지에서 추가 피해량
+
+    public float SpeedRate = 1f;    // 이동 속도 Rate (slow등 이동속도 변화 효과 적용 시 활용)
 
     [Header("실시간 능력치")]
 

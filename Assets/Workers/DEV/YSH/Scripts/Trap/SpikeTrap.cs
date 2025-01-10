@@ -29,12 +29,12 @@ public class SpikeTrap : Trap
 
     private void Start()
     {
-        spikeCollision.OnTriggered += CheckCollision;
+        spikeCollision.OnTriggerEntered += CheckCollision;
     }
 
     private void OnDestroy()
     {
-        spikeCollision.OnTriggered -= CheckCollision;
+        spikeCollision.OnTriggerEntered -= CheckCollision;
     }
 
     public override void Activate()

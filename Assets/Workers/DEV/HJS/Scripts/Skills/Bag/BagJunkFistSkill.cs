@@ -23,7 +23,19 @@ public class BagJunkFistSkill : IBagAct
 
     private LinkedList<BaseBagState> acts;
     public LinkedList<BaseBagState> Acts { get => acts; set { } }
-    public PlayerController player { get => owner; set { owner = value; } }
+    public PlayerController player 
+    { 
+        get => owner; 
+        set 
+        { 
+            owner = value;
+            foreach (var state in acts)
+            {
+                state.UpdateOwner(value);
+            }
+        } 
+    }
+    public float CurGauge { get => curGauge; set => curGauge = value; }
 
     /* 특수 정보들 */
     public int ResultDamage;

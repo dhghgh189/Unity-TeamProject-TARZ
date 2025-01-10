@@ -70,9 +70,6 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
 
         RotateToPlayer();
 
-        _rigid.angularVelocity = Vector3.zero;
-        _rigid.velocity = Vector3.zero;
-
         // 크리티컬
         damage *= Util.IsRandom(player.Stat.GetAbility(AdditionAbility.Critical)) ? (2 + (player.Stat.GetAbility(AdditionAbility.CriticalDamage) * 0.01f)) : 1;
 
@@ -101,6 +98,7 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
         if (_monsterData.MonsterTIer == MonsterData.MonsterTier.Boss)
             return;
 
+        SoundManager.PlaySFX(SoundManager.SoundData.M_TakeDamage);
         _animator.SetTrigger("TakeDamage");
     }
 

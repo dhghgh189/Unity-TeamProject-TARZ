@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject.SpaceFighter;
@@ -18,8 +19,13 @@ public class CameraController : MonoBehaviour
     public float Sensitivity { get { return sensitivity; } set { sensitivity = value; } }
     [SerializeField] private Vector3 delta;
 
+    // 카메라가 가려지면 안되는 오브젝트의 레이어를 설정
+    [SerializeField] private LayerMask whatIsWall;
+
     private float yAngle;
     private Camera mainCam;
+
+    private RaycastHit hit;
 
     private void Start()
     {
@@ -46,6 +52,23 @@ public class CameraController : MonoBehaviour
     {
         Rotate();
         Move(Vector3.zero);
+        if (!AvoidWall())
+        {
+            // 가리는 벽이 없는 경우 카메라는 controller의 로컬 방향을 기준으로 delta만큼 떨어진 곳에 위치한다. 
+            mainCam.transform.position = transform.position + (transform.right * delta.x) + (transform.up * delta.y) + (transform.forward * delta.z);
+        }
+    }
+
+    private bool AvoidWall()
+    {
+        Vector3 targetPos = transform.position + (transform.forward * delta.z) + (transform.right * delta.x) + (transform.up * delta.y);
+        Vector3 toTarget = targetPos - transform.position;
+        if (!Physics.Raycast(transform.position, toTarget.normalized, out hit, toTarget.magnitude, whatIsWall))
+            return false;
+
+        // 가리는 벽이 있는 경우 해당 벽위치로 이동한다.
+        mainCam.transform.position = hit.point;
+        return true;
     }
 
     public void Move(Vector3 r)

@@ -72,6 +72,7 @@ public class PlayerAttack : MonoBehaviour
 
     public bool CanUseCombo;
     public bool CanMoveWhileAttack;
+    public bool wasPressedCombo;
 
     public event UnityAction OnChangedStack;
 

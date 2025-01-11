@@ -65,6 +65,9 @@ public class SpikeTrap : Trap
 
     private void CheckCollision(Collider other)
     {
+        if (!isActive)
+            return;
+
         IDamagable damagable = other.GetComponent<IDamagable>();
         if (damagable == null)
             return;

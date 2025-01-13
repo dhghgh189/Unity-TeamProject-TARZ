@@ -38,4 +38,8 @@ public class UI_HPMerchant : MonoBehaviour
         playerController.PInput.IsCanControl = true;
         gameObject.SetActive(false);
     }
+    private void OnEnable()
+    {
+        buyButton.Select();
+    }
 }

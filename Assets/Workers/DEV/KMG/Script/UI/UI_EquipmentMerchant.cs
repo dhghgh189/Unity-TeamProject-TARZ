@@ -64,4 +64,8 @@ public class UI_EquipmentMerchant : MonoBehaviour
         playerController.PInput.IsCanControl = true;
         gameObject.SetActive(false);
     }
+    private void OnEnable()
+    {
+        buyButton.Select();
+    }
 }

@@ -351,6 +351,9 @@ public class PlayerAttack : MonoBehaviour
 
         AddMeleeEffect();
 
+        // 사운드 재생
+        SoundManager.PlaySFX(SoundManager.SoundData_P.Melees[MeleeCount]);
+
         Collider[] colliders = Physics.OverlapSphere(transform.position, MeleeAttackInfo[MeleeCount].Range, whatIsEnemy);
         foreach (Collider col in colliders)
         {
@@ -370,6 +373,9 @@ public class PlayerAttack : MonoBehaviour
             // 최종 추가 데미지 추가
             damage += player.Stat.ExtraDamage;
             damagable.TakeDamage(damage);
+
+            // 사운드 재생
+            SoundManager.PlaySFX(SoundManager.SoundData_P.MeleeHit);
 
             // Mp 회복
             player.Stat.CurrentMp += player.Stat.GetMpGain(EMpAmountType.Melee);

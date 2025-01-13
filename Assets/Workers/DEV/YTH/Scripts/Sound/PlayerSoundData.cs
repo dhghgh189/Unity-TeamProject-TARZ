@@ -24,9 +24,7 @@ public class PlayerSoundData : ScriptableObject
     public AudioClip Dead { get { return _sound.Dead; } }
 
     // Melee
-    public AudioClip Melee1 { get { return _sound.Melee1; } }
-    public AudioClip Melee2 { get { return _sound.Melee2; } }
-    public AudioClip Melee3 { get { return _sound.Melee3; } }
+    public AudioClip[] Melees { get { return _sound.Melees; } }
     public AudioClip MeleeHit { get { return _sound.MeleeHit; } }
 
     // Throw
@@ -56,10 +54,8 @@ public class PlayerSoundData : ScriptableObject
         public AudioClip AirDash;               // 공중에서 대쉬
         public AudioClip Dead;                  // 사망
 
-        [Header("Melee")]
-        public AudioClip Melee1;                // 근거리 공격 발동
-        public AudioClip Melee2;                // 근거리 공격 발동
-        public AudioClip Melee3;                // 근거리 공격 발동
+        [Header("Melee (타수 별 사운드 순서 맞춰주세요)")]
+        public AudioClip[] Melees;              // 근거리 공격 (1~3), 순서 정확히 맞출 것
         public AudioClip MeleeHit;              // 근거리 공격 히트 시
 
         [Header("Throw (타수 별 사운드 순서 맞춰주세요)")]

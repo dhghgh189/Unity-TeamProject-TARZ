@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using Zenject;
+using static BagSkillEnum;
 
 /// <summary>
 /// 가방 데이터
@@ -17,7 +18,8 @@ public class BagSkillManager : MonoBehaviour
     /// <summary>
     /// 방을 클리어 했을 때 가방 스킬들에게 충전하라고 알려주는 이벤트
     /// </summary>
-    [HideInInspector] public UnityEvent OnChargeEvent;
+    [HideInInspector] public UnityEvent OnChargeEvent = new();
+    [HideInInspector] public UnityEvent OnUIUpdateEvent = new();
 
     private PlayerController owner;
     [HideInInspector] public PlayerController Owner { get { return owner; } set { owner = value; UpdateOwner(owner); } }
@@ -29,16 +31,20 @@ public class BagSkillManager : MonoBehaviour
 
     public BagSkill[] SkillArray { get { return skillArr; } }
 
+    public (float, BagIndexKey)[] SaveBagSkillArray;
+
     private void Awake()
     {
-        OnChargeEvent = new UnityEvent();
         skillArr ??= new BagSkill[4];
+        SaveBagSkillArray ??= new (float, BagIndexKey)[4] { (-1, 0 ), (-1, 0), (-1, 0), (-1, 0) };
     }
 
     private void Start()
     {
         SceneManager.sceneLoaded -= LoadedsceneEvent;
         SceneManager.sceneLoaded += LoadedsceneEvent;
+
+        OnUIUpdateEvent.AddListener(UpdateCharge);
     }
 
     public bool IsCanUse(int index)
@@ -60,9 +66,12 @@ public class BagSkillManager : MonoBehaviour
         if (skillArr[index] is not null)
         {
             OnChargeEvent.RemoveListener(skillArr[index].Charge);
+            SaveBagSkillArray[index] = (-1, 0);
         }
         skillArr[index] = bagSkill;
-        OnChargeEvent.AddListener(skillArr[index].Charge);
+        SaveBagSkillArray[index] = (0, bagSkill.KeyName);
+        OnChargeEvent.AddListener(bagSkill.Charge);
+        OnUIUpdateEvent?.Invoke();
     }
 
     // TODO: 씬이 변경되었을 때 -> Manager안의 스킬들 순회
@@ -96,6 +105,16 @@ public class BagSkillManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        if(OnChargeEvent is not null) OnChargeEvent.RemoveAllListeners();
+        OnChargeEvent?.RemoveAllListeners();
+        OnUIUpdateEvent?.RemoveAllListeners();
+    }
+
+    public void UpdateCharge()
+    {
+        for(int i = 0; i < skillArr.Length; i++)
+        {
+            if (skillArr[i] == null) continue;
+            SaveBagSkillArray[i].Item1 = skillArr[i].CurGauge;
+        }
     }
 }

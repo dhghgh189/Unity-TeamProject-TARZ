@@ -1,7 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Experimental.AI;
 using Zenject;
 using static BagSkillEnum;
 
@@ -44,11 +43,13 @@ public class BagSkillHandler : MonoBehaviour
             { BagIndexKey.ScrapBurst, new BagScrapBurstSkill(player, container) },
         };
         manager.Owner = player;
+
+        LoadBagSkill();
     }
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.F8))
+        if (Input.GetKeyDown(KeyCode.F8))
         {
             AddBagSkill(BagIndexKey.JunkFist, 0);
             AddBagSkill(BagIndexKey.ScrapBurst, 1);
@@ -66,9 +67,9 @@ public class BagSkillHandler : MonoBehaviour
     public void AddBagSkill(BagIndexKey key, int index)
     {
         // BagSkillManager -> key로 Dictionary에 있는 new 이 친구를 찾아서 index에 넣는다
-        if (dic.TryGetValue(key, out var bagAct)) 
-        { 
-            manager.AddSkill(bagAct, index); 
+        if (dic.TryGetValue(key, out var bagAct))
+        {
+            manager.AddSkill(bagAct, index);
         }
         else { Debug.Log($"가방 딕셔너리에 {key}가 없습니다!"); return; }
     }
@@ -77,7 +78,16 @@ public class BagSkillHandler : MonoBehaviour
     // 가방 스킬을 불러오는 부분
     public void LoadBagSkill()
     {
-        // TODO: 가방 스킬 불러오기
+        for (int i = 0; i < manager.SaveBagSkillArray.Length; i++)
+        {
+            if (manager.SaveBagSkillArray[i].Item1 == -1) continue;
+
+            if (dic.TryGetValue(manager.SaveBagSkillArray[i].Item2, out var value))
+            {
+                value.CurGauge = manager.SaveBagSkillArray[i].Item1;
+                manager.AddSkill(value, i);
+            }
+        }
     }
 
     /// <summary>

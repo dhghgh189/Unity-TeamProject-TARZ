@@ -26,7 +26,7 @@ public class AblityAdapter : MonoBehaviour
         components = new Dictionary<string, IEnable>();
 
         // ThrowObject에 부착되어있는 활성화 가능한 스크립트 가져오기
-        foreach (IEnable enable in ThrowObjectPrefab.GetComponents<IEnable>())
+        foreach (IEnable enable in ThrowObjectPrefab.gameObject.GetComponents<IEnable>())
         {
             // 기본적으로 off
             enable.Enable = false;

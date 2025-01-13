@@ -6,8 +6,10 @@ public class BagSkillEnum
 {
     public enum BagIndexKey
     { 
-        JunkFist,
+        JunkFist, ScrapBurst
     }
 
     public enum JunkFistDataType { DefaultDamage, IncreaseDamage, Angle, Range, OperationTime }
+
+    public enum ScrapBurstDataType { DefaultDamage, Duration, Distance, WaitDelay }
 }

@@ -6,24 +6,24 @@ using Zenject;
 public class UI_StatMerchant : MonoBehaviour
 {
     [Inject] StatModel statModel;
+    [Inject] PlayerController playerController;
 
-    private Button buyButton;
-    private TMP_Text infoText;
+    [SerializeField] Button buyButton;
+    [SerializeField] Button closeButton;
+
+    [SerializeField] TMP_Text statNameText;
+    [SerializeField] TMP_Text statInfoText;
+    [SerializeField] TMP_Text priceText;
 
     private AdditionAbility ability;
-    float value;
-    float price;
+    private float value;
+    private float price;
 
     private void Awake()
     {
-        buyButton = GetComponentInChildren<Button>();
-        infoText = GetComponentInChildren<TMP_Text>();
-    }
-
-    private void Start()
-    {
         BuyStatInit();
         buyButton.onClick.AddListener(BuyStat);
+        closeButton.onClick.AddListener(ClosePanel);
     }
 
     private void BuyStatInit()
@@ -36,8 +36,9 @@ public class UI_StatMerchant : MonoBehaviour
         ability = randomAbility;
         value = Random.Range(5, 31);
         price = value * 10;
-
-        infoText.text = $"{price}를 지불하면 {ability.ToDescription()}을 {value}만큼 올려주겠다.";
+        statNameText.text = $"{ability.ToDescription()} 버프";
+        statInfoText.text = $"{ability.ToDescription()}을 {value}만큼 상승시킨다.";
+        priceText.text = $"{price} 블랙 데이터 칩";
     }
 
     private void BuyStat()
@@ -47,7 +48,12 @@ public class UI_StatMerchant : MonoBehaviour
         statModel.BlackChip -= price;
         statModel.SetAbility(ability, value);
         buyButton.gameObject.SetActive(false);
-        infoText.text = "매진이야";
+        priceText.text = "매진";
     }
 
+    private void ClosePanel()
+    {
+        playerController.PInput.IsCanControl = true;
+        gameObject.SetActive(false);
+    }
 }

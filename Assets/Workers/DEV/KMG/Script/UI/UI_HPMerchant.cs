@@ -5,18 +5,22 @@ using Zenject;
 
 public class UI_HPMerchant : MonoBehaviour
 {
+    [Inject] PlayerController playerController;
     [Inject] StatModel statModel;
     
     [SerializeField] float price;
 
-    private Button buyButton;
-    private TMP_Text infoText;
+    [SerializeField] Button buyButton;
+    [SerializeField] Button closeButton;
+    [SerializeField] TMP_Text ChipText;
 
     private void Start()
     {
         buyButton = GetComponentInChildren<Button>();
-        infoText = GetComponentInChildren<TMP_Text>();
         buyButton.onClick.AddListener(HPBuy);
+        closeButton.onClick.AddListener(ClosePanel);
+
+        ChipText.text = $"{price} 블랙 데이터 칩";
     }
 
     private void HPBuy()
@@ -26,6 +30,12 @@ public class UI_HPMerchant : MonoBehaviour
         statModel.BlackChip -= price;
         statModel.CurrentHp += statModel.MaxHp * 0.33f;
         buyButton.gameObject.SetActive(false);
-        infoText.text = "매진이야";
+        ChipText.text = "매진";
+    }
+
+    private void ClosePanel()
+    {
+        playerController.PInput.IsCanControl = true;
+        gameObject.SetActive(false);
     }
 }

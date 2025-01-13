@@ -5,14 +5,21 @@ using Zenject;
 
 public class UI_BlueChipMerchant : MonoBehaviour
 {
+    [Inject] PlayerController playerController;
     [Inject] StatModel skillModel;
     [Inject] PlayerSkillHandler skillHandler;
     [Inject] InGameSaveData saveData;
 
     [SerializeField] SkillSpecDatabase skillSpecDatabase;
 
+    [SerializeField] Image skillIcon;
+
     [SerializeField] Button buyButton;
-    [SerializeField] TMP_Text sellSkillText;
+    [SerializeField] Button closeButton;
+
+    [SerializeField] TMP_Text sellSkillName;
+    [SerializeField] TMP_Text sellSkillInfo;
+    [SerializeField] TMP_Text chipText;
 
     private float price;
 
@@ -23,6 +30,7 @@ public class UI_BlueChipMerchant : MonoBehaviour
     private void Awake()
     {
         buyButton.onClick.AddListener(BuySkill);
+        closeButton.onClick.AddListener(ClosePanel);
         sellSkillSet();
     }
 
@@ -39,7 +47,7 @@ public class UI_BlueChipMerchant : MonoBehaviour
             sellSkillSet();
             return;
         }
-        sellSkillText.text = "매진이야";
+        chipText.text = "매진";
         buyButton.gameObject.SetActive(false);
     }
 
@@ -62,6 +70,15 @@ public class UI_BlueChipMerchant : MonoBehaviour
         sellSkill = skillSpecDatabase.GetSkill(tier);
         price = (4 - sellSkill.SkillTier) * 70f;
 
-        sellSkillText.text = $"{sellSkill.Name}을 {price}에 살꺼야?";
+        sellSkillName.text = $"{sellSkill.Name}";
+        sellSkillInfo.text = $"{sellSkill.Description}";
+        chipText.text = $"{price} 블랙 데이터 칩";
+        skillIcon.sprite = sellSkill.Icon;
+    }
+
+    private void ClosePanel()
+    {
+        playerController.PInput.IsCanControl = true;
+        gameObject.SetActive(false);
     }
 }

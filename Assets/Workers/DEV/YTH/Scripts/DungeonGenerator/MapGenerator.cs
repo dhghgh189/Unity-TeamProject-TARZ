@@ -195,14 +195,14 @@ public class MapGenerator : MonoBehaviour
         {
             setStoreDir = maxXPos.x < 0 ? -1 : 1;
             maxXPos += Vector3.right * 50f * setStoreDir;
-            Instantiate(storePrefab, maxXPos, Quaternion.identity);
+            Instantiate(storePrefab, maxXPos, Quaternion.Euler(Vector3.up * 90 * -setStoreDir));
             wallDestroyer.transform.position = destroyerY + maxXPos - Vector3.right * 25f * setStoreDir;
         }
         else
         {
             setStoreDir = maxZPos.z < 0 ? -1 : 1;
             maxZPos += Vector3.forward * 50f * setStoreDir;
-            Instantiate(storePrefab, maxZPos, Quaternion.identity);
+            Instantiate(storePrefab, maxZPos, Quaternion.Euler(Vector3.up * 180 * setStoreDir));
             wallDestroyer.transform.position = destroyerY + maxZPos - Vector3.forward * 25f * setStoreDir;
         }
     }

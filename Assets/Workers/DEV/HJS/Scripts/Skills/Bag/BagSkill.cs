@@ -8,12 +8,14 @@ public class BagSkill : IBagAct
     protected BagIndexKey keyName;
     protected BagSkillDataSO skilldata;
     protected float maxGauge;
+    public float MaxGauge { get => maxGauge; }
     protected float chargeAmount;
     protected float useAmount;
     protected float curGauge;
     protected PlayerController owner;
     protected LinkedList<BaseBagState> acts;
     public float CurGauge { get => curGauge; set => curGauge = value; }
+    public Sprite icon => skilldata.SkillIcon;
     public LinkedList<BaseBagState> Acts { get => acts; set { } }
     public PlayerController player
     {

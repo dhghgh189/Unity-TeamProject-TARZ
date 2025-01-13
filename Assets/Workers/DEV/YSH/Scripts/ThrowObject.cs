@@ -6,6 +6,7 @@ using UnityEngine;
 public class ThrowObject : MonoBehaviour, IDrainable
 {
     [SerializeField] private RandomModeling setModeling;
+    [SerializeField] private GameObject modeling;
     [SerializeField] private LayerMask whatIsTarget;
 
     [HideInInspector] public AblityAdapter adapter;
@@ -29,16 +30,15 @@ public class ThrowObject : MonoBehaviour, IDrainable
 
     private void Awake()
     {
-        setModeling = FindAnyObjectByType<RandomModeling>();
-        setModeling.SetRandom(this.gameObject, setModeling.ThrowObjectOBJs);
-
+        rigid = GetComponent<Rigidbody>();
         Upgrade = GetComponent<ThrowObjectUpgrade>();
         throwEffects = new List<IEffect>();
-        rigid = GetComponent<Rigidbody>();
+        setModeling = FindAnyObjectByType<RandomModeling>();
         coll = GetComponent<BoxCollider>();
     }
     private void Start()
     {
+        setModeling.SetRandom(modeling, setModeling.ThrowObjectOBJs);
         adapter = FindAnyObjectByType<AblityAdapter>(FindObjectsInactive.Include);
     }
 

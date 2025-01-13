@@ -15,6 +15,7 @@ public class BagSkill : IBagAct
     protected PlayerController owner;
     protected LinkedList<BaseBagState> acts;
     public float CurGauge { get => curGauge; set => curGauge = value; }
+    public BagIndexKey KeyName => keyName;
     public Sprite icon => skilldata.SkillIcon;
     public LinkedList<BaseBagState> Acts { get => acts; set { } }
     public PlayerController player

@@ -36,7 +36,7 @@ public class BagSkillManager : MonoBehaviour
     private void Awake()
     {
         skillArr ??= new BagSkill[4];
-        SaveBagSkillArray ??= new (float, BagIndexKey)[4];
+        SaveBagSkillArray ??= new (float, BagIndexKey)[4] { (-1, 0 ), (-1, 0), (-1, 0), (-1, 0) };
     }
 
     private void Start()
@@ -66,9 +66,11 @@ public class BagSkillManager : MonoBehaviour
         if (skillArr[index] is not null)
         {
             OnChargeEvent.RemoveListener(skillArr[index].Charge);
+            SaveBagSkillArray[index] = (-1, 0);
         }
         skillArr[index] = bagSkill;
-        OnChargeEvent.AddListener(skillArr[index].Charge);
+        SaveBagSkillArray[index] = (0, bagSkill.KeyName);
+        OnChargeEvent.AddListener(bagSkill.Charge);
         OnUIUpdateEvent?.Invoke();
     }
 

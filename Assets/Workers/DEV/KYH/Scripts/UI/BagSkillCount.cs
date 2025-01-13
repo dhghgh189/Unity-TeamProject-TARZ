@@ -62,6 +62,8 @@ public class BagSkillCount : MonoBehaviour
     {
         if (bagSkill_01 != null)
         {
+            if (bagSkill.SkillArray[0] == null) return;
+
             bagSkill01MaxValue = bagSkill.SkillArray[0].MaxGauge;
             bagSkill_01.fillAmount = bagSkill.SkillArray[0].CurGauge / bagSkill01MaxValue;
             Debug.Log($"setting1{bagSkill.SkillArray[0].CurGauge} / {bagSkill01MaxValue} => {bagSkill_01.fillAmount}");
@@ -72,6 +74,8 @@ public class BagSkillCount : MonoBehaviour
     {
         if (bagSkill_02 != null)
         {
+            if (bagSkill.SkillArray[1] == null) return;
+
             bagSkill02MaxValue = bagSkill.SkillArray[1].MaxGauge;
             bagSkill_02.fillAmount = bagSkill.SkillArray[1].CurGauge / bagSkill02MaxValue;
             Debug.Log($"setting2{bagSkill.SkillArray[1].CurGauge} / {bagSkill02MaxValue} => {bagSkill_02.fillAmount}");

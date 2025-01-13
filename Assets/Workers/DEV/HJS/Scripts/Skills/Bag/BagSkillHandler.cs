@@ -80,12 +80,12 @@ public class BagSkillHandler : MonoBehaviour
     {
         for (int i = 0; i < manager.SaveBagSkillArray.Length; i++)
         {
-            if (manager.SaveBagSkillArray[i].IsUnityNull()) continue;
+            if (manager.SaveBagSkillArray[i].Item1 == -1) continue;
 
             if (dic.TryGetValue(manager.SaveBagSkillArray[i].Item2, out var value))
             {
                 value.CurGauge = manager.SaveBagSkillArray[i].Item1;
-                manager.SkillArray[i] = value;
+                manager.AddSkill(value, i);
             }
         }
     }

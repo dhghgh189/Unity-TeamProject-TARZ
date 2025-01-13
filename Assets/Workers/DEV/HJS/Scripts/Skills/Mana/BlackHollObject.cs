@@ -10,6 +10,7 @@ using static MonsterData;
 public class BlackHollObject : MonoBehaviour
 {
     [SerializeField] GameObject body;           // 보여줄 구체
+    [SerializeField] float force;               // 구체의 당기는 힘
 
     [Header("발사")]
     [SerializeField] float moveSpeed;           // 움직이는 속도
@@ -103,11 +104,12 @@ public class BlackHollObject : MonoBehaviour
     {
         if (other.gameObject.layer.Equals(LayerMask.NameToLayer("Monster")))
         {
-            if (other.gameObject.GetComponent<MonsterData>().MonsterTIer.Equals(MonsterTier.Normal))
+            MonsterData data = (other.gameObject.GetComponent<MonsterData>() is not null) ? other.gameObject.GetComponent<MonsterData>() : other.gameObject.GetComponentInParent<MonsterData>();
+            if (data.MonsterTIer.Equals(MonsterTier.Normal) && !enemies.Contains(data.gameObject))
             {
-                Debug.Log("StartHolidng");
-                enemies.Add(other.gameObject);
-                StartCoroutine(StartBoilingRoutine(other.gameObject.transform));
+                enemies.Add(data.gameObject);
+                SetHold(other.gameObject);
+                StartCoroutine(StartBoilingRoutine(data.gameObject.transform));
             }
         }
     }
@@ -126,20 +128,18 @@ public class BlackHollObject : MonoBehaviour
     {
         /* NavMeshAgent -> Rigidbody 물리(강체) 적용하기 위한 행동 */
         yield return null;
-        SetHold(other.gameObject);
         Debug.Log("초기설정");
+
+        Rigidbody rigid = other.GetComponent<Rigidbody>();
 
         Debug.Log("물리 적용");
         while (true)
         {
-            /* 물리 적용 */
-            Vector3 relativeDirection = other.position - transform.position;
-            Vector3 gravityDirection = relativeDirection.normalized;
-
-            rigid.AddExplosionForce(absorptionSpeed * -256f * Time.deltaTime, transform.position, absorptionRange);
+            rigid.AddExplosionForce(absorptionSpeed * force * Time.fixedDeltaTime, transform.position, absorptionRange);
+            // Vector3.MoveTowards(other.transform.position, transform.position, absorptionSpeed * delta * Time.deltaTime);
+            // rigid.position = Vector3.MoveTowards(rigid.position, transform.position, absorptionSpeed * delta * Time.fixedDeltaTime);
             /* 해당 적용이 다 끝나는 조건 */
             yield return new WaitForFixedUpdate();
-            // yield return new WaitUntil(() => rigid.velocity.magnitude < 0.05f);
         }
     }
 

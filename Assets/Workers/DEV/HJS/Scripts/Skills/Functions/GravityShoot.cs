@@ -16,6 +16,7 @@ public class GravityShoot : MonoBehaviour, ISpec
     private Coroutine coroutine;
     [SerializeField] Rigidbody rigid;
     [SerializeField] List<GameObject> enemies;
+    [SerializeField] float defaultForce;
 
     private void Init()
     {
@@ -32,6 +33,7 @@ public class GravityShoot : MonoBehaviour, ISpec
             if (data.MonsterTIer.Equals(MonsterTier.Normal))
             {
                 enemies.Add(data.gameObject);
+                SetHold(other.gameObject);
                 StartCoroutine(StartBoilingRoutine(data.gameObject.transform));
             }
         }
@@ -40,19 +42,15 @@ public class GravityShoot : MonoBehaviour, ISpec
     {
         /* NavMeshAgent -> Rigidbody 물리(강체) 적용하기 위한 행동 */
         yield return null;
-        SetHold(other.gameObject);
         Debug.Log("초기설정");
-
+        Rigidbody rigid = other.GetComponent<Rigidbody>();
         Debug.Log("물리 적용");
         while (true)
         {
-            /* 물리 적용 */
-            Vector3 relativeDirection = other.position - transform.position;
-            Vector3 gravityDirection = relativeDirection.normalized;
-
-            rigid.AddExplosionForce(force * -256f * Time.deltaTime, transform.position, range);
+            rigid.AddExplosionForce(defaultForce * force * Time.fixedDeltaTime, transform.position, range);
+            // other.transform.position = Vector3.MoveTowards(other.transform.position, transform.position, force * Time.deltaTime);
             /* 해당 적용이 다 끝나는 조건 */
-            yield return new WaitForFixedUpdate();
+            yield return null;
         }
     }
 

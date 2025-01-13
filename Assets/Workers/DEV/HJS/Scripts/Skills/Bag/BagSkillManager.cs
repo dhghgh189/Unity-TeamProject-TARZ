@@ -25,14 +25,14 @@ public class BagSkillManager : MonoBehaviour
     /// <summary>
     /// 가방 스킬을 담아놓는 배열
     /// </summary>
-    private IBagAct[] skillArr;
+    private BagSkill[] skillArr;
 
-    public IBagAct[] SkillArray { get { return skillArr; } }
+    public BagSkill[] SkillArray { get { return skillArr; } }
 
     private void Awake()
     {
         OnChargeEvent = new UnityEvent();
-        skillArr ??= new IBagAct[4];
+        skillArr ??= new BagSkill[4];
     }
 
     private void Start()
@@ -55,7 +55,7 @@ public class BagSkillManager : MonoBehaviour
     /// </summary>
     /// <param name="skillName">장착하려는 스킬의 이름</param>
     /// <param name="index">장착하려는 슬롯</param>
-    public void AddSkill(IBagAct bagSkill, int index)
+    public void AddSkill(BagSkill bagSkill, int index)
     {
         if (skillArr[index] is not null)
         {
@@ -73,7 +73,7 @@ public class BagSkillManager : MonoBehaviour
         if (skillArr == null) return;
 
         // 장착한 마나 스킬의 초기화 함수를 돌아본다
-        foreach(IBagAct act in skillArr)
+        foreach(BagSkill act in skillArr)
         {
             if (act is null) continue;
    
@@ -87,7 +87,7 @@ public class BagSkillManager : MonoBehaviour
         if (skillArr == null) return;
 
         // 장착한 마나 스킬의 초기화 함수를 돌아본다
-        foreach (IBagAct act in skillArr)
+        foreach (BagSkill act in skillArr)
         {
             if (act is null) continue;
             act.player = owner;

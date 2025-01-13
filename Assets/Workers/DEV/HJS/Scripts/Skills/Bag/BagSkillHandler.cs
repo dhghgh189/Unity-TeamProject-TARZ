@@ -20,7 +20,10 @@ public class BagSkillHandler : MonoBehaviour
     private LinkedListNode<BaseBagState> curNode;                      // 현재 동작
     private bool isEnd;
 
-    private Dictionary<BagIndexKey, IBagAct> dic;
+    private Dictionary<BagIndexKey, BagSkill> dic;
+
+    [Header("JunkFist")]
+    public JunkFistObject[] fists;
 
     #region 프로퍼티
     public bool ActionEnd { get => isEnd; set => isEnd = value; }       // 가방 스킬이 끝났는지 확인하는 변수
@@ -35,9 +38,10 @@ public class BagSkillHandler : MonoBehaviour
 
     private void Start()
     {
-        dic = new Dictionary<BagIndexKey, IBagAct>()
+        dic = new Dictionary<BagIndexKey, BagSkill>()
         {
             { BagIndexKey.JunkFist, new BagJunkFistSkill(player, container) },
+            { BagIndexKey.ScrapBurst, new BagScrapBurstSkill(player, container) },
         };
         manager.Owner = player;
     }
@@ -47,10 +51,15 @@ public class BagSkillHandler : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.F8))
         {
             AddBagSkill(BagIndexKey.JunkFist, 0);
+            AddBagSkill(BagIndexKey.ScrapBurst, 1);
         }
         else if (Input.GetKeyDown(KeyCode.F9))
         {
             Debug.Log($"가방 스킬 0번 사용! 성공 여부 : {UseBagSkill(0)}");
+        }
+        else if (Input.GetKeyDown(KeyCode.F10))
+        {
+            Debug.Log($"가방 스킬 1번 사용! 성공 여부 : {UseBagSkill(1)}");
         }
     }
 

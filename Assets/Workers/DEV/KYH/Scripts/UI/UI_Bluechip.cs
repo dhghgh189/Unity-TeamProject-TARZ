@@ -34,12 +34,12 @@ public class UI_Bluechip : MonoBehaviour
 
         if (bluechipSkill.TryGetValue(skillName, out BluechipPanel value))
         {
-            value.InitBluechipSkill(item.Name, item.SkillLevel == item.MaxLevel ? "Max" : $"{item.SkillLevel}", item.Description, item.Icon);
+            value.InitBluechipSkill(item.Name, item.SkillLevel == item.MaxLevel ? "Level. Max" : $"Level. {item.SkillLevel}", item.Description, item.Icon);
             return;
         }
 
         BluechipPanel skill = Instantiate(bluechipPrefab, bluechipContent).GetComponent<BluechipPanel>();
-        skill.InitBluechipSkill(item.Name, item.SkillLevel == item.MaxLevel ? "Max" : $"{item.SkillLevel}", item.Description, item.Icon);
+        skill.InitBluechipSkill(item.Name, item.SkillLevel == item.MaxLevel ? "Level. Max" : $"Level. {item.SkillLevel}", item.Description, item.Icon);
 
         bluechipSkill.Add(skillName, skill);
     }

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using UnityEditor.Localization.Plugins.XLIFF.V12;
 using UnityEngine;
+using static MonsterSoundData;
 
 public class SoundManager : MonoBehaviour
 {
@@ -16,6 +16,8 @@ public class SoundManager : MonoBehaviour
 
     private EtcSoundData _etcSoundData;
     public static EtcSoundData SoundData_UI { get { return Instance._etcSoundData; } private set { } }
+
+    public Dictionary<int, AudioClip> monsterSoundDic = new Dictionary<int, AudioClip>();
 
 
     // BGM 소스
@@ -51,6 +53,11 @@ public class SoundManager : MonoBehaviour
         _monsterSoundData = Resources.Load<MonsterSoundData>($"{SOUND_PATH}/MonsterSoundData");
         _playerSoundData = Resources.Load<PlayerSoundData>($"{SOUND_PATH}/PlayerSoundData");
         _etcSoundData = Resources.Load<EtcSoundData>($"{SOUND_PATH}/EtcSoundData");
+
+        for (int i = 0; i < _monsterSoundData.SoundInfos.Count; i++)
+        {
+            monsterSoundDic.Add(_monsterSoundData.SoundInfos[i].ID, _monsterSoundData.SoundInfos[i].Clip);
+        }
     }
 
     /// <summary>

@@ -9,41 +9,17 @@ using static BagSkillEnum;
 /// <summary>
 /// 가방 스킬 - 정크 피스트
 /// </summary>
-public class BagJunkFistSkill : IBagAct
+public class BagJunkFistSkill : BagSkill
 {
-    /* 식별자 */
-    private readonly BagIndexKey keyName = BagIndexKey.JunkFist;
-    /* 기본 정보들 */
-    private BagSkillDataSO skilldata;
-    private float maxGauge;
-    private float chargeAmount;
-    private float useAmount;
-    private float curGauge;
-    private PlayerController owner;
-
-    private LinkedList<BaseBagState> acts;
-    public LinkedList<BaseBagState> Acts { get => acts; set { } }
-    public PlayerController player 
-    { 
-        get => owner; 
-        set 
-        { 
-            owner = value;
-            foreach (var state in acts)
-            {
-                state.UpdateOwner(value);
-            }
-        } 
-    }
-    public float CurGauge { get => curGauge; set => curGauge = value; }
-
     /* 특수 정보들 */
     public float ResultDamage;
     public MeleeAttackInfo[] MeleeAttackInfo;
     public MeleeAttackInfo[] temp;
+    public Transform[] pos;
 
     public BagJunkFistSkill(PlayerController owner, BagSkillContainerSO container)
     {
+        keyName = BagIndexKey.JunkFist;
         try
         {
             // 없을 경우에만 넣기
@@ -58,7 +34,6 @@ public class BagJunkFistSkill : IBagAct
         {
             Debug.Log("일단 불러보기 성공!");
         }
-
         maxGauge = skilldata.MaxGauge;
         chargeAmount = skilldata.ChargeAmount;
         useAmount = skilldata.UseAmount;
@@ -73,12 +48,6 @@ public class BagJunkFistSkill : IBagAct
         temp = owner.Attack.MeleeAttackInfo;
     }
 
-    // 게이지 충전
-    public void Charge() => curGauge = (curGauge + chargeAmount >= maxGauge) ? maxGauge : curGauge + chargeAmount;
-    //게이지 사용 가능한지 확인
-    public bool IsCanUse() => curGauge >= useAmount;
-    // 게이지 사용
-    public void Use() => curGauge -= useAmount;
     // 특수 능력
     public void Feature()
     {
@@ -109,10 +78,6 @@ public class BagJunkFistSkill : IBagAct
         // 4. 기본 근접 공격의 방식을 변경
     }
 
-    public void RetrunFeature()
-    {
-    }
-
     private IEnumerator BuffRoutine()
     {
         // 버프
@@ -127,7 +92,7 @@ public class BagJunkFistSkill : IBagAct
         Debug.Log("버프 작동!");
         Use();
 
-        yield return Util.GetDelay(10f);    // 필요 데이터 - 지속 시간
+        yield return Util.GetDelay(skilldata.Getdata((int)JunkFistDataType.OperationTime).value);    // 필요 데이터 - 지속 시간
 
         // 정상 종료
         owner.StateTransfer.OnEnableState(new EState[] { EState.Throw, EState.JumpThrow, EState.JumpMelee });
@@ -136,6 +101,7 @@ public class BagJunkFistSkill : IBagAct
         owner.Attack.MeleeAttackInfo = temp;
         owner.Attack.GenerateMeleeEffects();
         owner.Fsm.ChangeStateAct(new MeleeState(owner), EState.Melee);
+        foreach (var fist in owner.BagSkillHandler.fists) fist.OffFist();
         Debug.Log("버프 끝!");
     }
 
@@ -145,7 +111,7 @@ public class BagJunkFistSkill : IBagAct
     public class BagJunkFist_1 : BaseBagState
     {
         private BagJunkFistSkill parent;
-        private string animName = "Drain";
+        private string animName = "JunkFistCharge";
 
         private Transform camTrf;
         private Vector3 moveDir;
@@ -161,8 +127,7 @@ public class BagJunkFistSkill : IBagAct
         public override void OnEnter()
         {
             base.OnEnter();
-            Debug.Log("자 시작해 버렸다");
-
+            foreach (var fist in owner.BagSkillHandler.fists) fist.OnEffect();
             owner.Movement.Rigid.velocity = Vector3.zero;
 
             animTimer = 999f;
@@ -197,7 +162,6 @@ public class BagJunkFistSkill : IBagAct
         public override void OnUpdate()
         {
             base.OnUpdate();
-            Debug.Log("자 업데이트해 버렸다");
 
             if (animTimer <= 0)
             {
@@ -211,14 +175,12 @@ public class BagJunkFistSkill : IBagAct
 
         public override void OnExit()
         {
+            foreach (var fist in owner.BagSkillHandler.fists)
+            {
+                fist.OffEffect();
+                fist.OnFist();
+            }
             base.OnExit();
-            Debug.Log("자 끝나버렸다");
-        }
-
-        public override void OnAction()
-        {
-            base.OnAction();
-            // TODO: 건틀릿 생성
         }
     }
 }

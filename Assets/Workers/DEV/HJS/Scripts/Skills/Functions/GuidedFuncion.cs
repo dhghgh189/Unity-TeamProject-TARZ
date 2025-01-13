@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Diagnostics.CodeAnalysis;
 using UnityEngine;
 
 /// <summary>
@@ -8,6 +9,7 @@ public class GuidedFuncion : MonoBehaviour, IEnable
 {
     // 유도와 같은 적을 우선 선별 해야할 때
     [SerializeField] Transform target;
+    [SerializeField] MonsterData data;
     private Collider[] colliders;
     private Rigidbody rb;
 
@@ -31,7 +33,7 @@ public class GuidedFuncion : MonoBehaviour, IEnable
     public void FixedUpdate()
     {
         // 유도하는 함수
-        if (target != null)
+        if (target != null && !data.IsDead)
         {
             try
             {
@@ -69,6 +71,8 @@ public class GuidedFuncion : MonoBehaviour, IEnable
         {
             // 타겟을 설정
             target = colliders[0].gameObject.transform;
+            data = (target.gameObject.GetComponent<MonsterData>() is not null) ?
+                 target.gameObject.GetComponent<MonsterData>() : (target.gameObject.GetComponentInParent<MonsterData>());
             return true;
         }
 

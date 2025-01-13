@@ -33,7 +33,8 @@ public class MSkill_TrippleAttack : Action
         {
             _monsterSkillManager.trippleAttackRoutine = StartCoroutine(_monsterSkillManager.TrippleAttackRoutine());
             _animator.SetTrigger("TrippleAttack");
-            Debug.Log("trippleAttack");
+            SoundManager.PlaySFX(SoundManager.SoundData_M.TrippleAttack);
+
             return TaskStatus.Success;
         }
         else

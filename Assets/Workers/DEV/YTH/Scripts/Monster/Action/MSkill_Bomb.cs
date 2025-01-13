@@ -32,10 +32,10 @@ public class MSkill_Bomb : Action
 	{
         if (_monsterSkillManager.BombSkill.CanUseSkill == true && _monsterSkillManager.bombRoutine == null)
         {
-            Debug.Log("Bomb");
             MonsterRotation();
             _monsterSkillManager.bombRoutine = StartCoroutine(_monsterSkillManager.BombRoutine());
             _animator.SetTrigger("BigBomb");
+            SoundManager.PlaySFX(SoundManager.SoundData_M.Bomb);
 
             return TaskStatus.Success;
         }

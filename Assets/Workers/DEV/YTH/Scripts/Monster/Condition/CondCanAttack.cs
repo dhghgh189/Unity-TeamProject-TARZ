@@ -28,7 +28,6 @@ public class CondCanAttack : Conditional
 
         if (_distance <= _monsterData.AttackRange && !_monsterData.IsAttacked && !_monsterData.IsCatched && _monsterData.IsDead == false)
         {
-            Debug.Log("CondMonsterCanAttack!!!!!!");
             return TaskStatus.Success;
         }
         else
@@ -37,7 +36,7 @@ public class CondCanAttack : Conditional
         }
     }
 
-    /*public bool IsValid()
+    /*private bool IsAvailable()
     {
         if (_distance <= _monsterData.AttackRange
              && !_monsterData.IsAttacked

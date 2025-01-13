@@ -35,6 +35,11 @@ public class LaserTrap : Trap
     public override void Deactivate()
     {
         isActive = false;
+        if (idleRoutine != null)
+        {
+            StopCoroutine(idleRoutine);
+            idleRoutine = null;
+        }
         laserParent.gameObject.SetActive(false);
     }
 

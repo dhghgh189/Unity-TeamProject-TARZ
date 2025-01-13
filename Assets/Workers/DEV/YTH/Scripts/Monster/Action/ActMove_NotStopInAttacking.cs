@@ -4,10 +4,6 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
-/// <summary>
-/// 1. returnObj로 setdastination  running + 공격 거리 내로 들어오면 succeess
-/// 2. 시야에서 놓치면 마지막 위치까지 가게 succeess 
-/// </summary>
 public class ActMove_NotStopInAttacking : Action
 {
     [SerializeField] CondCanMove _condCanMove;
@@ -52,7 +48,6 @@ public class ActMove_NotStopInAttacking : Action
             }
 
             _agent.SetDestination(_player.transform.position);
-
             _animator.SetBool("Move", true);
             
             return TaskStatus.Running;

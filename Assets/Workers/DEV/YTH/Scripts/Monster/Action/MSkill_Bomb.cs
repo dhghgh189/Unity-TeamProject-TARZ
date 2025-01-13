@@ -36,6 +36,7 @@ public class MSkill_Bomb : Action
             MonsterRotation();
             _monsterSkillManager.bombRoutine = StartCoroutine(_monsterSkillManager.BombRoutine());
             _animator.SetTrigger("BigBomb");
+            SoundManager.PlaySFX(SoundManager.SoundData_M.Bomb);
 
             return TaskStatus.Success;
         }

@@ -55,6 +55,9 @@ public class ActMove_Block : Action
         if (_condCanMove.IsPlayerWithinSight(_player.gameObject) && _distance > _stopBlockDistance)
         {
             _agent.SetDestination(_playerBackRoute);
+            _animator.SetBool("Move", true);
+            SoundManager.PlaySFX(SoundManager.SoundData_M.Move);
+
             return TaskStatus.Running;
         }
         else if (_condCanMove.IsPlayerWithinSight(_player.gameObject) && _distance <= _stopBlockDistance+1)

@@ -36,6 +36,7 @@ public class MSkill_Mine : Action
             Debug.Log("mine");
             _monsterSkillManager.mineRoutine = StartCoroutine(_monsterSkillManager.MineRoutine());
             _animator.SetTrigger("TakeMine");
+            SoundManager.PlaySFX(SoundManager.SoundData_M.Mine);
             return TaskStatus.Success;
         }
         else

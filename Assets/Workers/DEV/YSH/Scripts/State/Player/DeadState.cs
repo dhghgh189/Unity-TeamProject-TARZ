@@ -16,6 +16,8 @@ public class DeadState : BaseState<PlayerController>
     public override void OnEnter()
     {
         timer = 0;
+        // 사운드 재생
+        SoundManager.PlaySFX(SoundManager.SoundData_P.Dead);
         owner.Anim.CrossFade(Define.HASH_ANIM_DEAD, 0.125f);
         owner.StartCoroutine(GameOverRoutine());
         owner.saveData.chapterSaveData = new();
@@ -25,14 +27,6 @@ public class DeadState : BaseState<PlayerController>
     {
         owner.Movement.Rigid.velocity = Vector3.zero;
         owner.Movement.Rigid.angularVelocity = Vector3.zero;
-
-        //timer += Time.deltaTime;
-        //if (timer >= 5f)
-        //{
-        //    owner.loadingObject.StartLoading(Define.SceneType.Lobby);
-        //    owner.ChangeState(EState.Idle);
-        //    return;
-        //}
     }
 
     private IEnumerator GameOverRoutine()

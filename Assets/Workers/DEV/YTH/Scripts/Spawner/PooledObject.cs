@@ -104,6 +104,8 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
 
     public void Die()
     {
+        /*int killCount ++;*/
+
         _monsterData.IsDead = true;
 
         _capsuleCollider.enabled = false;

@@ -30,9 +30,7 @@ public class PlayerSoundData : ScriptableObject
     public AudioClip MeleeHit { get { return _sound.MeleeHit; } }
 
     // Throw
-    public AudioClip Throw1 { get { return _sound.Throw1; } }
-    public AudioClip Throw2 { get { return _sound.Throw2; } }
-    public AudioClip Throw3 { get { return _sound.Throw3; } }
+    public AudioClip[] Throws { get { return _sound.Throws; } }
     public AudioClip ThrowHit { get { return _sound.ThrowHit; } }
     public AudioClip JumpThrow { get { return _sound.JumpThrow; } }
     public AudioClip JumpThrowHit { get { return _sound.JumpThrowHit; } }
@@ -64,10 +62,8 @@ public class PlayerSoundData : ScriptableObject
         public AudioClip Melee3;                // 근거리 공격 발동
         public AudioClip MeleeHit;              // 근거리 공격 히트 시
 
-        [Header("Throw")]
-        public AudioClip Throw1;                // 원거리 공격 1 발동
-        public AudioClip Throw2;                // 원거리 공격 2 발동
-        public AudioClip Throw3;                // 원거리 공격 3 발동
+        [Header("Throw (타수 별 사운드 순서 맞춰주세요)")]
+        public AudioClip[] Throws;              // 원거리 공격 (1~3), 순서 정확히 맞출 것
         public AudioClip ThrowHit;              // 원거리 공격 히트 시
         public AudioClip JumpThrow;             // 점프 원거리 공격 발동
         public AudioClip JumpThrowHit;          // 점프 원거리 공격 히트 시

@@ -303,6 +303,8 @@ public class PlayerAttack : MonoBehaviour
         tobj.adapter = player.AblityAdapter;
         tobj.handler = player.SkillHandler;
         tobj.Throw(transform.forward + (transform.up * 0.3f), throwForce);
+        // 사운드 재생
+        SoundManager.PlaySFX(SoundManager.SoundData_P.Throws[ThrowCount]);
     }
 
     public void JumpThrow()

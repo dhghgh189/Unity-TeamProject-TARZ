@@ -18,19 +18,21 @@ MonoBehaviour:
     FootStep_Grass: {fileID: 0}
     FootStep_Wood: {fileID: 0}
     FootStep_Metal: {fileID: 0}
-    TakeDamage_Normal: {fileID: 0}
-    TakeDamage_Danger: {fileID: 0}
+    TakeDamage_Normal: {fileID: 8300000, guid: 5770d1d39c354a94e88b70d789f56905, type: 3}
+    TakeDamage_Danger: {fileID: 8300000, guid: ab4dcc7337236d54e8352fb39f5a9c5e, type: 3}
     Jump: {fileID: 8300000, guid: fd83f70007143914d9f0ac5e26a1d235, type: 3}
     Dash: {fileID: 8300000, guid: d7d668cac00abed439f66c0e33ea508b, type: 3}
     AirDash: {fileID: 8300000, guid: b75709bb2592e274b8898a91e89f289f, type: 3}
     Dead: {fileID: 8300000, guid: 27698c020c7fdaf4ba4d1b9afae22841, type: 3}
-    Melee1: {fileID: 0}
-    Melee2: {fileID: 0}
-    Melee3: {fileID: 0}
-    MeleeHit: {fileID: 0}
-    Throw1: {fileID: 0}
-    Throw2: {fileID: 0}
-    Throw3: {fileID: 0}
+    Melees:
+    - {fileID: 8300000, guid: bb05b5ac0900c634888e2859f7d0dcb8, type: 3}
+    - {fileID: 8300000, guid: 6badd5bc6bd7f3f469e1f0c6a83a15ff, type: 3}
+    - {fileID: 8300000, guid: 9db3bc7f93d7bb94ab4f8b5ebe42f616, type: 3}
+    MeleeHit: {fileID: 8300000, guid: 59c26fee53392b64d871d3bae4f38c3a, type: 3}
+    Throws:
+    - {fileID: 8300000, guid: 656c3dc7471384144a09d50439179e62, type: 3}
+    - {fileID: 8300000, guid: 4af19b52526d19d429b7229473702d95, type: 3}
+    - {fileID: 8300000, guid: 74c12e6da9ef8224ea0c52de05a0e99c, type: 3}
     ThrowHit: {fileID: 0}
     JumpThrow: {fileID: 0}
     JumpThrowHit: {fileID: 0}

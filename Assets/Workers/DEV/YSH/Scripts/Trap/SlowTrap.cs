@@ -70,6 +70,9 @@ public class SlowTrap : Trap
 
     private void OnTriggerEnter(Collider other)
     {
+        if (!isActive)
+            return;    
+
         if (other.gameObject.layer != LayerMask.NameToLayer("Player")
             && other.gameObject.layer != LayerMask.NameToLayer("Monster"))
             return;
@@ -96,6 +99,9 @@ public class SlowTrap : Trap
 
     private void OnTriggerExit(Collider other)
     {
+        if (!isActive)
+            return;
+
         if (other.gameObject.layer != LayerMask.NameToLayer("Player")
             && other.gameObject.layer != LayerMask.NameToLayer("Monster"))
             return;

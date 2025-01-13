@@ -12,7 +12,9 @@ public class MonsterSoundData : ScriptableObject
     /// </summary>
     public AudioClip TakeDamage { get { return _sound.TakeDamage; } }
     public AudioClip Idle { get { return _sound.Idle; } }
-    public AudioClip Attack { get { return _sound.Attack; } }
+    public AudioClip Move { get { return _sound.Move; } }
+    public AudioClip MeleeAttack { get { return _sound.MeleeAttack; } }
+    public AudioClip RangeAttack { get { return _sound.RangeAttack; } }
     public AudioClip Die { get { return _sound.Die; } }
     
 
@@ -28,6 +30,12 @@ public class MonsterSoundData : ScriptableObject
     public AudioClip DashAttack { get { return _sound.DashAttack; } }
     public AudioClip ElectricWall { get { return _sound.ElectricWall; } }
     public AudioClip Thunder { get { return _sound.Thunder; } }
+    public AudioClip Roar { get { return _sound.Roar; } }
+
+    /// <summary>
+    /// 몬스터 특수 사운드
+    /// </summary>
+     public AudioClip ArnoldSpawn { get { return _sound.ArnoldSpawn; } }
 
     [Serializable]
     public struct Sound
@@ -36,7 +44,9 @@ public class MonsterSoundData : ScriptableObject
         [Header("Male")]
         public AudioClip TakeDamage;
         public AudioClip Idle;
-        public AudioClip Attack;
+        public AudioClip Move;
+        public AudioClip MeleeAttack;
+        public AudioClip RangeAttack;
         public AudioClip Die;
 
         [Header("Skill")]
@@ -49,5 +59,9 @@ public class MonsterSoundData : ScriptableObject
         public AudioClip DashAttack;
         public AudioClip ElectricWall;
         public AudioClip Thunder;
+        public AudioClip Roar;
+
+        [Header("Etc")]
+        public AudioClip ArnoldSpawn;
     }
 }

@@ -36,7 +36,8 @@ public class MSkill_JumpAttack : Action
             _pooledObject.RotateToPlayer();
             _monsterSkillManager.jumpAttackRoutine = StartCoroutine( _monsterSkillManager.JumpAttackRoutine());
             _animator.SetTrigger("JumpAttack");
-            Debug.Log("점프어택");
+            SoundManager.PlaySFX(SoundManager.SoundData_M.JumpAttack);
+
             return TaskStatus.Success;
         }
         else

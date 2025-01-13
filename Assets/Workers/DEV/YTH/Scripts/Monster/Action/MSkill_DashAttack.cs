@@ -31,6 +31,7 @@ public class MSkill_DashAttack : Action
             _pooledObject.RotateToPlayer();
             _monsterSkillManager.dashAttackRoutine = StartCoroutine(_monsterSkillManager.DashAttackRoutine());
             Debug.Log("20 DashAttackRoutine");
+            SoundManager.PlaySFX(SoundManager.SoundData_M.DashAttack);
             return TaskStatus.Success;
         }
         else

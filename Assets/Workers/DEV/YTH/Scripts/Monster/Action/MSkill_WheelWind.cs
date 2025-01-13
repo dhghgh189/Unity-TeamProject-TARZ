@@ -39,7 +39,8 @@ public class MSkill_WheelWind : Action
         {
             _monsterSkillManager.wheelWindRoutine = StartCoroutine(_monsterSkillManager.WheelWindRoutine());
             _animator.SetTrigger("WheelWind");
-            Debug.Log("wheelWind");
+            SoundManager.PlaySFX(SoundManager.SoundData_M.WheelWind);
+
             return TaskStatus.Success;
         }
         else

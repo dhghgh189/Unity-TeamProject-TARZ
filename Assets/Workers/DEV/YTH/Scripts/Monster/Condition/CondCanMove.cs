@@ -32,12 +32,10 @@ public class CondCanMove : Conditional
     {
         if (IsPlayerWithinSight(_player.gameObject) && !_monsterData.IsAttacked && !_monsterData.IsCatched && _monsterData.IsDead == false)
         {
-            //Debug.Log("CodnMove true");
             return TaskStatus.Success;
         }
         else
         {
-            //Debug.Log("cond move false");
             return TaskStatus.Failure;
         }
     }

@@ -14,8 +14,8 @@ public class SoundManager : MonoBehaviour
     private PlayerSoundData _playerSoundData;
     public static PlayerSoundData SoundData_P { get { return Instance._playerSoundData; } private set { } }
 
-    private UiSoundData _uiSoundData;
-    public static UiSoundData SoundData_UI { get { return Instance._uiSoundData; } private set { } }
+    private EtcSoundData _etcSoundData;
+    public static EtcSoundData SoundData_UI { get { return Instance._etcSoundData; } private set { } }
 
 
     // BGM 소스
@@ -50,7 +50,7 @@ public class SoundManager : MonoBehaviour
     {
         _monsterSoundData = Resources.Load<MonsterSoundData>($"{SOUND_PATH}/MonsterSoundData");
         _playerSoundData = Resources.Load<PlayerSoundData>($"{SOUND_PATH}/PlayerSoundData");
-        _uiSoundData = Resources.Load<UiSoundData>($"{SOUND_PATH}/UISoundData");
+        _etcSoundData = Resources.Load<EtcSoundData>($"{SOUND_PATH}/EtcSoundData");
     }
 
     /// <summary>

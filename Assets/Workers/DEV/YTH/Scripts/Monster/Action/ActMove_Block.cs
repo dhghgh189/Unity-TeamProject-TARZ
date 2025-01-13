@@ -3,10 +3,6 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
-/// <summary>
-/// 1. 플레이어 뒤로 가다가 stopblockDistance보다 클때 running 
-/// 2. stopBlockDistance보다 가까워지면 추격 으로 넘어가게 Running 
-/// </summary>
 public class ActMove_Block : Action
 {
     [SerializeField] CondCanMove _condCanMove;
@@ -55,6 +51,9 @@ public class ActMove_Block : Action
         if (_condCanMove.IsPlayerWithinSight(_player.gameObject) && _distance > _stopBlockDistance)
         {
             _agent.SetDestination(_playerBackRoute);
+            _animator.SetBool("Move", true);
+            SoundManager.PlaySFX(SoundManager.SoundData_M.Move);
+
             return TaskStatus.Running;
         }
         else if (_condCanMove.IsPlayerWithinSight(_player.gameObject) && _distance <= _stopBlockDistance+1)

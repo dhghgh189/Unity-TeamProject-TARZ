@@ -35,7 +35,7 @@ public class MSkill_ElectricWall : Action
             _pooledObject.RotateToPlayer();
             _monsterSkillManager.electricWallRoutine = StartCoroutine(_monsterSkillManager.ElectricWallRoutine());
             _animator.SetTrigger("ElectricWall");
-            Debug.Log("일렉트릭월");
+            SoundManager.PlaySFX(SoundManager.SoundData_M.Roar);
             return TaskStatus.Success;
         }
         else

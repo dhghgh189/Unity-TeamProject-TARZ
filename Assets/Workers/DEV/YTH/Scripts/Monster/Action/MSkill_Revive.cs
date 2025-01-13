@@ -32,7 +32,7 @@ public class MSkill_Revive : Action
         {
             _monsterSkillManager.Revive();
             _animator.SetBool("Revive", true);
-            Debug.Log("부활");
+
             return TaskStatus.Success;
         }
         else

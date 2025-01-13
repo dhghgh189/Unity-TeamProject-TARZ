@@ -42,6 +42,7 @@ public class ActRangeAttack : Action
             MonsterRotation();
             throwRoutine = StartCoroutine(ThrowRoutine());
             _animator.SetTrigger("Attack");
+            SoundManager.PlaySFX(SoundManager.SoundData_M.RangeAttack);
             return TaskStatus.Success;
         }
         else

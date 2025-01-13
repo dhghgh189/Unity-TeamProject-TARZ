@@ -32,6 +32,11 @@ public class MonsterSoundData : ScriptableObject
     public AudioClip Thunder { get { return _sound.Thunder; } }
     public AudioClip Roar { get { return _sound.Roar; } }
 
+    /// <summary>
+    /// 몬스터 특수 사운드
+    /// </summary>
+     public AudioClip ArnoldSpawn { get { return _sound.ArnoldSpawn; } }
+
     [Serializable]
     public struct Sound
     {
@@ -55,5 +60,8 @@ public class MonsterSoundData : ScriptableObject
         public AudioClip ElectricWall;
         public AudioClip Thunder;
         public AudioClip Roar;
+
+        [Header("Etc")]
+        public AudioClip ArnoldSpawn;
     }
 }

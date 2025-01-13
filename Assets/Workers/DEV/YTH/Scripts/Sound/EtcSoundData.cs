@@ -2,8 +2,8 @@ using System;
 using UnityEngine;
 
 
-[CreateAssetMenu(menuName = "Scriptables/SoundData/UI")]
-public class UiSoundData : ScriptableObject
+[CreateAssetMenu(menuName = "Scriptables/SoundData/Etc")]
+public class EtcSoundData : ScriptableObject
 {
     [SerializeField] private Sound _sound;
     public AudioClip M_TakeDamage { get { return _sound.M_TakeDamage; } }

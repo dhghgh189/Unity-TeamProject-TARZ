@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using UnityEngine.Localization;
 
 public class InputDeviceManager : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class InputDeviceManager : MonoBehaviour
     [SerializeField] private Image keyboardImage;
     [SerializeField] private Image sideKeyboardImage;
     [SerializeField] private Image gamepadImage;
+    [SerializeField] private LocalizedStringTable localTable;
 
     public enum DeviceType { KeyboardMouse, Gamepad, Both }
 
@@ -26,6 +28,21 @@ public class InputDeviceManager : MonoBehaviour
     }
 
     private void Start()
+    {
+        UpdateDropdownOptions();
+    }
+
+    private void OnEnable()
+    {
+        InputSystem.onDeviceChange += OnDeviceChange;
+    }
+
+    private void OnDisable()
+    {
+        InputSystem.onDeviceChange -= OnDeviceChange;
+    }
+
+    private void Update()
     {
         if (Gamepad.current != null)
         {
@@ -58,6 +75,28 @@ public class InputDeviceManager : MonoBehaviour
                 EnableBoth();
                 break;
         }
+    }
+
+    private void UpdateDropdownOptions()
+    {
+        inputDeviceDropdown.ClearOptions();
+
+        localTable.GetTableAsync().Completed += handle =>
+        {
+            if (handle.Status == UnityEngine.ResourceManagement.AsyncOperations.AsyncOperationStatus.Succeeded)
+            {
+                var stringTable = handle.Result;
+
+                var options = new System.Collections.Generic.List<string>
+                {
+                    stringTable["InputKeyboard_Key"].LocalizedValue,
+                    stringTable["InputGamepad_Key"].LocalizedValue,
+                    stringTable["InputBoth_Key"].LocalizedValue
+                };
+
+                inputDeviceDropdown.AddOptions(options);
+            }
+        };
     }
 
     private void EnableKeyboardMouse()
@@ -131,6 +170,19 @@ public class InputDeviceManager : MonoBehaviour
         {
             currentDevice = DeviceType.KeyboardMouse;
             inputDeviceDropdown.value = 0;
+        }
+    }
+
+    private void OnDeviceChange(InputDevice device, InputDeviceChange change)
+    {
+        switch (change)
+        {
+            case InputDeviceChange.Added:
+                inputDeviceDropdown.interactable = true;
+                break;
+            case InputDeviceChange.Removed:
+                inputDeviceDropdown.interactable = false;
+                break;
         }
     }
 

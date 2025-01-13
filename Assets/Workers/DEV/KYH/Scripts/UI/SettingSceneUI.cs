@@ -53,7 +53,7 @@ public class SettingSceneUI : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "Title")
         {
             camera = null;
-            minimap = null;
+            
             sensitivityText.text = $"{(int)sensitivitySlider.value}";
         }
         else
@@ -72,16 +72,18 @@ public class SettingSceneUI : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name == "Title")
         {
+            minimap = null;
             minimapActiveToggle.interactable = false;
-            activeCPanel = nonSelectPanel;                  // 현재 활성화 중인 패널을 nonSelectPanel로 설정
+            sensitivitySlider.interactable = false;
         }
         else
         {
             titlePanel = null;
-
-            inputManager.firstInput = gameplayButton;
-            inputManager.firstInput.Select();
         }
+
+        activeCPanel = nonSelectPanel;                  // 현재 활성화 중인 패널을 nonSelectPanel로 설정
+        inputManager.firstInput = gameplayButton;
+        inputManager.firstInput.Select();
     }
 
     private void Update()
@@ -126,9 +128,9 @@ public class SettingSceneUI : MonoBehaviour
         languagePanel.SetActive(false);
         soundPanel.SetActive(false);
         keySettingsPanel.SetActive(false);
-        if (activeMinimapToggle.interactable == false)
+        if (SceneManager.GetActiveScene().name == "Title")
         {
-            sensitivitySlider.Select();
+            inputDeviceDropdown.Select();
         }
         else
         {
@@ -145,7 +147,14 @@ public class SettingSceneUI : MonoBehaviour
 
     public void OnCheckMinimapActiveToggle()
     {
-        minimap.SetActive(minimapActiveToggle.isOn);
+        if (minimapActiveToggle.isOn == true)
+        {
+            minimap.SetActive(true);
+        }
+        else
+        {
+            minimap.SetActive(false);
+        }
     }
 
     // 언어 카테고리 버튼 클릭

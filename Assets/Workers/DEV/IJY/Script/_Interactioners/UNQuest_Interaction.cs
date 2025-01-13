@@ -1,36 +1,92 @@
 using UnityEngine;
+using Zenject;
 
 public class UNQuest_Interaction : InteractionOBJ_Base, Interaction_Ibase_Activate
 {
+    [Inject] private PlayerController player;
+    public int CurCount { get { return curCount; } set { curCount = value; } }
+
+    private QuestManager questManager;
+
     [Header("돌발 퀘스트 NPC")]
+    [SerializeField] private int curCount;
+    [SerializeField] int QuestCount;
+    [SerializeField] bool isOngoing;
     [SerializeField] float Reward;
+
 
     void Start() => Init();
 
     void Init()
     {
+        questManager = player.gameObject.GetComponent<QuestManager>();
 
+        Reward = Random.Range(300f, 500f);
+        curCount = 0;
+        isOngoing = false;
     }
 
     public void Activate()
     {
-        // TODO : UI 대화창 띄움과 동시에, 돌발 퀘스트 승낙 여부 표시
-        // 승낙 시 목표치 설정해줌
-        // 거절 시 그 자리에 가만히 있음
+        if (isOngoing)
+        {
+            QuestOngoing();
+            return;
+        }
 
-        /* 경우의 수
-         
-        1. 아무 상호작용도 하지 않고, 가장 처음 말을 걸엇을 때 = 퀘스트 승낙 여부를 묻는다
-        1-1. 승낙 시 퀘스트 진행
-        1-2. 이후 대사 없음. 다시 말 걸면 1의 상황으로 되돌아감
-
-        2. 승낙 후 퀘스트 진행 사항을 표시한다.
-        2-1. 퀘스트 진행이 완료되지 않았을 경우, 같은 말을 반복하도록 한다. (완료 여부는 bool형으로 해결)
-        2-2. 퀘스트가 완료되었을 경우, 지정된 랜덤한 보상을 플레이어에게 전달한다.
-
-        3. 퀘스트 완료 후, NPC는 비활성화 혹은 삭제된다.
-         */
+        BeforeQuest();
     }
 
     //===============================================================================
+
+    void BeforeQuest()
+    {
+        // TODO : UI 출력
+        // 플레이어 움직임 정지
+        questManager.questPanel.SetActive(true);
+        questManager.QuestCountText.text = $"좀비를 {QuestCount}마리 사냥하여, 수상한 자에게서 보상을 얻자!";
+    }
+
+    public void SayYes()
+    {
+        isOngoing = true;
+        curCount = 0;
+        QuestCount = Random.Range(3, 6);
+        // TODO : UI 끔
+        questManager.questPanel.SetActive(false);
+        // 퀘스트 UI도 구성하면 좋겠다
+    }
+
+    public void SayNo()
+    {
+        isOngoing = false;
+        curCount = 0;
+        // TODO : UI 끔
+        questManager.questPanel.SetActive(false);
+    }
+
+    //===============================================================================
+
+    void QuestOngoing()
+    {
+        if (curCount < QuestCount)
+        {
+            // TODO : 진행하는 도중이라는 UI 표시
+            // 달성률도 표시하면 좋겠다.
+            return;
+        }
+
+        ClearQuest();
+    }
+
+    void ClearQuest()
+    {
+        player.Stat.BlackChip += Reward;
+        isOngoing = false;
+    }
+
+    void OnDisable()
+    {
+        isOngoing = false;
+    }
 }

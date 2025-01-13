@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using Zenject;
+using static BagSkillEnum;
 
 /// <summary>
 /// 가방 데이터
@@ -29,10 +30,13 @@ public class BagSkillManager : MonoBehaviour
 
     public BagSkill[] SkillArray { get { return skillArr; } }
 
+    public (float, BagIndexKey)[] SaveBagSkillArray;
+
     private void Awake()
     {
         OnChargeEvent = new UnityEvent();
         skillArr ??= new BagSkill[4];
+        SaveBagSkillArray ??= new (float, BagIndexKey)[4];
     }
 
     private void Start()
@@ -97,5 +101,14 @@ public class BagSkillManager : MonoBehaviour
     private void OnDestroy()
     {
         if(OnChargeEvent is not null) OnChargeEvent.RemoveAllListeners();
+    }
+
+    public void UpdateCharge()
+    {
+        for(int i = 0; i < skillArr.Length; i++)
+        {
+            if (skillArr[i] == null) continue;
+            SaveBagSkillArray[i].Item1 = skillArr[i].CurGauge;
+        }
     }
 }

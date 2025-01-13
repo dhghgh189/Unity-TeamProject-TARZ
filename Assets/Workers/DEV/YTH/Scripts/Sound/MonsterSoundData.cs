@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -6,6 +7,8 @@ using UnityEngine;
 public class MonsterSoundData : ScriptableObject
 {
     [SerializeField] private Sound _sound;
+
+    
 
     /// <summary>
     /// 몬스터 기본 사운드
@@ -64,4 +67,16 @@ public class MonsterSoundData : ScriptableObject
         [Header("Etc")]
         public AudioClip ArnoldSpawn;
     }
+
+
+    [SerializeField] List<SoundInfo> soundInfos = new List<SoundInfo>();
+    public List<SoundInfo> SoundInfos { get { return soundInfos; } private set { } }
+
+    [Serializable]
+    public struct SoundInfo
+    {
+        public int ID;
+        public AudioClip Clip;
+    }
 }
+

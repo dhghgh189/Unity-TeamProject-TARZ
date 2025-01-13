@@ -48,7 +48,7 @@ public class ActiveSkill
         if (Create)
         {
             Debug.Log(createObject.name);
-            GameObject game = UnityEngine.Object.Instantiate(createObject, requester.transform.position + Vector3.up, Quaternion.identity);
+            GameObject game = UnityEngine.Object.Instantiate(createObject, requester.transform.position, Quaternion.identity);
             game.GetComponent<ISpec>()?.SetSpec(skillLevelSpec, level);
 
             FloorSpawner flooring = game.GetComponent<FloorSpawner>();

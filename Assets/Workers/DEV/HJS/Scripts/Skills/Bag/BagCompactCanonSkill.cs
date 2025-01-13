@@ -1,22 +1,18 @@
-using BehaviorDesigner.Runtime.Tasks.Unity.UnityGameObject;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static BagSkillEnum;
 
-/// <summary>
-/// 가방 스킬 - 스크랩 버스트
-/// </summary>
-public class BagScrapBurstSkill : BagSkill
+public class BagCompactCanonSkill : BagSkill
 {
-    /* 특수 정보들 */
-    private GameObject tmp;
-    private ScrapParentObject instance;
+    /* 특수 정보 */
+    public GameObject tmp;                        // 고철 오브젝트 프리팹
+    public ScrapMatelObject instance;     // 고철 오브젝트
 
-    public BagScrapBurstSkill(PlayerController owner, BagSkillContainerSO container)
+    public BagCompactCanonSkill(PlayerController owner, BagSkillContainerSO container)
     {
-        keyName = BagIndexKey.ScrapBurst;
+        keyName = BagIndexKey.CompactCanon;
         try
         {
             // 없을 경우에만 넣기
@@ -39,52 +35,37 @@ public class BagScrapBurstSkill : BagSkill
         this.owner = owner;
 
         acts = new LinkedList<BaseBagState>();
-        acts.AddLast(new BagScrapBurst_1(owner, this));
-        acts.AddLast(new BagScrapBurst_2(owner, this));
 
-        tmp = Resources.Load("Managed/BagSkill/ScrapBrustObject") as GameObject;
+        tmp = Resources.Load("Managed/BagSkill/ScrapMatelObject") as GameObject;
     }
 
     /// <summary>
-    /// 1번 동작 : 고철덩어리를 오른속에 쥔채 전방으로 팔을 뻗기
+    /// 1번 동작 : 전방으로 팔을 뻗어 커다란 파편을 생성한다 -> 파편이 점점 커짐
     /// </summary>
-    public class BagScrapBurst_1 : BaseBagState
+    public class BagCompactCanon_1 : BaseBagState
     {
-        private BagScrapBurstSkill parent;
-        private string animName = "ScrapBrust_1";
+        private BagCompactCanonSkill parent;
+        private readonly string animName = "CompactCanon_1";
 
         private Transform camTrf;
         private Vector3 moveDir;
         private Vector3 lookDir;
 
-        private float animTimer;
-
-        public BagScrapBurst_1(PlayerController owner, BagScrapBurstSkill parent) : base(owner)
+        public BagCompactCanon_1(PlayerController owner, BagCompactCanonSkill parent) : base(owner)
         {
             this.parent = parent;
         }
 
-        private IEnumerator AnimRoutine()
-        {
-            yield return new WaitForSeconds(0.1f);
-            animTimer = owner.GetCurrentAnimTime();
-        }
-
         public override void OnEnter()
         {
-            // 손잡이를 만들고
-            Transform createPoint = GameObject.FindWithTag("GrabPoint").transform;
-            parent.instance = UnityEngine.Object.Instantiate(parent.tmp, createPoint.position, Quaternion.identity).GetComponent<ScrapParentObject>();
+            base.OnEnter();
+            Transform createPoint = GameObject.FindWithTag("CreatePoint").transform;
+            parent.instance = UnityEngine.Object.Instantiate(parent.tmp, createPoint.position, Quaternion.identity).GetComponent<ScrapMatelObject>();
             parent.instance.gameObject.transform.parent = createPoint;
-            parent.instance.OnStartEvent.AddListener(OnAction);
 
             parent.instance.Init(parent.skilldata);
 
-            base.OnEnter();
-
             owner.Movement.Rigid.velocity = Vector3.zero;
-
-            animTimer = 999f;
 
             if (camTrf == null)
                 camTrf = Camera.main.transform;
@@ -104,7 +85,6 @@ public class BagScrapBurstSkill : BagSkill
             lookDir = owner.transform.forward;
 
             owner.Anim.CrossFade(Animator.StringToHash(animName), 0.01f);
-            owner.StartCoroutine(AnimRoutine());
         }
 
         public override void OnUpdate()
@@ -115,57 +95,42 @@ public class BagScrapBurstSkill : BagSkill
             {
                 owner.Movement.LookAt(lookDir);
             }
-        }
 
-        public override void OnExit()
-        {
-            base.OnExit();
-            UnityEngine.Object.Destroy(parent.instance);
+            // TODO : 오브젝트가 풀 차징이 되었을 때 발동
+
         }
 
         public override void OnAction()
         {
-            parent.instance.gameObject.transform.parent = null;
-            parent.instance.gameObject.transform.rotation = owner.gameObject.transform.rotation;
-            owner.BagSkillHandler.NextStep();
+            // 거대 고철 덩어리 생성
+            base.OnAction();
         }
     }
 
-    /// <summary>
-    /// 2번 동작 : 고철덩어리 발사하기
-    /// </summary>
-    public class BagScrapBurst_2 : BaseBagState
+    public class BagCompactCanon_2 : BaseBagState
     {
-        private BagScrapBurstSkill parent;
-        private string animName = "ScrapBrust_2";
+        private BagCompactCanonSkill parent;
+        private readonly string animName = "CompactCanon_2";
 
         private Transform camTrf;
         private Vector3 moveDir;
         private Vector3 lookDir;
 
-        private float animTimer;
-
-        public BagScrapBurst_2(PlayerController owner, BagScrapBurstSkill parent) : base(owner)
+        public BagCompactCanon_2(PlayerController owner, BagCompactCanonSkill parent) : base(owner)
         {
             this.parent = parent;
-        }
-
-        private IEnumerator AnimRoutine()
-        {
-            yield return new WaitForSeconds(0.1f);
-            animTimer = owner.GetCurrentAnimTime();
         }
 
         public override void OnEnter()
         {
             base.OnEnter();
+            Transform createPoint = GameObject.FindWithTag("CreatePoint").transform;
+            parent.instance = UnityEngine.Object.Instantiate(parent.tmp, createPoint.position, Quaternion.identity).GetComponent<ScrapMatelObject>();
+            parent.instance.gameObject.transform.parent = createPoint;
 
-            // 게이지 감소
-            parent.Use();
+            parent.instance.Init(parent.skilldata);
 
             owner.Movement.Rigid.velocity = Vector3.zero;
-
-            animTimer = 999f;
 
             if (camTrf == null)
                 camTrf = Camera.main.transform;
@@ -185,24 +150,31 @@ public class BagScrapBurstSkill : BagSkill
             lookDir = owner.transform.forward;
 
             owner.Anim.CrossFade(Animator.StringToHash(animName), 0.01f);
-            owner.StartCoroutine(AnimRoutine());
         }
 
         public override void OnUpdate()
         {
             base.OnUpdate();
 
-            if (animTimer <= 0)
+            if (lookDir != Vector3.zero && owner.transform.forward != lookDir)
             {
+                owner.Movement.LookAt(lookDir);
+            }
+
+            // TODO : 오브젝트가 풀 차징이 되었을 때 발동
+            if (parent.instance == null) return;
+
+            if(parent.instance.IsFull)
+            {
+                parent.instance.gameObject.transform.parent = null;
                 owner.BagSkillHandler.NextStep();
             }
-            animTimer -= Time.deltaTime;
         }
 
-        public override void OnExit()
+        public override void OnAction()
         {
-            base.OnExit();
+            // 거대 고철 덩어리 생성
+            base.OnAction();
         }
     }
-
 }

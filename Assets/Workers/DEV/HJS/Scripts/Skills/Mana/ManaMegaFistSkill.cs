@@ -21,12 +21,7 @@ public class ManaMegaFistSkill : IManaSkill
     {
         Acts = new LinkedList<BaseManaState>();
         Acts.AddLast(new ManaMegaFist_1(owner, this));
-
-#if UNITY_EDITOR
-        tmp = Resources.Load("Unmanaged/Gate") as GameObject;
-#else
         tmp = Resources.Load("Managed/ManaSkill/Gate") as GameObject;
-#endif
     }
 
     public void SetInit(ManaSkillHandler manaSkillHandler)

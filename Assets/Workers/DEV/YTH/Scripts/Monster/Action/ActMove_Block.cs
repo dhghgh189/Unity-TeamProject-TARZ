@@ -52,7 +52,6 @@ public class ActMove_Block : Action
         {
             _agent.SetDestination(_playerBackRoute);
             _animator.SetBool("Move", true);
-            SoundManager.PlaySFX(SoundManager.SoundData_M.Move);
 
             return TaskStatus.Running;
         }

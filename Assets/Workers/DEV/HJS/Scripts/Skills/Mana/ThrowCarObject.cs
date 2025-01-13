@@ -49,16 +49,14 @@ public class ThrowCarObject : MonoBehaviour
         }
         else if (other.gameObject.layer.Equals(LayerMask.NameToLayer("Ground")))    // 땅에 닿을경우 -> 폭파
         {
+            Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRange, LayerMask.GetMask("Monster"));
+            foreach (Collider collider in colliders)
+            {
+                IDamagable damagable = collider.gameObject.GetComponent<IDamagable>();
+                if (damagable != null) { damagable.TakeDamage(explosionDamage); Debug.Log($"{collider.gameObject.name}에게 {explosionDamage}만큼의 피해를 입혔다!"); }
+            }
+
             Destroy(gameObject);
-        }
-    }
-    private void OnDestroy()
-    {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRange, LayerMask.GetMask("Monster"));
-        foreach (Collider collider in colliders)
-        {
-            IDamagable damagable = collider.gameObject.GetComponent<IDamagable>();
-            if (damagable != null) { damagable.TakeDamage(explosionDamage); Debug.Log($"{collider.gameObject.name}에게 {explosionDamage}만큼의 피해를 입혔다!"); }
         }
     }
 

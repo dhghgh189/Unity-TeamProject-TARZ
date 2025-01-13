@@ -11,8 +11,8 @@ using static BagSkillEnum;
 public class BagScrapBurstSkill : BagSkill
 {
     /* 특수 정보들 */
-    GameObject tmp;
-    ScrapParentObject instance;
+    private GameObject tmp;
+    private ScrapParentObject instance;
 
     public BagScrapBurstSkill(PlayerController owner, BagSkillContainerSO container)
     {

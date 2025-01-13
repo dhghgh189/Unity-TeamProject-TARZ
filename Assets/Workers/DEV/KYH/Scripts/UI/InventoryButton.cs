@@ -15,6 +15,9 @@ public class InventoryButton : MonoBehaviour
     [SerializeField] GameObject inventory;
     [SerializeField] GameObject bluechip;
 
+    [SerializeField] Button selectedItem;
+    //[SerializeField] Button selectedSkill;
+
     private void Start()
     {
         inventoryButton.onClick.AddListener(OnClickInventoryButton);
@@ -25,12 +28,14 @@ public class InventoryButton : MonoBehaviour
     {
         inventory.SetActive(true);
         bluechip.SetActive(false);
+        selectedItem.Select();
     }
 
     public void OnClickBluechipButton()
     {
         inventory.SetActive(false);
         bluechip.SetActive(true);
+        //selectedSkill.Select();
     }
 
     private void OnDestroy()

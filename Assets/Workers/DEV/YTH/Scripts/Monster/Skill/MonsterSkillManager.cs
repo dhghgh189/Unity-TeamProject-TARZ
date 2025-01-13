@@ -1,7 +1,5 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class MonsterSkillManager : MonoBehaviour
 {
@@ -67,7 +65,7 @@ public class MonsterSkillManager : MonoBehaviour
     public GameObject ReviveBefore { get { return _reviveBefore; } set { _reviveBefore = value; } }
 
     private GameObject _reviveAfter; // 불러올거에요 비워놔주세요
-    public GameObject ReviveAfter { get { return _reviveAfter;  } set { _reviveAfter = value; } } 
+    public GameObject ReviveAfter { get { return _reviveAfter; } set { _reviveAfter = value; } }
     #endregion
 
     #region Etc
@@ -83,7 +81,7 @@ public class MonsterSkillManager : MonoBehaviour
     private Vector3 _electricWallPosition;
 
     private Vector3 _electricWallPosition2;
-  
+
     private Vector3 _jumpStartPosition;
 
     private Vector3 _jumpDirection;
@@ -205,7 +203,7 @@ public class MonsterSkillManager : MonoBehaviour
     IEnumerator JumpRoutine_JumpAttack()
     {
         float distance = Vector3.Distance(transform.position, _player.transform.position);
-        
+
         _jumpStartPosition = transform.position;
         _jumpDirection = transform.forward.normalized * distance;
 
@@ -260,7 +258,7 @@ public class MonsterSkillManager : MonoBehaviour
         Rigidbody bombRb = bomb.GetComponent<Rigidbody>();
         bombRb.AddForce((_muzzlePoint.forward + _muzzlePoint.up * 3) * distance, ForceMode.Impulse);
 
-        yield return Util.GetDelay(BombSkill.CoolTime);    
+        yield return Util.GetDelay(BombSkill.CoolTime);
         bombRoutine = null;
         BombSkill.CanUseSkill = true;
     }
@@ -276,7 +274,7 @@ public class MonsterSkillManager : MonoBehaviour
 
         GameObject mine = Instantiate(_minePrefab, _muzzlePoint.position, _muzzlePoint.rotation, transform);
         Rigidbody mineRb = mine.GetComponent<Rigidbody>();
-        mineRb.AddForce((_muzzlePoint.forward +_muzzlePoint.up) * distance, ForceMode.Impulse);
+        mineRb.AddForce((_muzzlePoint.forward + _muzzlePoint.up) * distance, ForceMode.Impulse);
 
         yield return Util.GetDelay(MineSkill.CoolTime);
         mineRoutine = null;
@@ -285,17 +283,26 @@ public class MonsterSkillManager : MonoBehaviour
     #endregion
 
     #region StimPak
-   public Coroutine stimPakRoutine;
-    public IEnumerator  StimPak() // 폭탄좀비가 잭더리퍼의 몬스터 데이터에 접근해서 스텟 업 해줌
+    public Coroutine stimPakRoutine;
+    public IEnumerator StimPak() // 폭탄좀비가 잭더리퍼의 몬스터 데이터에 접근해서 스텟 업 해줌
     {
         StimPakSkill.CanUseSkill = false;
 
         MonsterData JackData = _jackTheRipper.GetComponent<MonsterData>();
-        JackData.CurHp += 50;
-        JackData.AttackSpeed -= 2;
+        JackData.CurHp += 500;
+        JackData.Damage += 10;
+        JackData.AttackRange += 3;
+        WheelWindSkill.CoolTime *= 0.5f;
+        TrippleAttackSkill.CoolTime *= 0.5f;
 
-        yield return null;
-        StimPakSkill.CanUseSkill = true;
+        yield return Util.GetDelay(30);
+
+        JackData.Damage -= 10;
+        JackData.AttackRange -= 3;
+        WheelWindSkill.CoolTime *= 2f;
+        TrippleAttackSkill.CoolTime *= 2f;
+
+        stimPakRoutine = null;
     }
     #endregion
 
@@ -371,8 +378,8 @@ public class MonsterSkillManager : MonoBehaviour
     public IEnumerator ElectricWallRoutine()
     {
         ElectricWallSkill.CanUseSkill = false;
-/*        _animator.SetTrigger("ElectricWall");
-*/      
+        /*        _animator.SetTrigger("ElectricWall");
+        */
 
         _electricWallPosition = transform.position + transform.forward * 5f;
 
@@ -398,8 +405,8 @@ public class MonsterSkillManager : MonoBehaviour
     public IEnumerator ThunderRoutine()
     {
         ThunderSkill.CanUseSkill = false;
-/*        _animator.SetTrigger("Thunder");
-*/
+        /*        _animator.SetTrigger("Thunder");
+        */
         for (int i = 0; i < 11; i++)
         {
             Vector3 randomPos = new Vector3(Random.Range(-30f, 30f), 0, Random.Range(-30f, 30f));
@@ -419,7 +426,7 @@ public class MonsterSkillManager : MonoBehaviour
 
     #region TrippleAttack
     public Coroutine trippleAttackRoutine;
-    public IEnumerator TrippleAttackRoutine() 
+    public IEnumerator TrippleAttackRoutine()
     {
         TrippleAttackSkill.CanUseSkill = false;
 
@@ -463,7 +470,7 @@ public class MonsterSkillManager : MonoBehaviour
         float _angle = 0;
         float _damage = 0;
 
-        Collider[] colliders = Physics.OverlapSphere(transform.position, _range , WhatIsTarget);
+        Collider[] colliders = Physics.OverlapSphere(transform.position, _range, WhatIsTarget);
         foreach (Collider collider in colliders)
         {
             // 공격 범위 확인

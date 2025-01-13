@@ -6,7 +6,6 @@ using UnityEngine;
 public class ThrowObject : MonoBehaviour, IDrainable
 {
     [SerializeField] private RandomModeling setModeling;
-    [SerializeField] private GameObject modeling;
     [SerializeField] private LayerMask whatIsTarget;
 
     [HideInInspector] public AblityAdapter adapter;
@@ -30,15 +29,16 @@ public class ThrowObject : MonoBehaviour, IDrainable
 
     private void Awake()
     {
-        rigid = GetComponent<Rigidbody>();
+        setModeling = FindAnyObjectByType<RandomModeling>();
+        setModeling.SetRandom(this.gameObject, setModeling.ThrowObjectOBJs);
+
         Upgrade = GetComponent<ThrowObjectUpgrade>();
         throwEffects = new List<IEffect>();
-        setModeling = FindAnyObjectByType<RandomModeling>();
+        rigid = GetComponent<Rigidbody>();
         coll = GetComponent<BoxCollider>();
     }
     private void Start()
     {
-        setModeling.SetRandom(modeling, setModeling.ThrowObjectOBJs);
         adapter = FindAnyObjectByType<AblityAdapter>(FindObjectsInactive.Include);
     }
 
@@ -78,9 +78,6 @@ public class ThrowObject : MonoBehaviour, IDrainable
         handler = owner.SkillHandler;
         player.AddObjectStack(this);
 
-        // 던질 때 플레이어랑 부딪히는 문제 방지
-        Debug.Log($"Player와 {gameObject.name} 충돌 무시");
-        Physics.IgnoreCollision(owner.coll, coll, true);
         isCollected = true;
     }
 
@@ -91,9 +88,6 @@ public class ThrowObject : MonoBehaviour, IDrainable
             return;
 
         rigid.velocity = Vector3.zero;
-
-        Debug.Log($"Player와 {gameObject.name} 충돌 다시 적용");
-        Physics.IgnoreCollision(owner.coll, coll, true);
 
         // 부딪힌 오브젝트가 target이 아니면
         if (((1 << other.gameObject.layer) & whatIsTarget.value) == 0)

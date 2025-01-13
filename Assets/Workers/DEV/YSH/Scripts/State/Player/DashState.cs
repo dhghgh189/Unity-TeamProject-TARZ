@@ -46,6 +46,16 @@ public class DashState : BaseState<PlayerController>
         // 대쉬 진행시작 방향을 기억한다.
         lookDir = owner.transform.forward;
 
+        // Dash 사운드 재생
+        if (owner.Movement.IsGrounded)
+        {
+            SoundManager.PlaySFX(SoundManager.SoundData_P.Dash);
+        }
+        else
+        {
+            SoundManager.PlaySFX(SoundManager.SoundData_P.AirDash);
+        }
+
         owner.Anim.CrossFade(Define.HASH_ANIM_DASH, 0.1f);
     }
 

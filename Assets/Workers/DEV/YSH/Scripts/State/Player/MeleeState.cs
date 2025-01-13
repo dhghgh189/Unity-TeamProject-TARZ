@@ -35,6 +35,7 @@ public class MeleeState : BaseState<PlayerController>
 
         // Attack 시작 시에는 콤보 진행 불가능하도록 set
         owner.Attack.CanUseCombo = false;
+        owner.Attack.wasPressedCombo = false;
 
         comboTimer = 0f;
         owner.Movement.Move(Vector3.zero);
@@ -73,12 +74,19 @@ public class MeleeState : BaseState<PlayerController>
             return;
         }
 
-        // 콤보가 가능한 상황에 입력이 확인된 경우 
-        if (owner.Attack.CanUseCombo && owner.PInput.TryMelee)
+        // EndCombo 시점에 콤보 입력 버퍼가 확인된 경우
+        if (!owner.Attack.CanUseCombo && owner.Attack.wasPressedCombo)
         {
             // 애니메이션이 끝나기 전에 전이하므로 카운트를 수동으로 증가
             owner.Attack.MeleeCount++;
             OnEnter();
+            return;
+        }
+
+        // 콤보가 가능한 상황에 입력이 확인된 경우 
+        if (owner.Attack.CanUseCombo && owner.PInput.TryMelee)
+        {
+            owner.Attack.wasPressedCombo = true;
             return;
         }
 

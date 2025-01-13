@@ -35,6 +35,7 @@ public class RoomBehaviour : MonoBehaviour
         {
             OpenWall();
             bagSkillManager.OnChargeEvent?.Invoke();
+            bagSkillManager.OnUIUpdateEvent?.Invoke();
         }
     }
 }

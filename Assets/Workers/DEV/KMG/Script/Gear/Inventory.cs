@@ -169,12 +169,10 @@ public class Inventory : MonoBehaviour
             {
                 canvas.SetActive(false);
                 selectPanel.SetActive(false);
-                Time.timeScale = 1f;
                 playerController.PInput.IsCanControl = true;
                 return;
             }
             playerController.PInput.IsCanControl = false;
-            Time.timeScale = 0f;
             canvas.SetActive(true);
             GetComponentInChildren<Button>(true).Select();
         }

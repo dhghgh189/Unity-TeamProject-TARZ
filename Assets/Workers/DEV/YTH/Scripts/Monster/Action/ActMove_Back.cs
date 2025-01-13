@@ -1,9 +1,6 @@
-using BehaviorDesigner.Runtime;
 using BehaviorDesigner.Runtime.Tasks;
-using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
-using Zenject;
 public class ActMove_Back : Action
 {
     [SerializeField] CondCanMove _condCanMove;
@@ -16,7 +13,7 @@ public class ActMove_Back : Action
 
     private Animator _animator;
 
-    private PlayerController _player; 
+    private PlayerController _player;
 
     private Vector3 _back;
 
@@ -33,7 +30,7 @@ public class ActMove_Back : Action
     public override void OnStart()
     {
         _player = _pooledObject.player;
-}
+    }
 
     public override TaskStatus OnUpdate()
     {

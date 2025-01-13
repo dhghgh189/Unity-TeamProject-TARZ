@@ -11,6 +11,7 @@ public class PlayerSkillHandler : MonoBehaviour
     [Header("Evnets")]
     private UnityEvent<GameObject, GameObject> onCollisionThrowObjectEvents;   // ThrowObject의 충돌 - OnCollision or OnTrigger
     private UnityEvent<GameObject, GameObject> onActionThrowObjectEvents;      // 기본 ThrowObject에서의 할일 - Enter
+    public UnityEvent<string> onAddSkillEvents = new();
     private Dictionary<ActionTimingType, UnityEvent<GameObject, GameObject>[]> eventDic;
 
     public SkillContainer Container;
@@ -19,8 +20,8 @@ public class PlayerSkillHandler : MonoBehaviour
     private PlayerMovement playerMovement;
 
     [Header("SkillList")]
-    [SerializeField] Dictionary<string, int> skillLevelDic;
-    [SerializeField] Dictionary<string, BaseSkillSO> skillDic;
+    [SerializeField] public Dictionary<string, int> skillLevelDic = new();
+    [SerializeField] public Dictionary<string, BaseSkillSO> skillDic = new();
 
     [Header("Etc")]
     [Inject][SerializeField] StatModel model;
@@ -55,8 +56,8 @@ public class PlayerSkillHandler : MonoBehaviour
             }
         }
 
-        skillLevelDic = new Dictionary<string, int>();
-        skillDic = new Dictionary<string, BaseSkillSO>();
+        //skillLevelDic = new Dictionary<string, int>();
+        //skillDic = new Dictionary<string, BaseSkillSO>();
         // Skill 저장하기
         LoadSkills();
     }
@@ -102,6 +103,7 @@ public class PlayerSkillHandler : MonoBehaviour
     {
         if (LevelUp(skillName, setLevel))
         {
+            onAddSkillEvents?.Invoke(skillName);
             return;
         }
 
@@ -215,6 +217,8 @@ public class PlayerSkillHandler : MonoBehaviour
         #endregion
         // 디버그로 정보 보여주기
         Debug.Log($"Add Skill Name : {skill.Name}  / Skill Tier : {skill.SkillTier} / Skill Level : {skill.SkillLevel}");
+        onAddSkillEvents?.Invoke(skillName);
+        Debug.Log(onAddSkillEvents);
     }
 
     public List<BlueChipSaveData> SaveBlueChips()
@@ -313,11 +317,6 @@ public class PlayerSkillHandler : MonoBehaviour
         }
         #endregion
 
-        // 스킬 리스트에서 제거하기
-        skillLevelDic[skill.Name] = 0;
-        // 스킬 제거하기
-        Destroy(skillDic[skill.name]);
-        skillDic[skill.name] = null;
         Debug.Log($"Remove Active Skill Name : {skill.Name}");
     }
 
@@ -345,7 +344,11 @@ public class PlayerSkillHandler : MonoBehaviour
 
         foreach(var item in skillDic.Values)
         {
-            if(item is not null) Destroy(item);
+            if (item is not null) 
+            { 
+                RemoveSkill(item);
+                Destroy(item);
+            }
         }
 
         skillDic.Clear();

@@ -893,7 +893,7 @@ PrefabInstance:
     - target: {fileID: 347440832924576484, guid: 967c75d39b272ce45bc0704b1ee68307,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 27.26158
+      value: -7.9
       objectReference: {fileID: 0}
     - target: {fileID: 347440832924576484, guid: 967c75d39b272ce45bc0704b1ee68307,
         type: 3}
@@ -903,7 +903,7 @@ PrefabInstance:
     - target: {fileID: 347440832924576484, guid: 967c75d39b272ce45bc0704b1ee68307,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 5.6372104
+      value: 1.4
       objectReference: {fileID: 0}
     - target: {fileID: 347440832924576484, guid: 967c75d39b272ce45bc0704b1ee68307,
         type: 3}
@@ -945,15 +945,35 @@ PrefabInstance:
       propertyPath: m_Name
       value: FrogZombie
       objectReference: {fileID: 0}
+    - target: {fileID: 1124082638942842974, guid: 967c75d39b272ce45bc0704b1ee68307,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4926079250640333438, guid: 967c75d39b272ce45bc0704b1ee68307,
+        type: 3}
+      propertyPath: dieID
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4926079250640333438, guid: 967c75d39b272ce45bc0704b1ee68307,
+        type: 3}
+      propertyPath: attackID
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4926079250640333438, guid: 967c75d39b272ce45bc0704b1ee68307,
+        type: 3}
+      propertyPath: takeDamageID
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5440502326164537646, guid: 967c75d39b272ce45bc0704b1ee68307,
         type: 3}
       propertyPath: mBehaviorSource.mTaskData.JSONSerialization
-      value: '{"EntryTask":{"Type":"BehaviorDesigner.Runtime.Tasks.EntryTask","NodeData":{"Offset":"(324.5058,-51.52971)"},"ID":0,"Name":"Entry","Instant":true},"RootTask":{"Type":"BehaviorDesigner.Runtime.Tasks.Repeater","NodeData":{"Offset":"(0,121.807251)"},"ID":1,"Name":"Repeater","Instant":true,"SharedIntcount":{"Type":"BehaviorDesigner.Runtime.SharedInt","Name":null,"Int32mValue":0},"SharedBoolrepeatForever":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":true},"SharedBoolendOnFailure":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(0,120.000015)"},"ID":2,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-420,180)"},"ID":3,"Name":"Sequence","Instant":true,"AbortTypeabortType":"Self","Children":[{"Type":"CondCanMove","NodeData":{"Offset":"(-68.59216,160)"},"ID":4,"Name":"Cond
+      value: '{"EntryTask":{"Type":"BehaviorDesigner.Runtime.Tasks.EntryTask","NodeData":{"Offset":"(324.5058,-51.52971)"},"ID":0,"Name":"Entry","Instant":true},"RootTask":{"Type":"BehaviorDesigner.Runtime.Tasks.Repeater","NodeData":{"Offset":"(0,121.807251)"},"ID":1,"Name":"Repeater","Instant":true,"SharedIntcount":{"Type":"BehaviorDesigner.Runtime.SharedInt","Name":null,"Int32mValue":0},"SharedBoolrepeatForever":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":true},"SharedBoolendOnFailure":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(0,120.000015)"},"ID":2,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-222.631714,180)"},"ID":3,"Name":"Sequence","Instant":true,"AbortTypeabortType":"Self","Children":[{"Type":"CondCanMove","NodeData":{"Offset":"(-68.59216,160)"},"ID":4,"Name":"Cond
         Can Move","Instant":true,"Single_angle":360,"Single_distance":30,"Single_rate":0.5},{"Type":"ActMove_Block","NodeData":{"Offset":"(78.94412,160)"},"ID":5,"Name":"Act
         Move   Block","Instant":true,"CondCanMove_condCanMove":4}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Selector","NodeData":{"Offset":"(206.5362,182.513)"},"ID":6,"Name":"Selector","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-166.772369,168.501373)"},"ID":7,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"CondCanSkill","NodeData":{"Offset":"(-62.6098557,158.396912)"},"ID":8,"Name":"Cond
         Can Skill","Instant":true,"CondCanMove_condCanMove":4},{"Type":"MSkill_FrogJump","NodeData":{"Offset":"(80.06378,158.812561)"},"ID":9,"Name":"M
         Skill   Frog Jump","Instant":true,"ActMove_Block_actMoveBlock":5}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(185.59079,172.363159)"},"ID":10,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"CondCanAttack","NodeData":{"Offset":"(-68.2769241,152.439392)"},"ID":11,"Name":"Cond
-        Can Attack","Instant":true},{"Type":"ActMeleeAttack","NodeData":{"Offset":"(90,150)"},"ID":12,"Name":"Act
+        Can Attack","Instant":true},{"Type":"ActMeleeAttack","NodeData":{"Offset":"(68.07019,150)"},"ID":12,"Name":"Act
         Melee Attack","Instant":true}]}]}]}]}}'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -3535,6 +3555,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Range
+      objectReference: {fileID: 0}
+    - target: {fileID: 7971317727230852696, guid: f8db29299a351a8439dc176b683878d6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8037177268833616866, guid: f8db29299a351a8439dc176b683878d6,
         type: 3}
@@ -14613,7 +14638,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dfcee6da78ce3546915024d706d7109, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _soundData: {fileID: 0}
 --- !u!4 &2103941031
 Transform:
   m_ObjectHideFlags: 0
@@ -14704,74 +14728,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2127771501}
   m_CullTransparentMesh: 1
---- !u!1001 &1101878326043708891
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 47697169517627081, guid: f18aa803555a1fe49ab42f91b95896e5,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 10.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 47697169517627081, guid: f18aa803555a1fe49ab42f91b95896e5,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.835
-      objectReference: {fileID: 0}
-    - target: {fileID: 47697169517627081, guid: f18aa803555a1fe49ab42f91b95896e5,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 6.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 47697169517627081, guid: f18aa803555a1fe49ab42f91b95896e5,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 47697169517627081, guid: f18aa803555a1fe49ab42f91b95896e5,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 47697169517627081, guid: f18aa803555a1fe49ab42f91b95896e5,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 47697169517627081, guid: f18aa803555a1fe49ab42f91b95896e5,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 47697169517627081, guid: f18aa803555a1fe49ab42f91b95896e5,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 47697169517627081, guid: f18aa803555a1fe49ab42f91b95896e5,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 47697169517627081, guid: f18aa803555a1fe49ab42f91b95896e5,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6588140967104755250, guid: f18aa803555a1fe49ab42f91b95896e5,
-        type: 3}
-      propertyPath: m_Name
-      value: ManaPotion
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: f18aa803555a1fe49ab42f91b95896e5, type: 3}
 --- !u!114 &4475472168939986457 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4867939594812695208, guid: 33ae2d0021d267348bf9e910fada698d,
@@ -14879,7 +14835,6 @@ SceneRoots:
   - {fileID: 1195592360}
   - {fileID: 696541964}
   - {fileID: 593819621}
-  - {fileID: 1101878326043708891}
   - {fileID: 1882301221}
   - {fileID: 526593004}
   - {fileID: 166899063}

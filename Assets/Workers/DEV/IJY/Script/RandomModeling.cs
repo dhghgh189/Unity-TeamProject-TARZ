@@ -10,8 +10,11 @@ public class RandomModeling : MonoBehaviour
     public void SetRandom(GameObject obj, List<GameObject> list)
     {
         int path = Random.Range(0, list.Count - 1);
+        obj.transform.localScale = list[path].transform.localScale;
         obj.GetComponent<MeshFilter>().sharedMesh = list[path].GetComponent<MeshFilter>().sharedMesh;
         obj.GetComponent<MeshRenderer>().sharedMaterial = list[path].GetComponent<MeshRenderer>().sharedMaterial;
+
+        obj.AddComponent<BoxCollider>();
 
         if (obj.transform.rotation != new Quaternion(0, 0, 0, 0))
         {

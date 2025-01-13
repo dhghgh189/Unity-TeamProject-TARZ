@@ -21,6 +21,9 @@ public class JumpState : BaseState<PlayerController>
             owner.ChangeState(EState.Idle);
             return;
         }
+
+        // 사운드 재생
+        SoundManager.PlaySFX(SoundManager.SoundData_P.Jump);
         owner.Anim.CrossFade(Define.HASH_ANIM_JUMP, 0.125f);
         owner.Movement.Jump(owner.Movement.JumpForce);
 

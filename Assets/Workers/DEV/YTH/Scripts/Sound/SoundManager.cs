@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using UnityEditor.Localization.Plugins.XLIFF.V12;
 using UnityEngine;
+using static MonsterSoundData;
 
 public class SoundManager : MonoBehaviour
 {
@@ -8,8 +8,17 @@ public class SoundManager : MonoBehaviour
 
     const string SOUND_PATH = "Managed/Sound";
 
-    private SoundDataSO _soundData;
-    public static SoundDataSO SoundData { get { return Instance._soundData; } private set { } }
+    private MonsterSoundData _monsterSoundData;
+    public static MonsterSoundData SoundData_M { get { return Instance._monsterSoundData; } private set { } }
+
+    private PlayerSoundData _playerSoundData;
+    public static PlayerSoundData SoundData_P { get { return Instance._playerSoundData; } private set { } }
+
+    private EtcSoundData _etcSoundData;
+    public static EtcSoundData SoundData_UI { get { return Instance._etcSoundData; } private set { } }
+
+    public Dictionary<int, AudioClip> monsterSoundDic = new Dictionary<int, AudioClip>();
+
 
     // BGM 소스
     private AudioSource bgmSource;
@@ -41,7 +50,14 @@ public class SoundManager : MonoBehaviour
 
     private void Start()
     {
-        _soundData = Resources.Load<SoundDataSO>($"{SOUND_PATH}/SoundData");
+        _monsterSoundData = Resources.Load<MonsterSoundData>($"{SOUND_PATH}/MonsterSoundData");
+        _playerSoundData = Resources.Load<PlayerSoundData>($"{SOUND_PATH}/PlayerSoundData");
+        _etcSoundData = Resources.Load<EtcSoundData>($"{SOUND_PATH}/EtcSoundData");
+
+        for (int i = 0; i < _monsterSoundData.SoundInfos.Count; i++)
+        {
+            monsterSoundDic.Add(_monsterSoundData.SoundInfos[i].ID, _monsterSoundData.SoundInfos[i].Clip);
+        }
     }
 
     /// <summary>

@@ -1050,10 +1050,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7614b84a350366f468d9f19fcf2ac993, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  drainManager: {fileID: 0}
-  playerMovement: {fileID: 0}
+  Container: {fileID: 0}
   model: {fileID: 0}
-  adapter: {fileID: 0}
 --- !u!1001 &512545003
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1597,17 +1595,20 @@ MonoBehaviour:
       EffectDatas: []
   - MultiActions:
     - ActionType: 0
+      StackAmount: 0
       Damage: 75
       ThrowForce: 13
       EffectInfo:
         EffectDatas: []
     - ActionType: 1
+      StackAmount: 0
       Damage: 105
       ThrowForce: 15
       EffectInfo:
         EffectDatas:
         - EffectType: 0
     - ActionType: 2
+      StackAmount: 0
       Damage: 55
       ThrowForce: 10
       EffectInfo:
@@ -1633,11 +1634,19 @@ MonoBehaviour:
     EffectInfo:
       EffectDatas:
       - EffectType: 0
-  stackTransform: {fileID: 960506489}
+  JumpThrowDamage: 0
+  JumpThrowForce: 0
+  JumpThrowAmount: 0
+  JumpThrowInterval: 0
+  JumpMeleeDamage: 0
+  JumpMeleeAngle: 0
+  JumpMeleeRange: 0
+  JumpMeleeFallForce: 0
+  IsEndJumpMelee: 0
   maxObjectCount: 50
   comboCheckTime: 0.2
-  player: {fileID: 512545012}
   CanUseCombo: 0
+  CanMoveWhileAttack: 0
 --- !u!114 &512545010
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1669,6 +1678,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62c765bb08d81884980738506dfc60ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TryKeyDown: 
+  IsCanControl: 0
+  UseKeyPressed: 
 --- !u!114 &512545012
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1681,10 +1693,81 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2df5efce1124f7140b2a6dd2b04b0b33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  drainManager: {fileID: 1640560645}
+  loadingObject: {fileID: 0}
+  saveData:
+    chapterSaveData:
+      Chapter: 0
+      StageNum: 0
+    StatSaveData:
+      maxHp: 0
+      maxStamina: 0
+      currentHp: 0
+      currentMp: 0
+      currentStamina: 0
+      blackChip: 0
+      additionAbility:
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+    EquipmentGears:
+    - Part: 0
+      Tier: 0
+      GearName: 
+      Abilities: []
+    - Part: 0
+      Tier: 0
+      GearName: 
+      Abilities: []
+    - Part: 0
+      Tier: 0
+      GearName: 
+      Abilities: []
+    - Part: 0
+      Tier: 0
+      GearName: 
+      Abilities: []
+    - Part: 0
+      Tier: 0
+      GearName: 
+      Abilities: []
+    - Part: 0
+      Tier: 0
+      GearName: 
+      Abilities: []
+    - Part: 0
+      Tier: 0
+      GearName: 
+      Abilities: []
+    - Part: 0
+      Tier: 0
+      GearName: 
+      Abilities: []
+    - Part: 0
+      Tier: 0
+      GearName: 
+      Abilities: []
+    InventoryGears: []
+    blueChipSaveDatas: []
+  manaSkillPanel: {fileID: 0}
   currentStateView: 0
+  cameraLookPos: {fileID: 0}
+  StateTransfer: {fileID: 0}
+  BagSkillHandler: {fileID: 0}
+  ManaSkillHandler: {fileID: 0}
   SkillHandler: {fileID: 0}
   AblityAdapter: {fileID: 0}
+  interactioner: {fileID: 0}
+  coll: {fileID: 0}
 --- !u!136 &512545013
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1735,10 +1818,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7614b84a350366f468d9f19fcf2ac993, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  drainManager: {fileID: 1640560645}
-  playerMovement: {fileID: 512545010}
+  Container: {fileID: 0}
   model: {fileID: 1072664238}
-  adapter: {fileID: 512545015}
 --- !u!1001 &535652379
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3048,7 +3129,7 @@ MonoBehaviour:
   - {fileID: 678567854}
   - {fileID: 1920410748}
   isRandom: 0
-  _skillList: []
+  _skills: []
   _handler: {fileID: 512545017}
 --- !u!114 &1072664238
 MonoBehaviour:
@@ -3073,6 +3154,9 @@ MonoBehaviour:
   DashSpeed: 10
   DashStaminaAmount: 0
   StaminaCostRate: 1
+  StaminaChargeRate: 1
+  ExtraDamage: 0
+  SpeedRate: 1
   currentHp: 100
   currentMp: 0
   currentStamina: 100

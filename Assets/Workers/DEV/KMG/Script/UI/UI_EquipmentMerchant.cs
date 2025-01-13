@@ -7,36 +7,40 @@ public class UI_EquipmentMerchant : MonoBehaviour
 {
     [Inject] Inventory inventory;
     [Inject] StatModel statModel;
+    [Inject] PlayerController playerController;
 
     private Gear gear;
     private float price;
 
-    private Button buyButton;
-    private TMP_Text infoText;
+    [SerializeField] Button buyButton;
+    [SerializeField] Button closeButton;
+
+    [SerializeField] TMP_Text nameText;
+    [SerializeField] TMP_Text infoText;
+    [SerializeField] TMP_Text chipText;
+
+    [SerializeField] Image itemImage;
 
     private bool oneMoreTime;
 
     private void Awake()
     {
-        buyButton = GetComponentInChildren<Button>();
-        infoText = GetComponentInChildren<TMP_Text>();
-
         buyButton.onClick.AddListener(BuyGear);
-    }
-    private void Start()
-    {
+        closeButton.onClick.AddListener(ClosePanel);
         SetSellGear();
     }
     private void SetSellGear()
     {
         gear = inventory.StoreGear();
+        nameText.text = gear.GearName;
         infoText.text = string.Empty;
         foreach (var item in gear.Abilities)
         {
             infoText.text += $"{item.ability.ToDescription()} {item.value}\n";
         }
         price = gear.Tier * 100;
-        infoText.text += $"{gear.GearName}\n 이 장비를 {price}원에 사쉴?";
+        chipText.text = $"{price} 블랙 데이터 칩";
+        itemImage.sprite = inventory.GetSprite(((int)gear.Part * 3) + (gear.Tier - 1));
     }
 
     private void BuyGear()
@@ -53,6 +57,15 @@ public class UI_EquipmentMerchant : MonoBehaviour
         }
 
         buyButton.gameObject.SetActive(false);
-        infoText.text = "매진이야";
+        infoText.text = "매진";
+    }
+    private void ClosePanel()
+    {
+        playerController.PInput.IsCanControl = true;
+        gameObject.SetActive(false);
+    }
+    private void OnEnable()
+    {
+        buyButton.Select();
     }
 }

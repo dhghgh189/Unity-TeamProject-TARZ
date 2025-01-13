@@ -26,12 +26,7 @@ public class ManaThrowCarSkill : IManaSkill
         Acts.AddLast(new ManaThrowCar_1(owner, this));
         Acts.AddLast(new ManaThrowCar_2(owner, this));
         OnThrowEvent = new UnityEvent();
-#if UNITY_EDITOR
-        tmp = Resources.Load("Unmanaged/Car") as GameObject;
-#else
         tmp = Resources.Load("Managed/ManaSkill/Car") as GameObject;
-#endif
-
     }
 
     public void SetInit(ManaSkillHandler manaSkillHandler)

@@ -72,6 +72,7 @@ public class PlayerAttack : MonoBehaviour
 
     public bool CanUseCombo;
     public bool CanMoveWhileAttack;
+    public bool wasPressedCombo;
 
     public event UnityAction OnChangedStack;
 
@@ -302,6 +303,8 @@ public class PlayerAttack : MonoBehaviour
         tobj.adapter = player.AblityAdapter;
         tobj.handler = player.SkillHandler;
         tobj.Throw(transform.forward + (transform.up * 0.3f), throwForce);
+        // 사운드 재생
+        SoundManager.PlaySFX(SoundManager.SoundData_P.Throws[ThrowCount]);
     }
 
     public void JumpThrow()
@@ -348,6 +351,9 @@ public class PlayerAttack : MonoBehaviour
 
         AddMeleeEffect();
 
+        // 사운드 재생
+        SoundManager.PlaySFX(SoundManager.SoundData_P.Melees[MeleeCount]);
+
         Collider[] colliders = Physics.OverlapSphere(transform.position, MeleeAttackInfo[MeleeCount].Range, whatIsEnemy);
         foreach (Collider col in colliders)
         {
@@ -367,6 +373,9 @@ public class PlayerAttack : MonoBehaviour
             // 최종 추가 데미지 추가
             damage += player.Stat.ExtraDamage;
             damagable.TakeDamage(damage);
+
+            // 사운드 재생
+            SoundManager.PlaySFX(SoundManager.SoundData_P.MeleeHit);
 
             // Mp 회복
             player.Stat.CurrentMp += player.Stat.GetMpGain(EMpAmountType.Melee);

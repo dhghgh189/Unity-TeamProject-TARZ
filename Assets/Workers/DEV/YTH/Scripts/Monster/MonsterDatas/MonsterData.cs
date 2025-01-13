@@ -26,10 +26,10 @@ public class MonsterData : MonoBehaviour
     public float CurHp { get { return _curHp; } set { _curHp = value; } }
 
     [SerializeField] float _damage;
-    public float Damage { get { return _damage; } private set { } }
+    public float Damage { get { return _damage; }  set { _damage = value; } }
 
     [SerializeField] float _attackRange; // 공격 거리
-    public float AttackRange { get { return _attackRange; } private set { } }
+    public float AttackRange { get { return _attackRange; }  set { _attackRange = value; } }
 
     [SerializeField] float _attackSpeed; // 공격 속도
     public float AttackSpeed { get { return _attackSpeed; } set { _attackSpeed = value; } }
@@ -42,6 +42,8 @@ public class MonsterData : MonoBehaviour
 
     private bool _isDead; // 사망 시
     public bool IsDead { get { return _isDead;  }  set { _isDead = value; } }
+
+    public bool IsCountered { get; set; }
 
     [Header("근거리 평타 각도 (거리는 AttackRange)")]
     [SerializeField] float _angle;
@@ -58,11 +60,24 @@ public class MonsterData : MonoBehaviour
     [SerializeField] float _canJumpDistance;
     public float CanJumpDistance { get { return _canJumpDistance; } set { _canJumpDistance = value; } }
 
+    [Header("Sound ID")]
+    [SerializeField] int _attackID;
+    public int AttackID { get { return _attackID; } }
+
+    [SerializeField] int _takeDamageID;
+    public int TakeDamageID { get { return _takeDamageID; } }
+
+    [SerializeField] int _dieID;
+    public int DieID { get { return _dieID; } }
+
+    [SerializeField] int spawnID;
+    public int SpawnID { get { return spawnID; } }
+
     public CapsuleCollider coll { get; private set; }
     public NavMeshAgent agent { get; private set; }
     public Rigidbody rigid { get; private set; }
     public PooledObject pooledObject { get; private set; }
-    public bool IsCountered { get; set; }
+    
     private void Awake()
     {
         CurHp = MaxHp;

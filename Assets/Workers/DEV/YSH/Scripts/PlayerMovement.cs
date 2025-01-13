@@ -34,6 +34,8 @@ public class PlayerMovement : MonoBehaviour
     public void FootStep()
     {
         // 플레이어 Move시 발생하는 이벤트
+        // 사운드 재생 (임시)
+        SoundManager.PlaySFX(SoundManager.SoundData_P.FootStep_Grass);
     }
 
     public void DashBoostPlay()

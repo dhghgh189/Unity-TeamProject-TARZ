@@ -1,8 +1,6 @@
-using UnityEngine;
-using BehaviorDesigner.Runtime;
 using BehaviorDesigner.Runtime.Tasks;
-using Zenject;
 using System.Collections;
+using UnityEngine;
 
 public class ActMeleeAttack : Action
 {
@@ -38,7 +36,7 @@ public class ActMeleeAttack : Action
                 _animator.SetBool("Move", false);
                 attackRoutine = StartCoroutine(AttackRoutine());
                 _animator.SetTrigger("Attack");
-                Debug.Log("점프공격했음");
+                SoundManager.PlaySFX(SoundManager.Instance.monsterSoundDic[_monsterData.AttackID]);
             }
             return TaskStatus.Success;
         }

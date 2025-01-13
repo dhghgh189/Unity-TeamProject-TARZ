@@ -98,7 +98,7 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
         if (_monsterData.MonsterTIer == MonsterData.MonsterTier.Boss)
             return;
 
-        SoundManager.PlaySFX(SoundManager.SoundData_M.TakeDamage);
+        SoundManager.PlaySFX(SoundManager.Instance.monsterSoundDic[_monsterData.TakeDamageID]);
         _animator.SetTrigger("TakeDamage");
     }
 
@@ -116,6 +116,7 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
         _autoLockOn.action?.Invoke();
         _animator.SetBool("Move", false);
         _animator.SetTrigger("Die");
+        SoundManager.PlaySFX(SoundManager.Instance.monsterSoundDic[_monsterData.DieID]);
 
         Debug.Log(random);
 

@@ -20,7 +20,8 @@ public class MSkill_StimPack : Action
             if (_monsterSkillManager.stimPakRoutine == null)
             {
                 _monsterSkillManager.stimPakRoutine = StartCoroutine(_monsterSkillManager.StimPak());
-                SoundManager.PlaySFX(SoundManager.SoundData_M.StimPak);
+                SoundManager.PlaySFX(SoundManager.SoundData_M.StimPak_Bomber);
+                SoundManager.PlaySFX(SoundManager.SoundData_M.StimPak_Jack);
                 Debug.Log("스팀팩");
             }
             return TaskStatus.Success;

@@ -26,10 +26,10 @@ public class MonsterData : MonoBehaviour
     public float CurHp { get { return _curHp; } set { _curHp = value; } }
 
     [SerializeField] float _damage;
-    public float Damage { get { return _damage; } private set { } }
+    public float Damage { get { return _damage; }  set { _damage = value; } }
 
     [SerializeField] float _attackRange; // 공격 거리
-    public float AttackRange { get { return _attackRange; } private set { } }
+    public float AttackRange { get { return _attackRange; }  set { _attackRange = value; } }
 
     [SerializeField] float _attackSpeed; // 공격 속도
     public float AttackSpeed { get { return _attackSpeed; } set { _attackSpeed = value; } }

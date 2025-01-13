@@ -18,7 +18,8 @@ public class BagSkillManager : MonoBehaviour
     /// <summary>
     /// 방을 클리어 했을 때 가방 스킬들에게 충전하라고 알려주는 이벤트
     /// </summary>
-    [HideInInspector] public UnityEvent OnChargeEvent;
+    [HideInInspector] public UnityEvent OnChargeEvent = new();
+    [HideInInspector] public UnityEvent OnUIUpdateEvent = new();
 
     private PlayerController owner;
     [HideInInspector] public PlayerController Owner { get { return owner; } set { owner = value; UpdateOwner(owner); } }
@@ -34,7 +35,6 @@ public class BagSkillManager : MonoBehaviour
 
     private void Awake()
     {
-        OnChargeEvent = new UnityEvent();
         skillArr ??= new BagSkill[4];
         SaveBagSkillArray ??= new (float, BagIndexKey)[4];
     }
@@ -43,6 +43,8 @@ public class BagSkillManager : MonoBehaviour
     {
         SceneManager.sceneLoaded -= LoadedsceneEvent;
         SceneManager.sceneLoaded += LoadedsceneEvent;
+
+        OnUIUpdateEvent.AddListener(UpdateCharge);
     }
 
     public bool IsCanUse(int index)
@@ -67,6 +69,7 @@ public class BagSkillManager : MonoBehaviour
         }
         skillArr[index] = bagSkill;
         OnChargeEvent.AddListener(skillArr[index].Charge);
+        OnUIUpdateEvent?.Invoke();
     }
 
     // TODO: 씬이 변경되었을 때 -> Manager안의 스킬들 순회
@@ -100,7 +103,8 @@ public class BagSkillManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        if(OnChargeEvent is not null) OnChargeEvent.RemoveAllListeners();
+        OnChargeEvent?.RemoveAllListeners();
+        OnUIUpdateEvent?.RemoveAllListeners();
     }
 
     public void UpdateCharge()

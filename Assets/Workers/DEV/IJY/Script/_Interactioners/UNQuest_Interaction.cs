@@ -1,16 +1,17 @@
-using System.Collections;
 using UnityEngine;
 using Zenject;
 
 public class UNQuest_Interaction : InteractionOBJ_Base, Interaction_Ibase_Activate
 {
     [Inject] private PlayerController player;
-    private Coroutine OngoingRoutine;
+    public int CurCount { get { return curCount; } set { curCount = value; } }
+
+    private QuestManager questManager;
 
     [Header("돌발 퀘스트 NPC")]
+    [SerializeField] private int curCount;
     [SerializeField] int QuestCount;
     [SerializeField] bool isOngoing;
-    [SerializeField] bool isClearQuest;
     [SerializeField] float Reward;
 
 
@@ -18,23 +19,18 @@ public class UNQuest_Interaction : InteractionOBJ_Base, Interaction_Ibase_Activa
 
     void Init()
     {
+        questManager = player.gameObject.GetComponent<QuestManager>();
+
         Reward = Random.Range(300f, 500f);
-        QuestCount = 0;
+        curCount = 0;
         isOngoing = false;
-        isClearQuest = false;
     }
 
     public void Activate()
     {
-        // TODO : UI 대화창 띄움과 동시에, 돌발 퀘스트 승낙 여부 표시
         if (isOngoing)
         {
             QuestOngoing();
-            return;
-        }
-        if (isClearQuest)
-        {
-            ClearQuest();
             return;
         }
 
@@ -43,70 +39,54 @@ public class UNQuest_Interaction : InteractionOBJ_Base, Interaction_Ibase_Activa
 
     //===============================================================================
 
-
     void BeforeQuest()
     {
         // TODO : UI 출력
+        // 플레이어 움직임 정지
+        questManager.questPanel.SetActive(true);
+        questManager.QuestCountText.text = $"좀비를 {QuestCount}마리 사냥하여, 수상한 자에게서 보상을 얻자!";
     }
 
     public void SayYes()
     {
         isOngoing = true;
-        OngoingRoutine = StartCoroutine(QuestOngoingRoutine(Random.Range(3, 6)));
+        curCount = 0;
+        QuestCount = Random.Range(3, 6);
         // TODO : UI 끔
+        questManager.questPanel.SetActive(false);
+        // 퀘스트 UI도 구성하면 좋겠다
     }
 
     public void SayNo()
     {
         isOngoing = false;
+        curCount = 0;
         // TODO : UI 끔
+        questManager.questPanel.SetActive(false);
     }
 
     //===============================================================================
 
     void QuestOngoing()
     {
-        if (OngoingRoutine != null)
+        if (curCount < QuestCount)
         {
             // TODO : 진행하는 도중이라는 UI 표시
             // 달성률도 표시하면 좋겠다.
+            return;
         }
+
+        ClearQuest();
     }
 
     void ClearQuest()
     {
-        // TODO : 플레이어 자체적인 stat 값에 리워드를 지급한다.
         player.Stat.BlackChip += Reward;
-    }
-
-    IEnumerator QuestOngoingRoutine(int MaxCount)
-    {
-        // 조건 = 퀘스트 완료 조건
-        while (QuestCount >= MaxCount)
-        {
-            //if ()
-            //{
-            //    QuestCount++;
-            //}
-
-            yield return null;
-        }
-
-        // 퀘스트 완료 시
         isOngoing = false;
-        OngoingRoutine = null;
-        isClearQuest = true;
-        yield break;
     }
 
     void OnDisable()
     {
         isOngoing = false;
-        isClearQuest = true;
-
-        if (OngoingRoutine != null)
-        {
-            OngoingRoutine = null;
-        }
     }
 }

@@ -36,11 +36,9 @@ public class ActMeleeAttack : Action
             if (attackRoutine == null)
             {
                 _animator.SetBool("Move", false);
-                
                 attackRoutine = StartCoroutine(AttackRoutine());
                 _animator.SetTrigger("Attack");
                 SoundManager.PlaySFX(SoundManager.SoundData_M.MeleeAttack);
-                Debug.Log("점프공격했음");
             }
             return TaskStatus.Success;
         }

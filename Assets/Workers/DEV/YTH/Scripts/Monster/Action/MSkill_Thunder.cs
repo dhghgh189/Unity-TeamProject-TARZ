@@ -38,7 +38,7 @@ public class MSkill_Thunder : Action
             _monsterSkillManager.thunderRoutine = StartCoroutine(_monsterSkillManager.ThunderRoutine());
             _animator.SetTrigger("Thunder");
             SoundManager.PlaySFX(SoundManager.SoundData_M.Roar);
-            Debug.Log("10 ThunderRoutine 시작");
+
             return TaskStatus.Success;
         }
         else

@@ -216,6 +216,16 @@ public class PlayerController : MonoBehaviour, IDamagable
         {
             if (SternCheckRoutine != null) return;
 
+            // 사운드 재생
+            // 데미지가 최대 체력의 50% 이상인 경우 개별 사운드 재생
+            if (damage >= (Stat.MaxHp * 0.5f))
+            {
+                SoundManager.PlaySFX(SoundManager.SoundData_P.TakeDamage_Danger);
+            }
+            else
+            {
+                SoundManager.PlaySFX(SoundManager.SoundData_P.TakeDamage_Normal);
+            }
             anim.CrossFade(Define.HASH_ANIM_DAMAGED, 0.1f);
             delay = GetCurrentAnimTime() * 0.5f;
             IsAnimStart = true;

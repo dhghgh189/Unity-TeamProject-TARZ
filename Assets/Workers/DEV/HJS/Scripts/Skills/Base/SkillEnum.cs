@@ -53,7 +53,7 @@ public class SkillEnum : MonoBehaviour
     /// <summary>
     /// 상호작용의 종류
     /// </summary>
-    public enum InteractionType { Slow, Elec, Frozen, Poison, Damage, SIZE }
+    public enum InteractionType { Slow, DOT, Damage, SIZE }
     /// <summary>
     /// 패시브 - 값의 종류
     /// </summary>
@@ -74,4 +74,8 @@ public class SkillEnum : MonoBehaviour
     /// 패시브 - 활성화/비활성화
     /// </summary>
     public enum ToggleType { Collision, Function }
+    /// <summary>
+    /// 패시브 - ThrowObject 기능 활성화/비활성화
+    /// </summary>
+    public enum Function_ThrowObject { ThrowObjectUpgrade, GuidedFuncion, ThrowObjectConvertMine }
 }

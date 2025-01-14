@@ -5,26 +5,18 @@ public class SpikeTrap : Trap
 {
     [SerializeField] private float damage;
     [SerializeField] private float interval;
-    [SerializeField] private float upward;      // 상승 수치
-    [SerializeField] private Transform spikes;
-
-    [Header("가시 속도 조정")]
-    [SerializeField] private float upSpeed;
-    [SerializeField] private float downSpeed;
 
     [Header("가시 충돌 판정 용")]
     [SerializeField] private CollisionHandler spikeCollision;
 
-    private Vector3 startPos;
-    private float rebootTime;
-
     private BoxCollider coll;
+    private Animator anim;
 
     protected override void Init()
     {
         coll = GetComponent<BoxCollider>();
+        anim = GetComponentInChildren<Animator>();
         base.Init();
-        startPos = spikes.position;
     }
 
     private void Start()
@@ -46,13 +38,6 @@ public class SpikeTrap : Trap
     public override void Deactivate()
     {
         isActive = false;
-
-        if (spikeRoutine != null)
-        {
-            StopCoroutine(spikeRoutine);
-            spikeRoutine = null;
-            spikes.transform.position = startPos;
-        }
 
         if (rebootRoutine != null)
         {
@@ -79,66 +64,25 @@ public class SpikeTrap : Trap
     private void OnTriggerEnter(Collider other)
     {
         if (!isActive
-            || spikeRoutine != null)
+            || rebootRoutine != null)
             return;
 
         if (other.gameObject.layer == LayerMask.NameToLayer("Player")
             || other.gameObject.layer == LayerMask.NameToLayer("Monster"))
         {
             Debug.Log("<color=red>Spike Trap 발동!</color>");
-            spikeRoutine = StartCoroutine(SpikeRoutine());
+            coll.enabled = false;
+            anim.SetTrigger("Triggered");
         }
     }
 
-    private Coroutine spikeRoutine;
-    private Coroutine rebootRoutine;
-
-    private IEnumerator SpikeRoutine()
+    public void Reboot()
     {
-        coll.enabled = false;
-
-        float currentY = 0;
-        Vector3 targetPos = startPos;
-
-        targetPos.y = startPos.y + upward;
-        while (true)
-        {
-            currentY = spikes.position.y;
-            if ((targetPos.y - currentY) <= 0.01f)
-            {
-                spikes.position = targetPos;
-                break;
-            }
-
-            spikes.transform.position = Vector3.MoveTowards(spikes.position, targetPos, upSpeed * Time.deltaTime);
-            yield return null;
-        }
-
-        Debug.Log("상승 종료");
-
-        yield return Util.GetDelay(1f);
-
-        targetPos.y = startPos.y;
-        while (true)
-        {
-            currentY = spikes.position.y;
-            if ((currentY - targetPos.y) <= 0.01f)
-            {
-                spikes.position = targetPos;
-                break;
-            }
-
-            spikes.transform.position = Vector3.MoveTowards(spikes.position, targetPos, downSpeed * Time.deltaTime);
-            yield return null;
-        }
-
-        Debug.Log("하강 종료");
-
-        spikeRoutine = null;
-
-        Debug.Log("Spike Trap 재활성화 대기...");
+        Debug.Log("<color=red>Spike Trap 대기</color>");
         rebootRoutine = StartCoroutine(RebootRoutine());
     }
+
+    private Coroutine rebootRoutine;
 
     private IEnumerator RebootRoutine()
     {

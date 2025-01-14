@@ -46,6 +46,7 @@ public class SoundManager : MonoBehaviour
         //bgmSource, sfxSource 불러오기
         sfxSource = gameObject.AddComponent<AudioSource>();
         bgmSource = gameObject.AddComponent<AudioSource>();
+        bgmSource.loop = true;
     }
 
     private void Start()

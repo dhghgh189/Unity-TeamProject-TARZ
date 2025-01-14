@@ -1,5 +1,4 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 using Zenject;
 
@@ -22,7 +21,7 @@ public class MonsterJustTrigger : MonoBehaviour
 
     private PlayerAttack _playerAttack;
 
-    [SerializeField] private float time = 0.25f; 
+    [SerializeField] private float time = 0.25f;
 
     private void Awake()
     {
@@ -36,6 +35,7 @@ public class MonsterJustTrigger : MonoBehaviour
     {
         _player = GameObject.FindGameObjectWithTag("Player");
         _playerAttack = _player.GetComponent<PlayerAttack>();
+
     }
 
     private void Update()
@@ -62,7 +62,7 @@ public class MonsterJustTrigger : MonoBehaviour
         justRoutine = null;
     }
 
-    private void OnTriggerExit(Collider other) 
+    private void OnTriggerExit(Collider other)
     {
         if (_monsterData.IsDead)
             return;
@@ -75,6 +75,8 @@ public class MonsterJustTrigger : MonoBehaviour
         if (player.Fsm.CurrentState.type == EState.Dash)
         {
             Debug.Log("저스트회피 성공!");
+            //EffectManager.instance.ParticlePlay("Nova", 2f, _player.transform.position, _player.transform.rotation);
+
             _playerStat.CurrentMp += 10;
             _monsterData.IsCountered = true;
             _playerAttack.JustCounter(_monsterData);

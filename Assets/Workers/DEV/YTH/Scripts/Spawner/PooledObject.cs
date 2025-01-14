@@ -11,8 +11,7 @@ using static MonsterData;
 public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
 {
     [HideInInspector]
-    [Inject]
-    public PlayerController player;
+    [Inject] public PlayerController player;
 
     public event Action OnDie;
 
@@ -79,6 +78,8 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
 
     public void TakeDamage(float damage)
     {
+        //EffectManager.instance.ParticlePlay("FX_splash_hit_01_air", 1f, this.transform.position, this.transform.rotation);
+
         if (_monsterData.IsDead)
             return;
 

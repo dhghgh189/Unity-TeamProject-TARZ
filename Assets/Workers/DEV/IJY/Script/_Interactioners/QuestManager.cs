@@ -7,7 +7,7 @@ public class QuestManager : MonoBehaviour
 {
     [Inject] ChangeInput input;
 
-    private UNQuest_Interaction questNPC;
+    public UNQuest_Interaction questNPC;
     [SerializeField] public GameObject questPanel;
     [SerializeField] public TMP_Text QuestCountText;
     [SerializeField] public GameObject questDoingPanel;
@@ -16,8 +16,6 @@ public class QuestManager : MonoBehaviour
 
     private void Start()
     {
-        questNPC = questNPC.gameObject.GetComponent<UNQuest_Interaction>();
-
         if (questPanel.activeSelf)
         {
             input.firstInput = yesButton;

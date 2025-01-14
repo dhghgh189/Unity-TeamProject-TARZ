@@ -21,11 +21,11 @@ public class SoundManager : MonoBehaviour
 
 
     // BGM 소스
-    private AudioSource bgmSource;
+    [SerializeField] private AudioSource bgmSource;
     public static AudioSource BGM { get { return Instance.bgmSource; } }
 
     // SFX 소스
-    private AudioSource sfxSource;
+    [SerializeField]private AudioSource sfxSource;
     public static AudioSource SFX { get { return Instance.sfxSource; } }
 
     /// <summary>
@@ -44,9 +44,9 @@ public class SoundManager : MonoBehaviour
         }
 
         //bgmSource, sfxSource 불러오기
-        sfxSource = gameObject.AddComponent<AudioSource>();
+        /*sfxSource = gameObject.AddComponent<AudioSource>();
         bgmSource = gameObject.AddComponent<AudioSource>();
-        bgmSource.loop = true;
+        bgmSource.loop = true;*/
     }
 
     private void Start()

@@ -12,8 +12,12 @@ public class ScrapChildObject : MonoBehaviour
 
     private void Start()
     {
-        parent.OnStartEvent.AddListener(ps.Play);
-        parent.OnEndEvent.AddListener(ps.Stop);
+        parent = GetComponentInParent<ScrapParentObject>();
+
+        if (parent == null) Destroy(this);
+
+        //parent.OnStartEvent.AddListener(ps.Play);
+        //parent.OnEndEvent.AddListener(ps.Stop);
     }
 
     private void OnParticleCollision(GameObject other)

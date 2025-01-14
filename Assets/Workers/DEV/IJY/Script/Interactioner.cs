@@ -81,7 +81,7 @@ public class Interactioner : MonoBehaviour
                 return;
             }
 
-            if (target.TryGetComponent<UNQuest_Interaction>(out quest_Interaction) == true)
+            if (target.TryGetComponent<UNQuest_Interaction>(out quest_Interaction) == true && questManager.questNPC == null)
             questManager.questNPC = quest_Interaction;
 
             // 타겟 내부의 Activate 함수를 통해, 타겟과만 상호작용을 수행한다.

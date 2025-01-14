@@ -55,9 +55,9 @@ public class ActMove_Block : Action
 
             return TaskStatus.Running;
         }
-        else if (_condCanMove.IsPlayerWithinSight(_player.gameObject) && _distance <= _stopBlockDistance+1)
+        else if (_condCanMove.IsPlayerWithinSight(_player.gameObject) && _distance <= _stopBlockDistance + 1)
         {
-            if (_condCanMove.IsPlayerWithinSight(_player.gameObject) && _distance <= _monsterData.CanJumpDistance)
+            if (/*_condCanMove.IsPlayerWithinSight(_player.gameObject) &&*/ _distance <= _monsterData.CanJumpDistance || _distance <= _monsterData.AttackRange )
             {
                 return TaskStatus.Success;
             }

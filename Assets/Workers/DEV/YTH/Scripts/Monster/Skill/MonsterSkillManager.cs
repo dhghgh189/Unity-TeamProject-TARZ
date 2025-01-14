@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using Zenject;
 
 public class MonsterSkillManager : MonoBehaviour
 {
@@ -95,6 +96,10 @@ public class MonsterSkillManager : MonoBehaviour
     private PooledObject _pooledObject;
 
     private PlayerController _player;
+
+    [HideInInspector]
+    [Inject] public EffectManager _effectManager;
+
     #endregion
 
     private void Awake()
@@ -111,7 +116,7 @@ public class MonsterSkillManager : MonoBehaviour
         SkillInit();
 
         _player = _pooledObject.player;
-        JackTheRipper = GameObject.Find("JackTheRipper");
+        _jackTheRipper = GameObject.Find("JackTheRipper");
     }
 
     public void LoadSkill()
@@ -158,13 +163,13 @@ public class MonsterSkillManager : MonoBehaviour
     public IEnumerator JumpAttackRoutine() // 보스의 도약해서 착지하여 범위 공격
     {
         _jumpAttack.CanUseSkill = false;
-        /*_animator.SetTrigger("JumpAttack");*/
 
         if (jumpRoutine_jumpAttack == null)
         {
             yield return Util.GetDelay(0.8f);
             jumpRoutine_jumpAttack = StartCoroutine(JumpRoutine_JumpAttack());
-            Debug.Log("점프!!");
+            yield return Util.GetDelay(JumpAttackSkill.InAirTime);
+            _effectManager.ParticlePlay("Hulk_Jump1", 2.5f, transform.position, Quaternion.identity, transform);
         }
 
         yield return Util.GetDelay(_jumpAttack.CoolTime);
@@ -232,6 +237,7 @@ public class MonsterSkillManager : MonoBehaviour
         WheelWindSkill.CanUseSkill = false;
 
         _wheelWindTrigger.SetActive(true);
+        _effectManager.ParticlePlay("WheelWind1", WheelWindSkill.Duration, transform.position, Quaternion.identity, transform);
 
         Radiation jackRadiation = _wheelWindTrigger.GetComponentInChildren<Radiation>();
         jackRadiation.Interaval = WheelWindSkill.Interval;
@@ -287,6 +293,9 @@ public class MonsterSkillManager : MonoBehaviour
     public IEnumerator StimPak() // 폭탄좀비가 잭더리퍼의 몬스터 데이터에 접근해서 스텟 업 해줌
     {
         StimPakSkill.CanUseSkill = false;
+
+        /*_effectManager.ParticlePlay("Syringe1", 3f, transform.position, Quaternion.identity, transform);*/
+        _effectManager.ParticlePlay("RevengeAura1", 4f, _jackTheRipper.transform.position, Quaternion.identity, transform);
 
         MonsterData JackData = _jackTheRipper.GetComponent<MonsterData>();
         JackData.CurHp += 500;
@@ -378,18 +387,21 @@ public class MonsterSkillManager : MonoBehaviour
     public IEnumerator ElectricWallRoutine()
     {
         ElectricWallSkill.CanUseSkill = false;
-        /*        _animator.SetTrigger("ElectricWall");
-        */
 
         _electricWallPosition = transform.position + transform.forward * 5f;
 
         GameObject electricWall = Instantiate(_electricWallPrefab, _electricWallPosition, transform.rotation);
+        _effectManager.ParticlePlay("ElectricWall1", 5f, electricWall.transform.position, Quaternion.identity);
+        _effectManager.ParticlePlay("ElectricWallFX1", 5f, electricWall.transform.position, Quaternion.identity);
 
         for (int i = 0; i < 6; i++)
         {
             yield return Util.GetDelay(ElectricWallSkill.Interval);
             _electricWallPosition2 = electricWall.transform.position + electricWall.transform.forward * (7f * (i + 1));
+           
             GameObject electricWall2 = Instantiate(_electricWallPrefab, _electricWallPosition2, electricWall.transform.rotation);
+            _effectManager.ParticlePlay("ElectricWall1", 5f, electricWall2.transform.position, Quaternion.identity);
+            _effectManager.ParticlePlay("ElectricWallFX1", 5f, electricWall2.transform.position, Quaternion.identity);
         }
 
         yield return Util.GetDelay(2.5f);
@@ -405,15 +417,21 @@ public class MonsterSkillManager : MonoBehaviour
     public IEnumerator ThunderRoutine()
     {
         ThunderSkill.CanUseSkill = false;
-        /*        _animator.SetTrigger("Thunder");
-        */
+
         for (int i = 0; i < 11; i++)
         {
             Vector3 randomPos = new Vector3(Random.Range(-30f, 30f), 0, Random.Range(-30f, 30f));
-            Instantiate(_thunderPrefab, randomPos, Quaternion.identity);
+            GameObject thunder = Instantiate(_thunderPrefab, randomPos, Quaternion.identity);
+            _effectManager.ParticlePlay("Lightning1", ThunderSkill.Duration, thunder.transform.position, Quaternion.identity);
+            _effectManager.ParticlePlay("LightningFloor1", 5f, thunder.transform.position, Quaternion.identity);
+
             yield return Util.GetDelay(0.1f);
+
             Vector3 randomPos2 = new Vector3(Random.Range(-30f, 30f), 0, Random.Range(-30f, 30f));
-            Instantiate(_thunderPrefab, randomPos2, Quaternion.identity);
+            GameObject thunder2 = Instantiate(_thunderPrefab, randomPos2, Quaternion.identity);
+            _effectManager.ParticlePlay("Lightning1", ThunderSkill.Duration, thunder2.transform.position, Quaternion.identity);
+            _effectManager.ParticlePlay("LightningFloor1", 5f, thunder2.transform.position, Quaternion.identity);
+
             i++;
             yield return Util.GetDelay(1f);
         }

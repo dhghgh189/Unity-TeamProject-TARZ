@@ -21,6 +21,7 @@ public class InventoryInstaller : MonoInstaller
         Container.Bind<ObjectPool_other>().FromInstance(this.gameObject.GetComponentInParent<ObjectPool_other>());
         Container.Bind<DamagePopUpManager>().FromComponentInHierarchy().AsSingle();
         Container.Bind<PlayerStateTransfer>().FromComponentInHierarchy().AsSingle();
+        Container.Bind<EffectManager>().FromComponentInHierarchy().AsSingle();
 
         GameObject DropPool = new GameObject("DropPool");
         Container.Bind<Transform>().FromInstance(DropPool.transform);

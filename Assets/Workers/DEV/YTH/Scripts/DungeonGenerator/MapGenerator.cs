@@ -193,7 +193,6 @@ public class MapGenerator : MonoBehaviour
                 Instantiate(trapPrefab[UnityEngine.Random.Range(0, trapPrefab.Length)], createPos, Quaternion.identity, roomTransform);
             }
 
-
             // 상점, 보스방 생성을 위한 가장 먼 방 체크
             FindFarRoomPos();
 

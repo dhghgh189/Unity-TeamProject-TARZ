@@ -9,7 +9,25 @@ public class Radiation : MonoBehaviour
     [SerializeField] float _damage;
     public float Damage { get { return _damage; } set { _damage = value; } }
 
+    private MonsterData _monsterData;
+
+    private MonsterSkillManager _skillManager;
+
     IDamagable _damagable;
+
+    private void Awake()
+    {
+        _skillManager = GetComponentInParent<MonsterSkillManager>();
+        _monsterData = GetComponentInParent<MonsterData>();
+    }
+
+    private void Start()
+    {
+        if (_monsterData.MonsterTIer != MonsterData.MonsterTier.Elite)
+            return;
+
+        _skillManager._effectManager.ParticlePlay("Radiation1", 60, transform.position, Quaternion.identity,  transform);
+    }
 
     private void Update()
     {

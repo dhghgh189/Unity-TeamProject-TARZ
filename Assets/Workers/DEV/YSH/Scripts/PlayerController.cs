@@ -12,6 +12,7 @@ public enum EMpAmountType { Melee, Throw, Length }
 public class PlayerController : MonoBehaviour, IDamagable
 {
     [Inject] private StatModel stat;
+    [Inject] public EffectManager effectManager;
     [HideInInspector][Inject] public Loading loadingObject;
     [HideInInspector][Inject] public InGameSaveData saveData;
 

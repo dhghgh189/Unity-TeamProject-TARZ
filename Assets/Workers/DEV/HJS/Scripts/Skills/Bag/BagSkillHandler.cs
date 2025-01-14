@@ -13,6 +13,8 @@ public class BagSkillHandler : MonoBehaviour
 {
     [Inject] BagSkillManager manager;
     [Inject] BagSkillContainerSO container;
+    [Inject] InGameSaveData saveData;
+
     [SerializeField] PlayerController player;
     [SerializeField] LinkedList<BaseBagState> actList;
     [SerializeField] int selectIndex;
@@ -33,6 +35,7 @@ public class BagSkillHandler : MonoBehaviour
     {
         player = GetComponent<PlayerController>();
         selectIndex = -1;
+        manager.LoadRedChip(saveData.redChipSaveDatas);
     }
 
     private void Start()

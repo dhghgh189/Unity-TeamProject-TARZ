@@ -151,4 +151,21 @@ public class BagSkillManager : MonoBehaviour
         }
         return 0;
     }
+    public RedChipSaveData[] SaveRedChips()
+    {
+        List<RedChipSaveData> blueChips = new();
+        foreach (var item in SaveBagSkillArray)
+        {
+            blueChips.Add(new RedChipSaveData() { Gauge = item.Item1, BagIndexKey = item.Item2 });
+        }
+        return blueChips.ToArray();
+    }
+
+    public void LoadRedChip(RedChipSaveData[] redChipSaveData)
+    {
+        for (int i = 0; i < redChipSaveData?.Length; i++)
+        {
+            SaveBagSkillArray[i] = (redChipSaveData[i].Gauge, redChipSaveData[i].BagIndexKey);
+        }
+    }
 }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using static BagSkillEnum;
 
 [Serializable]
 public class InGameSaveData
@@ -15,6 +16,8 @@ public class InGameSaveData
     public List<GearSaveData> InventoryGears = new();
     // 블루칩 상태를 저장하는 리스트
     public List<BlueChipSaveData> blueChipSaveDatas = new();
+    // 레드칩 상태를 저장하는 리스트
+    public RedChipSaveData[] redChipSaveDatas;
 }
 // MonoBehaviour를 상속한 클래스들은 FromJson으로 역 직렬화가 불가능 함
 // 그러므로 아래와 같은 클래스들을 만듬
@@ -52,4 +55,10 @@ public class ChapterSaveData
     // 챕터가 큰놈
     public Define.SceneType Chapter;
     public int StageNum;
+}
+[Serializable]
+public class RedChipSaveData
+{
+    public float Gauge;
+    public BagIndexKey BagIndexKey;
 }

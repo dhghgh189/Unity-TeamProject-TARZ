@@ -12,6 +12,8 @@ public class QuestManager : MonoBehaviour
     [SerializeField] public TMP_Text QuestCountText;
     [SerializeField] public GameObject questDoingPanel;
     [SerializeField] public TMP_Text questDoingText;
+    [SerializeField] public GameObject questClearPanel;
+    [SerializeField] public TMP_Text questRewardText;
     [SerializeField] private Button yesButton;
 
     private void Start()

@@ -12,7 +12,7 @@ public class UNQuest_Interaction : InteractionOBJ_Base, Interaction_Ibase_Activa
     [SerializeField] private int curCount;
     [SerializeField] int QuestCount;
     [SerializeField] bool isOngoing;
-    [SerializeField] float Reward;
+    [SerializeField] int Reward;
 
 
     void Start() => Init();
@@ -23,8 +23,9 @@ public class UNQuest_Interaction : InteractionOBJ_Base, Interaction_Ibase_Activa
 
         player = FindObjectOfType<PlayerController>();
         questManager = player.gameObject.GetComponent<QuestManager>();
-        QuestCount = Random.Range(3, 6);
-        Reward = Random.Range(300f, 500f);
+        QuestCount = Random.Range(5, 10);
+        Reward = Random.Range(300, 500);
+        questManager.questRewardText.text = Reward.ToString();
         curCount = 0;
         isOngoing = false;
     }
@@ -80,7 +81,10 @@ public class UNQuest_Interaction : InteractionOBJ_Base, Interaction_Ibase_Activa
 
         player.Stat.BlackChip += Reward;
         isOngoing = false;
+
         questManager.questDoingPanel.SetActive(false);
+        questManager.questClearPanel.SetActive(true);
+        questManager.questNPC = null;
 
         this.gameObject.SetActive(false);
     }

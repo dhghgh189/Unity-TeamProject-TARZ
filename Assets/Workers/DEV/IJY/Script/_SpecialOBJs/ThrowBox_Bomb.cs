@@ -1,3 +1,4 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -48,6 +49,7 @@ public class ThrowBox_Bomb : SpecialThrowOBJ_Base
         // 플레이어가 직접적으로 던졌을 경우, 플레이어에게는 데미지를 가하지 않되, 범위 내의 객체들에게 폭발 데미지를 가한다.
         if (isThrowing)
         {
+            SoundManager.PlaySFX(SoundManager.SoundData_P.Throws[0]);
             BombBoxLayer &= ~(1 << LayerMask.NameToLayer("Player"));
             Bomb();
         }
@@ -69,6 +71,7 @@ public class ThrowBox_Bomb : SpecialThrowOBJ_Base
                 hit.TakeDamage(BombBoxDamage);
             }
         }
+        SoundManager.PlaySFX(SoundManager.SoundData_UI.Bomb);
         Destroy(this.gameObject);
     }
 
@@ -84,6 +87,7 @@ public class ThrowBox_Bomb : SpecialThrowOBJ_Base
         while (cool > 0.1f)
         {
             cool -= Time.deltaTime;
+/*            SoundManager.PlaySFX(SoundManager.SoundData_UI.GetEquipment);*/ // 1초 뒤 터지는 그런걸 구현해야 함
             yield return null;
         }
 

@@ -51,6 +51,8 @@ public class EtcSoundData : ScriptableObject
     public AudioClip StaminaBuff { get { return _sound.StaminaBuff; } }
     public AudioClip ManaBuff { get { return _sound.ManaBuff; } }
     public AudioClip ObejectBuff { get { return _sound.ObejectBuff; } }
+    public AudioClip ObejectBroken { get { return _sound.ObejectBroken; } }
+    public AudioClip Bomb { get { return _sound.Bomb; } }
 
     
 
@@ -92,5 +94,7 @@ public class EtcSoundData : ScriptableObject
         public AudioClip StaminaBuff;
         public AudioClip ManaBuff;
         public AudioClip ObejectBuff;
+        public AudioClip ObejectBroken;
+        public AudioClip Bomb;
     }
 }

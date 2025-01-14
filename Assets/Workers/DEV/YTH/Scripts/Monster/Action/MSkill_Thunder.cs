@@ -32,7 +32,7 @@ public class MSkill_Thunder : Action
 
     public override TaskStatus OnUpdate()
     {
-        if (_distance < 20 && _monsterSkillManager.ThunderSkill.CanUseSkill == true && _monsterData.CurHp <= _monsterData.MaxHp / 2 && _monsterSkillManager.thunderRoutine == null)
+        if (_distance < 20 && _monsterSkillManager.ThunderSkill.CanUseSkill == true && _monsterData.CurHp <= _monsterData.MaxHp / 2 && _monsterSkillManager.thunderRoutine == null && _monsterData.CanSkill)
         {
             _pooledObject.RotateToPlayer();
             _monsterSkillManager.thunderRoutine = StartCoroutine(_monsterSkillManager.ThunderRoutine());

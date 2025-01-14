@@ -1,15 +1,26 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
+using Zenject;
 
 public class QuestManager : MonoBehaviour
 {
-    private UNQuest_Interaction questNPC;
+    [Inject] ChangeInput input;
+
+    public UNQuest_Interaction questNPC;
     [SerializeField] public GameObject questPanel;
     [SerializeField] public TMP_Text QuestCountText;
+    [SerializeField] public GameObject questDoingPanel;
+    [SerializeField] public TMP_Text questDoingText;
+    [SerializeField] private Button yesButton;
 
     private void Start()
     {
-        questNPC = GetComponent<UNQuest_Interaction>();
+        if (questPanel.activeSelf)
+        {
+            input.firstInput = yesButton;
+            input.firstInput.Select();
+        }
     }
 
     public void OnClickYes()

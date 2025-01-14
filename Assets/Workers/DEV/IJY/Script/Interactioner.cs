@@ -16,6 +16,7 @@ public class Interactioner : MonoBehaviour
     [SerializeField] private GameObject target;
     [SerializeField] private GameObject RangeCircle;
 
+
     public bool IsGrabing = false;
     private int interactionLayer;
     private int interactionGrabLayer;
@@ -24,6 +25,8 @@ public class Interactioner : MonoBehaviour
 
     private PlayerController playerController;
     private LineRenderer lineRenderer;
+    private QuestManager questManager;
+    public UNQuest_Interaction quest_Interaction;
     private List<GameObject> interactionOBJs = new();
 
     [Header("인식 범위")]
@@ -41,6 +44,7 @@ public class Interactioner : MonoBehaviour
         boxType = Box_Type.None;
         playerController = GetComponentInParent<PlayerController>();
         lineRenderer = GetComponentInParent<LineRenderer>();
+        questManager = GetComponentInParent<QuestManager>();
         interactionLayer = LayerMask.NameToLayer("Is_Interaction");
         interactionGrabLayer = LayerMask.NameToLayer("Is_Interaction_Grab");
         lineRenderer.enabled = false;
@@ -76,6 +80,9 @@ public class Interactioner : MonoBehaviour
                 Grab_KickDown();
                 return;
             }
+
+            if (target.TryGetComponent<UNQuest_Interaction>(out quest_Interaction) == true && questManager.questNPC == null)
+            questManager.questNPC = quest_Interaction;
 
             // 타겟 내부의 Activate 함수를 통해, 타겟과만 상호작용을 수행한다.
             target.GetComponent<Interaction_Ibase_Activate>().Activate();

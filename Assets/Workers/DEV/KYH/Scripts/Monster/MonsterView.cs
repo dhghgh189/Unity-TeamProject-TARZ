@@ -1,27 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using Zenject;
 
 public class MonsterView : MonoBehaviour
 {
-    [Inject] MonsterData monsterData;
+    [SerializeField] private GameObject hpGauge;
 
-    [SerializeField] private Slider hpView;
-
-    private void Awake()
+    public void AddGauge(MonsterData data)
     {
-        hpView.maxValue = monsterData.MaxHp;
-        hpView.value = monsterData.CurHp;
-    }
-
-    public void OnChangeMonsterHP()
-    {
-        hpView.value = monsterData.CurHp;
-        if (monsterData.CurHp >= 0)
-        {
-            hpView.value = 0;
-        }
+        GameObject instance = Instantiate(hpGauge, gameObject.transform);
+        BossHPGauge fill = instance.GetComponent<BossHPGauge>();
+        fill.SetInfo(data);
     }
 }

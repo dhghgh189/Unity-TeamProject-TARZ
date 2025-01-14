@@ -15,6 +15,8 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
 
     public event Action OnDie;
 
+    public event Action<float, float> OnDamage;
+
     private MonsterData _monsterData;
 
     private Rigidbody _rigid;
@@ -77,6 +79,7 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
 
         Debug.Log($"몬스터 피격 : {damage}");
         _monsterData.CurHp -= damage;
+        OnDamage?.Invoke(_monsterData.CurHp, _monsterData.MaxHp);
 
         if (isAttackedRoutine == null)
         {

@@ -256,6 +256,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7454912580011625206}
   - component: {fileID: 4478569580274203573}
+  - component: {fileID: 6371941856515293718}
   m_Layer: 5
   m_Name: MonsterHPGauge
   m_TagString: Untagged
@@ -272,7 +273,7 @@ RectTransform:
   m_GameObject: {fileID: 5769577991745748242}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.9, y: 0.9, z: 0.9}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6135540819748886620}
@@ -336,6 +337,18 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &6371941856515293718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5769577991745748242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dc81eab236c80c408d4e6b859c40549, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8983165921920908655
 GameObject:
   m_ObjectHideFlags: 0
@@ -369,7 +382,7 @@ RectTransform:
   m_Father: {fileID: 8327871730834198382}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 477.99997, y: 13.375}
   m_SizeDelta: {x: 970, y: 26.75}
   m_Pivot: {x: 0.5, y: 0.5}

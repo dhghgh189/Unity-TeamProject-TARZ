@@ -69,7 +69,7 @@ public class ThrowBox_Bomb : SpecialThrowOBJ_Base
             }
         }
         SoundManager.PlaySFX(SoundManager.SoundData_UI.Bomb);
-        effectManager.ParticlePlay("FX_Explosion_01", 3f, this.transform.position, this.transform.rotation);
+        EffectManager.instance.ParticlePlay("FX_Explosion_01", 3f, this.transform.position, this.transform.rotation);
         Destroy(this.gameObject);
     }
 

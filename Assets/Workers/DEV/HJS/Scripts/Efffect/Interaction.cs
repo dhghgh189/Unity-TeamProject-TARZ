@@ -1,10 +1,12 @@
+using System.Collections;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using static SkillEnum;
 
 /// <summary>
 /// 상호작용을 할 수 있게 해주는 클래스
 /// </summary>
-public class Interaction : IEffect, ISpec
+public class Interaction : ISpec, ISlowable
 {
     /// <summary>
     /// 해당 스킬의 타입 프토퍼티
@@ -35,21 +37,15 @@ public class Interaction : IEffect, ISpec
     public void Activate(GameObject attacker, GameObject target)
     {
         Debug.Log("<color=red>Activate Abnormal status</color>");
-        IStatusEffect statusEffectable = target.GetComponent<IStatusEffect>();
+        Test_StatusEffect statusEffectable = target.GetComponentInChildren<Test_StatusEffect>();
 
         switch (Type)
         {
             case InteractionType.Slow:
-                statusEffectable?.SlowEffect(attacker, target, (1f - degree), duration);
+                // Slow 적용하기
                 break;
-            case InteractionType.Elec:
-                statusEffectable?.ElectroEffect(attacker, target, dotDamage, duration);
-                break;
-            case InteractionType.Poison:
-                statusEffectable?.PoisonEffect(attacker, target, dotDamage, duration);
-                break;
-            case InteractionType.Frozen:
-                statusEffectable?.FrozenEffect(attacker, target, duration);
+            case InteractionType.DOT:
+                // TODO: 지속딜 넣기
                 break;
             case InteractionType.Damage:
                 IDamagable damagable = target.GetComponent<IDamagable>();
@@ -69,5 +65,11 @@ public class Interaction : IEffect, ISpec
         degree = spec.interactioDegree(level);
         duration = spec.InteractionDuration(level);
         dotDamage = spec.InteractionDamage(level);
+    }
+
+    private void SlowSkill()
+    {
+        // 스킬 적용 후 -> Invoke로 다시 원복
+        // 근데 Invoke 작동 시 -> 해당 오브젝트가 죽었거나 다
     }
 }

@@ -4,21 +4,29 @@ using Zenject;
 
 public class MapGenerator : MonoBehaviour
 {
+    [Header("맵 생성 프리팹")]
+    [SerializeField] GameObject wallDestroyer;
+    [SerializeField] RoomChecker roomChecker;
+    [Header("")]
     [SerializeField] GameObject roomPrefab;
     [SerializeField] GameObject startRoomPrefab;
     [SerializeField] GameObject storePrefab;
-    [SerializeField] GameObject wallDestroyer;
-    [SerializeField] RoomChecker roomChecker;
-    [SerializeField] GameObject[] monsterSpawners;
-    [SerializeField] GameObject[] obstacles;
-    [SerializeField] GameObject[] traps;
     [SerializeField] GameObject trapRoomPrefab;
-
+    [SerializeField] GameObject bossRoomPrefab;
+    [Header("")]
+    [SerializeField] GameObject[] monsterSpawners; // 일반몹 스포너 프리팹 
+    [SerializeField] GameObject[] eliteSpawners;   // 엘리트 몬스터 스포너 프리팹 
+    [SerializeField] GameObject[] obstacles;       // 장애물 프리팹
+    [SerializeField] GameObject[] SpecialPrefab;   // 특수 오브젝트 프리팹
+    [Header("")]
+    [SerializeField] GameObject NPCPrefab;         // 돌발 퀘스트 NPC 프리팹
     [SerializeField] GameObject movePotalPrefab;
     [SerializeField] GameObject scenePotalPrefab;
-    [SerializeField] GameObject bossRoomPrefab;
-    [SerializeField] GameObject NPCPrefab;
-    [SerializeField] GameObject[] SpecialPrefab;
+
+    [Header("세팅")]
+    [SerializeField] int maxTrapCount;
+    [SerializeField] float trapRoom_P;
+    [SerializeField] float[] eliteRoom_P = { 0, 10, 25 };
 
     private Transform bossRoomTransform;
 
@@ -36,15 +44,18 @@ public class MapGenerator : MonoBehaviour
     // 방을 생성할 위치
     private Vector3 createPos;
 
+    private ChapterManager chapterManager;
+
     private int random;
     private int roomCount;
-
-    [SerializeField] int maxTrapCount;
 
     [Inject] PlayerController playerController;
     [Inject] InGameSaveData saveData;
 
-    [SerializeField] ChapterManager chapterManager;
+    private void Awake()
+    {
+        chapterManager = GetComponentInChildren<ChapterManager>();
+    }
 
     private void Start()
     {
@@ -91,22 +102,29 @@ public class MapGenerator : MonoBehaviour
             }
 
 
-            if (maxTrapCount > 0 && Util.IsRandom(50))
+            if (maxTrapCount > 0 && Util.IsRandom(trapRoom_P))
             {
                 maxTrapCount--;
                 Debug.Log("트랩 방 생성!");
                 Transform roomTransform = Instantiate(trapRoomPrefab, createPos, Quaternion.identity, transform).transform;
                 // 트랩만 있는 방 생성
             }
-            else
+            else if (Util.IsRandom(eliteRoom_P[saveData.chapterSaveData.StageNum]))
             {
                 // 방 생성
+                Transform roomTransform = Instantiate(roomPrefab, createPos, Quaternion.identity, transform).transform;
+                Instantiate(obstacles[Random.Range(0, obstacles.Length)], createPos, Quaternion.identity, transform);
+                Instantiate(eliteSpawners[Random.Range(0, eliteSpawners.Length)], createPos, Quaternion.identity, roomTransform);
+                Instantiate(SpecialPrefab[Random.Range(0, SpecialPrefab.Length)], createPos + new Vector3(Random.Range(-15, 15), 3f, Random.Range(-15, 15)), Quaternion.identity, roomTransform);
+            }
+            else
+            {
                 Transform roomTransform = Instantiate(roomPrefab, createPos, Quaternion.identity, transform).transform;
                 Instantiate(obstacles[Random.Range(0, obstacles.Length)], createPos, Quaternion.identity, transform);
                 Instantiate(monsterSpawners[Random.Range(0, monsterSpawners.Length)], createPos, Quaternion.identity, roomTransform);
                 Instantiate(SpecialPrefab[Random.Range(0, SpecialPrefab.Length)], createPos + new Vector3(Random.Range(-15, 15), 3f, Random.Range(-15, 15)), Quaternion.identity, roomTransform);
             }
-            
+
 
             // 상점, 보스방 생성을 위한 가장 먼 방 체크
             FindFarRoomPos();

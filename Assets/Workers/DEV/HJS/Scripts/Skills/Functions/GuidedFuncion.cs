@@ -67,12 +67,12 @@ public class GuidedFuncion : MonoBehaviour, IEnable
         int nun = Physics.OverlapSphereNonAlloc(transform.position, 2f, colliders, LayerMask.GetMask("Monster"));
         Debug.Log($"상대 찾는 중... 찾은 수 {nun}"); // 디버그 용도로 숫자 받기
         // 만약 배열이 비어있지 않다면 -> 범위 안에 몬스터가 있다
-        if (colliders[0] is not null)
+        if (colliders[0] != null)
         {
             // 타겟을 설정
-            target = colliders[0].gameObject.transform;
-            data = (target.gameObject.GetComponent<MonsterData>() is not null) ?
-                 target.gameObject.GetComponent<MonsterData>() : (target.gameObject.GetComponentInParent<MonsterData>());
+            data = (colliders[0].gameObject.GetComponent<MonsterData>() != null ) ?
+                 colliders[0].gameObject.GetComponent<MonsterData>() : (colliders[0].gameObject.GetComponentInParent<MonsterData>());
+            target = data.gameObject.transform;
             return true;
         }
 

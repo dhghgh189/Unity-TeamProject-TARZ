@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 using Zenject;
 
@@ -11,13 +13,14 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] GameObject roomPrefab;
     [SerializeField] GameObject startRoomPrefab;
     [SerializeField] GameObject storePrefab;
-    [SerializeField] GameObject trapRoomPrefab;
     [SerializeField] GameObject bossRoomPrefab;
+    [SerializeField] GameObject[] trapRoomPrefab;
     [Header("")]
     [SerializeField] GameObject[] monsterSpawners; // 일반몹 스포너 프리팹 
     [SerializeField] GameObject[] eliteSpawners;   // 엘리트 몬스터 스포너 프리팹 
     [SerializeField] GameObject[] obstacles;       // 장애물 프리팹
     [SerializeField] GameObject[] SpecialPrefab;   // 특수 오브젝트 프리팹
+    [SerializeField] GameObject[] trapPrefab;      // 함정 프리팹
     [Header("")]
     [SerializeField] GameObject NPCPrefab;         // 돌발 퀘스트 NPC 프리팹
     [SerializeField] GameObject movePotalPrefab;
@@ -27,6 +30,11 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] int maxTrapCount;
     [SerializeField] float trapRoom_P;
     [SerializeField] float[] eliteRoom_P = { 0, 10, 25 };
+
+    [Header("비전투 구역 프리팹")]
+    [SerializeField] GameObject bigRobot;
+    [SerializeField] GameObject robot;
+    [SerializeField] GameObject coupang;
 
     private Transform bossRoomTransform;
 
@@ -48,6 +56,10 @@ public class MapGenerator : MonoBehaviour
 
     private int random;
     private int roomCount;
+    private int noBattle = 0;
+    private int stageNum;
+
+    private int[] noBattleIndex; // 비전투구역 생성 갯수 
 
     [Inject] PlayerController playerController;
     [Inject] InGameSaveData saveData;
@@ -62,6 +74,20 @@ public class MapGenerator : MonoBehaviour
         ChapterSaveData chapterSaveData = saveData.chapterSaveData;
         StageInfo stageInfo = chapterManager.stageInfos[chapterSaveData.StageNum];
         roomCount = stageInfo.RoomCount;
+        stageNum = chapterSaveData.StageNum;
+
+        noBattleIndex = new int[chapterSaveData.StageNum + 1];
+        for (int i = 0; i < noBattleIndex.Length; i++)
+        {
+            int random = UnityEngine.Random.Range(1, roomCount);
+            if (noBattleIndex.Contains(random))
+            {
+                i--;
+                continue;
+            }
+            noBattleIndex[i] = random;
+
+        }
 
         // 시작 지점 생성 (비전투 비행기 방)
         Instantiate(startRoomPrefab, createPos, Quaternion.identity, transform);
@@ -91,38 +117,80 @@ public class MapGenerator : MonoBehaviour
             if (!roomChecker.IsEmptyRoom())
             {
                 i--;
-                random = Random.Range(0, 4);
+                random = UnityEngine.Random.Range(0, 4);
                 while (createPos.z == 50 && random == 1)
                 {
-                    random = Random.Range(0, 4);
+                    random = UnityEngine.Random.Range(0, 4);
                 }
                 createPos += createDir[random] * 50f;
                 wallDestroyer.transform.position = destroyerY + createPos - createDir[random] * 25f;
                 continue;
             }
 
+            // 비전투 구역 생성
+            if (noBattle < noBattleIndex.Length && i == noBattleIndex[noBattle])
+            {
+                GameObject gameObj = bigRobot;
 
-            if (maxTrapCount > 0 && Util.IsRandom(trapRoom_P))
+                // 스테이지에 따른 비전투 구역 종류 확률
+                switch (stageNum)
+                {
+                    case 0:
+                        gameObj = (UnityEngine.Random.Range(0, 1f)) switch
+                        {
+                            < 0 => bigRobot,                    // 대형로봇
+                            > 0 and < 0.1f => robot,         // 로봇
+                            _ => coupang,                      // 택배 
+                        };
+                        break;
+
+                    case 1:
+                        gameObj = (UnityEngine.Random.Range(0, 1f)) switch
+                        {
+                            < 0.03f => bigRobot,                    // 대형로봇
+                            > 0.03f and < 0.2f => robot,         // 로봇
+                            _ => coupang,                          // 택배 
+                        };
+                        break;
+
+                    case 2:
+                        gameObj = (UnityEngine.Random.Range(0, 1f)) switch
+                        {
+                            < 0.05f => bigRobot,                    // 대형로봇
+                            > 0.05f and < 0.3f => robot,         // 로봇
+                            _ => coupang,                          // 택배 
+                        };
+                        break;
+                }
+
+                Transform roomTransform = Instantiate(gameObj, createPos, Quaternion.identity, transform).transform;
+             
+            }
+            // 함정 룸 생성
+            else if (maxTrapCount > 0 && Util.IsRandom(trapRoom_P))
             {
                 maxTrapCount--;
                 Debug.Log("트랩 방 생성!");
-                Transform roomTransform = Instantiate(trapRoomPrefab, createPos, Quaternion.identity, transform).transform;
+                Transform roomTransform = Instantiate(trapRoomPrefab[UnityEngine.Random.Range(0, trapRoomPrefab.Length)], createPos, Quaternion.identity, transform).transform;
                 // 트랩만 있는 방 생성
             }
+            // 엘리트 몬스터 룸 생성
             else if (Util.IsRandom(eliteRoom_P[saveData.chapterSaveData.StageNum]))
             {
-                // 방 생성
                 Transform roomTransform = Instantiate(roomPrefab, createPos, Quaternion.identity, transform).transform;
-                Instantiate(obstacles[Random.Range(0, obstacles.Length)], createPos, Quaternion.identity, transform);
-                Instantiate(eliteSpawners[Random.Range(0, eliteSpawners.Length)], createPos, Quaternion.identity, roomTransform);
-                Instantiate(SpecialPrefab[Random.Range(0, SpecialPrefab.Length)], createPos + new Vector3(Random.Range(-15, 15), 3f, Random.Range(-15, 15)), Quaternion.identity, roomTransform);
+                Instantiate(obstacles[UnityEngine.Random.Range(0, obstacles.Length)], createPos, Quaternion.identity, transform);
+                Instantiate(eliteSpawners[UnityEngine.Random.Range(0, eliteSpawners.Length)], createPos, Quaternion.identity, roomTransform);
+                Instantiate(SpecialPrefab[UnityEngine.Random.Range(0, SpecialPrefab.Length)], createPos + new Vector3(UnityEngine.Random.Range(-15, 15), 3f, UnityEngine.Random.Range(-15, 15)), Quaternion.identity, roomTransform);
+                Instantiate(trapPrefab[UnityEngine.Random.Range(0, trapPrefab.Length)], createPos , Quaternion.identity, roomTransform);
             }
+            // 일반 몬스터 룸 생성
             else
             {
                 Transform roomTransform = Instantiate(roomPrefab, createPos, Quaternion.identity, transform).transform;
-                Instantiate(obstacles[Random.Range(0, obstacles.Length)], createPos, Quaternion.identity, transform);
-                Instantiate(monsterSpawners[Random.Range(0, monsterSpawners.Length)], createPos, Quaternion.identity, roomTransform);
-                Instantiate(SpecialPrefab[Random.Range(0, SpecialPrefab.Length)], createPos + new Vector3(Random.Range(-15, 15), 3f, Random.Range(-15, 15)), Quaternion.identity, roomTransform);
+                Instantiate(obstacles[UnityEngine.Random.Range(0, obstacles.Length)], createPos, Quaternion.identity, transform);
+                Instantiate(monsterSpawners[UnityEngine.Random.Range(0, monsterSpawners.Length)], createPos, Quaternion.identity, roomTransform);
+                Instantiate(SpecialPrefab[UnityEngine.Random.Range(0, SpecialPrefab.Length)], createPos + new Vector3(UnityEngine.Random.Range(-15, 15), 3f, UnityEngine.Random.Range(-15, 15)), Quaternion.identity, roomTransform);
+                Instantiate(trapPrefab[UnityEngine.Random.Range(0, trapPrefab.Length)], createPos, Quaternion.identity, roomTransform);
             }
 
 
@@ -130,10 +198,10 @@ public class MapGenerator : MonoBehaviour
             FindFarRoomPos();
 
             // 랜덤 방향 지정
-            random = Random.Range(0, 4);
+            random = UnityEngine.Random.Range(0, 4);
             while (createPos.z == 50 && random == 1)
             {
-                random = Random.Range(0, 4);
+                random = UnityEngine.Random.Range(0, 4);
             }
             if (i == 0)
             {
@@ -184,7 +252,7 @@ public class MapGenerator : MonoBehaviour
     {
         while (true)
         {
-            random = Random.Range(0, 4);
+            random = UnityEngine.Random.Range(0, 4);
             bossRoomDir = createDir[random];
             farDistancePos += bossRoomDir * 50;
             roomChecker.transform.position = farDistancePos;

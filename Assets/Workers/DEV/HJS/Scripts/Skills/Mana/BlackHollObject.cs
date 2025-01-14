@@ -121,7 +121,8 @@ public class BlackHollObject : MonoBehaviour
         yield return Util.GetDelay(moveTime);
 
         // 해당 구체 폭발하기
-        Destroy(gameObject);
+        Explosion();
+        
     }
 
     private IEnumerator StartBoilingRoutine(Transform other)
@@ -145,23 +146,25 @@ public class BlackHollObject : MonoBehaviour
 
     private void Explosion()
     {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRange, LayerMask.GetMask("Monster"));
-        foreach (Collider collider in colliders)
-        {
-            IDamagable damagable = collider.gameObject.GetComponent<IDamagable>();
-            if (damagable != null) { damagable.TakeDamage(explosionDamage); Debug.Log($"{collider.gameObject.name}에게 {explosionDamage}만큼의 피해를 입혔다!"); }
-        }
-    }
-
-    private void OnDestroy()
-    {
         foreach (var enemy in enemies)
         {
             if (enemy is null) continue;
             SetPut(enemy);
         }
 
-        Explosion();
+        Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRange, LayerMask.GetMask("Monster"));
+        foreach (Collider collider in colliders)
+        {
+            IDamagable damagable = collider.gameObject.GetComponent<IDamagable>();
+            if (damagable != null) { damagable.TakeDamage(explosionDamage); Debug.Log($"{collider.gameObject.name}에게 {explosionDamage}만큼의 피해를 입혔다!"); }
+        }
+
+        Destroy(gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        EffectManager.instance.ParticlePlay("ManaSkill_42", 1f, transform.position, Quaternion.identity);
         StopAllCoroutines();
     }
 

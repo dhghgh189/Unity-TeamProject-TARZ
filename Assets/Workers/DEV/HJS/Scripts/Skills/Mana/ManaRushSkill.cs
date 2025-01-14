@@ -278,6 +278,15 @@ public class ManaRush_3 : BaseManaState
 
         owner.Movement.Rigid.velocity = Vector3.zero;
 
+        Debug.Log("범위 공격!");
+        EffectManager.instance.ParticlePlay("ManaSkill_11", 1f, owner.transform.position, Quaternion.identity);
+        Collider[] colliders = Physics.OverlapSphere(owner.transform.position, attackRange, LayerMask.GetMask("Monster"));
+        foreach (Collider collider in colliders)
+        {
+            IDamagable damagable = collider.gameObject.GetComponent<IDamagable>();
+            if (damagable != null) { damagable.TakeDamage(damage); Debug.Log($"{collider.gameObject.name}에게 {150}만큼의 피해를 입혔다!"); }
+        }
+
         owner.Anim.CrossFade(Animator.StringToHash(animName), 0.01f);
         owner.StartCoroutine(AnimRoutine());
     }
@@ -318,17 +327,5 @@ public class ManaRush_3 : BaseManaState
         base.OnExit();
         parent.collider = null;
     }
-
-    public override void OnAction()
-    {
-        Debug.Log("범위 공격!");
-        Collider[] colliders = Physics.OverlapSphere(owner.transform.position, attackRange, LayerMask.GetMask("Monster"));
-        foreach (Collider collider in colliders)
-        {
-            IDamagable damagable = collider.gameObject.GetComponent<IDamagable>();
-            if (damagable != null) { damagable.TakeDamage(damage); Debug.Log($"{collider.gameObject.name}에게 {150}만큼의 피해를 입혔다!"); }
-        }
-    }
-
 }
 

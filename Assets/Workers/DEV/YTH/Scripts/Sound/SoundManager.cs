@@ -58,6 +58,8 @@ public class SoundManager : MonoBehaviour
         {
             monsterSoundDic.Add(_monsterSoundData.SoundInfos[i].ID, _monsterSoundData.SoundInfos[i].Clip);
         }
+
+        _playerSoundData.Init();
     }
 
     /// <summary>

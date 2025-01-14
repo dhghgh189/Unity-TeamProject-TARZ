@@ -27,6 +27,8 @@ public class ThrowObject : MonoBehaviour, IDrainable
 
     private BoxCollider coll;
 
+    private AudioClip hitClip;
+
     private void Awake()
     {
         setModeling = FindAnyObjectByType<RandomModeling>();
@@ -56,9 +58,10 @@ public class ThrowObject : MonoBehaviour, IDrainable
         throwEffects.Add(effect);
     }
 
-    public void SetDamage(float damage)
+    public void SetInfo(float damage, AudioClip clip = null)
     {
         this.damage = damage;
+        hitClip = clip;
     }
 
     public void Throw(Vector3 dir, float throwForce)
@@ -78,6 +81,10 @@ public class ThrowObject : MonoBehaviour, IDrainable
         handler = owner.SkillHandler;
         player.AddObjectStack(this);
 
+        // 던질 때 플레이어랑 부딪히는 문제 방지
+        Debug.Log("충돌 해제");
+        rigid.excludeLayers |= (1 << owner.gameObject.layer); 
+
         isCollected = true;
     }
 
@@ -88,6 +95,10 @@ public class ThrowObject : MonoBehaviour, IDrainable
             return;
 
         rigid.velocity = Vector3.zero;
+
+        // 무시했던 충돌을 다시 적용
+        Debug.Log("충돌 적용");
+        rigid.excludeLayers = 0;
 
         // 부딪힌 오브젝트가 target이 아니면
         if (((1 << other.gameObject.layer) & whatIsTarget.value) == 0)
@@ -114,6 +125,11 @@ public class ThrowObject : MonoBehaviour, IDrainable
             {
                 owner.Stat.CurrentMp += owner.Stat.GetMpGain(EMpAmountType.Throw);
                 owner.SkillHandler.ThrowObjectCollision(gameObject, other.gameObject);
+            }
+
+            if (hitClip != null)
+            {
+                SoundManager.PlaySFX(hitClip);
             }
         }
 

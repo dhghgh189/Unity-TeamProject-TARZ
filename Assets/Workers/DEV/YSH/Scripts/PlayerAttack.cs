@@ -254,6 +254,8 @@ public class PlayerAttack : MonoBehaviour
         // 최종 수치 저장용
         float damage = 0;
         float throwForce = 0;
+        AudioClip throwClip;
+        AudioClip hitClip;
 
         ThrowObject tobj = PopObjectStack();
         if (tobj == null)
@@ -272,6 +274,10 @@ public class PlayerAttack : MonoBehaviour
             else damage = ThrowAttackInfo[ThrowCount].Damage;
 
             throwForce = ThrowAttackInfo[ThrowCount].ThrowForce;
+
+            // 현재 타수의 일반 클립
+            throwClip = SoundManager.SoundData_P.Throws[ThrowCount].Clip;
+            hitClip = SoundManager.SoundData_P.ThrowHits[ThrowCount].Clip;
         }
         else
         {
@@ -282,6 +288,10 @@ public class PlayerAttack : MonoBehaviour
             // 수치 저장
             damage = currentAction.Damage;
             throwForce = currentAction.ThrowForce;
+
+            // 현재 타수에 Type이 일치하는 클립 (캐싱됨)
+            throwClip = SoundManager.SoundData_P.ThrowCache[ThrowCount][ActionType];
+            hitClip = SoundManager.SoundData_P.ThrowHitsCache[ThrowCount][ActionType];
         }
 
         tobj.transform.parent = null;
@@ -298,13 +308,14 @@ public class PlayerAttack : MonoBehaviour
         damage = damage * player.Stat.DefaultPowerPer;
         // 최종 추가 데미지 추가
         damage += player.Stat.ExtraDamage;
-        Debug.Log($"final damage : {damage}");
-        tobj.SetDamage(damage);
+        //Debug.Log($"final damage : {damage}");
+        tobj.SetInfo(damage, hitClip);
         tobj.adapter = player.AblityAdapter;
         tobj.handler = player.SkillHandler;
         tobj.Throw(transform.forward + (transform.up * 0.3f), throwForce);
+
         // 사운드 재생
-        SoundManager.PlaySFX(SoundManager.SoundData_P.Throws[ThrowCount]);
+        SoundManager.PlaySFX(throwClip);
     }
 
     public void JumpThrow()
@@ -336,7 +347,7 @@ public class PlayerAttack : MonoBehaviour
         // 최종 추가 데미지 추가
         damage += player.Stat.ExtraDamage;
         Debug.Log($"final damage : {damage}");
-        tobj.SetDamage(damage);
+        tobj.SetInfo(damage);
         tobj.adapter = player.AblityAdapter;
         tobj.handler = player.SkillHandler;
         tobj.Throw(transform.forward + (-transform.up * 0.3f), throwForce);
@@ -375,7 +386,7 @@ public class PlayerAttack : MonoBehaviour
             damagable.TakeDamage(damage);
 
             // 사운드 재생
-            SoundManager.PlaySFX(SoundManager.SoundData_P.MeleeHit);
+            SoundManager.PlaySFX(SoundManager.SoundData_P.MeleeHits[MeleeCount]);
 
             // Mp 회복
             player.Stat.CurrentMp += player.Stat.GetMpGain(EMpAmountType.Melee);

@@ -1,10 +1,14 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Scriptables/SoundData/Player")]
 public class PlayerSoundData : ScriptableObject
 {
     [SerializeField] private Sound _sound;
+
+    public Dictionary<EMultiActionType, AudioClip>[] ThrowCache;
+    public Dictionary<EMultiActionType, AudioClip>[] ThrowHitsCache;
 
     // FootStep
     public AudioClip FootStep_Dirt { get { return _sound.FootStep_Dirt; } }
@@ -25,13 +29,11 @@ public class PlayerSoundData : ScriptableObject
 
     // Melee
     public AudioClip[] Melees { get { return _sound.Melees; } }
-    public AudioClip MeleeHit { get { return _sound.MeleeHit; } }
+    public AudioClip[] MeleeHits { get { return _sound.MeleeHits; } }
 
     // Throw
-    public AudioClip[] Throws { get { return _sound.Throws; } }
-    public AudioClip ThrowHit { get { return _sound.ThrowHit; } }
-    public AudioClip JumpThrow { get { return _sound.JumpThrow; } }
-    public AudioClip JumpThrowHit { get { return _sound.JumpThrowHit; } }
+    public ThrowSoundInfo[] Throws { get { return _sound.Throws; } }
+    public ThrowSoundInfo[] ThrowHits { get { return _sound.ThrowHits; } }
 
     [Serializable]
     public struct Sound
@@ -56,12 +58,65 @@ public class PlayerSoundData : ScriptableObject
 
         [Header("Melee (타수 별 사운드 순서 맞춰주세요)")]
         public AudioClip[] Melees;              // 근거리 공격 (1~3), 순서 정확히 맞출 것
-        public AudioClip MeleeHit;              // 근거리 공격 히트 시
+        public AudioClip[] MeleeHits;           // 근거리 공격 히트 시 (1~3), 순서 정확히 맞출 것
 
         [Header("Throw (타수 별 사운드 순서 맞춰주세요)")]
-        public AudioClip[] Throws;              // 원거리 공격 (1~3), 순서 정확히 맞출 것
-        public AudioClip ThrowHit;              // 원거리 공격 히트 시
-        public AudioClip JumpThrow;             // 점프 원거리 공격 발동
-        public AudioClip JumpThrowHit;          // 점프 원거리 공격 히트 시
+        public ThrowSoundInfo[] Throws;         // 원거리 공격 (1~3), 순서 정확히 맞출 것
+        public ThrowSoundInfo[] ThrowHits;      // 원거리 공격 히트 시 (1~3), 순서 정확히 맞출 것
     }
+
+    public void Init()
+    {
+        // 타수별 MultiAction의 Throw 클립을 캐싱하기 위한 딕셔너리 배열
+        ThrowCache = new Dictionary<EMultiActionType, AudioClip>[Throws.Length];
+        for (int i = 0; i < ThrowCache.Length; i++)
+        {
+            // 현재 타수에 MultiAction이 없으면 pass
+            if (Throws[i].MultiActions.Length <= 0)
+                continue;
+
+            // 현재 타수에 대한 정보를 캐싱할 딕셔너리 생성
+            ThrowCache[i] = new Dictionary<EMultiActionType, AudioClip>();
+
+            foreach (var item in Throws[i].MultiActions)
+            {
+                // 현재 타수의 딕셔너리에 Type을 키값으로 Clip 캐싱
+                ThrowCache[i].Add(item.ActionType, item.Clip);
+            }
+        }
+
+        // 타수별 MultiAction의 ThrowHit 클립을 캐싱하기 위한 딕셔너리 배열
+        ThrowHitsCache = new Dictionary<EMultiActionType, AudioClip>[ThrowHits.Length];
+        for (int i = 0; i < ThrowHitsCache.Length; i++)
+        {
+            // 현재 타수에 MultiAction이 없으면 pass
+            if (ThrowHits[i].MultiActions.Length <= 0)
+                continue;
+
+            // 현재 타수에 대한 정보를 캐싱할 딕셔너리 생성
+            ThrowHitsCache[i] = new Dictionary<EMultiActionType, AudioClip>();
+
+            foreach (var item in ThrowHits[i].MultiActions)
+            {
+                // 현재 타수의 딕셔너리에 Type을 키값으로 Clip 캐싱
+                ThrowHitsCache[i].Add(item.ActionType, item.Clip);
+            }
+        }
+
+        Debug.Log("Player Sound Init OK");
+    }
+}
+
+[System.Serializable]
+public class ThrowSoundInfo
+{
+    public MultiActionSoundInfo[] MultiActions;
+    public AudioClip Clip;
+}
+
+[System.Serializable]
+public class MultiActionSoundInfo
+{
+    public EMultiActionType ActionType;
+    public AudioClip Clip;
 }

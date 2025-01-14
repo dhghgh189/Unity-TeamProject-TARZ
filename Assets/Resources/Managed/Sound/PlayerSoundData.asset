@@ -25,14 +25,36 @@ MonoBehaviour:
     AirDash: {fileID: 8300000, guid: b75709bb2592e274b8898a91e89f289f, type: 3}
     Dead: {fileID: 8300000, guid: 27698c020c7fdaf4ba4d1b9afae22841, type: 3}
     Melees:
-    - {fileID: 8300000, guid: bb05b5ac0900c634888e2859f7d0dcb8, type: 3}
-    - {fileID: 8300000, guid: 6badd5bc6bd7f3f469e1f0c6a83a15ff, type: 3}
-    - {fileID: 8300000, guid: 9db3bc7f93d7bb94ab4f8b5ebe42f616, type: 3}
-    MeleeHit: {fileID: 8300000, guid: 59c26fee53392b64d871d3bae4f38c3a, type: 3}
+    - {fileID: 8300000, guid: c75092fd7838e78428e35f48ca4c7b5f, type: 3}
+    - {fileID: 8300000, guid: c75092fd7838e78428e35f48ca4c7b5f, type: 3}
+    - {fileID: 8300000, guid: e66746efd8fe1f340845dfbd04e74684, type: 3}
+    MeleeHits:
+    - {fileID: 8300000, guid: 339b281d1179744458ca7e44941f86f0, type: 3}
+    - {fileID: 8300000, guid: 339b281d1179744458ca7e44941f86f0, type: 3}
+    - {fileID: 8300000, guid: 9f0f9e7d8671b214b94c5ce82a2b0027, type: 3}
     Throws:
-    - {fileID: 8300000, guid: 656c3dc7471384144a09d50439179e62, type: 3}
-    - {fileID: 8300000, guid: 4af19b52526d19d429b7229473702d95, type: 3}
-    - {fileID: 8300000, guid: 74c12e6da9ef8224ea0c52de05a0e99c, type: 3}
-    ThrowHit: {fileID: 0}
-    JumpThrow: {fileID: 0}
-    JumpThrowHit: {fileID: 0}
+    - MultiActions: []
+      Clip: {fileID: 8300000, guid: 656c3dc7471384144a09d50439179e62, type: 3}
+    - MultiActions: []
+      Clip: {fileID: 8300000, guid: 4af19b52526d19d429b7229473702d95, type: 3}
+    - MultiActions:
+      - ActionType: 0
+        Clip: {fileID: 8300000, guid: 74c12e6da9ef8224ea0c52de05a0e99c, type: 3}
+      - ActionType: 1
+        Clip: {fileID: 8300000, guid: f367e188c78a61c42b5513439fa10dd1, type: 3}
+      - ActionType: 2
+        Clip: {fileID: 8300000, guid: 6c76d5cf6cb50c042b694631f33612f7, type: 3}
+      Clip: {fileID: 0}
+    ThrowHits:
+    - MultiActions: []
+      Clip: {fileID: 8300000, guid: 366a6cf85ff88a0448fb7325274cc761, type: 3}
+    - MultiActions: []
+      Clip: {fileID: 8300000, guid: fe7e9aa5b2cad3e47914ab6776db3e42, type: 3}
+    - MultiActions:
+      - ActionType: 0
+        Clip: {fileID: 8300000, guid: 06e8e150837e346448cfdbd93b018185, type: 3}
+      - ActionType: 1
+        Clip: {fileID: 8300000, guid: a9c26b9f06f9b194e9ca7bcd6a417525, type: 3}
+      - ActionType: 2
+        Clip: {fileID: 8300000, guid: 6653d3a2adacaec47bbe8b2778ae7253, type: 3}
+      Clip: {fileID: 0}

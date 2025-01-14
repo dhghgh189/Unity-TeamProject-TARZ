@@ -8,6 +8,7 @@ using UnityEngine;
 public class ScrapMatelObject : MonoBehaviour
 {
     [SerializeField] GameObject body;
+    [SerializeField] GameObject effect;
 
     [Header("발사")]
     [SerializeField] float force;           // 힘
@@ -16,8 +17,6 @@ public class ScrapMatelObject : MonoBehaviour
     [SerializeField] SphereCollider coll;
     [SerializeField] Rigidbody rigid;
     private Coroutine coroutine;
-
-    public Vector3 dir;
 
     private float delta;            // 변화량
     public bool IsFull;
@@ -55,13 +54,15 @@ public class ScrapMatelObject : MonoBehaviour
 
     public void Throw()
     {
+
         rigid.useGravity = false;
         rigid.isKinematic = false;
         // 힘만큼 던져버리기
-        rigid.velocity = dir * force * maxTime;
+        rigid.velocity = transform.forward * force * maxTime;
         // Collider 활성화
         coll.enabled = true;
 
+        Destroy(Instantiate(effect, transform.position, transform.rotation), 1f);
         StartCoroutine(DestroyRoutine());
     }
 

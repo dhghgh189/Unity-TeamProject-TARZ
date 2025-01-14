@@ -62,7 +62,7 @@ public class BagCompactCanonSkill : BagSkill
         {
             base.OnEnter();
             Transform createPoint = GameObject.FindWithTag("CreatePoint").transform;
-            parent.instance = UnityEngine.Object.Instantiate(parent.tmp, createPoint.position, Quaternion.identity).GetComponent<ScrapMatelObject>();
+            parent.instance = UnityEngine.Object.Instantiate(parent.tmp, createPoint.position, owner.gameObject.transform.rotation).GetComponent<ScrapMatelObject>();
             parent.instance.gameObject.transform.parent = createPoint;
 
             parent.instance.Init(parent.skilldata);
@@ -85,8 +85,6 @@ public class BagCompactCanonSkill : BagSkill
             }
 
             lookDir = owner.transform.forward;
-
-            parent.instance.dir = lookDir;
 
             owner.Anim.CrossFade(Animator.StringToHash(animName), 0.01f);
         }

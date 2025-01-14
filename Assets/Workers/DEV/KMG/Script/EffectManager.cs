@@ -20,7 +20,7 @@ public class EffectManager : MonoBehaviour
         }
         else
         {
-            particlePrefab = Resources.Load<GameObject>($"Effect/{particleName}");
+            particlePrefab = Resources.Load<GameObject>($"Managed/Effect/{particleName}");
             if (!particlePrefab)
             {
                 Debug.LogWarning("Resources에서 없는 파티클을 호출");

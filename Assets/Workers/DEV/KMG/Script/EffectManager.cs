@@ -67,6 +67,9 @@ public class EffectManager : MonoBehaviour
     {
         yield return Util.GetDelay(lifeTime);
 
+        if (!particleObject)
+            yield break;
+
         particleObject.SetActive(false);
 
         if (particleDic.ContainsKey(key))

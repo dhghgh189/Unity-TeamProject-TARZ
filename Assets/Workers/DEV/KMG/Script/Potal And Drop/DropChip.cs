@@ -10,9 +10,9 @@ public class DropChip : MonoBehaviour
     private void Awake()
     {
         if (blackChip)
-            transform.GetComponent<Renderer>().material = blackChipMaterial;
+            transform.GetComponentInChildren<Renderer>().material = blackChipMaterial;
         else
-            transform.GetComponent<Renderer>().material = ChipMaterial;
+            transform.GetComponentInChildren<Renderer>().material = ChipMaterial;
     }
 
     private void OnCollisionEnter(Collision other)
@@ -40,8 +40,8 @@ public class DropChip : MonoBehaviour
         this.blackChip = blackChip;
 
         if (blackChip)
-            transform.GetComponent<Renderer>().material = blackChipMaterial;
+            transform.GetComponentInChildren<Renderer>().material = blackChipMaterial;
         else
-            transform.GetComponent<Renderer>().material = ChipMaterial;
+            transform.GetComponentInChildren<Renderer>().material = ChipMaterial;
     }
 }

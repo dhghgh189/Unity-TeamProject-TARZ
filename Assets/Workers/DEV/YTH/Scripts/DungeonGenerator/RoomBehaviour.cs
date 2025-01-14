@@ -3,13 +3,18 @@ using UnityEngine;
 
 public class RoomBehaviour : MonoBehaviour
 {
-    [SerializeField] GameObject[] walls;
-    [SerializeField] BagSkillManager bagSkillManager;
     public int MonsterCount;
+
+    [SerializeField] GameObject[] walls;
+    [SerializeField] GameObject[] buffPrefab;   // 버프 프리팹
+
+    private BagSkillManager bagSkillManager;
 
     private void Awake()
     {
         bagSkillManager = FindAnyObjectByType<BagSkillManager>();
+
+        
     }
 
     public void CloseWall()
@@ -26,6 +31,7 @@ public class RoomBehaviour : MonoBehaviour
         {
             item.SetActive(false);
         }
+        Instantiate(buffPrefab[Random.Range(0, buffPrefab.Length)], transform.position + (Vector3.up * 4), Quaternion.identity);
     }
 
     public void MonsterCountChange()

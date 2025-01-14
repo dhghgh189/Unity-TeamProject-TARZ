@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8880159532811938391}
   - component: {fileID: 1254354926302509153}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ChapterManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46,11 +46,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stageInfos:
   - BossName: 0a0000000b000000
-    RoomCount: 3
+    RoomCount: 6
   - BossName: 0500000003000000
-    RoomCount: 5
+    RoomCount: 8
   - BossName: 02000000
-    RoomCount: 7
+    RoomCount: 11
   saveData:
     chapterSaveData:
       Chapter: 0
@@ -125,7 +125,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3573874244369440670}
   - component: {fileID: 5056533487982534989}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: MapGenerator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -162,38 +162,58 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13a8dc0c42116034d933a6a5e0a4f2ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomPrefab: {fileID: 8586030469086256412, guid: e033b310a4c0c44419674fdfe8b0f629,
+  wallDestroyer: {fileID: 6657308487099401457}
+  roomChecker: {fileID: 9074547477526642184}
+  roomPrefab: {fileID: 2282942474017867426, guid: 0a4e93a881e037c4a8bb0885c7b463ce,
     type: 3}
   startRoomPrefab: {fileID: 8586030469086256412, guid: f070e625dbd679b4caf289593ea50ece,
     type: 3}
   storePrefab: {fileID: 1568574986766593877, guid: 46a7b48e7769ec040a60983768d068aa,
     type: 3}
-  wallDestroyer: {fileID: 6657308487099401457}
-  roomChecker: {fileID: 9074547477526642184}
+  bossRoomPrefab: {fileID: 8568767677504642951, guid: 538878cc0319c5743918fd75a247354c,
+    type: 3}
+  trapRoomPrefab:
+  - {fileID: 8586030469086256412, guid: cea460bd15006aa45a062d6fe514d94f, type: 3}
   monsterSpawners:
   - {fileID: 4986280043407886338, guid: 1660fd7f577eacd4591865963ecccdd4, type: 3}
+  - {fileID: 4986280043407886338, guid: ad10307b12bfa0d488fb33f8a80a76cd, type: 3}
+  - {fileID: 4986280043407886338, guid: 0b8a7003ca6e80d4ca56dc6d136a8235, type: 3}
+  - {fileID: 4986280043407886338, guid: 2614157c8b44c464c9d50579d94cd40e, type: 3}
+  - {fileID: 4986280043407886338, guid: 773cf460f7ac3324c8fbb0bc76697685, type: 3}
   - {fileID: 8072767350992167787, guid: 96b55d0fc1675dd4caad03903f3723f7, type: 3}
+  - {fileID: 4986280043407886338, guid: d611009adbb491649ba1578ea9e6ab3e, type: 3}
+  - {fileID: 4986280043407886338, guid: c6507e288bb817e469ae77edd413edc2, type: 3}
+  - {fileID: 4986280043407886338, guid: 48a5ba507bff65042b961ac22bf30f9c, type: 3}
+  - {fileID: 4986280043407886338, guid: fc0a50108a061184aa138cac18a05079, type: 3}
+  eliteSpawners:
+  - {fileID: 5993424951484080609, guid: abc5d3c4bf1cfd147b6b91e8f0eeb9dd, type: 3}
   - {fileID: 5993424951484080609, guid: e32092dbf9628e34883e07d1332796f9, type: 3}
+  - {fileID: 5993424951484080609, guid: f9c9941923c9137498038af0714b7a47, type: 3}
   obstacles:
   - {fileID: 1758891255105315271, guid: 63cabf905be4bac42845fd078805a1c0, type: 3}
   - {fileID: 574797769055547023, guid: 5905f655de5516744850fa0d3d4632a3, type: 3}
   - {fileID: 6877869889264833943, guid: 87266796baa251a43a80ea5193a6c537, type: 3}
-  traps: []
-  trapRoomPrefab: {fileID: 8586030469086256412, guid: cea460bd15006aa45a062d6fe514d94f,
+  SpecialPrefab:
+  - {fileID: 2641190163738093171, guid: 66f1e81b0c71e7242ba471cdda0b02f9, type: 3}
+  - {fileID: 3189685185263555988, guid: f567ea3c60fe1bc40bf806908139a308, type: 3}
+  trapPrefab:
+  - {fileID: 1590315564621892767, guid: 04e80f08cec116e48b36ffbfc4e70133, type: 3}
+  NPCPrefab: {fileID: 8682453319666747854, guid: 34014f042fc49a64db7bad72855836f0,
     type: 3}
   movePotalPrefab: {fileID: 8989806833416724233, guid: de6c9581933e1aa45a47023a42c58669,
     type: 3}
   scenePotalPrefab: {fileID: 8989806833416724233, guid: 9e2a22fb3df1b974cacfb148a2bbf8c9,
     type: 3}
-  bossRoomPrefab: {fileID: 3845863571111393043, guid: 077daa6804d7fd942a74c77a90b1f67d,
-    type: 3}
-  NPCPrefab: {fileID: 8682453319666747854, guid: 34014f042fc49a64db7bad72855836f0,
-    type: 3}
-  SpecialPrefab:
-  - {fileID: 2641190163738093171, guid: 66f1e81b0c71e7242ba471cdda0b02f9, type: 3}
-  - {fileID: 3189685185263555988, guid: f567ea3c60fe1bc40bf806908139a308, type: 3}
   maxTrapCount: 2
-  chapterManager: {fileID: 1254354926302509153}
+  trapRoom_P: 10
+  eliteRoom_P:
+  - 0
+  - 10
+  - 25
+  bigRobot: {fileID: 2282942474017867426, guid: 0a4e93a881e037c4a8bb0885c7b463ce,
+    type: 3}
+  robot: {fileID: 2282942474017867426, guid: 0a4e93a881e037c4a8bb0885c7b463ce, type: 3}
+  coupang: {fileID: 2282942474017867426, guid: 0a4e93a881e037c4a8bb0885c7b463ce, type: 3}
 --- !u!1 &6657308487099401457
 GameObject:
   m_ObjectHideFlags: 0
@@ -208,7 +228,7 @@ GameObject:
   - component: {fileID: 6843134688765064513}
   - component: {fileID: 1443182008443970479}
   - component: {fileID: 867117350256146143}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: WallDestroyer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -354,7 +374,7 @@ GameObject:
   - component: {fileID: 6448210182489556019}
   - component: {fileID: 9143721710527728472}
   - component: {fileID: 9074547477526642184}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RoomChecker
   m_TagString: Untagged
   m_Icon: {fileID: 0}

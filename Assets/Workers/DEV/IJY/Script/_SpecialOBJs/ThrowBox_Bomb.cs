@@ -1,14 +1,10 @@
 
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 using UnityEngine;
-using Zenject;
 
 public class ThrowBox_Bomb : SpecialThrowOBJ_Base
 {
-    [Inject] EffectManager effectManager;
     public ThrowBox_Bomb() => box_type = Box_Type.Bomb;
 
     private bool isThrowingOBJ = false;

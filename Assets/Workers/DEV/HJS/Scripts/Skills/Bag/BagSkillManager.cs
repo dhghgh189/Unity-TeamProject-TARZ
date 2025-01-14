@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -20,6 +21,7 @@ public class BagSkillManager : MonoBehaviour
     /// </summary>
     [HideInInspector] public UnityEvent OnChargeEvent = new();
     [HideInInspector] public UnityEvent OnUIUpdateEvent = new();
+    [HideInInspector] public UnityEvent<BagSkillDataSO> OnAddBagSkillEvent = new();
 
     private PlayerController owner;
     [HideInInspector] public PlayerController Owner { get { return owner; } set { owner = value; UpdateOwner(owner); } }
@@ -32,6 +34,8 @@ public class BagSkillManager : MonoBehaviour
     public BagSkill[] SkillArray { get { return skillArr; } }
 
     public (float, BagIndexKey)[] SaveBagSkillArray;
+
+    private RedchipPanel[] redChipUIs = null;
 
     private void Awake()
     {
@@ -63,16 +67,27 @@ public class BagSkillManager : MonoBehaviour
     /// <param name="index">장착하려는 슬롯</param>
     public void AddSkill(BagSkill bagSkill, int index)
     {
+        Debug.Log(redChipUIs);
+        if (redChipUIs == null)
+        {
+            Debug.Log("크아아아악");
+            redChipUIs = FindObjectsOfType<RedchipPanel>(true);
+            Array.Reverse(redChipUIs);
+        }
+
         if (skillArr[index] is not null)
         {
             OnChargeEvent.RemoveListener(skillArr[index].Charge);
             SaveBagSkillArray[index] = (-1, 0);
         }
+        redChipUIs[index].gameObject.SetActive(true);
         bagSkill.Manager = this;
         skillArr[index] = bagSkill;
         SaveBagSkillArray[index] = (0, bagSkill.KeyName);
+        redChipUIs[index].InitRedchipSkill(bagSkill.SkillData);
         OnChargeEvent.AddListener(bagSkill.Charge);
         OnUIUpdateEvent?.Invoke();
+        Debug.Log(index);
     }
 
     // TODO: 씬이 변경되었을 때 -> Manager안의 스킬들 순회
@@ -88,6 +103,12 @@ public class BagSkillManager : MonoBehaviour
             if (act is null) continue;
    
             act.RetrunFeature();
+        }
+
+        if (scene.name == "Lobby")
+        {
+            skillArr = new BagSkill[4];
+            SaveBagSkillArray = new (float, BagIndexKey)[4] { (-1, 0), (-1, 0), (-1, 0), (-1, 0) };
         }
     }
 
@@ -117,5 +138,17 @@ public class BagSkillManager : MonoBehaviour
             if (skillArr[i] == null) continue;
             SaveBagSkillArray[i].Item1 = skillArr[i].CurGauge;
         }
+    }
+
+    public int CheckEmptySlot()
+    {
+        for (int i = 0; i < 2; i++)
+        {
+            if (SaveBagSkillArray[i].Item1 == -1)
+            {
+                return i;
+            }
+        }
+        return 0;
     }
 }

@@ -38,7 +38,9 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
 
     [SerializeField] GameObject _chip;
 
-    [SerializeField] GameObject _bluChip;
+    [SerializeField] GameObject _blueChip;
+
+    [SerializeField] GameObject _redChip;
 
     [Inject] Transform dropPool;
 
@@ -130,6 +132,9 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
 
         if (_monsterData.MonsterTIer != MonsterData.MonsterTier.Normal)
             DropBlueChip(curPos);
+
+        if (_monsterData.MonsterTIer == MonsterData.MonsterTier.Boss)
+            DropRedChip(curPos);
     }
 
     public void DieDissolve()
@@ -295,6 +300,11 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
                 return;
             }
         }
-        Instantiate(_bluChip, curPos, transform.rotation, dropPool).GetComponent<DropBlueChip>().DropChipInit(tier);
+        Instantiate(_blueChip, curPos, transform.rotation, dropPool).GetComponent<DropBlueChip>().DropChipInit(tier);
+    }
+
+    private void DropRedChip(Vector3 curPos)
+    {
+        Instantiate(_redChip, curPos, transform.rotation, dropPool).GetComponent<DropRedChip>().DropChipInit();
     }
 }

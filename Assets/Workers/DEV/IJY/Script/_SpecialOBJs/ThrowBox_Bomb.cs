@@ -49,7 +49,7 @@ public class ThrowBox_Bomb : SpecialThrowOBJ_Base
         // 플레이어가 직접적으로 던졌을 경우, 플레이어에게는 데미지를 가하지 않되, 범위 내의 객체들에게 폭발 데미지를 가한다.
         if (isThrowing)
         {
-            SoundManager.PlaySFX(SoundManager.SoundData_P.Throws[0]);
+            SoundManager.PlaySFX(SoundManager.SoundData_P.Throws[0].Clip);
             BombBoxLayer &= ~(1 << LayerMask.NameToLayer("Player"));
             Bomb();
         }

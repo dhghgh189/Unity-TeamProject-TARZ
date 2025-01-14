@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum Test_StatusEffectType { Frost, Dust, Poison }
 public enum Test_Target { None, Player, Monster }
-public class Test_StatusEffect : MonoBehaviour, ISlowable
+public class Test_StatusEffect : MonoBehaviour
 {
     // Slow Queue로 먼저 들어온 친구들 부터 정보 처리
     public PlayerController player;

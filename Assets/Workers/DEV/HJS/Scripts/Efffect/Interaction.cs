@@ -6,7 +6,7 @@ using static SkillEnum;
 /// <summary>
 /// 상호작용을 할 수 있게 해주는 클래스
 /// </summary>
-public class Interaction : ISpec, ISlowable
+public class Interaction : ISpec
 {
     /// <summary>
     /// 해당 스킬의 타입 프토퍼티

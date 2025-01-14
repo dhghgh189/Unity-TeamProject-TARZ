@@ -68,6 +68,7 @@ public class BagSkillManager : MonoBehaviour
             OnChargeEvent.RemoveListener(skillArr[index].Charge);
             SaveBagSkillArray[index] = (-1, 0);
         }
+        bagSkill.Manager = this;
         skillArr[index] = bagSkill;
         SaveBagSkillArray[index] = (0, bagSkill.KeyName);
         OnChargeEvent.AddListener(bagSkill.Charge);

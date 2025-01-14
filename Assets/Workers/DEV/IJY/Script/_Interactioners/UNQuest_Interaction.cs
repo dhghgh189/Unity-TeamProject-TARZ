@@ -73,6 +73,8 @@ public class UNQuest_Interaction : InteractionOBJ_Base, Interaction_Ibase_Activa
         {
             // TODO : 진행하는 도중이라는 UI 표시
             // 달성률도 표시하면 좋겠다.
+            questManager.questDoingPanel.SetActive(true);
+            questManager.questDoingText.text = $"{curCount} / <color=orange>{QuestCount}</color>";
             return;
         }
 
@@ -83,6 +85,7 @@ public class UNQuest_Interaction : InteractionOBJ_Base, Interaction_Ibase_Activa
     {
         player.Stat.BlackChip += Reward;
         isOngoing = false;
+        questManager.questDoingPanel.SetActive(false);
     }
 
     void OnDisable()

@@ -53,6 +53,7 @@ public class EtcSoundData : ScriptableObject
     public AudioClip ObejectBuff { get { return _sound.ObejectBuff; } }
     public AudioClip ObejectBroken { get { return _sound.ObejectBroken; } }
     public AudioClip Bomb { get { return _sound.Bomb; } }
+    public AudioClip BombTimer { get { return _sound.BombTimer; } }
 
     
 
@@ -96,5 +97,6 @@ public class EtcSoundData : ScriptableObject
         public AudioClip ObejectBuff;
         public AudioClip ObejectBroken;
         public AudioClip Bomb;
+        public AudioClip BombTimer;
     }
 }

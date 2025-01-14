@@ -1,9 +1,8 @@
 using UnityEngine;
-using Zenject;
 
 public class ThrowBox_Nomal : SpecialThrowOBJ_Base
 {
-     private ObjectPool_other pool;
+    private ObjectPool_other pool;
     public ThrowBox_Nomal() => box_type = Box_Type.Nomal;
 
     [Header("중형 상자")]
@@ -36,12 +35,11 @@ public class ThrowBox_Nomal : SpecialThrowOBJ_Base
     private void ThrowingBox(GameObject OBJ)
     {
         if (isDestroy) return;
-        SoundManager.PlaySFX(SoundManager.SoundData_P.Throws[0].Clip);
+        SoundManager.PlaySFX(SoundManager.SoundData_UI.ObejectBroken);
 
         if (OBJ.layer == NomalBoxLayer)
         {
             OBJ.GetComponent<IDamagable>().TakeDamage(NomalBoxDamage);
-            SoundManager.PlaySFX(SoundManager.SoundData_UI.ObejectBroken);
             DropBlackChips(0.0f);
         }
         else

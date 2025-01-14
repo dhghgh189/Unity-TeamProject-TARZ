@@ -57,6 +57,8 @@ public class Interactioner : MonoBehaviour
     {
         if (playerController.PInput.TryInteraction)
         {
+            SoundManager.PlaySFX(SoundManager.SoundData_UI.SelectUI);
+
             // 이미 특수 오브젝트를 들고 있는 상황에서는 다른 물체와 상호작용이 불가능하다.
             if (SpecialOBJ != null)
             {
@@ -310,6 +312,7 @@ public class Interactioner : MonoBehaviour
     /// </summary>
     void ThrowSpeOBJ(Rigidbody rigid)
     {
+        SoundManager.PlaySFX(SoundManager.SoundData_P.Throws[0].Clip);
         rigid.AddForce
             ((playerController.transform.forward + (playerController.transform.up * 0.3f))
             * throwForce, ForceMode.Impulse);

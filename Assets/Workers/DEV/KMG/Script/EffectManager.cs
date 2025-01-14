@@ -8,7 +8,7 @@ public class EffectManager : MonoBehaviour
     public void ParticlePlay(string particleName, float lifeTime, Vector3 pos, Quaternion rot, Transform pallowingTransform = null)
     {
         GameObject particlePrefab;
-        ParticleSystem _particleSystem;
+        ParticleSystem[] _particleSystem;
 
         if (particleDic.ContainsKey(particleName) && particleDic[particleName].Count > 0)
         {
@@ -16,7 +16,7 @@ public class EffectManager : MonoBehaviour
             particlePrefab.transform.rotation = rot;
             particlePrefab.transform.position = pos;
             particlePrefab.transform.parent = pallowingTransform;
-            _particleSystem = particlePrefab.GetComponent<ParticleSystem>();
+            _particleSystem = particlePrefab.GetComponentsInChildren<ParticleSystem>();
         }
         else
         {
@@ -29,20 +29,23 @@ public class EffectManager : MonoBehaviour
 
             particlePrefab.SetActive(false);
 
-            _particleSystem = Instantiate(particlePrefab, pos, rot, pallowingTransform).GetComponent<ParticleSystem>();
+            particlePrefab = Instantiate(particlePrefab, pos, rot, pallowingTransform);
+            _particleSystem = particlePrefab.GetComponentsInChildren<ParticleSystem>();
+        }
+        foreach (var item in _particleSystem)
+        {
+            var main = item.main;
+
+            main.playOnAwake = true;
+
+            main.duration = lifeTime;
+
+            main.stopAction = ParticleSystemStopAction.Disable;
         }
 
-        var main = _particleSystem.main;
+        particlePrefab.SetActive(true);
 
-        main.playOnAwake = true;
-
-        main.duration = lifeTime;
-
-        main.stopAction = ParticleSystemStopAction.Disable;
-
-        _particleSystem.gameObject.SetActive(true);
-
-        StartCoroutine(ReturnPool(particleName, _particleSystem.gameObject, lifeTime));
+        StartCoroutine(ReturnPool(particleName, particlePrefab, lifeTime));
     }
 
     IEnumerator ReturnPool(string key, GameObject particleObject, float lifeTime)

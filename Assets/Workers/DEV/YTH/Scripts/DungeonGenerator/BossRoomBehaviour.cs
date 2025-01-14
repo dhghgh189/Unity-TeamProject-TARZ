@@ -19,6 +19,8 @@ public class BossRoomBehaviour : MonoBehaviour
         // 스테이지 ++, 만약에 3스테이지면 로비로, 맵으로 가는 포탈 하나랑 다음 스테이지로 가는 포탈 하나
         if (++saveData.chapterSaveData.StageNum == 3)
         {
+            // 클리어 사운드 재생
+            SoundManager.PlaySFX(SoundManager.SoundData_UI.GameClear);
             saveData.chapterSaveData = new();
             scenePotal.GetComponent<ScenePotal>().SetScene(Define.SceneType.Lobby);
         }

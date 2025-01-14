@@ -77,23 +77,28 @@ public class SlowTrap : Trap
             && other.gameObject.layer != LayerMask.NameToLayer("Monster"))
             return;
 
-        PlayerController player = other.GetComponent<PlayerController>();
-        if (player != null)
+        Test_StatusEffect effect = other.GetComponentInChildren<Test_StatusEffect>();
+        if (effect != null) effect.Slow(slowPercent, out var target);
+        else
         {
-            player.Stat.SpeedRate = (1f - slowPercent);
-            targetPlayer = player;
-            return;
-        }
-
-        MonsterData monster = other.GetComponent<MonsterData>();
-        if (monster != null)
-        {
-            if (!monsterBaseSpeedDic.TryAdd(monster, monster.agent.speed))
+            PlayerController player = other.GetComponent<PlayerController>();
+            if (player != null)
             {
-                monsterBaseSpeedDic.Add(monster, monster.agent.speed);
+                player.Stat.SpeedRate = (1f - slowPercent);
+                targetPlayer = player;
+                return;
             }
-            monster.agent.speed *= (1f - slowPercent);
-            return;
+        
+            MonsterData monster = other.GetComponent<MonsterData>();
+            if (monster != null)
+            {
+                if (!monsterBaseSpeedDic.TryAdd(monster, monster.agent.speed))
+                {
+                    monsterBaseSpeedDic.Add(monster, monster.agent.speed);
+                }
+                monster.agent.speed *= (1f - slowPercent);
+                return;
+            }
         }
     }
 
@@ -106,20 +111,25 @@ public class SlowTrap : Trap
             && other.gameObject.layer != LayerMask.NameToLayer("Monster"))
             return;
 
-        PlayerController player = other.GetComponent<PlayerController>();
-        if (player != null)
+        Test_StatusEffect effect = other.GetComponentInChildren<Test_StatusEffect>();
+        if (effect != null) effect.Rollback(slowPercent, out var target);
+        else
         {
-            player.Stat.SpeedRate = 1f;
-            targetPlayer = null;
-            return;
-        }
-
-        MonsterData monster = other.GetComponent<MonsterData>();
-        if (monster != null)
-        {
-            monster.agent.speed = monsterBaseSpeedDic[monster];
-            monsterBaseSpeedDic[monster] = 0;
-            return;
+            PlayerController player = other.GetComponent<PlayerController>();
+            if (player != null)
+            {
+                player.Stat.SpeedRate = 1f;
+                targetPlayer = null;
+                return;
+            }
+        
+            MonsterData monster = other.GetComponent<MonsterData>();
+            if (monster != null)
+            {
+                monster.agent.speed = monsterBaseSpeedDic[monster];
+                monsterBaseSpeedDic[monster] = 0;
+                return;
+            }
         }
     }
 

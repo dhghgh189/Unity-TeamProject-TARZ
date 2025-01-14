@@ -1,15 +1,15 @@
 using System.Collections;
 using System.Linq;
+using UnityEditor.Localization.Plugins.XLIFF.V12;
 using UnityEngine;
+using UnityEngine.Localization.PropertyVariants.TrackedProperties;
 
 public enum Test_StatusEffectType { Frost, Dust, Poison }
 public enum Test_Target { None, Player, Monster }
 public class Test_StatusEffect : MonoBehaviour
 {
-    // Slow Queue로 먼저 들어온 친구들 부터 정보 처리
     public PlayerController player;
     public MonsterData monster;
-    private float backup = -1f;
 
     private Coroutine slowRoutine;
 
@@ -35,7 +35,6 @@ public class Test_StatusEffect : MonoBehaviour
         }
         else if (monster != null)
         {
-            backup = monster.agent.speed;
             monster.agent.speed *= (1f - amount);
             target = Test_Target.Monster;
         }
@@ -43,9 +42,10 @@ public class Test_StatusEffect : MonoBehaviour
         {
             target = Test_Target.None;
         }
+        Debug.Log($"{gameObject.name} is Slow!");
     }
 
-    public void Rollback(out Test_Target target)
+    public void Rollback(float amount, out Test_Target target)
     {
         if (player != null)
         {
@@ -54,14 +54,23 @@ public class Test_StatusEffect : MonoBehaviour
         }
         else if (monster != null)
         {
-            monster.agent.speed = backup;
-            backup = -1;
+            monster.agent.speed /= (1f - amount);
             target = Test_Target.Monster;
         }
         else
         {
             target = Test_Target.None;
         }
+        Debug.Log($"{gameObject.name} is Rollback");
+    }
+
+    public void SlowSkill(float amount, float time) => StartCoroutine(SlowRoutine(amount, time));
+
+    private IEnumerator SlowRoutine(float amount, float time)
+    {
+        Slow(amount, out _);
+        yield return Util.GetDelay(time);
+        Rollback(amount, out _);
     }
 }
 

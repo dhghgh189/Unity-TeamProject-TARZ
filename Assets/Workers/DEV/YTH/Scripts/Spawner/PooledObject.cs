@@ -3,6 +3,7 @@ using System.Collections;
 using Unity.Mathematics;
 using UnityEngine;
 using Zenject;
+using static MonsterData;
 
 /// <summary>
 /// 보스는 Instantiate로 생성해서 따로 관리 고려중..
@@ -19,6 +20,9 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
 
     private MonsterData _monsterData;
     public MonsterData MonsterData {  get { return _monsterData; } }
+
+    private MonsterView _monsterView;
+    public MonsterView MonsterView { get { return _monsterView; } }
 
     private Rigidbody _rigid;
 
@@ -55,6 +59,11 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
         _skill = GetComponent<MonsterSkillManager>();
         _dissolve = GetComponent<DissolveController>();
         _capsuleCollider = GetComponent<CapsuleCollider>();
+    }
+
+    private void Start()
+    {
+        _monsterView = FindAnyObjectByType<MonsterView>(FindObjectsInactive.Include);
     }
 
     private void OnEnable()
@@ -135,6 +144,8 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
 
         if (_monsterData.MonsterTIer == MonsterData.MonsterTier.Boss)
             DropRedChip(curPos);
+
+        _monsterView.gameObject.SetActive(false);
     }
 
     public void DieDissolve()

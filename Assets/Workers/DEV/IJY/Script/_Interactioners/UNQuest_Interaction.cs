@@ -84,6 +84,7 @@ public class UNQuest_Interaction : InteractionOBJ_Base, Interaction_Ibase_Activa
 
         questManager.questDoingPanel.SetActive(false);
         questManager.questClearPanel.SetActive(true);
+        player.interactioner.quest_Interaction = null;
         questManager.questNPC = null;
 
         this.gameObject.SetActive(false);

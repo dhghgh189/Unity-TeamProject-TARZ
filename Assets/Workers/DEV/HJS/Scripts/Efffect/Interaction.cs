@@ -38,11 +38,13 @@ public class Interaction : ISpec
     {
         Debug.Log("<color=red>Activate Abnormal status</color>");
         Test_StatusEffect statusEffectable = target.GetComponentInChildren<Test_StatusEffect>();
+        if (statusEffectable == null) return;
 
         switch (Type)
         {
             case InteractionType.Slow:
                 // Slow 적용하기
+                statusEffectable.SlowSkill(degree, duration);
                 break;
             case InteractionType.DOT:
                 // TODO: 지속딜 넣기
@@ -65,11 +67,5 @@ public class Interaction : ISpec
         degree = spec.interactioDegree(level);
         duration = spec.InteractionDuration(level);
         dotDamage = spec.InteractionDamage(level);
-    }
-
-    private void SlowSkill()
-    {
-        // 스킬 적용 후 -> Invoke로 다시 원복
-        // 근데 Invoke 작동 시 -> 해당 오브젝트가 죽었거나 다
     }
 }

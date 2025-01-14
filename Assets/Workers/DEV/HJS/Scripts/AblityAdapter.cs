@@ -12,27 +12,19 @@ public class AblityAdapter : MonoBehaviour
     // 던질 수 있는 물건의 프리팹
     public ThrowObject ThrowObjectPrefab;
 
-    public Dictionary<string, IEnable> components;
+    public Dictionary<string, IEnable> components = new Dictionary<string, IEnable>();
 
     private void Awake()
     {
         // 플레이어의 상태의 갯수만큼 초기화
         PlayerCollisionToggle = new bool[(int)EState.Length];
         for (int i = 0; i < PlayerCollisionToggle.Length; i++) { PlayerCollisionToggle[i] = false; }
+
     }
 
     private void Start()
     {
-        components = new Dictionary<string, IEnable>();
-
-        // ThrowObject에 부착되어있는 활성화 가능한 스크립트 가져오기
-        foreach (IEnable enable in ThrowObjectPrefab.gameObject.GetComponents<IEnable>())
-        {
-            // 기본적으로 off
-            enable.Enable = false;
-            components.Add(enable.Name, enable);
-        }
-
+        Init();
     }
     /// <summary>
     /// 상태 머신에서 가져올 충돌체 확인 여부
@@ -43,7 +35,7 @@ public class AblityAdapter : MonoBehaviour
 
     public void SetEnable(string name)
     {
-        if(components is null) { Debug.Log($"없다 {name}"); return; }
+        if (components is null) Init();
 
         if (components.TryGetValue(name, out IEnable enable))
         {
@@ -78,6 +70,17 @@ public class AblityAdapter : MonoBehaviour
         else
         {
             throw new System.Exception($"{name}은 ThrowObject에 부착되어있지 않습니다");
+        }
+    }
+
+    public void Init()
+    {
+        // ThrowObject에 부착되어있는 활성화 가능한 스크립트 가져오기
+        foreach (IEnable enable in ThrowObjectPrefab.gameObject.GetComponents<IEnable>())
+        {
+            // 기본적으로 off
+            enable.Enable = false;
+            components.TryAdd(enable.Name, enable);
         }
     }
 

@@ -166,7 +166,7 @@ public class MonsterSkillManager : MonoBehaviour
             yield return Util.GetDelay(0.8f);
             jumpRoutine_jumpAttack = StartCoroutine(JumpRoutine_JumpAttack());
             yield return Util.GetDelay(JumpAttackSkill.InAirTime);
-            EffectManager.instance.ParticlePlay("Hulk_Jump1", 2.5f, transform.position, Quaternion.identity, transform);
+            EffectManager.instance.ParticlePlay("Hulk_Jump", 2.5f, transform.position, Quaternion.identity, transform);
         }
 
         yield return Util.GetDelay(_jumpAttack.CoolTime);
@@ -234,7 +234,7 @@ public class MonsterSkillManager : MonoBehaviour
         WheelWindSkill.CanUseSkill = false;
 
         _wheelWindTrigger.SetActive(true);
-        EffectManager.instance.ParticlePlay("WheelWind1", WheelWindSkill.Duration, transform.position, Quaternion.identity, transform);
+        EffectManager.instance.ParticlePlay("WheelWind", WheelWindSkill.Duration, transform.position, Quaternion.identity, transform);
 
         Radiation jackRadiation = _wheelWindTrigger.GetComponentInChildren<Radiation>();
         jackRadiation.Interaval = WheelWindSkill.Interval;
@@ -292,7 +292,7 @@ public class MonsterSkillManager : MonoBehaviour
         StimPakSkill.CanUseSkill = false;
 
         /*_effectManager.ParticlePlay("Syringe1", 3f, transform.position, Quaternion.identity, transform);*/
-        EffectManager.instance.ParticlePlay("RevengeAura1", 4f, _jackTheRipper.transform.position, Quaternion.identity, transform);
+        EffectManager.instance.ParticlePlay("RevengeAura", 4f, _jackTheRipper.transform.position, Quaternion.identity, transform);
 
         MonsterData JackData = _jackTheRipper.GetComponent<MonsterData>();
         JackData.CurHp += 500;
@@ -388,8 +388,8 @@ public class MonsterSkillManager : MonoBehaviour
         _electricWallPosition = transform.position + transform.forward * 5f;
 
         GameObject electricWall = Instantiate(_electricWallPrefab, _electricWallPosition, transform.rotation);
-        EffectManager.instance.ParticlePlay("ElectricWall1", 5f, electricWall.transform.position, Quaternion.identity);
-        EffectManager.instance.ParticlePlay("ElectricWallFX1", 5f, electricWall.transform.position, Quaternion.identity);
+        EffectManager.instance.ParticlePlay("ElectricWall", 5f, electricWall.transform.position, Quaternion.identity);
+        EffectManager.instance.ParticlePlay("ElectricWallFX", 5f, electricWall.transform.position, Quaternion.identity);
 
         for (int i = 0; i < 6; i++)
         {
@@ -397,8 +397,8 @@ public class MonsterSkillManager : MonoBehaviour
             _electricWallPosition2 = electricWall.transform.position + electricWall.transform.forward * (7f * (i + 1));
            
             GameObject electricWall2 = Instantiate(_electricWallPrefab, _electricWallPosition2, electricWall.transform.rotation);
-            EffectManager.instance.ParticlePlay("ElectricWall1", 5f, electricWall2.transform.position, Quaternion.identity);
-            EffectManager.instance.ParticlePlay("ElectricWallFX1", 5f, electricWall2.transform.position, Quaternion.identity);
+            EffectManager.instance.ParticlePlay("ElectricWall", 5f, electricWall2.transform.position, Quaternion.identity);
+            EffectManager.instance.ParticlePlay("ElectricWallFX", 5f, electricWall2.transform.position, Quaternion.identity);
         }
 
         yield return Util.GetDelay(2.5f);
@@ -419,15 +419,15 @@ public class MonsterSkillManager : MonoBehaviour
         {
             Vector3 randomPos = new Vector3(Random.Range(-30f, 30f), 0, Random.Range(-30f, 30f));
             GameObject thunder = Instantiate(_thunderPrefab, randomPos, Quaternion.identity);
-            EffectManager.instance.ParticlePlay("Lightning1", ThunderSkill.Duration, thunder.transform.position, Quaternion.identity);
-            EffectManager.instance.ParticlePlay("LightningFloor1", 5f, thunder.transform.position, Quaternion.identity);
+            EffectManager.instance.ParticlePlay("Lightning", ThunderSkill.Duration, thunder.transform.position, Quaternion.identity);
+            EffectManager.instance.ParticlePlay("LightningFloor", 5f, thunder.transform.position, Quaternion.identity);
 
             yield return Util.GetDelay(0.1f);
 
             Vector3 randomPos2 = new Vector3(Random.Range(-30f, 30f), 0, Random.Range(-30f, 30f));
             GameObject thunder2 = Instantiate(_thunderPrefab, randomPos2, Quaternion.identity);
-            EffectManager.instance.ParticlePlay("Lightning1", ThunderSkill.Duration, thunder2.transform.position, Quaternion.identity);
-            EffectManager.instance.ParticlePlay("LightningFloor1", 5f, thunder2.transform.position, Quaternion.identity);
+            EffectManager.instance.ParticlePlay("Lightning", ThunderSkill.Duration, thunder2.transform.position, Quaternion.identity);
+            EffectManager.instance.ParticlePlay("LightningFloor", 5f, thunder2.transform.position, Quaternion.identity);
 
             i++;
             yield return Util.GetDelay(1f);

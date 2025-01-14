@@ -45,7 +45,7 @@ public class Projectile : MonoBehaviour // 일반 원딜 쫄몹
         _rigidBody.angularVelocity = Vector3.zero;
 
         _radiation.SetActive(true);
-        EffectManager.instance.ParticlePlay("PoisonPool1", 3f, transform.position, Quaternion.identity, transform);
+        EffectManager.instance.ParticlePlay("PoisonPool", 3f, transform.position, Quaternion.identity, transform);
         
         if (collider.gameObject.CompareTag("Player"))
         {

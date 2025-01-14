@@ -26,7 +26,7 @@ public class Radiation : MonoBehaviour
         if (_monsterData.MonsterTIer != MonsterData.MonsterTier.Elite)
             return;
 
-        EffectManager.instance.ParticlePlay("Radiation1", 60, transform.position, Quaternion.identity,  transform);
+        EffectManager.instance.ParticlePlay("Radiation", 60, transform.position, Quaternion.identity,  transform);
     }
 
     private void Update()

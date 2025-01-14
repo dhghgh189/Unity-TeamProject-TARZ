@@ -34,6 +34,12 @@ public class LobbySceneInit : MonoBehaviour
             Debug.Log("데이터 없음");
         }
     }
+
+    private void Start()
+    {
+        SoundManager.PlayBGM(SoundManager.SoundData_UI.LobbyBGM);
+    }
+
     IEnumerator MoveMove()
     {
         while (!loadingObject.IsUnLoading())

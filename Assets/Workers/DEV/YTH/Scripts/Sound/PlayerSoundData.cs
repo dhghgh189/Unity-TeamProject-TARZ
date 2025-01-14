@@ -25,7 +25,7 @@ public class PlayerSoundData : ScriptableObject
 
     // Melee
     public AudioClip[] Melees { get { return _sound.Melees; } }
-    public AudioClip MeleeHit { get { return _sound.MeleeHit; } }
+    public AudioClip[] MeleeHits { get { return _sound.MeleeHits; } }
 
     // Throw
     public AudioClip[] Throws { get { return _sound.Throws; } }
@@ -56,7 +56,7 @@ public class PlayerSoundData : ScriptableObject
 
         [Header("Melee (타수 별 사운드 순서 맞춰주세요)")]
         public AudioClip[] Melees;              // 근거리 공격 (1~3), 순서 정확히 맞출 것
-        public AudioClip MeleeHit;              // 근거리 공격 히트 시
+        public AudioClip[] MeleeHits;           // 근거리 공격 히트 시 (1~3), 순서 정확히 맞출 것
 
         [Header("Throw (타수 별 사운드 순서 맞춰주세요)")]
         public AudioClip[] Throws;              // 원거리 공격 (1~3), 순서 정확히 맞출 것

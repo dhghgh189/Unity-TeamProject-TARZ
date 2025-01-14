@@ -375,7 +375,7 @@ public class PlayerAttack : MonoBehaviour
             damagable.TakeDamage(damage);
 
             // 사운드 재생
-            SoundManager.PlaySFX(SoundManager.SoundData_P.MeleeHit);
+            SoundManager.PlaySFX(SoundManager.SoundData_P.MeleeHits[MeleeCount]);
 
             // Mp 회복
             player.Stat.CurrentMp += player.Stat.GetMpGain(EMpAmountType.Melee);

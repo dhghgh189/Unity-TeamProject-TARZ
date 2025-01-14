@@ -1,7 +1,10 @@
 using UnityEngine;
+using Zenject;
 
 public class Projectile : MonoBehaviour // 일반 원딜 쫄몹
 {
+   [SerializeField] MonsterSkillManager skillManager;
+
     [SerializeField] GameObject _radiation;
 
     private Rigidbody _rigidBody;
@@ -18,10 +21,12 @@ public class Projectile : MonoBehaviour // 일반 원딜 쫄몹
     {
         _rigidBody = GetComponent<Rigidbody>();
         _pooledObject = GetComponentInParent<PooledObject>();
+        skillManager = GetComponentInParent<MonsterSkillManager>();
     }
 
     private void Start()
     {
+
         _player = _pooledObject.player;
 
         _distance = Vector3.Distance(transform.position, _player.transform.position);
@@ -31,6 +36,7 @@ public class Projectile : MonoBehaviour // 일반 원딜 쫄몹
         transform.parent = null;
 
         Destroy(gameObject, 3f);
+      
     }
 
     private void OnCollisionEnter(Collision collider)
@@ -39,6 +45,7 @@ public class Projectile : MonoBehaviour // 일반 원딜 쫄몹
         _rigidBody.angularVelocity = Vector3.zero;
 
         _radiation.SetActive(true);
+        skillManager._effectManager.ParticlePlay("PoisonPool1", 3f, transform.position, Quaternion.identity, transform);
         
         if (collider.gameObject.CompareTag("Player"))
         {

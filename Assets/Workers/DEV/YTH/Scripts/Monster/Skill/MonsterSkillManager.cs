@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using Zenject;
 
 public class MonsterSkillManager : MonoBehaviour
 {
@@ -95,6 +96,8 @@ public class MonsterSkillManager : MonoBehaviour
     private PooledObject _pooledObject;
 
     private PlayerController _player;
+
+    [Inject] public  EffectManager _effectManager;
     #endregion
 
     private void Awake()

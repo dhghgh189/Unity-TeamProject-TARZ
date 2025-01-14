@@ -160,6 +160,7 @@ public class MonsterSkillManager : MonoBehaviour
     public IEnumerator JumpAttackRoutine() // 보스의 도약해서 착지하여 범위 공격
     {
         _jumpAttack.CanUseSkill = false;
+        StartCoroutine(CanSkill());
 
         if (jumpRoutine_jumpAttack == null)
         {
@@ -234,8 +235,10 @@ public class MonsterSkillManager : MonoBehaviour
     public IEnumerator WheelWindRoutine() // 가렌 E
     {
         WheelWindSkill.CanUseSkill = false;
+        StartCoroutine(CanSkill());
 
         _wheelWindTrigger.SetActive(true);
+        yield return Util.GetDelay(1f);
         EffectManager.instance.ParticlePlay("WheelWind", WheelWindSkill.Duration, transform.position, Quaternion.identity, transform);
 
         Radiation jackRadiation = _wheelWindTrigger.GetComponentInChildren<Radiation>();
@@ -258,6 +261,7 @@ public class MonsterSkillManager : MonoBehaviour
         float distance = Vector3.Distance(transform.position, _player.transform.position);
 
         BombSkill.CanUseSkill = false;
+        StartCoroutine(CanSkill());
 
         GameObject bomb = Instantiate(_bombPrefab, _muzzlePoint.position, _muzzlePoint.rotation, transform);
         Rigidbody bombRb = bomb.GetComponent<Rigidbody>();
@@ -276,6 +280,7 @@ public class MonsterSkillManager : MonoBehaviour
         float distance = Vector3.Distance(transform.position, _player.transform.position);
 
         MineSkill.CanUseSkill = false;
+        StartCoroutine(CanSkill());
 
         GameObject mine = Instantiate(_minePrefab, _muzzlePoint.position, _muzzlePoint.rotation, transform);
         Rigidbody mineRb = mine.GetComponent<Rigidbody>();
@@ -294,7 +299,7 @@ public class MonsterSkillManager : MonoBehaviour
         StimPakSkill.CanUseSkill = false;
 
         /*_effectManager.ParticlePlay("Syringe1", 3f, transform.position, Quaternion.identity, transform);*/
-        EffectManager.instance.ParticlePlay("RevengeAura", 4f, _jackTheRipper.transform.position, Quaternion.identity, transform);
+        EffectManager.instance.ParticlePlay("RevengeAura", 6f, _jackTheRipper.transform.position, Quaternion.identity, transform);
 
         MonsterData JackData = _jackTheRipper.GetComponent<MonsterData>();
         JackData.CurHp += 500;
@@ -319,6 +324,8 @@ public class MonsterSkillManager : MonoBehaviour
     public IEnumerator DashAttackRoutine()
     {
         DashAttackSkill.CanUseSkill = false;
+        StartCoroutine(CanSkill());
+
         _animator.SetBool("DashAttack", true);
 
         if (jumpRoutine_dashAttack == null)
@@ -386,6 +393,8 @@ public class MonsterSkillManager : MonoBehaviour
     public IEnumerator ElectricWallRoutine()
     {
         ElectricWallSkill.CanUseSkill = false;
+        StartCoroutine(CanSkill());
+
 
         _electricWallPosition = transform.position + transform.forward * 5f;
 
@@ -414,17 +423,19 @@ public class MonsterSkillManager : MonoBehaviour
     public IEnumerator ThunderRoutine()
     {
         ThunderSkill.CanUseSkill = false;
+        StartCoroutine(CanSkill());
+
 
         for (int i = 0; i < 11; i++)
         {
-            Vector3 randomPos = new Vector3(Random.Range(-30f, 30f), 0, Random.Range(-30f, 30f));
+            Vector3 randomPos = new Vector3(transform.position.x + Random.Range(-22f, 22f), 0, transform.position.z + Random.Range(-22f, 22f));
             GameObject thunder = Instantiate(_thunderPrefab, randomPos, Quaternion.identity);
             EffectManager.instance.ParticlePlay("Lightning", ThunderSkill.Duration, thunder.transform.position, Quaternion.identity);
             EffectManager.instance.ParticlePlay("LightningFloor", 5f, thunder.transform.position, Quaternion.identity);
 
             yield return Util.GetDelay(0.1f);
 
-            Vector3 randomPos2 = new Vector3(Random.Range(-30f, 30f), 0, Random.Range(-30f, 30f));
+            Vector3 randomPos2 = new Vector3(transform.position.x + Random.Range(-22f, 22f), 0, transform.position.z + Random.Range(-22f, 22f));
             GameObject thunder2 = Instantiate(_thunderPrefab, randomPos2, Quaternion.identity);
             EffectManager.instance.ParticlePlay("Lightning", ThunderSkill.Duration, thunder2.transform.position, Quaternion.identity);
             EffectManager.instance.ParticlePlay("LightningFloor", 5f, thunder2.transform.position, Quaternion.identity);
@@ -444,6 +455,8 @@ public class MonsterSkillManager : MonoBehaviour
     public IEnumerator TrippleAttackRoutine()
     {
         TrippleAttackSkill.CanUseSkill = false;
+        StartCoroutine(CanSkill());
+
 
         yield return Util.GetDelay(TrippleAttackSkill.CoolTime);
         trippleAttackRoutine = null;
@@ -666,4 +679,12 @@ public class MonsterSkillManager : MonoBehaviour
         GameObject projectile = Object.Instantiate(_projectile, _muzzlePoint.position, _muzzlePoint.rotation, transform);
     }
     #endregion
+
+    
+    IEnumerator CanSkill()
+    {
+        _monsterData.CanSkill = false;
+        yield return Util.GetDelay(3f);
+        _monsterData.CanSkill = true;
+    }
 }

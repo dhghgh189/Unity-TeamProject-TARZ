@@ -8,18 +8,21 @@ public class PoisonFog : MonoBehaviour, ISpec
     private Interaction interaction;        // 상태이상을 담당하는 클래스
     private SphereCollider coll;            // 독 안개의 감지를 담당할 콜라이더
     private float operationTime;            // 동작하는 시간
+    private float damage;
+    private WaitQueue damagedQueue;
+    private IDamagable target;
 
     private void Awake()
     {
         coll = GetComponent<SphereCollider>();
+        damagedQueue = GetComponentInParent<WaitQueue>();
     }
 
     public void SetSpec(Spec spec, int level)
     {
-        coll.radius = spec.Range(level);
+        transform.localScale = Vector3.one * spec.Range(level);
         operationTime = spec.Time(level);
-        interaction = new Interaction(SkillEnum.InteractionType.DOT);
-        interaction.SetSpec(spec, level);
+        damage = spec.Power(level);
         Init();
     }
 
@@ -29,17 +32,18 @@ public class PoisonFog : MonoBehaviour, ISpec
         Destroy(gameObject, operationTime);
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.layer.Equals(LayerMask.NameToLayer("Monster")))
         {
-            interaction.Activate(gameObject, other.gameObject);
-        }
-    }
+            if (damagedQueue.IsTargetInQueue(other.gameObject)) return;
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.magenta;
-        Gizmos.DrawWireSphere(transform.position, coll.radius);
+            target = other.GetComponent<IDamagable>();
+            if (target == null) return;
+
+            target.TakeDamage(damage);
+
+            damagedQueue.Add(other.gameObject, 1f);
+        }
     }
 }

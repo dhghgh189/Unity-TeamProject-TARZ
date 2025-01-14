@@ -11,10 +11,6 @@ public class BossHPGauge : MonoBehaviour
     [SerializeField]private Slider hpFill;
     [SerializeField] private TMP_Text nameText;
 
-    private void Awake()
-    {
-    }
-
     public void OnChangeMonsterHP(float curHP, float maxHP)
     {
         hpFill.value = curHP;
@@ -24,7 +20,7 @@ public class BossHPGauge : MonoBehaviour
     public void SetInfo(MonsterData data)
     {
         Debug.Log(data.name);
-        nameText.text = data.name;
+        nameText.text = data.name;  // TODO : name 자리에 MonsterData의 name 변수 받아오기
         hpFill.maxValue = data.MaxHp;
         hpFill.value = data.CurHp;
 

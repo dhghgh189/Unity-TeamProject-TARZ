@@ -245,6 +245,10 @@ public class MapGenerator : MonoBehaviour
         Destroy(roomChecker.gameObject);
 
         playerController.gameObject.SetActive(true);
+
+        // 사운드 재생 (임시)
+        if (SoundManager.BGM.clip != SoundManager.SoundData_UI.FieldBGM)
+            SoundManager.PlayBGM(SoundManager.SoundData_UI.FieldBGM);
     }
 
     private void SetBossRoomDir()

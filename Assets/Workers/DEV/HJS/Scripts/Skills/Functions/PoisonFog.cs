@@ -18,7 +18,7 @@ public class PoisonFog : MonoBehaviour, ISpec
     {
         coll.radius = spec.Range(level);
         operationTime = spec.Time(level);
-        interaction = new Interaction(SkillEnum.InteractionType.Poison);
+        interaction = new Interaction(SkillEnum.InteractionType.DOT);
         interaction.SetSpec(spec, level);
         Init();
     }

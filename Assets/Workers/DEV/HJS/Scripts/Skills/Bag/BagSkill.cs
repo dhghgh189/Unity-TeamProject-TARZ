@@ -5,6 +5,7 @@ using static BagSkillEnum;
 
 public class BagSkill : IBagAct
 {
+    protected BagSkillManager manager;
     protected BagIndexKey keyName;
     protected BagSkillDataSO skilldata;
     protected float maxGauge;
@@ -31,12 +32,14 @@ public class BagSkill : IBagAct
         }
     }
 
+    public BagSkillManager Manager { set => manager = value; }
+
     // 게이지 충전
     public void Charge() => curGauge = (curGauge + chargeAmount >= maxGauge) ? maxGauge : curGauge + chargeAmount;
     //게이지 사용 가능한지 확인
     public bool IsCanUse() => curGauge >= useAmount;
     // 게이지 사용
-    public void Use() => curGauge -= useAmount;
+    public void Use() { curGauge -= useAmount; manager.OnUIUpdateEvent?.Invoke(); }
     public virtual void RetrunFeature()
     {
     }

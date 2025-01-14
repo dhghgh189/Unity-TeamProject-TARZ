@@ -4,6 +4,21 @@ using UnityEngine;
 
 public class EffectManager : MonoBehaviour
 {
+    public static EffectManager instance;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     Dictionary<string, Queue<GameObject>> particleDic = new();
     public void ParticlePlay(string particleName, float lifeTime, Vector3 pos, Quaternion rot, Transform pallowingTransform = null)
     {

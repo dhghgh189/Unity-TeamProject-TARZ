@@ -10,12 +10,14 @@ public class UI_StatModel : MonoBehaviour
     [SerializeField] private TMP_Text maxHp;
     [SerializeField] private TMP_Text maxStamina;
     [SerializeField] private TMP_Text moveSpeed;
+    [SerializeField] private TMP_Text blackChip;
     private void Awake()
     {
         statModel.OnStatChange += StatModel_OnStatChange;
         statModel.OnMaxHpChange += StatModel_OnMaxHpChange;
         statModel.OnMaxStaminaChange += StatModel_OnMaxStaminaChange;
         statModel.OnMoveSpeedChange += StatModel_OnMoveSpeedChange;
+        statModel.OnBlackChipChange += StatModel_OnBlackChipChange;
 
         maxHp.text = $"체력\t\t{statModel.MaxHp}";
         maxStamina.text = $"스테미나\t{statModel.MaxStamina}";
@@ -23,6 +25,11 @@ public class UI_StatModel : MonoBehaviour
 
         // UI 갱신을 위한 의미있는 함수
         statModel.SetAbility(AdditionAbility.AllPowerPer, 0);
+    }
+
+    private void StatModel_OnBlackChipChange(float obj)
+    {
+        blackChip.text = $"{obj}";
     }
 
     private void StatModel_OnMoveSpeedChange(float obj)

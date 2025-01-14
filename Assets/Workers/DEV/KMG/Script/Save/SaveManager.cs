@@ -9,6 +9,7 @@ public class SaveManager : MonoBehaviour
     [Inject] Inventory inventory;
     [Inject] Equipment equipment;
     [Inject] PlayerSkillHandler handler;
+    [Inject] BagSkillManager bagSkillManager;
 
     [ContextMenu("Save")]
     public void Save()
@@ -26,6 +27,8 @@ public class SaveManager : MonoBehaviour
         slotData.DataChip = statModel.Chip;
 
         slotData.InGameSaveData.blueChipSaveDatas = handler.SaveBlueChips();
+
+        slotData.InGameSaveData.redChipSaveDatas = bagSkillManager.SaveRedChips();
 
         // PlayerPrefs으로 세이브 데이터 저장
         if (string.IsNullOrEmpty(slotData.SlotPath))

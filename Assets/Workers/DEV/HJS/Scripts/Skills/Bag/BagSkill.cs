@@ -8,6 +8,7 @@ public class BagSkill : IBagAct
     protected BagSkillManager manager;
     protected BagIndexKey keyName;
     protected BagSkillDataSO skilldata;
+    public BagSkillDataSO SkillData { get { return skilldata; } }
     protected float maxGauge;
     public float MaxGauge { get => maxGauge; }
     protected float chargeAmount;

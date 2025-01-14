@@ -3,6 +3,7 @@ using System.Collections;
 using Unity.Mathematics;
 using UnityEngine;
 using Zenject;
+using static MonsterData;
 
 /// <summary>
 /// 보스는 Instantiate로 생성해서 따로 관리 고려중..
@@ -18,6 +19,10 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
     public event Action<float, float> OnDamage;
 
     private MonsterData _monsterData;
+    public MonsterData MonsterData {  get { return _monsterData; } }
+
+    private MonsterView _monsterView;
+    public MonsterView MonsterView { get { return _monsterView; } }
 
     private Rigidbody _rigid;
 
@@ -37,7 +42,9 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
 
     [SerializeField] GameObject _chip;
 
-    [SerializeField] GameObject _bluChip;
+    [SerializeField] GameObject _blueChip;
+
+    [SerializeField] GameObject _redChip;
 
     [Inject] Transform dropPool;
 
@@ -52,6 +59,11 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
         _skill = GetComponent<MonsterSkillManager>();
         _dissolve = GetComponent<DissolveController>();
         _capsuleCollider = GetComponent<CapsuleCollider>();
+    }
+
+    private void Start()
+    {
+        _monsterView = FindAnyObjectByType<MonsterView>(FindObjectsInactive.Include);
     }
 
     private void OnEnable()
@@ -129,6 +141,13 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
 
         if (_monsterData.MonsterTIer != MonsterData.MonsterTier.Normal)
             DropBlueChip(curPos);
+
+        if (_monsterData.MonsterTIer == MonsterData.MonsterTier.Boss)
+        {
+            DropRedChip(curPos);
+            _monsterView.gameObject.SetActive(false);
+        }
+
     }
 
     public void DieDissolve()
@@ -294,6 +313,11 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
                 return;
             }
         }
-        Instantiate(_bluChip, curPos, transform.rotation, dropPool).GetComponent<DropBlueChip>().DropChipInit(tier);
+        Instantiate(_blueChip, curPos, transform.rotation, dropPool).GetComponent<DropBlueChip>().DropChipInit(tier);
+    }
+
+    private void DropRedChip(Vector3 curPos)
+    {
+        Instantiate(_redChip, curPos, transform.rotation, dropPool).GetComponent<DropRedChip>().DropChipInit();
     }
 }

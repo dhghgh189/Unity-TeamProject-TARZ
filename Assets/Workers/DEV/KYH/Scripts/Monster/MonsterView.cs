@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class MonsterView : MonoBehaviour
 {
-    [SerializeField] private GameObject hpGauge;
+    [SerializeField] public GameObject hpGauge;
 
     public void AddGauge(MonsterData data)
     {

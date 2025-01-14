@@ -1,0 +1,23 @@
+using TMPro;
+using UnityEngine;
+using UnityEngine.Localization;
+using UnityEngine.UI;
+using Zenject;
+
+public class RedchipPanel : MonoBehaviour
+{
+    [SerializeField] private TMP_Text skillName;
+    [SerializeField] private TMP_Text skillGauge;
+    [SerializeField] private TMP_Text skillDescription;
+    [SerializeField] private Image skillIcon;
+
+    //[SerializeField] private LocalizedStringTable localTable;
+
+    public void InitRedchipSkill(BagSkillDataSO data)
+    {
+        skillName.text = data.SkillName.ToString();
+        skillGauge.text = $"{data.MaxGauge} / {data.UseAmount}";
+        skillDescription.text = data.SkillDescription;
+        skillIcon.sprite = data.SkillIcon;
+    }
+}

@@ -10017,6 +10017,7 @@ MonoBehaviour:
   target: {fileID: 0}
   RangeCircle: {fileID: 3795758562320756798}
   IsGrabing: 0
+  quest_Interaction: {fileID: 0}
   range: 2
   angle: 260
   throwForce: 10
@@ -18677,14 +18678,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.6509434, g: 0.61102706, b: 0.61102706, a: 1}
+  m_Color: {r: 0.31132078, g: 0.31132078, b: 0.31132078, a: 0.8627451}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 2060285760, guid: ccc0062fe5f2db5459e5e50ef4099e03, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -37662,6 +37663,7 @@ MonoBehaviour:
   manaSkillPanel: {fileID: 2171273694688172250}
   currentStateView: 0
   cameraLookPos: {fileID: 6075622225480372493}
+  effect: {fileID: 0}
   StateTransfer: {fileID: 0}
   BagSkillHandler: {fileID: 0}
   ManaSkillHandler: {fileID: 1923758049850810125}
@@ -38098,6 +38100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2a658a9faee6bf419eeac36b2cb8018, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  questNPC: {fileID: 0}
   questPanel: {fileID: 3402326213153267099}
   QuestCountText: {fileID: 8942393599686932613}
   questDoingPanel: {fileID: 3738722608906276660}

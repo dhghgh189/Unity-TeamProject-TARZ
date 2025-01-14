@@ -13,6 +13,8 @@ public class BagSkillHandler : MonoBehaviour
 {
     [Inject] BagSkillManager manager;
     [Inject] BagSkillContainerSO container;
+    [Inject] InGameSaveData saveData;
+
     [SerializeField] PlayerController player;
     [SerializeField] LinkedList<BaseBagState> actList;
     [SerializeField] int selectIndex;
@@ -33,6 +35,7 @@ public class BagSkillHandler : MonoBehaviour
     {
         player = GetComponent<PlayerController>();
         selectIndex = -1;
+        manager.LoadRedChip(saveData.redChipSaveDatas);
     }
 
     private void Start()
@@ -54,7 +57,7 @@ public class BagSkillHandler : MonoBehaviour
         {
             AddBagSkill(BagIndexKey.JunkFist, 0);
             AddBagSkill(BagIndexKey.ScrapBurst, 1);
-            AddBagSkill(BagIndexKey.CompactCanon, 2);
+            //AddBagSkill(BagIndexKey.CompactCanon, 2);
         }
         else if (Input.GetKeyDown(KeyCode.F9))
         {
@@ -64,14 +67,19 @@ public class BagSkillHandler : MonoBehaviour
         {
             Debug.Log($"가방 스킬 1번 사용! 성공 여부 : {UseBagSkill(1)}");
         }
-        else if (Input.GetKeyDown(KeyCode.F11))
-        {
-            Debug.Log($"가방 스킬 2번 사용! 성공 여부 : {UseBagSkill(2)}");
-        }
+        //else if (Input.GetKeyDown(KeyCode.F11))
+        //{
+        //    Debug.Log($"가방 스킬 2번 사용! 성공 여부 : {UseBagSkill(2)}");
+        //}
     }
 
-    public void AddBagSkill(BagIndexKey key, int index)
+    public void AddBagSkill(BagIndexKey key, int index = -1)
     {
+        if (index == -1)
+        {
+            index = manager.CheckEmptySlot();
+        }
+
         // BagSkillManager -> key로 Dictionary에 있는 new 이 친구를 찾아서 index에 넣는다
         if (dic.TryGetValue(key, out var bagAct))
         {

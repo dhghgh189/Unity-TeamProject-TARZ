@@ -43,6 +43,8 @@ public class AblityAdapter : MonoBehaviour
 
     public void SetEnable(string name)
     {
+        if(components is null) { Debug.Log($"없다 {name}"); return; }
+
         if (components.TryGetValue(name, out IEnable enable))
         {
             enable.Enable = true;

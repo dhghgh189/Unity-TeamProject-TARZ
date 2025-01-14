@@ -55,13 +55,23 @@ public class ScrapMatelObject : MonoBehaviour
 
     public void Throw()
     {
+        rigid.useGravity = false;
         rigid.isKinematic = false;
-        rigid.useGravity = true;
         // 힘만큼 던져버리기
-        rigid.AddForce(dir * force * maxTime, ForceMode.Impulse);
+        rigid.velocity = dir * force * maxTime;
         // Collider 활성화
         coll.enabled = true;
+
+        StartCoroutine(DestroyRoutine());
     }
+
+    private IEnumerator DestroyRoutine()
+    {
+        yield return Util.GetDelay(8 / (force * maxTime));
+        Destroy(gameObject);
+    }
+
+
 
     public void OnTriggerEnter(Collider other)
     {

@@ -35,8 +35,10 @@ public class BagCompactCanonSkill : BagSkill
         this.owner = owner;
 
         acts = new LinkedList<BaseBagState>();
+        acts.AddLast(new BagCompactCanon_1(owner, this));
+        acts.AddLast(new BagCompactCanon_2(owner, this));
 
-        tmp = Resources.Load("Managed/BagSkill/ScrapMatelObject") as GameObject;
+        tmp = Resources.Load("Managed/BagSkill/ScrapMetalObject") as GameObject;
     }
 
     /// <summary>
@@ -84,6 +86,8 @@ public class BagCompactCanonSkill : BagSkill
 
             lookDir = owner.transform.forward;
 
+            parent.instance.dir = lookDir;
+
             owner.Anim.CrossFade(Animator.StringToHash(animName), 0.01f);
         }
 
@@ -96,15 +100,21 @@ public class BagCompactCanonSkill : BagSkill
                 owner.Movement.LookAt(lookDir);
             }
 
-            // TODO : 오브젝트가 풀 차징이 되었을 때 발동
+            if (parent.instance == null) return;
 
+            if (parent.instance.IsFull)
+            {
+                parent.instance.gameObject.transform.parent = null;
+                owner.BagSkillHandler.NextStep();
+            }
         }
 
-        public override void OnAction()
+        public override void OnExit()
         {
-            // 거대 고철 덩어리 생성
-            base.OnAction();
+            base.OnExit();
+            UnityEngine.Object.Destroy(parent.instance.gameObject);
         }
+
     }
 
     public class BagCompactCanon_2 : BaseBagState
@@ -116,19 +126,23 @@ public class BagCompactCanonSkill : BagSkill
         private Vector3 moveDir;
         private Vector3 lookDir;
 
+        private float animTimer;
+
         public BagCompactCanon_2(PlayerController owner, BagCompactCanonSkill parent) : base(owner)
         {
             this.parent = parent;
+        }
+        private IEnumerator AnimRoutine()
+        {
+            yield return new WaitForSeconds(0.1f);
+            animTimer = owner.GetCurrentAnimTime();
         }
 
         public override void OnEnter()
         {
             base.OnEnter();
-            Transform createPoint = GameObject.FindWithTag("CreatePoint").transform;
-            parent.instance = UnityEngine.Object.Instantiate(parent.tmp, createPoint.position, Quaternion.identity).GetComponent<ScrapMatelObject>();
-            parent.instance.gameObject.transform.parent = createPoint;
-
-            parent.instance.Init(parent.skilldata);
+            parent.instance.Throw();
+            parent.Use();
 
             owner.Movement.Rigid.velocity = Vector3.zero;
 
@@ -161,20 +175,11 @@ public class BagCompactCanonSkill : BagSkill
                 owner.Movement.LookAt(lookDir);
             }
 
-            // TODO : 오브젝트가 풀 차징이 되었을 때 발동
-            if (parent.instance == null) return;
-
-            if(parent.instance.IsFull)
+            if (animTimer <= 0)
             {
-                parent.instance.gameObject.transform.parent = null;
                 owner.BagSkillHandler.NextStep();
             }
-        }
-
-        public override void OnAction()
-        {
-            // 거대 고철 덩어리 생성
-            base.OnAction();
+            animTimer -= Time.deltaTime;
         }
     }
 }

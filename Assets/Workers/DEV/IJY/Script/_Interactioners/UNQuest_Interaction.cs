@@ -1,9 +1,11 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class UNQuest_Interaction : InteractionOBJ_Base, Interaction_Ibase_Activate
 {
-    private PlayerController player;
+    [SerializeField] private PlayerController player;
     private QuestManager questManager;
+    public UnityAction OnChangeQuestUI;
     public int CurCount { get { return curCount; } set { curCount = value; } }
 
     [Header("돌발 퀘스트 NPC")]
@@ -17,13 +19,14 @@ public class UNQuest_Interaction : InteractionOBJ_Base, Interaction_Ibase_Activa
 
     void Init()
     {
-        questManager = FindObjectOfType<QuestManager>();
+        OnChangeQuestUI += OnChangeCount;
+
+        player = FindObjectOfType<PlayerController>();
+        questManager = player.gameObject.GetComponent<QuestManager>();
         QuestCount = Random.Range(3, 6);
         Reward = Random.Range(300f, 500f);
         curCount = 0;
         isOngoing = false;
-
-        OnChangeCount(curCount);
     }
 
     public void Activate()
@@ -73,18 +76,26 @@ public class UNQuest_Interaction : InteractionOBJ_Base, Interaction_Ibase_Activa
 
     void ClearQuest()
     {
+        // TODO : 리워드 지급 UI
+
         player.Stat.BlackChip += Reward;
         isOngoing = false;
         questManager.questDoingPanel.SetActive(false);
+
+        this.gameObject.SetActive(false);
     }
 
-    public void OnChangeCount(int count)
+    private void OnChangeCount()
     {
-        questManager.questDoingText.text = $"{count} / <color=orange>{QuestCount}</color>";
+        if (curCount >= QuestCount) curCount = QuestCount;
+        else curCount++;
+
+        questManager.questDoingText.text = $"{curCount} / <color=orange>{QuestCount}</color>";
     }
 
     void OnDisable()
     {
         isOngoing = false;
+        OnChangeQuestUI -= OnChangeCount;
     }
 }

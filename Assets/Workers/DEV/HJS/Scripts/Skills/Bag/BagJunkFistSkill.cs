@@ -177,6 +177,8 @@ public class BagJunkFistSkill : BagSkill
         {
             foreach (var fist in owner.BagSkillHandler.fists)
             {
+                EffectManager.instance.ParticlePlay("BagSkill_11", 1f, fist.gameObject.transform.position, fist.gameObject.transform.rotation, fist.gameObject.transform);
+
                 fist.OffEffect();
                 fist.OnFist();
             }

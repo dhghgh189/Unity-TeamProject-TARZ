@@ -92,9 +92,13 @@ public class SlowTrap : Trap
             MonsterData monster = other.GetComponent<MonsterData>();
             if (monster != null)
             {
-                if (!monsterBaseSpeedDic.TryAdd(monster, monster.agent.speed))
+                if (!monsterBaseSpeedDic.ContainsKey(monster))
                 {
                     monsterBaseSpeedDic.Add(monster, monster.agent.speed);
+                }
+                else
+                {
+                    monsterBaseSpeedDic[monster] = monster.agent.speed;
                 }
                 monster.agent.speed *= (1f - slowPercent);
                 return;

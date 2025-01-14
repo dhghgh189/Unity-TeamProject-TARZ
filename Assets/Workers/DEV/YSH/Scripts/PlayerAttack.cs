@@ -495,6 +495,9 @@ public class PlayerAttack : MonoBehaviour
         monster.rigid.AddForce((mainCamTrf.forward + Vector3.up * 0.2f) * CounterThrowForce, ForceMode.Impulse);
         monster.rigid.AddTorque(mainCamTrf.right * 3f, ForceMode.Impulse);
         monster.coll.enabled = true;
+
+        // 사운드 재생
+        SoundManager.PlaySFX(SoundManager.SoundData_P.CounterThrow);
     }
 
     public void CounterMelee()

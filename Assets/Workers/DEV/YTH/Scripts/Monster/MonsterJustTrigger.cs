@@ -76,6 +76,7 @@ public class MonsterJustTrigger : MonoBehaviour
         {
             Debug.Log("저스트회피 성공!");
             //EffectManager.instance.ParticlePlay("Nova", 2f, _player.transform.position, _player.transform.rotation);
+            SoundManager.PlaySFX(SoundManager.SoundData_P.JustSuccess);
 
             _playerStat.CurrentMp += 10;
             _monsterData.IsCountered = true;

@@ -285,6 +285,7 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
 
             // 범위 타격 실행
             _skill.Explosion(4f, 360f, 50f);
+            SoundManager.PlaySFX(SoundManager.SoundData_P.CounterThrowHit);
 
             // 반격 상황 종료
             _monsterData.IsCountered = false;

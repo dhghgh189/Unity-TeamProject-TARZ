@@ -165,9 +165,11 @@ public class MonsterSkillManager : MonoBehaviour
         {
             yield return Util.GetDelay(0.8f);
             jumpRoutine_jumpAttack = StartCoroutine(JumpRoutine_JumpAttack());
-            yield return Util.GetDelay(JumpAttackSkill.InAirTime);
-            EffectManager.instance.ParticlePlay("Hulk_Jump", 2.5f, transform.position, Quaternion.identity, transform);
+           
         }
+
+        yield return Util.GetDelay(JumpAttackSkill.InAirTime);
+        EffectManager.instance.ParticlePlay("Hulk_Jump", 2.5f, transform.position, Quaternion.identity, transform);
 
         yield return Util.GetDelay(_jumpAttack.CoolTime);
         jumpAttackRoutine = null;
@@ -388,7 +390,6 @@ public class MonsterSkillManager : MonoBehaviour
         _electricWallPosition = transform.position + transform.forward * 5f;
 
         GameObject electricWall = Instantiate(_electricWallPrefab, _electricWallPosition, transform.rotation);
-        EffectManager.instance.ParticlePlay("ElectricWall", 5f, electricWall.transform.position, Quaternion.identity);
         EffectManager.instance.ParticlePlay("ElectricWallFX", 5f, electricWall.transform.position, Quaternion.identity);
 
         for (int i = 0; i < 6; i++)
@@ -397,7 +398,6 @@ public class MonsterSkillManager : MonoBehaviour
             _electricWallPosition2 = electricWall.transform.position + electricWall.transform.forward * (7f * (i + 1));
            
             GameObject electricWall2 = Instantiate(_electricWallPrefab, _electricWallPosition2, electricWall.transform.rotation);
-            EffectManager.instance.ParticlePlay("ElectricWall", 5f, electricWall2.transform.position, Quaternion.identity);
             EffectManager.instance.ParticlePlay("ElectricWallFX", 5f, electricWall2.transform.position, Quaternion.identity);
         }
 

@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class Loading : MonoBehaviour
@@ -12,6 +13,9 @@ public class Loading : MonoBehaviour
     /// <param name="sceneType"></param>
     public void StartLoading(Define.SceneType sceneType)
     {
+        // 로딩 동안 조작을 막는다.
+        InputSystem.actions.FindActionMap("Player").Disable();
+        
         gameObject.SetActive(true);
         loadingRoutine = StartCoroutine(LoadingRoutine(sceneType));
     }
@@ -42,6 +46,9 @@ public class Loading : MonoBehaviour
 
         yield return Util.GetDelay(0.2f);
         gameObject.SetActive(false);
+
+        // 로딩 종료되면 조작을 허용한다.
+        InputSystem.actions.FindActionMap("Player").Enable();
 
         loadingRoutine = null;
 

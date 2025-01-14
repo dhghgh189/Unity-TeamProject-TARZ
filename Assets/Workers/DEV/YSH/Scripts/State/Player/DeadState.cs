@@ -18,6 +18,7 @@ public class DeadState : BaseState<PlayerController>
         timer = 0;
         // 사운드 재생
         SoundManager.PlaySFX(SoundManager.SoundData_P.Dead);
+        SoundManager.PlayBGM(SoundManager.SoundData_UI.GameOver);
         owner.Anim.CrossFade(Define.HASH_ANIM_DEAD, 0.125f);
         owner.StartCoroutine(GameOverRoutine());
         owner.saveData.chapterSaveData = new();

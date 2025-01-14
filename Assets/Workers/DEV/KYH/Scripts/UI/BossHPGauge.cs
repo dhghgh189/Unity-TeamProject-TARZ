@@ -8,13 +8,11 @@ public class BossHPGauge : MonoBehaviour
 {
     private PooledObject pool;
 
-    private Slider hpFill;
-    private TMP_Text nameText;
+    [SerializeField]private Slider hpFill;
+    [SerializeField] private TMP_Text nameText;
 
     private void Awake()
     {
-        hpFill = GetComponent<Slider>();
-        nameText = GetComponentInChildren<TMP_Text>();
     }
 
     public void OnChangeMonsterHP(float curHP, float maxHP)
@@ -25,6 +23,7 @@ public class BossHPGauge : MonoBehaviour
 
     public void SetInfo(MonsterData data)
     {
+        Debug.Log(data.name);
         nameText.text = data.name;
         hpFill.maxValue = data.MaxHp;
         hpFill.value = data.CurHp;

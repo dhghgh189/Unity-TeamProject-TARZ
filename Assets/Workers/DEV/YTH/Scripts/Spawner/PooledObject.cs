@@ -18,6 +18,7 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
     public event Action<float, float> OnDamage;
 
     private MonsterData _monsterData;
+    public MonsterData MonsterData {  get { return _monsterData; } }
 
     private Rigidbody _rigid;
 

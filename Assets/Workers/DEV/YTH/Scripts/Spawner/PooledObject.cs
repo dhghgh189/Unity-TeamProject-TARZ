@@ -107,7 +107,7 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
 
     public void Die()
     {
-        if (player.interactioner.quest_Interaction != null) player.interactioner.quest_Interaction.CurCount++; 
+        player.interactioner.quest_Interaction.OnChangeQuestUI?.Invoke(); 
 
         _monsterData.IsDead = true;
 

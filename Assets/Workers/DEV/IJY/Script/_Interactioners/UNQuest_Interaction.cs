@@ -1,29 +1,33 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class UNQuest_Interaction : InteractionOBJ_Base, Interaction_Ibase_Activate
 {
-    private PlayerController player;
+    [SerializeField] private PlayerController player;
     private QuestManager questManager;
+    public UnityAction OnChangeQuestUI;
     public int CurCount { get { return curCount; } set { curCount = value; } }
 
     [Header("돌발 퀘스트 NPC")]
     [SerializeField] private int curCount;
     [SerializeField] int QuestCount;
     [SerializeField] bool isOngoing;
-    [SerializeField] float Reward;
+    [SerializeField] int Reward;
 
 
     void Start() => Init();
 
     void Init()
     {
-        questManager = FindObjectOfType<QuestManager>();
-        QuestCount = Random.Range(3, 6);
-        Reward = Random.Range(300f, 500f);
+        OnChangeQuestUI += OnChangeCount;
+
+        player = FindObjectOfType<PlayerController>();
+        questManager = player.gameObject.GetComponent<QuestManager>();
+        QuestCount = Random.Range(5, 10);
+        Reward = Random.Range(300, 500);
+        questManager.questRewardText.text = Reward.ToString();
         curCount = 0;
         isOngoing = false;
-
-        OnChangeCount(curCount);
     }
 
     public void Activate()
@@ -73,18 +77,30 @@ public class UNQuest_Interaction : InteractionOBJ_Base, Interaction_Ibase_Activa
 
     void ClearQuest()
     {
+        // TODO : 리워드 지급 UI
+
         player.Stat.BlackChip += Reward;
         isOngoing = false;
+
         questManager.questDoingPanel.SetActive(false);
+        questManager.questClearPanel.SetActive(true);
+        player.interactioner.quest_Interaction = null;
+        questManager.questNPC = null;
+
+        this.gameObject.SetActive(false);
     }
 
-    public void OnChangeCount(int count)
+    private void OnChangeCount()
     {
-        questManager.questDoingText.text = $"{count} / <color=orange>{QuestCount}</color>";
+        if (curCount >= QuestCount) curCount = QuestCount;
+        else curCount++;
+
+        questManager.questDoingText.text = $"{curCount} / <color=orange>{QuestCount}</color>";
     }
 
     void OnDisable()
     {
         isOngoing = false;
+        OnChangeQuestUI -= OnChangeCount;
     }
 }

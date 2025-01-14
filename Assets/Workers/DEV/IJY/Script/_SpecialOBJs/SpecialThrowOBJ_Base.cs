@@ -10,6 +10,7 @@ public class SpecialThrowOBJ_Base : MonoBehaviour, Interaction_Ibase_GrabAct
     public PlayerController playerController { get; set; }
     public Collider col;
     public Child_SpecialTrigger trigger;
+    public EffectManager effectManager;
 
     void Awake() => Init();
 
@@ -17,6 +18,7 @@ public class SpecialThrowOBJ_Base : MonoBehaviour, Interaction_Ibase_GrabAct
     {
         rigidOBJ = GetComponent<Rigidbody>();
         trigger = new GameObject("UI_trigger").AddComponent<Child_SpecialTrigger>();
+        effectManager = FindObjectOfType<EffectManager>();
         trigger.transform.position = this.transform.position;
         trigger.transform.parent = this.transform;
 

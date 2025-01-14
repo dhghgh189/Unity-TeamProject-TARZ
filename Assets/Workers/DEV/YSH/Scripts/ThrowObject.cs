@@ -27,6 +27,8 @@ public class ThrowObject : MonoBehaviour, IDrainable
 
     private BoxCollider coll;
 
+    private AudioClip hitClip;
+
     private void Awake()
     {
         setModeling = FindAnyObjectByType<RandomModeling>();
@@ -56,9 +58,10 @@ public class ThrowObject : MonoBehaviour, IDrainable
         throwEffects.Add(effect);
     }
 
-    public void SetDamage(float damage)
+    public void SetInfo(float damage, AudioClip clip = null)
     {
         this.damage = damage;
+        hitClip = clip;
     }
 
     public void Throw(Vector3 dir, float throwForce)
@@ -114,6 +117,11 @@ public class ThrowObject : MonoBehaviour, IDrainable
             {
                 owner.Stat.CurrentMp += owner.Stat.GetMpGain(EMpAmountType.Throw);
                 owner.SkillHandler.ThrowObjectCollision(gameObject, other.gameObject);
+            }
+
+            if (hitClip != null)
+            {
+                SoundManager.PlaySFX(hitClip);
             }
         }
 

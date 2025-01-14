@@ -39,7 +39,7 @@ public class Projectile_Bomb : MonoBehaviour
     {
         yield return new WaitForSeconds(3f);
         _sphereCollider.enabled = true;
-        _monsterSkillManager._effectManager.ParticlePlay("Bomb_Aim1", 3f, transform.position, Quaternion.identity, transform);
+        EffectManager.instance.ParticlePlay("Bomb_Aim1", 3f, transform.position, Quaternion.identity, transform);
         yield return new WaitForSeconds(0.1f);
         Destroy(gameObject);
     }

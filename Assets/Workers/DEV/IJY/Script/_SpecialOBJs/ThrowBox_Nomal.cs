@@ -36,7 +36,7 @@ public class ThrowBox_Nomal : SpecialThrowOBJ_Base
     private void ThrowingBox(GameObject OBJ)
     {
         if (isDestroy) return;
-        SoundManager.PlaySFX(SoundManager.SoundData_P.Throws[0]);
+        SoundManager.PlaySFX(SoundManager.SoundData_P.Throws[0].Clip);
 
         if (OBJ.layer == NomalBoxLayer)
         {

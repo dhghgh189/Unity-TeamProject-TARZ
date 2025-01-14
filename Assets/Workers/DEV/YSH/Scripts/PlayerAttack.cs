@@ -308,7 +308,7 @@ public class PlayerAttack : MonoBehaviour
         damage = damage * player.Stat.DefaultPowerPer;
         // 최종 추가 데미지 추가
         damage += player.Stat.ExtraDamage;
-        Debug.Log($"final damage : {damage}");
+        //Debug.Log($"final damage : {damage}");
         tobj.SetInfo(damage, hitClip);
         tobj.adapter = player.AblityAdapter;
         tobj.handler = player.SkillHandler;

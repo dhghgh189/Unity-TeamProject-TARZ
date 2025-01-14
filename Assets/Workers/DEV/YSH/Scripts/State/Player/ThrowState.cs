@@ -91,6 +91,10 @@ public class ThrowState : BaseState<PlayerController>
         MultiActionInfo[] multiActions = owner.Attack.ThrowAttackInfo[owner.Attack.ThrowCount].MultiActions;
         if (multiActions.Length <= 0)
         {
+            // 선입력으로 인한 예외 처리
+            if (owner.Attack.ObjectCount <= 0)
+                return false;
+
             owner.Anim.CrossFade(throwAnimHashes[owner.Attack.ThrowCount], 0.01f);
             return true;
         }

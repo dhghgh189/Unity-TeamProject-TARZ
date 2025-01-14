@@ -35,7 +35,7 @@ public class MSkill_WheelWind : Action
 
     public override TaskStatus OnUpdate()
     {
-        if (_monsterSkillManager.WheelWindSkill.CanUseSkill == true && _monsterData.CurHp <= _monsterData.MaxHp / 2 && _distance <= 10 && _monsterSkillManager.wheelWindRoutine == null)
+        if (_monsterSkillManager.WheelWindSkill.CanUseSkill == true && _monsterData.CurHp <= _monsterData.MaxHp / 2 && _distance <= 10 && _monsterSkillManager.wheelWindRoutine == null && _monsterData.CanSkill)
         {
             _monsterSkillManager.wheelWindRoutine = StartCoroutine(_monsterSkillManager.WheelWindRoutine());
             _animator.SetTrigger("WheelWind");

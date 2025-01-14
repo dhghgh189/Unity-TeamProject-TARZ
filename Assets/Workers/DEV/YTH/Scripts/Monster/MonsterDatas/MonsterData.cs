@@ -43,6 +43,9 @@ public class MonsterData : MonoBehaviour
     private bool _isDead; // 사망 시
     public bool IsDead { get { return _isDead;  }  set { _isDead = value; } }
 
+    private bool _canSkill;
+    public bool CanSkill { get { return _canSkill; } set { _canSkill = value; } }
+
     public bool IsCountered { get; set; }
 
     [Header("근거리 평타 각도 (거리는 AttackRange)")]
@@ -85,6 +88,7 @@ public class MonsterData : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         rigid = GetComponent<Rigidbody>();
         pooledObject = GetComponent<PooledObject>();
+        CanSkill = true;
     }
 }
 

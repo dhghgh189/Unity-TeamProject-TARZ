@@ -15,11 +15,14 @@ public class MSkill_ElectricWall : Action
 
     private float _distance;
 
+    private MonsterData _monsterData;
+
     public override void OnAwake()
     {
         _monsterSkillManager = GetComponent<MonsterSkillManager>();
         _pooledObject = GetComponent<PooledObject>();
         _animator = GetComponent<Animator>();
+        _monsterData = GetComponent<MonsterData>();
     }
 
     public override void OnStart()
@@ -30,7 +33,7 @@ public class MSkill_ElectricWall : Action
 
 	public override TaskStatus OnUpdate()
 	{
-        if (_distance < 40 && _monsterSkillManager.ElectricWallSkill.CanUseSkill == true && _monsterSkillManager.electricWallRoutine == null)
+        if (_distance < 40 && _monsterSkillManager.ElectricWallSkill.CanUseSkill == true && _monsterSkillManager.electricWallRoutine == null && _monsterData.CanSkill)
         {
             _pooledObject.RotateToPlayer();
             _monsterSkillManager.electricWallRoutine = StartCoroutine(_monsterSkillManager.ElectricWallRoutine());

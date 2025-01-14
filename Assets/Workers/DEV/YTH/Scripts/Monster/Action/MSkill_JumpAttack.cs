@@ -16,11 +16,14 @@ public class MSkill_JumpAttack : Action
 
     private Animator _animator;
 
+    private MonsterData _monsterData;
+
     public override void OnAwake()
     {
         _animator = GetComponent<Animator>();
         _monsterSkillManager = GetComponent<MonsterSkillManager>();
         _pooledObject = GetComponent<PooledObject>();
+        _monsterData= GetComponent<MonsterData>();
     }
 
     public override void OnStart()
@@ -31,7 +34,7 @@ public class MSkill_JumpAttack : Action
 
     public override TaskStatus OnUpdate()
     {
-        if (_distance >= 15 && _monsterSkillManager.JumpAttackSkill.CanUseSkill == true && _monsterSkillManager.jumpAttackRoutine == null)
+        if (_distance >= 15 && _monsterSkillManager.JumpAttackSkill.CanUseSkill == true && _monsterSkillManager.jumpAttackRoutine == null && _monsterData.CanSkill)
         {
             _pooledObject.RotateToPlayer();
             _monsterSkillManager.jumpAttackRoutine = StartCoroutine( _monsterSkillManager.JumpAttackRoutine());

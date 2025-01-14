@@ -38,8 +38,8 @@ public class Projectile_Bomb : MonoBehaviour
     IEnumerator CountDown()
     {
         yield return new WaitForSeconds(3f);
+        EffectManager.instance.ParticlePlay("Bomb_Aim", 3f, transform.position, Quaternion.identity);
         _sphereCollider.enabled = true;
-        EffectManager.instance.ParticlePlay("Bomb_Aim1", 3f, transform.position, Quaternion.identity, transform);
         yield return new WaitForSeconds(0.1f);
         Destroy(gameObject);
     }

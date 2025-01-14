@@ -503,6 +503,7 @@ public class PlayerAttack : MonoBehaviour
     public void CounterMelee()
     {
         CounterTarget.pooledObject.TakeDamage(counterMeleeDamage);
+        SoundManager.PlaySFX(SoundManager.SoundData_P.EliteCounterHit);
     }
 
     public void RemoveThrowObject(int count)

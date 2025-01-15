@@ -2,18 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using Zenject;
 
 public class PanelManager : MonoBehaviour
 {
-    //[Inject] PlayerController player;
-
     [SerializeField] private GameObject[] panels;
     [SerializeField] private bool isActive = false;
+
+    private PlayerController player;
+
+    private void Start()
+    {
+        if (SceneManager.GetActiveScene().name == "Title")
+        {
+            player = null;
+        }
+        else
+        {
+            player = FindAnyObjectByType<PlayerController>();
+        }
+    }
 
     private void Update()
     {
         isActive = CheckActivePanel();
+
+        if (SceneManager.GetActiveScene().name == "Title") return;
 
         if (isActive)
         {
@@ -26,7 +41,7 @@ public class PanelManager : MonoBehaviour
                     if (other != panel && other.activeSelf)
                     {
                         other.SetActive(false);
-                        //player.PInput.IsCanControl = true;
+                        player.PInput.IsCanControl = true;
                         Time.timeScale = 1;
                     }
                 }
@@ -40,13 +55,22 @@ public class PanelManager : MonoBehaviour
         {
             if (panel.activeSelf)
             {
-                //player.PInput.IsCanControl = false;
+                player.PInput.IsCanControl = false;
                 Time.timeScale = 0;
                 return true;
             }
         }
-        //player.PInput.IsCanControl = true;
-        Time.timeScale = 1;
-        return false;
+
+        if (SceneManager.GetActiveScene().name == "Title")
+        {
+            Time.timeScale = 1;
+            return false;
+        }
+        else
+        {
+            player.PInput.IsCanControl = true;
+            Time.timeScale = 1;
+            return false;
+        }
     }
 }

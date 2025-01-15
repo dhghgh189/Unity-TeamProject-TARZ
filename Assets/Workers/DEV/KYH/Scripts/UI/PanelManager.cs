@@ -31,20 +31,15 @@ public class PanelManager : MonoBehaviour
 
     private bool CheckActivePanel()
     {
-        AudioClip panelOn = SoundManager.SoundData_UI.OnUI;
-        AudioClip panelOff = SoundManager.SoundData_UI.OffUI;
-
         foreach (GameObject panel in panels)
         {
             if (panel.activeSelf)
             {
                 Time.timeScale = 0f;
-                SoundManager.PlaySFX(panelOn);
                 return true;
             }
         }
         Time.timeScale = 1f;
-        SoundManager.PlaySFX(panelOff);
         return false;
     }
 }

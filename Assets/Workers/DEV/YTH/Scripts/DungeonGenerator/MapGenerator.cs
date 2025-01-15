@@ -93,10 +93,11 @@ public class MapGenerator : MonoBehaviour
         Instantiate(startRoomPrefab, createPos, Quaternion.identity, transform);
 
         // 일정확률로 돌발퀘스트 NPC 생성
-        if (Util.IsRandom(50))
+        // TODO : 추후 폴리싱에 구현 예정
+        /*if (Util.IsRandom(50))
         {
             Instantiate(NPCPrefab, createPos + Vector3.forward * 10f, Quaternion.identity, transform);
-        }
+        }*/
 
         // 절차적 맵 생성 시작
         CreateBossRoom();

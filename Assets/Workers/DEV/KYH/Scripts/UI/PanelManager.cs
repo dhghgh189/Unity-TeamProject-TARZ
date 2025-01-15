@@ -6,7 +6,7 @@ using Zenject;
 
 public class PanelManager : MonoBehaviour
 {
-    [Inject] PlayerController player;
+    //[Inject] PlayerController player;
 
     [SerializeField] private GameObject[] panels;
     [SerializeField] private bool isActive = false;
@@ -26,7 +26,7 @@ public class PanelManager : MonoBehaviour
                     if (other != panel && other.activeSelf)
                     {
                         other.SetActive(false);
-                        player.PInput.IsCanControl = true;
+                        //player.PInput.IsCanControl = true;
                         Time.timeScale = 1;
                     }
                 }
@@ -40,12 +40,12 @@ public class PanelManager : MonoBehaviour
         {
             if (panel.activeSelf)
             {
-                player.PInput.IsCanControl = false;
+                //player.PInput.IsCanControl = false;
                 Time.timeScale = 0;
                 return true;
             }
         }
-        player.PInput.IsCanControl = true;
+        //player.PInput.IsCanControl = true;
         Time.timeScale = 1;
         return false;
     }

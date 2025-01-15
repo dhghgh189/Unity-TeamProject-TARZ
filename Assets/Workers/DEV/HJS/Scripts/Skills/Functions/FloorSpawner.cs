@@ -26,7 +26,7 @@ public class FloorSpawner : MonoBehaviour, ISpec
 
     private void Awake()
     {
-        script = new SkillSoundScript();
+        script = GetComponent<SkillSoundScript>();
     }
 
     // 생성을 하면서 작동을 해야하는 부분

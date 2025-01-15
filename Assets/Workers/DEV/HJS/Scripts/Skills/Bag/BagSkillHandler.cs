@@ -58,7 +58,7 @@ public class BagSkillHandler : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F8))
         {
             AddBagSkill(BagIndexKey.JunkFist, 0);
-            AddBagSkill(BagIndexKey.ScrapBurst, 1);
+            AddBagSkill(BagIndexKey.CompactCanon, 1);
             //AddBagSkill(BagIndexKey.CompactCanon, 2);
         }
         else if (Input.GetKeyDown(KeyCode.F9))

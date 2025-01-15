@@ -154,6 +154,7 @@ public class BlackHollObject : MonoBehaviour
     {
         // 기존 상시 효과음을 제거하고
         SoundManager.StopSFX();
+        SoundManager.PlaySFX(SoundManager.SoundData_S.ManaSkillSounds_4[3].AudioClip);
 
         foreach (var enemy in enemies)
         {

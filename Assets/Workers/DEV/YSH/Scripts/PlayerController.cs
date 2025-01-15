@@ -185,7 +185,7 @@ public class PlayerController : MonoBehaviour, IDamagable
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
-        Gizmos.DrawWireCube(transform.position + transform.up * 0.06f, new Vector3(0.5f, 0.1f, 0.5f));
+        Gizmos.DrawWireCube(transform.position + transform.up * 0.05f, new Vector3(0.25f, 0.1f, 0.25f));
     }
 
     public void AddObjectStack(ThrowObject tobj)

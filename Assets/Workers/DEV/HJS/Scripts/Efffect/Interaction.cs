@@ -1,5 +1,3 @@
-using System.Collections;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using static SkillEnum;
 
@@ -37,7 +35,7 @@ public class Interaction : ISpec
     public void Activate(GameObject attacker, GameObject target)
     {
         Debug.Log("<color=red>Activate Abnormal status</color>");
-        Test_StatusEffect statusEffectable = target.GetComponentInChildren<Test_StatusEffect>();
+        StatusEffect statusEffectable = target.GetComponentInChildren<StatusEffect>();
         if (statusEffectable == null) return;
 
         switch (Type)

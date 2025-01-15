@@ -139,14 +139,14 @@ public class PlayerSkillHandler : MonoBehaviour
 
             skill.onChangeLevel.AddListener(actSkill.UpdateLevel);
 
-            if (actSkill.Target == Target.Player)
+            if (actSkill.Target == SkillEnum.Target.Player)
             {
                 if (eventDic.TryGetValue(actSkill.ActTiming, out UnityEvent<GameObject, GameObject>[] onResultEvent))
                 {
                     onResultEvent[(int)actSkill.ConditionState].AddListener(actSkill.Use);
                 }
             }
-            else if (actSkill.Target == Target.ThrowObject)
+            else if (actSkill.Target == SkillEnum.Target.ThrowObject)
             {
                 if (actSkill.ConditionType == ActConditionType.Start)
                     onActionThrowObjectEvents.AddListener(actSkill.Use);
@@ -246,14 +246,14 @@ public class PlayerSkillHandler : MonoBehaviour
             skill.onChangeLevel.RemoveListener(actSkill.UpdateLevel);
 
             // 스킬의 사용 주체에 따라 실행
-            if (actSkill.Target == Target.Player)
+            if (actSkill.Target == SkillEnum.Target.Player)
             {
                 if (eventDic.TryGetValue(actSkill.ActTiming, out UnityEvent<GameObject, GameObject>[] te))
                 {
                     te[(int)actSkill.ConditionState].RemoveListener(actSkill.Use);
                 }
             }
-            else if (actSkill.Target == Target.ThrowObject)
+            else if (actSkill.Target == SkillEnum.Target.ThrowObject)
             {
                 if (actSkill.ConditionType == ActConditionType.Start)
                     onActionThrowObjectEvents.RemoveListener(actSkill.Use);

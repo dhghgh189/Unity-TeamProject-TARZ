@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour, IDamagable
 
     public Transform cameraLookPos;
 
-    [HideInInspector] public Test_StatusEffect effect;
+    [HideInInspector] public StatusEffect effect;
     [HideInInspector][Inject] public PlayerStateTransfer StateTransfer;
     [HideInInspector] public BagSkillHandler BagSkillHandler;
     [HideInInspector] public ManaSkillHandler ManaSkillHandler;
@@ -71,7 +71,7 @@ public class PlayerController : MonoBehaviour, IDamagable
         interactioner = GetComponentInChildren<Interactioner>();
         coll = GetComponent<CapsuleCollider>();
         GrabPoint = GameObject.FindWithTag("GrabPoint").transform;
-        effect = GetComponentInChildren<Test_StatusEffect>();
+        effect = GetComponentInChildren<StatusEffect>();
 
         Fsm = new PlayerFSM(this, AblityAdapter, StateTransfer);
 

@@ -1,12 +1,10 @@
 using System.Collections;
 using System.Linq;
-using UnityEditor.Localization.Plugins.XLIFF.V12;
 using UnityEngine;
-using UnityEngine.Localization.PropertyVariants.TrackedProperties;
 
-public enum Test_StatusEffectType { Frost, Dust, Poison }
-public enum Test_Target { None, Player, Monster }
-public class Test_StatusEffect : MonoBehaviour
+public enum StatusEffectType { Frost, Dust, Poison }
+public enum Target { None, Player, Monster }
+public class StatusEffect : MonoBehaviour
 {
     public PlayerController player;
     public MonsterData monster;
@@ -16,8 +14,8 @@ public class Test_StatusEffect : MonoBehaviour
     [Header("Status Effect Type")]
     [SerializeField] StatusEffectStruct[] effects;
 
-    public void StartEffect(Test_StatusEffectType type) => effects.Where(x => x.type.Equals(type)).First().effect.Play();
-    public void StopEffect(Test_StatusEffectType type) => effects.Where(x => x.type.Equals(type)).First().effect.Stop();
+    public void StartEffect(StatusEffectType type) => effects.Where(x => x.type.Equals(type)).First().effect.Play();
+    public void StopEffect(StatusEffectType type) => effects.Where(x => x.type.Equals(type)).First().effect.Stop();
 
     private void Start()
     {
@@ -26,42 +24,43 @@ public class Test_StatusEffect : MonoBehaviour
         // 태그가 플레이어가 아니다 -> 몬스터에 속해있다
         else monster = GetComponentInParent<MonsterData>();
     }
-    public void Slow(float amount, out Test_Target target)
+    public void Slow(float amount, out Target target)
     {
         if (player != null)
         {
             player.Stat.SpeedRate = (1f - amount);
-            target = Test_Target.Player;
+            target = Target.Player;
         }
         else if (monster != null)
         {
             monster.agent.speed *= (1f - amount);
-            target = Test_Target.Monster;
+            target = Target.Monster;
         }
         else
         {
-            target = Test_Target.None;
+            target = Target.None;
         }
         Debug.Log($"{gameObject.name} is Slow!");
+        StartEffect(StatusEffectType.Frost);
     }
 
-    public void Rollback(float amount, out Test_Target target)
+    public void Rollback(float amount, out Target target)
     {
         if (player != null)
         {
             player.Stat.SpeedRate = 1f;
-            target = Test_Target.Player;
+            target = Target.Player;
         }
         else if (monster != null)
         {
             monster.agent.speed /= (1f - amount);
-            target = Test_Target.Monster;
+            target = Target.Monster;
         }
         else
         {
-            target = Test_Target.None;
+            target = Target.None;
         }
-        Debug.Log($"{gameObject.name} is Rollback");
+        StopEffect(StatusEffectType.Frost);
     }
 
     public void SlowSkill(float amount, float time) => StartCoroutine(SlowRoutine(amount, time));
@@ -77,6 +76,6 @@ public class Test_StatusEffect : MonoBehaviour
 [System.Serializable]
 public struct StatusEffectStruct
 {
-    public Test_StatusEffectType type;
+    public StatusEffectType type;
     public ParticleSystem effect;
 }

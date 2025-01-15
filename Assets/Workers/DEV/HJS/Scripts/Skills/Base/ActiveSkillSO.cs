@@ -8,7 +8,7 @@ public class ActiveSkillSO
 {
     [SerializeField] string IndexName;
     [Tooltip("Player = 플레이어 / ThrowObject = 던지는 물체")]
-    public Target Target;
+    public SkillEnum.Target Target;
     private int level;
     private TestBaseSkillSO parent;
 

@@ -69,6 +69,7 @@ public class EffectManager : MonoBehaviour
         {
             item.gameObject.SetActive(true);
         }
+        particlePrefab.SetActive(true);
 
         StartCoroutine(ReturnPool(particleName, particlePrefab, lifeTime));
     }

@@ -19,6 +19,7 @@ public class DropChip : MonoBehaviour
     {
         if (!other.transform.CompareTag("Player")) return;
 
+        SoundManager.PlaySFX(SoundManager.SoundData_UI.GetMoney);
         PlayerController player = other.gameObject.GetComponent<PlayerController>();
         if (player == null)
         {

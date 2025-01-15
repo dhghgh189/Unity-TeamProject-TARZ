@@ -8,6 +8,7 @@ public class ObjectBuff : Buff
 
     public override void Use(PlayerController player)
     {
+        SoundManager.PlaySFX(SoundManager.SoundData_UI.ObejectBuff);
         ThrowObject throwObject;
 
         if (player.Attack.MaxObjectCount - player.Attack.ObjectCount < value)

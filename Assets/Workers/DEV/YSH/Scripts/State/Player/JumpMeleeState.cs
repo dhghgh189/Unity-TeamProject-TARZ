@@ -52,6 +52,13 @@ public class JumpMeleeState : BaseState<PlayerController>
     {
         base.OnFixedUpdate();
 
+        // 땅에 닿은 경우 더이상 하강하지 않는다.
+        if (owner.Movement.IsGrounded)
+        {
+            owner.Movement.Move(Vector3.zero);
+            return;
+        }
+
         // 플레이어가 점프 근거리 공격으로 인한 하강 중일 때
         if (!owner.Attack.IsEndJumpMelee)
         {

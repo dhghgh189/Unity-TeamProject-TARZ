@@ -39,6 +39,7 @@ public class MenuPanel : MonoBehaviour
             // 메뉴 패널이 활성화 되어 있으면 메뉴 패널을 비활성화
             if (isActive)
             {
+                SoundManager.PlaySFX(SoundManager.SoundData_UI.OffUI);
                 ClosePanel();
             }
             // 메뉴 패널이 비활성화 되어 있으면 메뉴 패널을 활성화
@@ -47,6 +48,7 @@ public class MenuPanel : MonoBehaviour
                 if (settingsPanel.activeSelf)
                     return;
 
+                SoundManager.PlaySFX(SoundManager.SoundData_UI.OnUI);
                 menuPanel.SetActive(true);
                 isActive = true;
                 Cursor.visible = true;
@@ -71,6 +73,7 @@ public class MenuPanel : MonoBehaviour
     /// </summary>
     public void OnClickSettingsButton()
     {
+        SoundManager.PlaySFX(SoundManager.SoundData_UI.OnUI);
         settingsPanel.SetActive(true);
         isActive = false;
         menuPanel.SetActive(false);
@@ -86,6 +89,7 @@ public class MenuPanel : MonoBehaviour
 
     public void OnClickBackToMenuButton()
     {
+        SoundManager.PlaySFX(SoundManager.SoundData_UI.OffUI);
         settingsPanel.SetActive(false);
     }
 
@@ -99,11 +103,13 @@ public class MenuPanel : MonoBehaviour
         //    saveManager.Save();
         //}
 
+        SoundManager.PlaySFX(SoundManager.SoundData_UI.OffUI);
         SceneManager.LoadScene(0);
     }
 
     private void ClosePanel()
     {
+        SoundManager.PlaySFX(SoundManager.SoundData_UI.OffUI);
         menuPanel.SetActive(false);
         isActive = false;
         playerController.PInput.IsCanControl = true;

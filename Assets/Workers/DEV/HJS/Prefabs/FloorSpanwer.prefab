@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3898555571974858818}
   - component: {fileID: 1477801619849588690}
+  - component: {fileID: 5554527606523354483}
   m_Layer: 0
   m_Name: FloorSpanwer
   m_TagString: Untagged
@@ -45,7 +46,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetTrans: {fileID: 0}
+  script: {fileID: 0}
   type: 2
   area: {fileID: 159314877273684252, guid: f8487631f9c017a40965fb508c83c850, type: 3}
   effect: {fileID: -6973092853883942505, guid: c26b87571f3f8c74bb65cb9e815a9a15, type: 3}
   time: 0.35
+--- !u!114 &5554527606523354483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9077476385755021717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95d1261be1559c3449baf46ba8f4321d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  index: 2

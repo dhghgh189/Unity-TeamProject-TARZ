@@ -42,6 +42,7 @@ public class StatusEffect : MonoBehaviour
         }
         Debug.Log($"{gameObject.name} is Slow!");
         StartEffect(StatusEffectType.Frost);
+        SoundManager.PlaySFX(SoundManager.SoundData_S.BluechipSounds[5].AudioClip);
     }
 
     public void Rollback(float amount, out Target target)

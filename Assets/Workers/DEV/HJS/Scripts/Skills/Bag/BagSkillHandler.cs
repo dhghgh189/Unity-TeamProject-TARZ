@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using Zenject;
@@ -170,5 +171,7 @@ public class BagSkillHandler : MonoBehaviour
 
         curNode.Value.OnAction();
     }
+
+    public bool CheckEquipSkill(BagIndexKey key) => manager.CheckEquipSkill(key);
 
 }

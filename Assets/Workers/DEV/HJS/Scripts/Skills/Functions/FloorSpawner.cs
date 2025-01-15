@@ -11,6 +11,7 @@ public class FloorSpawner : MonoBehaviour, ISpec
     // Target의 Transform
     // 플레이어가 될 수도 있고 던진 물건이 될 수 도 있음
     [SerializeField] Transform targetTrans;
+    [SerializeField] SkillSoundScript script;
 
     [SerializeField] SkillEnum.InteractionType type;
     [SerializeField] FloorArea area;
@@ -22,6 +23,11 @@ public class FloorSpawner : MonoBehaviour, ISpec
     private FloorObject floorInstance;
     private FloorArea areaInstance;
     public Transform SetTarget { set { targetTrans = value; } }
+
+    private void Awake()
+    {
+        script = new SkillSoundScript();
+    }
 
     // 생성을 하면서 작동을 해야하는 부분
     private void Start()
@@ -53,6 +59,8 @@ public class FloorSpawner : MonoBehaviour, ISpec
         Vector3 spawnPos = transform.position + transform.forward.normalized * radius;
         float curtime = 0f;
         yield return new WaitForFixedUpdate();
+        // 효과음 
+        script.PlaySound();
 
         Vector3 pastPos;
         Vector3 curPos;

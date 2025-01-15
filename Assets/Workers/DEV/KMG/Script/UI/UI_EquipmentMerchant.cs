@@ -49,6 +49,8 @@ public class UI_EquipmentMerchant : MonoBehaviour
             return;
         statModel.BlackChip -= price;
 
+        SoundManager.PlaySFX(SoundManager.SoundData_UI.Buy);
+
         if (!oneMoreTime && Util.IsRandom(50))
         {
             SetSellGear();

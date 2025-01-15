@@ -16,6 +16,7 @@ public class EtcSoundData : ScriptableObject
     public AudioClip GameOver { get { return _sound.GameOver; } }
     public AudioClip GameClear { get { return _sound.GameClear; } }
     public AudioClip HPLowBGM { get { return _sound.HPLowBGM; } }
+    public AudioClip StoreBGM { get { return _sound.StoreBGM; } }
 
     /// <summary>
     /// UI 사운드
@@ -40,6 +41,8 @@ public class EtcSoundData : ScriptableObject
     public AudioClip OffShop { get { return _sound.OffShop; } }
     public AudioClip Buy { get { return _sound.Buy; } }
     public AudioClip Reroll { get { return _sound.Reroll; } }
+    public AudioClip UpSucces { get { return _sound.UpSucces; } }
+    public AudioClip UpFaild { get { return _sound.UpFaild; } }
 
     /// <summary>
     /// Object
@@ -68,6 +71,7 @@ public class EtcSoundData : ScriptableObject
         public AudioClip GameOver;
         public AudioClip GameClear;
         public AudioClip HPLowBGM;
+        public AudioClip StoreBGM;
 
         [Header("SFX")]
         [Header("UI")]
@@ -87,6 +91,8 @@ public class EtcSoundData : ScriptableObject
         public AudioClip OffShop;            // 상점 닫기
         public AudioClip Buy;                // 구매
         public AudioClip Reroll;             // 리롤
+        public AudioClip UpSucces;             // 리롤
+        public AudioClip UpFaild;             // 리롤
 
         [Header("Object")]
         public AudioClip GetBlueChip;

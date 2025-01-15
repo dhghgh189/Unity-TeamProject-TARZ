@@ -26,6 +26,8 @@ public class PlayerView : MonoBehaviour
     [SerializeField] private Button active03;
     [SerializeField] private Button active04;
 
+    AudioClip tempClip;
+
     private void Start()
     {
         // 플레이어의 PlayerAttack 불러오기
@@ -39,7 +41,7 @@ public class PlayerView : MonoBehaviour
         attack.OnChangedStack += Player_OnTObjectChanged;
 
         // 이벤트 실행
-        Player_OnCurHPChanged(statModel.MaxHp);
+        Player_OnCurHPChanged(statModel.CurrentHp);
         Player_OnCurMPChanged(0);
         Player_OnTObjectChanged();
 
@@ -58,6 +60,16 @@ public class PlayerView : MonoBehaviour
     {
         hpImage.fillAmount = (statModel.MaxHp - (statModel.MaxHp - curHP)) / statModel.MaxHp;
         if (curHP <= 0) hpImage.fillAmount = 0;
+
+        if (SoundManager.BGM?.clip != SoundManager.SoundData_UI?.HPLowBGM && statModel.CurrentHp < statModel.MaxHp * 0.2f)
+        {
+            tempClip = SoundManager.BGM.clip;
+            SoundManager.PlayBGM(SoundManager.SoundData_UI.HPLowBGM);
+        }
+        if (SoundManager.BGM?.clip == SoundManager.SoundData_UI?.HPLowBGM && statModel.CurrentHp > statModel.MaxHp * 0.2f)
+        {
+            SoundManager.PlayBGM(tempClip);
+        }
     }
 
     /// <summary>
@@ -75,6 +87,8 @@ public class PlayerView : MonoBehaviour
         active02.interactable = (curMP >= 200);
         active03.interactable = (curMP >= 300);
         active04.interactable = (curMP >= 400);
+
+        Debug.Log("마나마나");
     }
 
     /// <summary>

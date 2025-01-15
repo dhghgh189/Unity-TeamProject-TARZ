@@ -10,6 +10,7 @@ public class CheatUISelect : MonoBehaviour
 
     private void OnEnable()
     {
+        SoundManager.PlaySFX(SoundManager.SoundData_UI.OnUI);
         inputManager.firstInput = mujeokToggle;
         inputManager.firstInput.Select();
     }

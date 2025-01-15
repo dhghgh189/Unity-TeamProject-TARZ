@@ -30,6 +30,17 @@ public class InputDeviceManager : MonoBehaviour
     private void Start()
     {
         UpdateDropdownOptions();
+
+        LoadDeviceConfig();
+        inputDeviceDropdown.onValueChanged.AddListener(OnDeviceDropdownChange);
+
+        if (Gamepad.current == null)
+        {
+            currentDevice = DeviceType.KeyboardMouse;
+            keyboardImage.gameObject.SetActive(true);
+            gamepadImage.gameObject.SetActive(false);
+            inputDeviceDropdown.interactable = false;
+        }
     }
 
     private void OnEnable()
@@ -44,18 +55,7 @@ public class InputDeviceManager : MonoBehaviour
 
     private void Update()
     {
-        if (Gamepad.current != null)
-        {
-            LoadDeviceConfig();
-            inputDeviceDropdown.onValueChanged.AddListener(OnDeviceDropdownChange);
-        }
-        else
-        {
-            currentDevice = DeviceType.KeyboardMouse;
-            keyboardImage.gameObject.SetActive(true);
-            gamepadImage.gameObject.SetActive(false);
-            inputDeviceDropdown.interactable = false;
-        }
+        
     }
 
     private void OnDeviceDropdownChange(int index)

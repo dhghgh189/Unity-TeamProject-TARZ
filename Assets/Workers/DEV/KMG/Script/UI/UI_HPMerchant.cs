@@ -31,6 +31,8 @@ public class UI_HPMerchant : MonoBehaviour
         statModel.CurrentHp += statModel.MaxHp * 0.33f;
         buyButton.gameObject.SetActive(false);
         ChipText.text = "매진";
+
+        SoundManager.PlaySFX(SoundManager.SoundData_UI.Buy);
     }
 
     private void ClosePanel()

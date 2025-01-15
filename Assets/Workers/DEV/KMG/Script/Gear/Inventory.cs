@@ -88,6 +88,7 @@ public class Inventory : MonoBehaviour
         }
 
         slot.SetInventorySlots(gear);
+        SoundManager.PlaySFX(SoundManager.SoundData_UI.GetEquipment);
         return true;
     }
 

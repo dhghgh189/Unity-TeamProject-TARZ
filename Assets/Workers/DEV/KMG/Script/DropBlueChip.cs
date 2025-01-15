@@ -54,6 +54,7 @@ public class DropBlueChip : MonoBehaviour, Interaction_Ibase_Activate
 
     public void Activate()
     {
+        SoundManager.PlaySFX(SoundManager.SoundData_UI.GetBlueChip);
         playerSkillHandler.AddSkill(baseSkillSO.Name);
         gameObject.SetActive(false);
     }

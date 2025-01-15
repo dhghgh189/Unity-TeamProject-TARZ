@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -13,9 +14,6 @@ public class SettingSceneUI : MonoBehaviour
     [SerializeField] private GameObject titlePanel;         // 타이틀 패널
     [SerializeField] private GameObject activeCPanel;       // 현재 활성화 중인 패널
     private CameraController camera;
-
-    [Header("<color=yellow>Input Manager</color>")]
-    //[SerializeField] private ChangeInput inputManager;      // UI 네비게이션 InputManager 참조용
 
     [Header("<color=orange>Category Buttons</color>")]
     [SerializeField] private Button gameplayButton;         // 게임 플레이 카테고리 버튼
@@ -48,7 +46,6 @@ public class SettingSceneUI : MonoBehaviour
     {
         playerController = FindAnyObjectByType<PlayerController>();
         camera = FindAnyObjectByType<CameraController>();
-        //inputManager = FindAnyObjectByType<ChangeInput>();
 
         if (SceneManager.GetActiveScene().name == "Title")
         {
@@ -58,13 +55,9 @@ public class SettingSceneUI : MonoBehaviour
         }
         else
         {
-            if (!PlayerPrefs.HasKey("Sensitivity"))
-            {
-                PlayerPrefs.SetFloat("Sensitivity", 5f);
-            }
-
-            camera.Sensitivity = PlayerPrefs.GetFloat("Sensitivity");
-            sensitivitySlider.value = camera.Sensitivity;
+            float savedSensitivity = PlayerPrefs.GetFloat("Sensitivity", 5f);
+            camera.Sensitivity = savedSensitivity;
+            sensitivitySlider.value = savedSensitivity;
         }
     }
 
@@ -88,6 +81,11 @@ public class SettingSceneUI : MonoBehaviour
 
     private void Update()
     {
+        if (EventSystem.current.currentSelectedGameObject == null)
+        {
+            EventSystem.current.SetSelectedGameObject(inputManager.LastSelect);
+        }
+
         // ESC(컨트롤러 B버튼) 입력 시 행동
         if (InputSystem.actions.FindAction("Cancel").WasPressedThisFrame())
         {
@@ -115,6 +113,10 @@ public class SettingSceneUI : MonoBehaviour
                 nonSelectPanel.SetActive(true);
                 keySettingsPanel.SetActive(false);
                 keySettingsButton.Select();
+            }
+            else if (activeCPanel == nonSelectPanel)
+            {
+                return;
             }
         }
     }

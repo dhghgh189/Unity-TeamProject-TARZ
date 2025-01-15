@@ -42,6 +42,11 @@ public class PlayerSoundData : ScriptableObject
     public AudioClip EliteCounter { get { return _sound.EliteCounter; } }
     public AudioClip EliteCounterHit { get { return _sound.EliteCounterHit; } }
 
+    // 경고음
+    public AudioClip Alert { get { return _sound.Alert; } }
+    public AudioClip StaminaZeroAlert { get { return _sound.StaminaZeroAlert; } }
+
+
     [Serializable]
     public struct Sound
     {
@@ -77,6 +82,10 @@ public class PlayerSoundData : ScriptableObject
         public AudioClip CounterThrowHit;       // 노멀 반격 hit 시
         public AudioClip EliteCounter;          // 엘리트 이상 반격 시
         public AudioClip EliteCounterHit;       // 엘리트 이상 반격 hit 시
+        
+        [Header("경고음")]
+        public AudioClip Alert;                 // 스테미나, 마나, 쿨타임 부족할 때 사용 시
+        public AudioClip StaminaZeroAlert;                 // 스테미나, 마나, 쿨타임 부족할 때 사용 시
     }
 
     public void Init()

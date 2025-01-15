@@ -144,10 +144,7 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
             DropBlueChip(curPos);
 
         if (_monsterData.MonsterTIer == MonsterData.MonsterTier.Boss)
-        {
             DropRedChip(curPos);
-            _monsterView.gameObject.SetActive(false);
-        }
 
     }
 

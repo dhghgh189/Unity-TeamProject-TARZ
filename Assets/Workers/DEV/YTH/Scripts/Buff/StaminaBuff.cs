@@ -7,6 +7,7 @@ public class StaminaBuff : Buff
 
     public override void Use(PlayerController player)
     {
+        SoundManager.PlaySFX(SoundManager.SoundData_UI.StaminaBuff);
         player.InfStamina(value);
     }
 }

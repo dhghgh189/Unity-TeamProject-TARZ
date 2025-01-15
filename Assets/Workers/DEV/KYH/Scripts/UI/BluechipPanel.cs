@@ -13,6 +13,7 @@ public class BluechipPanel : MonoBehaviour
 
     public void InitBluechipSkill(string name, string level, string des, Sprite icon)
     {
+        SoundManager.PlaySFX(SoundManager.SoundData_UI.OnUI);
         skillName.text = name;
         skillLevel.text = level;
         skillDescription.text = des;

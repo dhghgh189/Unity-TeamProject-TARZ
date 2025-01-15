@@ -46,6 +46,7 @@ public class Equipment : MonoBehaviour
             equipmentGears[(int)gear.Part] = gear;
             uI_EquipmentSlots[(int)gear.Part].SetEquipmentSlot(gear);
         }
+        SoundManager.PlaySFX(SoundManager.SoundData_UI.OnEquip);
     }
     public void EquipmentSave()
     {

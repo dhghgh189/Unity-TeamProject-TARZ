@@ -53,6 +53,7 @@ public class BagSkillHandler : MonoBehaviour
         LoadBagSkill();
     }
 
+#if UNITY_EDITOR
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.F8))
@@ -74,7 +75,7 @@ public class BagSkillHandler : MonoBehaviour
         //    Debug.Log($"가방 스킬 2번 사용! 성공 여부 : {UseBagSkill(2)}");
         //}
     }
-
+#endif
     public void AddBagSkill(BagIndexKey key, int index = -1)
     {
         if (index == -1)

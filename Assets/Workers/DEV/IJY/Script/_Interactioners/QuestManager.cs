@@ -15,15 +15,7 @@ public class QuestManager : MonoBehaviour
     [SerializeField] public GameObject questClearPanel;
     [SerializeField] public TMP_Text questRewardText;
     [SerializeField] private Button yesButton;
-
-    private void Start()
-    {
-        if (questPanel.activeSelf)
-        {
-            input.firstInput = yesButton;
-            input.firstInput.Select();
-        }
-    }
+    public Button YesButton { get { return yesButton; } }
 
     public void OnClickYes()
     {

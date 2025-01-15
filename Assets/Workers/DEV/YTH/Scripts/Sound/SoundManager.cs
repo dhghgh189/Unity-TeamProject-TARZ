@@ -41,19 +41,17 @@ public class SoundManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+
+            Init();
         }
         else
         {
             Destroy(gameObject);
         }
 
-        //bgmSource, sfxSource 불러오기
-        /*sfxSource = gameObject.AddComponent<AudioSource>();
-        bgmSource = gameObject.AddComponent<AudioSource>();
-        bgmSource.loop = true;*/
     }
 
-    private void Start()
+    private void Init()
     {
         _monsterSoundData = Resources.Load<MonsterSoundData>($"{SOUND_PATH}/MonsterSoundData");
         _playerSoundData = Resources.Load<PlayerSoundData>($"{SOUND_PATH}/PlayerSoundData");

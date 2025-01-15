@@ -9,6 +9,7 @@ using static MonsterData;
 /// </summary>
 public class GravityShoot : MonoBehaviour, ISpec
 {
+    [SerializeField] SkillSoundScript script;
     [SerializeField] float operationTime;   // 동작하는 시간
     [SerializeField] float force;           // 끌어당기는 힘
     [SerializeField] float range;           // 끌어당기는 범위
@@ -18,8 +19,14 @@ public class GravityShoot : MonoBehaviour, ISpec
     [SerializeField] List<GameObject> enemies;
     [SerializeField] float defaultForce;
 
+    private void Awake()
+    {
+        script = GetComponent<SkillSoundScript>();
+    }
+
     private void Init()
     {
+        script.PlaySound();
         GetComponent<SphereCollider>().radius = range;
         Destroy(gameObject, operationTime);
     }

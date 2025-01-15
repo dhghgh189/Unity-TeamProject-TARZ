@@ -2,12 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.GlobalIllumination;
 
 [CreateAssetMenu(menuName = "Scriptables/SoundData/Skill")]
 public class SkillSoundData : ScriptableObject
 {
     [SerializeField] private Sound _sound;
 
+    public List<SoundStruct> BluechipSounds => _sound.BluechipSounds;
     public List<SoundStruct> ManaSkillSounds_1 => _sound.ManaSkillSounds_1;
     public List<SoundStruct> ManaSkillSounds_2 => _sound.ManaSkillSounds_2;
     public List<SoundStruct> ManaSkillSounds_3 => _sound.ManaSkillSounds_3;
@@ -19,6 +21,9 @@ public class SkillSoundData : ScriptableObject
     [Serializable]
     public struct Sound
     {
+        [Header("블루 칩 스킬")]
+        public List<SoundStruct> BluechipSounds;
+
         [Header("마나 스킬")]
         [Header("마나 1스킬")]
         public List<SoundStruct> ManaSkillSounds_1;

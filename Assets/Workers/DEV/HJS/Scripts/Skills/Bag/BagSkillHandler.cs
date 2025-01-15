@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using Zenject;
@@ -57,7 +58,7 @@ public class BagSkillHandler : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F8))
         {
             AddBagSkill(BagIndexKey.JunkFist, 0);
-            AddBagSkill(BagIndexKey.ScrapBurst, 1);
+            AddBagSkill(BagIndexKey.CompactCanon, 1);
             //AddBagSkill(BagIndexKey.CompactCanon, 2);
         }
         else if (Input.GetKeyDown(KeyCode.F9))
@@ -170,5 +171,7 @@ public class BagSkillHandler : MonoBehaviour
 
         curNode.Value.OnAction();
     }
+
+    public bool CheckEquipSkill(BagIndexKey key) => manager.CheckEquipSkill(key);
 
 }

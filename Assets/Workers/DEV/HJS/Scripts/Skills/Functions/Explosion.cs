@@ -6,6 +6,7 @@ using Zenject;
 /// </summary>
 public class Explosion : MonoBehaviour, ISpec
 {
+    [SerializeField] SkillSoundScript script;
     [SerializeField] float damage;  // 공격 데미지
     [SerializeField] float range;   // 공격 범위
     [SerializeField] SphereCollider sphere;
@@ -27,9 +28,10 @@ public class Explosion : MonoBehaviour, ISpec
 
     private void Init()
     {
-        Debug.Log("폭팔시작");
+        // 폭발 효과음
+        script.PlaySound();
 
-        if(transform.parent == null)
+        if (transform.parent == null)
         {
             // Overlap으로 범위 확인
             Collider[] colliders = Physics.OverlapSphere(transform.position, 2f, LayerMask.GetMask("Monster"));

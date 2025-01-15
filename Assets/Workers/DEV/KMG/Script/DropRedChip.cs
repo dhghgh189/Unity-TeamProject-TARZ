@@ -54,6 +54,7 @@ public class DropRedChip : MonoBehaviour, Interaction_Ibase_Activate
     public void Activate()
     {
         SoundManager.PlaySFX(SoundManager.SoundData_UI.GetRedChip);
+        if (bagSkillHandler.CheckEquipSkill(bagSkillSO.SkillName)) return;
         bagSkillHandler.AddBagSkill(bagSkillSO.SkillName);
         gameObject.SetActive(false);
     }

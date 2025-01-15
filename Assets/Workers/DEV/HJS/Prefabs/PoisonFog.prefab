@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2781338694661235006}
   - component: {fileID: 6788279913678773787}
   - component: {fileID: 364729762199189231}
+  - component: {fileID: -735883648220958455}
   m_Layer: 0
   m_Name: PoisonFog
   m_TagString: Untagged
@@ -68,6 +69,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38b9ece06f10c9a4581b878feb828b7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  script: {fileID: -735883648220958455}
 --- !u!114 &364729762199189231
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -80,6 +82,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83f1de991b2fbed41ba3c2bd709080a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-735883648220958455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1458623554852019598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95d1261be1559c3449baf46ba8f4321d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  index: 0
 --- !u!1 &5161965810498800801
 GameObject:
   m_ObjectHideFlags: 0

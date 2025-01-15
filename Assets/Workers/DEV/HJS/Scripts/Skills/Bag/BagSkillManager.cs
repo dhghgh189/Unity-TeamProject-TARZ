@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
@@ -40,7 +41,7 @@ public class BagSkillManager : MonoBehaviour
     private void Awake()
     {
         skillArr ??= new BagSkill[4];
-        SaveBagSkillArray ??= new (float, BagIndexKey)[4] { (-1, 0 ), (-1, 0), (-1, 0), (-1, 0) };
+        SaveBagSkillArray ??= new (float, BagIndexKey)[4] { (-1, BagIndexKey.Length), (-1, BagIndexKey.Length), (-1, BagIndexKey.Length), (-1, BagIndexKey.Length) };
     }
 
     private void Start()
@@ -78,7 +79,7 @@ public class BagSkillManager : MonoBehaviour
         if (skillArr[index] is not null)
         {
             OnChargeEvent.RemoveListener(skillArr[index].Charge);
-            SaveBagSkillArray[index] = (-1, 0);
+            SaveBagSkillArray[index] = (-1, BagIndexKey.Length);
         }
         redChipUIs[index].gameObject.SetActive(true);
         bagSkill.Manager = this;
@@ -108,7 +109,7 @@ public class BagSkillManager : MonoBehaviour
         if (scene.name == "Lobby")
         {
             skillArr = new BagSkill[4];
-            SaveBagSkillArray = new (float, BagIndexKey)[4] { (-1, 0), (-1, 0), (-1, 0), (-1, 0) };
+            SaveBagSkillArray = new (float, BagIndexKey)[4] { (-1, BagIndexKey.Length), (-1, BagIndexKey.Length), (-1, BagIndexKey.Length), (-1, BagIndexKey.Length) };
         }
     }
 
@@ -168,4 +169,14 @@ public class BagSkillManager : MonoBehaviour
             SaveBagSkillArray[i] = (redChipSaveData[i].Gauge, redChipSaveData[i].BagIndexKey);
         }
     }
+
+    public bool CheckEquipSkill(BagIndexKey key)
+    {
+        foreach(var itme in SaveBagSkillArray)
+        {
+            if(itme.Item2 == key) return true;
+        }
+        return false;
+    }
+
 }

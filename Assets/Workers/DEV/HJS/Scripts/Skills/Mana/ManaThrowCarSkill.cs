@@ -109,7 +109,7 @@ public class ManaThrowCarSkill : IManaSkill
 
         public override void OnAction()
         {
-            parent.carInstance = Object.Instantiate(parent.tmp, owner.gameObject.transform.position + Vector3.up * 3.5f, owner.gameObject.transform.rotation * Quaternion.Euler(Vector3.right * 45));
+            parent.carInstance = Object.Instantiate(parent.tmp, owner.gameObject.transform.position + Vector3.up * 3.5f, owner.gameObject.transform.rotation * Quaternion.Euler(Vector3.right * 30));
             ThrowCarObject throwCarObject = parent.carInstance.GetComponent<ThrowCarObject>();
             if (throwCarObject is not null)
             {

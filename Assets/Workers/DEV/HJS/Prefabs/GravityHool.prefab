@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1137722449408930066}
   - component: {fileID: 8536365063832952040}
   - component: {fileID: -4685671870062384709}
+  - component: {fileID: 8731110819336055811}
   m_Layer: 0
   m_Name: GravityHool
   m_TagString: Untagged
@@ -46,6 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c6b7e7e154c03147a57328de94449d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  script: {fileID: 8731110819336055811}
   operationTime: 5
   force: 5
   range: 5
@@ -100,3 +102,16 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &8731110819336055811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7651433285117243063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95d1261be1559c3449baf46ba8f4321d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  index: 4

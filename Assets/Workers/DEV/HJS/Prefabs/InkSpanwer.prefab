@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3898555571974858818}
   - component: {fileID: 1477801619849588690}
+  - component: {fileID: 5688037099941701813}
   m_Layer: 0
   m_Name: InkSpanwer
   m_TagString: Untagged
@@ -45,7 +46,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetTrans: {fileID: 0}
+  script: {fileID: 5688037099941701813}
   type: 0
   area: {fileID: 159314877273684252, guid: f8487631f9c017a40965fb508c83c850, type: 3}
   effect: {fileID: 5541172336966312893, guid: d1a99d7ef1de55042b60504788f3053c, type: 3}
   time: 0.35
+--- !u!114 &5688037099941701813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9077476385755021717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95d1261be1559c3449baf46ba8f4321d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  index: 5

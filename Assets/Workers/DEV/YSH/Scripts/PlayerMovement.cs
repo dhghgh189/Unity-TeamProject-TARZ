@@ -38,8 +38,10 @@ public class PlayerMovement : MonoBehaviour
         GroundCheck();
         SlopeCheck();
 
+        // 유효한 경사면에 서있는 경우
         if (isGrounded && isSlope)
         {
+            // 중력을 off
             rigid.useGravity = false;
         }
         else
@@ -80,16 +82,20 @@ public class PlayerMovement : MonoBehaviour
             LookRotation(velocity.normalized);
         }
 
+        // 유효한 경사면에 서 있는 경우
+        // Jump를 하자마자 isGrounded가 바뀌지 않기 때문에 State로 체크한다. 
         if (player.Fsm.CurrentState.type != EState.Jump
             && player.Fsm.CurrentState.type != EState.Fall
             && isSlope)
         {
+            // 기존의 방향을 경사면의 방향에 맞춰 투영시킨다.
             Vector3 dir = Vector3.ProjectOnPlane(velocity.normalized, slopeHit.normal).normalized;
             velocity = dir * 5f;
             rigid.velocity = velocity;
         }
         else
         {
+            // 기존 방향대로 이동
             rigid.velocity = new Vector3(velocity.x, rigid.velocity.y, velocity.z);
         }
     }
@@ -122,19 +128,17 @@ public class PlayerMovement : MonoBehaviour
     // 플레이어 경사 처리
     public void SlopeCheck()
     {
-        Debug.DrawRay(transform.position + transform.up * 0.05f, Vector3.down * 0.2f, Color.red);
+        //Debug.DrawRay(transform.position + transform.up * 0.05f, Vector3.down * 0.2f, Color.red);
+
+        // 플레이어 위치에서 아래방향으로 Raycast 진행
         if (!Physics.Raycast(transform.position + transform.up * 0.05f, Vector3.down, out slopeHit, 0.2f, whatIsGround))
-            isSlope = false;
+            isSlope = false;    // 닿는게 없으면 false
 
+        // 충돌한 물체의 법선 벡터와 월드기준 위 방향의 각도를 계산
         float angle = Vector3.Angle(Vector3.up, slopeHit.normal);
-        Debug.Log($"Angle : {angle}");
 
+        // 계산한 각도가 maxSlope 내에 있으면 유효한 경사면에 있는것으로 판정
         isSlope = angle != 0 && maxSlope <= 50f;
-
-        if (isSlope)
-        {
-            Debug.Log("On the Slope!");
-        }
     }
 
     public void Stop()

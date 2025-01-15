@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 public class SlowTrap : Trap
@@ -20,6 +21,8 @@ public class SlowTrap : Trap
     private Dictionary<MonsterData, float> monsterBaseSpeedDic = new Dictionary<MonsterData, float>();
 
     private SlowTrapCore core;
+
+    private List<StatusEffect> effects = new List<StatusEffect>();
 
     public override void Activate()
     {
@@ -43,6 +46,8 @@ public class SlowTrap : Trap
             if (!monster.IsDead && monster != null)
                 monster.agent.speed = monsterBaseSpeedDic[monster];
         }
+
+        if(effects.Count > 0) foreach(StatusEffect effect in effects) effect.Rollback(slowPercent, out _);
     }
 
     protected override void Init()
@@ -77,8 +82,12 @@ public class SlowTrap : Trap
             && other.gameObject.layer != LayerMask.NameToLayer("Monster"))
             return;
 
-        Test_StatusEffect effect = other.GetComponentInChildren<Test_StatusEffect>();
-        if (effect != null) effect.Slow(slowPercent, out var target);
+        StatusEffect effect = other.GetComponentInChildren<StatusEffect>();
+        if (effect != null)
+        {
+            effects.Add(effect);
+            effect.Slow(slowPercent, out var target);
+        }
         else
         {
             PlayerController player = other.GetComponent<PlayerController>();
@@ -88,7 +97,7 @@ public class SlowTrap : Trap
                 targetPlayer = player;
                 return;
             }
-        
+
             MonsterData monster = other.GetComponent<MonsterData>();
             if (monster != null)
             {
@@ -115,8 +124,12 @@ public class SlowTrap : Trap
             && other.gameObject.layer != LayerMask.NameToLayer("Monster"))
             return;
 
-        Test_StatusEffect effect = other.GetComponentInChildren<Test_StatusEffect>();
-        if (effect != null) effect.Rollback(slowPercent, out var target);
+        StatusEffect effect = other.GetComponentInChildren<StatusEffect>();
+        if (effect != null)
+        {
+            effect.Rollback(slowPercent, out var target);
+            effects.Remove(effect);
+        }
         else
         {
             PlayerController player = other.GetComponent<PlayerController>();
@@ -126,7 +139,7 @@ public class SlowTrap : Trap
                 targetPlayer = null;
                 return;
             }
-        
+
             MonsterData monster = other.GetComponent<MonsterData>();
             if (monster != null)
             {

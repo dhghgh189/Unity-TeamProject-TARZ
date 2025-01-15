@@ -35,6 +35,13 @@ public class PlayerSoundData : ScriptableObject
     public ThrowSoundInfo[] Throws { get { return _sound.Throws; } }
     public ThrowSoundInfo[] ThrowHits { get { return _sound.ThrowHits; } }
 
+    // 저스트 회피
+    public AudioClip JustSuccess { get { return _sound.JustSuccess; } }
+    public AudioClip CounterThrow { get { return _sound.CounterThrow; } }
+    public AudioClip CounterThrowHit { get { return _sound.CounterThrowHit; } }
+    public AudioClip EliteCounter { get { return _sound.EliteCounter; } }
+    public AudioClip EliteCounterHit { get { return _sound.EliteCounterHit; } }
+
     [Serializable]
     public struct Sound
     {
@@ -63,6 +70,13 @@ public class PlayerSoundData : ScriptableObject
         [Header("Throw (타수 별 사운드 순서 맞춰주세요)")]
         public ThrowSoundInfo[] Throws;         // 원거리 공격 (1~3), 순서 정확히 맞출 것
         public ThrowSoundInfo[] ThrowHits;      // 원거리 공격 히트 시 (1~3), 순서 정확히 맞출 것
+
+        [Header("저스트 회피")]
+        public AudioClip JustSuccess;           // 저스트 회피 성공 시
+        public AudioClip CounterThrow;          // 노멀 반격 (던지기)
+        public AudioClip CounterThrowHit;       // 노멀 반격 hit 시
+        public AudioClip EliteCounter;          // 엘리트 이상 반격 시
+        public AudioClip EliteCounterHit;       // 엘리트 이상 반격 hit 시
     }
 
     public void Init()

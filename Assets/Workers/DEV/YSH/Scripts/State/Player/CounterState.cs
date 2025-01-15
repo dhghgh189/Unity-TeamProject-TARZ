@@ -122,6 +122,8 @@ public class CounterState : BaseState<PlayerController>
             yield return null;
         }
 
+        SoundManager.PlaySFX(SoundManager.SoundData_P.EliteCounter);
+
         //근접 공격
         owner.Anim.CrossFade(Define.HASH_ANIM_COUNTER_MELEE, 0.01f);
 

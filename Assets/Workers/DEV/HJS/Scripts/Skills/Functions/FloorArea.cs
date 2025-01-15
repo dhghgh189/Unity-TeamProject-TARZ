@@ -8,8 +8,13 @@ public class FloorArea : MonoBehaviour
     private List<GameObject> lists;
     private Interaction interaction;
     private SkillEnum.InteractionType type;
-    
+    private WaitQueue interactionQueue;
     public SkillEnum.InteractionType Type { set { type = value; } }
+
+    private void Awake()
+    {
+        interactionQueue = GetComponent<WaitQueue>();
+    }
 
     // 필요한 데이터
     // 데미지, 지속시간
@@ -27,18 +32,16 @@ public class FloorArea : MonoBehaviour
         StartCoroutine(CheckChildRoutine());
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
-        // 이미 연산했거나 플레이어 이면
-        if (other.gameObject.CompareTag("Player") || lists.Contains(other.gameObject)) return;
+        if (other.gameObject.layer.Equals(LayerMask.NameToLayer("Monster")))
+        {
+            if (interactionQueue.IsTargetInQueue(other.gameObject)) return;
 
-        Debug.Log("나 충돌합!");
+            interaction.Activate(gameObject, other.gameObject);
 
-        // 안했으면 추가하고
-        lists.Add(other.gameObject);
-
-        // 피해 입히기
-        interaction.Activate(gameObject, other.gameObject);
+            interactionQueue.Add(other.gameObject, 1f);
+        }
     }
 
     private IEnumerator CheckChildRoutine()

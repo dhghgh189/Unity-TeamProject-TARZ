@@ -188,7 +188,7 @@ MonoBehaviour:
   _monsterType: 0
   _skillType: 1
   _monsterTier: 1
-  _maxHp: 150
+  _maxHp: 700
   _curHp: 0
   _damage: 5
   _attackRange: 2
@@ -258,6 +258,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _projectile: {fileID: 0}
+  _projectile_boss: {fileID: 0}
   _bombPrefab: {fileID: 0}
   _minePrefab: {fileID: 0}
   _electricWallPrefab: {fileID: 0}
@@ -2653,6 +2654,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5308138838905806333}
     m_Modifications:
+    - target: {fileID: 5293978569347659889, guid: 21e4b73bd9a65304b95b34e21e044c29,
+        type: 3}
+      propertyPath: m_Radius
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6140007488947650493, guid: 21e4b73bd9a65304b95b34e21e044c29,
         type: 3}
       propertyPath: m_Name

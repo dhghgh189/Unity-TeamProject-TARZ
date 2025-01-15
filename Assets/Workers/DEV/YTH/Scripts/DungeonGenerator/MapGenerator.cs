@@ -119,7 +119,7 @@ public class MapGenerator : MonoBehaviour
             {
                 i--;
                 random = UnityEngine.Random.Range(0, 4);
-                while (createPos.z == 50 && random == 1)
+                while (createPos.z == 0 && random == 1)
                 {
                     random = UnityEngine.Random.Range(0, 4);
                 }
@@ -197,7 +197,7 @@ public class MapGenerator : MonoBehaviour
 
             // 랜덤 방향 지정
             random = UnityEngine.Random.Range(0, 4);
-            while (createPos.z == 50 && random == 1)
+            while (createPos.z == 0 && random == 1)
             {
                 random = UnityEngine.Random.Range(0, 4);
             }
@@ -232,7 +232,7 @@ public class MapGenerator : MonoBehaviour
 
             if (i == 1)
             {
-                Instantiate(movePotalPrefab, farDistancePos + Vector3.up, Quaternion.identity).GetComponent<MovePotal>().SetTarget(bossRoomTransform.position);
+                Instantiate(movePotalPrefab, farDistancePos + Vector3.up, Quaternion.identity).GetComponent<MovePotal>().SetTarget(bossRoomTransform.position + (Vector3.right * 30));
             }
 
             wallDestroyer.transform.position = destroyerY + farDistancePos - bossRoomDir * 25f;

@@ -33,7 +33,7 @@ public class BossRoomBehaviour : MonoBehaviour
         }
         Instantiate(scenePotal, transform.position + Vector3.back * 10 + Vector3.up * 2, Quaternion.identity);
 
-        Instantiate(movePotal, transform.position + Vector3.forward * 10 + Vector3.up * 2, Quaternion.identity).GetComponent<MovePotal>().SetTarget(Vector3.zero + Vector3.up * 0.5f);
+        Instantiate(movePotal, transform.position + Vector3.forward * 10 + Vector3.up * 2, Quaternion.identity).GetComponent<MovePotal>().SetTarget((Vector3.forward + Vector3.right) * 7);
         
         if (_monsterView != null)
         {

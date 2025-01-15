@@ -39,7 +39,7 @@ public class PlayerView : MonoBehaviour
         attack.OnChangedStack += Player_OnTObjectChanged;
 
         // 이벤트 실행
-        Player_OnCurHPChanged(statModel.MaxHp);
+        Player_OnCurHPChanged(statModel.CurrentHp);
         Player_OnCurMPChanged(0);
         Player_OnTObjectChanged();
 

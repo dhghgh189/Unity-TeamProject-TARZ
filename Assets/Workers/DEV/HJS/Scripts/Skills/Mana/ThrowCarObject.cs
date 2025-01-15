@@ -55,7 +55,10 @@ public class ThrowCarObject : MonoBehaviour
                 IDamagable damagable = collider.gameObject.GetComponent<IDamagable>();
                 if (damagable != null) { damagable.TakeDamage(explosionDamage); Debug.Log($"{collider.gameObject.name}에게 {explosionDamage}만큼의 피해를 입혔다!"); }
             }
+            // 이펙트 생성
             EffectManager.instance.ParticlePlay("ManaSkill_21", 1f,transform.position, Quaternion.identity);
+            // SFX 재생
+            SoundManager.PlaySFX(SoundManager.SoundData_S.ManaSkillSounds_2[1].AudioClip);
             Destroy(gameObject);
         }
     }

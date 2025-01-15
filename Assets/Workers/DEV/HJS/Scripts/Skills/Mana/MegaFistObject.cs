@@ -71,6 +71,7 @@ public class MegaFistObject : MonoBehaviour
         yield return Util.GetDelay(1f);
         boxCollider.enabled = true;
         Debug.Log("앞으로 움직이기 시작!");
+        SoundManager.PlaySFX(SoundManager.SoundData_S.ManaSkillSounds_3[1].AudioClip);
 
         float elapsedTime = 0f;
         while ((elapsedTime * fistSpeed) < fistTime)

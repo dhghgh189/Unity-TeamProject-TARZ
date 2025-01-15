@@ -53,6 +53,7 @@ public class MegaFistGateObject : MonoBehaviour
 
     private void OnDestroy()
     {
+        SoundManager.PlaySFX(SoundManager.SoundData_S.ManaSkillSounds_3[2].AudioClip);
         Destroy(instance);
     }
 }

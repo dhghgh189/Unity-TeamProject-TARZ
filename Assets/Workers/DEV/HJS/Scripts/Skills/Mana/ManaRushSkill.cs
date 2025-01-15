@@ -279,7 +279,11 @@ public class ManaRush_3 : BaseManaState
         owner.Movement.Rigid.velocity = Vector3.zero;
 
         Debug.Log("범위 공격!");
+        // 이펙트 생성
         EffectManager.instance.ParticlePlay("ManaSkill_11", 1f, owner.transform.position, Quaternion.identity);
+        // SFX 재생
+        SoundManager.PlaySFX(SoundManager.SoundData_S.ManaSkillSounds_1[0].AudioClip);        
+        
         Collider[] colliders = Physics.OverlapSphere(owner.transform.position, attackRange, LayerMask.GetMask("Monster"));
         foreach (Collider collider in colliders)
         {

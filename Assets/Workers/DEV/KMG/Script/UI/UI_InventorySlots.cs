@@ -48,6 +48,7 @@ public class UI_InventorySlots : MonoBehaviour, ISelectHandler, IDeselectHandler
     public void GearSell()
     {
         statModel.Chip += gear.Tier + 1;
+        SoundManager.PlaySFX(SoundManager.SoundData_UI.DecompositEquip);
         ClearSlot();
     }
 

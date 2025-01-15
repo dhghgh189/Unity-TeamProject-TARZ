@@ -40,6 +40,8 @@ public class UI_BlueChipMerchant : MonoBehaviour
         if (skillModel.BlackChip < price)
             return;
 
+        SoundManager.PlaySFX(SoundManager.SoundData_UI.Buy);
+
         skillHandler.AddSkill(sellSkill.Name);
         if (saveData.chapterSaveData.StageNum > 0 && Util.IsRandom(50f) && !isAdditionalSell)
         {

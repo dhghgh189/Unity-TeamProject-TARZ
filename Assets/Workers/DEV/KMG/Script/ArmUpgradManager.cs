@@ -46,8 +46,10 @@ public class ArmUpgradManager : MonoBehaviour, Interaction_Ibase_Activate
         if (statModel.Chip >= chip)
         {
             statModel.Chip -= chip;
+            SoundManager.PlaySFX(SoundManager.SoundData_UI.UpSucces);
             return true;
         }
+        SoundManager.PlaySFX(SoundManager.SoundData_UI.UpFaild);
         return false;
     }
 

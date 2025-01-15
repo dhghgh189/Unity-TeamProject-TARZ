@@ -285,6 +285,10 @@ public class PlayerController : MonoBehaviour, IDamagable
     public bool IsEnoughStamina(float amount)
     {
         Debug.Log($"<color=cyan>Current Stamina : {stat.CurrentStamina}, Amount : {amount}</color>");
+        if (stat.CurrentStamina == 0)
+        {
+            SoundManager.PlaySFX(SoundManager.SoundData_P.Alert);
+        }
         //return stat.CurrentStamina >= amount;
         // 조건 변경 (스테미너가 1이라도 존재한다면 사용 가능)
         return stat.CurrentStamina > 0;

@@ -49,6 +49,7 @@ public class UI_StatMerchant : MonoBehaviour
         statModel.SetAbility(ability, value);
         buyButton.gameObject.SetActive(false);
         priceText.text = "매진";
+        SoundManager.PlaySFX(SoundManager.SoundData_UI.Buy);
     }
 
     private void ClosePanel()

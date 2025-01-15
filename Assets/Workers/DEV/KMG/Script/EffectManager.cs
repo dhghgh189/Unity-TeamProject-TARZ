@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EffectManager : MonoBehaviour
 {
@@ -17,6 +18,13 @@ public class EffectManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        SceneManager.sceneLoaded -= ResetDic;
+        SceneManager.sceneLoaded += ResetDic;
+    }
+
+    private void ResetDic(Scene arg0, LoadSceneMode arg1)
+    {
+        particleDic = new();
     }
 
     Dictionary<string, Queue<GameObject>> particleDic = new();
@@ -31,7 +39,7 @@ public class EffectManager : MonoBehaviour
             particlePrefab.transform.rotation = rot;
             particlePrefab.transform.position = pos;
             particlePrefab.transform.parent = pallowingTransform;
-            _particleSystem = particlePrefab.GetComponentsInChildren<ParticleSystem>();
+            _particleSystem = particlePrefab.GetComponentsInChildren<ParticleSystem>(true);
         }
         else
         {
@@ -45,7 +53,7 @@ public class EffectManager : MonoBehaviour
             particlePrefab.SetActive(false);
 
             particlePrefab = Instantiate(particlePrefab, pos, rot, pallowingTransform);
-            _particleSystem = particlePrefab.GetComponentsInChildren<ParticleSystem>();
+            _particleSystem = particlePrefab.GetComponentsInChildren<ParticleSystem>(true);
         }
         foreach (var item in _particleSystem)
         {
@@ -57,8 +65,10 @@ public class EffectManager : MonoBehaviour
 
             main.stopAction = ParticleSystemStopAction.Disable;
         }
-
-        particlePrefab.SetActive(true);
+        foreach (var item in _particleSystem)
+        {
+            item.gameObject.SetActive(true);
+        }
 
         StartCoroutine(ReturnPool(particleName, particlePrefab, lifeTime));
     }

@@ -94,6 +94,7 @@ public class ManaSkillHandler : MonoBehaviour
         {
             // Todo -> 사용이 불가능하다고 UI 보여주기(Popup)
             Debug.Log("<color=Red>마나가 부족하여 사용이 불가능합니다</color>");
+            SoundManager.PlaySFX(SoundManager.SoundData_P.Alert);
             return false;
         }
     }

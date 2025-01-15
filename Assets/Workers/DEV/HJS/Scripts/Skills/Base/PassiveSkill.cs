@@ -296,7 +296,7 @@ public class PassiveSkill
         public bool On;
         public EState Timing;  // 타이밍
         [Header("Toggle -> Function")]
-        public Function_ThrowObject Type;
+        public UniqueFunctionType Type;
         public string Name;
     }
     #endregion

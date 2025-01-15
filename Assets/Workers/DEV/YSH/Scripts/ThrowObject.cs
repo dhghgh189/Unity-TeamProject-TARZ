@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -66,7 +67,16 @@ public class ThrowObject : MonoBehaviour, IDrainable
 
     public void Throw(Vector3 dir, float throwForce)
     {
-        if (adapter.IsEnable("GuidedFuncion")) GetComponent<GuidedFuncion>().StartCheckTarget();
+        foreach (var item in adapter.GetFunctionList())
+        {
+            switch (item)
+            {
+                case SkillEnum.UniqueFunctionType.GuidedFuncion:
+                    GetComponent<GuidedFuncion>().StartCheckTarget();
+                    break;
+            }
+        }
+
         handler.Use(gameObject);
         rigid.rotation = Quaternion.identity;
         rigid.AddForce(dir * throwForce, ForceMode.Impulse);
@@ -143,18 +153,21 @@ public class ThrowObject : MonoBehaviour, IDrainable
 
         bool any = true;
 
-        // TODO: 열거형으로 구현하기
-        if (adapter.IsEnable("ThrowObjectUpgrade"))
+        foreach(var item in adapter.GetFunctionList())
         {
-            GetComponent<ThrowObjectUpgrade>().IsUpgraded = true;
+            switch(item)
+            {
+                case SkillEnum.UniqueFunctionType.ThrowObjectConvertMine:
+                    ThrowObjectConvertMine mine = GetComponent<ThrowObjectConvertMine>();
+                    mine.Change(owner.Player.Stat.DefaultPowerPer);
+                    break;
+                case SkillEnum.UniqueFunctionType.ThrowObjectUpgrade:
+                    GetComponent<ThrowObjectUpgrade>().IsUpgraded = true;
+                    break;
+            }
             any = false;
         }
-        if (adapter.IsEnable("ThrowObjectConvertMine"))
-        {
-            ThrowObjectConvertMine mine = GetComponent<ThrowObjectConvertMine>();
-            mine.Change(owner.Player.Stat.DefaultPowerPer);
-            any = false;
-        }
+
 
         if (!any) return;
 

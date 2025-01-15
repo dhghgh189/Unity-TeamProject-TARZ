@@ -77,5 +77,5 @@ public class SkillEnum : MonoBehaviour
     /// <summary>
     /// 패시브 - ThrowObject 기능 활성화/비활성화
     /// </summary>
-    public enum Function_ThrowObject { ThrowObjectUpgrade, GuidedFuncion, ThrowObjectConvertMine }
+    public enum UniqueFunctionType { ThrowObjectUpgrade, GuidedFuncion, ThrowObjectConvertMine, ElectricDrain, FrozenDrain}
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.AI;
 using static MonsterData;
@@ -26,6 +27,7 @@ public class BlackHollObject : MonoBehaviour
     [SerializeField] float explosionRange;      // 폭발 범위
     [SerializeField] float explosionMinDamage;  // 폭발 최소 데미지
     [SerializeField] float explosionMaxDamage;  // 폭발 최대 데미지
+    [SerializeField] GameObject explosionEffect;// 폭발 이펙트
 
     public bool CanThrow;                       // 1초가 지난 시점을 알려주는 변수 <- 던질 수 있다.
     public bool FullCharge;                     // 최대 시간이 모두 지나면 알려주는 변수 <- 던져야 한다.
@@ -174,7 +176,8 @@ public class BlackHollObject : MonoBehaviour
 
     private void OnDestroy()
     {
-        EffectManager.instance.ParticlePlay("ManaSkill_42", 1f, transform.position, Quaternion.identity);
+        //EffectManager.instance.ParticlePlay("ManaSkill_42", 1f, transform.position, Quaternion.identity);
+        Destroy(Instantiate(explosionEffect, transform.position, Quaternion.identity), 1f);
         StopAllCoroutines();
     }
 

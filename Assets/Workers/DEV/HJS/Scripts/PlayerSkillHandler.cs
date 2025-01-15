@@ -209,6 +209,7 @@ public class PlayerSkillHandler : MonoBehaviour
                             break;
                         case ToggleType.Function:
                             adapter.SetEnable(psivSkill.GetToggleSetting.Name);
+                            adapter.SetEnable(psivSkill.GetToggleSetting.Type);
                             break;
                     }
                     break;
@@ -310,6 +311,7 @@ public class PlayerSkillHandler : MonoBehaviour
                             break;
                         case ToggleType.Function:
                             adapter.SetDisable(psivSkill.GetToggleSetting.Name);
+                            adapter.SetDisable(psivSkill.GetToggleSetting.Type);
                             break;
                     }
                     break;

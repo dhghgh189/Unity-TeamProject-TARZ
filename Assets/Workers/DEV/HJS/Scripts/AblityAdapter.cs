@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using static SkillEnum;
 
 /// <summary>
 /// Toggle과 연동되어서 사용되는 스크립트,
@@ -13,12 +15,18 @@ public class AblityAdapter : MonoBehaviour
     public ThrowObject ThrowObjectPrefab;
 
     public Dictionary<string, IEnable> components = new Dictionary<string, IEnable>();
+    public Dictionary<UniqueFunctionType, bool> UniqueFuncDic = new Dictionary<UniqueFunctionType, bool>();
 
     private void Awake()
     {
         // 플레이어의 상태의 갯수만큼 초기화
         PlayerCollisionToggle = new bool[(int)EState.Length];
         for (int i = 0; i < PlayerCollisionToggle.Length; i++) { PlayerCollisionToggle[i] = false; }
+
+        foreach(UniqueFunctionType item in Enum.GetValues(typeof(UniqueFunctionType)))
+        {
+            UniqueFuncDic.TryAdd(item, false);
+        }
 
     }
 
@@ -84,4 +92,27 @@ public class AblityAdapter : MonoBehaviour
         }
     }
 
+    public List<UniqueFunctionType> GetFunctionList()
+    {
+        var list = new List<UniqueFunctionType>();
+        foreach(var item in UniqueFuncDic)
+        {
+            if(item.Value) list.Add(item.Key);
+        }
+        return list;
+    }
+
+    public void SetEnable(UniqueFunctionType type)
+    {
+        if (UniqueFuncDic == null) return;
+
+        UniqueFuncDic[type] = true;
+    }
+
+    public void SetDisable(UniqueFunctionType type)
+    {
+        if (UniqueFuncDic == null) return;
+
+        UniqueFuncDic[type] = false;
+    }
 }

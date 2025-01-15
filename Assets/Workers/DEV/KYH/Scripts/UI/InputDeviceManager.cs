@@ -38,6 +38,7 @@ public class InputDeviceManager : MonoBehaviour
         {
             currentDevice = DeviceType.KeyboardMouse;
             keyboardImage.gameObject.SetActive(true);
+            sideKeyboardImage.gameObject.SetActive(false);
             gamepadImage.gameObject.SetActive(false);
             inputDeviceDropdown.interactable = false;
         }

@@ -15,6 +15,7 @@ public class EtcSoundData : ScriptableObject
     public AudioClip FieldBGM { get { return _sound.FieldBGM; } }
     public AudioClip GameOver { get { return _sound.GameOver; } }
     public AudioClip GameClear { get { return _sound.GameClear; } }
+    public AudioClip HPLowBGM { get { return _sound.HPLowBGM; } }
 
     /// <summary>
     /// UI 사운드
@@ -66,6 +67,7 @@ public class EtcSoundData : ScriptableObject
         public AudioClip FieldBGM;
         public AudioClip GameOver;
         public AudioClip GameClear;
+        public AudioClip HPLowBGM;
 
         [Header("SFX")]
         [Header("UI")]

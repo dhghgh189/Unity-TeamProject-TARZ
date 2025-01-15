@@ -90,7 +90,7 @@ public class PlayerMovement : MonoBehaviour
         {
             // 기존의 방향을 경사면의 방향에 맞춰 투영시킨다.
             Vector3 dir = Vector3.ProjectOnPlane(velocity.normalized, slopeHit.normal).normalized;
-            velocity = dir * 5f;
+            velocity = dir * player.Stat.MoveSpeed;
             rigid.velocity = velocity;
         }
         else

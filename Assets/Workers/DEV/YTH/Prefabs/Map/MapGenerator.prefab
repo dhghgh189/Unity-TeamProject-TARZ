@@ -46,11 +46,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stageInfos:
   - BossName: 0a0000000b000000
-    RoomCount: 6
+    RoomCount: 9
   - BossName: 0500000003000000
-    RoomCount: 8
-  - BossName: 02000000
     RoomCount: 11
+  - BossName: 02000000
+    RoomCount: 14
   saveData:
     chapterSaveData:
       Chapter: 0
@@ -177,6 +177,7 @@ MonoBehaviour:
   - {fileID: 8586030469086256412, guid: cea460bd15006aa45a062d6fe514d94f, type: 3}
   - {fileID: 5309521402389598400, guid: 2145e9d873d47b348b62bf8d19a98f98, type: 3}
   - {fileID: 3419063172494373878, guid: d60f82af2ebcaa44c8208de34305994a, type: 3}
+  - {fileID: 7899638967496459438, guid: 7c031f78d94b3e64e808ecf4b15cb8e7, type: 3}
   monsterSpawners:
   - {fileID: 4986280043407886338, guid: 1660fd7f577eacd4591865963ecccdd4, type: 3}
   - {fileID: 4986280043407886338, guid: ad10307b12bfa0d488fb33f8a80a76cd, type: 3}
@@ -192,15 +193,19 @@ MonoBehaviour:
   - {fileID: 5993424951484080609, guid: abc5d3c4bf1cfd147b6b91e8f0eeb9dd, type: 3}
   - {fileID: 5993424951484080609, guid: e32092dbf9628e34883e07d1332796f9, type: 3}
   - {fileID: 5993424951484080609, guid: f9c9941923c9137498038af0714b7a47, type: 3}
+  - {fileID: 5993424951484080609, guid: dfcd611f3f5f2a1409d0f1f9d40724c6, type: 3}
   obstacles:
-  - {fileID: 1758891255105315271, guid: 63cabf905be4bac42845fd078805a1c0, type: 3}
-  - {fileID: 574797769055547023, guid: 5905f655de5516744850fa0d3d4632a3, type: 3}
-  - {fileID: 6877869889264833943, guid: 87266796baa251a43a80ea5193a6c537, type: 3}
+  - {fileID: 9024891794303907578, guid: 01fc339f19563e4498c1cbc401b69f17, type: 3}
+  - {fileID: 7304250859565849018, guid: 34cde6ca5d3411844bd9af26b1438541, type: 3}
+  - {fileID: 2608451476674277337, guid: c4ff751f246be9343bc1da0dc1332f9e, type: 3}
+  - {fileID: 3171100190040184100, guid: 440cc344cf3ae5c41ac621aa94c61fff, type: 3}
+  - {fileID: 3176532109781290352, guid: 9b6ca0b50ee94344eb59e24a7c99ceb8, type: 3}
+  - {fileID: 5097777962860279653, guid: 0ddc70833634f824fa5d980341081535, type: 3}
+  - {fileID: 5685376212521853468, guid: 6173becf5887d2a4684b41132329f2a0, type: 3}
+  - {fileID: 1630377503211791658, guid: ac08b5d5c53bc594c9ca18f45a2f704a, type: 3}
   SpecialPrefab:
   - {fileID: 2641190163738093171, guid: 66f1e81b0c71e7242ba471cdda0b02f9, type: 3}
   - {fileID: 3189685185263555988, guid: f567ea3c60fe1bc40bf806908139a308, type: 3}
-  trapPrefab:
-  - {fileID: 1590315564621892767, guid: 04e80f08cec116e48b36ffbfc4e70133, type: 3}
   NPCPrefab: {fileID: 1852786447911538460, guid: 145e1b32bb02a9e499632e9cb1b76ddf,
     type: 3}
   movePotalPrefab: {fileID: 8989806833416724233, guid: de6c9581933e1aa45a47023a42c58669,
@@ -209,14 +214,15 @@ MonoBehaviour:
     type: 3}
   maxTrapCount: 2
   trapRoom_P: 10
+  maxEliteRoomCount: 010000000300000005000000
   eliteRoom_P:
-  - 0
-  - 10
-  - 25
-  bigRobot: {fileID: 2282942474017867426, guid: 0a4e93a881e037c4a8bb0885c7b463ce,
+  - 30
+  - 40
+  - 60
+  bigRobot: {fileID: 2282942474017867426, guid: 70e69215b88e55d49b58fab02b700fa7,
     type: 3}
-  robot: {fileID: 2282942474017867426, guid: 0a4e93a881e037c4a8bb0885c7b463ce, type: 3}
-  coupang: {fileID: 2282942474017867426, guid: 0a4e93a881e037c4a8bb0885c7b463ce, type: 3}
+  robot: {fileID: 2282942474017867426, guid: ff83361de759f0044b2e3032dbf9c04c, type: 3}
+  coupang: {fileID: 2282942474017867426, guid: a1fd39cd31d0a4f4f96b5a4bb8c0b384, type: 3}
 --- !u!1 &6657308487099401457
 GameObject:
   m_ObjectHideFlags: 0

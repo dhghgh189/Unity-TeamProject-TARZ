@@ -44,7 +44,7 @@ public class Interactioner : MonoBehaviour
         boxType = Box_Type.None;
         playerController = GetComponentInParent<PlayerController>();
         lineRenderer = GetComponentInParent<LineRenderer>();
-        questManager = GetComponentInParent<QuestManager>();
+        questManager = FindObjectOfType<QuestManager>();
         interactionLayer = LayerMask.NameToLayer("Is_Interaction");
         interactionGrabLayer = LayerMask.NameToLayer("Is_Interaction_Grab");
         lineRenderer.enabled = false;

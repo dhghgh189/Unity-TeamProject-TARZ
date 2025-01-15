@@ -22,7 +22,7 @@ public class UNQuest_Interaction : InteractionOBJ_Base, Interaction_Ibase_Activa
         OnChangeQuestUI += OnChangeCount;
 
         player = FindObjectOfType<PlayerController>();
-        questManager = player.gameObject.GetComponent<QuestManager>();
+        questManager = FindObjectOfType<QuestManager>();
         QuestCount = Random.Range(5, 10);
         Reward = Random.Range(300, 500);
         questManager.questRewardText.text = Reward.ToString();
@@ -46,6 +46,7 @@ public class UNQuest_Interaction : InteractionOBJ_Base, Interaction_Ibase_Activa
     void BeforeQuest()
     {
         questManager.questPanel.SetActive(true);
+        questManager.YesButton.Select();
         questManager.QuestCountText.text = $"좀비를 {QuestCount}마리 사냥하여, 수상한 자에게서 보상을 얻자!";
     }
 

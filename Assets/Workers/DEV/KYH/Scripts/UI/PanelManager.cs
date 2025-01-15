@@ -1,9 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using Zenject;
 
 public class PanelManager : MonoBehaviour
 {
+    [Inject] PlayerController player;
+
     [SerializeField] private GameObject[] panels;
     [SerializeField] private bool isActive = false;
 
@@ -22,7 +26,8 @@ public class PanelManager : MonoBehaviour
                     if (other != panel && other.activeSelf)
                     {
                         other.SetActive(false);
-                        Time.timeScale = 1f;
+                        player.PInput.IsCanControl = true;
+                        Time.timeScale = 1;
                     }
                 }
             }
@@ -35,11 +40,13 @@ public class PanelManager : MonoBehaviour
         {
             if (panel.activeSelf)
             {
-                Time.timeScale = 0f;
+                player.PInput.IsCanControl = false;
+                Time.timeScale = 0;
                 return true;
             }
         }
-        Time.timeScale = 1f;
+        player.PInput.IsCanControl = true;
+        Time.timeScale = 1;
         return false;
     }
 }

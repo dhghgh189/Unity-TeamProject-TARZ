@@ -97,6 +97,7 @@ public class PlayerController : MonoBehaviour, IDamagable
 
         // Mana Skill 처리 구간
         if (Fsm.CurrentState.type == EState.ManaUse
+            || Fsm.CurrentState.type == EState.BagUse
             || Fsm.CurrentState.type == EState.Jump
             || Fsm.CurrentState.type == EState.Fall)
         {
@@ -109,16 +110,28 @@ public class PlayerController : MonoBehaviour, IDamagable
         // 마나 스킬 UI 출력 키 입력 감지 
         CheckManaSkillInput();
 
-        // 키 감지 되지 않으면 return
-        if (!isTryManaSkill)
-            return;
-
-        for (int i = 0; i < Define.USEKEY_MAXCOUNT; i++)
+        // 키 감지 되면 마나스킬 체크
+        if (isTryManaSkill)
         {
-            if (PInput.UseKeyPressed[i])   // 스킬 1 ~ 4 번 키 입력 감지 
+            for (int i = 0; i < Define.USEKEY_MAXCOUNT; i++)
             {
-                TryManaSkill(i);
-                return;
+                if (PInput.UseKeyPressed[i])   // 스킬 1 ~ 4 번 키 입력 감지 
+                {
+                    TryManaSkill(i);
+                    return;
+                }
+            }
+        }
+        // 키 감지 안되면 가방스킬 체크
+        else
+        {
+            for (int i = 0; i < Define.USEKEY_MAXCOUNT; i++)
+            {
+                if (PInput.UseKeyPressed[i])   // 스킬 1 ~ 4 번 키 입력 감지 
+                {
+                    BagSkillHandler.UseBagSkill(i);
+                    return;
+                }
             }
         }
     }

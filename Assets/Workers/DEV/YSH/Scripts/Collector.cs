@@ -12,6 +12,7 @@ public class Collector : MonoBehaviour
             && player.Attack.ObjectCount < player.Attack.MaxObjectCount)
         {
             //Debug.Log($"Get Throw Object! : {tobj.name}");
+            SoundManager.PlaySFX(SoundManager.SoundData_UI.GetEquipment);
             tobj.Get(player);
         }
 

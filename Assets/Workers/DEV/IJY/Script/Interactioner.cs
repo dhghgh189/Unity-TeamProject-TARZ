@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using Zenject.SpaceFighter;
 
 public class Interactioner : MonoBehaviour
 {
@@ -227,8 +228,7 @@ public class Interactioner : MonoBehaviour
         Destroy(SpecialOBJ.rigidOBJ);
 
         // 플레이어의 스피드 = 기존의 1/3
-        float curSpeed = playerController.Stat.MoveSpeed;
-        playerController.Stat.MoveSpeed = curSpeed / 3f;
+        playerController.Stat.SpeedRate *= 0.3f;
 
         while (IsGrabing)
         {
@@ -239,7 +239,7 @@ public class Interactioner : MonoBehaviour
 
         // 오브젝트를 던졌을 때, 플레이어의 속도는 다시 원래대로 돌아온다.
 
-        playerController.Stat.MoveSpeed = curSpeed;
+        playerController.Stat.SpeedRate = 1f;
         GrabRoutineCheck = null;
         lineRenderer.enabled = false;
         // 오브젝트가 독립적으로 움직일 수 있도록 자식 종속성을 해제한다.

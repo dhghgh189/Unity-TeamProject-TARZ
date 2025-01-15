@@ -32,6 +32,7 @@ public class BossMonsterSpwner : MonoBehaviour
             bossRoomBehaviour.BossCount++;
             monsterView.AddGauge(pooledObject.MonsterData);
         }
+        Debug.Log($"보스 수 : {bossRoomBehaviour.BossCount}");
         monsterView.gameObject.SetActive(true);
         Destroy(gameObject);
     }

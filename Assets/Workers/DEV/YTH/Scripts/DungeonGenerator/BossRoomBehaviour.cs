@@ -8,9 +8,12 @@ public class BossRoomBehaviour : MonoBehaviour
     private InGameSaveData saveData;
     public int BossCount;
 
+    private MonsterView _monsterView;
+
     private void Start()
     {
         chapterManager = FindAnyObjectByType<ChapterManager>();
+        _monsterView = FindAnyObjectByType<MonsterView>(FindObjectsInactive.Include);
         saveData = chapterManager.saveData;
     }
 
@@ -31,6 +34,11 @@ public class BossRoomBehaviour : MonoBehaviour
         Instantiate(scenePotal, transform.position + Vector3.back * 10 + Vector3.up * 2, Quaternion.identity);
 
         Instantiate(movePotal, transform.position + Vector3.forward * 10 + Vector3.up * 2, Quaternion.identity).GetComponent<MovePotal>().SetTarget(Vector3.zero + Vector3.up * 0.5f);
+        
+        if (_monsterView != null)
+        {
+            _monsterView.gameObject.SetActive(false);
+        }
     }
 
     public void BossCountChange()

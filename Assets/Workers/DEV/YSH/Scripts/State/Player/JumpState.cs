@@ -62,6 +62,13 @@ public class JumpState : BaseState<PlayerController>
             return;
         }
 
+        // 점프 하자마자 땅에 닿은 경우에도 idle로
+        if (owner.Movement.IsGrounded)
+        {
+            owner.ChangeState(EState.Idle);
+            return;
+        }
+
         if (owner.Movement.CurrentVelocity.y < 0)
         {
             owner.ChangeState(EState.Fall);

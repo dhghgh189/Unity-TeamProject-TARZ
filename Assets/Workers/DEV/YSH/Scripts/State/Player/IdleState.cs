@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class IdleState : BaseState<PlayerController>
@@ -67,6 +65,12 @@ public class IdleState : BaseState<PlayerController>
             owner.ChangeState(EState.Jump);
             return;
         }
+    }
+
+    public override void OnFixedUpdate()
+    {
+        // idle에서는 velocity를 zero로 하여 미끄러지는 일이 없도록 함
+        owner.Movement.Move(Vector3.zero);
     }
 
     public override void OnExit()

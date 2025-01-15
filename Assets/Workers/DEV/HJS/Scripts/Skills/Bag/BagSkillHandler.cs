@@ -25,6 +25,7 @@ public class BagSkillHandler : MonoBehaviour
 
     [Header("JunkFist")]
     public JunkFistObject[] fists;
+    public bool IsUseSkill;  
 
     #region 프로퍼티
     public bool ActionEnd { get => isEnd; set => isEnd = value; }       // 가방 스킬이 끝났는지 확인하는 변수

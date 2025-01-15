@@ -57,7 +57,7 @@ public class BagJunkFistSkill : BagSkill
         Debug.Log($"<color=green>데미지 증가량 : {ResultDamage}</color>");
         owner.Attack.RemoveThrowObject(removeCount);
         ResultDamage *= skilldata.Getdata((int)JunkFistDataType.IncreaseDamage).value;
-
+        
         // 변경할 공격 모션 담아두기
         MeleeAttackInfo = new MeleeAttackInfo[]
         {
@@ -86,6 +86,7 @@ public class BagJunkFistSkill : BagSkill
         // 기존 Melee -> JunkFistMelee
 
         // 4. 기본 근접 공격의 방식을 변경
+        owner.BagSkillHandler.IsUseSkill = true;
         owner.Attack.MeleeAttackInfo = MeleeAttackInfo;
         owner.Attack.GenerateMeleeEffects();
         owner.Fsm.ChangeStateAct(new JunkFistMeleeState(owner), EState.Melee);
@@ -96,6 +97,7 @@ public class BagJunkFistSkill : BagSkill
 
         // 정상 종료
         owner.StateTransfer.OnEnableState(new EState[] { EState.Throw, EState.JumpThrow, EState.JumpMelee });
+        owner.BagSkillHandler.IsUseSkill = false;
         owner.Stat.ExtraDamage -= ResultDamage;
         // 기존 JunkFistMelee -> Melee
         owner.Attack.MeleeAttackInfo = temp;
@@ -128,6 +130,10 @@ public class BagJunkFistSkill : BagSkill
         {
             base.OnEnter();
             foreach (var fist in owner.BagSkillHandler.fists) fist.OnEffect();
+
+            // 효과음 재생
+            SoundManager.PlaySFX(SoundManager.SoundData_S.BagSkillSounds_1[0].AudioClip);
+
             owner.Movement.Rigid.velocity = Vector3.zero;
 
             animTimer = 999f;

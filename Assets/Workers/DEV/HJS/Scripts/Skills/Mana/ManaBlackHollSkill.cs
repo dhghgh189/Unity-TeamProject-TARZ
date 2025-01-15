@@ -118,6 +118,8 @@ public class ManaBlackHollSkill : IManaSkill
         {
             // 생성하는 부분
             parent.blackhollInstance = Object.Instantiate(parent.tmp, createPoint.position, Quaternion.identity);
+            // 효과음 재생
+            SoundManager.PlaySFX(SoundManager.SoundData_S.ManaSkillSounds_4[0].AudioClip);
 
             blackHoll = parent.blackhollInstance.GetComponent<BlackHollObject>();
             if (blackHoll != null)

@@ -85,6 +85,9 @@ public class ManaMegaFistSkill : IManaSkill
             Vector3 pos = owner.transform.position + owner.transform.forward * -0.5f;
             // 차원문 생성
             GameObject instatiate = Object.Instantiate(parent.tmp, pos, owner.transform.rotation);
+            // 생성 효과음 재생
+            SoundManager.PlaySFX(SoundManager.SoundData_S.ManaSkillSounds_3[0].AudioClip);
+
             MegaFistGateObject gate = instatiate.GetComponent<MegaFistGateObject>();
             gate.Init(parent.SkillData);
             owner.ManaSkillHandler.NextStep();

@@ -140,6 +140,8 @@ public class BagCompactCanonSkill : BagSkill
         {
             base.OnEnter();
             parent.instance.Throw();
+            // 효과음 재생
+            SoundManager.PlaySFX(SoundManager.SoundData_S.BagSkillSounds_3[0].AudioClip);
             parent.Use();
 
             owner.Movement.Rigid.velocity = Vector3.zero;

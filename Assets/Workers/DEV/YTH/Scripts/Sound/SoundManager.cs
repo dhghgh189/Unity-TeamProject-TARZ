@@ -17,6 +17,10 @@ public class SoundManager : MonoBehaviour
     private EtcSoundData _etcSoundData;
     public static EtcSoundData SoundData_UI { get { return Instance._etcSoundData; } private set { } }
 
+    private SkillSoundData _skillSoundData;
+
+    public static SkillSoundData SoundData_S { get { return Instance._skillSoundData; } private set { } }
+
     public Dictionary<int, AudioClip> monsterSoundDic = new Dictionary<int, AudioClip>();
 
 
@@ -54,6 +58,7 @@ public class SoundManager : MonoBehaviour
         _monsterSoundData = Resources.Load<MonsterSoundData>($"{SOUND_PATH}/MonsterSoundData");
         _playerSoundData = Resources.Load<PlayerSoundData>($"{SOUND_PATH}/PlayerSoundData");
         _etcSoundData = Resources.Load<EtcSoundData>($"{SOUND_PATH}/EtcSoundData");
+        _skillSoundData = Resources.Load<SkillSoundData>($"{SOUND_PATH}/SkillSoundData");
 
         for (int i = 0; i < _monsterSoundData.SoundInfos.Count; i++)
         {

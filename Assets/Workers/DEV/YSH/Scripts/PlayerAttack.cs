@@ -363,7 +363,8 @@ public class PlayerAttack : MonoBehaviour
         AddMeleeEffect();
 
         // 사운드 재생
-        SoundManager.PlaySFX(SoundManager.SoundData_P.Melees[MeleeCount]);
+        if (player.BagSkillHandler.IsUseSkill) SoundManager.PlaySFX(SoundManager.SoundData_S.BagSkillSounds_1[1].AudioClip);
+        else SoundManager.PlaySFX(SoundManager.SoundData_P.Melees[MeleeCount]);
 
         Collider[] colliders = Physics.OverlapSphere(transform.position, MeleeAttackInfo[MeleeCount].Range, whatIsEnemy);
         foreach (Collider col in colliders)
@@ -386,7 +387,8 @@ public class PlayerAttack : MonoBehaviour
             damagable.TakeDamage(damage);
 
             // 사운드 재생
-            SoundManager.PlaySFX(SoundManager.SoundData_P.MeleeHits[MeleeCount]);
+            if (player.BagSkillHandler.IsUseSkill) SoundManager.PlaySFX(SoundManager.SoundData_S.BagSkillSounds_1[2].AudioClip);
+            else SoundManager.PlaySFX(SoundManager.SoundData_P.MeleeHits[MeleeCount]);
 
             // Mp 회복
             player.Stat.CurrentMp += player.Stat.GetMpGain(EMpAmountType.Melee);

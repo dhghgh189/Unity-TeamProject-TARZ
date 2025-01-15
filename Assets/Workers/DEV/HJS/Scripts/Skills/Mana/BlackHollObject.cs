@@ -64,6 +64,7 @@ public class BlackHollObject : MonoBehaviour
 
     private IEnumerator StartChargingRoutine()
     {
+        SoundManager.PlaySFX(SoundManager.SoundData_S.ManaSkillSounds_4[1].AudioClip);
         while (delta <= 2f)
         {
             if (delta >= 1f) CanThrow = true;
@@ -75,6 +76,7 @@ public class BlackHollObject : MonoBehaviour
             coll.radius = absorptionRange;
 
             delta += Time.deltaTime;
+            // 상시 효과음 재생
             yield return null;
         }
 
@@ -96,6 +98,10 @@ public class BlackHollObject : MonoBehaviour
         StopCoroutine(coroutine);
         // 플레이어가 바라보는 방향 -> 구체의 앞 방향으로 속도만큼 이동
         rigid.velocity = dir * moveSpeed;
+
+        // 발사하는 효과음 시작
+        SoundManager.PlaySFX(SoundManager.SoundData_S.ManaSkillSounds_4[2].AudioClip);
+
         // 날아가는 시간을 계산하는 코루틴 실행
         StartCoroutine(StartThrowRoutine());
     }
@@ -146,6 +152,9 @@ public class BlackHollObject : MonoBehaviour
 
     private void Explosion()
     {
+        // 기존 상시 효과음을 제거하고
+        SoundManager.StopSFX();
+
         foreach (var enemy in enemies)
         {
             if (enemy is null) continue;

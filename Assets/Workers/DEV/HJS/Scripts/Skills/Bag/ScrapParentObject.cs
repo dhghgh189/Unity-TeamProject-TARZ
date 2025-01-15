@@ -33,7 +33,11 @@ public class ScrapParentObject : MonoBehaviour
         OnStartEvent?.Invoke();
         chargePs.Stop();
 
-        yield return Util.GetDelay(duration);
+        yield return Util.GetDelay(duration * 0.5f);
+        // 효과음 재생
+        SoundManager.PlaySFX(SoundManager.SoundData_S.BagSkillSounds_2[0].AudioClip);
+
+        yield return Util.GetDelay(duration * 0.5f);
 
         OnEndEvent?.Invoke();
 

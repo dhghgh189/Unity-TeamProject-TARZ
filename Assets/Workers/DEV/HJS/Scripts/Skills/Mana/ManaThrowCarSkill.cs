@@ -173,6 +173,8 @@ public class ManaThrowCarSkill : IManaSkill
         public override void OnAction()
         {
             Debug.Log("차량 던졌다!");
+            // SFX 시작
+            SoundManager.PlaySFX(SoundManager.SoundData_S.ManaSkillSounds_2[0].AudioClip);
             parent.OnThrowEvent?.Invoke();
             parent.carInstance = null;
 

@@ -49,6 +49,8 @@ public class MonsterSkillManager : MonoBehaviour
     [SerializeField] GameObject _projectile;
 
     [Header("Bomber")]
+    [SerializeField] GameObject _projectile_boss;
+
     [SerializeField] GameObject _bombPrefab;
 
     [SerializeField] GameObject _minePrefab;
@@ -614,7 +616,7 @@ public class MonsterSkillManager : MonoBehaviour
     public void Revive()
     {
         ReviveSkill.CanUseSkill = false;
-
+        _animator.SetBool("Revive", true);
         //_reviveBefore.SetActive(false);
         //_reviveAfter.SetActive(true);
     }
@@ -676,7 +678,11 @@ public class MonsterSkillManager : MonoBehaviour
     #region RangeAttack
     public void ThrowAttack()
     {
-        GameObject projectile = Object.Instantiate(_projectile, _muzzlePoint.position, _muzzlePoint.rotation, transform);
+        GameObject projectileObj = _projectile;
+
+        projectileObj = _monsterData.MonsterTyPe == MonsterData.MonsterType.Range ? _projectile : _projectile_boss;
+
+        GameObject projectile = Object.Instantiate(projectileObj, _muzzlePoint.position, _muzzlePoint.rotation, transform);
     }
     #endregion
 

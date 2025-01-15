@@ -188,7 +188,7 @@ MonoBehaviour:
   _monsterType: 0
   _skillType: 1
   _monsterTier: 1
-  _maxHp: 150
+  _maxHp: 700
   _curHp: 0
   _damage: 5
   _attackRange: 2
@@ -230,7 +230,7 @@ MonoBehaviour:
       startIndex: 
       variableStartIndex: 
       JSONSerialization: '{"EntryTask":{"Type":"BehaviorDesigner.Runtime.Tasks.EntryTask","NodeData":{"Offset":"(437.825836,14.0752106)"},"ID":0,"Name":"Entry","Instant":true},"RootTask":{"Type":"BehaviorDesigner.Runtime.Tasks.Repeater","NodeData":{"Offset":"(-1.56629181,158.192749)"},"ID":1,"Name":"Repeater","Instant":true,"SharedIntcount":{"Type":"BehaviorDesigner.Runtime.SharedInt","Name":null,"Int32mValue":0},"SharedBoolrepeatForever":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":true},"SharedBoolendOnFailure":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(0,130.000015)"},"ID":2,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-230,180)"},"ID":3,"Name":"Sequence","Instant":true,"AbortTypeabortType":"Self","Children":[{"Type":"CondCanMove","NodeData":{"Offset":"(-108.425919,200)"},"ID":4,"Name":"Cond
-        Can Move","Instant":true,"Single_angle":180,"Single_distance":15,"Single_rate":0.5},{"Type":"ActMove","NodeData":{"Offset":"(90,200)"},"ID":5,"Name":"Act
+        Can Move","Instant":true,"Single_angle":360,"Single_distance":15,"Single_rate":0.5},{"Type":"ActMove","NodeData":{"Offset":"(90,200)"},"ID":5,"Name":"Act
         Move","Instant":true,"CondCanMove_condCanMove":4}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(210,199.999969)"},"ID":6,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"CondCanAttack","NodeData":{"Offset":"(-80.18091,175.283264)"},"ID":7,"Name":"Cond
         Can Attack","Instant":true},{"Type":"ActMeleeAttack","NodeData":{"Offset":"(100,180)"},"ID":8,"Name":"Act
         Melee Attack","Instant":true}]}]}]}}'
@@ -258,11 +258,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _projectile: {fileID: 0}
+  _projectile_boss: {fileID: 0}
   _bombPrefab: {fileID: 0}
   _minePrefab: {fileID: 0}
   _electricWallPrefab: {fileID: 0}
   _thunderPrefab: {fileID: 0}
-  _effectManager: {fileID: 0}
 --- !u!114 &721351539252127389
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2654,6 +2654,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5308138838905806333}
     m_Modifications:
+    - target: {fileID: 5293978569347659889, guid: 21e4b73bd9a65304b95b34e21e044c29,
+        type: 3}
+      propertyPath: m_Radius
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6140007488947650493, guid: 21e4b73bd9a65304b95b34e21e044c29,
         type: 3}
       propertyPath: m_Name

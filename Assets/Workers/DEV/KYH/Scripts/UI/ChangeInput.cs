@@ -9,6 +9,7 @@ public class ChangeInput : MonoBehaviour
     private EventSystem system;         // 현재 씬의 UI 이벤트 시스템을 저장할 변수
     public Selectable firstInput;       // UI Selectable Input 시작점
     private GameObject lastSelect;      // 마지막으로 선택된 UI 오브젝트
+    public GameObject LastSelect {  get { return lastSelect; } }
 
 
 

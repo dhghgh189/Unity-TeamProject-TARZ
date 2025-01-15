@@ -1989,7 +1989,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -7514,7 +7514,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2167424111029458929}
   - component: {fileID: 8537809289693320962}
-  - component: {fileID: 8069712169390492391}
   m_Layer: 5
   m_Name: BackDescriptionPanel
   m_TagString: Untagged
@@ -7553,36 +7552,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2900638540403514569}
   m_CullTransparentMesh: 1
---- !u!114 &8069712169390492391
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2900638540403514569}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &2918919391133652415
 GameObject:
   m_ObjectHideFlags: 0
@@ -8219,7 +8188,6 @@ GameObject:
   - component: {fileID: 1254039159838605293}
   - component: {fileID: 5895719662110309140}
   - component: {fileID: 1440757682427754623}
-  - component: {fileID: 1466162418905923528}
   m_Layer: 5
   m_Name: SettingsPanel
   m_TagString: Untagged
@@ -8277,7 +8245,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.23529412, g: 0.23529412, b: 0.23529412, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -8326,19 +8294,6 @@ MonoBehaviour:
   sensitivitySlider: {fileID: 3598958604167302398}
   sensitivityText: {fileID: 6836616962379160808}
   inputDeviceDropdown: {fileID: 4281320009086155188}
---- !u!114 &1466162418905923528
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3212834969034640852}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4595db6774f98444f935fd2e6f6d47cc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  languageDropdown: {fileID: 7974263317214792812}
 --- !u!1 &3231170924435381544
 GameObject:
   m_ObjectHideFlags: 0
@@ -16729,7 +16684,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6635219406432930057}
   - component: {fileID: 6446196894954310147}
-  - component: {fileID: 6907463796549847434}
   m_Layer: 5
   m_Name: NonSelectPanel
   m_TagString: Untagged
@@ -16764,36 +16718,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7625716529404166400}
   m_CullTransparentMesh: 1
---- !u!114 &6907463796549847434
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7625716529404166400}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0.64779866, g: 0.58464843, b: 0.58464843, a: 0}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &7753292059972668090
 GameObject:
   m_ObjectHideFlags: 0

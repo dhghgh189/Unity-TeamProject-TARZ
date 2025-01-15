@@ -21,6 +21,7 @@ public class LoadSceneUI : MonoBehaviour
 
     public void OnClickBackButton()
     {
+        SoundManager.PlaySFX(SoundManager.SoundData_UI.OnUI);
         gameObject.SetActive(false);
         titlePanel.SetActive(true);
     }

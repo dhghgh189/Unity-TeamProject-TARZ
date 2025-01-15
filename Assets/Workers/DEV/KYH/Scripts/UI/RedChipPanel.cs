@@ -15,6 +15,7 @@ public class RedchipPanel : MonoBehaviour
 
     public void InitRedchipSkill(BagSkillDataSO data)
     {
+        SoundManager.PlaySFX(SoundManager.SoundData_UI.OnUI);
         skillName.text = data.SkillName.ToString();
         skillGauge.text = $"{data.MaxGauge} / {data.UseAmount}";
         skillDescription.text = data.SkillDescription;

@@ -77,7 +77,12 @@ public class Radiation : MonoBehaviour
         if (transform.parent != null)
             return;
 
-      _skillManager = monsterSkillManager;
+        _skillManager = monsterSkillManager;
         _monsterData = monsterData;
+    }
+
+    public void ReserveDestroy()
+    {
+        Destroy(gameObject, 3f);
     }
 }

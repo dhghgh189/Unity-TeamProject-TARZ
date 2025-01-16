@@ -28,7 +28,7 @@ public class PhaseController : MonoBehaviour
             material.SetTexture("_Base_Map", texture);
             material.SetVector("_Tiling", tiling);
 
-            material.SetFloat("_Split_Value", 20f);
+            material.SetFloat("_Split_Value", 25f);
             material.SetFloat("_Glow_Size", glowSize);
             material.SetColor("_Glow_Color", glowColor);
         }

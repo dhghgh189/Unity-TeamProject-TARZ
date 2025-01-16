@@ -23,6 +23,7 @@ public class DrainState : BaseState<PlayerController>
     public override void OnUpdate()
     {
         base.OnUpdate();
+        owner.Movement.Move(Vector3.zero);
 
         if (owner.PInput.TryDash && owner.IsEnoughStamina(owner.Stat.DashStaminaAmount))
         {

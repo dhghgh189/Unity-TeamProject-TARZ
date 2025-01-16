@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
@@ -49,6 +50,9 @@ public class BagSkillHandler : MonoBehaviour
             { BagIndexKey.CompactCanon, new BagCompactCanonSkill(player, container) },
         };
         manager.Owner = player;
+
+        manager.redChipUIs = FindObjectsOfType<RedchipPanel>(true);
+        Array.Reverse(manager.redChipUIs);
 
         LoadBagSkill();
     }

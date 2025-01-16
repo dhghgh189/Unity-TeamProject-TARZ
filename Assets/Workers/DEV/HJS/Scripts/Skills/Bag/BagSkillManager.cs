@@ -36,7 +36,7 @@ public class BagSkillManager : MonoBehaviour
 
     public (float, BagIndexKey)[] SaveBagSkillArray;
 
-    private RedchipPanel[] redChipUIs = null;
+    public RedchipPanel[] redChipUIs = null;
 
     private void Awake()
     {
@@ -68,12 +68,6 @@ public class BagSkillManager : MonoBehaviour
     public void AddSkill(BagSkill bagSkill, int index)
     {
         Debug.Log(redChipUIs);
-        if (redChipUIs == null)
-        {
-            Debug.Log("크아아아악");
-            redChipUIs = FindObjectsOfType<RedchipPanel>(true);
-            Array.Reverse(redChipUIs);
-        }
 
         if (skillArr[index] is not null)
         {
@@ -81,12 +75,15 @@ public class BagSkillManager : MonoBehaviour
             SaveBagSkillArray[index] = (-1, BagIndexKey.Length);
         }
         redChipUIs[index].gameObject.SetActive(true);
+
         bagSkill.Manager = this;
         skillArr[index] = bagSkill;
         SaveBagSkillArray[index] = (0, bagSkill.KeyName);
+
         redChipUIs[index].InitRedchipSkill(bagSkill.SkillData);
         OnChargeEvent.AddListener(bagSkill.Charge);
         OnUIUpdateEvent?.Invoke();
+
         Debug.Log(index);
     }
 

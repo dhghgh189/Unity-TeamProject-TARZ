@@ -62,6 +62,7 @@ public class StatusEffect : MonoBehaviour
             target = Target.None;
         }
         StopEffect(StatusEffectType.Frost);
+        SoundManager.StopSFX();
     }
 
     public void SlowSkill(float amount, float time) => StartCoroutine(SlowRoutine(amount, time));

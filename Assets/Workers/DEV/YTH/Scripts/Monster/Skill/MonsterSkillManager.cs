@@ -55,9 +55,6 @@ public class MonsterSkillManager : MonoBehaviour
 
     [SerializeField] GameObject _minePrefab;
 
-    private GameObject _bomber;
-    public GameObject Bomber { get { return _bomber; } set { _bomber = value; } }
-
     [Header("Arnold")]
     [SerializeField] GameObject _electricWallPrefab;
 
@@ -115,7 +112,6 @@ public class MonsterSkillManager : MonoBehaviour
         SkillInit();
 
         _player = _pooledObject.player;
-        _bomber = GameObject.Find("Bomber");
     }
 
     public void LoadSkill()

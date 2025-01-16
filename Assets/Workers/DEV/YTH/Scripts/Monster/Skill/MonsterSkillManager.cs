@@ -620,7 +620,7 @@ public class MonsterSkillManager : MonoBehaviour
     #region MeleeAttack
     public void MeleeAttack()
     {
-        _pooledObject.RotateToPlayer();
+        /*_pooledObject.RotateToPlayer();*/
 
         //내적 이용하여 공격 범위 (전방 부채꼴) 정해서
         Collider[] colliders = Physics.OverlapSphere(transform.position, _monsterData.AttackRange, WhatIsTarget);

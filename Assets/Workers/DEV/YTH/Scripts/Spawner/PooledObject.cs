@@ -67,14 +67,9 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
 
     private void OnEnable()
     {
-        OnDie += Die;
         _dissolve.DissolveReset();
     }
 
-    private void OnDisable()
-    {
-        OnDie -= Die;
-    }
 
     public void TakeDamage(float damage)
     {
@@ -107,7 +102,7 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
 
         if (_monsterData.CurHp <= 0)
         {
-            OnDie?.Invoke();
+            Die();
             return;
         }
 
@@ -120,9 +115,12 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
 
     public void Die()
     {
+        OnDie?.Invoke();    
+
         player.interactioner.quest_Interaction?.OnChangeQuestUI?.Invoke(); 
 
         _monsterData.IsDead = true;
+        _animator.SetBool("IsDead", true);
 
         _capsuleCollider.enabled = false;
 
@@ -132,7 +130,8 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
         _autoLockOn.action?.Invoke();
         _animator.SetBool("Move", false);
         _animator.SetTrigger("Die");
-        StartCoroutine(PreventBug());
+
+       /* StartCoroutine(PreventBug());*/
 
         SoundManager.PlaySFX(SoundManager.Instance.monsterSoundDic[_monsterData.DieID]);
 
@@ -167,7 +166,8 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
     IEnumerator PreventBug()
     {
         yield return Util.GetDelay(2f);
-        StartCoroutine(DissolveRoutine());
+        _animator.SetTrigger("Die");
+        
     }
 
 
@@ -198,6 +198,7 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
     public void RotateToPlayer()
     {
         transform.LookAt(player.transform.position);
+        Debug.Log("돌아봅니다!~~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!");
     }
 
     Coroutine isAttackedRoutine;

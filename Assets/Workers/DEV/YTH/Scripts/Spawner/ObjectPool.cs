@@ -47,6 +47,8 @@ public class ObjectPool : MonoBehaviour
                 monsterData.IsDead = false;
                 pooledObject.CapsuleCollider.enabled = true;
                 pooledObject.gameObject.transform.position = transform.position + new Vector3(Random.Range(-2, 2), 0, Random.Range(-2, 2));
+                Animator monsterAnimator = pooledObject.GetComponent<Animator>();
+                monsterAnimator.SetBool("IsDead", false);
                 pooledObject.gameObject.SetActive(true);
                 
 

@@ -33,6 +33,9 @@ public class ActMove : Action
     {
         _player = _pooledObject.player;
         keepChaseRoutine = StartCoroutine(KeepChaseRoutine());
+
+        Debug.Log("액트 무브 ");
+
     }
 
     public override TaskStatus OnUpdate()

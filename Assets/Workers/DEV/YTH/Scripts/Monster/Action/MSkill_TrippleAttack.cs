@@ -1,9 +1,14 @@
 using BehaviorDesigner.Runtime.Tasks;
+using System.Collections;
 using UnityEngine;
 using Zenject;
+using static BTreeState;
+
 
 public class MSkill_TrippleAttack : Action
 {
+    State state;
+
     private MonsterSkillManager _monsterSkillManager;
 
     private PooledObject _pooledObject;
@@ -38,11 +43,35 @@ public class MSkill_TrippleAttack : Action
             _animator.SetTrigger("TrippleAttack");
             SoundManager.PlaySFX(SoundManager.SoundData_M.TrippleAttack);
 
-            return TaskStatus.Success;
+            animSuccessRoutine = StartCoroutine(AnimSuccess());
         }
         else
         {
-            return TaskStatus.Failure;
+            state = State.Failure;
         }
+       
+        // 노드 진행
+        switch (state)
+        {
+            case State.Success:
+                return TaskStatus.Success;
+
+            case State.Running:
+            default:
+                return TaskStatus.Running;
+
+            case State.Failure:
+                return TaskStatus.Failure;
+        }
+    }
+
+    Coroutine animSuccessRoutine;
+    IEnumerator AnimSuccess()
+    {
+        state = State.Running;
+        yield return Util.GetDelay(4.2f);
+        state = State.Success;
+        Debug.Log("State = Suceess!!");
+        animSuccessRoutine = null;
     }
 }

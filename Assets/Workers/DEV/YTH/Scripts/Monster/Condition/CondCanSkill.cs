@@ -21,6 +21,7 @@ public class CondCanSkill : Conditional
 
     public override void OnStart()
     {
+
         _player = _pooledObject.player;
     }
 

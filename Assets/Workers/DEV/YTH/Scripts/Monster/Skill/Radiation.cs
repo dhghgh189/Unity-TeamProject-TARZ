@@ -26,12 +26,7 @@ public class Radiation : MonoBehaviour
         if (_monsterData.MonsterTIer != MonsterData.MonsterTier.Elite)
             return;
 
-        EffectManager.instance.ParticlePlay("Radiation", 60, transform.position, Quaternion.identity,  transform);
-    }
-
-    private void Update()
-    {
-        transform.localPosition = Vector3.zero;
+        EffectManager.instance.ParticlePlay("Radiation", 60, transform.position, Quaternion.identity, transform);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -75,5 +70,14 @@ public class Radiation : MonoBehaviour
         _damagable.TakeDamage(damage);
         yield return new WaitForSeconds(_interval);  // 기획분들이 정해주시면 딜레이 캐싱 해두기
         takeDOTRoutine = null;
+    }
+
+    public void SetParent(MonsterSkillManager monsterSkillManager, MonsterData monsterData)
+    {
+        if (transform.parent != null)
+            return;
+
+      _skillManager = monsterSkillManager;
+        _monsterData = monsterData;
     }
 }

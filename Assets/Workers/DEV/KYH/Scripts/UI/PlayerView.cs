@@ -21,10 +21,16 @@ public class PlayerView : MonoBehaviour
     [SerializeField] private TMP_Text currentTObj;
     [SerializeField] private TMP_Text maxTObj;
     [SerializeField] private Image tObjFill;
+
+    [Header("마나 스킬")]
     [SerializeField] private Button active01;
     [SerializeField] private Button active02;
     [SerializeField] private Button active03;
     [SerializeField] private Button active04;
+    [SerializeField] private Button skill01;
+    [SerializeField] private Button skill02;
+    [SerializeField] private Button skill03;
+    [SerializeField] private Button skill04;
 
     AudioClip tempClip;
 
@@ -84,9 +90,17 @@ public class PlayerView : MonoBehaviour
 
         // 스킬 사용 타이밍마다 스킬 사용 가능을 Interactable로 알려주기
         active01.interactable = (curMP >= 100);
+        skill01.interactable = (curMP >= 100);
+
         active02.interactable = (curMP >= 200);
+        skill02.interactable = (curMP >= 200);
+
         active03.interactable = (curMP >= 300);
+        skill03.interactable = (curMP >= 300);
+
         active04.interactable = (curMP >= 400);
+        skill04.interactable = (curMP >= 400);
+
 
         Debug.Log("마나마나");
     }

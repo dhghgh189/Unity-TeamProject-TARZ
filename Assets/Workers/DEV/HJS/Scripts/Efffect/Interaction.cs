@@ -44,9 +44,6 @@ public class Interaction : ISpec
                 // Slow 적용하기
                 statusEffectable.SlowSkill(degree, duration);
                 break;
-            case InteractionType.DOT:
-                // TODO: 지속딜 넣기
-                break;
             case InteractionType.Damage:
                 IDamagable damagable = target.GetComponent<IDamagable>();
                 damagable?.TakeDamage((int)dotDamage);

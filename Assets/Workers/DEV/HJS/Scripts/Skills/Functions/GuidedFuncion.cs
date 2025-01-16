@@ -81,15 +81,15 @@ public class GuidedFuncion : MonoBehaviour, IEnable
 
     private void OnCollisionEnter(Collision other)
     {
-        if (traceCoroutine is not null)
-        {
-            StopCoroutine(traceCoroutine);
-            traceCoroutine = null;
-        }
-        else if (checkCoroutine is not null)
+        if (checkCoroutine is not null)
         {
             StopCoroutine(checkCoroutine);
             checkCoroutine = null;
+        }
+
+        if(!other.gameObject.layer.Equals(LayerMask.NameToLayer("Monster")))
+        {
+            target = null;
         }
     }
 

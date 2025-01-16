@@ -58,11 +58,10 @@ public class SlowTrap : Trap
                 monster.agent.speed = monsterBaseSpeedDic[monster];
         }
 
-        if (effects.Count <= 0)
-            return;
-
         foreach (StatusEffect effect in effects)
         {
+            if (effect == null) continue; 
+            
             effect.Rollback(slowPercent, out _);
         }
     }

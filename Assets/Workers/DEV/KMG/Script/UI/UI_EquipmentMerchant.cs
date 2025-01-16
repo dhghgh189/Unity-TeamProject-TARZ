@@ -63,8 +63,7 @@ public class UI_EquipmentMerchant : MonoBehaviour
     }
     private void ClosePanel()
     {
-        playerController.PInput.IsCanControl = true;
-        gameObject.SetActive(false);
+        GetComponentInParent<UI_Merchant>().Temp(UI_Merchant.EMerchant.Equipment);
     }
     private void OnEnable()
     {

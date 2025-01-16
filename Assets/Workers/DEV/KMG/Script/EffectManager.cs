@@ -32,6 +32,7 @@ public class EffectManager : MonoBehaviour
     {
         GameObject particlePrefab;
         ParticleSystem[] _particleSystem;
+        List<ParticleSystem> subParticle = new();
 
         if (particleDic.ContainsKey(particleName) && particleDic[particleName].Count > 0)
         {
@@ -64,6 +65,19 @@ public class EffectManager : MonoBehaviour
             main.duration = lifeTime;
 
             main.stopAction = ParticleSystemStopAction.Disable;
+
+            if (item.subEmitters.subEmittersCount > 0)
+            {
+                for (int i = 0; i < item.subEmitters.subEmittersCount; i++)
+                {
+                    subParticle.Add(item.subEmitters.GetSubEmitterSystem(i));
+                }
+            }
+        }
+        foreach (var item in subParticle)
+        {
+            var main = item.main;
+            main.stopAction = ParticleSystemStopAction.None;
         }
         foreach (var item in _particleSystem)
         {

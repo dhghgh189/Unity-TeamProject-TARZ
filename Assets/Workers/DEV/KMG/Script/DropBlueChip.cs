@@ -24,7 +24,6 @@ public class DropBlueChip : MonoBehaviour, Interaction_Ibase_Activate
 
     private void Start()
     {
-        DropChipInit(1);
         playerSkillHandler = FindAnyObjectByType<PlayerSkillHandler>();
     }
     public void DropChipInit(int tier)

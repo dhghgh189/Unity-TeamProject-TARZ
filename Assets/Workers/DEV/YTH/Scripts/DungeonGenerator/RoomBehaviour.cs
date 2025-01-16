@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -13,8 +14,6 @@ public class RoomBehaviour : MonoBehaviour
     private void Awake()
     {
         bagSkillManager = FindAnyObjectByType<BagSkillManager>();
-
-        
     }
 
     public void CloseWall()
@@ -23,13 +22,14 @@ public class RoomBehaviour : MonoBehaviour
         foreach (var item in walls)
         {
             item.SetActive(true);
+            item.GetComponent<PhaseController>().StartPhase(false);
         }
     }
     public void OpenWall()
     {
         foreach (var item in walls)
         {
-            item.SetActive(false);
+            item.GetComponent<PhaseController>().StartPhase(true, item);
         }
         Instantiate(buffPrefab[Random.Range(0, buffPrefab.Length)], transform.position + (Vector3.up * 4), Quaternion.identity);
     }
@@ -41,6 +41,7 @@ public class RoomBehaviour : MonoBehaviour
         {
             OpenWall();
             bagSkillManager.OnChargeEvent?.Invoke();
+            bagSkillManager.UpdateCharge();
             bagSkillManager.OnUIUpdateEvent?.Invoke();
         }
     }

@@ -125,9 +125,9 @@ public class PlayerController : MonoBehaviour, IDamagable
         // 키 감지 안되면 가방스킬 체크
         else
         {
-            for (int i = 0; i < Define.USEKEY_MAXCOUNT; i++)
+            for (int i = 0; i < Define.BAGKEY_MAXCOUNT; i++)
             {
-                if (PInput.UseKeyPressed[i])   // 스킬 1 ~ 4 번 키 입력 감지 
+                if (PInput.BagKeyPressed[i])   // 스킬 1 ~ 4 번 키 입력 감지 
                 {
                     BagSkillHandler.UseBagSkill(i);
                     return;

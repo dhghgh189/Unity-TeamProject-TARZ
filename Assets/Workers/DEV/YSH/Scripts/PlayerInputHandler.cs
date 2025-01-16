@@ -25,6 +25,7 @@ public class PlayerInputHandler : MonoBehaviour
      public bool IsCanControl;
 
     [HideInInspector] public bool[] UseKeyPressed;
+    [HideInInspector] public bool[] BagKeyPressed;
 
     private void Awake()
     {
@@ -34,6 +35,7 @@ public class PlayerInputHandler : MonoBehaviour
     private void Start()
     {
         UseKeyPressed = new bool[Define.USEKEY_MAXCOUNT];
+        BagKeyPressed = new bool[Define.BAGKEY_MAXCOUNT];
 
         controller = GetComponent<PlayerController>();
         input = GetComponent<PlayerInput>();
@@ -80,6 +82,11 @@ public class PlayerInputHandler : MonoBehaviour
         for (int i = 0; i < Define.USEKEY_MAXCOUNT; i++)
         {
             UseKeyPressed[i] = input.actions[$"Use{i + 1}"].WasPressedThisFrame();
+        }
+
+        for (int i = 0; i < Define.BAGKEY_MAXCOUNT; i++)
+        {
+            BagKeyPressed[i] = input.actions[$"BagSkill{i + 1}"].WasPressedThisFrame();
         }
     }
 

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using Zenject;
 
@@ -58,11 +59,11 @@ public class ArmUpgradManager : MonoBehaviour, Interaction_Ibase_Activate
         if (upgradePanel.activeSelf)
         {
             upgradePanel.SetActive(false);
-            playerController.PInput.IsCanControl = true;
+            OnlyInteractAction(false);
             saveManager.Save();
             return;
         }
-        playerController.PInput.IsCanControl = false;
+        OnlyInteractAction(true);
         upgradePanel.SetActive(true);
         GetComponentInChildren<UI_ArmUpgrade>().GetComponent<Button>().Select();
     }
@@ -84,5 +85,23 @@ public class ArmUpgradManager : MonoBehaviour, Interaction_Ibase_Activate
     private void DataChipChange(float chip)
     {
         dataChipText.text = $"{chip}";
+    }
+    private void OnlyInteractAction(bool on)
+    {
+        InputActionMap actionMap = InputSystem.actions.FindActionMap("Player");
+        if (on)
+        {
+            foreach (var action in actionMap.actions)
+            {
+                if (action.name != "Interact")
+                {
+                    action.Disable();
+                }
+            }
+        }
+        else
+        {
+            actionMap.Enable();
+        }
     }
 }

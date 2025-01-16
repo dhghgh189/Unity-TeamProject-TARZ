@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class DrainManager : MonoBehaviour
 {
@@ -21,6 +22,9 @@ public class DrainManager : MonoBehaviour
 
     public float DrainStaminaAmount;
 
+    [HideInInspector] public UnityEvent OnStartEffectEvent = new(); // 드레인에 있는 능력의 효과를 시작시키는 이벤트
+    [HideInInspector] public UnityEvent OnStopEffectEvent = new();  // 드레인에 있는 능력의 효과를 중단시키는 이벤트
+
     private void Awake()
     {
         col = GetComponent<SphereCollider>();
@@ -32,6 +36,7 @@ public class DrainManager : MonoBehaviour
         if (drainRoutine != null)
             return;
 
+        OnStartEffectEvent?.Invoke();
         drainRoutine = StartCoroutine(DrainRoutine());
     }
 
@@ -60,7 +65,9 @@ public class DrainManager : MonoBehaviour
     {
         // 콜라이더를 게임 영역 외로 보내버린다.
         // 비활성화 하는것으로는 Exit 호출이 안되므로 물리적으로 벗어나게 하기 위함
+        col.radius = minRadius;
         transform.localPosition = Vector3.up * 100f;
+        OnStopEffectEvent?.Invoke();
 
         if (drainRoutine != null)
             StopCoroutine(drainRoutine);

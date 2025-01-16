@@ -24,6 +24,7 @@ public class TrapRoomBehaviour : MonoBehaviour
         foreach (var item in walls)
         {
             item.SetActive(true);
+            item.GetComponent<PhaseController>().StartPhase(false);
         }
     }
 
@@ -31,7 +32,7 @@ public class TrapRoomBehaviour : MonoBehaviour
     {
         foreach (var item in walls)
         {
-            item.SetActive(false);
+            item.GetComponent<PhaseController>().StartPhase(true, item);
         }
     }
 

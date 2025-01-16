@@ -37,8 +37,7 @@ public class UI_HPMerchant : MonoBehaviour
 
     private void ClosePanel()
     {
-        playerController.PInput.IsCanControl = true;
-        gameObject.SetActive(false);
+        GetComponentInParent<UI_Merchant>().Temp(UI_Merchant.EMerchant.Hp);
     }
     private void OnEnable()
     {

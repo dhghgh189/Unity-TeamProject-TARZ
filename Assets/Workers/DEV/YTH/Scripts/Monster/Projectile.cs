@@ -44,8 +44,8 @@ public class Projectile : MonoBehaviour // 일반 원딜 쫄몹
         _rigidBody.angularVelocity = Vector3.zero;
         
         Radiation radiation = Instantiate(_radiation, transform.position, Quaternion.identity);
-        Destroy(radiation, 3f);
         radiation.SetParent(skillManager, _pooledObject.MonsterData);
+        radiation.ReserveDestroy();
         EffectManager.instance.ParticlePlay("PoisonPool", 3f, transform.position, Quaternion.identity);
         
         if (collider.gameObject.CompareTag("Player"))

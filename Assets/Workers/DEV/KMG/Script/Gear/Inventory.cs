@@ -195,11 +195,11 @@ public class Inventory : MonoBehaviour
     public Gear StoreGear()
     {
         float random = Random.Range(1, 101);
-        int stage = saveData.chapterSaveData.StageNum;
+        int stage = saveData.chapterSaveData.StageNum + 1;
 
         Part part = (Part)Random.Range(0, (int)Part.Size);
         Gear gear = Instantiate(baseGears.Where(x => x.Part == part).First());
-        gear.Tier = random > 100 - (10 * stage) ? 3 : random > 90 - (20 * stage) ? 2 : 1;
+        gear.Tier = random > 100 - (10 * (stage == 3 ? 5 : stage)) ? 3 : 2;
 
         // 장갑은 4개중 하나의 기본 능력치를 가지므로 능력치 3개를 삭제
         if (part == Part.장갑)

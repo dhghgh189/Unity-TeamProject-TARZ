@@ -49,6 +49,8 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
 
     [Inject] DamagePopUpManager _damagePopUpManager;
 
+    [Inject] InGameSaveData saveData;
+
     private void Awake()
     {
         _autoLockOn = player.GetComponent<AutoLockOn>();
@@ -207,15 +209,13 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
     {
         bool dropGear = false;
         int dropGearTier = 1;
-        float dropGearPvalue = 0;
-        bool dropGearRandomTier = false;
+        float dropGearPvalue = 25 * (saveData.chapterSaveData.StageNum + 1);
         switch (_monsterData.MonsterTIer)
         {
             case MonsterData.MonsterTier.Normal:
-                if (random > 50)
+                if (random > 75)
                 {
                     dropGearTier = 1;
-                    dropGearPvalue = 25f;
                     dropGear = true;
                 }
                 break;
@@ -223,13 +223,11 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
                 if (random > 25)
                 {
                     dropGearTier = random > 90 ? 3 : random > 75 ? 2 : 1;
-                    dropGearPvalue = 50f;
                     dropGear = true;
                 }
                 break;
             case MonsterData.MonsterTier.Boss:
-                dropGearRandomTier = true;
-                dropGearPvalue = 75f;
+                dropGearTier = random > 65 ? 3 : 2;
                 dropGear = true;
                 break;
         }
@@ -239,13 +237,13 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
             {
                 if (!item.gameObject.activeSelf)
                 {
-                    item.SetDropItem(dropGearTier, dropGearPvalue, dropGearRandomTier);
+                    item.SetDropItem(dropGearTier, dropGearPvalue);
                     item.transform.position = curPos;
                     item.gameObject.SetActive(true);
                     return;
                 }
             }
-            Instantiate(_gear, curPos, transform.rotation, dropPool).GetComponent<DropGear>().SetDropItem(dropGearTier, dropGearPvalue, dropGearRandomTier);
+            Instantiate(_gear, curPos, transform.rotation, dropPool).GetComponent<DropGear>().SetDropItem(dropGearTier, dropGearPvalue);
         }
     }
 

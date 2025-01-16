@@ -2,7 +2,7 @@ using System.Collections;
 using System.Linq;
 using UnityEngine;
 
-public enum StatusEffectType { Frost, Dust, Poison }
+public enum StatusEffectType { Frost, Elec, Poison }
 public enum Target { None, Player, Monster }
 public class StatusEffect : MonoBehaviour
 {
@@ -14,8 +14,12 @@ public class StatusEffect : MonoBehaviour
     [Header("Status Effect Type")]
     [SerializeField] StatusEffectStruct[] effects;
 
-    public void StartEffect(StatusEffectType type) => effects.Where(x => x.type.Equals(type)).First().effect.Play();
-    public void StopEffect(StatusEffectType type) => effects.Where(x => x.type.Equals(type)).First().effect.Stop();
+    public void StartEffect(StatusEffectType type)
+    {
+        ParticleSystem ps = effects.Where(x => x.type.Equals(type)).First().effect;
+        if (ps != null && !ps.isPlaying) ps.Play();
+    }
+    public void StopEffect(StatusEffectType type) => effects.Where(x => x.type.Equals(type)).First().effect?.Stop();
 
     private void Start()
     {
@@ -40,9 +44,6 @@ public class StatusEffect : MonoBehaviour
         {
             target = Target.None;
         }
-        Debug.Log($"{gameObject.name} is Slow!");
-        StartEffect(StatusEffectType.Frost);
-        SoundManager.PlaySFX(SoundManager.SoundData_S.BluechipSounds[5].AudioClip);
     }
 
     public void Rollback(float amount, out Target target)
@@ -61,7 +62,7 @@ public class StatusEffect : MonoBehaviour
         {
             target = Target.None;
         }
-        StopEffect(StatusEffectType.Frost);
+
     }
 
     public void SlowSkill(float amount, float time) => StartCoroutine(SlowRoutine(amount, time));
@@ -69,8 +70,13 @@ public class StatusEffect : MonoBehaviour
     private IEnumerator SlowRoutine(float amount, float time)
     {
         Slow(amount, out _);
+        StartEffect(StatusEffectType.Frost);
+        SoundManager.PlaySFX(SoundManager.SoundData_S.BluechipSounds[5].AudioClip);
+        
         yield return Util.GetDelay(time);
+        
         Rollback(amount, out _);
+        StopEffect(StatusEffectType.Frost);
     }
 }
 

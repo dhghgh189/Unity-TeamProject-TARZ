@@ -33,8 +33,8 @@ public class BlackHollObject : MonoBehaviour
     public bool FullCharge;                     // 최대 시간이 모두 지나면 알려주는 변수 <- 던져야 한다.
 
     private float delta;                        // 변화량
-
     private float explosionDamage;              // 폭발 데미지
+    private bool isThrow;                       // 던졌는지 확인
 
     [SerializeField] SphereCollider coll;
     [SerializeField] Rigidbody rigid;
@@ -51,6 +51,7 @@ public class BlackHollObject : MonoBehaviour
         coll = GetComponent<SphereCollider>();
         rigid = GetComponent<Rigidbody>();
         enemies = new List<GameObject>();
+        isThrow = false;
     }
     private void Start()
     {
@@ -96,6 +97,7 @@ public class BlackHollObject : MonoBehaviour
     /// </summary>
     public void Throw()
     {
+        isThrow = true;
         // 기존 흡수하는 코루틴을 중단하고
         StopCoroutine(coroutine);
         // 플레이어가 바라보는 방향 -> 구체의 앞 방향으로 속도만큼 이동
@@ -130,7 +132,6 @@ public class BlackHollObject : MonoBehaviour
 
         // 해당 구체 폭발하기
         Explosion();
-        
     }
 
     private IEnumerator StartBoilingRoutine(Transform other)
@@ -156,7 +157,6 @@ public class BlackHollObject : MonoBehaviour
     {
         // 기존 상시 효과음을 제거하고
         SoundManager.StopSFX();
-        SoundManager.PlaySFX(SoundManager.SoundData_S.ManaSkillSounds_4[3].AudioClip);
 
         foreach (var enemy in enemies)
         {
@@ -171,13 +171,14 @@ public class BlackHollObject : MonoBehaviour
             if (damagable != null) { damagable.TakeDamage(explosionDamage); Debug.Log($"{collider.gameObject.name}에게 {explosionDamage}만큼의 피해를 입혔다!"); }
         }
 
+        Destroy(Instantiate(explosionEffect, transform.position, Quaternion.identity), 1f);
         Destroy(gameObject);
     }
 
     private void OnDestroy()
     {
-        //EffectManager.instance.ParticlePlay("ManaSkill_42", 1f, transform.position, Quaternion.identity);
-        Destroy(Instantiate(explosionEffect, transform.position, Quaternion.identity), 1f);
+        SoundManager.StopSFX();
+        if(isThrow) SoundManager.PlaySFX(SoundManager.SoundData_S.ManaSkillSounds_4[3].AudioClip);
         StopAllCoroutines();
     }
 

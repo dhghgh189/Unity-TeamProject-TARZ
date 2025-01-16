@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -44,11 +43,11 @@ public class PlayerSkillHandler : MonoBehaviour
             { ActionTimingType.Exit, new UnityEvent<GameObject, GameObject>[(int)EState.Length] },      // 행동이 끝났을 때
             { ActionTimingType.Collision, new UnityEvent<GameObject, GameObject>[(int)EState.Length] }, // 행동 중 충돌했을 때
         };
-        
+
         onCollisionThrowObjectEvents = new UnityEvent<GameObject, GameObject>();
         onActionThrowObjectEvents = new UnityEvent<GameObject, GameObject>();
 
-        foreach(var value in eventDic.Values)
+        foreach (var value in eventDic.Values)
         {
             for (int i = 0; i < (int)EState.Length; i++)
             {
@@ -79,13 +78,13 @@ public class PlayerSkillHandler : MonoBehaviour
     {
         if (eventDic == null) return;
 
-        if(eventDic.TryGetValue(act, out var onResultEvent))
+        if (eventDic.TryGetValue(act, out var onResultEvent))
         {
             onResultEvent[(int)state]?.Invoke(gameObject, collider);
         }
     }
 
-    public void CollisionEvent(EState curState, GameObject target) 
+    public void CollisionEvent(EState curState, GameObject target)
     {
         if (eventDic.TryGetValue(ActionTimingType.Collision, out UnityEvent<GameObject, GameObject>[] events))
         {
@@ -130,92 +129,99 @@ public class PlayerSkillHandler : MonoBehaviour
         skillDic[skillName] = skill;
 
         #region 액티브 스킬 넣기
-        foreach (ActiveSkill actSkill in skill.ActiveSkills)
+        if ((skill.SkillType & SkillType.Act) != 0)
         {
-            // 해당 스킬의 레벨에 따라 변경하기 위해 부모 설정
-            actSkill.Parent = skill;
-            // 레벨 변경의 대한 수치를 가져오기 위한 데이터베이스 넣기
-            actSkill.SetModel(model);
-
-            skill.onChangeLevel.AddListener(actSkill.UpdateLevel);
-
-            if (actSkill.Target == SkillEnum.Target.Player)
+            foreach (ActiveSkill actSkill in skill.ActiveSkills)
             {
-                if (eventDic.TryGetValue(actSkill.ActTiming, out UnityEvent<GameObject, GameObject>[] onResultEvent))
+                // 해당 스킬의 레벨에 따라 변경하기 위해 부모 설정
+                actSkill.Parent = skill;
+                // 레벨 변경의 대한 수치를 가져오기 위한 데이터베이스 넣기
+                actSkill.SetModel(model);
+
+                skill.onChangeLevel.AddListener(actSkill.UpdateLevel);
+
+                if (actSkill.Target == SkillEnum.Target.Player)
                 {
-                    onResultEvent[(int)actSkill.ConditionState].AddListener(actSkill.Use);
+                    if (eventDic.TryGetValue(actSkill.ActTiming, out UnityEvent<GameObject, GameObject>[] onResultEvent))
+                    {
+                        onResultEvent[(int)actSkill.ConditionState].AddListener(actSkill.Use);
+                    }
                 }
-            }
-            else if (actSkill.Target == SkillEnum.Target.ThrowObject)
-            {
-                if (actSkill.ConditionType == ActConditionType.Start)
-                    onActionThrowObjectEvents.AddListener(actSkill.Use);
-                else if (actSkill.ConditionType == ActConditionType.Collision)
-                    onCollisionThrowObjectEvents.AddListener(actSkill.Use);
+                else if (actSkill.Target == SkillEnum.Target.ThrowObject)
+                {
+                    if (actSkill.ConditionType == ActConditionType.Start)
+                        onActionThrowObjectEvents.AddListener(actSkill.Use);
+                    else if (actSkill.ConditionType == ActConditionType.Collision)
+                        onCollisionThrowObjectEvents.AddListener(actSkill.Use);
+                }
             }
         }
         #endregion
 
         #region 패시브 스킬 넣기
-        foreach (PassiveSkill psivSkill in skill.PassiveSkills)
+        if ((skill.SkillType & SkillType.Etc) != 0)
         {
-            psivSkill.Parent = skill;
-            psivSkill.StatModel = model;
-            skill.onChangeLevel.AddListener(psivSkill.UpdateLevel);
-            // 패시브 스킬의 종류에 따라 실행
-            switch (psivSkill.GetPassiveType)
+            foreach (PassiveSkill psivSkill in skill.PassiveSkills)
             {
-                // 수정 - 직접적으로 값을 수정한다.
-                case PassiveType.Modify:
-                    switch (psivSkill.GetModifySetting.ModifyType)
-                    {
-                        case PassiveModifyType.DashSpeed:
-                            model.DashSpeed += psivSkill.GetModifySetting.Amount(skill.SkillLevel);
-                            break;
-                        case PassiveModifyType.DrainRadius:
-                            drainManager.MaxRadius += psivSkill.GetModifySetting.Amount(skill.SkillLevel);
-                            break;
-                        default:
-                            psivSkill.SetValue();
-                            break;
-                    }
-                    model.AllCheck();
-                    break;
-                // 조건 - 조건에 맞으면 특정 행동을 수행한다.
-                case PassiveType.Condition:
-                    switch (psivSkill.GetConditionSetting.modifyType)
-                    {
-                        case PassiveModifyType.MaxHp:
-                            psivSkill.GetConditionSetting.MaxValue = model.MaxHp;
-                            model.OnMaxHpChange += psivSkill.GetConditionSetting.SetMax;    // 최대 체력 연결
-                            model.OnCurHpChange += psivSkill.ConditionCheck;                // 현재 체력 연결
-                            Debug.Log("hp 스킬 연결!");
-                            break;
-                        case PassiveModifyType.MaxStamina:
-                            psivSkill.GetConditionSetting.MaxValue = model.MaxStamina;
-                            model.OnMaxStaminaChange += psivSkill.GetConditionSetting.SetMax;
-                            model.OnCurStaminaChange += psivSkill.ConditionCheck;
-                            Debug.Log("스테미너 스킬 연결!");
-                            break;
-                    }
-                    model.AllCheck();
-                    break;
-                // 활성화/비활성화 - 특정 기능의 활성화 여부 설정한다.
-                case PassiveType.Toggle:
-                    switch (psivSkill.GetToggleSetting.ToggleType)
-                    {
-                        case ToggleType.Collision:
-                            adapter.SetOnPlayerCollision(psivSkill.GetToggleSetting.Timing, psivSkill.GetToggleSetting.On);
-                            break;
-                        case ToggleType.Function:
-                            adapter.SetEnable(psivSkill.GetToggleSetting.Name);
-                            adapter.SetEnable(psivSkill.GetToggleSetting.Type);
-                            break;
-                    }
-                    break;
+                psivSkill.Parent = skill;
+                psivSkill.StatModel = model;
+                skill.onChangeLevel.AddListener(psivSkill.UpdateLevel);
+                // 패시브 스킬의 종류에 따라 실행
+                switch (psivSkill.GetPassiveType)
+                {
+                    // 수정 - 직접적으로 값을 수정한다.
+                    case PassiveType.Modify:
+                        switch (psivSkill.GetModifySetting.ModifyType)
+                        {
+                            case PassiveModifyType.DashSpeed:
+                                model.DashSpeed += psivSkill.GetModifySetting.Amount(skill.SkillLevel);
+                                break;
+                            case PassiveModifyType.DrainRadius:
+                                drainManager.MaxRadius += psivSkill.GetModifySetting.Amount(skill.SkillLevel);
+                                break;
+                            default:
+                                psivSkill.SetValue();
+                                break;
+                        }
+                        model.AllCheck();
+                        break;
+                    // 조건 - 조건에 맞으면 특정 행동을 수행한다.
+                    case PassiveType.Condition:
+                        switch (psivSkill.GetConditionSetting.modifyType)
+                        {
+                            case PassiveModifyType.MaxHp:
+                                psivSkill.GetConditionSetting.MaxValue = model.MaxHp;
+                                model.OnMaxHpChange += psivSkill.GetConditionSetting.SetMax;    // 최대 체력 연결
+                                model.OnCurHpChange += psivSkill.ConditionCheck;                // 현재 체력 연결
+                                Debug.Log("hp 스킬 연결!");
+                                break;
+                            case PassiveModifyType.MaxStamina:
+                                psivSkill.GetConditionSetting.MaxValue = model.MaxStamina;
+                                model.OnMaxStaminaChange += psivSkill.GetConditionSetting.SetMax;
+                                model.OnCurStaminaChange += psivSkill.ConditionCheck;
+                                Debug.Log("스테미너 스킬 연결!");
+                                break;
+                        }
+                        model.AllCheck();
+                        break;
+                    // 활성화/비활성화 - 특정 기능의 활성화 여부 설정한다.
+                    case PassiveType.Toggle:
+                        switch (psivSkill.GetToggleSetting.ToggleType)
+                        {
+                            case ToggleType.Collision:
+                                adapter.SetOnPlayerCollision(psivSkill.GetToggleSetting.Timing, psivSkill.GetToggleSetting.On);
+                                break;
+                            case ToggleType.Function:
+                                adapter.SetEnable(psivSkill.GetToggleSetting.Name);
+                                adapter.SetEnable(psivSkill.GetToggleSetting.Type, (skill.SkillLevel - 1, psivSkill.GetToggleSetting.spec));
+                                break;
+                        }
+                        break;
+                }
             }
         }
         #endregion
+
         // 디버그로 정보 보여주기
         Debug.Log($"Add Skill Name : {skill.Name}  / Skill Tier : {skill.SkillTier} / Skill Level : {skill.SkillLevel}");
         onAddSkillEvents?.Invoke(skillName);
@@ -237,84 +243,92 @@ public class PlayerSkillHandler : MonoBehaviour
         // 스킬이 없을 때 예외처리
         if (skill is null) return;
 
-        foreach (ActiveSkill actSkill in skill.ActiveSkills)
+        #region 액티브 스킬 빼기
+        if ((skill.SkillType & SkillType.Act) != 0)
         {
-            // 해당 스킬의 레벨에 따라 변경하기 위해 부모 설정
-            actSkill.Parent = skill;
-            // 레벨 변경의 대한 수치를 가져오기 위한 데이터베이스 넣기
-            actSkill.SetModel(model);
-
-            skill.onChangeLevel.RemoveListener(actSkill.UpdateLevel);
-
-            // 스킬의 사용 주체에 따라 실행
-            if (actSkill.Target == SkillEnum.Target.Player)
+            foreach (ActiveSkill actSkill in skill.ActiveSkills)
             {
-                if (eventDic.TryGetValue(actSkill.ActTiming, out UnityEvent<GameObject, GameObject>[] te))
+                // 해당 스킬의 레벨에 따라 변경하기 위해 부모 설정
+                actSkill.Parent = skill;
+                // 레벨 변경의 대한 수치를 가져오기 위한 데이터베이스 넣기
+                actSkill.SetModel(model);
+
+                skill.onChangeLevel.RemoveListener(actSkill.UpdateLevel);
+
+                // 스킬의 사용 주체에 따라 실행
+                if (actSkill.Target == SkillEnum.Target.Player)
                 {
-                    te[(int)actSkill.ConditionState].RemoveListener(actSkill.Use);
+                    if (eventDic.TryGetValue(actSkill.ActTiming, out UnityEvent<GameObject, GameObject>[] te))
+                    {
+                        te[(int)actSkill.ConditionState].RemoveListener(actSkill.Use);
+                    }
+                }
+                else if (actSkill.Target == SkillEnum.Target.ThrowObject)
+                {
+                    if (actSkill.ConditionType == ActConditionType.Start)
+                        onActionThrowObjectEvents.RemoveListener(actSkill.Use);
+                    else if (actSkill.ConditionType == ActConditionType.Collision)
+                        onCollisionThrowObjectEvents.RemoveListener(actSkill.Use);
                 }
             }
-            else if (actSkill.Target == SkillEnum.Target.ThrowObject)
-            {
-                if (actSkill.ConditionType == ActConditionType.Start)
-                    onActionThrowObjectEvents.RemoveListener(actSkill.Use);
-                else if (actSkill.ConditionType == ActConditionType.Collision)
-                    onCollisionThrowObjectEvents.RemoveListener(actSkill.Use);
-            }
         }
+        #endregion
 
         #region 패시브 스킬 빼기
-        foreach (PassiveSkill psivSkill in skill.PassiveSkills)
+        if ((skill.SkillType & SkillType.Etc) != 0)
         {
-            psivSkill.Parent = skill;
-            skill.onChangeLevel.RemoveListener(psivSkill.UpdateLevel);
-
-            // 패시브 스킬의 종류에 따라 실행
-            switch (psivSkill.GetPassiveType)
+            foreach (PassiveSkill psivSkill in skill.PassiveSkills)
             {
-                // 수정 - 직접적으로 값을 수정한다.
-                case PassiveType.Modify:
-                    switch (psivSkill.GetModifySetting.ModifyType)
-                    {
-                        case PassiveModifyType.DashSpeed:
-                            model.DashSpeed -= psivSkill.GetModifySetting.Amount(skill.SkillLevel);
-                            break;
-                        case PassiveModifyType.DrainRadius:
-                            drainManager.MaxRadius -= psivSkill.GetModifySetting.Amount(skill.SkillLevel);
-                            break;
-                        default:
-                            psivSkill.ResetValue();
-                            break;
-                    }
-                    break;
-                // 조건 - 조건에 맞으면 특정 행동을 수행한다.
-                case PassiveType.Condition:
-                    psivSkill.ReturnValue();
-                    switch (psivSkill.GetConditionSetting.modifyType)
-                    {
-                        case PassiveModifyType.MaxHp:
-                            model.OnMaxHpChange -= psivSkill.GetConditionSetting.SetMax;    // 최대 값 연결 해제
-                            model.OnCurHpChange -= psivSkill.ConditionCheck;                // 현재 값 연결 해제
-                            break;
-                        case PassiveModifyType.MaxStamina:
-                            model.OnMaxStaminaChange -= psivSkill.GetConditionSetting.SetMax;
-                            model.OnCurStaminaChange -= psivSkill.ConditionCheck;
-                            break;
-                    }
-                    break;
-                // 활성화/비활성화 - 특정 기능의 활성화 여부 설정한다.
-                case PassiveType.Toggle:
-                    switch (psivSkill.GetToggleSetting.ToggleType)
-                    {
-                        case ToggleType.Collision:
-                            adapter.SetOffPlayerCollision(psivSkill.GetToggleSetting.Timing, psivSkill.GetToggleSetting.On);
-                            break;
-                        case ToggleType.Function:
-                            adapter.SetDisable(psivSkill.GetToggleSetting.Name);
-                            adapter.SetDisable(psivSkill.GetToggleSetting.Type);
-                            break;
-                    }
-                    break;
+                psivSkill.Parent = skill;
+                skill.onChangeLevel.RemoveListener(psivSkill.UpdateLevel);
+
+                // 패시브 스킬의 종류에 따라 실행
+                switch (psivSkill.GetPassiveType)
+                {
+                    // 수정 - 직접적으로 값을 수정한다.
+                    case PassiveType.Modify:
+                        switch (psivSkill.GetModifySetting.ModifyType)
+                        {
+                            case PassiveModifyType.DashSpeed:
+                                model.DashSpeed -= psivSkill.GetModifySetting.Amount(skill.SkillLevel);
+                                break;
+                            case PassiveModifyType.DrainRadius:
+                                drainManager.MaxRadius -= psivSkill.GetModifySetting.Amount(skill.SkillLevel);
+                                break;
+                            default:
+                                psivSkill.ResetValue();
+                                break;
+                        }
+                        break;
+                    // 조건 - 조건에 맞으면 특정 행동을 수행한다.
+                    case PassiveType.Condition:
+                        psivSkill.ReturnValue();
+                        switch (psivSkill.GetConditionSetting.modifyType)
+                        {
+                            case PassiveModifyType.MaxHp:
+                                model.OnMaxHpChange -= psivSkill.GetConditionSetting.SetMax;    // 최대 값 연결 해제
+                                model.OnCurHpChange -= psivSkill.ConditionCheck;                // 현재 값 연결 해제
+                                break;
+                            case PassiveModifyType.MaxStamina:
+                                model.OnMaxStaminaChange -= psivSkill.GetConditionSetting.SetMax;
+                                model.OnCurStaminaChange -= psivSkill.ConditionCheck;
+                                break;
+                        }
+                        break;
+                    // 활성화/비활성화 - 특정 기능의 활성화 여부 설정한다.
+                    case PassiveType.Toggle:
+                        switch (psivSkill.GetToggleSetting.ToggleType)
+                        {
+                            case ToggleType.Collision:
+                                adapter.SetOffPlayerCollision(psivSkill.GetToggleSetting.Timing, psivSkill.GetToggleSetting.On);
+                                break;
+                            case ToggleType.Function:
+                                adapter.SetDisable(psivSkill.GetToggleSetting.Name);
+                                adapter.SetDisable(psivSkill.GetToggleSetting.Type);
+                                break;
+                        }
+                        break;
+                }
             }
         }
         #endregion
@@ -344,10 +358,10 @@ public class PlayerSkillHandler : MonoBehaviour
             }
         }
 
-        foreach(var item in skillDic.Values)
+        foreach (var item in skillDic.Values)
         {
-            if (item is not null) 
-            { 
+            if (item is not null)
+            {
                 RemoveSkill(item);
                 Destroy(item);
             }
@@ -401,9 +415,9 @@ public class PlayerSkillHandler : MonoBehaviour
     // TODO: 해당 내용들을 StatModel에서 관리하기 -> Skill안에서만 해결하기로
     private void UpdatePassiveByLevel(BaseSkillSO skill, int level)
     {
-        foreach(PassiveSkill psivSkill in skill.PassiveSkills)
+        foreach (PassiveSkill psivSkill in skill.PassiveSkills)
         {
-            if(psivSkill.GetPassiveType.Equals(PassiveType.Modify))
+            if (psivSkill.GetPassiveType.Equals(PassiveType.Modify))
             {
                 switch (psivSkill.GetModifySetting.ModifyType)
                 {
@@ -416,6 +430,13 @@ public class PlayerSkillHandler : MonoBehaviour
                         drainManager.MaxRadius += psivSkill.GetModifySetting.Amount(skill.SkillLevel);
                         break;
                 }
+            }
+            else if (psivSkill.GetPassiveType.Equals(PassiveType.Toggle))
+            {
+                var item = adapter.levelDic[psivSkill.GetToggleSetting.Type];
+                item.Item1 = skillLevelDic[skill.Name] - 1;
+                adapter.levelDic[psivSkill.GetToggleSetting.Type] = item;
+                Debug.Log($"Toggle 업데이트 : {item.Item1} : {level - 1}");
             }
         }
     }

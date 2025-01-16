@@ -49,7 +49,6 @@ public class BagSkillManager : MonoBehaviour
         SceneManager.sceneLoaded -= LoadedsceneEvent;
         SceneManager.sceneLoaded += LoadedsceneEvent;
 
-        OnUIUpdateEvent.AddListener(UpdateCharge);
     }
 
     public bool IsCanUse(int index)

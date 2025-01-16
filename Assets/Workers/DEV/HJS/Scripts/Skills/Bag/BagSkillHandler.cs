@@ -114,7 +114,7 @@ public class BagSkillHandler : MonoBehaviour
     /// <returns>사용 가능 여부</returns>
     public bool UseBagSkill(int index)
     {
-        if (manager.IsCanUse(index))
+        if (manager.IsCanUse(index) && !player.currentStateView.Equals(EState.BagUse))
         {
             Debug.Log("사용 가능");
             // 여기서 게이지 감소

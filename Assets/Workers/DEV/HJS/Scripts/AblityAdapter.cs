@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using static SkillEnum;
 
@@ -16,6 +17,7 @@ public class AblityAdapter : MonoBehaviour
 
     public Dictionary<string, IEnable> components = new Dictionary<string, IEnable>();
     public Dictionary<UniqueFunctionType, bool> UniqueFuncDic = new Dictionary<UniqueFunctionType, bool>();
+    public Dictionary<UniqueFunctionType, (int, Vector3[] spec)> levelDic = new Dictionary<UniqueFunctionType, (int, Vector3[] spec)>();
 
     private void Awake()
     {
@@ -26,8 +28,8 @@ public class AblityAdapter : MonoBehaviour
         foreach(UniqueFunctionType item in Enum.GetValues(typeof(UniqueFunctionType)))
         {
             UniqueFuncDic.TryAdd(item, false);
+            levelDic.TryAdd(item, (-1, null));
         }
-
     }
 
     private void Start()
@@ -102,11 +104,14 @@ public class AblityAdapter : MonoBehaviour
         return list;
     }
 
-    public void SetEnable(UniqueFunctionType type)
+    public void SetEnable(UniqueFunctionType type, (int, Vector3[]) spec)
     {
         if (UniqueFuncDic == null) return;
 
+        // 스킬 활성화
         UniqueFuncDic[type] = true;
+        // 스펙의 데이터 넣기
+        levelDic[type] = spec;
     }
 
     public void SetDisable(UniqueFunctionType type)
@@ -114,5 +119,6 @@ public class AblityAdapter : MonoBehaviour
         if (UniqueFuncDic == null) return;
 
         UniqueFuncDic[type] = false;
+        levelDic[type] = (-1, null);
     }
 }

@@ -241,6 +241,9 @@ public class PlayerController : MonoBehaviour, IDamagable
             {
                 SoundManager.PlaySFX(SoundManager.SoundData_P.TakeDamage_Normal);
             }
+
+            if (currentStateView == EState.ManaUse || currentStateView == EState.BagUse) return;
+
             anim.CrossFade(Define.HASH_ANIM_DAMAGED, 0.1f);
             delay = GetCurrentAnimTime() * 0.5f;
             IsAnimStart = true;

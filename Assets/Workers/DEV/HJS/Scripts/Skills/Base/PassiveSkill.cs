@@ -298,6 +298,7 @@ public class PassiveSkill
         [Header("Toggle -> Function")]
         public UniqueFunctionType Type;
         public string Name;
+        public Vector3[] spec;
     }
     #endregion
 

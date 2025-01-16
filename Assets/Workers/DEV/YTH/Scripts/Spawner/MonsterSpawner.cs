@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -9,10 +10,12 @@ public class MonsterSpawner : MonoBehaviour
 
     private ObjectPool _monsterPool;
     private Transform[] _spawnPoints;
+    RoomBehaviour roomBehaviour;
 
     private void Awake()
     {
         _spawnPoints = GetComponentsInChildren<Transform>().Skip(1).ToArray();
+        roomBehaviour = transform.parent.GetComponent<RoomBehaviour>();
     }
 
     private void Start()
@@ -22,7 +25,6 @@ public class MonsterSpawner : MonoBehaviour
 
     public void Spawn()
     {
-        RoomBehaviour roomBehaviour = transform.parent.GetComponent<RoomBehaviour>();
         int temp = 0;
         for (int i = 0; i < monsterSpwanInfos.Count; i++)
         {
@@ -33,7 +35,6 @@ public class MonsterSpawner : MonoBehaviour
                 pooledObject.OnDie += roomBehaviour.MonsterCountChange;
             }
         }
-        roomBehaviour.CloseWall();
         roomBehaviour.MonsterCount = temp;
         Destroy(gameObject);
     }
@@ -43,8 +44,19 @@ public class MonsterSpawner : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             Debug.Log("몬스터 소환!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-            Spawn();
+            StartCoroutine(SpawnCoroutine());
         }
+    }
+
+    IEnumerator SpawnCoroutine()
+    {
+        roomBehaviour.CloseWall();
+        yield return Util.GetDelay(3f);
+        foreach (var item in _spawnPoints)
+        {
+            EffectManager.instance.ParticlePlay("GasExplosionPink", 5f, item.position, Quaternion.identity);
+        }
+        Spawn();
     }
 
     [Serializable]

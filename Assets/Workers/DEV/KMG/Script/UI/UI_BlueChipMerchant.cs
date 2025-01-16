@@ -80,8 +80,7 @@ public class UI_BlueChipMerchant : MonoBehaviour
 
     private void ClosePanel()
     {
-        playerController.PInput.IsCanControl = true;
-        gameObject.SetActive(false);
+        GetComponentInParent<UI_Merchant>().Temp(UI_Merchant.EMerchant.Chip);
     }
     private void OnEnable()
     {

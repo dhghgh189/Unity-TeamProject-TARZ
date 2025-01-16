@@ -54,8 +54,7 @@ public class UI_StatMerchant : MonoBehaviour
 
     private void ClosePanel()
     {
-        playerController.PInput.IsCanControl = true;
-        gameObject.SetActive(false);
+        GetComponentInParent<UI_Merchant>().Temp(UI_Merchant.EMerchant.Stat);
     }
     private void OnEnable()
     {

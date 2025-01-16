@@ -40,6 +40,8 @@ public class ActMove_Block : Action
         keepChaseRoutine = StartCoroutine(KeepChaseRoutine());
 
         _stopBlockDistance = _monsterData.CanJumpDistance + 2;
+
+        Debug.Log("액트 무브 _ 블락 : 2");
     }
 
     public override TaskStatus OnUpdate()
@@ -48,6 +50,10 @@ public class ActMove_Block : Action
 
         _playerBackRoute = _player.transform.position - _player.transform.forward * _stopBlockDistance;
 
+        // 캐릭터의 뒤로 걸어서 간다
+        // 마주보고 있으면 캐릭터 뒤 좌표로 직진 => 자연스럽게 거리가 가까워지면 캐릭터를 추격하게ㅐ
+        // 멀리있을때는 캐릭터의 뒤로 갈 수있음
+        // 하지만 캐릭터를 추적하는 본질은 유지
         if (_condCanMove.IsPlayerWithinSight(_player.gameObject) && _distance > _stopBlockDistance)
         {
             _agent.SetDestination(_playerBackRoute);
@@ -57,10 +63,11 @@ public class ActMove_Block : Action
         }
         else if (_condCanMove.IsPlayerWithinSight(_player.gameObject) && _distance <= _stopBlockDistance + 1)
         {
-            if (/*_condCanMove.IsPlayerWithinSight(_player.gameObject) &&*/ _distance <= _monsterData.CanJumpDistance || _distance <= _monsterData.AttackRange )
+            if ( _distance <= _monsterData.CanJumpDistance || _distance <= _monsterData.AttackRange )
             {
                 return TaskStatus.Success;
             }
+
             _agent.SetDestination(_player.transform.position);
             return TaskStatus.Running;
         }

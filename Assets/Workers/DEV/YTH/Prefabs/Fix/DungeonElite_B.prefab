@@ -1878,7 +1878,7 @@ Transform:
   m_GameObject: {fileID: 7512000166511379862}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.40933514, z: -0, w: 0.9123841}
-  m_LocalPosition: {x: 18.831688, y: 0, z: 1.4364138}
+  m_LocalPosition: {x: 18.831688, y: -0.5, z: 1.4364138}
   m_LocalScale: {x: 1.7, y: 1.7, z: 1.7}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2075,7 +2075,7 @@ MonoBehaviour:
         Can Move","Instant":true,"Single_angle":360,"Single_distance":25,"Single_rate":0.7},{"Type":"ActMove","NodeData":{"Offset":"(90,200)"},"ID":5,"Name":"Act
         Move","Instant":true,"CondCanMove_condCanMove":4}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(210,199.999969)"},"ID":6,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"CondCanAttack","NodeData":{"Offset":"(-114.90313,175.283264)"},"ID":7,"Name":"Cond
         Can Attack","Instant":true},{"Type":"ActMeleeAttack","NodeData":{"Offset":"(30.5555573,180)"},"ID":8,"Name":"Act
-        Melee Attack","Instant":true},{"Type":"BehaviorDesigner.Runtime.Tasks.Wait","NodeData":{"Offset":"(155.572617,173.6434)"},"ID":9,"Name":"Wait","Instant":true,"SharedFloatwaitTime":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":3},"SharedBoolrandomWait":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"SharedFloatrandomWaitMin":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1},"SharedFloatrandomWaitMax":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1}}]}]}]}}'
+        Melee Attack","Instant":true}]}]}]}}'
       fieldSerializationData:
         typeName: []
         fieldNameHash: 
@@ -2100,6 +2100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _projectile: {fileID: 0}
+  _projectile_boss: {fileID: 0}
   _bombPrefab: {fileID: 0}
   _minePrefab: {fileID: 0}
   _electricWallPrefab: {fileID: 0}

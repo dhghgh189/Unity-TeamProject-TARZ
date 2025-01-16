@@ -20,6 +20,9 @@ public class CondCanAttack : Conditional
     public override void OnStart()
     {
         _player = _pooledObject.player;
+
+        Debug.Log("컨디션 캔 어택 3 ");
+
     }
 
     public override TaskStatus OnUpdate()

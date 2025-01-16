@@ -1,4 +1,5 @@
 using BehaviorDesigner.Runtime.Tasks;
+using BehaviorDesigner.Runtime.Tasks.Unity.UnityGameObject;
 using UnityEngine;
 
 public class MSkill_StimPack : Action
@@ -6,6 +7,8 @@ public class MSkill_StimPack : Action
     private MonsterSkillManager _monsterSkillManager;
 
     private MonsterData _monsterData;
+
+    private GameObject _bomber;
 
     public override void OnAwake()
     {
@@ -15,20 +18,18 @@ public class MSkill_StimPack : Action
 
     public override TaskStatus OnUpdate()
     {
-        if (_monsterData.CurHp <= 0 && _monsterSkillManager.JackTheRipper != null)
+        if (_monsterSkillManager.StimPakSkill.CanUseSkill && _monsterData.CurHp <= _monsterData.MaxHp/3)
         {
-            if (_monsterSkillManager.stimPakRoutine == null)
-            {
-                _monsterSkillManager.stimPakRoutine = StartCoroutine(_monsterSkillManager.StimPak());
-                SoundManager.PlaySFX(SoundManager.SoundData_M.StimPak_Bomber);
-                SoundManager.PlaySFX(SoundManager.SoundData_M.StimPak_Jack);
-                Debug.Log("스팀팩");
-            }
+            _monsterSkillManager.stimPakRoutine = StartCoroutine(_monsterSkillManager.StimPak());
+            SoundManager.PlaySFX(SoundManager.SoundData_M.StimPak_Bomber);
+            SoundManager.PlaySFX(SoundManager.SoundData_M.StimPak_Jack);
+            Debug.Log("스팀팩");
+
             return TaskStatus.Success;
         }
         else
         {
-            return TaskStatus.Success;
+            return TaskStatus.Failure;
         }
     }
 }

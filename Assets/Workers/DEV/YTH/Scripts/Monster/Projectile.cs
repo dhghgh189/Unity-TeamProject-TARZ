@@ -5,7 +5,7 @@ public class Projectile : MonoBehaviour // 일반 원딜 쫄몹
 {
    [SerializeField] MonsterSkillManager skillManager;
 
-    [SerializeField] GameObject _radiation;
+   [SerializeField] Radiation _radiation;
 
     private Rigidbody _rigidBody;
 
@@ -36,16 +36,16 @@ public class Projectile : MonoBehaviour // 일반 원딜 쫄몹
         transform.parent = null;
 
         Destroy(gameObject, 3f);
-      
     }
 
     private void OnCollisionEnter(Collision collider)
     {
         _rigidBody.velocity = Vector3.zero;
         _rigidBody.angularVelocity = Vector3.zero;
-
-        _radiation.SetActive(true);
-        EffectManager.instance.ParticlePlay("PoisonPool", 3f, transform.position, Quaternion.identity, transform);
+        
+        Radiation radiation = Instantiate(_radiation, transform.position, Quaternion.identity);
+        radiation.SetParent(skillManager, _pooledObject.MonsterData);
+        EffectManager.instance.ParticlePlay("PoisonPool", 3f, transform.position, Quaternion.identity);
         
         if (collider.gameObject.CompareTag("Player"))
         {
@@ -56,6 +56,7 @@ public class Projectile : MonoBehaviour // 일반 원딜 쫄몹
                 damagable.TakeDamage(5);
             }
         }
+        Destroy(gameObject);
     }
 }
 

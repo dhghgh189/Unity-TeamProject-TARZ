@@ -15,7 +15,7 @@ public class MSkill_StimPack : Action
 
     public override TaskStatus OnUpdate()
     {
-        if ( _monsterSkillManager.Bomber == null)
+        if ( _monsterSkillManager.Bomber == null && _monsterSkillManager.StimPakSkill.CanUseSkill)
         {
             if (_monsterSkillManager.stimPakRoutine == null)
             {
@@ -28,7 +28,7 @@ public class MSkill_StimPack : Action
         }
         else
         {
-            return TaskStatus.Success;
+            return TaskStatus.Failure;
         }
     }
 }

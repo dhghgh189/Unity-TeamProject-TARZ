@@ -39,7 +39,6 @@ public class MSkill_FrogJump : Action
             _pooledObject.RotateToPlayer();
             _monsterSkillManager.frogJumpAttackRoutine = StartCoroutine(_monsterSkillManager.FrogJumpAttackRoutine());
             _animator.SetTrigger("Jump");
-            Debug.Log("개구리 점프!!");
             return TaskStatus.Success;
         }
         else if (_distance <= _monsterData.AttackRange)

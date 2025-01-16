@@ -56,6 +56,11 @@ public class Child_SpecialTrigger : MonoBehaviour
         }
     }
 
+    private void OnDisable()
+    {
+        player.HideUI();
+    }
+
     private void OnDestroy()
     {
         player.HideUI();

@@ -17,6 +17,7 @@ public static class Define
     public static readonly int HASH_ANIM_COUNTER_MELEE = Animator.StringToHash("CounterMelee");
 
     public const int USEKEY_MAXCOUNT = 4;
+    public const int BAGKEY_MAXCOUNT = 4;
 
     public enum SceneType { Title, Lobby, Chapter1 }
 }

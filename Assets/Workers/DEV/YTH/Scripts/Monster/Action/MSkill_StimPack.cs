@@ -15,7 +15,7 @@ public class MSkill_StimPack : Action
 
     public override TaskStatus OnUpdate()
     {
-        if (_monsterData.CurHp <= 0 && _monsterSkillManager.JackTheRipper != null)
+        if ( _monsterSkillManager.Bomber == null)
         {
             if (_monsterSkillManager.stimPakRoutine == null)
             {

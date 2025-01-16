@@ -55,8 +55,8 @@ public class MonsterSkillManager : MonoBehaviour
 
     [SerializeField] GameObject _minePrefab;
 
-    private GameObject _jackTheRipper;
-    public GameObject JackTheRipper { get { return _jackTheRipper; } set { _jackTheRipper = value; } }
+    private GameObject _bomber;
+    public GameObject Bomber { get { return _bomber; } set { _bomber = value; } }
 
     [Header("Arnold")]
     [SerializeField] GameObject _electricWallPrefab;
@@ -115,7 +115,7 @@ public class MonsterSkillManager : MonoBehaviour
         SkillInit();
 
         _player = _pooledObject.player;
-        _jackTheRipper = GameObject.Find("JackTheRipper");
+        _bomber = GameObject.Find("Bomber");
     }
 
     public void LoadSkill()
@@ -300,20 +300,19 @@ public class MonsterSkillManager : MonoBehaviour
     {
         StimPakSkill.CanUseSkill = false;
 
-        /*_effectManager.ParticlePlay("Syringe1", 3f, transform.position, Quaternion.identity, transform);*/
-        EffectManager.instance.ParticlePlay("RevengeAura", 6f, _jackTheRipper.transform.position, Quaternion.identity, transform);
+        EffectManager.instance.ParticlePlay("Syringe", 3f, transform.position, Quaternion.identity, transform);
+        EffectManager.instance.ParticlePlay("RevengeAura", 6f, transform.position, Quaternion.identity, transform);
 
-        MonsterData JackData = _jackTheRipper.GetComponent<MonsterData>();
-        JackData.CurHp += 500;
-        JackData.Damage += 10;
-        JackData.AttackRange += 3;
+        _monsterData.CurHp += 500;
+        _monsterData.Damage += 10;
+        _monsterData.AttackRange += 3;
         WheelWindSkill.CoolTime *= 0.5f;
         TrippleAttackSkill.CoolTime *= 0.5f;
 
         yield return Util.GetDelay(30);
 
-        JackData.Damage -= 10;
-        JackData.AttackRange -= 3;
+        _monsterData.Damage -= 10;
+        _monsterData.AttackRange -= 3;
         WheelWindSkill.CoolTime *= 2f;
         TrippleAttackSkill.CoolTime *= 2f;
 

@@ -290,15 +290,7 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
     private void DropBlueChip(Vector3 curPos)
     {
         int tier = UnityEngine.Random.Range(1, 4);
-        if (_monsterData.MonsterTIer == MonsterData.MonsterTier.Elite)
-        {
-            tier = (UnityEngine.Random.Range(0, 1f)) switch
-            {
-                < 0.5f => 3,
-                <= 0.5f and < 0.8f => 2,
-                _ => 1,
-            };
-        }
+
 
         foreach (var item in dropPool.GetComponentsInChildren<DropBlueChip>(true))
         {
@@ -309,6 +301,16 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
                 item.gameObject.SetActive(true);
                 return;
             }
+        }
+
+        if (_monsterData.MonsterTIer == MonsterData.MonsterTier.Elite)
+        {
+            tier = (UnityEngine.Random.Range(0, 1f)) switch
+            {
+                < 0.5f => 3,
+                <= 0.5f and < 0.8f => 2,
+                _ => 1,
+            };
         }
         Instantiate(_blueChip, curPos, transform.rotation, dropPool).GetComponent<DropBlueChip>().DropChipInit(tier);
     }

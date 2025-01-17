@@ -149,7 +149,7 @@ public class ManaRush_1 : BaseManaState
                 return false;
             }
         }
-        else if(
+        else if (
             ((1 << other.gameObject.layer) & LayerMask.GetMask("Camera")) != 0 ||
             ((1 << other.gameObject.layer) & LayerMask.GetMask("Obstacles")) != 0)
         {
@@ -302,7 +302,7 @@ public class ManaRush_3 : BaseManaState
         SoundManager.PlaySFX(SoundManager.SoundData_S.ManaSkillSounds_1[0].AudioClip);
         // 던지는 물건 생성
         CreateThrowObject();
-        
+
         Collider[] colliders = Physics.OverlapSphere(owner.transform.position, attackRange, LayerMask.GetMask("Monster"));
         foreach (Collider collider in colliders)
         {
@@ -349,64 +349,70 @@ public class ManaRush_3 : BaseManaState
     {
         base.OnExit();
         parent.collider = null;
+        owner.Movement.Rigid.isKinematic = false;
     }
 
     private void CreateThrowObject()
     {
-        float count = parent.SkillData.GetData((int)ManaRushDataType.CreateThrowObject);
-        for (int i = 0; i < count; i++)
-        {
-            if (owner.Attack.ObjectCount >= owner.Attack.MaxObjectCount) break;
-            ThrowObject ob = Object.Instantiate(owner.ManaSkillHandler.instance);
-            ob.IsCollected = true;
-            owner.Attack.AddObjectStack(ob);
-        }
+        // float count = parent.SkillData.GetData((int)ManaRushDataType.CreateThrowObject);
+        // for (int i = 0; i < count; i++)
+        // {
+        //     if (owner.Attack.ObjectCount >= owner.Attack.MaxObjectCount) break;
+        //     ThrowObject ob = Object.Instantiate(owner.ManaSkillHandler.instance);
+        //     ob.IsCollected = true;
+        //     owner.Attack.AddObjectStack(ob);
+        // }
 
         // TODO: 던지는 갯수 문제
         // 던지는 물체의 갯수
-        // float count = parent.SkillData.GetData((int)ManaRushDataType.CreateThrowObject);
-        // float radius = 3f;
-        // Collider[] check = new Collider[1];
-        // throwObjectList.Clear();
-        // 
-        // dir = Vector3.zero;
-        // pos = owner.gameObject.transform.position;
-        // 
-        // // 던지는 물체 원형으로 생성
-        // for (int i = 0; i < count; i++)
-        // {
-        //     float angle = i * (Mathf.PI * 2.0f) / count;
-        // 
-        //     Vector3 nextPos = pos + (new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle))) * radius + Vector3.up;
-        //     check[0] = null;
-        // 
-        //     // 생성될 위치에 장애물이 있는지 확인
-        //     Physics.OverlapSphereNonAlloc(nextPos, 0.1f, check, LayerMask.GetMask("Camera", "Obstacles") );
-        // 
-        //     // 만약 장애물이 있으면
-        //     if (check[0] != null)
-        //     {
-        //         // 발동한 자리에
-        //         nextPos = pos;
-        //     }
-        // 
-        //     GameObject child = Object.Instantiate(owner.ManaSkillHandler.instance, nextPos, Quaternion.identity).gameObject;
-        //     
-        //     if(check[0] == null) throwObjectList.Add(child);
-        // 
-        //     dir = child.transform.position - pos;
-        //     child.transform.rotation = Quaternion.LookRotation(dir.normalized);
-        // }
+        float count = parent.SkillData.GetData((int)ManaRushDataType.CreateThrowObject);
+        float radius = 3f;
+        Collider[] check = new Collider[1];
+        throwObjectList.Clear();
 
-        // Addforce로 날리기
-        // foreach (GameObject item in throwObjectList)
-        // {
-        //     Rigidbody rigid = item.GetComponent<Rigidbody>();
-        //     if (rigid != null)
-        //     {
-        //         item.GetComponent<Rigidbody>().AddForce((item.transform.forward) * 5f, ForceMode.Impulse);
-        //     }
-        // }
+        dir = Vector3.zero;
+        pos = owner.gameObject.transform.position;
+
+        // 던지는 물체 원형으로 생성
+        for (int i = 0; i < count; i++)
+        {
+            float angle = i * (Mathf.PI * 2.0f) / count;
+
+            Vector3 nextPos = pos + (new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle))) * radius + Vector3.up;
+            check[0] = null;
+
+            // 생성될 위치에 장애물이 있는지 확인
+            Physics.OverlapSphereNonAlloc(nextPos, 0.1f, check, LayerMask.GetMask("Camera", "Obstacles"));
+
+            // 만약 장애물이 있으면
+            if (check[0] != null)
+            {
+                // 발동한 자리에
+                nextPos = pos;
+            }
+
+            GameObject child = Object.Instantiate(owner.ManaSkillHandler.instance, nextPos, Quaternion.identity).gameObject;
+
+            if (check[0] == null) throwObjectList.Add(child);
+
+            dir = child.transform.position - pos;
+            child.transform.rotation = Quaternion.LookRotation(dir.normalized);
+        }
+
+        // 플레이어 뒤로 안밀려나게
+        owner.Movement.Rigid.isKinematic = true;
+
+        //Addforce로 날리기
+        foreach (GameObject item in throwObjectList)
+        {
+            if (item == null) continue;
+
+            Rigidbody rigid = item.GetComponent<Rigidbody>();
+            if (rigid != null)
+            {
+                item.GetComponent<Rigidbody>().AddForce((item.transform.forward) * 5f, ForceMode.Impulse);
+            }
+        }
     }
 }
 

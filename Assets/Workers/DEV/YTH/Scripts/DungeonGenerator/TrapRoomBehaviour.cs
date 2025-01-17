@@ -10,6 +10,8 @@ public class TrapRoomBehaviour : MonoBehaviour
 
     [SerializeField] Buff speedBuff;
 
+    private bool isClear = false;
+
     private void Awake()
     {
         bagSkillManager = FindAnyObjectByType<BagSkillManager>();
@@ -42,6 +44,10 @@ public class TrapRoomBehaviour : MonoBehaviour
 
     public void Clear()
     {
+        if (isClear)
+            return;
+        isClear = true;
+
         foreach (ISwitchable item in traps)
         {
             if (item.IsActive)

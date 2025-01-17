@@ -65,7 +65,7 @@ public class ArmUpgradManager : MonoBehaviour, Interaction_Ibase_Activate
         }
         OnlyInteractAction(true);
         upgradePanel.SetActive(true);
-        GetComponentInChildren<UI_ArmUpgrade>().GetComponent<Button>().Select();
+        armUnits[0].GetComponent<Button>().Select();
     }
     public void SetUpgradeDescription(string name, string info, string cost)
     {

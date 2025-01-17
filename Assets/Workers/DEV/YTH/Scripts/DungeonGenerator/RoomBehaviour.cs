@@ -33,7 +33,7 @@ public class RoomBehaviour : MonoBehaviour
         {
             item.GetComponent<PhaseController>().StartPhase(true, item);
         }
-        Instantiate(buffPrefab[Random.Range(0, buffPrefab.Length)], transform.position + (Vector3.up * 4), Quaternion.identity);
+        Instantiate(buffPrefab[Random.Range(0, buffPrefab.Length)], transform.position + Vector3.forward * 2, Quaternion.identity);
         Instantiate(speedBuff, transform.position, Quaternion.identity);
     }
 

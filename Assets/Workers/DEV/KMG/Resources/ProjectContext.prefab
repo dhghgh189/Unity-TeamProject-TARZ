@@ -236,14 +236,15 @@ MonoBehaviour:
   maxMp: 400
   moveSpeed: 5
   MpAmount:
-  - 5
-  - 3
+  - 10
+  - 15
   staminarEgeneration: 10
   DashSpeed: 10
   DashStaminaAmount: 30
   StaminaCostRate: 1
   StaminaChargeRate: 1
   ExtraDamage: 0
+  SpeedRate: 1
   currentHp: 100
   currentMp: 0
   currentStamina: 100
@@ -304,6 +305,13 @@ MonoBehaviour:
   OnChargeEvent:
     m_PersistentCalls:
       m_Calls: []
+  OnUIUpdateEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnAddBagSkillEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  redChipUIs: []
 --- !u!1001 &1395578014432126290
 PrefabInstance:
   m_ObjectHideFlags: 0

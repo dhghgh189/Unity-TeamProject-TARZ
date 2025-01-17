@@ -20,7 +20,9 @@ public class Collector : MonoBehaviour
         if (buff != null)
         {
             buff.Use(player);
-            Destroy(buff.gameObject);
+
+            if(string.Compare(buff.Name, "SpeedBuff") != 0)
+                Destroy(buff.gameObject);
         }
     }
 }

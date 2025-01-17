@@ -20316,12 +20316,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41216882644dcb64cbf6c524c9e30142, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxRadius: 2
+  maxRadius: 6
   drainSpeed: 5
   whatIsTarget:
     serializedVersion: 2
     m_Bits: 128
   player: {fileID: 8752484280843322280}
+  drainEffect: {fileID: 198536722342428144, guid: c105577ec49dfb3408a7a89c3b7730be,
+    type: 3}
   DrainStaminaAmount: 10
   OnStartEffectEvent:
     m_PersistentCalls:

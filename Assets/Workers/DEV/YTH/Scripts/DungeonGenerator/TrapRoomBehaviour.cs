@@ -8,6 +8,8 @@ public class TrapRoomBehaviour : MonoBehaviour
     [SerializeField] BagSkillManager bagSkillManager;
     [SerializeField] List<ISwitchable> traps = new();
 
+    [SerializeField] Buff speedBuff;
+
     private void Awake()
     {
         bagSkillManager = FindAnyObjectByType<BagSkillManager>();
@@ -34,6 +36,8 @@ public class TrapRoomBehaviour : MonoBehaviour
         {
             item.GetComponent<PhaseController>().StartPhase(true, item);
         }
+
+        Instantiate(speedBuff, transform.position + Vector3.up * 1f, Quaternion.identity);
     }
 
     public void Clear()

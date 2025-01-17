@@ -228,7 +228,7 @@ public class Interactioner : MonoBehaviour
         Destroy(SpecialOBJ.rigidOBJ);
 
         // 플레이어의 스피드 = 기존의 1/3
-        playerController.Stat.SpeedRate *= 0.3f;
+        playerController.Stat.SpeedRate *= 0.7f;
 
         while (IsGrabing)
         {

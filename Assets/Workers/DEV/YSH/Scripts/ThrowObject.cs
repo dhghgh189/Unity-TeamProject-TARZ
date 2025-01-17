@@ -160,12 +160,13 @@ public class ThrowObject : MonoBehaviour, IDrainable
                 case SkillEnum.UniqueFunctionType.ThrowObjectConvertMine:
                     ThrowObjectConvertMine mine = GetComponent<ThrowObjectConvertMine>();
                     mine.Change(owner.Player.Stat.DefaultPowerPer);
+                    any = false;
                     break;
                 case SkillEnum.UniqueFunctionType.ThrowObjectUpgrade:
                     GetComponent<ThrowObjectUpgrade>().IsUpgraded = true;
+                    any = false;
                     break;
             }
-            any = false;
         }
 
 

@@ -117,6 +117,9 @@ public class PlayerView : MonoBehaviour
         if (attack.ObjectCount <= 0) tObjFill.fillAmount = 0;
     }
 
+    /// <summary>
+    /// 상호작용 UI 출력 함수
+    /// </summary>
     public void SetActiveUI()
     {
         if (interactionAlarm != null)
@@ -125,6 +128,9 @@ public class PlayerView : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 상호작용 UI 숨김 처리 함수
+    /// </summary>
     public void HideUI()
     {
         if (interactionAlarm != null)

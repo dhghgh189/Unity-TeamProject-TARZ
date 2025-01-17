@@ -22,6 +22,11 @@ public class PanelManager : MonoBehaviour
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
+    /// <summary>
+    /// 씬 로드 체크 함수
+    /// </summary>
+    /// <param name="scene"></param>
+    /// <param name="mode"></param>
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         if (scene.name == "Title")
@@ -44,12 +49,14 @@ public class PanelManager : MonoBehaviour
 
         if (SceneManager.GetActiveScene().name == "Title") return;
 
+        // 플레이어가 없을 때 예외처리
         if (player == null)
         {
             Debug.LogError("PlayerController가 초기화되지 않았습니다.");
             return;
         }
 
+        // 패널이 활성화 되어있는 경우 플레이어의 행동 체크
         if (isActive)
         {
             foreach (GameObject panel in panels)
@@ -69,6 +76,10 @@ public class PanelManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 패널 활성화 체크 함수
+    /// </summary>
+    /// <returns></returns>
     private bool CheckActivePanel()
     {
         foreach (GameObject panel in panels)

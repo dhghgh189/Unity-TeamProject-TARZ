@@ -19,6 +19,9 @@ public class LoadSceneUI : MonoBehaviour
         inputManager.firstInput.Select();
     }
 
+    /// <summary>
+    /// 돌아가기 버튼 클릭
+    /// </summary>
     public void OnClickBackButton()
     {
         SoundManager.PlaySFX(SoundManager.SoundData_UI.OnUI);

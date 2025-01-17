@@ -13,18 +13,15 @@ public class UI_Bluechip : MonoBehaviour
 
     private void Awake()
     {
+        // 블루칩 스킬 UI 업데이트 이벤트 구독
         playerSkill.onAddSkillEvents.AddListener(UpdateUI);
         Debug.Log(playerSkill.onAddSkillEvents.GetPersistentEventCount());
     }
 
-    /*private void Start()
-    {
-        foreach (var item in playerSkill.skillDic?.Keys)
-        {
-            UpdateUI(item);
-        } 
-    }*/
-
+    /// <summary>
+    /// 블루칩 스킬 UI 업데이트 함수
+    /// </summary>
+    /// <param name="skillName"></param>
     private void UpdateUI(string skillName)
     {
         BaseSkillSO item = playerSkill.skillDic[skillName];

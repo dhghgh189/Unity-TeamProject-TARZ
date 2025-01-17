@@ -20,14 +20,20 @@ public class ButtonSelectable : MonoBehaviour
 
     private void Start()
     {
+        // 현재 씬의 이벤트 시스템을 참조
         system = EventSystem.current;
+
+        // 셀렉터블로 지정할 버튼 선택
         inputManager.firstInput = button;
         inputManager.firstInput.Select();
     }
 
     private void OnEnable()
     {
+        // 현재 씬의 이벤트 시스템을 참조
         system = EventSystem.current;
+
+        // 셀렉터블로 지정할 버튼 선택
         inputManager.firstInput = button;
         inputManager.firstInput.Select();
     }
@@ -37,6 +43,9 @@ public class ButtonSelectable : MonoBehaviour
         ChangeText();
     }
 
+    /// <summary>
+    /// 텍스트 변경
+    /// </summary>
     private void ChangeText()
     {
         if (system.currentSelectedGameObject == null) return;

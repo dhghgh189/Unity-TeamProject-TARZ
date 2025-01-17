@@ -67,33 +67,45 @@ public class TitleSceneUI : MonoBehaviour
         }
     }
 
-    // 게임 시작 버튼 클릭
+    /// <summary>
+    /// 게임 시작 버튼 클릭
+    /// </summary>
     public void OnClickLoadGameButton()
     {
         gameObject.SetActive(false);    // 타이틀 패널 비활성화
         loadGamePanel.SetActive(true);  // 저장된 게임 불러오기 패널 활성화
     }
 
-    // 설정 버튼 클릭
+    /// <summary>
+    /// 설정 버튼 클릭
+    /// </summary>
     public void OnClickSettingsButton()
     {
         gameObject.SetActive(false);    // 타이틀 패널 비활성화
         settingsPanel.SetActive(true);  // 설정 패널 활성화
     }
 
-    // 게임 종료 버튼 클릭
+    /// <summary>
+    /// 게임 종료 버튼 클릭
+    /// </summary>
     public void OnClickQuitGameButton()
     {
         gameObject.SetActive(false);    // 타이틀 패널 비활성화
         quitPanel.SetActive(true);      // 게임 나가기 패널 활성화
     }
 
+    /// <summary>
+    /// 로고 숨기기 함수
+    /// </summary>
     public void HideLogo()
     {
         LogoPanel.gameObject.SetActive(false);
         anim.Play(fadeInHash);
     }
 
+    /// <summary>
+    /// Fade In 완료 후 진행 함수
+    /// </summary>
     public void OnCompleteFadeIn()
     {
         inputManager.firstInput = newGameButton;  // 타이틀 패널의 UI 네비게이션 첫 Input을 newGameButton로 설정

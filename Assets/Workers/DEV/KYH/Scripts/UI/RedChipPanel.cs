@@ -13,6 +13,10 @@ public class RedchipPanel : MonoBehaviour
 
     //[SerializeField] private LocalizedStringTable localTable;
 
+    /// <summary>
+    /// 가방 스킬 초기화 함수
+    /// </summary>
+    /// <param name="data"></param>
     public void InitRedchipSkill(BagSkillDataSO data)
     {
         SoundManager.PlaySFX(SoundManager.SoundData_UI.OnUI);

@@ -30,6 +30,7 @@ public class ChangeInput : MonoBehaviour
         // 현재 선택된 UI 오브젝트가 없는 경우 예외 처리
         if (system.currentSelectedGameObject == null) return;
 
+        // UI 오브젝트 셀렉터블 이동 시 효과음 출력
         if (system.currentSelectedGameObject != lastSelect)
         {
             lastSelect = system.currentSelectedGameObject;

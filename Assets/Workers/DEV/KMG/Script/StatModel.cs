@@ -6,7 +6,7 @@ public enum AdditionAbility
     [Description("공격력%")] AllPowerPer,
     [Description("기본 공격력%")] DefaultPowerPer,
     [Description("스킬 공격력%")] SkillPowerPer,
-    [Description("속성 공격력%")] ElementalPowerPer,
+    [Description("아이템 공격력%")] ItemPowerPer,
     [Description("크리티컬 공격력%")] CriticalDamage,
     [Description("크리티컬 확률%")] Critical,
     [Description("최대 생명력%")] MaxHpPer,
@@ -37,7 +37,7 @@ public class StatModel : MonoBehaviour
     public float AllPowerPer { get => GetAbility(AdditionAbility.AllPowerPer); private set { } }
     public float DefaultPowerPer { get => 1 + ((AllPowerPer + (GetAbility(AdditionAbility.DefaultPowerPer))) * 0.01f); private set { } }
     public float SkillPowerPer { get => 1 + ((AllPowerPer + (GetAbility(AdditionAbility.SkillPowerPer))) * 0.01f); private set { } }
-    public float ElementalPowerPer { get => 1 + ((AllPowerPer + (GetAbility(AdditionAbility.ElementalPowerPer))) * 0.01f); private set { } }
+    public float ItemPowerPer { get => 1 + ((AllPowerPer + (GetAbility(AdditionAbility.ItemPowerPer))) * 0.01f); private set { } }
 
     public float[] MpAmount = new float[(int)EMpAmountType.Length];
     public float GetMpGain(EMpAmountType amountType)

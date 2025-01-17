@@ -62,9 +62,9 @@ public class ScrapParentObject : MonoBehaviour
         OnStartEvent.RemoveAllListeners();
     }
 
-    public void Init(BagSkillDataSO data)
+    public void Init(BagSkillDataSO data, float skillDamagePercent)
     {
-        damage = data.Getdata((int)BagSkillEnum.ScrapBurstDataType.DefaultDamage).value;
+        damage = data.Getdata((int)BagSkillEnum.ScrapBurstDataType.DefaultDamage).value * skillDamagePercent;
         duration = data.Getdata((int)BagSkillEnum.ScrapBurstDataType.Duration).value;
         distance = data.Getdata((int)BagSkillEnum.ScrapBurstDataType.Distance).value;
         waitDelay = data.Getdata((int)BagSkillEnum.ScrapBurstDataType.WaitDelay).value;

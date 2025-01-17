@@ -65,7 +65,7 @@ public class BagCompactCanonSkill : BagSkill
             parent.instance = UnityEngine.Object.Instantiate(parent.tmp, createPoint.position, owner.gameObject.transform.rotation).GetComponent<ScrapMatelObject>();
             parent.instance.gameObject.transform.parent = createPoint;
 
-            parent.instance.Init(parent.skilldata);
+            parent.instance.Init(parent.skilldata, owner.Stat.SkillPowerPer);
 
             owner.Movement.Rigid.velocity = Vector3.zero;
 

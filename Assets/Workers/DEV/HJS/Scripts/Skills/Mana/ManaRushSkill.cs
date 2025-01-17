@@ -223,7 +223,7 @@ public class ManaRush_2 : BaseManaState
             Debug.Log("마나2 잡기에서 충격파 행동으로 넘어가기 요청!");
             IDamagable damagable = parent.collider.gameObject.GetComponent<IDamagable>();
 
-            if (damagable is not null) damagable.TakeDamage(grabDamage);
+            if (damagable is not null) damagable.TakeDamage(grabDamage * owner.Stat.SkillPowerPer);
 
             // 잡은 몬스터 놓아주기
             LeaveMonster();
@@ -307,7 +307,7 @@ public class ManaRush_3 : BaseManaState
         foreach (Collider collider in colliders)
         {
             IDamagable damagable = collider.gameObject.GetComponent<IDamagable>();
-            if (damagable != null) { damagable.TakeDamage(damage); Debug.Log($"{collider.gameObject.name}에게 {150}만큼의 피해를 입혔다!"); }
+            if (damagable != null) { damagable.TakeDamage(damage * owner.Stat.SkillPowerPer); }
         }
 
         owner.Anim.CrossFade(Animator.StringToHash(animName), 0.01f);
@@ -356,7 +356,7 @@ public class ManaRush_3 : BaseManaState
         // 던지는 물체의 갯수
         float count = parent.SkillData.GetData((int)ManaRushDataType.CreateThrowObject);
         float radius = 2f;
-
+        Collider[] check = new Collider[1];
 
         dir = Vector3.zero;
         pos = owner.gameObject.transform.position;
@@ -379,7 +379,11 @@ public class ManaRush_3 : BaseManaState
         // Addforce로 날리기
         foreach (GameObject item in throwObjectList)
         {
-            item.GetComponent<Rigidbody>().AddForce((item.transform.forward) * 5f, ForceMode.Impulse);
+            Rigidbody rigid = item.GetComponent<Rigidbody>();
+            if (rigid != null)
+            {
+                item.GetComponent<Rigidbody>().AddForce((item.transform.forward) * 5f, ForceMode.Impulse);
+            }
         }
     }
 }

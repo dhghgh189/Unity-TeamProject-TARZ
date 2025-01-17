@@ -56,8 +56,8 @@ public class BagJunkFistSkill : BagSkill
         int removeCount = (int)ResultDamage * 3;
         Debug.Log($"<color=green>데미지 증가량 : {ResultDamage}</color>");
         owner.Attack.RemoveThrowObject(removeCount);
-        ResultDamage *= skilldata.Getdata((int)JunkFistDataType.IncreaseDamage).value;
-        
+        ResultDamage *= (skilldata.Getdata((int)JunkFistDataType.IncreaseDamage).value) * owner.Stat.SkillPowerPer;
+
         // 변경할 공격 모션 담아두기
         MeleeAttackInfo = new MeleeAttackInfo[]
         {

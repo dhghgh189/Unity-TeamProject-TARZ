@@ -114,7 +114,7 @@ public class ManaThrowCarSkill : IManaSkill
             ThrowCarObject throwCarObject = parent.carInstance.GetComponent<ThrowCarObject>();
             if (throwCarObject is not null)
             {
-                throwCarObject.Init(parent.SkillData);
+                throwCarObject.Init(parent.SkillData, owner.Stat.SkillPowerPer);
                 parent.OnThrowEvent.AddListener(throwCarObject.Throw);
             }
         }

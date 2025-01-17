@@ -89,7 +89,7 @@ public class ManaMegaFistSkill : IManaSkill
             SoundManager.PlaySFX(SoundManager.SoundData_S.ManaSkillSounds_3[0].AudioClip);
 
             MegaFistGateObject gate = instatiate.GetComponent<MegaFistGateObject>();
-            gate.Init(parent.SkillData);
+            gate.Init(parent.SkillData, owner.Stat.SkillPowerPer);
             owner.ManaSkillHandler.NextStep();
         }
     }

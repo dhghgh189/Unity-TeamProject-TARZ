@@ -182,7 +182,7 @@ public class BlackHollObject : MonoBehaviour
         StopAllCoroutines();
     }
 
-    public void Init(ManaSkillDataSO data)
+    public void Init(ManaSkillDataSO data, float skillDamagePower)
     {
         // 값 설정
         moveSpeed = data.GetData((int)ManaBlackHollDataType.ThrowSpeed);
@@ -190,8 +190,8 @@ public class BlackHollObject : MonoBehaviour
         absorptionMinRange = data.GetData((int)ManaBlackHollDataType.AbsorptionMinRange);
         absorptionMaxRange = data.GetData((int)ManaBlackHollDataType.AbsorptionMaxRange);
         absorptionSpeed = data.GetData((int)ManaBlackHollDataType.AbsorptionSpeed);
-        explosionMinDamage = data.GetData((int)ManaBlackHollDataType.ExplosionMinDamage);
-        explosionMaxDamage = data.GetData((int)ManaBlackHollDataType.ExplosionMaxDamage);
+        explosionMinDamage = data.GetData((int)ManaBlackHollDataType.ExplosionMinDamage) * skillDamagePower;
+        explosionMaxDamage = data.GetData((int)ManaBlackHollDataType.ExplosionMaxDamage) * skillDamagePower;
         explosionRange = data.GetData((int)ManaBlackHollDataType.ExplosionRange);
 
         // 값 설정후 모으기 시작

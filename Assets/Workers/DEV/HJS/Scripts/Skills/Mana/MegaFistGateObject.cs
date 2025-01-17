@@ -18,7 +18,7 @@ public class MegaFistGateObject : MonoBehaviour
     }
 
     // 데미지, 공격 범위, 주먹 속도, 주먹 시간 , 투명도
-    public void Init(ManaSkillDataSO data)
+    public void Init(ManaSkillDataSO data, float skillDamagePercent)
     {
         // 거대 주먹 생성
         instance = Instantiate(fistPrefab.gameObject);
@@ -40,7 +40,7 @@ public class MegaFistGateObject : MonoBehaviour
         // 투명도
         fist.AlphaValue = data.GetData((int)ManaMegaFistDataType.FistAlpha) * 0.01f;
         // 공격력
-        fist.Damage = data.GetData((int)ManaMegaFistDataType.FistDamage);
+        fist.Damage = data.GetData((int)ManaMegaFistDataType.FistDamage) * skillDamagePercent;
         // 파괴 이벤트 설정
         fist.OnEndEvent.AddListener(IsOver);
         // 크기 설정

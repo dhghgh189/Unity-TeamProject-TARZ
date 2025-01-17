@@ -60,15 +60,6 @@ public class ManaThrowCarSkill : IManaSkill
             animTimer = 999f;
             Debug.Log("차량 집어들기 시작!");
 
-            float count = parent.SkillData.GetData((int)ManaThrowCarDataType.CreateThrowObject);
-            for (int i = 0; i < count; i++)
-            {
-                if (owner.Attack.ObjectCount >= owner.Attack.MaxObjectCount) break;
-                ThrowObject ob = Object.Instantiate(owner.ManaSkillHandler.instance);
-                ob.IsCollected = true;
-                owner.Attack.AddObjectStack(ob);
-            }
-
             if (camTrf == null)
                 camTrf = Camera.main.transform;
 

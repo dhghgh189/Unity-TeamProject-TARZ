@@ -60,15 +60,6 @@ public class ManaRush_1 : BaseManaState
     public override void OnEnter()
     {
         base.OnEnter();
-        float count = parent.SkillData.GetData((int)ManaRushDataType.CreateThrowObject);
-
-        for(int i = 0; i < count; i++)
-        {
-            if (owner.Attack.ObjectCount >= owner.Attack.MaxObjectCount) break;
-            ThrowObject ob = Object.Instantiate(owner.ManaSkillHandler.instance);
-            ob.IsCollected = true;
-            owner.Attack.AddObjectStack(ob);
-        }
 
         Debug.Log("마나1 마나 입장");
         rushTime = parent.SkillData.GetData((int)ManaRushDataType.RushTime);
@@ -272,10 +263,18 @@ public class ManaRush_3 : BaseManaState
     private Vector3 lookDir;
     float damage;
     float attackRange;
+
+    /* 파편 생성 변수 */
+    private Vector3 dir;
+    private Vector3 pos;
+    private float count;
+    private List<GameObject> throwObjectList;
+
     public ManaRush_3(PlayerController owner, ManaRushSkill parent) : base(owner)
     {
         this.parent = parent;
         animTimer = 999f;
+        throwObjectList = new();
     }
 
     public override void OnEnter()
@@ -300,7 +299,9 @@ public class ManaRush_3 : BaseManaState
         // 이펙트 생성
         EffectManager.instance.ParticlePlay("ManaSkill_11", 1f, owner.transform.position, Quaternion.identity);
         // SFX 재생
-        SoundManager.PlaySFX(SoundManager.SoundData_S.ManaSkillSounds_1[0].AudioClip);        
+        SoundManager.PlaySFX(SoundManager.SoundData_S.ManaSkillSounds_1[0].AudioClip);
+        // 던지는 물건 생성
+        CreateThrowObject();
         
         Collider[] colliders = Physics.OverlapSphere(owner.transform.position, attackRange, LayerMask.GetMask("Monster"));
         foreach (Collider collider in colliders)
@@ -348,6 +349,38 @@ public class ManaRush_3 : BaseManaState
     {
         base.OnExit();
         parent.collider = null;
+    }
+
+    private void CreateThrowObject()
+    {
+        // 던지는 물체의 갯수
+        float count = parent.SkillData.GetData((int)ManaRushDataType.CreateThrowObject);
+        float radius = 2f;
+
+
+        dir = Vector3.zero;
+        pos = owner.gameObject.transform.position;
+
+        // 던지는 물체 원형으로 생성
+        for (int i = 0; i < count; i++)
+        {
+            float angle = i * (Mathf.PI * 2.0f) / count;
+
+            GameObject child = Object.Instantiate(owner.ManaSkillHandler.instance, pos, Quaternion.identity).gameObject;
+            throwObjectList.Add(child);
+
+            child.transform.position
+                = pos + (new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle))) * radius + Vector3.up;
+
+            dir = child.transform.position - pos;
+            child.transform.rotation = Quaternion.LookRotation(dir.normalized);
+        }
+
+        // Addforce로 날리기
+        foreach (GameObject item in throwObjectList)
+        {
+            item.GetComponent<Rigidbody>().AddForce((item.transform.forward) * 5f, ForceMode.Impulse);
+        }
     }
 }
 

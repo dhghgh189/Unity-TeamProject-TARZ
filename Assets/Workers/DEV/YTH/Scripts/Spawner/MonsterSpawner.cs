@@ -15,6 +15,8 @@ public class MonsterSpawner : MonoBehaviour
     private MapGenerator _generator;
     private UNQuest_Interaction _quest;
 
+    Coroutine coroutine;
+
     private void Awake()
     {
         _spawnPoints = GetComponentsInChildren<Transform>().Skip(1).ToArray();
@@ -60,7 +62,9 @@ public class MonsterSpawner : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             Debug.Log("몬스터 소환!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-            StartCoroutine(SpawnCoroutine());
+
+            if (coroutine == null)
+                coroutine = StartCoroutine(SpawnCoroutine());
         }
     }
 

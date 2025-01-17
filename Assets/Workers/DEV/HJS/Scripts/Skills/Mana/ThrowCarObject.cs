@@ -93,15 +93,29 @@ public class ThrowCarObject : MonoBehaviour
         Vector3 dir = Vector3.zero;
         Vector3 pos = transform.position;
 
+        Collider[] check = new Collider[1];
+
         // 던지는 물체 원형으로 생성
         for (int i = 0; i < count; i++)
         {
             float angle = i * (Mathf.PI * 2.0f) / count;
 
-            GameObject child = Instantiate(instance, pos, Quaternion.identity).gameObject;
-            throwObjectList.Add(child);
-            child.transform.position
-                = pos + (new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle))) * radius + Vector3.up;
+            Vector3 nextPos = pos + (new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle))) * radius + Vector3.up;
+            check[0] = null;
+
+            // 생성될 위치에 장애물이 있는지 확인
+            Physics.OverlapSphereNonAlloc(nextPos, 0.1f, check, LayerMask.GetMask("Camera", "Obstacles"));
+
+            // 만약 장애물이 있으면
+            if (check[0] != null)
+            {
+                // 발동한 자리에
+                nextPos = pos;
+            }
+
+            GameObject child = Instantiate(instance, nextPos, Quaternion.identity).gameObject;
+
+            if (check[0] == null) throwObjectList.Add(child);
 
             dir = child.transform.position - pos;
             child.transform.rotation = Quaternion.LookRotation(dir.normalized);

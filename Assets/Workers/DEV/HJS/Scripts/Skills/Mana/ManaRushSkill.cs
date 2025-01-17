@@ -353,7 +353,7 @@ public class ManaRush_3 : BaseManaState
 
     private void CreateThrowObject()
     {
-        float count = parent.SkillData.GetData((int)ManaThrowCarDataType.CreateThrowObject);
+        float count = parent.SkillData.GetData((int)ManaRushDataType.CreateThrowObject);
         for (int i = 0; i < count; i++)
         {
             if (owner.Attack.ObjectCount >= owner.Attack.MaxObjectCount) break;

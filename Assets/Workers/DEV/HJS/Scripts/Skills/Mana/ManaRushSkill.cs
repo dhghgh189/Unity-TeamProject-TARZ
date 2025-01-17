@@ -7,7 +7,7 @@ using static MonsterData;
 /// <summary>
 /// 마나 1스킬의 필요 데이터
 /// </summary>
-public enum ManaRushDataType { RushTime, RushSpeed, GrabDamage, RangeAttackDamage, AttackRange }
+public enum ManaRushDataType { RushTime, RushSpeed, GrabDamage, RangeAttackDamage, AttackRange, CreateThrowObject }
 /// <summary>
 /// 마나 1스킬 : 돌진 잡기
 /// </summary>
@@ -60,6 +60,13 @@ public class ManaRush_1 : BaseManaState
     public override void OnEnter()
     {
         base.OnEnter();
+        float count = parent.SkillData.GetData((int)ManaRushDataType.CreateThrowObject);
+
+        for(int i = 0; i < count; i++)
+        {
+            if (owner.Attack.ObjectCount >= owner.Attack.MaxObjectCount) break;
+            owner.Attack.AddObjectStack(Object.Instantiate(owner.ManaSkillHandler.instance));
+        }
 
         Debug.Log("마나1 마나 입장");
         rushTime = parent.SkillData.GetData((int)ManaRushDataType.RushTime);
@@ -123,6 +130,7 @@ public class ManaRush_1 : BaseManaState
 
         if (other.gameObject.layer.Equals(LayerMask.NameToLayer("Monster")))
         {
+            // 일반 몬스터일 때
             if (other.gameObject.GetComponent<MonsterData>().MonsterTIer.Equals(MonsterTier.Normal))
             {
                 Debug.Log("마나1 잡는 행동으로 넘어가기 요청!");
@@ -141,8 +149,16 @@ public class ManaRush_1 : BaseManaState
                 owner.Movement.Rigid.velocity = Vector3.zero;
                 return true;
             }
+            // 보스나 엘리트일 때
+            else
+            {
+                owner.ManaSkillHandler.NextStep(2);
+                return false;
+            }
         }
-        else if(((1 << other.gameObject.layer) & LayerMask.GetMask("Ground")) == 0)
+        else if(
+            ((1 << other.gameObject.layer) & LayerMask.GetMask("Camera")) != 0 ||
+            ((1 << other.gameObject.layer) & LayerMask.GetMask("Obstacles")) != 0)
         {
             owner.ManaSkillHandler.NextStep(2);
             return false;

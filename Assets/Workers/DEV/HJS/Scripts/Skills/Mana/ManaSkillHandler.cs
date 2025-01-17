@@ -18,6 +18,7 @@ public class ManaSkillHandler : MonoBehaviour
     [SerializeField] int selectIndex;                                   // 사용할 마나스킬
     private LinkedListNode<BaseManaState> curNode;                      // 현재 동작
     private bool isEnd;                                                 // 동작이 끝이 났는지 확인
+    public ThrowObject instance;
 
     public bool ActionEnd { get => isEnd; set => isEnd = value; }       // 마나 스킬이 끝났는지 확인하는 변수
     public LinkedList<BaseManaState> ActList { get { return actList; } set { actList = value; } }   // 스킬의 행동 리스트

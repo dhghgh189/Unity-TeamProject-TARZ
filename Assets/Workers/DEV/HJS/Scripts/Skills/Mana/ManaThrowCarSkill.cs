@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Localization.Plugins.XLIFF.V12;
 using UnityEngine;
 using UnityEngine.Events;
 /// <summary>
 /// 마나 2스킬의 필요 데이터
 /// </summary>
-public enum ManaThrowCarDataType { FlightSpeed, HitDamage, ExplosionDamage, ExplosionRange }
+public enum ManaThrowCarDataType { FlightSpeed, HitDamage, ExplosionDamage, ExplosionRange, CreateThrowObject }
 /// <summary>
 /// 마나 2스킬 : 차량 투척
 /// </summary>
@@ -58,6 +59,13 @@ public class ManaThrowCarSkill : IManaSkill
             parent.carInstance = null;
             animTimer = 999f;
             Debug.Log("차량 집어들기 시작!");
+
+            float count = parent.SkillData.GetData((int)ManaThrowCarDataType.CreateThrowObject);
+            for (int i = 0; i < count; i++)
+            {
+                if (owner.Attack.ObjectCount >= owner.Attack.MaxObjectCount) break;
+                owner.Attack.AddObjectStack(Object.Instantiate(owner.ManaSkillHandler.instance));
+            }
 
             if (camTrf == null)
                 camTrf = Camera.main.transform;

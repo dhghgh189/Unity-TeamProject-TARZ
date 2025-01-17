@@ -17,7 +17,7 @@ public class AblityAdapter : MonoBehaviour
 
     public Dictionary<string, IEnable> components = new Dictionary<string, IEnable>();
     public Dictionary<UniqueFunctionType, bool> UniqueFuncDic = new Dictionary<UniqueFunctionType, bool>();
-    public Dictionary<UniqueFunctionType, (int, Vector3[] spec)> levelDic = new Dictionary<UniqueFunctionType, (int, Vector3[] spec)>();
+    public Dictionary<UniqueFunctionType, (int, Spec)> levelDic = new Dictionary<UniqueFunctionType, (int, Spec)>();
 
     private void Awake()
     {
@@ -28,7 +28,7 @@ public class AblityAdapter : MonoBehaviour
         foreach(UniqueFunctionType item in Enum.GetValues(typeof(UniqueFunctionType)))
         {
             UniqueFuncDic.TryAdd(item, false);
-            levelDic.TryAdd(item, (-1, null));
+            levelDic.TryAdd(item, (-1, new()));
         }
     }
 
@@ -104,7 +104,7 @@ public class AblityAdapter : MonoBehaviour
         return list;
     }
 
-    public void SetEnable(UniqueFunctionType type, (int, Vector3[]) spec)
+    public void SetEnable(UniqueFunctionType type, (int, Spec) spec)
     {
         if (UniqueFuncDic == null) return;
 
@@ -119,6 +119,6 @@ public class AblityAdapter : MonoBehaviour
         if (UniqueFuncDic == null) return;
 
         UniqueFuncDic[type] = false;
-        levelDic[type] = (-1, null);
+        levelDic[type] = (-1, new());
     }
 }

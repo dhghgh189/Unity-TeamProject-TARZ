@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.UI.GridLayoutGroup;
 
 /// <summary>
 /// 던지는 차에 부착하는 스크립트
@@ -89,43 +90,43 @@ public class ThrowCarObject : MonoBehaviour
 
     private void CreateThrowObject()
     {
-        // 던지는 물체의 갯수
-        Vector3 dir = Vector3.zero;
-        Vector3 pos = transform.position;
-
-        Collider[] check = new Collider[1];
-
-        // 던지는 물체 원형으로 생성
-        for (int i = 0; i < count; i++)
-        {
-            float angle = i * (Mathf.PI * 2.0f) / count;
-
-            Vector3 nextPos = pos + (new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle))) * radius + Vector3.up;
-            check[0] = null;
-
-            // 생성될 위치에 장애물이 있는지 확인
-            Physics.OverlapSphereNonAlloc(nextPos, 0.1f, check, LayerMask.GetMask("Camera", "Obstacles"));
-
-            // 만약 장애물이 있으면
-            if (check[0] != null)
-            {
-                // 발동한 자리에
-                nextPos = pos;
-            }
-
-            GameObject child = Instantiate(instance, nextPos, Quaternion.identity).gameObject;
-
-            if (check[0] == null) throwObjectList.Add(child);
-
-            dir = child.transform.position - pos;
-            child.transform.rotation = Quaternion.LookRotation(dir.normalized);
-        }
-
-        // Addforce로 날리기
-        foreach (GameObject item in throwObjectList)
-        {
-            item.GetComponent<Rigidbody>().AddForce((item.transform.forward) * force, ForceMode.Impulse);
-        }
+        // // 던지는 물체의 갯수
+        // Vector3 dir = Vector3.zero;
+        // Vector3 pos = transform.position;
+        // 
+        // Collider[] check = new Collider[1];
+        // 
+        // // 던지는 물체 원형으로 생성
+        // for (int i = 0; i < count; i++)
+        // {
+        //     float angle = i * (Mathf.PI * 2.0f) / count;
+        // 
+        //     Vector3 nextPos = pos + (new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle))) * radius + Vector3.up;
+        //     check[0] = null;
+        // 
+        //     // 생성될 위치에 장애물이 있는지 확인
+        //     Physics.OverlapSphereNonAlloc(nextPos, 0.1f, check, LayerMask.GetMask("Camera", "Obstacles"));
+        // 
+        //     // 만약 장애물이 있으면
+        //     if (check[0] != null)
+        //     {
+        //         // 발동한 자리에
+        //         nextPos = pos;
+        //     }
+        // 
+        //     GameObject child = Instantiate(instance, nextPos, Quaternion.identity).gameObject;
+        // 
+        //     if (check[0] == null) throwObjectList.Add(child);
+        // 
+        //     dir = child.transform.position - pos;
+        //     child.transform.rotation = Quaternion.LookRotation(dir.normalized);
+        // }
+        // 
+        // // Addforce로 날리기
+        // foreach (GameObject item in throwObjectList)
+        // {
+        //     item.GetComponent<Rigidbody>().AddForce((item.transform.forward) * force, ForceMode.Impulse);
+        // }
 
     }
 }

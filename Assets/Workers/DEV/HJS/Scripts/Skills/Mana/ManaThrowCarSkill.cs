@@ -149,6 +149,15 @@ public class ManaThrowCarSkill : IManaSkill
 
             owner.Movement.Rigid.velocity = Vector3.zero;
 
+            float count = parent.SkillData.GetData((int)ManaThrowCarDataType.CreateThrowObject);
+            for (int i = 0; i < count; i++)
+            {
+                if (owner.Attack.ObjectCount >= owner.Attack.MaxObjectCount) break;
+                ThrowObject ob = Object.Instantiate(owner.ManaSkillHandler.instance);
+                ob.IsCollected = true;
+                owner.Attack.AddObjectStack(ob);
+            }
+
             // 차량 투척 애니메이션 실행
             owner.Anim.CrossFade(Animator.StringToHash(animName), 0.01f);
             owner.StartCoroutine(AnimRoutine());

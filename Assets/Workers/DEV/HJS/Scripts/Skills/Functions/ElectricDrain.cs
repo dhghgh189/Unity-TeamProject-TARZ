@@ -16,7 +16,7 @@ public class ElectricDrain : MonoBehaviour
     public void SetSpec()
     {
         var item = adapter.levelDic[SkillEnum.UniqueFunctionType.ElectricDrain];
-        damage = item.Item2[item.Item1].x;
+        damage = item.Item2.InteractionDamage(item.Item1);
     }
 
     private void Awake() 

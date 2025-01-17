@@ -1,5 +1,8 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
+using static UnityEngine.UI.GridLayoutGroup;
 
 /// <summary>
 /// 던지는 차에 부착하는 스크립트
@@ -12,6 +15,12 @@ public class ThrowCarObject : MonoBehaviour
     [SerializeField] float hitDamage;           // 피격을 입히는 데미지
     [SerializeField] float explosionDamage;     // 폭발했을 때 데미지
     [SerializeField] float explosionRange;      // 폭발하는 범위
+    [Header("CreateThrowObejct_Init")]
+    [SerializeField] ThrowObject instance;
+    [SerializeField] float count;
+    [SerializeField] float radius;
+    [SerializeField] float force;
+    [SerializeField] List<GameObject> throwObjectList;
 
     [SerializeField] Rigidbody rigid;
     [SerializeField] BoxCollider coll;
@@ -22,6 +31,7 @@ public class ThrowCarObject : MonoBehaviour
 
         coll.enabled = false;
         rigid.useGravity = false;
+        throwObjectList = new List<GameObject>();
     }
 
     /// <summary>
@@ -56,9 +66,12 @@ public class ThrowCarObject : MonoBehaviour
                 if (damagable != null) { damagable.TakeDamage(explosionDamage); Debug.Log($"{collider.gameObject.name}에게 {explosionDamage}만큼의 피해를 입혔다!"); }
             }
             // 이펙트 생성
-            EffectManager.instance.ParticlePlay("ManaSkill_21", 1f,transform.position, Quaternion.identity);
+            EffectManager.instance.ParticlePlay("ManaSkill_21", 1f, transform.position, Quaternion.identity);
             // SFX 재생
             SoundManager.PlaySFX(SoundManager.SoundData_S.ManaSkillSounds_2[1].AudioClip);
+            // 던지는 물체 생성            
+            CreateThrowObject();
+            // 기능을 다한 차량 오브젝트는 삭제
             Destroy(gameObject);
         }
     }
@@ -73,6 +86,34 @@ public class ThrowCarObject : MonoBehaviour
         hitDamage = data.GetData((int)ManaThrowCarDataType.HitDamage);
         explosionDamage = data.GetData((int)ManaThrowCarDataType.ExplosionDamage);
         explosionRange = data.GetData((int)ManaThrowCarDataType.ExplosionRange);
+        count = data.GetData((int)ManaThrowCarDataType.CreateThrowObject);
     }
 
+    private void CreateThrowObject()
+    {
+        // 던지는 물체의 갯수
+        Vector3 dir = Vector3.zero;
+        Vector3 pos = transform.position;
+
+        // 던지는 물체 원형으로 생성
+        for (int i = 0; i < count; i++)
+        {
+            float angle = i * (Mathf.PI * 2.0f) / count;
+
+            GameObject child = Instantiate(instance, pos, Quaternion.identity).gameObject;
+            throwObjectList.Add(child);
+            child.transform.position
+                = pos + (new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle))) * radius + Vector3.up;
+
+            dir = child.transform.position - pos;
+            child.transform.rotation = Quaternion.LookRotation(dir.normalized);
+        }
+
+        // Addforce로 날리기
+        foreach (GameObject item in throwObjectList)
+        {
+            item.GetComponent<Rigidbody>().AddForce((item.transform.forward) * force, ForceMode.Impulse);
+        }
+
+    }
 }

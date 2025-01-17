@@ -12,7 +12,7 @@ public class FrozenDrain : MonoBehaviour
     public void SetSpec()
     {
         var item = adapter.levelDic[SkillEnum.UniqueFunctionType.FrozenDrain];
-        slowPercent = item.spec[item.Item1].y * 0.01f;
+        slowPercent = item.Item2.interactioDegree(item.Item1);
     }
 
     private void OnTriggerEnter(Collider other)

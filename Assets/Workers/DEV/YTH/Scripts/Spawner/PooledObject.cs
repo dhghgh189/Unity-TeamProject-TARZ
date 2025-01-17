@@ -75,7 +75,7 @@ public class PooledObject : MonoBehaviour, IKnockBack, IDamagable
 
     public void TakeDamage(float damage)
     {
-        EffectManager.instance.ParticlePlay("FX_splash_hit_01_air", 1f, this.transform.position, this.transform.rotation);
+        EffectManager.instance.ParticlePlay("FX_splash_hit_01_air", 1f, this.transform.position + Vector3.up, this.transform.rotation);
 
         if (_monsterData.IsDead)
             return;

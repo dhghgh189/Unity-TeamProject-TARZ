@@ -12,6 +12,9 @@ public class MonsterSpawner : MonoBehaviour
     private Transform[] _spawnPoints;
     RoomBehaviour roomBehaviour;
 
+    private MapGenerator _generator;
+    private UNQuest_Interaction _quest;
+
     private void Awake()
     {
         _spawnPoints = GetComponentsInChildren<Transform>().Skip(1).ToArray();
@@ -20,11 +23,18 @@ public class MonsterSpawner : MonoBehaviour
 
     private void Start()
     {
+        _generator = FindAnyObjectByType<MapGenerator>();
         _monsterPool = FindAnyObjectByType<ObjectPool>();
     }
 
     public void Spawn()
     {
+        // 참조가 없는 경우 한번만 찾는다
+        if (_generator.IsNpcExist && _quest == null)
+        {
+            _quest = FindAnyObjectByType<UNQuest_Interaction>();
+        }
+
         int temp = 0;
         for (int i = 0; i < monsterSpwanInfos.Count; i++)
         {
@@ -33,6 +43,12 @@ public class MonsterSpawner : MonoBehaviour
                 PooledObject pooledObject = _monsterPool.CreateMonster(monsterSpwanInfos[i].monsterName, _spawnPoints[temp++ % _spawnPoints.Length]);
 
                 pooledObject.OnDie += roomBehaviour.MonsterCountChange;
+
+                // quest가 진행중이라면
+                if (_generator.IsNpcExist && _quest.IsOngoing)
+                {
+                    pooledObject.OnDie += _quest.OnChangeCount;
+                }
             }
         }
         roomBehaviour.MonsterCount = temp;

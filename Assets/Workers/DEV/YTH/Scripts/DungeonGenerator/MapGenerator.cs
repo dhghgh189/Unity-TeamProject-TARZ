@@ -64,6 +64,8 @@ public class MapGenerator : MonoBehaviour
     [Inject] PlayerController playerController;
     [Inject] InGameSaveData saveData;
 
+    public bool IsNpcExist;
+
     private void Awake()
     {
         chapterManager = GetComponentInChildren<ChapterManager>();
@@ -97,6 +99,11 @@ public class MapGenerator : MonoBehaviour
         if (Util.IsRandom(50))
         {
             Instantiate(NPCPrefab, createPos + Vector3.forward * 10f, Quaternion.identity, transform);
+            IsNpcExist = true;
+        }
+        else
+        {
+            IsNpcExist = false;
         }
 
         // 절차적 맵 생성 시작

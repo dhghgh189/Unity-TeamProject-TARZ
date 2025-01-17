@@ -9,6 +9,8 @@ public class RoomBehaviour : MonoBehaviour
     [SerializeField] GameObject[] walls;
     [SerializeField] GameObject[] buffPrefab;   // 버프 프리팹
 
+    [SerializeField] Buff speedBuff;
+
     private BagSkillManager bagSkillManager;
 
     private void Awake()
@@ -32,6 +34,7 @@ public class RoomBehaviour : MonoBehaviour
             item.GetComponent<PhaseController>().StartPhase(true, item);
         }
         Instantiate(buffPrefab[Random.Range(0, buffPrefab.Length)], transform.position + (Vector3.up * 4), Quaternion.identity);
+        Instantiate(speedBuff, transform.position, Quaternion.identity);
     }
 
     public void MonsterCountChange()

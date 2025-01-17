@@ -65,7 +65,9 @@ public class ManaRush_1 : BaseManaState
         for(int i = 0; i < count; i++)
         {
             if (owner.Attack.ObjectCount >= owner.Attack.MaxObjectCount) break;
-            owner.Attack.AddObjectStack(Object.Instantiate(owner.ManaSkillHandler.instance));
+            ThrowObject ob = Object.Instantiate(owner.ManaSkillHandler.instance);
+            ob.IsCollected = true;
+            owner.Attack.AddObjectStack(ob);
         }
 
         Debug.Log("마나1 마나 입장");

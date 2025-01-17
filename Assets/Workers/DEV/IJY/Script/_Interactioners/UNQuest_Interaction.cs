@@ -5,7 +5,6 @@ public class UNQuest_Interaction : InteractionOBJ_Base, Interaction_Ibase_Activa
 {
     [SerializeField] private PlayerController player;
     private QuestManager questManager;
-    public UnityAction OnChangeQuestUI;
     public int CurCount { get { return curCount; } set { curCount = value; } }
 
     [Header("돌발 퀘스트 NPC")]
@@ -14,13 +13,12 @@ public class UNQuest_Interaction : InteractionOBJ_Base, Interaction_Ibase_Activa
     [SerializeField] bool isOngoing;
     [SerializeField] int Reward;
 
+    public bool IsOngoing { get { return isOngoing; } }
 
     void Start() => Init();
 
     void Init()
     {
-        OnChangeQuestUI += OnChangeCount;
-
         player = FindObjectOfType<PlayerController>();
         questManager = FindObjectOfType<QuestManager>();
         QuestCount = Random.Range(5, 10);
@@ -91,8 +89,12 @@ public class UNQuest_Interaction : InteractionOBJ_Base, Interaction_Ibase_Activa
         this.gameObject.SetActive(false);
     }
 
-    private void OnChangeCount()
+    public void OnChangeCount()
     {
+        // 퀘스트가 진행중이 아니면 호출되도 아무것도 하지않음
+        if (!isOngoing)
+            return;
+
         if (curCount >= QuestCount) curCount = QuestCount;
         else curCount++;
 
@@ -102,6 +104,5 @@ public class UNQuest_Interaction : InteractionOBJ_Base, Interaction_Ibase_Activa
     void OnDisable()
     {
         isOngoing = false;
-        OnChangeQuestUI -= OnChangeCount;
     }
 }

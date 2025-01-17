@@ -16,7 +16,9 @@ public class QuitSceneUI : MonoBehaviour
         inputManager.firstInput.Select();         // 첫 Input으로 지정한 오브젝트를 선택 처리
     }
 
-    // No 버튼 클릭
+    /// <summary>
+    /// No 버튼 클릭
+    /// </summary>
     public void OnClickNoButton()
     {
         SoundManager.PlaySFX(SoundManager.SoundData_UI.SelectUI);
@@ -24,7 +26,9 @@ public class QuitSceneUI : MonoBehaviour
         titlePanel.SetActive(true);
     }
 
-    // Yes 버튼 클릭
+    /// <summary>
+    /// Yes 버튼 클릭
+    /// </summary>
     public void OnClickYesButton()
     {
         SoundManager.PlaySFX(SoundManager.SoundData_UI.SelectUI);

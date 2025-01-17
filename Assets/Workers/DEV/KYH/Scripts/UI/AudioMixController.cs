@@ -8,20 +8,24 @@ public class AudioMixController : MonoBehaviour
 {
     [SerializeField] private AudioMixer audioMixer;
 
+    // 볼륨 조절 슬라이더
     [Header("<color=green>Sound Slider</color>")]
     [SerializeField] private Slider masterSlider;
     [SerializeField] private Slider bgmSlider;
     [SerializeField] private Slider sfxSlider;
 
+    // 볼륨 조절 값
     private float masterVol;
     private float bgmVol;
     private float sfxVol;
 
+    // 음소거 토글
     [Header("<color=orange>Mute Toggle</color>")]
     [SerializeField] private Toggle masterMute;
     [SerializeField] private Toggle bgmMute;
     [SerializeField] private Toggle sfxMute;
 
+    // 음소거 값
     private float muteBGM;
     private float muteSFX;
 
@@ -40,15 +44,20 @@ public class AudioMixController : MonoBehaviour
         bgmMute.isOn = PlayerPrefs.GetInt("BGMMute", 0) == 1;
         sfxMute.isOn = PlayerPrefs.GetInt("SFXMute", 0) == 1;
 
+        // 음소거 토글이 true일 때 음소거 유지
         if (masterMute.isOn) AudioListener.volume = 0;
         if (bgmMute.isOn) audioMixer.SetFloat("BGM", -80f);
         if (sfxMute.isOn) audioMixer.SetFloat("SFX", -80f);
 
+        // 저장된 볼륨값으로 설정
         audioMixer.SetFloat("Master", masterVol);
         audioMixer.SetFloat("BGM", bgmVol);
         audioMixer.SetFloat("SFX", sfxVol);
     }
 
+    /// <summary>
+    /// 마스터 슬라이더로 볼륨 조절
+    /// </summary>
     public void MasterVolumeSliderChanged()
     {
         masterVol = masterSlider.value;
@@ -57,6 +66,9 @@ public class AudioMixController : MonoBehaviour
         PlayerPrefs.Save();
     }
 
+    /// <summary>
+    /// BGM 슬라이더로 볼륨 조절
+    /// </summary>
     public void BGMVolumeSliderChanged()
     {
         bgmVol = bgmSlider.value;
@@ -65,6 +77,9 @@ public class AudioMixController : MonoBehaviour
         PlayerPrefs.Save();
     }
 
+    /// <summary>
+    /// SFX 슬라이더로 볼륨 조절
+    /// </summary>
     public void SFXVolumeSliderChanged()
     {
         sfxVol = sfxSlider.value;
@@ -73,6 +88,9 @@ public class AudioMixController : MonoBehaviour
         PlayerPrefs.Save();
     }
 
+    /// <summary>
+    /// 마스터 볼륨 음소거
+    /// </summary>
     public void MasterMuteToggleChanged()
     {
         bool isMuted = masterMute.isOn;
@@ -82,6 +100,9 @@ public class AudioMixController : MonoBehaviour
         PlayerPrefs.Save();
     }
 
+    /// <summary>
+    /// BGM 볼륨 음소거
+    /// </summary>
     public void BGMMuteToggleChanged()
     {
         if (bgmMute.isOn)
@@ -100,6 +121,9 @@ public class AudioMixController : MonoBehaviour
         PlayerPrefs.Save();
     }
 
+    /// <summary>
+    /// SFX 볼륨 음소거
+    /// </summary>
     public void SFXMuteToggleChanged()
     {
         if (sfxMute.isOn)

@@ -107,6 +107,9 @@ public class MenuPanel : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
+    /// <summary>
+    /// 패널 닫기 함수
+    /// </summary>
     private void ClosePanel()
     {
         SoundManager.PlaySFX(SoundManager.SoundData_UI.OffUI);

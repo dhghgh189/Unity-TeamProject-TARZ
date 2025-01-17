@@ -15,9 +15,9 @@ public class InputDeviceManager : MonoBehaviour
     [SerializeField] private Image gamepadImage;
     [SerializeField] private LocalizedStringTable localTable;
 
-    public enum DeviceType { KeyboardMouse, Gamepad, Both }
+    public enum DeviceType { KeyboardMouse, Gamepad, Both }     // 입력 기기 종류
 
-    private DeviceType currentDevice;
+    private DeviceType currentDevice;                           // 현재 선택된 입력 기기
 
     private const string SaveDevicePath = "InputDevice.json";
 
@@ -34,6 +34,7 @@ public class InputDeviceManager : MonoBehaviour
         LoadDeviceConfig();
         inputDeviceDropdown.onValueChanged.AddListener(OnDeviceDropdownChange);
 
+        // 현재 연결된 게임패드가 없을 경우 키보드&마우스로 설정
         if (Gamepad.current == null)
         {
             currentDevice = DeviceType.KeyboardMouse;
@@ -54,16 +55,16 @@ public class InputDeviceManager : MonoBehaviour
         InputSystem.onDeviceChange -= OnDeviceChange;
     }
 
-    private void Update()
-    {
-        
-    }
-
+    /// <summary>
+    /// 입력 기기 선택 드롭다운 항목 선택 변경값 설정
+    /// </summary>
+    /// <param name="index"></param>
     private void OnDeviceDropdownChange(int index)
     {
         currentDevice = (DeviceType)index;
         SaveDevice();
 
+        // 현재 입력된 기기에 따른 기기 선택 함수 호출
         switch (currentDevice)
         {
             case DeviceType.KeyboardMouse:
@@ -78,6 +79,9 @@ public class InputDeviceManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 드롭다운 선택지(옵션) 업데이트
+    /// </summary>
     private void UpdateDropdownOptions()
     {
         inputDeviceDropdown.ClearOptions();
@@ -100,13 +104,18 @@ public class InputDeviceManager : MonoBehaviour
         };
     }
 
+    /// <summary>
+    /// 키보드&마우스 사용
+    /// </summary>
     private void EnableKeyboardMouse()
     {
+        // 연결된 게임패드가 있을 경우 사용하지 않음 처리
         if (Gamepad.current != null)
         {
             InputSystem.DisableDevice(Gamepad.current);
         }
         
+        // 키보드&마우스 사용 처리
         InputSystem.EnableDevice(Keyboard.current);
         InputSystem.EnableDevice(Mouse.current);
         keyboardImage.gameObject.SetActive(true);
@@ -114,13 +123,18 @@ public class InputDeviceManager : MonoBehaviour
         sideKeyboardImage.gameObject.SetActive(false);
     }
 
+    /// <summary>
+    /// 게임패드 사용
+    /// </summary>
     private void EnableGamepad()
     {
+        // 연결된 게임패드가 있을 경우 사용 처리
         if (Gamepad.current != null)
         {
             InputSystem.EnableDevice(Gamepad.current);
         }
 
+        // 키보드&마우스 사용하지 않음 처리
         InputSystem.DisableDevice(Keyboard.current);
         InputSystem.DisableDevice(Mouse.current);
         keyboardImage.gameObject.SetActive(false);
@@ -128,13 +142,18 @@ public class InputDeviceManager : MonoBehaviour
         sideKeyboardImage.gameObject.SetActive(false);
     }
 
+    /// <summary>
+    /// 모두 사용
+    /// </summary>
     private void EnableBoth()
     {
+        // 연결된 게임패드가 있을 경우 사용 처리
         if (Gamepad.current != null)
         {
             InputSystem.EnableDevice(Gamepad.current);
         }
 
+        // 키보드&마우스 사용 처리
         InputSystem.EnableDevice(Keyboard.current);
         InputSystem.EnableDevice(Mouse.current);
         keyboardImage.gameObject.SetActive(false);
@@ -142,6 +161,9 @@ public class InputDeviceManager : MonoBehaviour
         sideKeyboardImage.gameObject.SetActive(true);
     }
 
+    /// <summary>
+    /// 입력기기 선택값 저장
+    /// </summary>
     private void SaveDevice()
     {
         DeviceConfig config = new DeviceConfig
@@ -153,6 +175,9 @@ public class InputDeviceManager : MonoBehaviour
         File.WriteAllText(Path.Combine(Application.persistentDataPath, SaveDevicePath), json);
     }
 
+    /// <summary>
+    /// 입력기기 선택값 로드
+    /// </summary>
     private void LoadDeviceConfig()
     {
         string path = Path.Combine(Application.persistentDataPath, SaveDevicePath);
@@ -174,6 +199,11 @@ public class InputDeviceManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 입력기기 변경 이벤트용 함수
+    /// </summary>
+    /// <param name="device"></param>
+    /// <param name="change"></param>
     private void OnDeviceChange(InputDevice device, InputDeviceChange change)
     {
         switch (change)
@@ -187,6 +217,9 @@ public class InputDeviceManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 값 변경 이벤트 구독 해제
+    /// </summary>
     private void OnDestroy()
     {
         inputDeviceDropdown.onValueChanged.RemoveListener(OnDeviceDropdownChange);

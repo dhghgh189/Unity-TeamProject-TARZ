@@ -47,6 +47,7 @@ public class SettingSceneUI : MonoBehaviour
         playerController = FindAnyObjectByType<PlayerController>();
         camera = FindAnyObjectByType<CameraController>();
 
+        // 타이틀 씬일 때 별도 처리
         if (SceneManager.GetActiveScene().name == "Title")
         {
             camera = null;
@@ -63,6 +64,7 @@ public class SettingSceneUI : MonoBehaviour
 
     private void OnEnable()
     {
+        // 타이틀 씬일 때 별도 처리
         if (SceneManager.GetActiveScene().name == "Title")
         {
             minimap = null;
@@ -121,7 +123,9 @@ public class SettingSceneUI : MonoBehaviour
         }
     }
 
-    // 게임 플레이 카테고리 버튼 클릭
+    /// <summary>
+    /// 게임 플레이 카테고리 버튼 클릭
+    /// </summary>
     public void OnClickGamePlayButton()
     {
         activeCPanel = gameplayPanel;           // 현재 활성화 중인 패널을 게임 플레이 카테고리 패널로 설정
@@ -140,6 +144,9 @@ public class SettingSceneUI : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 카메라 회전 민감도 변경 함수
+    /// </summary>
     public void ChangeSensitivity()
     {
         camera.Sensitivity = sensitivitySlider.value;
@@ -147,6 +154,9 @@ public class SettingSceneUI : MonoBehaviour
         PlayerPrefs.SetFloat("Sensitivity", camera.Sensitivity);
     }
 
+    /// <summary>
+    /// 미니맵 활성화/비활성화 토글값 변경 함수
+    /// </summary>
     public void OnCheckMinimapActiveToggle()
     {
         if (minimapActiveToggle.isOn == true)
@@ -159,7 +169,9 @@ public class SettingSceneUI : MonoBehaviour
         }
     }
 
-    // 언어 카테고리 버튼 클릭
+    /// <summary>
+    /// 언어 카테고리 버튼 클릭
+    /// </summary>
     public void OnClickLanguageButton()
     {
         activeCPanel = languagePanel;           // 현재 활성화 중인 패널을 언어 카테고리 패널로 설정
@@ -171,7 +183,9 @@ public class SettingSceneUI : MonoBehaviour
         languageDropdown.Select();              // languageDropdown 오브젝트를 UI 네비게이션 Input 시작으로 선택
     }
 
-    // 사운드 카테고리 버튼 클릭
+    /// <summary>
+    /// 사운드 카테고리 버튼 클릭
+    /// </summary>
     public void OnClickSoundButton()
     {
         activeCPanel = soundPanel;              // 현재 활성화 중인 패널을 사운드 카테고리 패널로 설정
@@ -183,7 +197,9 @@ public class SettingSceneUI : MonoBehaviour
         masterVolumeSlider.Select();            // masterVolumeSlider 오브젝트를 UI 네비게이션 Input 시작으로 선택
     }
 
-    // 키 설정 카테고리 버튼 클릭
+    /// <summary>
+    /// 키 설정 카테고리 버튼 클릭
+    /// </summary>
     public void OnClickKeySettingsButton()
     {
         activeCPanel = keySettingsPanel;              // 현재 활성화 중인 패널을 키 설정 카테고리 패널로 설정
@@ -195,7 +211,9 @@ public class SettingSceneUI : MonoBehaviour
         keyboardButton.Select();
     }
 
-    // 타이틀 화면으로 돌아가기 버튼 클릭
+    /// <summary>
+    /// 타이틀 화면으로 돌아가기 버튼 클릭
+    /// </summary>
     public void OnClickBackToTitleButton()
     {
         if (activeCPanel != null)

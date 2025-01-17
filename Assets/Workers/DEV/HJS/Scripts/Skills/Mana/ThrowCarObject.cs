@@ -80,11 +80,11 @@ public class ThrowCarObject : MonoBehaviour
     /// 초기 값을 설정하는 함수
     /// </summary>
     /// <param name="data">해당 스킬의 데이터</param>
-    public void Init(ManaSkillDataSO data)
+    public void Init(ManaSkillDataSO data, float skillDamagePercent)
     {
         speed = data.GetData((int)ManaThrowCarDataType.FlightSpeed);
-        hitDamage = data.GetData((int)ManaThrowCarDataType.HitDamage);
-        explosionDamage = data.GetData((int)ManaThrowCarDataType.ExplosionDamage);
+        hitDamage = data.GetData((int)ManaThrowCarDataType.HitDamage) * skillDamagePercent;
+        explosionDamage = data.GetData((int)ManaThrowCarDataType.ExplosionDamage) * skillDamagePercent;
         explosionRange = data.GetData((int)ManaThrowCarDataType.ExplosionRange);
         count = data.GetData((int)ManaThrowCarDataType.CreateThrowObject);
     }

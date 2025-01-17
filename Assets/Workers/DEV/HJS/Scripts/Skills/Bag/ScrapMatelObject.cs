@@ -87,10 +87,10 @@ public class ScrapMatelObject : MonoBehaviour
         }
     }
 
-    public void Init(BagSkillDataSO skilldata)
+    public void Init(BagSkillDataSO skilldata, float skillDamagePercent)
     {
         // 데이터 추가
-        damage = skilldata.Getdata((int)BagSkillEnum.CompactCanonDataType.DefaultDamage).value;
+        damage = skilldata.Getdata((int)BagSkillEnum.CompactCanonDataType.DefaultDamage).value * skillDamagePercent;
         maxTime = skilldata.Getdata((int)BagSkillEnum.CompactCanonDataType.ChargeTime).value;
         force = skilldata.Getdata((int)BagSkillEnum.CompactCanonDataType.Force).value;
 

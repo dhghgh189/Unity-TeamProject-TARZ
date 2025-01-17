@@ -78,7 +78,7 @@ public class BagScrapBurstSkill : BagSkill
             parent.instance.gameObject.transform.parent = createPoint;
             parent.instance.OnStartEvent.AddListener(OnAction);
 
-            parent.instance.Init(parent.skilldata);
+            parent.instance.Init(parent.skilldata, owner.Stat.SkillPowerPer);
 
             base.OnEnter();
 

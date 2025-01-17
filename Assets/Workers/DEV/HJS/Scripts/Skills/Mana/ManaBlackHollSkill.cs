@@ -128,7 +128,7 @@ public class ManaBlackHollSkill : IManaSkill
                 // 이벤트 연결
                 parent.OnThrowEvent.AddListener(blackHoll.Throw);
                 blackHoll.dir = owner.transform.forward;
-                blackHoll.Init(parent.skillData);
+                blackHoll.Init(parent.skillData, owner.Stat.SkillPowerPer);
             }
             else
             {

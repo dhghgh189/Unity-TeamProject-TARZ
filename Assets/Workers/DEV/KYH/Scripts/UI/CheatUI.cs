@@ -228,7 +228,7 @@ public class CheatUI : MonoBehaviour
                 model.SetAbility(AdditionAbility.SkillPowerPer, float.Parse(statInputField.text));
                 break;
             case CheatManager.StatType.속성공격력:
-                model.SetAbility(AdditionAbility.ElementalPowerPer, float.Parse(statInputField.text));
+                model.SetAbility(AdditionAbility.ItemPowerPer, float.Parse(statInputField.text));
                 break;
             case CheatManager.StatType.공격시마나회복량:
                 model.SetAbility(AdditionAbility.MpGain, float.Parse(statInputField.text));

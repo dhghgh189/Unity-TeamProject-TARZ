@@ -104,6 +104,11 @@ public class MeleeState : BaseState<PlayerController>
         animTimer -= Time.deltaTime;
     }
 
+    public override void OnFixedUpdate()
+    {
+        owner.Movement.Move(Vector3.zero);
+    }
+
     public override void OnExit()
     {
         base.OnExit();

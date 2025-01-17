@@ -120,7 +120,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void GroundCheck()
     {
-        isGrounded = Physics.CheckBox(transform.position + transform.up * 0.05f, new Vector3(0.25f, 0.1f, 0.25f), Quaternion.identity, whatIsGround);
+        isGrounded = Physics.CheckBox(transform.position, new Vector3(0.1f, 0.1f, 0.1f), Quaternion.identity, whatIsGround);
     }
 
     // 플레이어 경사 처리

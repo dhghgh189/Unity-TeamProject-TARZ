@@ -11,8 +11,6 @@ GameObject:
   - component: {fileID: 2140111226664156038}
   - component: {fileID: 7275174026348186473}
   - component: {fileID: 4289752228550866512}
-  - component: {fileID: 3274585909944309453}
-  - component: {fileID: 7303827683489781273}
   m_Layer: 0
   m_Name: SM_Prop_Car_Wrecked_SUV_01
   m_TagString: Untagged
@@ -85,50 +83,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &3274585909944309453
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3807424742662905611}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 43908522801457060, guid: 6f853ac1d2ebc6f4b8b7029b02719667, type: 2}
---- !u!64 &7303827683489781273
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3807424742662905611}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 43066935055645440, guid: 6f853ac1d2ebc6f4b8b7029b02719667, type: 2}
 --- !u!1 &7764144887595358050
 GameObject:
   m_ObjectHideFlags: 0
@@ -181,6 +135,12 @@ MonoBehaviour:
   hitDamage: 0
   explosionDamage: 0
   explosionRange: 0
+  instance: {fileID: 4766049548964259805, guid: a6a424693f63ae04788f8ca7d29163b6,
+    type: 3}
+  count: 0
+  radius: 2
+  force: 6
+  throwObjectList: []
   rigid: {fileID: 0}
   coll: {fileID: 0}
 --- !u!54 &-849000458834282339

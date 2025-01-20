@@ -13,6 +13,19 @@ public class LobbySceneInit : MonoBehaviour
     {
         // 데이터 칩 가져오기
         model.Chip = saveData.DataChip;
+
+        // 인게임 중인지 판단
+        if (saveData.InGameSaveData.chapterSaveData.Chapter > Define.SceneType.Lobby)
+        {
+            Debug.Log("데이터 있음 이동해야함");
+            StartCoroutine(MoveMove());
+            return;
+        }
+        else
+        {
+            Debug.Log("데이터 없음");
+        }
+
         // 장비 장착 상황 초기화
         saveData.InGameSaveData.EquipmentGears = new GearSaveData[(int)Part.Size];
         // 인벤토리 초기화
@@ -22,17 +35,8 @@ public class LobbySceneInit : MonoBehaviour
         saveData.InGameSaveData.blueChipSaveDatas.Clear();
         // 쓰레기 초기화
         throwObjectStack.Clear();
-
-        // 인게임 중인지 판단
-        if (saveData.InGameSaveData.chapterSaveData.Chapter > Define.SceneType.Lobby)
-        {
-            Debug.Log("데이터 있음 이동해야함");
-            StartCoroutine(MoveMove());
-        }
-        else
-        {
-            Debug.Log("데이터 없음");
-        }
+        // 레드칩 초기화
+        saveData.InGameSaveData.redChipSaveDatas.Clear();
     }
 
     private void Start()

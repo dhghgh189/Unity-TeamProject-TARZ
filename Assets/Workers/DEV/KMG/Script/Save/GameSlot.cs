@@ -54,7 +54,7 @@ public class GameSlot : MonoBehaviour
 
         // saveSlotData을 프로젝트에 바인딩 
         FindAnyObjectByType<ProjectInstaller>().SaveSlotBind(saveSlotData);
-        
+        Debug.Log(JsonUtility.ToJson(saveSlotData.InGameSaveData, true));
         LoadingObject.StartLoading(Define.SceneType.Lobby);
         gameObject.SetActive(false);
     }

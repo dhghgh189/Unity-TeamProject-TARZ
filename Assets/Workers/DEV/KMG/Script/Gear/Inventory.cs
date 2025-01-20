@@ -45,6 +45,7 @@ public class Inventory : MonoBehaviour
             saveGear.GearName = item.GearName;
             saveGear.Abilities = item.Abilities;
             EmptySlot().SetInventorySlots(saveGear);
+            Debug.Log(saveGear);
         }
 
         inventoryAction = InputSystem.actions.FindAction("Inventory");

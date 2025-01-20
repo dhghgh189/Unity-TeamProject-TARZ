@@ -141,7 +141,7 @@ public class MegaFistObject : MonoBehaviour
         if (other.gameObject.layer.Equals(LayerMask.NameToLayer("Monster")))
         {
             IDamagable damagable = other.gameObject.GetComponent<IDamagable>();
-            if (damagable != null) { damagable.TakeDamage(Damage); }
+            if (damagable != null) { Debug.Log($" 주먹 데미지{Damage}" ); damagable.TakeDamage(Damage); }
         }
     }
 

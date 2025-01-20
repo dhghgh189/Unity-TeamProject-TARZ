@@ -21,7 +21,7 @@ public class CondCanAttack : Conditional
     {
         _player = _pooledObject.player;
 
-        Debug.Log("컨디션 캔 어택 3 ");
+        //Debug.Log("컨디션 캔 어택 3 ");
 
     }
 

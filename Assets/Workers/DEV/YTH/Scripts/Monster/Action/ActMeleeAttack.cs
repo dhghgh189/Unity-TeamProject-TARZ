@@ -34,7 +34,7 @@ public class ActMeleeAttack : Action
     {
         _distance = Vector3.Distance(transform.position, _player.transform.position);
 
-        Debug.Log(state);
+        //Debug.Log(state);
 
         if (_distance <= _monsterData.AttackRange && !_monsterData.IsCatched && attackRoutine == null)
         {

@@ -27,4 +27,13 @@ public class ThrowObjectStack : MonoBehaviour
         }
         objectStack.Clear();
     }
+
+    // ThrowObject의 Owner가 씬이 이동하면 파괴되므로 게임이 시작할 때마다 재설정 하기 위한 함수
+    public void SetOwner(PlayerController owner)
+    {
+        foreach (ThrowObject tobj in objectStack)
+        {
+            tobj.Owner = owner;
+        }
+    }
 }

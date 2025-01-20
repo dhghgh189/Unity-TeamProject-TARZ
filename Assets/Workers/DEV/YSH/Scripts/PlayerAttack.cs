@@ -96,6 +96,9 @@ public class PlayerAttack : MonoBehaviour
     private void Start()
     {
         mainCamTrf = Camera.main.transform;
+
+        // 씬이 이동되면 ThrowObject가 저장했던 owner가 null이 되므로 재설정해준다.
+        objectStack.SetOwner(player);
     }
 
     public void GenerateThrowEffects()

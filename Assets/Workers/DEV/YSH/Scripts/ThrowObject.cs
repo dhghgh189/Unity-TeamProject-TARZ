@@ -15,6 +15,7 @@ public class ThrowObject : MonoBehaviour, IDrainable
     [SerializeField] private bool isCollected;
     private Rigidbody rigid;
     private PlayerController owner;
+    public PlayerController Owner { get { return owner; } set { owner = value; } }
 
     private float damage;
 

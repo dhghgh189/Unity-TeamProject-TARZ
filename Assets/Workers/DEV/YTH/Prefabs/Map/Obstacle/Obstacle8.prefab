@@ -16,7 +16,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &388457086128353095
 Transform:
@@ -95,12 +95,13 @@ GameObject:
   - component: {fileID: 1718680916897736352}
   - component: {fileID: 5344742387846804417}
   - component: {fileID: 850198432999014023}
+  - component: {fileID: 3760424685482438826}
   m_Layer: 31
   m_Name: SM_Prop_Car_Wrecked_SUV_01 (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &9107736510279337467
 Transform:
@@ -189,6 +190,22 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.3655217, y: 1.6341811, z: 4.968236}
   m_Center: {x: -0.02156735, y: 0.76812464, z: -0.09241333}
+--- !u!208 &3760424685482438826
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 895680463235529369}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.1830001, y: 0.81700003, z: 2.4840002}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -0.022000002, y: 0.768, z: -0.09200001}
+  m_TimeToStationary: 0.5
 --- !u!1 &1630377503211791658
 GameObject:
   m_ObjectHideFlags: 0
@@ -314,7 +331,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &766528884801066035
 Transform:
@@ -397,7 +414,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &3432012250566600399
 Transform:
@@ -480,7 +497,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &6274089957871658467
 Transform:
@@ -563,7 +580,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &8751263901181550418
 Transform:
@@ -646,7 +663,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &347575777520135279
 Transform:
@@ -725,12 +742,13 @@ GameObject:
   - component: {fileID: 2007099616325889694}
   - component: {fileID: 5534179061224317235}
   - component: {fileID: 2668887658082654350}
+  - component: {fileID: 4806313697406609283}
   m_Layer: 31
   m_Name: SM_Prop_Crate_Open_01 (11)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &6031035310118278804
 Transform:
@@ -819,6 +837,22 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.82827514, y: 0.7631561, z: 0.82839644}
   m_Center: {x: 0, y: 0.38157806, z: 0}
+--- !u!208 &4806313697406609283
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2505086263779167342}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.41400003, y: 0.38200003, z: 0.41400003}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.38200003, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &2557223980984854056
 GameObject:
   m_ObjectHideFlags: 0
@@ -831,12 +865,13 @@ GameObject:
   - component: {fileID: 3255734833798649151}
   - component: {fileID: 7984296561904637444}
   - component: {fileID: 8739360109485704524}
+  - component: {fileID: 5623606384317162606}
   m_Layer: 31
   m_Name: SM_Prop_Crate_Open_01 (20)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2361201761382113446
 Transform:
@@ -925,6 +960,22 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.82827514, y: 0.7631561, z: 0.82839644}
   m_Center: {x: 0, y: 0.38157806, z: 0}
+--- !u!208 &5623606384317162606
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2557223980984854056}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.41400003, y: 0.38200003, z: 0.41400003}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.38200003, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &2575208039282885812
 GameObject:
   m_ObjectHideFlags: 0
@@ -937,12 +988,13 @@ GameObject:
   - component: {fileID: 4364821155584056565}
   - component: {fileID: 6982651797015142515}
   - component: {fileID: 7260043819282310714}
+  - component: {fileID: 3821770252682827239}
   m_Layer: 31
   m_Name: SM_Prop_Crate_Open_01 (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &3290848279012242643
 Transform:
@@ -1031,6 +1083,22 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.82827514, y: 0.7631561, z: 0.82839644}
   m_Center: {x: 0, y: 0.38157806, z: 0}
+--- !u!208 &3821770252682827239
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2575208039282885812}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.41400003, y: 0.38200003, z: 0.41400003}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.38200003, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &2602117718592996279
 GameObject:
   m_ObjectHideFlags: 0
@@ -1047,7 +1115,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &4794499273960123079
 Transform:
@@ -1126,12 +1194,13 @@ GameObject:
   - component: {fileID: 5030180489071353313}
   - component: {fileID: 7174481117095078393}
   - component: {fileID: 5988228077789276130}
+  - component: {fileID: 6219172591316462893}
   m_Layer: 31
   m_Name: SM_Prop_Crate_Open_01 (13)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &4907240801472058750
 Transform:
@@ -1220,6 +1289,22 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.82827514, y: 0.7631561, z: 0.82839644}
   m_Center: {x: 0, y: 0.38157806, z: 0}
+--- !u!208 &6219172591316462893
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2812404594746198297}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.41400003, y: 0.38200003, z: 0.41400003}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.38200003, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &2944810537365752479
 GameObject:
   m_ObjectHideFlags: 0
@@ -1236,7 +1321,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2634646420195458121
 Transform:
@@ -1315,12 +1400,13 @@ GameObject:
   - component: {fileID: 469277910208696272}
   - component: {fileID: 3352341454839838007}
   - component: {fileID: 3655040938228718102}
+  - component: {fileID: 2587110453475243230}
   m_Layer: 31
   m_Name: SM_Prop_Crate_Open_01 (19)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &4206044673831392568
 Transform:
@@ -1409,6 +1495,22 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.82827514, y: 0.7631561, z: 0.82839644}
   m_Center: {x: 0, y: 0.38157806, z: 0}
+--- !u!208 &2587110453475243230
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3369177035431434293}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.41400003, y: 0.38200003, z: 0.41400003}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.38200003, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &3798536455843338908
 GameObject:
   m_ObjectHideFlags: 0
@@ -1425,7 +1527,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &6020919466388484248
 Transform:
@@ -1504,12 +1606,13 @@ GameObject:
   - component: {fileID: 7464938132954041430}
   - component: {fileID: 6449861365911474560}
   - component: {fileID: 7809017602912901379}
+  - component: {fileID: 7247564691418161678}
   m_Layer: 31
   m_Name: SM_Prop_Crate_Open_01 (18)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &6060505073494439288
 Transform:
@@ -1598,6 +1701,22 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.82827514, y: 0.7631561, z: 0.82839644}
   m_Center: {x: 0, y: 0.38157806, z: 0}
+--- !u!208 &7247564691418161678
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3949112357392184391}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.41400003, y: 0.38200003, z: 0.41400003}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.38200003, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &4276607476632736887
 GameObject:
   m_ObjectHideFlags: 0
@@ -1614,7 +1733,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &3509360533171155659
 Transform:
@@ -1697,7 +1816,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &3888591022278558444
 Transform:
@@ -1780,7 +1899,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &3749489995119168389
 Transform:
@@ -1859,12 +1978,13 @@ GameObject:
   - component: {fileID: 683072352211253467}
   - component: {fileID: 5094578681976900948}
   - component: {fileID: 8408797958641894556}
+  - component: {fileID: 4875408733609170065}
   m_Layer: 31
   m_Name: SM_Prop_Crate_Open_01 (16)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &6786547424324382158
 Transform:
@@ -1953,6 +2073,22 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.82827514, y: 0.7631561, z: 0.82839644}
   m_Center: {x: 0, y: 0.38157806, z: 0}
+--- !u!208 &4875408733609170065
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4703674633873652831}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.41400003, y: 0.38200003, z: 0.41400003}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.38200003, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &4748337114950554537
 GameObject:
   m_ObjectHideFlags: 0
@@ -1969,7 +2105,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &6532655223784420156
 Transform:
@@ -2052,7 +2188,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1387258126631171258
 Transform:
@@ -2135,7 +2271,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &5766394589335330322
 Transform:
@@ -2214,12 +2350,13 @@ GameObject:
   - component: {fileID: 6064834753319920604}
   - component: {fileID: 171956960640477930}
   - component: {fileID: 6013261571011408187}
+  - component: {fileID: 6022703131535328716}
   m_Layer: 31
   m_Name: SM_Prop_Crate_Open_01 (14)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &6364690986342965510
 Transform:
@@ -2308,6 +2445,22 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.82827514, y: 0.7631561, z: 0.82839644}
   m_Center: {x: 0, y: 0.38157806, z: 0}
+--- !u!208 &6022703131535328716
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5845928291392355860}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.41400003, y: 0.38200003, z: 0.41400003}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.38200003, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &5947677284620812475
 GameObject:
   m_ObjectHideFlags: 0
@@ -2324,7 +2477,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &7716730924070137321
 Transform:
@@ -2403,12 +2556,13 @@ GameObject:
   - component: {fileID: 7768131812354224586}
   - component: {fileID: 8509999055511406227}
   - component: {fileID: 1330451699553031136}
+  - component: {fileID: 951418338729681884}
   m_Layer: 31
   m_Name: SM_Prop_Car_Wrecked_SUV_01 (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2500053868720784465
 Transform:
@@ -2497,6 +2651,22 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.3655217, y: 1.6341811, z: 4.968236}
   m_Center: {x: -0.02156735, y: 0.76812464, z: -0.09241333}
+--- !u!208 &951418338729681884
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6105315554727043873}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.1830001, y: 0.81700003, z: 2.4840002}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -0.022000002, y: 0.768, z: -0.09200001}
+  m_TimeToStationary: 0.5
 --- !u!1 &6257335270913544836
 GameObject:
   m_ObjectHideFlags: 0
@@ -2513,7 +2683,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &3451003087798179439
 Transform:
@@ -2592,12 +2762,13 @@ GameObject:
   - component: {fileID: 206157718311252221}
   - component: {fileID: 1989437158343600448}
   - component: {fileID: 8606192387093377576}
+  - component: {fileID: 8494055176684749253}
   m_Layer: 31
   m_Name: SM_Prop_Crate_Open_01 (22)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &379476425235458735
 Transform:
@@ -2686,6 +2857,22 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.82827514, y: 0.7631561, z: 0.82839644}
   m_Center: {x: 0, y: 0.38157806, z: 0}
+--- !u!208 &8494055176684749253
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6269125463252109155}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.41400003, y: 0.38200003, z: 0.41400003}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.38200003, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &6922145244685962289
 GameObject:
   m_ObjectHideFlags: 0
@@ -2698,12 +2885,13 @@ GameObject:
   - component: {fileID: 7966223727440164001}
   - component: {fileID: 2327604548752224060}
   - component: {fileID: 4812385207747022045}
+  - component: {fileID: 5029977668315495737}
   m_Layer: 31
   m_Name: SM_Prop_Crate_Open_01 (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &3583844082793677446
 Transform:
@@ -2792,6 +2980,22 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.82827514, y: 0.7631561, z: 0.82839644}
   m_Center: {x: 0, y: 0.38157806, z: 0}
+--- !u!208 &5029977668315495737
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6922145244685962289}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.41400003, y: 0.38200003, z: 0.41400003}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.38200003, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &7080233080328925632
 GameObject:
   m_ObjectHideFlags: 0
@@ -2804,12 +3008,13 @@ GameObject:
   - component: {fileID: 3818486781889228177}
   - component: {fileID: 6877267501309873581}
   - component: {fileID: 3721314467766015114}
+  - component: {fileID: 5146521460590855812}
   m_Layer: 31
   m_Name: SM_Prop_Crate_Open_01 (21)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &6266755335019439623
 Transform:
@@ -2898,6 +3103,22 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.82827514, y: 0.7631561, z: 0.82839644}
   m_Center: {x: 0, y: 0.38157806, z: 0}
+--- !u!208 &5146521460590855812
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7080233080328925632}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.41400003, y: 0.38200003, z: 0.41400003}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.38200003, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &7156171098557694289
 GameObject:
   m_ObjectHideFlags: 0
@@ -2914,7 +3135,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1353681211687314332
 Transform:
@@ -2993,12 +3214,13 @@ GameObject:
   - component: {fileID: 1604362986153048183}
   - component: {fileID: 3077599360868215153}
   - component: {fileID: 1293328196033916205}
+  - component: {fileID: 2287860329890986619}
   m_Layer: 31
   m_Name: SM_Prop_Crate_Open_01 (23)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2528274044303983325
 Transform:
@@ -3087,6 +3309,22 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.82827514, y: 0.7631561, z: 0.82839644}
   m_Center: {x: 0, y: 0.38157806, z: 0}
+--- !u!208 &2287860329890986619
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7200296527371906850}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.41400003, y: 0.38200003, z: 0.41400003}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.38200003, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &7264635469898282327
 GameObject:
   m_ObjectHideFlags: 0
@@ -3099,12 +3337,13 @@ GameObject:
   - component: {fileID: 6846009476670060578}
   - component: {fileID: 8016669730932017132}
   - component: {fileID: 4165592881605928660}
+  - component: {fileID: 3666658985997547025}
   m_Layer: 31
   m_Name: SM_Prop_Car_Wrecked_SUV_01 (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &8560811922858348183
 Transform:
@@ -3193,6 +3432,22 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.3655217, y: 1.6341811, z: 4.968236}
   m_Center: {x: -0.02156735, y: 0.76812464, z: -0.09241333}
+--- !u!208 &3666658985997547025
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7264635469898282327}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.1830001, y: 0.81700003, z: 2.4840002}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -0.022000002, y: 0.768, z: -0.09200001}
+  m_TimeToStationary: 0.5
 --- !u!1 &7457312271295209976
 GameObject:
   m_ObjectHideFlags: 0
@@ -3205,12 +3460,13 @@ GameObject:
   - component: {fileID: 6973954649561719437}
   - component: {fileID: 419191877217824318}
   - component: {fileID: 3823938868578589441}
+  - component: {fileID: 6604665937939393684}
   m_Layer: 31
   m_Name: SM_Prop_Crate_Open_01 (15)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &7892215741362943018
 Transform:
@@ -3299,6 +3555,22 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.82827514, y: 0.7631561, z: 0.82839644}
   m_Center: {x: 0, y: 0.38157806, z: 0}
+--- !u!208 &6604665937939393684
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7457312271295209976}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.41400003, y: 0.38200003, z: 0.41400003}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.38200003, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &7623327396669002582
 GameObject:
   m_ObjectHideFlags: 0
@@ -3311,12 +3583,13 @@ GameObject:
   - component: {fileID: 2752818439046082938}
   - component: {fileID: 5189372382356066511}
   - component: {fileID: 5245007493458730372}
+  - component: {fileID: 4452994705321583332}
   m_Layer: 31
   m_Name: SM_Prop_Car_Wrecked_SUV_01 (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &3286613186185633984
 Transform:
@@ -3405,6 +3678,22 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.3655217, y: 1.6341811, z: 4.968236}
   m_Center: {x: -0.02156735, y: 0.76812464, z: -0.09241333}
+--- !u!208 &4452994705321583332
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7623327396669002582}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.1830001, y: 0.81700003, z: 2.4840002}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -0.022000002, y: 0.768, z: -0.09200001}
+  m_TimeToStationary: 0.5
 --- !u!1 &7713098085705942084
 GameObject:
   m_ObjectHideFlags: 0
@@ -3421,7 +3710,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &7368051434211216668
 Transform:
@@ -3500,12 +3789,13 @@ GameObject:
   - component: {fileID: 7825841790129985395}
   - component: {fileID: 4611034089301990951}
   - component: {fileID: 6296953472779923714}
+  - component: {fileID: 1405315174840585278}
   m_Layer: 31
   m_Name: SM_Prop_Crate_Open_01 (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2528698379242684317
 Transform:
@@ -3594,6 +3884,22 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.82827514, y: 0.7631561, z: 0.82839644}
   m_Center: {x: 0, y: 0.38157806, z: 0}
+--- !u!208 &1405315174840585278
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8211307004761515579}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.41400003, y: 0.38200003, z: 0.41400003}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.38200003, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &8242166938421037476
 GameObject:
   m_ObjectHideFlags: 0
@@ -3610,7 +3916,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &3282734498059293872
 Transform:
@@ -3689,12 +3995,13 @@ GameObject:
   - component: {fileID: 178602850787378955}
   - component: {fileID: 2564614512693525410}
   - component: {fileID: 6986951509910492651}
+  - component: {fileID: 8225121673271240717}
   m_Layer: 31
   m_Name: SM_Prop_Crate_Open_01 (24)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &7611068455491398301
 Transform:
@@ -3783,6 +4090,22 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.82827514, y: 0.7631561, z: 0.82839644}
   m_Center: {x: 0, y: 0.38157806, z: 0}
+--- !u!208 &8225121673271240717
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8611714639401089293}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.41400003, y: 0.38200003, z: 0.41400003}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.38200003, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &9098904611340803174
 GameObject:
   m_ObjectHideFlags: 0
@@ -3795,12 +4118,13 @@ GameObject:
   - component: {fileID: 8692774353053073833}
   - component: {fileID: 2847461235897985393}
   - component: {fileID: 4226778482587943383}
+  - component: {fileID: 4476165354972272823}
   m_Layer: 31
   m_Name: SM_Prop_Crate_Open_01 (17)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &872894441514027296
 Transform:
@@ -3889,6 +4213,22 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.82827514, y: 0.7631561, z: 0.82839644}
   m_Center: {x: 0, y: 0.38157806, z: 0}
+--- !u!208 &4476165354972272823
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9098904611340803174}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.41400003, y: 0.38200003, z: 0.41400003}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.38200003, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1001 &906777233298591215
 PrefabInstance:
   m_ObjectHideFlags: 0

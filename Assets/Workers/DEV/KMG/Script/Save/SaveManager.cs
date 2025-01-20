@@ -36,6 +36,11 @@ public class SaveManager : MonoBehaviour
         File.WriteAllText(slotData.SlotPath, JsonUtility.ToJson(slotData));
         Debug.Log(File.ReadAllText(slotData.SlotPath));
     }
+    [ContextMenu("Log")]
+    public void Log()
+    {
+        Debug.Log(File.ReadAllText(slotData.SlotPath));
+    }
     [ContextMenu("Reset")]
     public void Reset()
     {

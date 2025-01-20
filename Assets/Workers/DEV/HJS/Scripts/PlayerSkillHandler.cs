@@ -216,7 +216,7 @@ public class PlayerSkillHandler : MonoBehaviour
                                 Spec spec = new Spec();
                                 spec.InteractionValues = psivSkill.GetToggleSetting.spec;
                                 spec.statModel = model;
-                                adapter.SetEnable(psivSkill.GetToggleSetting.Type, (skill.SkillLevel - 1, spec));
+                                adapter.SetEnable(psivSkill.GetToggleSetting.Type, (skill.SkillLevel, spec));
                                 break;
                         }
                         break;

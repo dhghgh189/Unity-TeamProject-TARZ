@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
 using Zenject;
 
 public class Equipment : MonoBehaviour
@@ -22,6 +21,10 @@ public class Equipment : MonoBehaviour
             saveGear.Tier = item.Tier;
             saveGear.GearName = item.GearName;
             saveGear.Abilities = item.Abilities;
+
+            Gear temp = null;
+            ChangeGear(saveGear, out temp);
+
             equipmentGears[(int)item.Part] = saveGear;
             uI_EquipmentSlots[(int)item.Part].SetEquipmentSlot(saveGear);
         }

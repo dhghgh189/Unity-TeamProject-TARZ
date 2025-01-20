@@ -17,7 +17,7 @@ public class InGameSaveData
     // 블루칩 상태를 저장하는 리스트
     public List<BlueChipSaveData> blueChipSaveDatas = new();
     // 레드칩 상태를 저장하는 리스트
-    public RedChipSaveData[] redChipSaveDatas;
+    public List<RedChipSaveData> redChipSaveDatas = new();
 }
 // MonoBehaviour를 상속한 클래스들은 FromJson으로 역 직렬화가 불가능 함
 // 그러므로 아래와 같은 클래스들을 만듬

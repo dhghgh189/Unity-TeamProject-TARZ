@@ -13,7 +13,7 @@ public class MegaFistGateObject : MonoBehaviour
 
     private IEnumerator StartGate(MegaFistObject fist)
     {
-        yield return Util.GetDelay(1f);
+        yield return Util.GetDelay(0.5f);
         fist.Move();
     }
 

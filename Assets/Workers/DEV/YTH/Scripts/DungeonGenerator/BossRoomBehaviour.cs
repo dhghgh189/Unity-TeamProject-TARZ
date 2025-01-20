@@ -1,14 +1,21 @@
 using UnityEngine;
+using Zenject;
 
 public class BossRoomBehaviour : MonoBehaviour
 {
     [SerializeField] GameObject movePotal;
+
     [SerializeField] GameObject scenePotal;
-    private ChapterManager chapterManager;
-    private InGameSaveData saveData;
+
+    [SerializeField] GameObject _redChip;
+    
     public int BossCount;
 
+    private ChapterManager chapterManager;
+    private InGameSaveData saveData;
     private MonsterView _monsterView;
+
+    [Inject] Transform dropPool;
 
     private void Start()
     {
@@ -31,10 +38,13 @@ public class BossRoomBehaviour : MonoBehaviour
         {
             scenePotal.GetComponent<ScenePotal>().SetScene(Define.SceneType.Chapter1);
         }
+
         Instantiate(scenePotal, transform.position + Vector3.back * 10 + Vector3.up * 2, Quaternion.identity);
 
         Instantiate(movePotal, transform.position + Vector3.forward * 10 + Vector3.up * 2, Quaternion.identity).GetComponent<MovePotal>().SetTarget((Vector3.forward + Vector3.right) * 7);
-        
+
+        Instantiate(_redChip, transform.position + Vector3.up * 2, transform.rotation, dropPool).GetComponent<DropRedChip>().DropChipInit();
+
         if (_monsterView != null)
         {
             _monsterView.gameObject.SetActive(false);

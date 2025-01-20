@@ -13,7 +13,11 @@ public class ThrowObjectStack : MonoBehaviour
 
     public ThrowObject Pop()
     {
+        if (objectStack.Count <= 0)
+            return null;
+
         ThrowObject throwObject = objectStack.Pop();
+
         throwObject.transform.parent = Camera.main.transform;
         return throwObject;
     }

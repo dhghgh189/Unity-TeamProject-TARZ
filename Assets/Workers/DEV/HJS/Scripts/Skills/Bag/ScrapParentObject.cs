@@ -16,6 +16,11 @@ public class ScrapParentObject : MonoBehaviour
     [SerializeField] ParticleSystem chargePs;
     [SerializeField] GameObject scrap;
 
+    [SerializeField] List<MultipleObjectsMake> multipleObjectsMakes;
+
+    public float Duration { get { return duration; } }
+    public float Distance { get { return distance; } }
+
     private void Awake()
     {
         OnStartEvent = new UnityEvent();
@@ -29,6 +34,11 @@ public class ScrapParentObject : MonoBehaviour
 
     private IEnumerator LifeCycleRoutine()
     {
+        foreach(var item in multipleObjectsMakes)
+        {
+            item.m_startDelay = duration;
+        }
+
         yield return Util.GetDelay(waitDelay);
         OnStartEvent?.Invoke();
         chargePs.Stop();

@@ -68,7 +68,7 @@ public class MegaFistObject : MonoBehaviour
 
     private IEnumerator MoveForwardRoutine(Vector3 startPos, Vector3 endPos)
     {
-        yield return Util.GetDelay(1f);
+        yield return Util.GetDelay(0.5f);
         boxCollider.enabled = true;
         Debug.Log("앞으로 움직이기 시작!");
         SoundManager.PlaySFX(SoundManager.SoundData_S.ManaSkillSounds_3[1].AudioClip);

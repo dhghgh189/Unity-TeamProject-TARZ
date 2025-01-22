@@ -81,12 +81,12 @@ public class ActMeleeAttack : Action
         yield return Util.GetDelay(waitTime);
         float curAnimTime = GetCurrentAnimTime();
         yield return Util.GetDelay(curAnimTime - waitTime);
-
-        if (_distance > _monsterData.AttackRange)
-        {
-            state = State.Success;
-            Debug.Log("State = Suceess!!");
-        }
+        state = State.Success;
+        /*  if (_distance > _monsterData.AttackRange)
+          {
+              state = State.Success;
+              Debug.Log("State = Suceess!!");
+          }*/
         animSuccessRoutine = null;
     }
 

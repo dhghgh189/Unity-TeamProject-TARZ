@@ -30,6 +30,12 @@ public class UNQuest_Interaction : InteractionOBJ_Base, Interaction_Ibase_Activa
 
     public void Activate()
     {
+        if (questManager.questPanel.activeSelf || questManager.questClearPanel.activeSelf)
+        {
+            Debug.Log("퀘스트 창이 이미 열려있음");
+            return;
+        }
+
         if (isOngoing)
         {
             QuestOngoing();

@@ -47,7 +47,7 @@ public class MonsterSpawner : MonoBehaviour
                 pooledObject.OnDie += roomBehaviour.MonsterCountChange;
 
                 // quest가 진행중이라면
-                if (_generator.IsNpcExist && _quest.IsOngoing)
+                if (_quest && _generator.IsNpcExist && _quest.IsOngoing)
                 {
                     pooledObject.OnDie += _quest.OnChangeCount;
                 }

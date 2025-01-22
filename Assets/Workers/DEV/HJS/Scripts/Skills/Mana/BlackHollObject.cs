@@ -158,11 +158,7 @@ public class BlackHollObject : MonoBehaviour
         // 기존 상시 효과음을 제거하고
         SoundManager.StopSFX();
 
-        foreach (var enemy in enemies)
-        {
-            if (enemy is null) continue;
-            SetPut(enemy);
-        }
+        
 
         Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRange, LayerMask.GetMask("Monster"));
         foreach (Collider collider in colliders)
@@ -177,6 +173,12 @@ public class BlackHollObject : MonoBehaviour
 
     private void OnDestroy()
     {
+        foreach (var enemy in enemies)
+        {
+            if (enemy is null) continue;
+            SetPut(enemy);
+        }
+
         SoundManager.StopSFX();
         if(isThrow) SoundManager.PlaySFX(SoundManager.SoundData_S.ManaSkillSounds_4[3].AudioClip);
         StopAllCoroutines();

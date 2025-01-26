@@ -134,7 +134,8 @@ public class PlayerMovement : MonoBehaviour
         float angle = Vector3.Angle(Vector3.up, slopeHit.normal);
 
         // 계산한 각도가 maxSlope 내에 있으면 유효한 경사면에 있는것으로 판정
-        isSlope = angle != 0 && maxSlope <= 50f;
+        // float인 angle과 maxSlope는 같은지를 비교하는 연산이 정확하지 않으므로 Approximately로 근사값인지 체크한다.
+        isSlope = angle != 0 && (angle < maxSlope || Mathf.Approximately(angle, maxSlope));
     }
 
     public void Stop()

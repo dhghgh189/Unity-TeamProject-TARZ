@@ -272,8 +272,8 @@ public class PlayerAttack : MonoBehaviour
         {
             AddThrowEffects(tobj);
 
-            // 수치 저장
-            if (player.IsGrabingInput) damage = 20f; // 추후 스텟에서 설정 가능하게 변경 예정
+            // 현재 타수에 대한 수치 저장
+            if (player.IsGrabingInput) damage = 20f; 
             else damage = ThrowAttackInfo[ThrowCount].Damage;
 
             throwForce = ThrowAttackInfo[ThrowCount].ThrowForce;
@@ -522,16 +522,16 @@ public class PlayerAttack : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, MeleeAttackInfo[MeleeCount].Range);
+        //Gizmos.color = Color.red;
+        //Gizmos.DrawWireSphere(transform.position, MeleeAttackInfo[MeleeCount].Range);
 
-        Gizmos.color = Color.blue;
-        Gizmos.DrawRay(transform.position,
-            (Quaternion.Euler(0, MeleeAttackInfo[MeleeCount].Angle * 0.5f, 0) * transform.forward) * MeleeAttackInfo[MeleeCount].Range);
-        Gizmos.DrawRay(transform.position,
-            (Quaternion.Euler(0, MeleeAttackInfo[MeleeCount].Angle * -0.5f, 0) * transform.forward) * MeleeAttackInfo[MeleeCount].Range);
+        //Gizmos.color = Color.blue;
+        //Gizmos.DrawRay(transform.position,
+        //    (Quaternion.Euler(0, MeleeAttackInfo[MeleeCount].Angle * 0.5f, 0) * transform.forward) * MeleeAttackInfo[MeleeCount].Range);
+        //Gizmos.DrawRay(transform.position,
+        //    (Quaternion.Euler(0, MeleeAttackInfo[MeleeCount].Angle * -0.5f, 0) * transform.forward) * MeleeAttackInfo[MeleeCount].Range);
 
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, JumpMeleeRange);
+        //Gizmos.color = Color.yellow;
+        //Gizmos.DrawWireSphere(transform.position, JumpMeleeRange);
     }
 }

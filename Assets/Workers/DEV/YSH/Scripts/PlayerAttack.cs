@@ -307,9 +307,7 @@ public class PlayerAttack : MonoBehaviour
             damage = result;
             Debug.Log($"1.5 damage : {damage}");
         }
-        // 최종 데미지 = 타수별 공격력 + (타수별 공격력 * 현재 스탯상 증가량)
         damage = damage * player.Stat.DefaultPowerPer;
-        // 최종 추가 데미지 추가
         damage += player.Stat.ExtraDamage;
         //Debug.Log($"final damage : {damage}");
         tobj.SetInfo(damage, hitClip);
@@ -345,9 +343,7 @@ public class PlayerAttack : MonoBehaviour
             damage = result;
             Debug.Log($"1.5 damage : {damage}");
         }
-        // 최종 데미지 = 타수별 공격력 + (타수별 공격력 * 현재 스탯상 증가량)
         damage = damage * player.Stat.DefaultPowerPer;
-        // 최종 추가 데미지 추가
         damage += player.Stat.ExtraDamage;
         Debug.Log($"final damage : {damage}");
         tobj.SetInfo(damage);
@@ -383,9 +379,7 @@ public class PlayerAttack : MonoBehaviour
             if (damagable == null)
                 continue;
 
-            // 최종 데미지 = 타수별 공격력 + (타수별 공격력 * 현재 스탯상 증가량)
             float damage = MeleeAttackInfo[MeleeCount].Damage * player.Stat.DefaultPowerPer;
-            // 최종 추가 데미지 추가
             damage += player.Stat.ExtraDamage;
             damagable.TakeDamage(damage);
 
@@ -431,9 +425,7 @@ public class PlayerAttack : MonoBehaviour
             if (damagable == null)
                 continue;
 
-            // 최종 데미지 = 타수별 공격력 + (타수별 공격력 * 현재 스탯상 증가량)
             float damage = JumpMeleeDamage * player.Stat.DefaultPowerPer;
-            // 최종 추가 데미지 추가
             damage += player.Stat.ExtraDamage;
             damagable.TakeDamage(damage);
 

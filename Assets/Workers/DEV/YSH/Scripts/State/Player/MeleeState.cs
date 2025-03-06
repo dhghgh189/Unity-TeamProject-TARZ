@@ -19,10 +19,12 @@ public class MeleeState : BaseState<PlayerController>
         this.owner = owner;
         type = EState.Melee;
 
+        // MeleeCountMax : Combo Count의 최대치
         meleeAnimHashes = new int[owner.Attack.MeleeCountMax];
 
         for (int i = 0; i < meleeAnimHashes.Length; i++)
         {
+            // 애니메이션 해시값을 캐시
             meleeAnimHashes[i] = Animator.StringToHash($"Melee{i + 1}");
         }
     }

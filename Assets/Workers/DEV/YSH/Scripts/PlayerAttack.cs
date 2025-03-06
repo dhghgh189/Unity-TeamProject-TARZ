@@ -272,8 +272,8 @@ public class PlayerAttack : MonoBehaviour
         {
             AddThrowEffects(tobj);
 
-            // 수치 저장
-            if (player.IsGrabingInput) damage = 20f; // 추후 스텟에서 설정 가능하게 변경 예정
+            // 현재 타수에 대한 수치 저장
+            if (player.IsGrabingInput) damage = 20f; 
             else damage = ThrowAttackInfo[ThrowCount].Damage;
 
             throwForce = ThrowAttackInfo[ThrowCount].ThrowForce;
@@ -307,9 +307,7 @@ public class PlayerAttack : MonoBehaviour
             damage = result;
             Debug.Log($"1.5 damage : {damage}");
         }
-        // 최종 데미지 = 타수별 공격력 + (타수별 공격력 * 현재 스탯상 증가량)
         damage = damage * player.Stat.DefaultPowerPer;
-        // 최종 추가 데미지 추가
         damage += player.Stat.ExtraDamage;
         //Debug.Log($"final damage : {damage}");
         tobj.SetInfo(damage, hitClip);
@@ -345,9 +343,7 @@ public class PlayerAttack : MonoBehaviour
             damage = result;
             Debug.Log($"1.5 damage : {damage}");
         }
-        // 최종 데미지 = 타수별 공격력 + (타수별 공격력 * 현재 스탯상 증가량)
         damage = damage * player.Stat.DefaultPowerPer;
-        // 최종 추가 데미지 추가
         damage += player.Stat.ExtraDamage;
         Debug.Log($"final damage : {damage}");
         tobj.SetInfo(damage);
@@ -383,9 +379,7 @@ public class PlayerAttack : MonoBehaviour
             if (damagable == null)
                 continue;
 
-            // 최종 데미지 = 타수별 공격력 + (타수별 공격력 * 현재 스탯상 증가량)
             float damage = MeleeAttackInfo[MeleeCount].Damage * player.Stat.DefaultPowerPer;
-            // 최종 추가 데미지 추가
             damage += player.Stat.ExtraDamage;
             damagable.TakeDamage(damage);
 
@@ -431,9 +425,7 @@ public class PlayerAttack : MonoBehaviour
             if (damagable == null)
                 continue;
 
-            // 최종 데미지 = 타수별 공격력 + (타수별 공격력 * 현재 스탯상 증가량)
             float damage = JumpMeleeDamage * player.Stat.DefaultPowerPer;
-            // 최종 추가 데미지 추가
             damage += player.Stat.ExtraDamage;
             damagable.TakeDamage(damage);
 
@@ -522,16 +514,16 @@ public class PlayerAttack : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, MeleeAttackInfo[MeleeCount].Range);
+        //Gizmos.color = Color.red;
+        //Gizmos.DrawWireSphere(transform.position, MeleeAttackInfo[MeleeCount].Range);
 
-        Gizmos.color = Color.blue;
-        Gizmos.DrawRay(transform.position,
-            (Quaternion.Euler(0, MeleeAttackInfo[MeleeCount].Angle * 0.5f, 0) * transform.forward) * MeleeAttackInfo[MeleeCount].Range);
-        Gizmos.DrawRay(transform.position,
-            (Quaternion.Euler(0, MeleeAttackInfo[MeleeCount].Angle * -0.5f, 0) * transform.forward) * MeleeAttackInfo[MeleeCount].Range);
+        //Gizmos.color = Color.blue;
+        //Gizmos.DrawRay(transform.position,
+        //    (Quaternion.Euler(0, MeleeAttackInfo[MeleeCount].Angle * 0.5f, 0) * transform.forward) * MeleeAttackInfo[MeleeCount].Range);
+        //Gizmos.DrawRay(transform.position,
+        //    (Quaternion.Euler(0, MeleeAttackInfo[MeleeCount].Angle * -0.5f, 0) * transform.forward) * MeleeAttackInfo[MeleeCount].Range);
 
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, JumpMeleeRange);
+        //Gizmos.color = Color.yellow;
+        //Gizmos.DrawWireSphere(transform.position, JumpMeleeRange);
     }
 }

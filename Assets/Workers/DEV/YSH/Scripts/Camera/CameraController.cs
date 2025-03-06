@@ -55,13 +55,15 @@ public class CameraController : MonoBehaviour
         if (!AvoidWall())
         {
             // 가리는 벽이 없는 경우 카메라는 controller의 로컬 방향을 기준으로 delta만큼 떨어진 곳에 위치한다. 
-            mainCam.transform.position = transform.position + (transform.right * delta.x) + (transform.up * delta.y) + (transform.forward * delta.z);
+            //mainCam.transform.position = transform.position + (transform.right * delta.x) + (transform.up * delta.y) + (transform.forward * delta.z);
+            mainCam.transform.position = transform.position + transform.TransformDirection(delta);
         }
     }
 
     private bool AvoidWall()
     {
-        Vector3 targetPos = transform.position + (transform.forward * delta.z) + (transform.right * delta.x) + (transform.up * delta.y);
+        //Vector3 targetPos = transform.position + (transform.forward * delta.z) + (transform.right * delta.x) + (transform.up * delta.y);
+        Vector3 targetPos = transform.position + transform.TransformDirection(delta);
         Vector3 toTarget = targetPos - transform.position;
         if (!Physics.Raycast(transform.position, toTarget.normalized, out hit, toTarget.magnitude, whatIsWall))
             return false;

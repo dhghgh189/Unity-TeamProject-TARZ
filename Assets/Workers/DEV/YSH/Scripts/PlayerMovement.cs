@@ -75,7 +75,8 @@ public class PlayerMovement : MonoBehaviour
         float moveSpeed = moveVelocity.magnitude;
 
         // 현재 카메라 방향을 기준으로 이동을 진행한다.
-        Vector3 velocity = (mainCamTrf.right * moveVelocity.x) + (mainCamTrf.forward * moveVelocity.z);
+        //Vector3 velocity = (mainCamTrf.right * moveVelocity.x) + (mainCamTrf.forward * moveVelocity.z);
+        Vector3 velocity = mainCamTrf.TransformDirection(moveVelocity);
         if (velocity != Vector3.zero)
         {
             LookRotation(velocity.normalized);

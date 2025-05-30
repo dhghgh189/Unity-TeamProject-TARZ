@@ -50,7 +50,9 @@ public class PlayerAttack : MonoBehaviour
 
     private Vector3 source;
     private Vector3 dest;
-    private float resultAngle;
+    private float[] cosMeleeAngles;     // 내적값과 비교할 melee angle값
+    private float cosJumpMeleeAngle;    // 내적값과 비교할 jump melee angle 값
+    private float dot; 
 
     private EffectGenerator generator;
 
@@ -84,9 +86,16 @@ public class PlayerAttack : MonoBehaviour
 
         MeleeCount = 0;
         ThrowCount = 0;
+        cosMeleeAngles = new float[MeleeAttackInfo.Length];  // 일반 근접공격
+
+        // cosMeleeAngle 캐시
+        for (int i = 0; i < MeleeAttackInfo.Length; i++)
+            cosMeleeAngles[i] = Mathf.Cos((MeleeAttackInfo[i].Angle * 0.5f) * Mathf.Deg2Rad);
+
+        // cosJumpMeleeAngle 캐시
+        cosJumpMeleeAngle = Mathf.Cos((JumpMeleeAngle * 0.5f) * Mathf.Deg2Rad);
 
         meleeEffects = new List<IEffect>();
-
         generator = new EffectGenerator();
 
         GenerateThrowEffects();
@@ -369,7 +378,7 @@ public class PlayerAttack : MonoBehaviour
         foreach (Collider col in colliders)
         {
             // 각도 체크
-            if (!IsTargetInAngle(col.transform, MeleeAttackInfo[MeleeCount].Angle))
+            if (!IsTargetInAngle(col.transform, cosMeleeAngles[MeleeCount]))
                 continue;
 
             // 이펙트 발동
@@ -415,7 +424,7 @@ public class PlayerAttack : MonoBehaviour
         foreach (Collider col in colliders)
         {
             // 각도 체크
-            if (!IsTargetInAngle(col.transform, JumpMeleeAngle))
+            if (!IsTargetInAngle(col.transform, cosJumpMeleeAngle))
                 continue;
 
             // 이펙트 발동
@@ -436,7 +445,7 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
-    private bool IsTargetInAngle(Transform targetTrf, float angle)
+    private bool IsTargetInAngle(Transform targetTrf, float cosAngle)
     {
         source = transform.position;    // 플레이어 위치
         dest = targetTrf.position;      // 감지된 Target 위치
@@ -446,8 +455,8 @@ public class PlayerAttack : MonoBehaviour
         dest.y = 0;
 
         // 플레이어와 Target간의 각도 체크
-        resultAngle = Vector3.Angle(transform.forward, (dest - source).normalized);
-        if (resultAngle > angle * 0.5f)
+        dot = Vector3.Dot(transform.forward, (dest - source).normalized);
+        if (dot < cosAngle)
             return false;
 
         return true;
